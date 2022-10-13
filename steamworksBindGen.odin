@@ -5,11 +5,12 @@ import "core:strings"
 import "core:encoding/json"
 
 INDENT :: "    "
+print :: fmt.sbprint
+println :: fmt.sbprintln
 
 main :: proc() {
-    if jsonData, jsonDataOk := os.read_entire_file_from_filename(
-        "steamworksBindGen/steam_api.json",
-    ); jsonDataOk {
+    if jsonData, jsonDataOk := os.read_entire_file_from_filename("../../Downloads/steam_api.json");
+    jsonDataOk {
         fmt.println(transmute(string)jsonData)
 
         if groups, err := json.parse(jsonData); err == .None {
@@ -17,9 +18,6 @@ main :: proc() {
 
             foreignBuf: strings.Builder
             buf: strings.Builder
-
-            print :: fmt.sbprint
-            println :: fmt.sbprintln
 
             {
                 callbacks := groups["callback_structs"].(json.Array)
@@ -42,6 +40,7 @@ main :: proc() {
                         sep = "",
                     )
                 }
+                println(&buf)
             }
 
             {
@@ -49,10 +48,9 @@ main :: proc() {
                 for enum_ in enums {
                     enum_ := enum_.(json.Object)
                     enumname := enum_["enumname"].(json.String)
-
+                    values := enum_["values"].(json.Array)
                     println(&buf, enumname, ":: enum {")
 
-                    values := enum_["values"].(json.Array)
                     for value in values {
                         value := value.(json.Object)
                         // NOTE: the value name could be shortened. Naming of enum values isn't completely consistent though...
@@ -72,43 +70,12 @@ main :: proc() {
                 interfaces := groups["interfaces"].(json.Array)
                 for interface in interfaces {
                     interface := interface.(json.Object)
-
                     classname := interface["classname"].(json.String)
-                    fmt.println(classname)
-
                     assert(len(interface["fields"].(json.Array)) == 0)
 
                     for method in interface["methods"].(json.Array) {
                         method := method.(json.Object)
-                        methodname := method["methodname"].(json.String)
-                        params := method["params"].(json.Array)
-                        returntype := method["returntype"].(json.String)
-
-                        fmt.println("  ", methodname, returntype)
-
-                        print(buf = &foreignBuf, args = {classname, "_", methodname}, sep = "")
-                        print(&foreignBuf, ":: proc(")
-
-                        print(buf = &foreignBuf, args = {"self: ^", classname}, sep = "")
-                        if len(params) > 0 do print(&foreignBuf, ", ")
-
-                        for param, i in params {
-                            param := param.(json.Object)
-                            paramname := param["paramname"]
-                            paramtype := param["paramtype"]
-                            print(&foreignBuf, paramname)
-                            print(&foreignBuf, ": ")
-                            print(&foreignBuf, paramtype)
-
-                            if i + 1 < len(params) do print(&foreignBuf, ", ")
-                        }
-                        print(&foreignBuf, ")")
-
-                        if returntype != "void" {
-                            print(&foreignBuf, " ->", convType(returntype))
-                        }
-
-                        println(&foreignBuf)
+                        printMethod(&foreignBuf, classname, method)
                     }
                 }
             }
@@ -150,17 +117,66 @@ main :: proc() {
             }
 
 
-
             fmt.println(strings.to_string(foreignBuf))
             fmt.println(strings.to_string(buf))
 
+            // Final output
+            {
+                finalBuf: strings.Builder
+
+                println(&finalBuf, "package steamworks")
+                println(&finalBuf, "import \"core:c\"")
+                println(&finalBuf, "foreign import lib \"steamworks_api.lib\"")
+                println(&finalBuf)
+
+                println(&finalBuf, strings.to_string(buf))
+                println(&finalBuf)
+
+                println(&finalBuf, "foreign lib {")
+                println(&finalBuf, strings.to_string(foreignBuf))
+                println(&foreignBuf, "} // foreign lib")
+
+                if !os.write_entire_file("steamworks.odin", finalBuf.buf[:]) {
+                    panic("Couldn't write file.")
+                }
+            }
+
         } else {
             fmt.println("json.parse Error:", err)
-            panic("Couldn't parse json")
+            panic("Couldn't parse json.")
         }
-    } else do panic("Couldn't read file")
+    } else do panic("Couldn't read file.")
 }
 
 convType :: proc(typeName: string) -> string {
     return typeName
+}
+
+printMethod :: proc(buf: ^strings.Builder, classname: string, method: json.Object) {
+    methodname := method["methodname"].(json.String)
+    params := method["params"].(json.Array)
+    returntype := method["returntype"].(json.String)
+
+    print(buf = buf, args = {classname, "_", methodname}, sep = "")
+    print(buf, ":: proc(")
+    print(buf = buf, args = {"self: ^", classname}, sep = "")
+    if len(params) > 0 do print(buf, ", ")
+
+    for param, i in params {
+        param := param.(json.Object)
+        paramname := param["paramname"]
+        paramtype := param["paramtype"]
+        print(buf, paramname)
+        print(buf, ": ")
+        print(buf, paramtype)
+
+        if i + 1 < len(params) do print(buf, ", ")
+    }
+    print(buf, ")")
+
+    if returntype != "void" {
+        print(buf, " ->", convType(returntype))
+    }
+
+    println(buf, " ---")
 }
