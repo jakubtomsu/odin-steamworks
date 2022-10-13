@@ -1,5 +1,5 @@
 {
-    "character_width": 100,
-    "tabs": false,
-    "tabs_width": 4
+	"character_width": 1000,
+	"tabs": true,
+	"tabs_width": 4
 }
