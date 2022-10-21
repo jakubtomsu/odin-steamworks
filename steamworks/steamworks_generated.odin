@@ -4,6 +4,22 @@ foreign import lib "steam_api64.lib"
 
 intptr :: distinct int
 
+CGameID_EGameIDType :: enum {
+	k_EGameIDTypeApp      = 0,
+	k_EGameIDTypeGameMod  = 1,
+	k_EGameIDTypeShortcut = 2,
+	k_EGameIDTypeP2P      = 3,
+}
+
+// HACK
+CGameID :: struct #packed {
+	m_ulGameID: uint64,
+}
+
+SteamDatagramRelayAuthTicketPtr :: distinct rawptr
+ISteamNetworkingConnectionSignalingPtr :: distinct rawptr
+ISteamNetworkingSignalingRecvContextPtr :: distinct rawptr
+
 SteamServersConnected_t :: struct #packed {}
 
 SteamServerConnectFailure_t :: struct #packed {
@@ -3333,26 +3349,6 @@ EServerMode :: enum {
 	eServerModeAuthenticationAndSecure = 3,
 }
 
-SteamUser: proc "c" () -> ^ISteamUser : SteamUser_v021
-SteamFriends: proc "c" () -> ^ISteamFriends : SteamFriends_v017
-SteamUtils: proc "c" () -> ^ISteamUtils : SteamUtils_v010
-SteamMatchmaking: proc "c" () -> ^ISteamMatchmaking : SteamMatchmaking_v009
-SteamMatchmakingServers: proc "c" () -> ^ISteamMatchmakingServers : SteamMatchmakingServers_v002
-SteamGameSearch: proc "c" () -> ^ISteamGameSearch : SteamGameSearch_v001
-SteamParties: proc "c" () -> ^ISteamParties : SteamParties_v002
-SteamRemoteStorage: proc "c" () -> ^ISteamRemoteStorage : SteamRemoteStorage_v016
-SteamUserStats: proc "c" () -> ^ISteamUserStats : SteamUserStats_v012
-SteamApps: proc "c" () -> ^ISteamApps : SteamApps_v008
-SteamNetworking: proc "c" () -> ^ISteamNetworking : SteamNetworking_v006
-SteamScreenshots: proc "c" () -> ^ISteamScreenshots : SteamScreenshots_v003
-SteamMusic: proc "c" () -> ^ISteamMusic : SteamMusic_v001
-SteamMusicRemote: proc "c" () -> ^ISteamMusicRemote : SteamMusicRemote_v001
-SteamHTTP: proc "c" () -> ^ISteamHTTP : SteamHTTP_v003
-SteamInput: proc "c" () -> ^ISteamInput : SteamInput_v006
-SteamController: proc "c" () -> ^ISteamController : SteamController_v008
-SteamUGC: proc "c" () -> ^ISteamUGC : SteamUGC_v016
-SteamAppList: proc "c" () -> ^ISteamAppList : SteamAppList_v001
-
 ISteamHTMLSurface_EHTMLMouseButton :: enum {
 	eHTMLMouseButton_Left   = 0,
 	eHTMLMouseButton_Right  = 1,
@@ -3411,6 +3407,25 @@ ISteamHTMLSurface_EHTMLKeyModifiers :: enum {
 	k_eHTMLKeyModifier_ShiftDown = 4,
 }
 
+SteamUser: proc "c" () -> ^ISteamUser : SteamUser_v021
+SteamFriends: proc "c" () -> ^ISteamFriends : SteamFriends_v017
+SteamUtils: proc "c" () -> ^ISteamUtils : SteamUtils_v010
+SteamMatchmaking: proc "c" () -> ^ISteamMatchmaking : SteamMatchmaking_v009
+SteamMatchmakingServers: proc "c" () -> ^ISteamMatchmakingServers : SteamMatchmakingServers_v002
+SteamGameSearch: proc "c" () -> ^ISteamGameSearch : SteamGameSearch_v001
+SteamParties: proc "c" () -> ^ISteamParties : SteamParties_v002
+SteamRemoteStorage: proc "c" () -> ^ISteamRemoteStorage : SteamRemoteStorage_v016
+SteamUserStats: proc "c" () -> ^ISteamUserStats : SteamUserStats_v012
+SteamApps: proc "c" () -> ^ISteamApps : SteamApps_v008
+SteamNetworking: proc "c" () -> ^ISteamNetworking : SteamNetworking_v006
+SteamScreenshots: proc "c" () -> ^ISteamScreenshots : SteamScreenshots_v003
+SteamMusic: proc "c" () -> ^ISteamMusic : SteamMusic_v001
+SteamMusicRemote: proc "c" () -> ^ISteamMusicRemote : SteamMusicRemote_v001
+SteamHTTP: proc "c" () -> ^ISteamHTTP : SteamHTTP_v003
+SteamInput: proc "c" () -> ^ISteamInput : SteamInput_v006
+SteamController: proc "c" () -> ^ISteamController : SteamController_v008
+SteamUGC: proc "c" () -> ^ISteamUGC : SteamUGC_v016
+SteamAppList: proc "c" () -> ^ISteamAppList : SteamAppList_v001
 SteamHTMLSurface: proc "c" () -> ^ISteamHTMLSurface : SteamHTMLSurface_v005
 SteamInventory: proc "c" () -> ^ISteamInventory : SteamInventory_v003
 SteamVideo: proc "c" () -> ^ISteamVideo : SteamVideo_v002
@@ -3667,7 +3682,13 @@ SteamDatagramGameCoordinatorServerLogin :: struct #packed {
 	m_appData:   [2048]u8,
 }
 
-SteamAPIWarningMessageHook_t :: proc "c" (_: int, _: cstring)
+SteamAPIWarningMessageHook_t :: proc "c" (_: c.int, _: cstring)
+
+// No 'SteamAPI_' prefix
+@(default_calling_convention = "c")
+foreign lib {
+	SteamClient :: proc() -> ^ISteamClient ---
+}
 
 @(link_prefix = "SteamAPI_", default_calling_convention = "c")
 foreign lib {
@@ -4713,20 +4734,958 @@ foreign lib {
 	SteamDatagramHostedAddress_Clear :: proc(self: ^SteamDatagramHostedAddress) ---
 	SteamDatagramHostedAddress_GetPopID :: proc(self: ^SteamDatagramHostedAddress) -> SteamNetworkingPOPID ---
 	SteamDatagramHostedAddress_SetDevAddress :: proc(self: ^SteamDatagramHostedAddress, nIP: uint32, nPort: uint16, popid: SteamNetworkingPOPID) ---
+
 } // foreign lib
 
-CGameID_EGameIDType :: enum {
-	k_EGameIDTypeApp      = 0,
-	k_EGameIDTypeGameMod  = 1,
-	k_EGameIDTypeShortcut = 2,
-	k_EGameIDTypeP2P      = 3,
-}
 
-// HACK
-CGameID :: struct #packed {
-	m_ulGameID: uint64,
-}
+// ---------------
+// HELPFUL ALIASES
+// ---------------
 
-SteamDatagramRelayAuthTicketPtr :: distinct rawptr
-ISteamNetworkingConnectionSignalingPtr :: distinct rawptr
-ISteamNetworkingSignalingRecvContextPtr :: distinct rawptr
+Client :: SteamClient
+
+User :: SteamUser
+Friends :: SteamFriends
+Utils :: SteamUtils
+Matchmaking :: SteamMatchmaking
+MatchmakingServers :: SteamMatchmakingServers
+GameSearch :: SteamGameSearch
+Parties :: SteamParties
+RemoteStorage :: SteamRemoteStorage
+UserStats :: SteamUserStats
+Apps :: SteamApps
+Networking :: SteamNetworking
+Screenshots :: SteamScreenshots
+Music :: SteamMusic
+MusicRemote :: SteamMusicRemote
+HTTP :: SteamHTTP
+Input :: SteamInput
+Controller :: SteamController
+UGC :: SteamUGC
+AppList :: SteamAppList
+HTMLSurface :: SteamHTMLSurface
+Inventory :: SteamInventory
+Video :: SteamVideo
+ParentalSettings :: SteamParentalSettings
+RemotePlay :: SteamRemotePlay
+NetworkingMessages_SteamAPI :: SteamNetworkingMessages_SteamAPI
+NetworkingSockets_SteamAPI :: SteamNetworkingSockets_SteamAPI
+
+Client_CreateSteamPipe :: ISteamClient_CreateSteamPipe
+Client_BReleaseSteamPipe :: ISteamClient_BReleaseSteamPipe
+Client_ConnectToGlobalUser :: ISteamClient_ConnectToGlobalUser
+Client_CreateLocalUser :: ISteamClient_CreateLocalUser
+Client_ReleaseUser :: ISteamClient_ReleaseUser
+Client_GetISteamUser :: ISteamClient_GetISteamUser
+Client_GetISteamGameServer :: ISteamClient_GetISteamGameServer
+Client_SetLocalIPBinding :: ISteamClient_SetLocalIPBinding
+Client_GetISteamFriends :: ISteamClient_GetISteamFriends
+Client_GetISteamUtils :: ISteamClient_GetISteamUtils
+Client_GetISteamMatchmaking :: ISteamClient_GetISteamMatchmaking
+Client_GetISteamMatchmakingServers :: ISteamClient_GetISteamMatchmakingServers
+Client_GetISteamGenericInterface :: ISteamClient_GetISteamGenericInterface
+Client_GetISteamUserStats :: ISteamClient_GetISteamUserStats
+Client_GetISteamGameServerStats :: ISteamClient_GetISteamGameServerStats
+Client_GetISteamApps :: ISteamClient_GetISteamApps
+Client_GetISteamNetworking :: ISteamClient_GetISteamNetworking
+Client_GetISteamRemoteStorage :: ISteamClient_GetISteamRemoteStorage
+Client_GetISteamScreenshots :: ISteamClient_GetISteamScreenshots
+Client_GetISteamGameSearch :: ISteamClient_GetISteamGameSearch
+Client_GetIPCCallCount :: ISteamClient_GetIPCCallCount
+Client_SetWarningMessageHook :: ISteamClient_SetWarningMessageHook
+Client_BShutdownIfAllPipesClosed :: ISteamClient_BShutdownIfAllPipesClosed
+Client_GetISteamHTTP :: ISteamClient_GetISteamHTTP
+Client_GetISteamController :: ISteamClient_GetISteamController
+Client_GetISteamUGC :: ISteamClient_GetISteamUGC
+Client_GetISteamAppList :: ISteamClient_GetISteamAppList
+Client_GetISteamMusic :: ISteamClient_GetISteamMusic
+Client_GetISteamMusicRemote :: ISteamClient_GetISteamMusicRemote
+Client_GetISteamHTMLSurface :: ISteamClient_GetISteamHTMLSurface
+Client_GetISteamInventory :: ISteamClient_GetISteamInventory
+Client_GetISteamVideo :: ISteamClient_GetISteamVideo
+Client_GetISteamParentalSettings :: ISteamClient_GetISteamParentalSettings
+Client_GetISteamInput :: ISteamClient_GetISteamInput
+Client_GetISteamParties :: ISteamClient_GetISteamParties
+Client_GetISteamRemotePlay :: ISteamClient_GetISteamRemotePlay
+User_GetHSteamUser :: ISteamUser_GetHSteamUser
+User_BLoggedOn :: ISteamUser_BLoggedOn
+User_GetSteamID :: ISteamUser_GetSteamID
+User_InitiateGameConnection_DEPRECATED :: ISteamUser_InitiateGameConnection_DEPRECATED
+User_TerminateGameConnection_DEPRECATED :: ISteamUser_TerminateGameConnection_DEPRECATED
+User_TrackAppUsageEvent :: ISteamUser_TrackAppUsageEvent
+User_GetUserDataFolder :: ISteamUser_GetUserDataFolder
+User_StartVoiceRecording :: ISteamUser_StartVoiceRecording
+User_StopVoiceRecording :: ISteamUser_StopVoiceRecording
+User_GetAvailableVoice :: ISteamUser_GetAvailableVoice
+User_GetVoice :: ISteamUser_GetVoice
+User_DecompressVoice :: ISteamUser_DecompressVoice
+User_GetVoiceOptimalSampleRate :: ISteamUser_GetVoiceOptimalSampleRate
+User_GetAuthSessionTicket :: ISteamUser_GetAuthSessionTicket
+User_BeginAuthSession :: ISteamUser_BeginAuthSession
+User_EndAuthSession :: ISteamUser_EndAuthSession
+User_CancelAuthTicket :: ISteamUser_CancelAuthTicket
+User_UserHasLicenseForApp :: ISteamUser_UserHasLicenseForApp
+User_BIsBehindNAT :: ISteamUser_BIsBehindNAT
+User_AdvertiseGame :: ISteamUser_AdvertiseGame
+User_RequestEncryptedAppTicket :: ISteamUser_RequestEncryptedAppTicket
+User_GetEncryptedAppTicket :: ISteamUser_GetEncryptedAppTicket
+User_GetGameBadgeLevel :: ISteamUser_GetGameBadgeLevel
+User_GetPlayerSteamLevel :: ISteamUser_GetPlayerSteamLevel
+User_RequestStoreAuthURL :: ISteamUser_RequestStoreAuthURL
+User_BIsPhoneVerified :: ISteamUser_BIsPhoneVerified
+User_BIsTwoFactorEnabled :: ISteamUser_BIsTwoFactorEnabled
+User_BIsPhoneIdentifying :: ISteamUser_BIsPhoneIdentifying
+User_BIsPhoneRequiringVerification :: ISteamUser_BIsPhoneRequiringVerification
+User_GetMarketEligibility :: ISteamUser_GetMarketEligibility
+User_GetDurationControl :: ISteamUser_GetDurationControl
+User_BSetDurationControlOnlineState :: ISteamUser_BSetDurationControlOnlineState
+Friends_GetPersonaName :: ISteamFriends_GetPersonaName
+Friends_SetPersonaName :: ISteamFriends_SetPersonaName
+Friends_GetPersonaState :: ISteamFriends_GetPersonaState
+Friends_GetFriendCount :: ISteamFriends_GetFriendCount
+Friends_GetFriendByIndex :: ISteamFriends_GetFriendByIndex
+Friends_GetFriendRelationship :: ISteamFriends_GetFriendRelationship
+Friends_GetFriendPersonaState :: ISteamFriends_GetFriendPersonaState
+Friends_GetFriendPersonaName :: ISteamFriends_GetFriendPersonaName
+Friends_GetFriendGamePlayed :: ISteamFriends_GetFriendGamePlayed
+Friends_GetFriendPersonaNameHistory :: ISteamFriends_GetFriendPersonaNameHistory
+Friends_GetFriendSteamLevel :: ISteamFriends_GetFriendSteamLevel
+Friends_GetPlayerNickname :: ISteamFriends_GetPlayerNickname
+Friends_GetFriendsGroupCount :: ISteamFriends_GetFriendsGroupCount
+Friends_GetFriendsGroupIDByIndex :: ISteamFriends_GetFriendsGroupIDByIndex
+Friends_GetFriendsGroupName :: ISteamFriends_GetFriendsGroupName
+Friends_GetFriendsGroupMembersCount :: ISteamFriends_GetFriendsGroupMembersCount
+Friends_GetFriendsGroupMembersList :: ISteamFriends_GetFriendsGroupMembersList
+Friends_HasFriend :: ISteamFriends_HasFriend
+Friends_GetClanCount :: ISteamFriends_GetClanCount
+Friends_GetClanByIndex :: ISteamFriends_GetClanByIndex
+Friends_GetClanName :: ISteamFriends_GetClanName
+Friends_GetClanTag :: ISteamFriends_GetClanTag
+Friends_GetClanActivityCounts :: ISteamFriends_GetClanActivityCounts
+Friends_DownloadClanActivityCounts :: ISteamFriends_DownloadClanActivityCounts
+Friends_GetFriendCountFromSource :: ISteamFriends_GetFriendCountFromSource
+Friends_GetFriendFromSourceByIndex :: ISteamFriends_GetFriendFromSourceByIndex
+Friends_IsUserInSource :: ISteamFriends_IsUserInSource
+Friends_SetInGameVoiceSpeaking :: ISteamFriends_SetInGameVoiceSpeaking
+Friends_ActivateGameOverlay :: ISteamFriends_ActivateGameOverlay
+Friends_ActivateGameOverlayToUser :: ISteamFriends_ActivateGameOverlayToUser
+Friends_ActivateGameOverlayToWebPage :: ISteamFriends_ActivateGameOverlayToWebPage
+Friends_ActivateGameOverlayToStore :: ISteamFriends_ActivateGameOverlayToStore
+Friends_SetPlayedWith :: ISteamFriends_SetPlayedWith
+Friends_ActivateGameOverlayInviteDialog :: ISteamFriends_ActivateGameOverlayInviteDialog
+Friends_GetSmallFriendAvatar :: ISteamFriends_GetSmallFriendAvatar
+Friends_GetMediumFriendAvatar :: ISteamFriends_GetMediumFriendAvatar
+Friends_GetLargeFriendAvatar :: ISteamFriends_GetLargeFriendAvatar
+Friends_RequestUserInformation :: ISteamFriends_RequestUserInformation
+Friends_RequestClanOfficerList :: ISteamFriends_RequestClanOfficerList
+Friends_GetClanOwner :: ISteamFriends_GetClanOwner
+Friends_GetClanOfficerCount :: ISteamFriends_GetClanOfficerCount
+Friends_GetClanOfficerByIndex :: ISteamFriends_GetClanOfficerByIndex
+Friends_GetUserRestrictions :: ISteamFriends_GetUserRestrictions
+Friends_SetRichPresence :: ISteamFriends_SetRichPresence
+Friends_ClearRichPresence :: ISteamFriends_ClearRichPresence
+Friends_GetFriendRichPresence :: ISteamFriends_GetFriendRichPresence
+Friends_GetFriendRichPresenceKeyCount :: ISteamFriends_GetFriendRichPresenceKeyCount
+Friends_GetFriendRichPresenceKeyByIndex :: ISteamFriends_GetFriendRichPresenceKeyByIndex
+Friends_RequestFriendRichPresence :: ISteamFriends_RequestFriendRichPresence
+Friends_InviteUserToGame :: ISteamFriends_InviteUserToGame
+Friends_GetCoplayFriendCount :: ISteamFriends_GetCoplayFriendCount
+Friends_GetCoplayFriend :: ISteamFriends_GetCoplayFriend
+Friends_GetFriendCoplayTime :: ISteamFriends_GetFriendCoplayTime
+Friends_GetFriendCoplayGame :: ISteamFriends_GetFriendCoplayGame
+Friends_JoinClanChatRoom :: ISteamFriends_JoinClanChatRoom
+Friends_LeaveClanChatRoom :: ISteamFriends_LeaveClanChatRoom
+Friends_GetClanChatMemberCount :: ISteamFriends_GetClanChatMemberCount
+Friends_GetChatMemberByIndex :: ISteamFriends_GetChatMemberByIndex
+Friends_SendClanChatMessage :: ISteamFriends_SendClanChatMessage
+Friends_GetClanChatMessage :: ISteamFriends_GetClanChatMessage
+Friends_IsClanChatAdmin :: ISteamFriends_IsClanChatAdmin
+Friends_IsClanChatWindowOpenInSteam :: ISteamFriends_IsClanChatWindowOpenInSteam
+Friends_OpenClanChatWindowInSteam :: ISteamFriends_OpenClanChatWindowInSteam
+Friends_CloseClanChatWindowInSteam :: ISteamFriends_CloseClanChatWindowInSteam
+Friends_SetListenForFriendsMessages :: ISteamFriends_SetListenForFriendsMessages
+Friends_ReplyToFriendMessage :: ISteamFriends_ReplyToFriendMessage
+Friends_GetFriendMessage :: ISteamFriends_GetFriendMessage
+Friends_GetFollowerCount :: ISteamFriends_GetFollowerCount
+Friends_IsFollowing :: ISteamFriends_IsFollowing
+Friends_EnumerateFollowingList :: ISteamFriends_EnumerateFollowingList
+Friends_IsClanPublic :: ISteamFriends_IsClanPublic
+Friends_IsClanOfficialGameGroup :: ISteamFriends_IsClanOfficialGameGroup
+Friends_GetNumChatsWithUnreadPriorityMessages :: ISteamFriends_GetNumChatsWithUnreadPriorityMessages
+Friends_ActivateGameOverlayRemotePlayTogetherInviteDialog :: ISteamFriends_ActivateGameOverlayRemotePlayTogetherInviteDialog
+Friends_RegisterProtocolInOverlayBrowser :: ISteamFriends_RegisterProtocolInOverlayBrowser
+Friends_ActivateGameOverlayInviteDialogConnectString :: ISteamFriends_ActivateGameOverlayInviteDialogConnectString
+Friends_RequestEquippedProfileItems :: ISteamFriends_RequestEquippedProfileItems
+Friends_BHasEquippedProfileItem :: ISteamFriends_BHasEquippedProfileItem
+Friends_GetProfileItemPropertyString :: ISteamFriends_GetProfileItemPropertyString
+Friends_GetProfileItemPropertyUint :: ISteamFriends_GetProfileItemPropertyUint
+Utils_GetSecondsSinceAppActive :: ISteamUtils_GetSecondsSinceAppActive
+Utils_GetSecondsSinceComputerActive :: ISteamUtils_GetSecondsSinceComputerActive
+Utils_GetConnectedUniverse :: ISteamUtils_GetConnectedUniverse
+Utils_GetServerRealTime :: ISteamUtils_GetServerRealTime
+Utils_GetIPCountry :: ISteamUtils_GetIPCountry
+Utils_GetImageSize :: ISteamUtils_GetImageSize
+Utils_GetImageRGBA :: ISteamUtils_GetImageRGBA
+Utils_GetCurrentBatteryPower :: ISteamUtils_GetCurrentBatteryPower
+Utils_GetAppID :: ISteamUtils_GetAppID
+Utils_SetOverlayNotificationPosition :: ISteamUtils_SetOverlayNotificationPosition
+Utils_IsAPICallCompleted :: ISteamUtils_IsAPICallCompleted
+Utils_GetAPICallFailureReason :: ISteamUtils_GetAPICallFailureReason
+Utils_GetAPICallResult :: ISteamUtils_GetAPICallResult
+Utils_GetIPCCallCount :: ISteamUtils_GetIPCCallCount
+Utils_SetWarningMessageHook :: ISteamUtils_SetWarningMessageHook
+Utils_IsOverlayEnabled :: ISteamUtils_IsOverlayEnabled
+Utils_BOverlayNeedsPresent :: ISteamUtils_BOverlayNeedsPresent
+Utils_CheckFileSignature :: ISteamUtils_CheckFileSignature
+Utils_ShowGamepadTextInput :: ISteamUtils_ShowGamepadTextInput
+Utils_GetEnteredGamepadTextLength :: ISteamUtils_GetEnteredGamepadTextLength
+Utils_GetEnteredGamepadTextInput :: ISteamUtils_GetEnteredGamepadTextInput
+Utils_GetSteamUILanguage :: ISteamUtils_GetSteamUILanguage
+Utils_IsSteamRunningInVR :: ISteamUtils_IsSteamRunningInVR
+Utils_SetOverlayNotificationInset :: ISteamUtils_SetOverlayNotificationInset
+Utils_IsSteamInBigPictureMode :: ISteamUtils_IsSteamInBigPictureMode
+Utils_StartVRDashboard :: ISteamUtils_StartVRDashboard
+Utils_IsVRHeadsetStreamingEnabled :: ISteamUtils_IsVRHeadsetStreamingEnabled
+Utils_SetVRHeadsetStreamingEnabled :: ISteamUtils_SetVRHeadsetStreamingEnabled
+Utils_IsSteamChinaLauncher :: ISteamUtils_IsSteamChinaLauncher
+Utils_InitFilterText :: ISteamUtils_InitFilterText
+Utils_FilterText :: ISteamUtils_FilterText
+Utils_GetIPv6ConnectivityState :: ISteamUtils_GetIPv6ConnectivityState
+Utils_IsSteamRunningOnSteamDeck :: ISteamUtils_IsSteamRunningOnSteamDeck
+Utils_Showf32ingGamepadTextInput :: ISteamUtils_Showf32ingGamepadTextInput
+Utils_SetGameLauncherMode :: ISteamUtils_SetGameLauncherMode
+Utils_Dismissf32ingGamepadTextInput :: ISteamUtils_Dismissf32ingGamepadTextInput
+Matchmaking_GetFavoriteGameCount :: ISteamMatchmaking_GetFavoriteGameCount
+Matchmaking_GetFavoriteGame :: ISteamMatchmaking_GetFavoriteGame
+Matchmaking_AddFavoriteGame :: ISteamMatchmaking_AddFavoriteGame
+Matchmaking_RemoveFavoriteGame :: ISteamMatchmaking_RemoveFavoriteGame
+Matchmaking_RequestLobbyList :: ISteamMatchmaking_RequestLobbyList
+Matchmaking_AddRequestLobbyListStringFilter :: ISteamMatchmaking_AddRequestLobbyListStringFilter
+Matchmaking_AddRequestLobbyListNumericalFilter :: ISteamMatchmaking_AddRequestLobbyListNumericalFilter
+Matchmaking_AddRequestLobbyListNearValueFilter :: ISteamMatchmaking_AddRequestLobbyListNearValueFilter
+Matchmaking_AddRequestLobbyListFilterSlotsAvailable :: ISteamMatchmaking_AddRequestLobbyListFilterSlotsAvailable
+Matchmaking_AddRequestLobbyListDistanceFilter :: ISteamMatchmaking_AddRequestLobbyListDistanceFilter
+Matchmaking_AddRequestLobbyListResultCountFilter :: ISteamMatchmaking_AddRequestLobbyListResultCountFilter
+Matchmaking_AddRequestLobbyListCompatibleMembersFilter :: ISteamMatchmaking_AddRequestLobbyListCompatibleMembersFilter
+Matchmaking_GetLobbyByIndex :: ISteamMatchmaking_GetLobbyByIndex
+Matchmaking_CreateLobby :: ISteamMatchmaking_CreateLobby
+Matchmaking_JoinLobby :: ISteamMatchmaking_JoinLobby
+Matchmaking_LeaveLobby :: ISteamMatchmaking_LeaveLobby
+Matchmaking_InviteUserToLobby :: ISteamMatchmaking_InviteUserToLobby
+Matchmaking_GetNumLobbyMembers :: ISteamMatchmaking_GetNumLobbyMembers
+Matchmaking_GetLobbyMemberByIndex :: ISteamMatchmaking_GetLobbyMemberByIndex
+Matchmaking_GetLobbyData :: ISteamMatchmaking_GetLobbyData
+Matchmaking_SetLobbyData :: ISteamMatchmaking_SetLobbyData
+Matchmaking_GetLobbyDataCount :: ISteamMatchmaking_GetLobbyDataCount
+Matchmaking_GetLobbyDataByIndex :: ISteamMatchmaking_GetLobbyDataByIndex
+Matchmaking_DeleteLobbyData :: ISteamMatchmaking_DeleteLobbyData
+Matchmaking_GetLobbyMemberData :: ISteamMatchmaking_GetLobbyMemberData
+Matchmaking_SetLobbyMemberData :: ISteamMatchmaking_SetLobbyMemberData
+Matchmaking_SendLobbyChatMsg :: ISteamMatchmaking_SendLobbyChatMsg
+Matchmaking_GetLobbyChatEntry :: ISteamMatchmaking_GetLobbyChatEntry
+Matchmaking_RequestLobbyData :: ISteamMatchmaking_RequestLobbyData
+Matchmaking_SetLobbyGameServer :: ISteamMatchmaking_SetLobbyGameServer
+Matchmaking_GetLobbyGameServer :: ISteamMatchmaking_GetLobbyGameServer
+Matchmaking_SetLobbyMemberLimit :: ISteamMatchmaking_SetLobbyMemberLimit
+Matchmaking_GetLobbyMemberLimit :: ISteamMatchmaking_GetLobbyMemberLimit
+Matchmaking_SetLobbyType :: ISteamMatchmaking_SetLobbyType
+Matchmaking_SetLobbyJoinable :: ISteamMatchmaking_SetLobbyJoinable
+Matchmaking_GetLobbyOwner :: ISteamMatchmaking_GetLobbyOwner
+Matchmaking_SetLobbyOwner :: ISteamMatchmaking_SetLobbyOwner
+Matchmaking_SetLinkedLobby :: ISteamMatchmaking_SetLinkedLobby
+MatchmakingServerListResponse_ServerResponded :: ISteamMatchmakingServerListResponse_ServerResponded
+MatchmakingServerListResponse_ServerFailedToRespond :: ISteamMatchmakingServerListResponse_ServerFailedToRespond
+MatchmakingServerListResponse_RefreshComplete :: ISteamMatchmakingServerListResponse_RefreshComplete
+MatchmakingPingResponse_ServerResponded :: ISteamMatchmakingPingResponse_ServerResponded
+MatchmakingPingResponse_ServerFailedToRespond :: ISteamMatchmakingPingResponse_ServerFailedToRespond
+MatchmakingPlayersResponse_AddPlayerToList :: ISteamMatchmakingPlayersResponse_AddPlayerToList
+MatchmakingPlayersResponse_PlayersFailedToRespond :: ISteamMatchmakingPlayersResponse_PlayersFailedToRespond
+MatchmakingPlayersResponse_PlayersRefreshComplete :: ISteamMatchmakingPlayersResponse_PlayersRefreshComplete
+MatchmakingRulesResponse_RulesResponded :: ISteamMatchmakingRulesResponse_RulesResponded
+MatchmakingRulesResponse_RulesFailedToRespond :: ISteamMatchmakingRulesResponse_RulesFailedToRespond
+MatchmakingRulesResponse_RulesRefreshComplete :: ISteamMatchmakingRulesResponse_RulesRefreshComplete
+MatchmakingServers_RequestInternetServerList :: ISteamMatchmakingServers_RequestInternetServerList
+MatchmakingServers_RequestLANServerList :: ISteamMatchmakingServers_RequestLANServerList
+MatchmakingServers_RequestFriendsServerList :: ISteamMatchmakingServers_RequestFriendsServerList
+MatchmakingServers_RequestFavoritesServerList :: ISteamMatchmakingServers_RequestFavoritesServerList
+MatchmakingServers_RequestHistoryServerList :: ISteamMatchmakingServers_RequestHistoryServerList
+MatchmakingServers_RequestSpectatorServerList :: ISteamMatchmakingServers_RequestSpectatorServerList
+MatchmakingServers_ReleaseRequest :: ISteamMatchmakingServers_ReleaseRequest
+MatchmakingServers_GetServerDetails :: ISteamMatchmakingServers_GetServerDetails
+MatchmakingServers_CancelQuery :: ISteamMatchmakingServers_CancelQuery
+MatchmakingServers_RefreshQuery :: ISteamMatchmakingServers_RefreshQuery
+MatchmakingServers_IsRefreshing :: ISteamMatchmakingServers_IsRefreshing
+MatchmakingServers_GetServerCount :: ISteamMatchmakingServers_GetServerCount
+MatchmakingServers_RefreshServer :: ISteamMatchmakingServers_RefreshServer
+MatchmakingServers_PingServer :: ISteamMatchmakingServers_PingServer
+MatchmakingServers_PlayerDetails :: ISteamMatchmakingServers_PlayerDetails
+MatchmakingServers_ServerRules :: ISteamMatchmakingServers_ServerRules
+MatchmakingServers_CancelServerQuery :: ISteamMatchmakingServers_CancelServerQuery
+GameSearch_AddGameSearchParams :: ISteamGameSearch_AddGameSearchParams
+GameSearch_SearchForGameWithLobby :: ISteamGameSearch_SearchForGameWithLobby
+GameSearch_SearchForGameSolo :: ISteamGameSearch_SearchForGameSolo
+GameSearch_AcceptGame :: ISteamGameSearch_AcceptGame
+GameSearch_DeclineGame :: ISteamGameSearch_DeclineGame
+GameSearch_RetrieveConnectionDetails :: ISteamGameSearch_RetrieveConnectionDetails
+GameSearch_EndGameSearch :: ISteamGameSearch_EndGameSearch
+GameSearch_SetGameHostParams :: ISteamGameSearch_SetGameHostParams
+GameSearch_SetConnectionDetails :: ISteamGameSearch_SetConnectionDetails
+GameSearch_RequestPlayersForGame :: ISteamGameSearch_RequestPlayersForGame
+GameSearch_HostConfirmGameStart :: ISteamGameSearch_HostConfirmGameStart
+GameSearch_CancelRequestPlayersForGame :: ISteamGameSearch_CancelRequestPlayersForGame
+GameSearch_SubmitPlayerResult :: ISteamGameSearch_SubmitPlayerResult
+GameSearch_EndGame :: ISteamGameSearch_EndGame
+Parties_GetNumActiveBeacons :: ISteamParties_GetNumActiveBeacons
+Parties_GetBeaconByIndex :: ISteamParties_GetBeaconByIndex
+Parties_GetBeaconDetails :: ISteamParties_GetBeaconDetails
+Parties_JoinParty :: ISteamParties_JoinParty
+Parties_GetNumAvailableBeaconLocations :: ISteamParties_GetNumAvailableBeaconLocations
+Parties_GetAvailableBeaconLocations :: ISteamParties_GetAvailableBeaconLocations
+Parties_CreateBeacon :: ISteamParties_CreateBeacon
+Parties_OnReservationCompleted :: ISteamParties_OnReservationCompleted
+Parties_CancelReservation :: ISteamParties_CancelReservation
+Parties_ChangeNumOpenSlots :: ISteamParties_ChangeNumOpenSlots
+Parties_DestroyBeacon :: ISteamParties_DestroyBeacon
+Parties_GetBeaconLocationData :: ISteamParties_GetBeaconLocationData
+RemoteStorage_FileWrite :: ISteamRemoteStorage_FileWrite
+RemoteStorage_FileRead :: ISteamRemoteStorage_FileRead
+RemoteStorage_FileWriteAsync :: ISteamRemoteStorage_FileWriteAsync
+RemoteStorage_FileReadAsync :: ISteamRemoteStorage_FileReadAsync
+RemoteStorage_FileReadAsyncComplete :: ISteamRemoteStorage_FileReadAsyncComplete
+RemoteStorage_FileForget :: ISteamRemoteStorage_FileForget
+RemoteStorage_FileDelete :: ISteamRemoteStorage_FileDelete
+RemoteStorage_FileShare :: ISteamRemoteStorage_FileShare
+RemoteStorage_SetSyncPlatforms :: ISteamRemoteStorage_SetSyncPlatforms
+RemoteStorage_FileWriteStreamOpen :: ISteamRemoteStorage_FileWriteStreamOpen
+RemoteStorage_FileWriteStreamWriteChunk :: ISteamRemoteStorage_FileWriteStreamWriteChunk
+RemoteStorage_FileWriteStreamClose :: ISteamRemoteStorage_FileWriteStreamClose
+RemoteStorage_FileWriteStreamCancel :: ISteamRemoteStorage_FileWriteStreamCancel
+RemoteStorage_FileExists :: ISteamRemoteStorage_FileExists
+RemoteStorage_FilePersisted :: ISteamRemoteStorage_FilePersisted
+RemoteStorage_GetFileSize :: ISteamRemoteStorage_GetFileSize
+RemoteStorage_GetFileTimestamp :: ISteamRemoteStorage_GetFileTimestamp
+RemoteStorage_GetSyncPlatforms :: ISteamRemoteStorage_GetSyncPlatforms
+RemoteStorage_GetFileCount :: ISteamRemoteStorage_GetFileCount
+RemoteStorage_GetFileNameAndSize :: ISteamRemoteStorage_GetFileNameAndSize
+RemoteStorage_GetQuota :: ISteamRemoteStorage_GetQuota
+RemoteStorage_IsCloudEnabledForAccount :: ISteamRemoteStorage_IsCloudEnabledForAccount
+RemoteStorage_IsCloudEnabledForApp :: ISteamRemoteStorage_IsCloudEnabledForApp
+RemoteStorage_SetCloudEnabledForApp :: ISteamRemoteStorage_SetCloudEnabledForApp
+RemoteStorage_UGCDownload :: ISteamRemoteStorage_UGCDownload
+RemoteStorage_GetUGCDownloadProgress :: ISteamRemoteStorage_GetUGCDownloadProgress
+RemoteStorage_GetUGCDetails :: ISteamRemoteStorage_GetUGCDetails
+RemoteStorage_UGCRead :: ISteamRemoteStorage_UGCRead
+RemoteStorage_GetCachedUGCCount :: ISteamRemoteStorage_GetCachedUGCCount
+RemoteStorage_GetCachedUGCHandle :: ISteamRemoteStorage_GetCachedUGCHandle
+RemoteStorage_PublishWorkshopFile :: ISteamRemoteStorage_PublishWorkshopFile
+RemoteStorage_CreatePublishedFileUpdateRequest :: ISteamRemoteStorage_CreatePublishedFileUpdateRequest
+RemoteStorage_UpdatePublishedFileFile :: ISteamRemoteStorage_UpdatePublishedFileFile
+RemoteStorage_UpdatePublishedFilePreviewFile :: ISteamRemoteStorage_UpdatePublishedFilePreviewFile
+RemoteStorage_UpdatePublishedFileTitle :: ISteamRemoteStorage_UpdatePublishedFileTitle
+RemoteStorage_UpdatePublishedFileDescription :: ISteamRemoteStorage_UpdatePublishedFileDescription
+RemoteStorage_UpdatePublishedFileVisibility :: ISteamRemoteStorage_UpdatePublishedFileVisibility
+RemoteStorage_UpdatePublishedFileTags :: ISteamRemoteStorage_UpdatePublishedFileTags
+RemoteStorage_CommitPublishedFileUpdate :: ISteamRemoteStorage_CommitPublishedFileUpdate
+RemoteStorage_GetPublishedFileDetails :: ISteamRemoteStorage_GetPublishedFileDetails
+RemoteStorage_DeletePublishedFile :: ISteamRemoteStorage_DeletePublishedFile
+RemoteStorage_EnumerateUserPublishedFiles :: ISteamRemoteStorage_EnumerateUserPublishedFiles
+RemoteStorage_SubscribePublishedFile :: ISteamRemoteStorage_SubscribePublishedFile
+RemoteStorage_EnumerateUserSubscribedFiles :: ISteamRemoteStorage_EnumerateUserSubscribedFiles
+RemoteStorage_UnsubscribePublishedFile :: ISteamRemoteStorage_UnsubscribePublishedFile
+RemoteStorage_UpdatePublishedFileSetChangeDescription :: ISteamRemoteStorage_UpdatePublishedFileSetChangeDescription
+RemoteStorage_GetPublishedItemVoteDetails :: ISteamRemoteStorage_GetPublishedItemVoteDetails
+RemoteStorage_UpdateUserPublishedItemVote :: ISteamRemoteStorage_UpdateUserPublishedItemVote
+RemoteStorage_GetUserPublishedItemVoteDetails :: ISteamRemoteStorage_GetUserPublishedItemVoteDetails
+RemoteStorage_EnumerateUserSharedWorkshopFiles :: ISteamRemoteStorage_EnumerateUserSharedWorkshopFiles
+RemoteStorage_PublishVideo :: ISteamRemoteStorage_PublishVideo
+RemoteStorage_SetUserPublishedFileAction :: ISteamRemoteStorage_SetUserPublishedFileAction
+RemoteStorage_EnumeratePublishedFilesByUserAction :: ISteamRemoteStorage_EnumeratePublishedFilesByUserAction
+RemoteStorage_EnumeratePublishedWorkshopFiles :: ISteamRemoteStorage_EnumeratePublishedWorkshopFiles
+RemoteStorage_UGCDownloadToLocation :: ISteamRemoteStorage_UGCDownloadToLocation
+RemoteStorage_GetLocalFileChangeCount :: ISteamRemoteStorage_GetLocalFileChangeCount
+RemoteStorage_GetLocalFileChange :: ISteamRemoteStorage_GetLocalFileChange
+RemoteStorage_BeginFileWriteBatch :: ISteamRemoteStorage_BeginFileWriteBatch
+RemoteStorage_EndFileWriteBatch :: ISteamRemoteStorage_EndFileWriteBatch
+UserStats_RequestCurrentStats :: ISteamUserStats_RequestCurrentStats
+UserStats_GetStatInt32 :: ISteamUserStats_GetStatInt32
+UserStats_GetStatFloat :: ISteamUserStats_GetStatFloat
+UserStats_SetStatInt32 :: ISteamUserStats_SetStatInt32
+UserStats_SetStatFloat :: ISteamUserStats_SetStatFloat
+UserStats_UpdateAvgRateStat :: ISteamUserStats_UpdateAvgRateStat
+UserStats_GetAchievement :: ISteamUserStats_GetAchievement
+UserStats_SetAchievement :: ISteamUserStats_SetAchievement
+UserStats_ClearAchievement :: ISteamUserStats_ClearAchievement
+UserStats_GetAchievementAndUnlockTime :: ISteamUserStats_GetAchievementAndUnlockTime
+UserStats_StoreStats :: ISteamUserStats_StoreStats
+UserStats_GetAchievementIcon :: ISteamUserStats_GetAchievementIcon
+UserStats_GetAchievementDisplayAttribute :: ISteamUserStats_GetAchievementDisplayAttribute
+UserStats_IndicateAchievementProgress :: ISteamUserStats_IndicateAchievementProgress
+UserStats_GetNumAchievements :: ISteamUserStats_GetNumAchievements
+UserStats_GetAchievementName :: ISteamUserStats_GetAchievementName
+UserStats_RequestUserStats :: ISteamUserStats_RequestUserStats
+UserStats_GetUserStatInt32 :: ISteamUserStats_GetUserStatInt32
+UserStats_GetUserStatFloat :: ISteamUserStats_GetUserStatFloat
+UserStats_GetUserAchievement :: ISteamUserStats_GetUserAchievement
+UserStats_GetUserAchievementAndUnlockTime :: ISteamUserStats_GetUserAchievementAndUnlockTime
+UserStats_ResetAllStats :: ISteamUserStats_ResetAllStats
+UserStats_FindOrCreateLeaderboard :: ISteamUserStats_FindOrCreateLeaderboard
+UserStats_FindLeaderboard :: ISteamUserStats_FindLeaderboard
+UserStats_GetLeaderboardName :: ISteamUserStats_GetLeaderboardName
+UserStats_GetLeaderboardEntryCount :: ISteamUserStats_GetLeaderboardEntryCount
+UserStats_GetLeaderboardSortMethod :: ISteamUserStats_GetLeaderboardSortMethod
+UserStats_GetLeaderboardDisplayType :: ISteamUserStats_GetLeaderboardDisplayType
+UserStats_DownloadLeaderboardEntries :: ISteamUserStats_DownloadLeaderboardEntries
+UserStats_DownloadLeaderboardEntriesForUsers :: ISteamUserStats_DownloadLeaderboardEntriesForUsers
+UserStats_GetDownloadedLeaderboardEntry :: ISteamUserStats_GetDownloadedLeaderboardEntry
+UserStats_UploadLeaderboardScore :: ISteamUserStats_UploadLeaderboardScore
+UserStats_AttachLeaderboardUGC :: ISteamUserStats_AttachLeaderboardUGC
+UserStats_GetNumberOfCurrentPlayers :: ISteamUserStats_GetNumberOfCurrentPlayers
+UserStats_RequestGlobalAchievementPercentages :: ISteamUserStats_RequestGlobalAchievementPercentages
+UserStats_GetMostAchievedAchievementInfo :: ISteamUserStats_GetMostAchievedAchievementInfo
+UserStats_GetNextMostAchievedAchievementInfo :: ISteamUserStats_GetNextMostAchievedAchievementInfo
+UserStats_GetAchievementAchievedPercent :: ISteamUserStats_GetAchievementAchievedPercent
+UserStats_RequestGlobalStats :: ISteamUserStats_RequestGlobalStats
+UserStats_GetGlobalStatInt64 :: ISteamUserStats_GetGlobalStatInt64
+UserStats_GetGlobalStatFloat64 :: ISteamUserStats_GetGlobalStatFloat64
+UserStats_GetGlobalStatHistoryInt64 :: ISteamUserStats_GetGlobalStatHistoryInt64
+UserStats_GetGlobalStatHistoryFloat64 :: ISteamUserStats_GetGlobalStatHistoryFloat64
+UserStats_GetAchievementProgressLimitsInt32 :: ISteamUserStats_GetAchievementProgressLimitsInt32
+UserStats_GetAchievementProgressLimitsFloat :: ISteamUserStats_GetAchievementProgressLimitsFloat
+Apps_BIsSubscribed :: ISteamApps_BIsSubscribed
+Apps_BIsLowViolence :: ISteamApps_BIsLowViolence
+Apps_BIsCybercafe :: ISteamApps_BIsCybercafe
+Apps_BIsVACBanned :: ISteamApps_BIsVACBanned
+Apps_GetCurrentGameLanguage :: ISteamApps_GetCurrentGameLanguage
+Apps_GetAvailableGameLanguages :: ISteamApps_GetAvailableGameLanguages
+Apps_BIsSubscribedApp :: ISteamApps_BIsSubscribedApp
+Apps_BIsDlcInstalled :: ISteamApps_BIsDlcInstalled
+Apps_GetEarliestPurchaseUnixTime :: ISteamApps_GetEarliestPurchaseUnixTime
+Apps_BIsSubscribedFromFreeWeekend :: ISteamApps_BIsSubscribedFromFreeWeekend
+Apps_GetDLCCount :: ISteamApps_GetDLCCount
+Apps_BGetDLCDataByIndex :: ISteamApps_BGetDLCDataByIndex
+Apps_InstallDLC :: ISteamApps_InstallDLC
+Apps_UninstallDLC :: ISteamApps_UninstallDLC
+Apps_RequestAppProofOfPurchaseKey :: ISteamApps_RequestAppProofOfPurchaseKey
+Apps_GetCurrentBetaName :: ISteamApps_GetCurrentBetaName
+Apps_MarkContentCorrupt :: ISteamApps_MarkContentCorrupt
+Apps_GetInstalledDepots :: ISteamApps_GetInstalledDepots
+Apps_GetAppInstallDir :: ISteamApps_GetAppInstallDir
+Apps_BIsAppInstalled :: ISteamApps_BIsAppInstalled
+Apps_GetAppOwner :: ISteamApps_GetAppOwner
+Apps_GetLaunchQueryParam :: ISteamApps_GetLaunchQueryParam
+Apps_GetDlcDownloadProgress :: ISteamApps_GetDlcDownloadProgress
+Apps_GetAppBuildId :: ISteamApps_GetAppBuildId
+Apps_RequestAllProofOfPurchaseKeys :: ISteamApps_RequestAllProofOfPurchaseKeys
+Apps_GetFileDetails :: ISteamApps_GetFileDetails
+Apps_GetLaunchCommandLine :: ISteamApps_GetLaunchCommandLine
+Apps_BIsSubscribedFromFamilySharing :: ISteamApps_BIsSubscribedFromFamilySharing
+Apps_BIsTimedTrial :: ISteamApps_BIsTimedTrial
+Apps_SetDlcContext :: ISteamApps_SetDlcContext
+Networking_SendP2PPacket :: ISteamNetworking_SendP2PPacket
+Networking_IsP2PPacketAvailable :: ISteamNetworking_IsP2PPacketAvailable
+Networking_ReadP2PPacket :: ISteamNetworking_ReadP2PPacket
+Networking_AcceptP2PSessionWithUser :: ISteamNetworking_AcceptP2PSessionWithUser
+Networking_CloseP2PSessionWithUser :: ISteamNetworking_CloseP2PSessionWithUser
+Networking_CloseP2PChannelWithUser :: ISteamNetworking_CloseP2PChannelWithUser
+Networking_GetP2PSessionState :: ISteamNetworking_GetP2PSessionState
+Networking_AllowP2PPacketRelay :: ISteamNetworking_AllowP2PPacketRelay
+Networking_CreateListenSocket :: ISteamNetworking_CreateListenSocket
+Networking_CreateP2PConnectionSocket :: ISteamNetworking_CreateP2PConnectionSocket
+Networking_CreateConnectionSocket :: ISteamNetworking_CreateConnectionSocket
+Networking_DestroySocket :: ISteamNetworking_DestroySocket
+Networking_DestroyListenSocket :: ISteamNetworking_DestroyListenSocket
+Networking_SendDataOnSocket :: ISteamNetworking_SendDataOnSocket
+Networking_IsDataAvailableOnSocket :: ISteamNetworking_IsDataAvailableOnSocket
+Networking_RetrieveDataFromSocket :: ISteamNetworking_RetrieveDataFromSocket
+Networking_IsDataAvailable :: ISteamNetworking_IsDataAvailable
+Networking_RetrieveData :: ISteamNetworking_RetrieveData
+Networking_GetSocketInfo :: ISteamNetworking_GetSocketInfo
+Networking_GetListenSocketInfo :: ISteamNetworking_GetListenSocketInfo
+Networking_GetSocketConnectionType :: ISteamNetworking_GetSocketConnectionType
+Networking_GetMaxPacketSize :: ISteamNetworking_GetMaxPacketSize
+Screenshots_WriteScreenshot :: ISteamScreenshots_WriteScreenshot
+Screenshots_AddScreenshotToLibrary :: ISteamScreenshots_AddScreenshotToLibrary
+Screenshots_TriggerScreenshot :: ISteamScreenshots_TriggerScreenshot
+Screenshots_HookScreenshots :: ISteamScreenshots_HookScreenshots
+Screenshots_SetLocation :: ISteamScreenshots_SetLocation
+Screenshots_TagUser :: ISteamScreenshots_TagUser
+Screenshots_TagPublishedFile :: ISteamScreenshots_TagPublishedFile
+Screenshots_IsScreenshotsHooked :: ISteamScreenshots_IsScreenshotsHooked
+Screenshots_AddVRScreenshotToLibrary :: ISteamScreenshots_AddVRScreenshotToLibrary
+Music_BIsEnabled :: ISteamMusic_BIsEnabled
+Music_BIsPlaying :: ISteamMusic_BIsPlaying
+Music_GetPlaybackStatus :: ISteamMusic_GetPlaybackStatus
+Music_Play :: ISteamMusic_Play
+Music_Pause :: ISteamMusic_Pause
+Music_PlayPrevious :: ISteamMusic_PlayPrevious
+Music_PlayNext :: ISteamMusic_PlayNext
+Music_SetVolume :: ISteamMusic_SetVolume
+Music_GetVolume :: ISteamMusic_GetVolume
+MusicRemote_RegisterSteamMusicRemote :: ISteamMusicRemote_RegisterSteamMusicRemote
+MusicRemote_DeregisterSteamMusicRemote :: ISteamMusicRemote_DeregisterSteamMusicRemote
+MusicRemote_BIsCurrentMusicRemote :: ISteamMusicRemote_BIsCurrentMusicRemote
+MusicRemote_BActivationSuccess :: ISteamMusicRemote_BActivationSuccess
+MusicRemote_SetDisplayName :: ISteamMusicRemote_SetDisplayName
+MusicRemote_SetPNGIcon_64x64 :: ISteamMusicRemote_SetPNGIcon_64x64
+MusicRemote_EnablePlayPrevious :: ISteamMusicRemote_EnablePlayPrevious
+MusicRemote_EnablePlayNext :: ISteamMusicRemote_EnablePlayNext
+MusicRemote_EnableShuffled :: ISteamMusicRemote_EnableShuffled
+MusicRemote_EnableLooped :: ISteamMusicRemote_EnableLooped
+MusicRemote_EnableQueue :: ISteamMusicRemote_EnableQueue
+MusicRemote_EnablePlaylists :: ISteamMusicRemote_EnablePlaylists
+MusicRemote_UpdatePlaybackStatus :: ISteamMusicRemote_UpdatePlaybackStatus
+MusicRemote_UpdateShuffled :: ISteamMusicRemote_UpdateShuffled
+MusicRemote_UpdateLooped :: ISteamMusicRemote_UpdateLooped
+MusicRemote_UpdateVolume :: ISteamMusicRemote_UpdateVolume
+MusicRemote_CurrentEntryWillChange :: ISteamMusicRemote_CurrentEntryWillChange
+MusicRemote_CurrentEntryIsAvailable :: ISteamMusicRemote_CurrentEntryIsAvailable
+MusicRemote_UpdateCurrentEntryText :: ISteamMusicRemote_UpdateCurrentEntryText
+MusicRemote_UpdateCurrentEntryElapsedSeconds :: ISteamMusicRemote_UpdateCurrentEntryElapsedSeconds
+MusicRemote_UpdateCurrentEntryCoverArt :: ISteamMusicRemote_UpdateCurrentEntryCoverArt
+MusicRemote_CurrentEntryDidChange :: ISteamMusicRemote_CurrentEntryDidChange
+MusicRemote_QueueWillChange :: ISteamMusicRemote_QueueWillChange
+MusicRemote_ResetQueueEntries :: ISteamMusicRemote_ResetQueueEntries
+MusicRemote_SetQueueEntry :: ISteamMusicRemote_SetQueueEntry
+MusicRemote_SetCurrentQueueEntry :: ISteamMusicRemote_SetCurrentQueueEntry
+MusicRemote_QueueDidChange :: ISteamMusicRemote_QueueDidChange
+MusicRemote_PlaylistWillChange :: ISteamMusicRemote_PlaylistWillChange
+MusicRemote_ResetPlaylistEntries :: ISteamMusicRemote_ResetPlaylistEntries
+MusicRemote_SetPlaylistEntry :: ISteamMusicRemote_SetPlaylistEntry
+MusicRemote_SetCurrentPlaylistEntry :: ISteamMusicRemote_SetCurrentPlaylistEntry
+MusicRemote_PlaylistDidChange :: ISteamMusicRemote_PlaylistDidChange
+HTTP_CreateHTTPRequest :: ISteamHTTP_CreateHTTPRequest
+HTTP_SetHTTPRequestContextValue :: ISteamHTTP_SetHTTPRequestContextValue
+HTTP_SetHTTPRequestNetworkActivityTimeout :: ISteamHTTP_SetHTTPRequestNetworkActivityTimeout
+HTTP_SetHTTPRequestHeaderValue :: ISteamHTTP_SetHTTPRequestHeaderValue
+HTTP_SetHTTPRequestGetOrPostParameter :: ISteamHTTP_SetHTTPRequestGetOrPostParameter
+HTTP_SendHTTPRequest :: ISteamHTTP_SendHTTPRequest
+HTTP_SendHTTPRequestAndStreamResponse :: ISteamHTTP_SendHTTPRequestAndStreamResponse
+HTTP_DeferHTTPRequest :: ISteamHTTP_DeferHTTPRequest
+HTTP_PrioritizeHTTPRequest :: ISteamHTTP_PrioritizeHTTPRequest
+HTTP_GetHTTPResponseHeaderSize :: ISteamHTTP_GetHTTPResponseHeaderSize
+HTTP_GetHTTPResponseHeaderValue :: ISteamHTTP_GetHTTPResponseHeaderValue
+HTTP_GetHTTPResponseBodySize :: ISteamHTTP_GetHTTPResponseBodySize
+HTTP_GetHTTPResponseBodyData :: ISteamHTTP_GetHTTPResponseBodyData
+HTTP_GetHTTPStreamingResponseBodyData :: ISteamHTTP_GetHTTPStreamingResponseBodyData
+HTTP_ReleaseHTTPRequest :: ISteamHTTP_ReleaseHTTPRequest
+HTTP_GetHTTPDownloadProgressPct :: ISteamHTTP_GetHTTPDownloadProgressPct
+HTTP_SetHTTPRequestRawPostBody :: ISteamHTTP_SetHTTPRequestRawPostBody
+HTTP_CreateCookieContainer :: ISteamHTTP_CreateCookieContainer
+HTTP_ReleaseCookieContainer :: ISteamHTTP_ReleaseCookieContainer
+HTTP_SetCookie :: ISteamHTTP_SetCookie
+HTTP_SetHTTPRequestCookieContainer :: ISteamHTTP_SetHTTPRequestCookieContainer
+HTTP_SetHTTPRequestUserAgentInfo :: ISteamHTTP_SetHTTPRequestUserAgentInfo
+HTTP_SetHTTPRequestRequiresVerifiedCertificate :: ISteamHTTP_SetHTTPRequestRequiresVerifiedCertificate
+HTTP_SetHTTPRequestAbsoluteTimeoutMS :: ISteamHTTP_SetHTTPRequestAbsoluteTimeoutMS
+HTTP_GetHTTPRequestWasTimedOut :: ISteamHTTP_GetHTTPRequestWasTimedOut
+Input_Init :: ISteamInput_Init
+Input_Shutdown :: ISteamInput_Shutdown
+Input_SetInputActionManifestFilePath :: ISteamInput_SetInputActionManifestFilePath
+Input_RunFrame :: ISteamInput_RunFrame
+Input_BWaitForData :: ISteamInput_BWaitForData
+Input_BNewDataAvailable :: ISteamInput_BNewDataAvailable
+Input_GetConnectedControllers :: ISteamInput_GetConnectedControllers
+Input_EnableDeviceCallbacks :: ISteamInput_EnableDeviceCallbacks
+Input_EnableActionEventCallbacks :: ISteamInput_EnableActionEventCallbacks
+Input_GetActionSetHandle :: ISteamInput_GetActionSetHandle
+Input_ActivateActionSet :: ISteamInput_ActivateActionSet
+Input_GetCurrentActionSet :: ISteamInput_GetCurrentActionSet
+Input_ActivateActionSetLayer :: ISteamInput_ActivateActionSetLayer
+Input_DeactivateActionSetLayer :: ISteamInput_DeactivateActionSetLayer
+Input_DeactivateAllActionSetLayers :: ISteamInput_DeactivateAllActionSetLayers
+Input_GetActiveActionSetLayers :: ISteamInput_GetActiveActionSetLayers
+Input_GetDigitalActionHandle :: ISteamInput_GetDigitalActionHandle
+Input_GetDigitalActionData :: ISteamInput_GetDigitalActionData
+Input_GetDigitalActionOrigins :: ISteamInput_GetDigitalActionOrigins
+Input_GetStringForDigitalActionName :: ISteamInput_GetStringForDigitalActionName
+Input_GetAnalogActionHandle :: ISteamInput_GetAnalogActionHandle
+Input_GetAnalogActionData :: ISteamInput_GetAnalogActionData
+Input_GetAnalogActionOrigins :: ISteamInput_GetAnalogActionOrigins
+Input_GetGlyphPNGForActionOrigin :: ISteamInput_GetGlyphPNGForActionOrigin
+Input_GetGlyphSVGForActionOrigin :: ISteamInput_GetGlyphSVGForActionOrigin
+Input_GetGlyphForActionOrigin_Legacy :: ISteamInput_GetGlyphForActionOrigin_Legacy
+Input_GetStringForActionOrigin :: ISteamInput_GetStringForActionOrigin
+Input_GetStringForAnalogActionName :: ISteamInput_GetStringForAnalogActionName
+Input_StopAnalogActionMomentum :: ISteamInput_StopAnalogActionMomentum
+Input_GetMotionData :: ISteamInput_GetMotionData
+Input_TriggerVibration :: ISteamInput_TriggerVibration
+Input_TriggerVibrationExtended :: ISteamInput_TriggerVibrationExtended
+Input_TriggerSimpleHapticEvent :: ISteamInput_TriggerSimpleHapticEvent
+Input_SetLEDColor :: ISteamInput_SetLEDColor
+Input_Legacy_TriggerHapticPulse :: ISteamInput_Legacy_TriggerHapticPulse
+Input_Legacy_TriggerRepeatedHapticPulse :: ISteamInput_Legacy_TriggerRepeatedHapticPulse
+Input_ShowBindingPanel :: ISteamInput_ShowBindingPanel
+Input_GetInputTypeForHandle :: ISteamInput_GetInputTypeForHandle
+Input_GetControllerForGamepadIndex :: ISteamInput_GetControllerForGamepadIndex
+Input_GetGamepadIndexForController :: ISteamInput_GetGamepadIndexForController
+Input_GetStringForXboxOrigin :: ISteamInput_GetStringForXboxOrigin
+Input_GetGlyphForXboxOrigin :: ISteamInput_GetGlyphForXboxOrigin
+Input_GetActionOriginFromXboxOrigin :: ISteamInput_GetActionOriginFromXboxOrigin
+Input_TranslateActionOrigin :: ISteamInput_TranslateActionOrigin
+Input_GetDeviceBindingRevision :: ISteamInput_GetDeviceBindingRevision
+Input_GetRemotePlaySessionID :: ISteamInput_GetRemotePlaySessionID
+Input_GetSessionInputConfigurationSettings :: ISteamInput_GetSessionInputConfigurationSettings
+Controller_Init :: ISteamController_Init
+Controller_Shutdown :: ISteamController_Shutdown
+Controller_RunFrame :: ISteamController_RunFrame
+Controller_GetConnectedControllers :: ISteamController_GetConnectedControllers
+Controller_GetActionSetHandle :: ISteamController_GetActionSetHandle
+Controller_ActivateActionSet :: ISteamController_ActivateActionSet
+Controller_GetCurrentActionSet :: ISteamController_GetCurrentActionSet
+Controller_ActivateActionSetLayer :: ISteamController_ActivateActionSetLayer
+Controller_DeactivateActionSetLayer :: ISteamController_DeactivateActionSetLayer
+Controller_DeactivateAllActionSetLayers :: ISteamController_DeactivateAllActionSetLayers
+Controller_GetActiveActionSetLayers :: ISteamController_GetActiveActionSetLayers
+Controller_GetDigitalActionHandle :: ISteamController_GetDigitalActionHandle
+Controller_GetDigitalActionData :: ISteamController_GetDigitalActionData
+Controller_GetDigitalActionOrigins :: ISteamController_GetDigitalActionOrigins
+Controller_GetAnalogActionHandle :: ISteamController_GetAnalogActionHandle
+Controller_GetAnalogActionData :: ISteamController_GetAnalogActionData
+Controller_GetAnalogActionOrigins :: ISteamController_GetAnalogActionOrigins
+Controller_GetGlyphForActionOrigin :: ISteamController_GetGlyphForActionOrigin
+Controller_GetStringForActionOrigin :: ISteamController_GetStringForActionOrigin
+Controller_StopAnalogActionMomentum :: ISteamController_StopAnalogActionMomentum
+Controller_GetMotionData :: ISteamController_GetMotionData
+Controller_TriggerHapticPulse :: ISteamController_TriggerHapticPulse
+Controller_TriggerRepeatedHapticPulse :: ISteamController_TriggerRepeatedHapticPulse
+Controller_TriggerVibration :: ISteamController_TriggerVibration
+Controller_SetLEDColor :: ISteamController_SetLEDColor
+Controller_ShowBindingPanel :: ISteamController_ShowBindingPanel
+Controller_GetInputTypeForHandle :: ISteamController_GetInputTypeForHandle
+Controller_GetControllerForGamepadIndex :: ISteamController_GetControllerForGamepadIndex
+Controller_GetGamepadIndexForController :: ISteamController_GetGamepadIndexForController
+Controller_GetStringForXboxOrigin :: ISteamController_GetStringForXboxOrigin
+Controller_GetGlyphForXboxOrigin :: ISteamController_GetGlyphForXboxOrigin
+Controller_GetActionOriginFromXboxOrigin :: ISteamController_GetActionOriginFromXboxOrigin
+Controller_TranslateActionOrigin :: ISteamController_TranslateActionOrigin
+Controller_GetControllerBindingRevision :: ISteamController_GetControllerBindingRevision
+UGC_CreateQueryUserUGCRequest :: ISteamUGC_CreateQueryUserUGCRequest
+UGC_CreateQueryAllUGCRequestByPage :: ISteamUGC_CreateQueryAllUGCRequestByPage
+UGC_CreateQueryAllUGCRequestByCursor :: ISteamUGC_CreateQueryAllUGCRequestByCursor
+UGC_CreateQueryUGCDetailsRequest :: ISteamUGC_CreateQueryUGCDetailsRequest
+UGC_SendQueryUGCRequest :: ISteamUGC_SendQueryUGCRequest
+UGC_GetQueryUGCResult :: ISteamUGC_GetQueryUGCResult
+UGC_GetQueryUGCNumTags :: ISteamUGC_GetQueryUGCNumTags
+UGC_GetQueryUGCTag :: ISteamUGC_GetQueryUGCTag
+UGC_GetQueryUGCTagDisplayName :: ISteamUGC_GetQueryUGCTagDisplayName
+UGC_GetQueryUGCPreviewURL :: ISteamUGC_GetQueryUGCPreviewURL
+UGC_GetQueryUGCMetadata :: ISteamUGC_GetQueryUGCMetadata
+UGC_GetQueryUGCChildren :: ISteamUGC_GetQueryUGCChildren
+UGC_GetQueryUGCStatistic :: ISteamUGC_GetQueryUGCStatistic
+UGC_GetQueryUGCNumAdditionalPreviews :: ISteamUGC_GetQueryUGCNumAdditionalPreviews
+UGC_GetQueryUGCAdditionalPreview :: ISteamUGC_GetQueryUGCAdditionalPreview
+UGC_GetQueryUGCNumKeyValueTags :: ISteamUGC_GetQueryUGCNumKeyValueTags
+UGC_GetQueryUGCKeyValueTag :: ISteamUGC_GetQueryUGCKeyValueTag
+UGC_ReleaseQueryUGCRequest :: ISteamUGC_ReleaseQueryUGCRequest
+UGC_AddRequiredTag :: ISteamUGC_AddRequiredTag
+UGC_AddRequiredTagGroup :: ISteamUGC_AddRequiredTagGroup
+UGC_AddExcludedTag :: ISteamUGC_AddExcludedTag
+UGC_SetReturnOnlyIDs :: ISteamUGC_SetReturnOnlyIDs
+UGC_SetReturnKeyValueTags :: ISteamUGC_SetReturnKeyValueTags
+UGC_SetReturnLongDescription :: ISteamUGC_SetReturnLongDescription
+UGC_SetReturnMetadata :: ISteamUGC_SetReturnMetadata
+UGC_SetReturnChildren :: ISteamUGC_SetReturnChildren
+UGC_SetReturnAdditionalPreviews :: ISteamUGC_SetReturnAdditionalPreviews
+UGC_SetReturnTotalOnly :: ISteamUGC_SetReturnTotalOnly
+UGC_SetReturnPlaytimeStats :: ISteamUGC_SetReturnPlaytimeStats
+UGC_SetLanguage :: ISteamUGC_SetLanguage
+UGC_SetAllowCachedResponse :: ISteamUGC_SetAllowCachedResponse
+UGC_SetCloudFileNameFilter :: ISteamUGC_SetCloudFileNameFilter
+UGC_SetMatchAnyTag :: ISteamUGC_SetMatchAnyTag
+UGC_SetSearchText :: ISteamUGC_SetSearchText
+UGC_SetRankedByTrendDays :: ISteamUGC_SetRankedByTrendDays
+UGC_SetTimeCreatedDateRange :: ISteamUGC_SetTimeCreatedDateRange
+UGC_SetTimeUpdatedDateRange :: ISteamUGC_SetTimeUpdatedDateRange
+UGC_AddRequiredKeyValueTag :: ISteamUGC_AddRequiredKeyValueTag
+UGC_RequestUGCDetails :: ISteamUGC_RequestUGCDetails
+UGC_CreateItem :: ISteamUGC_CreateItem
+UGC_StartItemUpdate :: ISteamUGC_StartItemUpdate
+UGC_SetItemTitle :: ISteamUGC_SetItemTitle
+UGC_SetItemDescription :: ISteamUGC_SetItemDescription
+UGC_SetItemUpdateLanguage :: ISteamUGC_SetItemUpdateLanguage
+UGC_SetItemMetadata :: ISteamUGC_SetItemMetadata
+UGC_SetItemVisibility :: ISteamUGC_SetItemVisibility
+UGC_SetItemTags :: ISteamUGC_SetItemTags
+UGC_SetItemContent :: ISteamUGC_SetItemContent
+UGC_SetItemPreview :: ISteamUGC_SetItemPreview
+UGC_SetAllowLegacyUpload :: ISteamUGC_SetAllowLegacyUpload
+UGC_RemoveAllItemKeyValueTags :: ISteamUGC_RemoveAllItemKeyValueTags
+UGC_RemoveItemKeyValueTags :: ISteamUGC_RemoveItemKeyValueTags
+UGC_AddItemKeyValueTag :: ISteamUGC_AddItemKeyValueTag
+UGC_AddItemPreviewFile :: ISteamUGC_AddItemPreviewFile
+UGC_AddItemPreviewVideo :: ISteamUGC_AddItemPreviewVideo
+UGC_UpdateItemPreviewFile :: ISteamUGC_UpdateItemPreviewFile
+UGC_UpdateItemPreviewVideo :: ISteamUGC_UpdateItemPreviewVideo
+UGC_RemoveItemPreview :: ISteamUGC_RemoveItemPreview
+UGC_SubmitItemUpdate :: ISteamUGC_SubmitItemUpdate
+UGC_GetItemUpdateProgress :: ISteamUGC_GetItemUpdateProgress
+UGC_SetUserItemVote :: ISteamUGC_SetUserItemVote
+UGC_GetUserItemVote :: ISteamUGC_GetUserItemVote
+UGC_AddItemToFavorites :: ISteamUGC_AddItemToFavorites
+UGC_RemoveItemFromFavorites :: ISteamUGC_RemoveItemFromFavorites
+UGC_SubscribeItem :: ISteamUGC_SubscribeItem
+UGC_UnsubscribeItem :: ISteamUGC_UnsubscribeItem
+UGC_GetNumSubscribedItems :: ISteamUGC_GetNumSubscribedItems
+UGC_GetSubscribedItems :: ISteamUGC_GetSubscribedItems
+UGC_GetItemState :: ISteamUGC_GetItemState
+UGC_GetItemInstallInfo :: ISteamUGC_GetItemInstallInfo
+UGC_GetItemDownloadInfo :: ISteamUGC_GetItemDownloadInfo
+UGC_DownloadItem :: ISteamUGC_DownloadItem
+UGC_BInitWorkshopForGameServer :: ISteamUGC_BInitWorkshopForGameServer
+UGC_SuspendDownloads :: ISteamUGC_SuspendDownloads
+UGC_StartPlaytimeTracking :: ISteamUGC_StartPlaytimeTracking
+UGC_StopPlaytimeTracking :: ISteamUGC_StopPlaytimeTracking
+UGC_StopPlaytimeTrackingForAllItems :: ISteamUGC_StopPlaytimeTrackingForAllItems
+UGC_AddDependency :: ISteamUGC_AddDependency
+UGC_RemoveDependency :: ISteamUGC_RemoveDependency
+UGC_AddAppDependency :: ISteamUGC_AddAppDependency
+UGC_RemoveAppDependency :: ISteamUGC_RemoveAppDependency
+UGC_GetAppDependencies :: ISteamUGC_GetAppDependencies
+UGC_DeleteItem :: ISteamUGC_DeleteItem
+UGC_ShowWorkshopEULA :: ISteamUGC_ShowWorkshopEULA
+UGC_GetWorkshopEULAStatus :: ISteamUGC_GetWorkshopEULAStatus
+AppList_GetNumInstalledApps :: ISteamAppList_GetNumInstalledApps
+AppList_GetInstalledApps :: ISteamAppList_GetInstalledApps
+AppList_GetAppName :: ISteamAppList_GetAppName
+AppList_GetAppInstallDir :: ISteamAppList_GetAppInstallDir
+AppList_GetAppBuildId :: ISteamAppList_GetAppBuildId
+HTMLSurface_Init :: ISteamHTMLSurface_Init
+HTMLSurface_Shutdown :: ISteamHTMLSurface_Shutdown
+HTMLSurface_CreateBrowser :: ISteamHTMLSurface_CreateBrowser
+HTMLSurface_RemoveBrowser :: ISteamHTMLSurface_RemoveBrowser
+HTMLSurface_LoadURL :: ISteamHTMLSurface_LoadURL
+HTMLSurface_SetSize :: ISteamHTMLSurface_SetSize
+HTMLSurface_StopLoad :: ISteamHTMLSurface_StopLoad
+HTMLSurface_Reload :: ISteamHTMLSurface_Reload
+HTMLSurface_GoBack :: ISteamHTMLSurface_GoBack
+HTMLSurface_GoForward :: ISteamHTMLSurface_GoForward
+HTMLSurface_AddHeader :: ISteamHTMLSurface_AddHeader
+HTMLSurface_ExecuteJavascript :: ISteamHTMLSurface_ExecuteJavascript
+HTMLSurface_MouseUp :: ISteamHTMLSurface_MouseUp
+HTMLSurface_MouseDown :: ISteamHTMLSurface_MouseDown
+HTMLSurface_MouseDoubleClick :: ISteamHTMLSurface_MouseDoubleClick
+HTMLSurface_MouseMove :: ISteamHTMLSurface_MouseMove
+HTMLSurface_MouseWheel :: ISteamHTMLSurface_MouseWheel
+HTMLSurface_KeyDown :: ISteamHTMLSurface_KeyDown
+HTMLSurface_KeyUp :: ISteamHTMLSurface_KeyUp
+HTMLSurface_KeyChar :: ISteamHTMLSurface_KeyChar
+HTMLSurface_SetHorizontalScroll :: ISteamHTMLSurface_SetHorizontalScroll
+HTMLSurface_SetVerticalScroll :: ISteamHTMLSurface_SetVerticalScroll
+HTMLSurface_SetKeyFocus :: ISteamHTMLSurface_SetKeyFocus
+HTMLSurface_ViewSource :: ISteamHTMLSurface_ViewSource
+HTMLSurface_CopyToClipboard :: ISteamHTMLSurface_CopyToClipboard
+HTMLSurface_PasteFromClipboard :: ISteamHTMLSurface_PasteFromClipboard
+HTMLSurface_Find :: ISteamHTMLSurface_Find
+HTMLSurface_StopFind :: ISteamHTMLSurface_StopFind
+HTMLSurface_GetLinkAtPosition :: ISteamHTMLSurface_GetLinkAtPosition
+HTMLSurface_SetCookie :: ISteamHTMLSurface_SetCookie
+HTMLSurface_SetPageScaleFactor :: ISteamHTMLSurface_SetPageScaleFactor
+HTMLSurface_SetBackgroundMode :: ISteamHTMLSurface_SetBackgroundMode
+HTMLSurface_SetDPIScalingFactor :: ISteamHTMLSurface_SetDPIScalingFactor
+HTMLSurface_OpenDeveloperTools :: ISteamHTMLSurface_OpenDeveloperTools
+HTMLSurface_AllowStartRequest :: ISteamHTMLSurface_AllowStartRequest
+HTMLSurface_JSDialogResponse :: ISteamHTMLSurface_JSDialogResponse
+HTMLSurface_FileLoadDialogResponse :: ISteamHTMLSurface_FileLoadDialogResponse
+Inventory_GetResultStatus :: ISteamInventory_GetResultStatus
+Inventory_GetResultItems :: ISteamInventory_GetResultItems
+Inventory_GetResultItemProperty :: ISteamInventory_GetResultItemProperty
+Inventory_GetResultTimestamp :: ISteamInventory_GetResultTimestamp
+Inventory_CheckResultSteamID :: ISteamInventory_CheckResultSteamID
+Inventory_DestroyResult :: ISteamInventory_DestroyResult
+Inventory_GetAllItems :: ISteamInventory_GetAllItems
+Inventory_GetItemsByID :: ISteamInventory_GetItemsByID
+Inventory_SerializeResult :: ISteamInventory_SerializeResult
+Inventory_DeserializeResult :: ISteamInventory_DeserializeResult
+Inventory_GenerateItems :: ISteamInventory_GenerateItems
+Inventory_GrantPromoItems :: ISteamInventory_GrantPromoItems
+Inventory_AddPromoItem :: ISteamInventory_AddPromoItem
+Inventory_AddPromoItems :: ISteamInventory_AddPromoItems
+Inventory_ConsumeItem :: ISteamInventory_ConsumeItem
+Inventory_ExchangeItems :: ISteamInventory_ExchangeItems
+Inventory_TransferItemQuantity :: ISteamInventory_TransferItemQuantity
+Inventory_SendItemDropHeartbeat :: ISteamInventory_SendItemDropHeartbeat
+Inventory_TriggerItemDrop :: ISteamInventory_TriggerItemDrop
+Inventory_TradeItems :: ISteamInventory_TradeItems
+Inventory_LoadItemDefinitions :: ISteamInventory_LoadItemDefinitions
+Inventory_GetItemDefinitionIDs :: ISteamInventory_GetItemDefinitionIDs
+Inventory_GetItemDefinitionProperty :: ISteamInventory_GetItemDefinitionProperty
+Inventory_RequestEligiblePromoItemDefinitionsIDs :: ISteamInventory_RequestEligiblePromoItemDefinitionsIDs
+Inventory_GetEligiblePromoItemDefinitionIDs :: ISteamInventory_GetEligiblePromoItemDefinitionIDs
+Inventory_StartPurchase :: ISteamInventory_StartPurchase
+Inventory_RequestPrices :: ISteamInventory_RequestPrices
+Inventory_GetNumItemsWithPrices :: ISteamInventory_GetNumItemsWithPrices
+Inventory_GetItemsWithPrices :: ISteamInventory_GetItemsWithPrices
+Inventory_GetItemPrice :: ISteamInventory_GetItemPrice
+Inventory_StartUpdateProperties :: ISteamInventory_StartUpdateProperties
+Inventory_RemoveProperty :: ISteamInventory_RemoveProperty
+Inventory_SetProperty :: ISteamInventory_SetProperty
+Inventory_SetPropertyBool :: ISteamInventory_SetPropertyBool
+Inventory_SetPropertyInt64 :: ISteamInventory_SetPropertyInt64
+Inventory_SetPropertyFloat :: ISteamInventory_SetPropertyFloat
+Inventory_SubmitUpdateProperties :: ISteamInventory_SubmitUpdateProperties
+Inventory_InspectItem :: ISteamInventory_InspectItem
+Video_GetVideoURL :: ISteamVideo_GetVideoURL
+Video_IsBroadcasting :: ISteamVideo_IsBroadcasting
+Video_GetOPFSettings :: ISteamVideo_GetOPFSettings
+Video_GetOPFStringForApp :: ISteamVideo_GetOPFStringForApp
+ParentalSettings_BIsParentalLockEnabled :: ISteamParentalSettings_BIsParentalLockEnabled
+ParentalSettings_BIsParentalLockLocked :: ISteamParentalSettings_BIsParentalLockLocked
+ParentalSettings_BIsAppBlocked :: ISteamParentalSettings_BIsAppBlocked
+ParentalSettings_BIsAppInBlockList :: ISteamParentalSettings_BIsAppInBlockList
+ParentalSettings_BIsFeatureBlocked :: ISteamParentalSettings_BIsFeatureBlocked
+ParentalSettings_BIsFeatureInBlockList :: ISteamParentalSettings_BIsFeatureInBlockList
+RemotePlay_GetSessionCount :: ISteamRemotePlay_GetSessionCount
+RemotePlay_GetSessionID :: ISteamRemotePlay_GetSessionID
+RemotePlay_GetSessionSteamID :: ISteamRemotePlay_GetSessionSteamID
+RemotePlay_GetSessionClientName :: ISteamRemotePlay_GetSessionClientName
+RemotePlay_GetSessionClientFormFactor :: ISteamRemotePlay_GetSessionClientFormFactor
+RemotePlay_BGetSessionClientResolution :: ISteamRemotePlay_BGetSessionClientResolution
+RemotePlay_BSendRemotePlayTogetherInvite :: ISteamRemotePlay_BSendRemotePlayTogetherInvite
+NetworkingMessages_SendMessageToUser :: ISteamNetworkingMessages_SendMessageToUser
+NetworkingMessages_ReceiveMessagesOnChannel :: ISteamNetworkingMessages_ReceiveMessagesOnChannel
+NetworkingMessages_AcceptSessionWithUser :: ISteamNetworkingMessages_AcceptSessionWithUser
+NetworkingMessages_CloseSessionWithUser :: ISteamNetworkingMessages_CloseSessionWithUser
+NetworkingMessages_CloseChannelWithUser :: ISteamNetworkingMessages_CloseChannelWithUser
+NetworkingMessages_GetSessionConnectionInfo :: ISteamNetworkingMessages_GetSessionConnectionInfo
+NetworkingSockets_CreateListenSocketIP :: ISteamNetworkingSockets_CreateListenSocketIP
+NetworkingSockets_ConnectByIPAddress :: ISteamNetworkingSockets_ConnectByIPAddress
+NetworkingSockets_CreateListenSocketP2P :: ISteamNetworkingSockets_CreateListenSocketP2P
+NetworkingSockets_ConnectP2P :: ISteamNetworkingSockets_ConnectP2P
+NetworkingSockets_AcceptConnection :: ISteamNetworkingSockets_AcceptConnection
+NetworkingSockets_CloseConnection :: ISteamNetworkingSockets_CloseConnection
+NetworkingSockets_CloseListenSocket :: ISteamNetworkingSockets_CloseListenSocket
+NetworkingSockets_SetConnectionUserData :: ISteamNetworkingSockets_SetConnectionUserData
+NetworkingSockets_GetConnectionUserData :: ISteamNetworkingSockets_GetConnectionUserData
+NetworkingSockets_SetConnectionName :: ISteamNetworkingSockets_SetConnectionName
+NetworkingSockets_GetConnectionName :: ISteamNetworkingSockets_GetConnectionName
+NetworkingSockets_SendMessageToConnection :: ISteamNetworkingSockets_SendMessageToConnection
+NetworkingSockets_FlushMessagesOnConnection :: ISteamNetworkingSockets_FlushMessagesOnConnection
+NetworkingSockets_ReceiveMessagesOnConnection :: ISteamNetworkingSockets_ReceiveMessagesOnConnection
+NetworkingSockets_GetConnectionInfo :: ISteamNetworkingSockets_GetConnectionInfo
+NetworkingSockets_GetConnectionRealTimeStatus :: ISteamNetworkingSockets_GetConnectionRealTimeStatus
+NetworkingSockets_GetDetailedConnectionStatus :: ISteamNetworkingSockets_GetDetailedConnectionStatus
+NetworkingSockets_GetListenSocketAddress :: ISteamNetworkingSockets_GetListenSocketAddress
+NetworkingSockets_CreateSocketPair :: ISteamNetworkingSockets_CreateSocketPair
+NetworkingSockets_ConfigureConnectionLanes :: ISteamNetworkingSockets_ConfigureConnectionLanes
+NetworkingSockets_GetIdentity :: ISteamNetworkingSockets_GetIdentity
+NetworkingSockets_InitAuthentication :: ISteamNetworkingSockets_InitAuthentication
+NetworkingSockets_GetAuthenticationStatus :: ISteamNetworkingSockets_GetAuthenticationStatus
+NetworkingSockets_CreatePollGroup :: ISteamNetworkingSockets_CreatePollGroup
+NetworkingSockets_DestroyPollGroup :: ISteamNetworkingSockets_DestroyPollGroup
+NetworkingSockets_SetConnectionPollGroup :: ISteamNetworkingSockets_SetConnectionPollGroup
+NetworkingSockets_ReceiveMessagesOnPollGroup :: ISteamNetworkingSockets_ReceiveMessagesOnPollGroup
+NetworkingSockets_ReceivedRelayAuthTicket :: ISteamNetworkingSockets_ReceivedRelayAuthTicket
+NetworkingSockets_FindRelayAuthTicketForServer :: ISteamNetworkingSockets_FindRelayAuthTicketForServer
+NetworkingSockets_ConnectToHostedDedicatedServer :: ISteamNetworkingSockets_ConnectToHostedDedicatedServer
+NetworkingSockets_GetHostedDedicatedServerPort :: ISteamNetworkingSockets_GetHostedDedicatedServerPort
+NetworkingSockets_GetHostedDedicatedServerPOPID :: ISteamNetworkingSockets_GetHostedDedicatedServerPOPID
+NetworkingSockets_GetHostedDedicatedServerAddress :: ISteamNetworkingSockets_GetHostedDedicatedServerAddress
+NetworkingSockets_CreateHostedDedicatedServerListenSocket :: ISteamNetworkingSockets_CreateHostedDedicatedServerListenSocket
+NetworkingSockets_GetGameCoordinatorServerLogin :: ISteamNetworkingSockets_GetGameCoordinatorServerLogin
+NetworkingSockets_ConnectP2PCustomSignaling :: ISteamNetworkingSockets_ConnectP2PCustomSignaling
+NetworkingSockets_ReceivedP2PCustomSignal :: ISteamNetworkingSockets_ReceivedP2PCustomSignal
+NetworkingSockets_GetCertificateRequest :: ISteamNetworkingSockets_GetCertificateRequest
+NetworkingSockets_SetCertificate :: ISteamNetworkingSockets_SetCertificate
+NetworkingSockets_ResetIdentity :: ISteamNetworkingSockets_ResetIdentity
+NetworkingSockets_RunCallbacks :: ISteamNetworkingSockets_RunCallbacks
+NetworkingSockets_BeginAsyncRequestFakeIP :: ISteamNetworkingSockets_BeginAsyncRequestFakeIP
+NetworkingSockets_GetFakeIP :: ISteamNetworkingSockets_GetFakeIP
+NetworkingSockets_CreateListenSocketP2PFakeIP :: ISteamNetworkingSockets_CreateListenSocketP2PFakeIP
+NetworkingSockets_GetRemoteFakeIPForConnection :: ISteamNetworkingSockets_GetRemoteFakeIPForConnection
+NetworkingSockets_CreateFakeUDPPort :: ISteamNetworkingSockets_CreateFakeUDPPort
+NetworkingUtils_AllocateMessage :: ISteamNetworkingUtils_AllocateMessage
+NetworkingUtils_InitRelayNetworkAccess :: ISteamNetworkingUtils_InitRelayNetworkAccess
+NetworkingUtils_GetRelayNetworkStatus :: ISteamNetworkingUtils_GetRelayNetworkStatus
+NetworkingUtils_GetLocalPingLocation :: ISteamNetworkingUtils_GetLocalPingLocation
+NetworkingUtils_EstimatePingTimeBetweenTwoLocations :: ISteamNetworkingUtils_EstimatePingTimeBetweenTwoLocations
+NetworkingUtils_EstimatePingTimeFromLocalHost :: ISteamNetworkingUtils_EstimatePingTimeFromLocalHost
+NetworkingUtils_ConvertPingLocationToString :: ISteamNetworkingUtils_ConvertPingLocationToString
+NetworkingUtils_ParsePingLocationString :: ISteamNetworkingUtils_ParsePingLocationString
+NetworkingUtils_CheckPingDataUpToDate :: ISteamNetworkingUtils_CheckPingDataUpToDate
+NetworkingUtils_GetPingToDataCenter :: ISteamNetworkingUtils_GetPingToDataCenter
+NetworkingUtils_GetDirectPingToPOP :: ISteamNetworkingUtils_GetDirectPingToPOP
+NetworkingUtils_GetPOPCount :: ISteamNetworkingUtils_GetPOPCount
+NetworkingUtils_GetPOPList :: ISteamNetworkingUtils_GetPOPList
+NetworkingUtils_GetLocalTimestamp :: ISteamNetworkingUtils_GetLocalTimestamp
+NetworkingUtils_SetDebugOutputFunction :: ISteamNetworkingUtils_SetDebugOutputFunction
+NetworkingUtils_IsFakeIPv4 :: ISteamNetworkingUtils_IsFakeIPv4
+NetworkingUtils_GetIPv4FakeIPType :: ISteamNetworkingUtils_GetIPv4FakeIPType
+NetworkingUtils_GetRealIdentityForFakeIP :: ISteamNetworkingUtils_GetRealIdentityForFakeIP
+NetworkingUtils_SetGlobalConfigValueInt32 :: ISteamNetworkingUtils_SetGlobalConfigValueInt32
+NetworkingUtils_SetGlobalConfigValueFloat :: ISteamNetworkingUtils_SetGlobalConfigValueFloat
+NetworkingUtils_SetGlobalConfigValueString :: ISteamNetworkingUtils_SetGlobalConfigValueString
+NetworkingUtils_SetGlobalConfigValuePtr :: ISteamNetworkingUtils_SetGlobalConfigValuePtr
+NetworkingUtils_SetConnectionConfigValueInt32 :: ISteamNetworkingUtils_SetConnectionConfigValueInt32
+NetworkingUtils_SetConnectionConfigValueFloat :: ISteamNetworkingUtils_SetConnectionConfigValueFloat
+NetworkingUtils_SetConnectionConfigValueString :: ISteamNetworkingUtils_SetConnectionConfigValueString
+NetworkingUtils_SetGlobalCallback_SteamNetConnectionStatusChanged :: ISteamNetworkingUtils_SetGlobalCallback_SteamNetConnectionStatusChanged
+NetworkingUtils_SetGlobalCallback_SteamNetAuthenticationStatusChanged :: ISteamNetworkingUtils_SetGlobalCallback_SteamNetAuthenticationStatusChanged
+NetworkingUtils_SetGlobalCallback_SteamRelayNetworkStatusChanged :: ISteamNetworkingUtils_SetGlobalCallback_SteamRelayNetworkStatusChanged
+NetworkingUtils_SetGlobalCallback_FakeIPResult :: ISteamNetworkingUtils_SetGlobalCallback_FakeIPResult
+NetworkingUtils_SetGlobalCallback_MessagesSessionRequest :: ISteamNetworkingUtils_SetGlobalCallback_MessagesSessionRequest
+NetworkingUtils_SetGlobalCallback_MessagesSessionFailed :: ISteamNetworkingUtils_SetGlobalCallback_MessagesSessionFailed
+NetworkingUtils_SetConfigValue :: ISteamNetworkingUtils_SetConfigValue
+NetworkingUtils_SetConfigValueStruct :: ISteamNetworkingUtils_SetConfigValueStruct
+NetworkingUtils_GetConfigValue :: ISteamNetworkingUtils_GetConfigValue
+NetworkingUtils_GetConfigValueInfo :: ISteamNetworkingUtils_GetConfigValueInfo
+NetworkingUtils_IterateGenericEditableConfigValues :: ISteamNetworkingUtils_IterateGenericEditableConfigValues
+NetworkingUtils_SteamNetworkingIPAddr_ToString :: ISteamNetworkingUtils_SteamNetworkingIPAddr_ToString
+NetworkingUtils_SteamNetworkingIPAddr_ParseString :: ISteamNetworkingUtils_SteamNetworkingIPAddr_ParseString
+NetworkingUtils_SteamNetworkingIPAddr_GetFakeIPType :: ISteamNetworkingUtils_SteamNetworkingIPAddr_GetFakeIPType
+NetworkingUtils_SteamNetworkingIdentity_ToString :: ISteamNetworkingUtils_SteamNetworkingIdentity_ToString
+NetworkingUtils_SteamNetworkingIdentity_ParseString :: ISteamNetworkingUtils_SteamNetworkingIdentity_ParseString
+GameServer_SetProduct :: ISteamGameServer_SetProduct
+GameServer_SetGameDescription :: ISteamGameServer_SetGameDescription
+GameServer_SetModDir :: ISteamGameServer_SetModDir
+GameServer_SetDedicatedServer :: ISteamGameServer_SetDedicatedServer
+GameServer_LogOn :: ISteamGameServer_LogOn
+GameServer_LogOnAnonymous :: ISteamGameServer_LogOnAnonymous
+GameServer_LogOff :: ISteamGameServer_LogOff
+GameServer_BLoggedOn :: ISteamGameServer_BLoggedOn
+GameServer_BSecure :: ISteamGameServer_BSecure
+GameServer_GetSteamID :: ISteamGameServer_GetSteamID
+GameServer_WasRestartRequested :: ISteamGameServer_WasRestartRequested
+GameServer_SetMaxPlayerCount :: ISteamGameServer_SetMaxPlayerCount
+GameServer_SetBotPlayerCount :: ISteamGameServer_SetBotPlayerCount
+GameServer_SetServerName :: ISteamGameServer_SetServerName
+GameServer_SetMapName :: ISteamGameServer_SetMapName
+GameServer_SetPasswordProtected :: ISteamGameServer_SetPasswordProtected
+GameServer_SetSpectatorPort :: ISteamGameServer_SetSpectatorPort
+GameServer_SetSpectatorServerName :: ISteamGameServer_SetSpectatorServerName
+GameServer_ClearAllKeyValues :: ISteamGameServer_ClearAllKeyValues
+GameServer_SetKeyValue :: ISteamGameServer_SetKeyValue
+GameServer_SetGameTags :: ISteamGameServer_SetGameTags
+GameServer_SetGameData :: ISteamGameServer_SetGameData
+GameServer_SetRegion :: ISteamGameServer_SetRegion
+GameServer_SetAdvertiseServerActive :: ISteamGameServer_SetAdvertiseServerActive
+GameServer_GetAuthSessionTicket :: ISteamGameServer_GetAuthSessionTicket
+GameServer_BeginAuthSession :: ISteamGameServer_BeginAuthSession
+GameServer_EndAuthSession :: ISteamGameServer_EndAuthSession
+GameServer_CancelAuthTicket :: ISteamGameServer_CancelAuthTicket
+GameServer_UserHasLicenseForApp :: ISteamGameServer_UserHasLicenseForApp
+GameServer_RequestUserGroupStatus :: ISteamGameServer_RequestUserGroupStatus
+GameServer_GetGameplayStats :: ISteamGameServer_GetGameplayStats
+GameServer_GetServerReputation :: ISteamGameServer_GetServerReputation
+GameServer_GetPublicIP :: ISteamGameServer_GetPublicIP
+GameServer_HandleIncomingPacket :: ISteamGameServer_HandleIncomingPacket
+GameServer_GetNextOutgoingPacket :: ISteamGameServer_GetNextOutgoingPacket
+GameServer_AssociateWithClan :: ISteamGameServer_AssociateWithClan
+GameServer_ComputeNewPlayerCompatibility :: ISteamGameServer_ComputeNewPlayerCompatibility
+GameServer_SendUserConnectAndAuthenticate_DEPRECATED :: ISteamGameServer_SendUserConnectAndAuthenticate_DEPRECATED
+GameServer_CreateUnauthenticatedUserConnection :: ISteamGameServer_CreateUnauthenticatedUserConnection
+GameServer_SendUserDisconnect_DEPRECATED :: ISteamGameServer_SendUserDisconnect_DEPRECATED
+GameServer_BUpdateUserData :: ISteamGameServer_BUpdateUserData
+GameServerStats_RequestUserStats :: ISteamGameServerStats_RequestUserStats
+GameServerStats_GetUserStatInt32 :: ISteamGameServerStats_GetUserStatInt32
+GameServerStats_GetUserStatFloat :: ISteamGameServerStats_GetUserStatFloat
+GameServerStats_GetUserAchievement :: ISteamGameServerStats_GetUserAchievement
+GameServerStats_SetUserStatInt32 :: ISteamGameServerStats_SetUserStatInt32
+GameServerStats_SetUserStatFloat :: ISteamGameServerStats_SetUserStatFloat
+GameServerStats_UpdateUserAvgRateStat :: ISteamGameServerStats_UpdateUserAvgRateStat
+GameServerStats_SetUserAchievement :: ISteamGameServerStats_SetUserAchievement
+GameServerStats_ClearUserAchievement :: ISteamGameServerStats_ClearUserAchievement
+GameServerStats_StoreUserStats :: ISteamGameServerStats_StoreUserStats
+NetworkingFakeUDPPort_DestroyFakeUDPPort :: ISteamNetworkingFakeUDPPort_DestroyFakeUDPPort
+NetworkingFakeUDPPort_SendMessageToFakeIP :: ISteamNetworkingFakeUDPPort_SendMessageToFakeIP
+NetworkingFakeUDPPort_ReceiveMessages :: ISteamNetworkingFakeUDPPort_ReceiveMessages
+NetworkingFakeUDPPort_ScheduleCleanup :: ISteamNetworkingFakeUDPPort_ScheduleCleanup

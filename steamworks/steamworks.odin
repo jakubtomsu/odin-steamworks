@@ -144,7 +144,7 @@ foreign lib {
 	//
 	// NOTE: If you use the Steam DRM wrapper on your primary executable file, this check is unnecessary
 	// since the DRM wrapper will ensure that your application was launched properly through Steam.
-	RestartAppIfNecessary :: proc "c" (unOwnAppID: uint32) ---
+	RestartAppIfNecessary :: proc "c" (unOwnAppID: uint32) -> bool ---
 
 	// Many Steam API functions allocate a small amount of thread-local memory for parameter storage.
 	// SteamAPI_ReleaseCurrentThreadMemory() will free API memory associated with the calling thread.
