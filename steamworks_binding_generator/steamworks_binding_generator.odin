@@ -9,7 +9,11 @@ print :: fmt.sbprint
 println :: fmt.sbprintln
 
 main :: proc() {
-	if jsonData, jsonDataOk := os.read_entire_file_from_filename("d:/steamworks_sdk_155/public/steam/steam_api.json"); jsonDataOk {
+	if len(os.args) <= 1 {
+		panic("No path provided. Please provide a path to the \'steam_api.json\'")
+	}
+
+	if jsonData, jsonDataOk := os.read_entire_file_from_filename(os.args[1]); jsonDataOk {
 		if groups, err := json.parse(jsonData); err == .None {
 			groups := groups.(json.Object)
 
