@@ -1,6 +1,6 @@
 package steamworks
 import "core:c"
-foreign import lib "steam_api64.lib"
+foreign import lib "steaapi64.lib"
 
 intptr :: distinct int
 
@@ -30,53 +30,53 @@ lint64 :: i64
 ulint64 :: u64
 intp :: int
 uintp :: uintptr
-AppId_t :: c.uint
-DepotId_t :: c.uint
+AppId :: c.uint
+DepotId :: c.uint
 RTime32 :: c.uint
-SteamAPICall_t :: u64
-AccountID_t :: c.uint
-PartyBeaconID_t :: u64
+SteamAPICall :: u64
+AccountID :: c.uint
+PartyBeaconID :: u64
 HAuthTicket :: c.uint
 PFNPreMinidumpCallback :: proc "c" (_: rawptr)
 HSteamPipe :: int
 HSteamUser :: int
-FriendsGroupID_t :: i64
+FriendsGroupID :: i64
 HServerListRequest :: rawptr
 HServerQuery :: int
-UGCHandle_t :: u64
-PublishedFileUpdateHandle_t :: u64
-PublishedFileId_t :: u64
-UGCFileWriteStreamHandle_t :: u64
-SteamLeaderboard_t :: u64
-SteamLeaderboardEntries_t :: u64
-SNetSocket_t :: c.uint
-SNetListenSocket_t :: c.uint
+UGCHandle :: u64
+PublishedFileUpdateHandle :: u64
+PublishedFileId :: u64
+UGCFileWriteStreamHandle :: u64
+SteamLeaderboard :: u64
+SteamLeaderboardEntries :: u64
+SNetSocket :: c.uint
+SNetListenSocket :: c.uint
 ScreenshotHandle :: c.uint
 HTTPRequestHandle :: c.uint
 HTTPCookieContainerHandle :: c.uint
-InputHandle_t :: u64
-InputActionSetHandle_t :: u64
-InputDigitalActionHandle_t :: u64
-InputAnalogActionHandle_t :: u64
-SteamInputActionEventCallbackPointer :: proc "c" (_: ^SteamInputActionEvent_t)
-ControllerHandle_t :: u64
-ControllerActionSetHandle_t :: u64
-ControllerDigitalActionHandle_t :: u64
-ControllerAnalogActionHandle_t :: u64
-UGCQueryHandle_t :: u64
-UGCUpdateHandle_t :: u64
+InputHandle :: u64
+InputActionSetHandle :: u64
+InputDigitalActionHandle :: u64
+InputAnalogActionHandle :: u64
+SteamInputActionEventCallbackPointer :: proc "c" (_: ^SteamInputActionEvent)
+ControllerHandle :: u64
+ControllerActionSetHandle :: u64
+ControllerDigitalActionHandle :: u64
+ControllerAnalogActionHandle :: u64
+UGCQueryHandle :: u64
+UGCUpdateHandle :: u64
 HHTMLBrowser :: c.uint
-SteamItemInstanceID_t :: u64
-SteamItemDef_t :: int
-SteamInventoryResult_t :: int
-SteamInventoryUpdateHandle_t :: u64
-RemotePlaySessionID_t :: c.uint
-FnSteamNetConnectionStatusChanged :: proc "c" (_: ^SteamNetConnectionStatusChangedCallback_t)
-FnSteamNetAuthenticationStatusChanged :: proc "c" (_: ^SteamNetAuthenticationStatus_t)
-FnSteamRelayNetworkStatusChanged :: proc "c" (_: ^SteamRelayNetworkStatus_t)
-FnSteamNetworkingMessagesSessionRequest :: proc "c" (_: ^SteamNetworkingMessagesSessionRequest_t)
-FnSteamNetworkingMessagesSessionFailed :: proc "c" (_: ^SteamNetworkingMessagesSessionFailed_t)
-FnSteamNetworkingFakeIPResult :: proc "c" (_: ^SteamNetworkingFakeIPResult_t)
+SteamItemInstanceID :: u64
+SteamItemDef :: int
+SteamInventoryResult :: int
+SteamInventoryUpdateHandle :: u64
+RemotePlaySessionID :: c.uint
+FnSteamNetConnectionStatusChanged :: proc "c" (_: ^SteamNetConnectionStatusChangedCallback)
+FnSteamNetAuthenticationStatusChanged :: proc "c" (_: ^SteamNetAuthenticationStatus)
+FnSteamRelayNetworkStatusChanged :: proc "c" (_: ^SteamRelayNetworkStatus)
+FnSteamNetworkingMessagesSessionRequest :: proc "c" (_: ^SteamNetworkingMessagesSessionRequest)
+FnSteamNetworkingMessagesSessionFailed :: proc "c" (_: ^SteamNetworkingMessagesSessionFailed)
+FnSteamNetworkingFakeIPResult :: proc "c" (_: ^SteamNetworkingFakeIPResult)
 HSteamNetConnection :: c.uint
 HSteamListenSocket :: c.uint
 HSteamNetPollGroup :: c.uint
@@ -85,1033 +85,1033 @@ SteamNetworkingPOPID :: c.uint
 SteamNetworkingMicroseconds :: c.longlong
 FSteamNetworkingSocketsDebugOutput :: proc "c" (_: ESteamNetworkingSocketsDebugOutputType, _: cstring)
 
-k_uAppIdInvalid: AppId_t : 0x0
-k_uDepotIdInvalid: DepotId_t : 0x0
-k_uAPICallInvalid: SteamAPICall_t : 0x0
-k_ulPartyBeaconIdInvalid: PartyBeaconID_t : 0
-k_HAuthTicketInvalid: HAuthTicket : 0
-k_unSteamAccountIDMask: c.uint : 0xFFFFFFFF
-k_unSteamAccountInstanceMask: c.uint : 0x000FFFFF
-k_unSteamUserDefaultInstance: c.uint : 1
-k_cchGameExtraInfoMax: c.int : 64
-k_cchMaxFriendsGroupName: c.int : 64
-k_cFriendsGroupLimit: c.int : 100
-k_FriendsGroupID_Invalid: FriendsGroupID_t : -1
-k_cEnumerateFollowersMax: c.int : 50
-k_cubChatMetadataMax: uint32 : 8192
-k_cbMaxGameServerGameDir: c.int : 32
-k_cbMaxGameServerMapName: c.int : 32
-k_cbMaxGameServerGameDescription: c.int : 64
-k_cbMaxGameServerName: c.int : 64
-k_cbMaxGameServerTags: c.int : 128
-k_cbMaxGameServerGameData: c.int : 2048
+uAppIdInvalid: AppId : 0x0
+uDepotIdInvalid: DepotId : 0x0
+uAPICallInvalid: SteamAPICall : 0x0
+ulPartyBeaconIdInvalid: PartyBeaconID : 0
+HAuthTicketInvalid: HAuthTicket : 0
+unSteamAccountIDMask: c.uint : 0xFFFFFFFF
+unSteamAccountInstanceMask: c.uint : 0x000FFFFF
+unSteamUserDefaultInstance: c.uint : 1
+cchGameExtraInfoMax: c.int : 64
+cchMaxFriendsGroupName: c.int : 64
+cFriendsGroupLimit: c.int : 100
+FriendsGroupID_Invalid: FriendsGroupID : -1
+cEnumerateFollowersMax: c.int : 50
+cubChatMetadataMax: uint32 : 8192
+cbMaxGameServerGameDir: c.int : 32
+cbMaxGameServerMapName: c.int : 32
+cbMaxGameServerGameDescription: c.int : 64
+cbMaxGameServerName: c.int : 64
+cbMaxGameServerTags: c.int : 128
+cbMaxGameServerGameData: c.int : 2048
 HSERVERQUERY_INVALID: c.uint : 0xffffffff
-k_unFavoriteFlagNone: uint32 : 0x00
-k_unFavoriteFlagFavorite: uint32 : 0x01
-k_unFavoriteFlagHistory: uint32 : 0x02
-k_unMaxCloudFileChunkSize: uint32 : 100 * 1024 * 1024
-k_PublishedFileIdInvalid: PublishedFileId_t : 0
-k_cchPublishedDocumentTitleMax: uint32 : 128 + 1
-k_cchPublishedDocumentDescriptionMax: uint32 : 8000
-k_cchPublishedDocumentChangeDescriptionMax: uint32 : 8000
-k_unEnumeratePublishedFilesMaxResults: uint32 : 50
-k_cchTagListMax: uint32 : 1024 + 1
-k_cchFilenameMax: uint32 : 260
-k_cchPublishedFileURLMax: uint32 : 256
-k_cubAppProofOfPurchaseKeyMax: c.int : 240
-k_nScreenshotMaxTaggedUsers: uint32 : 32
-k_nScreenshotMaxTaggedPublishedFiles: uint32 : 32
-k_cubUFSTagTypeMax: c.int : 255
-k_cubUFSTagValueMax: c.int : 255
-k_ScreenshotThumbWidth: c.int : 200
+unFavoriteFlagNone: uint32 : 0x00
+unFavoriteFlagFavorite: uint32 : 0x01
+unFavoriteFlagHistory: uint32 : 0x02
+unMaxCloudFileChunkSize: uint32 : 100 * 1024 * 1024
+PublishedFileIdInvalid: PublishedFileId : 0
+cchPublishedDocumentTitleMax: uint32 : 128 + 1
+cchPublishedDocumentDescriptionMax: uint32 : 8000
+cchPublishedDocumentChangeDescriptionMax: uint32 : 8000
+unEnumeratePublishedFilesMaxResults: uint32 : 50
+cchTagListMax: uint32 : 1024 + 1
+cchFilenameMax: uint32 : 260
+cchPublishedFileURLMax: uint32 : 256
+cubAppProofOfPurchaseKeyMax: c.int : 240
+nScreenshotMaxTaggedUsers: uint32 : 32
+nScreenshotMaxTaggedPublishedFiles: uint32 : 32
+cubUFSTagTypeMax: c.int : 255
+cubUFSTagValueMax: c.int : 255
+ScreenshotThumbWidth: c.int : 200
 kNumUGCResultsPerPage: uint32 : 50
-k_cchDeveloperMetadataMax: uint32 : 5000
+cchDeveloperMetadataMax: uint32 : 5000
 INVALID_HTMLBROWSER: uint32 : 0
-k_SteamItemInstanceIDInvalid: SteamItemInstanceID_t : ~SteamItemInstanceID_t(0)
-k_SteamInventoryResultInvalid: SteamInventoryResult_t : -1
-k_HSteamNetConnection_Invalid: HSteamNetConnection : 0
-k_HSteamListenSocket_Invalid: HSteamListenSocket : 0
-k_HSteamNetPollGroup_Invalid: HSteamNetPollGroup : 0
-k_cchMaxSteamNetworkingErrMsg: c.int : 1024
-k_cchSteamNetworkingMaxConnectionCloseReason: c.int : 128
-k_cchSteamNetworkingMaxConnectionDescription: c.int : 128
-k_cchSteamNetworkingMaxConnectionAppName: c.int : 32
-k_nSteamNetworkConnectionInfoFlags_Unauthenticated: c.int : 1
-k_nSteamNetworkConnectionInfoFlags_Unencrypted: c.int : 2
-k_nSteamNetworkConnectionInfoFlags_LoopbackBuffers: c.int : 4
-k_nSteamNetworkConnectionInfoFlags_Fast: c.int : 8
-k_nSteamNetworkConnectionInfoFlags_Relayed: c.int : 16
-k_nSteamNetworkConnectionInfoFlags_DualWifi: c.int : 32
-k_cbMaxSteamNetworkingSocketsMessageSizeSend: c.int : 512 * 1024
-k_nSteamNetworkingSend_Unreliable: c.int : 0
-k_nSteamNetworkingSend_NoNagle: c.int : 1
-k_nSteamNetworkingSend_UnreliableNoNagle: c.int : k_nSteamNetworkingSend_Unreliable | k_nSteamNetworkingSend_NoNagle
-k_nSteamNetworkingSend_NoDelay: c.int : 4
-k_nSteamNetworkingSend_UnreliableNoDelay: c.int : k_nSteamNetworkingSend_Unreliable | k_nSteamNetworkingSend_NoDelay | k_nSteamNetworkingSend_NoNagle
-k_nSteamNetworkingSend_Reliable: c.int : 8
-k_nSteamNetworkingSend_ReliableNoNagle: c.int : k_nSteamNetworkingSend_Reliable | k_nSteamNetworkingSend_NoNagle
-k_nSteamNetworkingSend_UseCurrentThread: c.int : 16
-k_nSteamNetworkingSend_AutoRestartBrokenSession: c.int : 32
-k_cchMaxSteamNetworkingPingLocationString: c.int : 1024
-k_nSteamNetworkingPing_Failed: c.int : -1
-k_nSteamNetworkingPing_Unknown: c.int : -2
-k_nSteamNetworkingConfig_P2P_Transport_ICE_Enable_Default: c.int : -1
-k_nSteamNetworkingConfig_P2P_Transport_ICE_Enable_Disable: c.int : 0
-k_nSteamNetworkingConfig_P2P_Transport_ICE_Enable_Relay: c.int : 1
-k_nSteamNetworkingConfig_P2P_Transport_ICE_Enable_Private: c.int : 2
-k_nSteamNetworkingConfig_P2P_Transport_ICE_Enable_Public: c.int : 4
-k_nSteamNetworkingConfig_P2P_Transport_ICE_Enable_All: c.int : 0x7fffffff
+SteamItemInstanceIDInvalid: SteamItemInstanceID : ~SteamItemInstanceID(0)
+SteamInventoryResultInvalid: SteamInventoryResult : -1
+HSteamNetConnection_Invalid: HSteamNetConnection : 0
+HSteamListenSocket_Invalid: HSteamListenSocket : 0
+HSteamNetPollGroup_Invalid: HSteamNetPollGroup : 0
+cchMaxSteamNetworkingErrMsg: c.int : 1024
+cchSteamNetworkingMaxConnectionCloseReason: c.int : 128
+cchSteamNetworkingMaxConnectionDescription: c.int : 128
+cchSteamNetworkingMaxConnectionAppName: c.int : 32
+nSteamNetworkConnectionInfoFlags_Unauthenticated: c.int : 1
+nSteamNetworkConnectionInfoFlags_Unencrypted: c.int : 2
+nSteamNetworkConnectionInfoFlags_LoopbackBuffers: c.int : 4
+nSteamNetworkConnectionInfoFlags_Fast: c.int : 8
+nSteamNetworkConnectionInfoFlags_Relayed: c.int : 16
+nSteamNetworkConnectionInfoFlags_DualWifi: c.int : 32
+cbMaxSteamNetworkingSocketsMessageSizeSend: c.int : 512 * 1024
+nSteamNetworkingSend_Unreliable: c.int : 0
+nSteamNetworkingSend_NoNagle: c.int : 1
+nSteamNetworkingSend_UnreliableNoNagle: c.int : nSteamNetworkingSend_Unreliable | nSteamNetworkingSend_NoNagle
+nSteamNetworkingSend_NoDelay: c.int : 4
+nSteamNetworkingSend_UnreliableNoDelay: c.int : nSteamNetworkingSend_Unreliable | nSteamNetworkingSend_NoDelay | nSteamNetworkingSend_NoNagle
+nSteamNetworkingSend_Reliable: c.int : 8
+nSteamNetworkingSend_ReliableNoNagle: c.int : nSteamNetworkingSend_Reliable | nSteamNetworkingSend_NoNagle
+nSteamNetworkingSend_UseCurrentThread: c.int : 16
+nSteamNetworkingSend_AutoRestartBrokenSession: c.int : 32
+cchMaxSteamNetworkingPingLocationString: c.int : 1024
+nSteamNetworkingPing_Failed: c.int : -1
+nSteamNetworkingPing_Unknown: c.int : -2
+nSteamNetworkingConfig_P2P_Transport_ICE_Enable_Default: c.int : -1
+nSteamNetworkingConfig_P2P_Transport_ICE_Enable_Disable: c.int : 0
+nSteamNetworkingConfig_P2P_Transport_ICE_Enable_Relay: c.int : 1
+nSteamNetworkingConfig_P2P_Transport_ICE_Enable_Private: c.int : 2
+nSteamNetworkingConfig_P2P_Transport_ICE_Enable_Public: c.int : 4
+nSteamNetworkingConfig_P2P_Transport_ICE_Enable_All: c.int : 0x7fffffff
 STEAMGAMESERVER_QUERY_PORT_SHARED: uint16 : 0xffff
 MASTERSERVERUPDATERPORT_USEGAMESOCKETSHARE: uint16 : STEAMGAMESERVER_QUERY_PORT_SHARED
-k_cbSteamDatagramMaxSerializedTicket: uint32 : 512
-k_cbMaxSteamDatagramGameCoordinatorServerLoginAppData: uint32 : 2048
-k_cbMaxSteamDatagramGameCoordinatorServerLoginSerialized: uint32 : 4096
-k_cbSteamNetworkingSocketsFakeUDPPortRecommendedMTU: c.int : 1200
-k_cbSteamNetworkingSocketsFakeUDPPortMaxMessageSize: c.int : 4096
+cbSteamDatagramMaxSerializedTicket: uint32 : 512
+cbMaxSteamDatagramGameCoordinatorServerLoginAppData: uint32 : 2048
+cbMaxSteamDatagramGameCoordinatorServerLoginSerialized: uint32 : 4096
+cbSteamNetworkingSocketsFakeUDPPortRecommendedMTU: c.int : 1200
+cbSteamNetworkingSocketsFakeUDPPortMaxMessageSize: c.int : 4096
 
-k_UGCHandleInvalid: UGCHandle_t : 0xffffffffffffffff
-k_PublishedFileUpdateHandleInvalid: PublishedFileUpdateHandle_t : 0xffffffffffffffff
-k_UGCFileStreamHandleInvalid: UGCFileWriteStreamHandle_t : 0xffffffffffffffff
-k_UGCQueryHandleInvalid: UGCQueryHandle_t : 0xffffffffffffffff
-k_UGCUpdateHandleInvalid: UGCUpdateHandle_t : 0xffffffffffffffff
-k_SteamInventoryUpdateHandleInvalid: SteamInventoryUpdateHandle_t : 0xffffffffffffffff
-k_SteamDatagramPOPID_dev: SteamNetworkingPOPID : (uint32('d') << 16) | (uint32('e') << 8) | uint32('v')
+UGCHandleInvalid: UGCHandle : 0xffffffffffffffff
+PublishedFileUpdateHandleInvalid: PublishedFileUpdateHandle : 0xffffffffffffffff
+UGCFileStreamHandleInvalid: UGCFileWriteStreamHandle : 0xffffffffffffffff
+UGCQueryHandleInvalid: UGCQueryHandle : 0xffffffffffffffff
+UGCUpdateHandleInvalid: UGCUpdateHandle : 0xffffffffffffffff
+SteamInventoryUpdateHandleInvalid: SteamInventoryUpdateHandle : 0xffffffffffffffff
+SteamDatagramPOPID_dev: SteamNetworkingPOPID : (uint32('d') << 16) | (uint32('e') << 8) | uint32('v')
 
 // -------
 // Structs
 // -------
 
-SteamNetworkingMessage_t :: struct #packed {
-	m_pData:            rawptr,
-	m_cbSize:           c.int,
-	m_conn:             HSteamNetConnection,
-	m_identityPeer:     SteamNetworkingIdentity,
-	m_nConnUserData:    int64,
-	m_usecTimeReceived: SteamNetworkingMicroseconds,
-	m_nMessageNumber:   int64,
-	m_pfnFreeData:      proc "c" (_: ^SteamNetworkingMessage_t),
-	m_pfnRelease:       proc "c" (_: ^SteamNetworkingMessage_t),
-	m_nChannel:         c.int,
-	m_nFlags:           c.int,
-	m_nUserData:        int64,
-	m_idxLane:          uint16,
-	_pad1__:            uint16,
+SteamNetworkingMessage :: struct #packed {
+	pData:            rawptr,
+	cbSize:           c.int,
+	conn:             HSteamNetConnection,
+	identityPeer:     SteamNetworkingIdentity,
+	nConnUserData:    int64,
+	usecTimeReceived: SteamNetworkingMicroseconds,
+	nMessageNumber:   int64,
+	pfnFreeData:      proc "c" (_: ^SteamNetworkingMessage),
+	pfnRelease:       proc "c" (_: ^SteamNetworkingMessage),
+	nChannel:         c.int,
+	nFlags:           c.int,
+	nUserData:        int64,
+	idxLane:          uint16,
+	_pad1__:          uint16,
 }
 
-SteamInputActionEvent_t_AnalogAction_t :: struct {
-	actionHandle:     InputAnalogActionHandle_t,
-	analogActionData: InputAnalogActionData_t,
+SteamInputActionEvent_t_AnalogAction :: struct {
+	actionHandle:     InputAnalogActionHandle,
+	analogActionData: InputAnalogActionData,
 }
 
-SteamInputActionEvent_t_DigitalAction_t :: struct {
-	actionHandle:      InputDigitalActionHandle_t,
-	digitalActionData: InputDigitalActionData_t,
+SteamInputActionEvent_t_DigitalAction :: struct {
+	actionHandle:      InputDigitalActionHandle,
+	digitalActionData: InputDigitalActionData,
 }
 
-SteamInputActionEvent_t :: struct {
-	controllerHandle: InputHandle_t,
+SteamInputActionEvent :: struct {
+	controllerHandle: InputHandle,
 	eEventType:       ESteamInputActionEventType,
 	using actions:    struct #raw_union {
-		analogAction:  SteamInputActionEvent_t_AnalogAction_t,
-		digitalAction: SteamInputActionEvent_t_DigitalAction_t,
+		analogAction:  SteamInputActionEvent_t_AnalogAction,
+		digitalAction: SteamInputActionEvent_t_DigitalAction,
 	},
 }
 
 
-SteamServersConnected_t :: struct #packed {}
+SteamServersConnected :: struct #packed {}
 
-SteamServerConnectFailure_t :: struct #packed {
-	m_eResult:        EResult,
-	m_bStillRetrying: bool,
+SteamServerConnectFailure :: struct #packed {
+	eResult:        EResult,
+	bStillRetrying: bool,
 }
 
-SteamServersDisconnected_t :: struct #packed {
-	m_eResult: EResult,
+SteamServersDisconnected :: struct #packed {
+	eResult: EResult,
 }
 
-ClientGameServerDeny_t :: struct #packed {
-	m_uAppID:           uint32,
-	m_unGameServerIP:   uint32,
-	m_usGameServerPort: uint16,
-	m_bSecure:          uint16,
-	m_uReason:          uint32,
+ClientGameServerDeny :: struct #packed {
+	uAppID:           uint32,
+	unGameServerIP:   uint32,
+	usGameServerPort: uint16,
+	bSecure:          uint16,
+	uReason:          uint32,
 }
 
-IPCFailure_t :: struct #packed {
-	m_eFailureType: uint8,
+IPCFailure :: struct #packed {
+	eFailureType: uint8,
 }
 
-LicensesUpdated_t :: struct #packed {}
+LicensesUpdated :: struct #packed {}
 
-ValidateAuthTicketResponse_t :: struct #packed {
-	m_SteamID:              CSteamID,
-	m_eAuthSessionResponse: EAuthSessionResponse,
-	m_OwnerSteamID:         CSteamID,
+ValidateAuthTicketResponse :: struct #packed {
+	SteamID:              CSteamID,
+	eAuthSessionResponse: EAuthSessionResponse,
+	OwnerSteamID:         CSteamID,
 }
 
-MicroTxnAuthorizationResponse_t :: struct #packed {
-	m_unAppID:     uint32,
-	m_ulOrderID:   uint64,
-	m_bAuthorized: uint8,
+MicroTxnAuthorizationResponse :: struct #packed {
+	unAppID:     uint32,
+	ulOrderID:   uint64,
+	bAuthorized: uint8,
 }
 
-EncryptedAppTicketResponse_t :: struct #packed {
-	m_eResult: EResult,
+EncryptedAppTicketResponse :: struct #packed {
+	eResult: EResult,
 }
 
-GetAuthSessionTicketResponse_t :: struct #packed {
-	m_hAuthTicket: HAuthTicket,
-	m_eResult:     EResult,
+GetAuthSessionTicketResponse :: struct #packed {
+	hAuthTicket: HAuthTicket,
+	eResult:     EResult,
 }
 
-GameWebCallback_t :: struct #packed {
-	m_szURL: [256]u8,
+GameWebCallback :: struct #packed {
+	szURL: [256]u8,
 }
 
-StoreAuthURLResponse_t :: struct #packed {
-	m_szURL: [512]u8,
+StoreAuthURLResponse :: struct #packed {
+	szURL: [512]u8,
 }
 
-MarketEligibilityResponse_t :: struct #packed {
-	m_bAllowed:                   bool,
-	m_eNotAllowedReason:          EMarketNotAllowedReasonFlags,
-	m_rtAllowedAtTime:            RTime32,
-	m_cdaySteamGuardRequiredDays: c.int,
-	m_cdayNewDeviceCooldown:      c.int,
+MarketEligibilityResponse :: struct #packed {
+	bAllowed:                   bool,
+	eNotAllowedReason:          EMarketNotAllowedReasonFlags,
+	rtAllowedAtTime:            RTime32,
+	cdaySteamGuardRequiredDays: c.int,
+	cdayNewDeviceCooldown:      c.int,
 }
 
-DurationControl_t :: struct #packed {
-	m_eResult:        EResult,
-	m_appid:          AppId_t,
-	m_bApplicable:    bool,
-	m_csecsLast5h:    int32,
-	m_progress:       EDurationControlProgress,
-	m_notification:   EDurationControlNotification,
-	m_csecsToday:     int32,
-	m_csecsRemaining: int32,
+DurationControl :: struct #packed {
+	eResult:        EResult,
+	appid:          AppId,
+	bApplicable:    bool,
+	csecsLast5h:    int32,
+	progress:       EDurationControlProgress,
+	notification:   EDurationControlNotification,
+	csecsToday:     int32,
+	csecsRemaining: int32,
 }
 
-PersonaStateChange_t :: struct #packed {
-	m_ulSteamID:    uint64,
-	m_nChangeFlags: c.int,
+PersonaStateChange :: struct #packed {
+	ulSteamID:    uint64,
+	nChangeFlags: c.int,
 }
 
-GameOverlayActivated_t :: struct #packed {
-	m_bActive: uint8,
+GameOverlayActivated :: struct #packed {
+	bActive: uint8,
 }
 
-GameServerChangeRequested_t :: struct #packed {
-	m_rgchServer:   [64]u8,
-	m_rgchPassword: [64]u8,
+GameServerChangeRequested :: struct #packed {
+	rgchServer:   [64]u8,
+	rgchPassword: [64]u8,
 }
 
-GameLobbyJoinRequested_t :: struct #packed {
-	m_steamIDLobby:  CSteamID,
-	m_steamIDFriend: CSteamID,
+GameLobbyJoinRequested :: struct #packed {
+	steamIDLobby:  CSteamID,
+	steamIDFriend: CSteamID,
 }
 
-AvatarImageLoaded_t :: struct #packed {
-	m_steamID: CSteamID,
-	m_iImage:  c.int,
-	m_iWide:   c.int,
-	m_iTall:   c.int,
+AvatarImageLoaded :: struct #packed {
+	steamID: CSteamID,
+	iImage:  c.int,
+	iWide:   c.int,
+	iTall:   c.int,
 }
 
-ClanOfficerListResponse_t :: struct #packed {
-	m_steamIDClan: CSteamID,
-	m_cOfficers:   c.int,
-	m_bSuccess:    uint8,
+ClanOfficerListResponse :: struct #packed {
+	steamIDClan: CSteamID,
+	cOfficers:   c.int,
+	bSuccess:    uint8,
 }
 
-FriendRichPresenceUpdate_t :: struct #packed {
-	m_steamIDFriend: CSteamID,
-	m_nAppID:        AppId_t,
+FriendRichPresenceUpdate :: struct #packed {
+	steamIDFriend: CSteamID,
+	nAppID:        AppId,
 }
 
-GameRichPresenceJoinRequested_t :: struct #packed {
-	m_steamIDFriend: CSteamID,
-	m_rgchConnect:   [256]u8,
+GameRichPresenceJoinRequested :: struct #packed {
+	steamIDFriend: CSteamID,
+	rgchConnect:   [256]u8,
 }
 
-GameConnectedClanChatMsg_t :: struct #packed {
-	m_steamIDClanChat: CSteamID,
-	m_steamIDUser:     CSteamID,
-	m_iMessageID:      c.int,
+GameConnectedClanChatMsg :: struct #packed {
+	steamIDClanChat: CSteamID,
+	steamIDUser:     CSteamID,
+	iMessageID:      c.int,
 }
 
-GameConnectedChatJoin_t :: struct #packed {
-	m_steamIDClanChat: CSteamID,
-	m_steamIDUser:     CSteamID,
+GameConnectedChatJoin :: struct #packed {
+	steamIDClanChat: CSteamID,
+	steamIDUser:     CSteamID,
 }
 
-GameConnectedChatLeave_t :: struct #packed {
-	m_steamIDClanChat: CSteamID,
-	m_steamIDUser:     CSteamID,
-	m_bKicked:         bool,
-	m_bDropped:        bool,
+GameConnectedChatLeave :: struct #packed {
+	steamIDClanChat: CSteamID,
+	steamIDUser:     CSteamID,
+	bKicked:         bool,
+	bDropped:        bool,
 }
 
-DownloadClanActivityCountsResult_t :: struct #packed {
-	m_bSuccess: bool,
+DownloadClanActivityCountsResult :: struct #packed {
+	bSuccess: bool,
 }
 
-JoinClanChatRoomCompletionResult_t :: struct #packed {
-	m_steamIDClanChat:        CSteamID,
-	m_eChatRoomEnterResponse: EChatRoomEnterResponse,
+JoinClanChatRoomCompletionResult :: struct #packed {
+	steamIDClanChat:        CSteamID,
+	eChatRoomEnterResponse: EChatRoomEnterResponse,
 }
 
-GameConnectedFriendChatMsg_t :: struct #packed {
-	m_steamIDUser: CSteamID,
-	m_iMessageID:  c.int,
+GameConnectedFriendChatMsg :: struct #packed {
+	steamIDUser: CSteamID,
+	iMessageID:  c.int,
 }
 
-FriendsGetFollowerCount_t :: struct #packed {
-	m_eResult: EResult,
-	m_steamID: CSteamID,
-	m_nCount:  c.int,
+FriendsGetFollowerCount :: struct #packed {
+	eResult: EResult,
+	steamID: CSteamID,
+	nCount:  c.int,
 }
 
-FriendsIsFollowing_t :: struct #packed {
-	m_eResult:      EResult,
-	m_steamID:      CSteamID,
-	m_bIsFollowing: bool,
+FriendsIsFollowing :: struct #packed {
+	eResult:      EResult,
+	steamID:      CSteamID,
+	bIsFollowing: bool,
 }
 
-FriendsEnumerateFollowingList_t :: struct #packed {
-	m_eResult:           EResult,
-	m_rgSteamID:         [50]CSteamID,
-	m_nResultsReturned:  int32,
-	m_nTotalResultCount: int32,
+FriendsEnumerateFollowingList :: struct #packed {
+	eResult:           EResult,
+	rgSteamID:         [50]CSteamID,
+	nResultsReturned:  int32,
+	nTotalResultCount: int32,
 }
 
-SetPersonaNameResponse_t :: struct #packed {
-	m_bSuccess:      bool,
-	m_bLocalSuccess: bool,
-	m_result:        EResult,
+SetPersonaNameResponse :: struct #packed {
+	bSuccess:      bool,
+	bLocalSuccess: bool,
+	result:        EResult,
 }
 
-UnreadChatMessagesChanged_t :: struct #packed {}
+UnreadChatMessagesChanged :: struct #packed {}
 
-OverlayBrowserProtocolNavigation_t :: struct #packed {
+OverlayBrowserProtocolNavigation :: struct #packed {
 	rgchURI: [1024]u8,
 }
 
-EquippedProfileItemsChanged_t :: struct #packed {
-	m_steamID: CSteamID,
+EquippedProfileItemsChanged :: struct #packed {
+	steamID: CSteamID,
 }
 
-EquippedProfileItems_t :: struct #packed {
-	m_eResult:                   EResult,
-	m_steamID:                   CSteamID,
-	m_bHasAnimatedAvatar:        bool,
-	m_bHasAvatarFrame:           bool,
-	m_bHasProfileModifier:       bool,
-	m_bHasProfileBackground:     bool,
-	m_bHasMiniProfileBackground: bool,
+EquippedProfileItems :: struct #packed {
+	eResult:                   EResult,
+	steamID:                   CSteamID,
+	bHasAnimatedAvatar:        bool,
+	bHasAvatarFrame:           bool,
+	bHasProfileModifier:       bool,
+	bHasProfileBackground:     bool,
+	bHasMiniProfileBackground: bool,
 }
 
-IPCountry_t :: struct #packed {}
+IPCountry :: struct #packed {}
 
-LowBatteryPower_t :: struct #packed {
-	m_nMinutesBatteryLeft: uint8,
+LowBatteryPower :: struct #packed {
+	nMinutesBatteryLeft: uint8,
 }
 
-SteamAPICallCompleted_t :: struct #packed {
-	m_hAsyncCall: SteamAPICall_t,
-	m_iCallback:  c.int,
-	m_cubParam:   uint32,
+SteamAPICallCompleted :: struct #packed {
+	hAsyncCall: SteamAPICall,
+	iCallback:  c.int,
+	cubParam:   uint32,
 }
 
-SteamShutdown_t :: struct #packed {}
+SteamShutdown :: struct #packed {}
 
-CheckFileSignature_t :: struct #packed {
-	m_eCheckFileSignature: ECheckFileSignature,
+CheckFileSignature :: struct #packed {
+	eCheckFileSignature: ECheckFileSignature,
 }
 
-GamepadTextInputDismissed_t :: struct #packed {
-	m_bSubmitted:      bool,
-	m_unSubmittedText: uint32,
+GamepadTextInputDismissed :: struct #packed {
+	bSubmitted:      bool,
+	unSubmittedText: uint32,
 }
 
-AppResumingFromSuspend_t :: struct #packed {}
+AppResumingFromSuspend :: struct #packed {}
 
-f32ingGamepadTextInputDismissed_t :: struct #packed {}
+f32ingGamepadTextInputDismissed :: struct #packed {}
 
-FavoritesListChanged_t :: struct #packed {
-	m_nIP:         uint32,
-	m_nQueryPort:  uint32,
-	m_nConnPort:   uint32,
-	m_nAppID:      uint32,
-	m_nFlags:      uint32,
-	m_bAdd:        bool,
-	m_unAccountId: AccountID_t,
+FavoritesListChanged :: struct #packed {
+	nIP:         uint32,
+	nQueryPort:  uint32,
+	nConnPort:   uint32,
+	nAppID:      uint32,
+	nFlags:      uint32,
+	bAdd:        bool,
+	unAccountId: AccountID,
 }
 
-LobbyInvite_t :: struct #packed {
-	m_ulSteamIDUser:  uint64,
-	m_ulSteamIDLobby: uint64,
-	m_ulGameID:       uint64,
+LobbyInvite :: struct #packed {
+	ulSteamIDUser:  uint64,
+	ulSteamIDLobby: uint64,
+	ulGameID:       uint64,
 }
 
-LobbyEnter_t :: struct #packed {
-	m_ulSteamIDLobby:         uint64,
-	m_rgfChatPermissions:     uint32,
-	m_bLocked:                bool,
-	m_EChatRoomEnterResponse: uint32,
+LobbyEnter :: struct #packed {
+	ulSteamIDLobby:         uint64,
+	rgfChatPermissions:     uint32,
+	bLocked:                bool,
+	EChatRoomEnterResponse: uint32,
 }
 
-LobbyDataUpdate_t :: struct #packed {
-	m_ulSteamIDLobby:  uint64,
-	m_ulSteamIDMember: uint64,
-	m_bSuccess:        uint8,
+LobbyDataUpdate :: struct #packed {
+	ulSteamIDLobby:  uint64,
+	ulSteamIDMember: uint64,
+	bSuccess:        uint8,
 }
 
-LobbyChatUpdate_t :: struct #packed {
-	m_ulSteamIDLobby:           uint64,
-	m_ulSteamIDUserChanged:     uint64,
-	m_ulSteamIDMakingChange:    uint64,
-	m_rgfChatMemberStateChange: uint32,
+LobbyChatUpdate :: struct #packed {
+	ulSteamIDLobby:           uint64,
+	ulSteamIDUserChanged:     uint64,
+	ulSteamIDMakingChange:    uint64,
+	rgfChatMemberStateChange: uint32,
 }
 
-LobbyChatMsg_t :: struct #packed {
-	m_ulSteamIDLobby: uint64,
-	m_ulSteamIDUser:  uint64,
-	m_eChatEntryType: uint8,
-	m_iChatID:        uint32,
+LobbyChatMsg :: struct #packed {
+	ulSteamIDLobby: uint64,
+	ulSteamIDUser:  uint64,
+	eChatEntryType: uint8,
+	iChatID:        uint32,
 }
 
-LobbyGameCreated_t :: struct #packed {
-	m_ulSteamIDLobby:      uint64,
-	m_ulSteamIDGameServer: uint64,
-	m_unIP:                uint32,
-	m_usPort:              uint16,
+LobbyGameCreated :: struct #packed {
+	ulSteamIDLobby:      uint64,
+	ulSteamIDGameServer: uint64,
+	unIP:                uint32,
+	usPort:              uint16,
 }
 
-LobbyMatchList_t :: struct #packed {
-	m_nLobbiesMatching: uint32,
+LobbyMatchList :: struct #packed {
+	nLobbiesMatching: uint32,
 }
 
-LobbyKicked_t :: struct #packed {
-	m_ulSteamIDLobby:         uint64,
-	m_ulSteamIDAdmin:         uint64,
-	m_bKickedDueToDisconnect: uint8,
+LobbyKicked :: struct #packed {
+	ulSteamIDLobby:         uint64,
+	ulSteamIDAdmin:         uint64,
+	bKickedDueToDisconnect: uint8,
 }
 
-LobbyCreated_t :: struct #packed {
-	m_eResult:        EResult,
-	m_ulSteamIDLobby: uint64,
+LobbyCreated :: struct #packed {
+	eResult:        EResult,
+	ulSteamIDLobby: uint64,
 }
 
-PSNGameBootInviteResult_t :: struct #packed {
-	m_bGameBootInviteExists: bool,
-	m_steamIDLobby:          CSteamID,
+PSNGameBootInviteResult :: struct #packed {
+	bGameBootInviteExists: bool,
+	steamIDLobby:          CSteamID,
 }
 
-FavoritesListAccountsUpdated_t :: struct #packed {
-	m_eResult: EResult,
+FavoritesListAccountsUpdated :: struct #packed {
+	eResult: EResult,
 }
 
-SearchForGameProgressCallback_t :: struct #packed {
-	m_ullSearchID:               uint64,
-	m_eResult:                   EResult,
-	m_lobbyID:                   CSteamID,
-	m_steamIDEndedSearch:        CSteamID,
-	m_nSecondsRemainingEstimate: int32,
-	m_cPlayersSearching:         int32,
+SearchForGameProgressCallback :: struct #packed {
+	ullSearchID:               uint64,
+	eResult:                   EResult,
+	lobbyID:                   CSteamID,
+	steamIDEndedSearch:        CSteamID,
+	nSecondsRemainingEstimate: int32,
+	cPlayersSearching:         int32,
 }
 
-SearchForGameResultCallback_t :: struct #packed {
-	m_ullSearchID:         uint64,
-	m_eResult:             EResult,
-	m_nCountPlayersInGame: int32,
-	m_nCountAcceptedGame:  int32,
-	m_steamIDHost:         CSteamID,
-	m_bFinalCallback:      bool,
+SearchForGameResultCallback :: struct #packed {
+	ullSearchID:         uint64,
+	eResult:             EResult,
+	nCountPlayersInGame: int32,
+	nCountAcceptedGame:  int32,
+	steamIDHost:         CSteamID,
+	bFinalCallback:      bool,
 }
 
-RequestPlayersForGameProgressCallback_t :: struct #packed {
-	m_eResult:     EResult,
-	m_ullSearchID: uint64,
+RequestPlayersForGameProgressCallback :: struct #packed {
+	eResult:     EResult,
+	ullSearchID: uint64,
 }
 
-RequestPlayersForGameResultCallback_t :: struct #packed {
-	m_eResult:                   EResult,
-	m_ullSearchID:               uint64,
-	m_SteamIDPlayerFound:        CSteamID,
-	m_SteamIDLobby:              CSteamID,
-	m_ePlayerAcceptState:        RequestPlayersForGameResultCallback_t_PlayerAcceptState_t,
-	m_nPlayerIndex:              int32,
-	m_nTotalPlayersFound:        int32,
-	m_nTotalPlayersAcceptedGame: int32,
-	m_nSuggestedTeamIndex:       int32,
-	m_ullUniqueGameID:           uint64,
+RequestPlayersForGameResultCallback :: struct #packed {
+	eResult:                   EResult,
+	ullSearchID:               uint64,
+	SteamIDPlayerFound:        CSteamID,
+	SteamIDLobby:              CSteamID,
+	ePlayerAcceptState:        RequestPlayersForGameResultCallbact_PlayerAcceptState,
+	nPlayerIndex:              int32,
+	nTotalPlayersFound:        int32,
+	nTotalPlayersAcceptedGame: int32,
+	nSuggestedTeamIndex:       int32,
+	ullUniqueGameID:           uint64,
 }
 
-RequestPlayersForGameResultCallback_t_PlayerAcceptState_t :: enum {
-	k_EStateUnknown        = 0,
-	k_EStatePlayerAccepted = 1,
-	k_EStatePlayerDeclined = 2,
+RequestPlayersForGameResultCallbact_PlayerAcceptState :: enum {
+	EStateUnknown        = 0,
+	EStatePlayerAccepted = 1,
+	EStatePlayerDeclined = 2,
 }
 
-RequestPlayersForGameFinalResultCallback_t :: struct #packed {
-	m_eResult:         EResult,
-	m_ullSearchID:     uint64,
-	m_ullUniqueGameID: uint64,
+RequestPlayersForGameFinalResultCallback :: struct #packed {
+	eResult:         EResult,
+	ullSearchID:     uint64,
+	ullUniqueGameID: uint64,
 }
 
-SubmitPlayerResultResultCallback_t :: struct #packed {
-	m_eResult:       EResult,
+SubmitPlayerResultResultCallback :: struct #packed {
+	eResult:         EResult,
 	ullUniqueGameID: uint64,
 	steamIDPlayer:   CSteamID,
 }
 
-EndGameResultCallback_t :: struct #packed {
-	m_eResult:       EResult,
+EndGameResultCallback :: struct #packed {
+	eResult:         EResult,
 	ullUniqueGameID: uint64,
 }
 
-JoinPartyCallback_t :: struct #packed {
-	m_eResult:            EResult,
-	m_ulBeaconID:         PartyBeaconID_t,
-	m_SteamIDBeaconOwner: CSteamID,
-	m_rgchConnectString:  [256]u8,
+JoinPartyCallback :: struct #packed {
+	eResult:            EResult,
+	ulBeaconID:         PartyBeaconID,
+	SteamIDBeaconOwner: CSteamID,
+	rgchConnectString:  [256]u8,
 }
 
-CreateBeaconCallback_t :: struct #packed {
-	m_eResult:    EResult,
-	m_ulBeaconID: PartyBeaconID_t,
+CreateBeaconCallback :: struct #packed {
+	eResult:    EResult,
+	ulBeaconID: PartyBeaconID,
 }
 
-ReservationNotificationCallback_t :: struct #packed {
-	m_ulBeaconID:    PartyBeaconID_t,
-	m_steamIDJoiner: CSteamID,
+ReservationNotificationCallback :: struct #packed {
+	ulBeaconID:    PartyBeaconID,
+	steamIDJoiner: CSteamID,
 }
 
-ChangeNumOpenSlotsCallback_t :: struct #packed {
-	m_eResult: EResult,
+ChangeNumOpenSlotsCallback :: struct #packed {
+	eResult: EResult,
 }
 
-AvailableBeaconLocationsUpdated_t :: struct #packed {}
+AvailableBeaconLocationsUpdated :: struct #packed {}
 
-ActiveBeaconsUpdated_t :: struct #packed {}
+ActiveBeaconsUpdated :: struct #packed {}
 
-RemoteStorageFileShareResult_t :: struct #packed {
-	m_eResult:      EResult,
-	m_hFile:        UGCHandle_t,
-	m_rgchFilename: [260]u8,
+RemoteStorageFileShareResult :: struct #packed {
+	eResult:      EResult,
+	hFile:        UGCHandle,
+	rgchFilename: [260]u8,
 }
 
-RemoteStoragePublishFileResult_t :: struct #packed {
-	m_eResult:                                  EResult,
-	m_nPublishedFileId:                         PublishedFileId_t,
-	m_bUserNeedsToAcceptWorkshopLegalAgreement: bool,
+RemoteStoragePublishFileResult :: struct #packed {
+	eResult:                                  EResult,
+	nPublishedFileId:                         PublishedFileId,
+	bUserNeedsToAcceptWorkshopLegalAgreement: bool,
 }
 
-RemoteStorageDeletePublishedFileResult_t :: struct #packed {
-	m_eResult:          EResult,
-	m_nPublishedFileId: PublishedFileId_t,
+RemoteStorageDeletePublishedFileResult :: struct #packed {
+	eResult:          EResult,
+	nPublishedFileId: PublishedFileId,
 }
 
-RemoteStorageEnumerateUserPublishedFilesResult_t :: struct #packed {
-	m_eResult:           EResult,
-	m_nResultsReturned:  int32,
-	m_nTotalResultCount: int32,
-	m_rgPublishedFileId: [50]PublishedFileId_t,
+RemoteStorageEnumerateUserPublishedFilesResult :: struct #packed {
+	eResult:           EResult,
+	nResultsReturned:  int32,
+	nTotalResultCount: int32,
+	rgPublishedFileId: [50]PublishedFileId,
 }
 
-RemoteStorageSubscribePublishedFileResult_t :: struct #packed {
-	m_eResult:          EResult,
-	m_nPublishedFileId: PublishedFileId_t,
+RemoteStorageSubscribePublishedFileResult :: struct #packed {
+	eResult:          EResult,
+	nPublishedFileId: PublishedFileId,
 }
 
-RemoteStorageEnumerateUserSubscribedFilesResult_t :: struct #packed {
-	m_eResult:           EResult,
-	m_nResultsReturned:  int32,
-	m_nTotalResultCount: int32,
-	m_rgPublishedFileId: [50]PublishedFileId_t,
-	m_rgRTimeSubscribed: [50]uint32,
+RemoteStorageEnumerateUserSubscribedFilesResult :: struct #packed {
+	eResult:           EResult,
+	nResultsReturned:  int32,
+	nTotalResultCount: int32,
+	rgPublishedFileId: [50]PublishedFileId,
+	rgRTimeSubscribed: [50]uint32,
 }
 
-RemoteStorageUnsubscribePublishedFileResult_t :: struct #packed {
-	m_eResult:          EResult,
-	m_nPublishedFileId: PublishedFileId_t,
+RemoteStorageUnsubscribePublishedFileResult :: struct #packed {
+	eResult:          EResult,
+	nPublishedFileId: PublishedFileId,
 }
 
-RemoteStorageUpdatePublishedFileResult_t :: struct #packed {
-	m_eResult:                                  EResult,
-	m_nPublishedFileId:                         PublishedFileId_t,
-	m_bUserNeedsToAcceptWorkshopLegalAgreement: bool,
+RemoteStorageUpdatePublishedFileResult :: struct #packed {
+	eResult:                                  EResult,
+	nPublishedFileId:                         PublishedFileId,
+	bUserNeedsToAcceptWorkshopLegalAgreement: bool,
 }
 
-RemoteStorageDownloadUGCResult_t :: struct #packed {
-	m_eResult:        EResult,
-	m_hFile:          UGCHandle_t,
-	m_nAppID:         AppId_t,
-	m_nSizeInBytes:   int32,
-	m_pchFileName:    [260]u8,
-	m_ulSteamIDOwner: uint64,
+RemoteStorageDownloadUGCResult :: struct #packed {
+	eResult:        EResult,
+	hFile:          UGCHandle,
+	nAppID:         AppId,
+	nSizeInBytes:   int32,
+	pchFileName:    [260]u8,
+	ulSteamIDOwner: uint64,
 }
 
-RemoteStorageGetPublishedFileDetailsResult_t :: struct #packed {
-	m_eResult:          EResult,
-	m_nPublishedFileId: PublishedFileId_t,
-	m_nCreatorAppID:    AppId_t,
-	m_nConsumerAppID:   AppId_t,
-	m_rgchTitle:        [129]u8,
-	m_rgchDescription:  [8000]u8,
-	m_hFile:            UGCHandle_t,
-	m_hPreviewFile:     UGCHandle_t,
-	m_ulSteamIDOwner:   uint64,
-	m_rtimeCreated:     uint32,
-	m_rtimeUpdated:     uint32,
-	m_eVisibility:      ERemoteStoragePublishedFileVisibility,
-	m_bBanned:          bool,
-	m_rgchTags:         [1025]u8,
-	m_bTagsTruncated:   bool,
-	m_pchFileName:      [260]u8,
-	m_nFileSize:        int32,
-	m_nPreviewFileSize: int32,
-	m_rgchURL:          [256]u8,
-	m_eFileType:        EWorkshopFileType,
-	m_bAcceptedForUse:  bool,
+RemoteStorageGetPublishedFileDetailsResult :: struct #packed {
+	eResult:          EResult,
+	nPublishedFileId: PublishedFileId,
+	nCreatorAppID:    AppId,
+	nConsumerAppID:   AppId,
+	rgchTitle:        [129]u8,
+	rgchDescription:  [8000]u8,
+	hFile:            UGCHandle,
+	hPreviewFile:     UGCHandle,
+	ulSteamIDOwner:   uint64,
+	rtimeCreated:     uint32,
+	rtimeUpdated:     uint32,
+	eVisibility:      ERemoteStoragePublishedFileVisibility,
+	bBanned:          bool,
+	rgchTags:         [1025]u8,
+	bTagsTruncated:   bool,
+	pchFileName:      [260]u8,
+	nFileSize:        int32,
+	nPreviewFileSize: int32,
+	rgchURL:          [256]u8,
+	eFileType:        EWorkshopFileType,
+	bAcceptedForUse:  bool,
 }
 
-RemoteStorageEnumerateWorkshopFilesResult_t :: struct #packed {
-	m_eResult:           EResult,
-	m_nResultsReturned:  int32,
-	m_nTotalResultCount: int32,
-	m_rgPublishedFileId: [50]PublishedFileId_t,
-	m_rgScore:           [50]f32,
-	m_nAppId:            AppId_t,
-	m_unStartIndex:      uint32,
+RemoteStorageEnumerateWorkshopFilesResult :: struct #packed {
+	eResult:           EResult,
+	nResultsReturned:  int32,
+	nTotalResultCount: int32,
+	rgPublishedFileId: [50]PublishedFileId,
+	rgScore:           [50]f32,
+	nAppId:            AppId,
+	unStartIndex:      uint32,
 }
 
-RemoteStorageGetPublishedItemVoteDetailsResult_t :: struct #packed {
-	m_eResult:           EResult,
-	m_unPublishedFileId: PublishedFileId_t,
-	m_nVotesFor:         int32,
-	m_nVotesAgainst:     int32,
-	m_nReports:          int32,
-	m_fScore:            f32,
+RemoteStorageGetPublishedItemVoteDetailsResult :: struct #packed {
+	eResult:           EResult,
+	unPublishedFileId: PublishedFileId,
+	nVotesFor:         int32,
+	nVotesAgainst:     int32,
+	nReports:          int32,
+	fScore:            f32,
 }
 
-RemoteStoragePublishedFileSubscribed_t :: struct #packed {
-	m_nPublishedFileId: PublishedFileId_t,
-	m_nAppID:           AppId_t,
+RemoteStoragePublishedFileSubscribed :: struct #packed {
+	nPublishedFileId: PublishedFileId,
+	nAppID:           AppId,
 }
 
-RemoteStoragePublishedFileUnsubscribed_t :: struct #packed {
-	m_nPublishedFileId: PublishedFileId_t,
-	m_nAppID:           AppId_t,
+RemoteStoragePublishedFileUnsubscribed :: struct #packed {
+	nPublishedFileId: PublishedFileId,
+	nAppID:           AppId,
 }
 
-RemoteStoragePublishedFileDeleted_t :: struct #packed {
-	m_nPublishedFileId: PublishedFileId_t,
-	m_nAppID:           AppId_t,
+RemoteStoragePublishedFileDeleted :: struct #packed {
+	nPublishedFileId: PublishedFileId,
+	nAppID:           AppId,
 }
 
-RemoteStorageUpdateUserPublishedItemVoteResult_t :: struct #packed {
-	m_eResult:          EResult,
-	m_nPublishedFileId: PublishedFileId_t,
+RemoteStorageUpdateUserPublishedItemVoteResult :: struct #packed {
+	eResult:          EResult,
+	nPublishedFileId: PublishedFileId,
 }
 
-RemoteStorageUserVoteDetails_t :: struct #packed {
-	m_eResult:          EResult,
-	m_nPublishedFileId: PublishedFileId_t,
-	m_eVote:            EWorkshopVote,
+RemoteStorageUserVoteDetails :: struct #packed {
+	eResult:          EResult,
+	nPublishedFileId: PublishedFileId,
+	eVote:            EWorkshopVote,
 }
 
-RemoteStorageEnumerateUserSharedWorkshopFilesResult_t :: struct #packed {
-	m_eResult:           EResult,
-	m_nResultsReturned:  int32,
-	m_nTotalResultCount: int32,
-	m_rgPublishedFileId: [50]PublishedFileId_t,
+RemoteStorageEnumerateUserSharedWorkshopFilesResult :: struct #packed {
+	eResult:           EResult,
+	nResultsReturned:  int32,
+	nTotalResultCount: int32,
+	rgPublishedFileId: [50]PublishedFileId,
 }
 
-RemoteStorageSetUserPublishedFileActionResult_t :: struct #packed {
-	m_eResult:          EResult,
-	m_nPublishedFileId: PublishedFileId_t,
-	m_eAction:          EWorkshopFileAction,
+RemoteStorageSetUserPublishedFileActionResult :: struct #packed {
+	eResult:          EResult,
+	nPublishedFileId: PublishedFileId,
+	eAction:          EWorkshopFileAction,
 }
 
-RemoteStorageEnumeratePublishedFilesByUserActionResult_t :: struct #packed {
-	m_eResult:           EResult,
-	m_eAction:           EWorkshopFileAction,
-	m_nResultsReturned:  int32,
-	m_nTotalResultCount: int32,
-	m_rgPublishedFileId: [50]PublishedFileId_t,
-	m_rgRTimeUpdated:    [50]uint32,
+RemoteStorageEnumeratePublishedFilesByUserActionResult :: struct #packed {
+	eResult:           EResult,
+	eAction:           EWorkshopFileAction,
+	nResultsReturned:  int32,
+	nTotalResultCount: int32,
+	rgPublishedFileId: [50]PublishedFileId,
+	rgRTimeUpdated:    [50]uint32,
 }
 
-RemoteStoragePublishFileProgress_t :: struct #packed {
-	m_dPercentFile: f64,
-	m_bPreview:     bool,
+RemoteStoragePublishFileProgress :: struct #packed {
+	dPercentFile: f64,
+	bPreview:     bool,
 }
 
-RemoteStoragePublishedFileUpdated_t :: struct #packed {
-	m_nPublishedFileId: PublishedFileId_t,
-	m_nAppID:           AppId_t,
-	m_ulUnused:         uint64,
+RemoteStoragePublishedFileUpdated :: struct #packed {
+	nPublishedFileId: PublishedFileId,
+	nAppID:           AppId,
+	ulUnused:         uint64,
 }
 
-RemoteStorageFileWriteAsyncComplete_t :: struct #packed {
-	m_eResult: EResult,
+RemoteStorageFileWriteAsyncComplete :: struct #packed {
+	eResult: EResult,
 }
 
-RemoteStorageFileReadAsyncComplete_t :: struct #packed {
-	m_hFileReadAsync: SteamAPICall_t,
-	m_eResult:        EResult,
-	m_nOffset:        uint32,
-	m_cubRead:        uint32,
+RemoteStorageFileReadAsyncComplete :: struct #packed {
+	hFileReadAsync: SteamAPICall,
+	eResult:        EResult,
+	nOffset:        uint32,
+	cubRead:        uint32,
 }
 
-RemoteStorageLocalFileChange_t :: struct #packed {}
+RemoteStorageLocalFileChange :: struct #packed {}
 
-UserStatsReceived_t :: struct #packed {
-	m_nGameID:     uint64,
-	m_eResult:     EResult,
-	m_steamIDUser: CSteamID,
+UserStatsReceived :: struct #packed {
+	nGameID:     uint64,
+	eResult:     EResult,
+	steamIDUser: CSteamID,
 }
 
-UserStatsStored_t :: struct #packed {
-	m_nGameID: uint64,
-	m_eResult: EResult,
+UserStatsStored :: struct #packed {
+	nGameID: uint64,
+	eResult: EResult,
 }
 
-UserAchievementStored_t :: struct #packed {
-	m_nGameID:             uint64,
-	m_bGroupAchievement:   bool,
-	m_rgchAchievementName: [128]u8,
-	m_nCurProgress:        uint32,
-	m_nMaxProgress:        uint32,
+UserAchievementStored :: struct #packed {
+	nGameID:             uint64,
+	bGroupAchievement:   bool,
+	rgchAchievementName: [128]u8,
+	nCurProgress:        uint32,
+	nMaxProgress:        uint32,
 }
 
-LeaderboardFindResult_t :: struct #packed {
-	m_hSteamLeaderboard: SteamLeaderboard_t,
-	m_bLeaderboardFound: uint8,
+LeaderboardFindResult :: struct #packed {
+	hSteamLeaderboard: SteamLeaderboard,
+	bLeaderboardFound: uint8,
 }
 
-LeaderboardScoresDownloaded_t :: struct #packed {
-	m_hSteamLeaderboard:        SteamLeaderboard_t,
-	m_hSteamLeaderboardEntries: SteamLeaderboardEntries_t,
-	m_cEntryCount:              c.int,
+LeaderboardScoresDownloaded :: struct #packed {
+	hSteamLeaderboard:        SteamLeaderboard,
+	hSteamLeaderboardEntries: SteamLeaderboardEntries,
+	cEntryCount:              c.int,
 }
 
-LeaderboardScoreUploaded_t :: struct #packed {
-	m_bSuccess:            uint8,
-	m_hSteamLeaderboard:   SteamLeaderboard_t,
-	m_nScore:              int32,
-	m_bScoreChanged:       uint8,
-	m_nGlobalRankNew:      c.int,
-	m_nGlobalRankPrevious: c.int,
+LeaderboardScoreUploaded :: struct #packed {
+	bSuccess:            uint8,
+	hSteamLeaderboard:   SteamLeaderboard,
+	nScore:              int32,
+	bScoreChanged:       uint8,
+	nGlobalRankNew:      c.int,
+	nGlobalRankPrevious: c.int,
 }
 
-NumberOfCurrentPlayers_t :: struct #packed {
-	m_bSuccess: uint8,
-	m_cPlayers: int32,
+NumberOfCurrentPlayers :: struct #packed {
+	bSuccess: uint8,
+	cPlayers: int32,
 }
 
-UserStatsUnloaded_t :: struct #packed {
-	m_steamIDUser: CSteamID,
+UserStatsUnloaded :: struct #packed {
+	steamIDUser: CSteamID,
 }
 
-UserAchievementIconFetched_t :: struct #packed {
-	m_nGameID:             CGameID,
-	m_rgchAchievementName: [128]u8,
-	m_bAchieved:           bool,
-	m_nIconHandle:         c.int,
+UserAchievementIconFetched :: struct #packed {
+	nGameID:             CGameID,
+	rgchAchievementName: [128]u8,
+	bAchieved:           bool,
+	nIconHandle:         c.int,
 }
 
-GlobalAchievementPercentagesReady_t :: struct #packed {
-	m_nGameID: uint64,
-	m_eResult: EResult,
+GlobalAchievementPercentagesReady :: struct #packed {
+	nGameID: uint64,
+	eResult: EResult,
 }
 
-LeaderboardUGCSet_t :: struct #packed {
-	m_eResult:           EResult,
-	m_hSteamLeaderboard: SteamLeaderboard_t,
+LeaderboardUGCSet :: struct #packed {
+	eResult:           EResult,
+	hSteamLeaderboard: SteamLeaderboard,
 }
 
-PS3TrophiesInstalled_t :: struct #packed {
-	m_nGameID:             uint64,
-	m_eResult:             EResult,
-	m_ulRequiredDiskSpace: uint64,
+PS3TrophiesInstalled :: struct #packed {
+	nGameID:             uint64,
+	eResult:             EResult,
+	ulRequiredDiskSpace: uint64,
 }
 
-GlobalStatsReceived_t :: struct #packed {
-	m_nGameID: uint64,
-	m_eResult: EResult,
+GlobalStatsReceived :: struct #packed {
+	nGameID: uint64,
+	eResult: EResult,
 }
 
-DlcInstalled_t :: struct #packed {
-	m_nAppID: AppId_t,
+DlcInstalled :: struct #packed {
+	nAppID: AppId,
 }
 
-RegisterActivationCodeResponse_t :: struct #packed {
-	m_eResult:             ERegisterActivationCodeResult,
-	m_unPackageRegistered: uint32,
+RegisterActivationCodeResponse :: struct #packed {
+	eResult:             ERegisterActivationCodeResult,
+	unPackageRegistered: uint32,
 }
 
-NewUrlLaunchParameters_t :: struct #packed {}
+NewUrlLaunchParameters :: struct #packed {}
 
-AppProofOfPurchaseKeyResponse_t :: struct #packed {
-	m_eResult:      EResult,
-	m_nAppID:       uint32,
-	m_cchKeyLength: uint32,
-	m_rgchKey:      [240]u8,
+AppProofOfPurchaseKeyResponse :: struct #packed {
+	eResult:      EResult,
+	nAppID:       uint32,
+	cchKeyLength: uint32,
+	rgchKey:      [240]u8,
 }
 
-FileDetailsResult_t :: struct #packed {
-	m_eResult:    EResult,
-	m_ulFileSize: uint64,
-	m_FileSHA:    [20]uint8,
-	m_unFlags:    uint32,
+FileDetailsResult :: struct #packed {
+	eResult:    EResult,
+	ulFileSize: uint64,
+	FileSHA:    [20]uint8,
+	unFlags:    uint32,
 }
 
-TimedTrialStatus_t :: struct #packed {
-	m_unAppID:          AppId_t,
-	m_bIsOffline:       bool,
-	m_unSecondsAllowed: uint32,
-	m_unSecondsPlayed:  uint32,
+TimedTrialStatus :: struct #packed {
+	unAppID:          AppId,
+	bIsOffline:       bool,
+	unSecondsAllowed: uint32,
+	unSecondsPlayed:  uint32,
 }
 
-P2PSessionRequest_t :: struct #packed {
-	m_steamIDRemote: CSteamID,
+P2PSessionRequest :: struct #packed {
+	steamIDRemote: CSteamID,
 }
 
-P2PSessionConnectFail_t :: struct #packed {
-	m_steamIDRemote:    CSteamID,
-	m_eP2PSessionError: uint8,
+P2PSessionConnectFail :: struct #packed {
+	steamIDRemote:    CSteamID,
+	eP2PSessionError: uint8,
 }
 
-SocketStatusCallback_t :: struct #packed {
-	m_hSocket:          SNetSocket_t,
-	m_hListenSocket:    SNetListenSocket_t,
-	m_steamIDRemote:    CSteamID,
-	m_eSNetSocketState: c.int,
+SocketStatusCallback :: struct #packed {
+	hSocket:          SNetSocket,
+	hListenSocket:    SNetListenSocket,
+	steamIDRemote:    CSteamID,
+	eSNetSocketState: c.int,
 }
 
-ScreenshotReady_t :: struct #packed {
-	m_hLocal:  ScreenshotHandle,
-	m_eResult: EResult,
+ScreenshotReady :: struct #packed {
+	hLocal:  ScreenshotHandle,
+	eResult: EResult,
 }
 
-ScreenshotRequested_t :: struct #packed {}
+ScreenshotRequested :: struct #packed {}
 
-PlaybackStatusHasChanged_t :: struct #packed {}
+PlaybackStatusHasChanged :: struct #packed {}
 
-VolumeHasChanged_t :: struct #packed {
-	m_flNewVolume: f32,
+VolumeHasChanged :: struct #packed {
+	flNewVolume: f32,
 }
 
-MusicPlayerRemoteWillActivate_t :: struct #packed {}
+MusicPlayerRemoteWillActivate :: struct #packed {}
 
-MusicPlayerRemoteWillDeactivate_t :: struct #packed {}
+MusicPlayerRemoteWillDeactivate :: struct #packed {}
 
-MusicPlayerRemoteToFront_t :: struct #packed {}
+MusicPlayerRemoteToFront :: struct #packed {}
 
-MusicPlayerWillQuit_t :: struct #packed {}
+MusicPlayerWillQuit :: struct #packed {}
 
-MusicPlayerWantsPlay_t :: struct #packed {}
+MusicPlayerWantsPlay :: struct #packed {}
 
-MusicPlayerWantsPause_t :: struct #packed {}
+MusicPlayerWantsPause :: struct #packed {}
 
-MusicPlayerWantsPlayPrevious_t :: struct #packed {}
+MusicPlayerWantsPlayPrevious :: struct #packed {}
 
-MusicPlayerWantsPlayNext_t :: struct #packed {}
+MusicPlayerWantsPlayNext :: struct #packed {}
 
-MusicPlayerWantsShuffled_t :: struct #packed {
-	m_bShuffled: bool,
+MusicPlayerWantsShuffled :: struct #packed {
+	bShuffled: bool,
 }
 
-MusicPlayerWantsLooped_t :: struct #packed {
-	m_bLooped: bool,
+MusicPlayerWantsLooped :: struct #packed {
+	bLooped: bool,
 }
 
-MusicPlayerWantsVolume_t :: struct #packed {
-	m_flNewVolume: f32,
+MusicPlayerWantsVolume :: struct #packed {
+	flNewVolume: f32,
 }
 
-MusicPlayerSelectsQueueEntry_t :: struct #packed {
+MusicPlayerSelectsQueueEntry :: struct #packed {
 	nID: c.int,
 }
 
-MusicPlayerSelectsPlaylistEntry_t :: struct #packed {
+MusicPlayerSelectsPlaylistEntry :: struct #packed {
 	nID: c.int,
 }
 
-MusicPlayerWantsPlayingRepeatStatus_t :: struct #packed {
-	m_nPlayingRepeatStatus: c.int,
+MusicPlayerWantsPlayingRepeatStatus :: struct #packed {
+	nPlayingRepeatStatus: c.int,
 }
 
-HTTPRequestCompleted_t :: struct #packed {
-	m_hRequest:           HTTPRequestHandle,
-	m_ulContextValue:     uint64,
-	m_bRequestSuccessful: bool,
-	m_eStatusCode:        EHTTPStatusCode,
-	m_unBodySize:         uint32,
+HTTPRequestCompleted :: struct #packed {
+	hRequest:           HTTPRequestHandle,
+	ulContextValue:     uint64,
+	bRequestSuccessful: bool,
+	eStatusCode:        EHTTPStatusCode,
+	unBodySize:         uint32,
 }
 
-HTTPRequestHeadersReceived_t :: struct #packed {
-	m_hRequest:       HTTPRequestHandle,
-	m_ulContextValue: uint64,
+HTTPRequestHeadersReceived :: struct #packed {
+	hRequest:       HTTPRequestHandle,
+	ulContextValue: uint64,
 }
 
-HTTPRequestDataReceived_t :: struct #packed {
-	m_hRequest:       HTTPRequestHandle,
-	m_ulContextValue: uint64,
-	m_cOffset:        uint32,
-	m_cBytesReceived: uint32,
+HTTPRequestDataReceived :: struct #packed {
+	hRequest:       HTTPRequestHandle,
+	ulContextValue: uint64,
+	cOffset:        uint32,
+	cBytesReceived: uint32,
 }
 
-SteamInputDeviceConnected_t :: struct #packed {
-	m_ulConnectedDeviceHandle: InputHandle_t,
+SteamInputDeviceConnected :: struct #packed {
+	ulConnectedDeviceHandle: InputHandle,
 }
 
-SteamInputDeviceDisconnected_t :: struct #packed {
-	m_ulDisconnectedDeviceHandle: InputHandle_t,
+SteamInputDeviceDisconnected :: struct #packed {
+	ulDisconnectedDeviceHandle: InputHandle,
 }
 
-SteamInputConfigurationLoaded_t :: struct #packed {
-	m_unAppID:            AppId_t,
-	m_ulDeviceHandle:     InputHandle_t,
-	m_ulMappingCreator:   CSteamID,
-	m_unMajorRevision:    uint32,
-	m_unMinorRevision:    uint32,
-	m_bUsesSteamInputAPI: bool,
-	m_bUsesGamepadAPI:    bool,
+SteamInputConfigurationLoaded :: struct #packed {
+	unAppID:            AppId,
+	ulDeviceHandle:     InputHandle,
+	ulMappingCreator:   CSteamID,
+	unMajorRevision:    uint32,
+	unMinorRevision:    uint32,
+	bUsesSteamInputAPI: bool,
+	bUsesGamepadAPI:    bool,
 }
 
-SteamUGCQueryCompleted_t :: struct #packed {
-	m_handle:                 UGCQueryHandle_t,
-	m_eResult:                EResult,
-	m_unNumResultsReturned:   uint32,
-	m_unTotalMatchingResults: uint32,
-	m_bCachedData:            bool,
-	m_rgchNextCursor:         [256]u8,
+SteamUGCQueryCompleted :: struct #packed {
+	handle:                 UGCQueryHandle,
+	eResult:                EResult,
+	unNumResultsReturned:   uint32,
+	unTotalMatchingResults: uint32,
+	bCachedData:            bool,
+	rgchNextCursor:         [256]u8,
 }
 
-SteamUGCRequestUGCDetailsResult_t :: struct #packed {
-	m_details:     SteamUGCDetails_t,
-	m_bCachedData: bool,
+SteamUGCRequestUGCDetailsResult :: struct #packed {
+	details:     SteamUGCDetails,
+	bCachedData: bool,
 }
 
-CreateItemResult_t :: struct #packed {
-	m_eResult:                                  EResult,
-	m_nPublishedFileId:                         PublishedFileId_t,
-	m_bUserNeedsToAcceptWorkshopLegalAgreement: bool,
+CreateItemResult :: struct #packed {
+	eResult:                                  EResult,
+	nPublishedFileId:                         PublishedFileId,
+	bUserNeedsToAcceptWorkshopLegalAgreement: bool,
 }
 
-SubmitItemUpdateResult_t :: struct #packed {
-	m_eResult:                                  EResult,
-	m_bUserNeedsToAcceptWorkshopLegalAgreement: bool,
-	m_nPublishedFileId:                         PublishedFileId_t,
+SubmitItemUpdateResult :: struct #packed {
+	eResult:                                  EResult,
+	bUserNeedsToAcceptWorkshopLegalAgreement: bool,
+	nPublishedFileId:                         PublishedFileId,
 }
 
-ItemInstalled_t :: struct #packed {
-	m_unAppID:          AppId_t,
-	m_nPublishedFileId: PublishedFileId_t,
+ItemInstalled :: struct #packed {
+	unAppID:          AppId,
+	nPublishedFileId: PublishedFileId,
 }
 
-DownloadItemResult_t :: struct #packed {
-	m_unAppID:          AppId_t,
-	m_nPublishedFileId: PublishedFileId_t,
-	m_eResult:          EResult,
+DownloadItemResult :: struct #packed {
+	unAppID:          AppId,
+	nPublishedFileId: PublishedFileId,
+	eResult:          EResult,
 }
 
-UserFavoriteItemsListChanged_t :: struct #packed {
-	m_nPublishedFileId: PublishedFileId_t,
-	m_eResult:          EResult,
-	m_bWasAddRequest:   bool,
+UserFavoriteItemsListChanged :: struct #packed {
+	nPublishedFileId: PublishedFileId,
+	eResult:          EResult,
+	bWasAddRequest:   bool,
 }
 
-SetUserItemVoteResult_t :: struct #packed {
-	m_nPublishedFileId: PublishedFileId_t,
-	m_eResult:          EResult,
-	m_bVoteUp:          bool,
+SetUserItemVoteResult :: struct #packed {
+	nPublishedFileId: PublishedFileId,
+	eResult:          EResult,
+	bVoteUp:          bool,
 }
 
-GetUserItemVoteResult_t :: struct #packed {
-	m_nPublishedFileId: PublishedFileId_t,
-	m_eResult:          EResult,
-	m_bVotedUp:         bool,
-	m_bVotedDown:       bool,
-	m_bVoteSkipped:     bool,
+GetUserItemVoteResult :: struct #packed {
+	nPublishedFileId: PublishedFileId,
+	eResult:          EResult,
+	bVotedUp:         bool,
+	bVotedDown:       bool,
+	bVoteSkipped:     bool,
 }
 
-StartPlaytimeTrackingResult_t :: struct #packed {
-	m_eResult: EResult,
+StartPlaytimeTrackingResult :: struct #packed {
+	eResult: EResult,
 }
 
-StopPlaytimeTrackingResult_t :: struct #packed {
-	m_eResult: EResult,
+StopPlaytimeTrackingResult :: struct #packed {
+	eResult: EResult,
 }
 
-AddUGCDependencyResult_t :: struct #packed {
-	m_eResult:               EResult,
-	m_nPublishedFileId:      PublishedFileId_t,
-	m_nChildPublishedFileId: PublishedFileId_t,
+AddUGCDependencyResult :: struct #packed {
+	eResult:               EResult,
+	nPublishedFileId:      PublishedFileId,
+	nChildPublishedFileId: PublishedFileId,
 }
 
-RemoveUGCDependencyResult_t :: struct #packed {
-	m_eResult:               EResult,
-	m_nPublishedFileId:      PublishedFileId_t,
-	m_nChildPublishedFileId: PublishedFileId_t,
+RemoveUGCDependencyResult :: struct #packed {
+	eResult:               EResult,
+	nPublishedFileId:      PublishedFileId,
+	nChildPublishedFileId: PublishedFileId,
 }
 
-AddAppDependencyResult_t :: struct #packed {
-	m_eResult:          EResult,
-	m_nPublishedFileId: PublishedFileId_t,
-	m_nAppID:           AppId_t,
+AddAppDependencyResult :: struct #packed {
+	eResult:          EResult,
+	nPublishedFileId: PublishedFileId,
+	nAppID:           AppId,
 }
 
-RemoveAppDependencyResult_t :: struct #packed {
-	m_eResult:          EResult,
-	m_nPublishedFileId: PublishedFileId_t,
-	m_nAppID:           AppId_t,
+RemoveAppDependencyResult :: struct #packed {
+	eResult:          EResult,
+	nPublishedFileId: PublishedFileId,
+	nAppID:           AppId,
 }
 
-GetAppDependenciesResult_t :: struct #packed {
-	m_eResult:                  EResult,
-	m_nPublishedFileId:         PublishedFileId_t,
-	m_rgAppIDs:                 [32]AppId_t,
-	m_nNumAppDependencies:      uint32,
-	m_nTotalNumAppDependencies: uint32,
+GetAppDependenciesResult :: struct #packed {
+	eResult:                  EResult,
+	nPublishedFileId:         PublishedFileId,
+	rgAppIDs:                 [32]AppId,
+	nNumAppDependencies:      uint32,
+	nTotalNumAppDependencies: uint32,
 }
 
-DeleteItemResult_t :: struct #packed {
-	m_eResult:          EResult,
-	m_nPublishedFileId: PublishedFileId_t,
+DeleteItemResult :: struct #packed {
+	eResult:          EResult,
+	nPublishedFileId: PublishedFileId,
 }
 
-UserSubscribedItemsListChanged_t :: struct #packed {
-	m_nAppID: AppId_t,
+UserSubscribedItemsListChanged :: struct #packed {
+	nAppID: AppId,
 }
 
-WorkshopEULAStatus_t :: struct #packed {
-	m_eResult:      EResult,
-	m_nAppID:       AppId_t,
-	m_unVersion:    uint32,
-	m_rtAction:     RTime32,
-	m_bAccepted:    bool,
-	m_bNeedsAction: bool,
+WorkshopEULAStatus :: struct #packed {
+	eResult:      EResult,
+	nAppID:       AppId,
+	unVersion:    uint32,
+	rtAction:     RTime32,
+	bAccepted:    bool,
+	bNeedsAction: bool,
 }
 
-SteamAppInstalled_t :: struct #packed {
-	m_nAppID:              AppId_t,
-	m_iInstallFolderIndex: c.int,
+SteamAppInstalled :: struct #packed {
+	nAppID:              AppId,
+	iInstallFolderIndex: c.int,
 }
 
-SteamAppUninstalled_t :: struct #packed {
-	m_nAppID:              AppId_t,
-	m_iInstallFolderIndex: c.int,
+SteamAppUninstalled :: struct #packed {
+	nAppID:              AppId,
+	iInstallFolderIndex: c.int,
 }
 
-HTML_BrowserReady_t :: struct #packed {
+HTML_BrowserReady :: struct #packed {
 	unBrowserHandle: HHTMLBrowser,
 }
 
-HTML_NeedsPaint_t :: struct #packed {
+HTML_NeedsPaint :: struct #packed {
 	unBrowserHandle: HHTMLBrowser,
 	pBGRA:           cstring,
 	unWide:          uint32,
@@ -1126,7 +1126,7 @@ HTML_NeedsPaint_t :: struct #packed {
 	unPageSerial:    uint32,
 }
 
-HTML_StartRequest_t :: struct #packed {
+HTML_StartRequest :: struct #packed {
 	unBrowserHandle: HHTMLBrowser,
 	pchURL:          cstring,
 	pchTarget:       cstring,
@@ -1134,11 +1134,11 @@ HTML_StartRequest_t :: struct #packed {
 	bIsRedirect:     bool,
 }
 
-HTML_CloseBrowser_t :: struct #packed {
+HTML_CloseBrowser :: struct #packed {
 	unBrowserHandle: HHTMLBrowser,
 }
 
-HTML_URLChanged_t :: struct #packed {
+HTML_URLChanged :: struct #packed {
 	unBrowserHandle: HHTMLBrowser,
 	pchURL:          cstring,
 	pchPostData:     cstring,
@@ -1147,35 +1147,35 @@ HTML_URLChanged_t :: struct #packed {
 	bNewNavigation:  bool,
 }
 
-HTML_FinishedRequest_t :: struct #packed {
+HTML_FinishedRequest :: struct #packed {
 	unBrowserHandle: HHTMLBrowser,
 	pchURL:          cstring,
 	pchPageTitle:    cstring,
 }
 
-HTML_OpenLinkInNewTab_t :: struct #packed {
+HTML_OpenLinkInNewTab :: struct #packed {
 	unBrowserHandle: HHTMLBrowser,
 	pchURL:          cstring,
 }
 
-HTML_ChangedTitle_t :: struct #packed {
+HTML_ChangedTitle :: struct #packed {
 	unBrowserHandle: HHTMLBrowser,
 	pchTitle:        cstring,
 }
 
-HTML_SearchResults_t :: struct #packed {
+HTML_SearchResults :: struct #packed {
 	unBrowserHandle: HHTMLBrowser,
 	unResults:       uint32,
 	unCurrentMatch:  uint32,
 }
 
-HTML_CanGoBackAndForward_t :: struct #packed {
+HTML_CanGoBackAndForward :: struct #packed {
 	unBrowserHandle: HHTMLBrowser,
 	bCanGoBack:      bool,
 	bCanGoForward:   bool,
 }
 
-HTML_HorizontalScroll_t :: struct #packed {
+HTML_HorizontalScroll :: struct #packed {
 	unBrowserHandle: HHTMLBrowser,
 	unScrollMax:     uint32,
 	unScrollCurrent: uint32,
@@ -1184,7 +1184,7 @@ HTML_HorizontalScroll_t :: struct #packed {
 	unPageSize:      uint32,
 }
 
-HTML_VerticalScroll_t :: struct #packed {
+HTML_VerticalScroll :: struct #packed {
 	unBrowserHandle: HHTMLBrowser,
 	unScrollMax:     uint32,
 	unScrollCurrent: uint32,
@@ -1193,7 +1193,7 @@ HTML_VerticalScroll_t :: struct #packed {
 	unPageSize:      uint32,
 }
 
-HTML_LinkAtPosition_t :: struct #packed {
+HTML_LinkAtPosition :: struct #packed {
 	unBrowserHandle: HHTMLBrowser,
 	x:               uint32,
 	y:               uint32,
@@ -1202,23 +1202,23 @@ HTML_LinkAtPosition_t :: struct #packed {
 	bLiveLink:       bool,
 }
 
-HTML_JSAlert_t :: struct #packed {
+HTML_JSAlert :: struct #packed {
 	unBrowserHandle: HHTMLBrowser,
 	pchMessage:      cstring,
 }
 
-HTML_JSConfirm_t :: struct #packed {
+HTML_JSConfirt :: struct #packed {
 	unBrowserHandle: HHTMLBrowser,
 	pchMessage:      cstring,
 }
 
-HTML_FileOpenDialog_t :: struct #packed {
+HTML_FileOpenDialog :: struct #packed {
 	unBrowserHandle: HHTMLBrowser,
 	pchTitle:        cstring,
 	pchInitialFile:  cstring,
 }
 
-HTML_NewWindow_t :: struct #packed {
+HTML_NewWindow :: struct #packed {
 	unBrowserHandle:                  HHTMLBrowser,
 	pchURL:                           cstring,
 	unX:                              uint32,
@@ -1228,193 +1228,193 @@ HTML_NewWindow_t :: struct #packed {
 	unNewWindow_BrowserHandle_IGNORE: HHTMLBrowser,
 }
 
-HTML_SetCursor_t :: struct #packed {
+HTML_SetCursor :: struct #packed {
 	unBrowserHandle: HHTMLBrowser,
 	eMouseCursor:    uint32,
 }
 
-HTML_StatusText_t :: struct #packed {
+HTML_StatusText :: struct #packed {
 	unBrowserHandle: HHTMLBrowser,
 	pchMsg:          cstring,
 }
 
-HTML_ShowToolTip_t :: struct #packed {
+HTML_ShowToolTip :: struct #packed {
 	unBrowserHandle: HHTMLBrowser,
 	pchMsg:          cstring,
 }
 
-HTML_UpdateToolTip_t :: struct #packed {
+HTML_UpdateToolTip :: struct #packed {
 	unBrowserHandle: HHTMLBrowser,
 	pchMsg:          cstring,
 }
 
-HTML_HideToolTip_t :: struct #packed {
+HTML_HideToolTip :: struct #packed {
 	unBrowserHandle: HHTMLBrowser,
 }
 
-HTML_BrowserRestarted_t :: struct #packed {
+HTML_BrowserRestarted :: struct #packed {
 	unBrowserHandle:    HHTMLBrowser,
 	unOldBrowserHandle: HHTMLBrowser,
 }
 
-SteamInventoryResultReady_t :: struct #packed {
-	m_handle: SteamInventoryResult_t,
-	m_result: EResult,
+SteamInventoryResultReady :: struct #packed {
+	handle: SteamInventoryResult,
+	result: EResult,
 }
 
-SteamInventoryFullUpdate_t :: struct #packed {
-	m_handle: SteamInventoryResult_t,
+SteamInventoryFullUpdate :: struct #packed {
+	handle: SteamInventoryResult,
 }
 
-SteamInventoryDefinitionUpdate_t :: struct #packed {}
+SteamInventoryDefinitionUpdate :: struct #packed {}
 
-SteamInventoryEligiblePromoItemDefIDs_t :: struct #packed {
-	m_result:                   EResult,
-	m_steamID:                  CSteamID,
-	m_numEligiblePromoItemDefs: c.int,
-	m_bCachedData:              bool,
+SteamInventoryEligiblePromoItemDefIDs :: struct #packed {
+	result:                   EResult,
+	steamID:                  CSteamID,
+	numEligiblePromoItemDefs: c.int,
+	bCachedData:              bool,
 }
 
-SteamInventoryStartPurchaseResult_t :: struct #packed {
-	m_result:    EResult,
-	m_ulOrderID: uint64,
-	m_ulTransID: uint64,
+SteamInventoryStartPurchaseResult :: struct #packed {
+	result:    EResult,
+	ulOrderID: uint64,
+	ulTransID: uint64,
 }
 
-SteamInventoryRequestPricesResult_t :: struct #packed {
-	m_result:       EResult,
-	m_rgchCurrency: [4]u8,
+SteamInventoryRequestPricesResult :: struct #packed {
+	result:       EResult,
+	rgchCurrency: [4]u8,
 }
 
-GetVideoURLResult_t :: struct #packed {
-	m_eResult:      EResult,
-	m_unVideoAppID: AppId_t,
-	m_rgchURL:      [256]u8,
+GetVideoURLResult :: struct #packed {
+	eResult:      EResult,
+	unVideoAppID: AppId,
+	rgchURL:      [256]u8,
 }
 
-GetOPFSettingsResult_t :: struct #packed {
-	m_eResult:      EResult,
-	m_unVideoAppID: AppId_t,
+GetOPFSettingsResult :: struct #packed {
+	eResult:      EResult,
+	unVideoAppID: AppId,
 }
 
-SteamParentalSettingsChanged_t :: struct #packed {}
+SteamParentalSettingsChanged :: struct #packed {}
 
-SteamRemotePlaySessionConnected_t :: struct #packed {
-	m_unSessionID: RemotePlaySessionID_t,
+SteamRemotePlaySessionConnected :: struct #packed {
+	unSessionID: RemotePlaySessionID,
 }
 
-SteamRemotePlaySessionDisconnected_t :: struct #packed {
-	m_unSessionID: RemotePlaySessionID_t,
+SteamRemotePlaySessionDisconnected :: struct #packed {
+	unSessionID: RemotePlaySessionID,
 }
 
-SteamNetworkingMessagesSessionRequest_t :: struct #packed {
-	m_identityRemote: SteamNetworkingIdentity,
+SteamNetworkingMessagesSessionRequest :: struct #packed {
+	identityRemote: SteamNetworkingIdentity,
 }
 
-SteamNetworkingMessagesSessionFailed_t :: struct #packed {
-	m_info: SteamNetConnectionInfo_t,
+SteamNetworkingMessagesSessionFailed :: struct #packed {
+	info: SteamNetConnectionInfo,
 }
 
-SteamNetConnectionStatusChangedCallback_t :: struct #packed {
-	m_hConn:     HSteamNetConnection,
-	m_info:      SteamNetConnectionInfo_t,
-	m_eOldState: ESteamNetworkingConnectionState,
+SteamNetConnectionStatusChangedCallback :: struct #packed {
+	hConn:     HSteamNetConnection,
+	info:      SteamNetConnectionInfo,
+	eOldState: ESteamNetworkingConnectionState,
 }
 
-SteamNetAuthenticationStatus_t :: struct #packed {
-	m_eAvail:   ESteamNetworkingAvailability,
-	m_debugMsg: [256]u8,
+SteamNetAuthenticationStatus :: struct #packed {
+	eAvail:   ESteamNetworkingAvailability,
+	debugMsg: [256]u8,
 }
 
-SteamRelayNetworkStatus_t :: struct #packed {
-	m_eAvail:                     ESteamNetworkingAvailability,
-	m_bPingMeasurementInProgress: c.int,
-	m_eAvailNetworkConfig:        ESteamNetworkingAvailability,
-	m_eAvailAnyRelay:             ESteamNetworkingAvailability,
-	m_debugMsg:                   [256]u8,
+SteamRelayNetworkStatus :: struct #packed {
+	eAvail:                     ESteamNetworkingAvailability,
+	bPingMeasurementInProgress: c.int,
+	eAvailNetworkConfig:        ESteamNetworkingAvailability,
+	eAvailAnyRelay:             ESteamNetworkingAvailability,
+	debugMsg:                   [256]u8,
 }
 
-GSClientApprove_t :: struct #packed {
-	m_SteamID:      CSteamID,
-	m_OwnerSteamID: CSteamID,
+GSClientApprove :: struct #packed {
+	SteamID:      CSteamID,
+	OwnerSteamID: CSteamID,
 }
 
-GSClientDeny_t :: struct #packed {
-	m_SteamID:          CSteamID,
-	m_eDenyReason:      EDenyReason,
-	m_rgchOptionalText: [128]u8,
+GSClientDeny :: struct #packed {
+	SteamID:          CSteamID,
+	eDenyReason:      EDenyReason,
+	rgchOptionalText: [128]u8,
 }
 
-GSClientKick_t :: struct #packed {
-	m_SteamID:     CSteamID,
-	m_eDenyReason: EDenyReason,
+GSClientKick :: struct #packed {
+	SteamID:     CSteamID,
+	eDenyReason: EDenyReason,
 }
 
-GSClientAchievementStatus_t :: struct #packed {
-	m_SteamID:        uint64,
-	m_pchAchievement: [128]u8,
-	m_bUnlocked:      bool,
+GSClientAchievementStatus :: struct #packed {
+	SteamID:        uint64,
+	pchAchievement: [128]u8,
+	bUnlocked:      bool,
 }
 
-GSPolicyResponse_t :: struct #packed {
-	m_bSecure: uint8,
+GSPolicyResponse :: struct #packed {
+	bSecure: uint8,
 }
 
-GSGameplayStats_t :: struct #packed {
-	m_eResult:              EResult,
-	m_nRank:                int32,
-	m_unTotalConnects:      uint32,
-	m_unTotalMinutesPlayed: uint32,
+GSGameplayStats :: struct #packed {
+	eResult:              EResult,
+	nRank:                int32,
+	unTotalConnects:      uint32,
+	unTotalMinutesPlayed: uint32,
 }
 
-GSClientGroupStatus_t :: struct #packed {
-	m_SteamIDUser:  CSteamID,
-	m_SteamIDGroup: CSteamID,
-	m_bMember:      bool,
-	m_bOfficer:     bool,
+GSClientGroupStatus :: struct #packed {
+	SteamIDUser:  CSteamID,
+	SteamIDGroup: CSteamID,
+	bMember:      bool,
+	bOfficer:     bool,
 }
 
-GSReputation_t :: struct #packed {
-	m_eResult:           EResult,
-	m_unReputationScore: uint32,
-	m_bBanned:           bool,
-	m_unBannedIP:        uint32,
-	m_usBannedPort:      uint16,
-	m_ulBannedGameID:    uint64,
-	m_unBanExpires:      uint32,
+GSReputation :: struct #packed {
+	eResult:           EResult,
+	unReputationScore: uint32,
+	bBanned:           bool,
+	unBannedIP:        uint32,
+	usBannedPort:      uint16,
+	ulBannedGameID:    uint64,
+	unBanExpires:      uint32,
 }
 
-AssociateWithClanResult_t :: struct #packed {
-	m_eResult: EResult,
+AssociateWithClanResult :: struct #packed {
+	eResult: EResult,
 }
 
-ComputeNewPlayerCompatibilityResult_t :: struct #packed {
-	m_eResult:                           EResult,
-	m_cPlayersThatDontLikeCandidate:     c.int,
-	m_cPlayersThatCandidateDoesntLike:   c.int,
-	m_cClanPlayersThatDontLikeCandidate: c.int,
-	m_SteamIDCandidate:                  CSteamID,
+ComputeNewPlayerCompatibilityResult :: struct #packed {
+	eResult:                           EResult,
+	cPlayersThatDontLikeCandidate:     c.int,
+	cPlayersThatCandidateDoesntLike:   c.int,
+	cClanPlayersThatDontLikeCandidate: c.int,
+	SteamIDCandidate:                  CSteamID,
 }
 
-GSStatsReceived_t :: struct #packed {
-	m_eResult:     EResult,
-	m_steamIDUser: CSteamID,
+GSStatsReceived :: struct #packed {
+	eResult:     EResult,
+	steamIDUser: CSteamID,
 }
 
-GSStatsStored_t :: struct #packed {
-	m_eResult:     EResult,
-	m_steamIDUser: CSteamID,
+GSStatsStored :: struct #packed {
+	eResult:     EResult,
+	steamIDUser: CSteamID,
 }
 
-GSStatsUnloaded_t :: struct #packed {
-	m_steamIDUser: CSteamID,
+GSStatsUnloaded :: struct #packed {
+	steamIDUser: CSteamID,
 }
 
-SteamNetworkingFakeIPResult_t :: struct #packed {
-	m_eResult:  EResult,
-	m_identity: SteamNetworkingIdentity,
-	m_unIP:     uint32,
-	m_unPorts:  [8]uint16,
+SteamNetworkingFakeIPResult :: struct #packed {
+	eResult:  EResult,
+	identity: SteamNetworkingIdentity,
+	unIP:     uint32,
+	unPorts:  [8]uint16,
 }
 
 // -----
@@ -1422,2203 +1422,2203 @@ SteamNetworkingFakeIPResult_t :: struct #packed {
 // -----
 
 CGameID_EGameIDType :: enum {
-	k_EGameIDTypeApp      = 0,
-	k_EGameIDTypeGameMod  = 1,
-	k_EGameIDTypeShortcut = 2,
-	k_EGameIDTypeP2P      = 3,
+	App      = 0,
+	GameMod  = 1,
+	Shortcut = 2,
+	P2P      = 3,
 }
 
 ESteamIPType :: enum {
-	k_ESteamIPTypeIPv4 = 0,
-	k_ESteamIPTypeIPv6 = 1,
+	IPv4 = 0,
+	IPv6 = 1,
 }
 
 EUniverse :: enum {
-	k_EUniverseInvalid  = 0,
-	k_EUniversePublic   = 1,
-	k_EUniverseBeta     = 2,
-	k_EUniverseInternal = 3,
-	k_EUniverseDev      = 4,
-	k_EUniverseMax      = 5,
+	Invalid  = 0,
+	Public   = 1,
+	Beta     = 2,
+	Internal = 3,
+	Dev      = 4,
+	Max      = 5,
 }
 
 EResult :: enum {
-	k_EResultNone                                    = 0,
-	k_EResultOK                                      = 1,
-	k_EResultFail                                    = 2,
-	k_EResultNoConnection                            = 3,
-	k_EResultInvalidPassword                         = 5,
-	k_EResultLoggedInElsewhere                       = 6,
-	k_EResultInvalidProtocolVer                      = 7,
-	k_EResultInvalidParam                            = 8,
-	k_EResultFileNotFound                            = 9,
-	k_EResultBusy                                    = 10,
-	k_EResultInvalidState                            = 11,
-	k_EResultInvalidName                             = 12,
-	k_EResultInvalidEmail                            = 13,
-	k_EResultDuplicateName                           = 14,
-	k_EResultAccessDenied                            = 15,
-	k_EResultTimeout                                 = 16,
-	k_EResultBanned                                  = 17,
-	k_EResultAccountNotFound                         = 18,
-	k_EResultInvalidSteamID                          = 19,
-	k_EResultServiceUnavailable                      = 20,
-	k_EResultNotLoggedOn                             = 21,
-	k_EResultPending                                 = 22,
-	k_EResultEncryptionFailure                       = 23,
-	k_EResultInsufficientPrivilege                   = 24,
-	k_EResultLimitExceeded                           = 25,
-	k_EResultRevoked                                 = 26,
-	k_EResultExpired                                 = 27,
-	k_EResultAlreadyRedeemed                         = 28,
-	k_EResultDuplicateRequest                        = 29,
-	k_EResultAlreadyOwned                            = 30,
-	k_EResultIPNotFound                              = 31,
-	k_EResultPersistFailed                           = 32,
-	k_EResultLockingFailed                           = 33,
-	k_EResultLogonSessionReplaced                    = 34,
-	k_EResultConnectFailed                           = 35,
-	k_EResultHandshakeFailed                         = 36,
-	k_EResultIOFailure                               = 37,
-	k_EResultRemoteDisconnect                        = 38,
-	k_EResultShoppingCartNotFound                    = 39,
-	k_EResultBlocked                                 = 40,
-	k_EResultIgnored                                 = 41,
-	k_EResultNoMatch                                 = 42,
-	k_EResultAccountDisabled                         = 43,
-	k_EResultServiceReadOnly                         = 44,
-	k_EResultAccountNotFeatured                      = 45,
-	k_EResultAdministratorOK                         = 46,
-	k_EResultContentVersion                          = 47,
-	k_EResultTryAnotherCM                            = 48,
-	k_EResultPasswordRequiredToKickSession           = 49,
-	k_EResultAlreadyLoggedInElsewhere                = 50,
-	k_EResultSuspended                               = 51,
-	k_EResultCancelled                               = 52,
-	k_EResultDataCorruption                          = 53,
-	k_EResultDiskFull                                = 54,
-	k_EResultRemoteCallFailed                        = 55,
-	k_EResultPasswordUnset                           = 56,
-	k_EResultExternalAccountUnlinked                 = 57,
-	k_EResultPSNTicketInvalid                        = 58,
-	k_EResultExternalAccountAlreadyLinked            = 59,
-	k_EResultRemoteFileConflict                      = 60,
-	k_EResultIllegalPassword                         = 61,
-	k_EResultSameAsPreviousValue                     = 62,
-	k_EResultAccountLogonDenied                      = 63,
-	k_EResultCannotUseOldPassword                    = 64,
-	k_EResultInvalidLoginAuthCode                    = 65,
-	k_EResultAccountLogonDeniedNoMail                = 66,
-	k_EResultHardwareNotCapableOfIPT                 = 67,
-	k_EResultIPTInitError                            = 68,
-	k_EResultParentalControlRestricted               = 69,
-	k_EResultFacebookQueryError                      = 70,
-	k_EResultExpiredLoginAuthCode                    = 71,
-	k_EResultIPLoginRestrictionFailed                = 72,
-	k_EResultAccountLockedDown                       = 73,
-	k_EResultAccountLogonDeniedVerifiedEmailRequired = 74,
-	k_EResultNoMatchingURL                           = 75,
-	k_EResultBadResponse                             = 76,
-	k_EResultRequirePasswordReEntry                  = 77,
-	k_EResultValueOutOfRange                         = 78,
-	k_EResultUnexpectedError                         = 79,
-	k_EResultDisabled                                = 80,
-	k_EResultInvalidCEGSubmission                    = 81,
-	k_EResultRestrictedDevice                        = 82,
-	k_EResultRegionLocked                            = 83,
-	k_EResultRateLimitExceeded                       = 84,
-	k_EResultAccountLoginDeniedNeedTwoFactor         = 85,
-	k_EResultItemDeleted                             = 86,
-	k_EResultAccountLoginDeniedThrottle              = 87,
-	k_EResultTwoFactorCodeMismatch                   = 88,
-	k_EResultTwoFactorActivationCodeMismatch         = 89,
-	k_EResultAccountAssociatedToMultiplePartners     = 90,
-	k_EResultNotModified                             = 91,
-	k_EResultNoMobileDevice                          = 92,
-	k_EResultTimeNotSynced                           = 93,
-	k_EResultSmsCodeFailed                           = 94,
-	k_EResultAccountLimitExceeded                    = 95,
-	k_EResultAccountActivityLimitExceeded            = 96,
-	k_EResultPhoneActivityLimitExceeded              = 97,
-	k_EResultRefundToWallet                          = 98,
-	k_EResultEmailSendFailure                        = 99,
-	k_EResultNotSettled                              = 100,
-	k_EResultNeedCaptcha                             = 101,
-	k_EResultGSLTDenied                              = 102,
-	k_EResultGSOwnerDenied                           = 103,
-	k_EResultInvalidItemType                         = 104,
-	k_EResultIPBanned                                = 105,
-	k_EResultGSLTExpired                             = 106,
-	k_EResultInsufficientFunds                       = 107,
-	k_EResultTooManyPending                          = 108,
-	k_EResultNoSiteLicensesFound                     = 109,
-	k_EResultWGNetworkSendExceeded                   = 110,
-	k_EResultAccountNotFriends                       = 111,
-	k_EResultLimitedUserAccount                      = 112,
-	k_EResultCantRemoveItem                          = 113,
-	k_EResultAccountDeleted                          = 114,
-	k_EResultExistingUserCancelledLicense            = 115,
-	k_EResultCommunityCooldown                       = 116,
-	k_EResultNoLauncherSpecified                     = 117,
-	k_EResultMustAgreeToSSA                          = 118,
-	k_EResultLauncherMigrated                        = 119,
-	k_EResultSteamRealmMismatch                      = 120,
-	k_EResultInvalidSignature                        = 121,
-	k_EResultParseFailure                            = 122,
-	k_EResultNoVerifiedPhone                         = 123,
-	k_EResultInsufficientBattery                     = 124,
-	k_EResultChargerRequired                         = 125,
-	k_EResultCachedCredentialInvalid                 = 126,
-	K_EResultPhoneNumberIsVOIP                       = 127,
+	None                                    = 0,
+	OK                                      = 1,
+	Fail                                    = 2,
+	NoConnection                            = 3,
+	InvalidPassword                         = 5,
+	LoggedInElsewhere                       = 6,
+	InvalidProtocolVer                      = 7,
+	InvalidParam                            = 8,
+	FileNotFound                            = 9,
+	Busy                                    = 10,
+	InvalidState                            = 11,
+	InvalidName                             = 12,
+	InvalidEmail                            = 13,
+	DuplicateName                           = 14,
+	AccessDenied                            = 15,
+	Timeout                                 = 16,
+	Banned                                  = 17,
+	AccountNotFound                         = 18,
+	InvalidSteamID                          = 19,
+	ServiceUnavailable                      = 20,
+	NotLoggedOn                             = 21,
+	Pending                                 = 22,
+	EncryptionFailure                       = 23,
+	InsufficientPrivilege                   = 24,
+	LimitExceeded                           = 25,
+	Revoked                                 = 26,
+	Expired                                 = 27,
+	AlreadyRedeemed                         = 28,
+	DuplicateRequest                        = 29,
+	AlreadyOwned                            = 30,
+	IPNotFound                              = 31,
+	PersistFailed                           = 32,
+	LockingFailed                           = 33,
+	LogonSessionReplaced                    = 34,
+	ConnectFailed                           = 35,
+	HandshakeFailed                         = 36,
+	IOFailure                               = 37,
+	RemoteDisconnect                        = 38,
+	ShoppingCartNotFound                    = 39,
+	Blocked                                 = 40,
+	Ignored                                 = 41,
+	NoMatch                                 = 42,
+	AccountDisabled                         = 43,
+	ServiceReadOnly                         = 44,
+	AccountNotFeatured                      = 45,
+	AdministratorOK                         = 46,
+	ContentVersion                          = 47,
+	TryAnotherCM                            = 48,
+	PasswordRequiredToKickSession           = 49,
+	AlreadyLoggedInElsewhere                = 50,
+	Suspended                               = 51,
+	Cancelled                               = 52,
+	DataCorruption                          = 53,
+	DiskFull                                = 54,
+	RemoteCallFailed                        = 55,
+	PasswordUnset                           = 56,
+	ExternalAccountUnlinked                 = 57,
+	PSNTicketInvalid                        = 58,
+	ExternalAccountAlreadyLinked            = 59,
+	RemoteFileConflict                      = 60,
+	IllegalPassword                         = 61,
+	SameAsPreviousValue                     = 62,
+	AccountLogonDenied                      = 63,
+	CannotUseOldPassword                    = 64,
+	InvalidLoginAuthCode                    = 65,
+	AccountLogonDeniedNoMail                = 66,
+	HardwareNotCapableOfIPT                 = 67,
+	IPTInitError                            = 68,
+	ParentalControlRestricted               = 69,
+	FacebookQueryError                      = 70,
+	ExpiredLoginAuthCode                    = 71,
+	IPLoginRestrictionFailed                = 72,
+	AccountLockedDown                       = 73,
+	AccountLogonDeniedVerifiedEmailRequired = 74,
+	NoMatchingURL                           = 75,
+	BadResponse                             = 76,
+	RequirePasswordReEntry                  = 77,
+	ValueOutOfRange                         = 78,
+	UnexpectedError                         = 79,
+	Disabled                                = 80,
+	InvalidCEGSubmission                    = 81,
+	RestrictedDevice                        = 82,
+	RegionLocked                            = 83,
+	RateLimitExceeded                       = 84,
+	AccountLoginDeniedNeedTwoFactor         = 85,
+	ItemDeleted                             = 86,
+	AccountLoginDeniedThrottle              = 87,
+	TwoFactorCodeMismatch                   = 88,
+	TwoFactorActivationCodeMismatch         = 89,
+	AccountAssociatedToMultiplePartners     = 90,
+	NotModified                             = 91,
+	NoMobileDevice                          = 92,
+	TimeNotSynced                           = 93,
+	SmsCodeFailed                           = 94,
+	AccountLimitExceeded                    = 95,
+	AccountActivityLimitExceeded            = 96,
+	PhoneActivityLimitExceeded              = 97,
+	RefundToWallet                          = 98,
+	EmailSendFailure                        = 99,
+	NotSettled                              = 100,
+	NeedCaptcha                             = 101,
+	GSLTDenied                              = 102,
+	GSOwnerDenied                           = 103,
+	InvalidItemType                         = 104,
+	IPBanned                                = 105,
+	GSLTExpired                             = 106,
+	InsufficientFunds                       = 107,
+	TooManyPending                          = 108,
+	NoSiteLicensesFound                     = 109,
+	WGNetworkSendExceeded                   = 110,
+	AccountNotFriends                       = 111,
+	LimitedUserAccount                      = 112,
+	CantRemoveItem                          = 113,
+	AccountDeleted                          = 114,
+	ExistingUserCancelledLicense            = 115,
+	CommunityCooldown                       = 116,
+	NoLauncherSpecified                     = 117,
+	MustAgreeToSSA                          = 118,
+	LauncherMigrated                        = 119,
+	SteamRealmMismatch                      = 120,
+	InvalidSignature                        = 121,
+	ParseFailure                            = 122,
+	NoVerifiedPhone                         = 123,
+	InsufficientBattery                     = 124,
+	ChargerRequired                         = 125,
+	CachedCredentialInvalid                 = 126,
+	PhoneNumberIsVOIP                       = 127,
 }
 
 EVoiceResult :: enum {
-	k_EVoiceResultOK                   = 0,
-	k_EVoiceResultNotInitialized       = 1,
-	k_EVoiceResultNotRecording         = 2,
-	k_EVoiceResultNoData               = 3,
-	k_EVoiceResultBufferTooSmall       = 4,
-	k_EVoiceResultDataCorrupted        = 5,
-	k_EVoiceResultRestricted           = 6,
-	k_EVoiceResultUnsupportedCodec     = 7,
-	k_EVoiceResultReceiverOutOfDate    = 8,
-	k_EVoiceResultReceiverDidNotAnswer = 9,
+	OK                   = 0,
+	NotInitialized       = 1,
+	NotRecording         = 2,
+	NoData               = 3,
+	BufferTooSmall       = 4,
+	DataCorrupted        = 5,
+	Restricted           = 6,
+	UnsupportedCodec     = 7,
+	ReceiverOutOfDate    = 8,
+	ReceiverDidNotAnswer = 9,
 }
 
 EDenyReason :: enum {
-	k_EDenyInvalid                 = 0,
-	k_EDenyInvalidVersion          = 1,
-	k_EDenyGeneric                 = 2,
-	k_EDenyNotLoggedOn             = 3,
-	k_EDenyNoLicense               = 4,
-	k_EDenyCheater                 = 5,
-	k_EDenyLoggedInElseWhere       = 6,
-	k_EDenyUnknownText             = 7,
-	k_EDenyIncompatibleAnticheat   = 8,
-	k_EDenyMemoryCorruption        = 9,
-	k_EDenyIncompatibleSoftware    = 10,
-	k_EDenySteamConnectionLost     = 11,
-	k_EDenySteamConnectionError    = 12,
-	k_EDenySteamResponseTimedOut   = 13,
-	k_EDenySteamValidationStalled  = 14,
-	k_EDenySteamOwnerLeftGuestUser = 15,
+	Invalid                 = 0,
+	InvalidVersion          = 1,
+	Generic                 = 2,
+	NotLoggedOn             = 3,
+	NoLicense               = 4,
+	Cheater                 = 5,
+	LoggedInElseWhere       = 6,
+	UnknownText             = 7,
+	IncompatibleAnticheat   = 8,
+	MemoryCorruption        = 9,
+	IncompatibleSoftware    = 10,
+	SteamConnectionLost     = 11,
+	SteamConnectionError    = 12,
+	SteamResponseTimedOut   = 13,
+	SteamValidationStalled  = 14,
+	SteamOwnerLeftGuestUser = 15,
 }
 
 EBeginAuthSessionResult :: enum {
-	k_EBeginAuthSessionResultOK               = 0,
-	k_EBeginAuthSessionResultInvalidTicket    = 1,
-	k_EBeginAuthSessionResultDuplicateRequest = 2,
-	k_EBeginAuthSessionResultInvalidVersion   = 3,
-	k_EBeginAuthSessionResultGameMismatch     = 4,
-	k_EBeginAuthSessionResultExpiredTicket    = 5,
+	OK               = 0,
+	InvalidTicket    = 1,
+	DuplicateRequest = 2,
+	InvalidVersion   = 3,
+	GameMismatch     = 4,
+	ExpiredTicket    = 5,
 }
 
 EAuthSessionResponse :: enum {
-	k_EAuthSessionResponseOK                           = 0,
-	k_EAuthSessionResponseUserNotConnectedToSteam      = 1,
-	k_EAuthSessionResponseNoLicenseOrExpired           = 2,
-	k_EAuthSessionResponseVACBanned                    = 3,
-	k_EAuthSessionResponseLoggedInElseWhere            = 4,
-	k_EAuthSessionResponseVACCheckTimedOut             = 5,
-	k_EAuthSessionResponseAuthTicketCanceled           = 6,
-	k_EAuthSessionResponseAuthTicketInvalidAlreadyUsed = 7,
-	k_EAuthSessionResponseAuthTicketInvalid            = 8,
-	k_EAuthSessionResponsePublisherIssuedBan           = 9,
+	OK                           = 0,
+	UserNotConnectedToSteam      = 1,
+	NoLicenseOrExpired           = 2,
+	VACBanned                    = 3,
+	LoggedInElseWhere            = 4,
+	VACCheckTimedOut             = 5,
+	AuthTicketCanceled           = 6,
+	AuthTicketInvalidAlreadyUsed = 7,
+	AuthTicketInvalid            = 8,
+	PublisherIssuedBan           = 9,
 }
 
 EUserHasLicenseForAppResult :: enum {
-	k_EUserHasLicenseResultHasLicense         = 0,
-	k_EUserHasLicenseResultDoesNotHaveLicense = 1,
-	k_EUserHasLicenseResultNoAuth             = 2,
+	HasLicense         = 0,
+	DoesNotHaveLicense = 1,
+	NoAuth             = 2,
 }
 
 EAccountType :: enum {
-	k_EAccountTypeInvalid        = 0,
-	k_EAccountTypeIndividual     = 1,
-	k_EAccountTypeMultiseat      = 2,
-	k_EAccountTypeGameServer     = 3,
-	k_EAccountTypeAnonGameServer = 4,
-	k_EAccountTypePending        = 5,
-	k_EAccountTypeContentServer  = 6,
-	k_EAccountTypeClan           = 7,
-	k_EAccountTypeChat           = 8,
-	k_EAccountTypeConsoleUser    = 9,
-	k_EAccountTypeAnonUser       = 10,
-	k_EAccountTypeMax            = 11,
+	Invalid        = 0,
+	Individual     = 1,
+	Multiseat      = 2,
+	GameServer     = 3,
+	AnonGameServer = 4,
+	Pending        = 5,
+	ContentServer  = 6,
+	Clan           = 7,
+	Chat           = 8,
+	ConsoleUser    = 9,
+	AnonUser       = 10,
+	Max            = 11,
 }
 
 EChatEntryType :: enum {
-	k_EChatEntryTypeInvalid          = 0,
-	k_EChatEntryTypeChatMsg          = 1,
-	k_EChatEntryTypeTyping           = 2,
-	k_EChatEntryTypeInviteGame       = 3,
-	k_EChatEntryTypeEmote            = 4,
-	k_EChatEntryTypeLeftConversation = 6,
-	k_EChatEntryTypeEntered          = 7,
-	k_EChatEntryTypeWasKicked        = 8,
-	k_EChatEntryTypeWasBanned        = 9,
-	k_EChatEntryTypeDisconnected     = 10,
-	k_EChatEntryTypeHistoricalChat   = 11,
-	k_EChatEntryTypeLinkBlocked      = 14,
+	Invalid          = 0,
+	ChatMsg          = 1,
+	Typing           = 2,
+	InviteGame       = 3,
+	Emote            = 4,
+	LeftConversation = 6,
+	Entered          = 7,
+	WasKicked        = 8,
+	WasBanned        = 9,
+	Disconnected     = 10,
+	HistoricalChat   = 11,
+	LinkBlocked      = 14,
 }
 
 EChatRoomEnterResponse :: enum {
-	k_EChatRoomEnterResponseSuccess           = 1,
-	k_EChatRoomEnterResponseDoesntExist       = 2,
-	k_EChatRoomEnterResponseNotAllowed        = 3,
-	k_EChatRoomEnterResponseFull              = 4,
-	k_EChatRoomEnterResponseError             = 5,
-	k_EChatRoomEnterResponseBanned            = 6,
-	k_EChatRoomEnterResponseLimited           = 7,
-	k_EChatRoomEnterResponseClanDisabled      = 8,
-	k_EChatRoomEnterResponseCommunityBan      = 9,
-	k_EChatRoomEnterResponseMemberBlockedYou  = 10,
-	k_EChatRoomEnterResponseYouBlockedMember  = 11,
-	k_EChatRoomEnterResponseRatelimitExceeded = 15,
+	Success           = 1,
+	DoesntExist       = 2,
+	NotAllowed        = 3,
+	Full              = 4,
+	Error             = 5,
+	Banned            = 6,
+	Limited           = 7,
+	ClanDisabled      = 8,
+	CommunityBan      = 9,
+	MemberBlockedYou  = 10,
+	YouBlockedMember  = 11,
+	RatelimitExceeded = 15,
 }
 
 EChatSteamIDInstanceFlags :: enum {
-	k_EChatAccountInstanceMask  = 4095,
-	k_EChatInstanceFlagClan     = 524288,
-	k_EChatInstanceFlagLobby    = 262144,
-	k_EChatInstanceFlagMMSLobby = 131072,
+	AccountInstanceMask  = 4095,
+	InstanceFlagClan     = 524288,
+	InstanceFlagLobby    = 262144,
+	InstanceFlagMMSLobby = 131072,
 }
 
 ENotificationPosition :: enum {
-	k_EPositionTopLeft     = 0,
-	k_EPositionTopRight    = 1,
-	k_EPositionBottomLeft  = 2,
-	k_EPositionBottomRight = 3,
+	TopLeft     = 0,
+	TopRight    = 1,
+	BottomLeft  = 2,
+	BottomRight = 3,
 }
 
 EBroadcastUploadResult :: enum {
-	k_EBroadcastUploadResultNone              = 0,
-	k_EBroadcastUploadResultOK                = 1,
-	k_EBroadcastUploadResultInitFailed        = 2,
-	k_EBroadcastUploadResultFrameFailed       = 3,
-	k_EBroadcastUploadResultTimeout           = 4,
-	k_EBroadcastUploadResultBandwidthExceeded = 5,
-	k_EBroadcastUploadResultLowFPS            = 6,
-	k_EBroadcastUploadResultMissingKeyFrames  = 7,
-	k_EBroadcastUploadResultNoConnection      = 8,
-	k_EBroadcastUploadResultRelayFailed       = 9,
-	k_EBroadcastUploadResultSettingsChanged   = 10,
-	k_EBroadcastUploadResultMissingAudio      = 11,
-	k_EBroadcastUploadResultTooFarBehind      = 12,
-	k_EBroadcastUploadResultTranscodeBehind   = 13,
-	k_EBroadcastUploadResultNotAllowedToPlay  = 14,
-	k_EBroadcastUploadResultBusy              = 15,
-	k_EBroadcastUploadResultBanned            = 16,
-	k_EBroadcastUploadResultAlreadyActive     = 17,
-	k_EBroadcastUploadResultForcedOff         = 18,
-	k_EBroadcastUploadResultAudioBehind       = 19,
-	k_EBroadcastUploadResultShutdown          = 20,
-	k_EBroadcastUploadResultDisconnect        = 21,
-	k_EBroadcastUploadResultVideoInitFailed   = 22,
-	k_EBroadcastUploadResultAudioInitFailed   = 23,
+	None              = 0,
+	OK                = 1,
+	InitFailed        = 2,
+	FrameFailed       = 3,
+	Timeout           = 4,
+	BandwidthExceeded = 5,
+	LowFPS            = 6,
+	MissingKeyFrames  = 7,
+	NoConnection      = 8,
+	RelayFailed       = 9,
+	SettingsChanged   = 10,
+	MissingAudio      = 11,
+	TooFarBehind      = 12,
+	TranscodeBehind   = 13,
+	NotAllowedToPlay  = 14,
+	Busy              = 15,
+	Banned            = 16,
+	AlreadyActive     = 17,
+	ForcedOff         = 18,
+	AudioBehind       = 19,
+	Shutdown          = 20,
+	Disconnect        = 21,
+	VideoInitFailed   = 22,
+	AudioInitFailed   = 23,
 }
 
 EMarketNotAllowedReasonFlags :: enum {
-	k_EMarketNotAllowedReason_None                             = 0,
-	k_EMarketNotAllowedReason_TemporaryFailure                 = 1,
-	k_EMarketNotAllowedReason_AccountDisabled                  = 2,
-	k_EMarketNotAllowedReason_AccountLockedDown                = 4,
-	k_EMarketNotAllowedReason_AccountLimited                   = 8,
-	k_EMarketNotAllowedReason_TradeBanned                      = 16,
-	k_EMarketNotAllowedReason_AccountNotTrusted                = 32,
-	k_EMarketNotAllowedReason_SteamGuardNotEnabled             = 64,
-	k_EMarketNotAllowedReason_SteamGuardOnlyRecentlyEnabled    = 128,
-	k_EMarketNotAllowedReason_RecentPasswordReset              = 256,
-	k_EMarketNotAllowedReason_NewPaymentMethod                 = 512,
-	k_EMarketNotAllowedReason_InvalidCookie                    = 1024,
-	k_EMarketNotAllowedReason_UsingNewDevice                   = 2048,
-	k_EMarketNotAllowedReason_RecentSelfRefund                 = 4096,
-	k_EMarketNotAllowedReason_NewPaymentMethodCannotBeVerified = 8192,
-	k_EMarketNotAllowedReason_NoRecentPurchases                = 16384,
-	k_EMarketNotAllowedReason_AcceptedWalletGift               = 32768,
+	None                             = 0,
+	TemporaryFailure                 = 1,
+	AccountDisabled                  = 2,
+	AccountLockedDown                = 4,
+	AccountLimited                   = 8,
+	TradeBanned                      = 16,
+	AccountNotTrusted                = 32,
+	SteamGuardNotEnabled             = 64,
+	SteamGuardOnlyRecentlyEnabled    = 128,
+	RecentPasswordReset              = 256,
+	NewPaymentMethod                 = 512,
+	InvalidCookie                    = 1024,
+	UsingNewDevice                   = 2048,
+	RecentSelfRefund                 = 4096,
+	NewPaymentMethodCannotBeVerified = 8192,
+	NoRecentPurchases                = 16384,
+	AcceptedWalletGift               = 32768,
 }
 
 EDurationControlProgress :: enum {
-	k_EDurationControlProgress_Full   = 0,
-	k_EDurationControlProgress_Half   = 1,
-	k_EDurationControlProgress_None   = 2,
-	k_EDurationControl_ExitSoon_3h    = 3,
-	k_EDurationControl_ExitSoon_5h    = 4,
-	k_EDurationControl_ExitSoon_Night = 5,
+	Progress_Full  = 0,
+	Progress_Half  = 1,
+	Progress_None  = 2,
+	ExitSoon_3h    = 3,
+	ExitSoon_5h    = 4,
+	ExitSoon_Night = 5,
 }
 
 EDurationControlNotification :: enum {
-	k_EDurationControlNotification_None           = 0,
-	k_EDurationControlNotification_1Hour          = 1,
-	k_EDurationControlNotification_3Hours         = 2,
-	k_EDurationControlNotification_HalfProgress   = 3,
-	k_EDurationControlNotification_NoProgress     = 4,
-	k_EDurationControlNotification_ExitSoon_3h    = 5,
-	k_EDurationControlNotification_ExitSoon_5h    = 6,
-	k_EDurationControlNotification_ExitSoon_Night = 7,
+	None           = 0,
+	OneHour        = 1,
+	ThreeHours     = 2,
+	HalfProgress   = 3,
+	NoProgress     = 4,
+	ExitSoon_3h    = 5,
+	ExitSoon_5h    = 6,
+	ExitSoon_Night = 7,
 }
 
 EDurationControlOnlineState :: enum {
-	k_EDurationControlOnlineState_Invalid       = 0,
-	k_EDurationControlOnlineState_Offline       = 1,
-	k_EDurationControlOnlineState_Online        = 2,
-	k_EDurationControlOnlineState_OnlineHighPri = 3,
+	Invalid       = 0,
+	Offline       = 1,
+	Online        = 2,
+	OnlineHighPri = 3,
 }
 
-EGameSearchErrorCode_t :: enum {
-	k_EGameSearchErrorCode_OK                                = 1,
-	k_EGameSearchErrorCode_Failed_Search_Already_In_Progress = 2,
-	k_EGameSearchErrorCode_Failed_No_Search_In_Progress      = 3,
-	k_EGameSearchErrorCode_Failed_Not_Lobby_Leader           = 4,
-	k_EGameSearchErrorCode_Failed_No_Host_Available          = 5,
-	k_EGameSearchErrorCode_Failed_Search_Params_Invalid      = 6,
-	k_EGameSearchErrorCode_Failed_Offline                    = 7,
-	k_EGameSearchErrorCode_Failed_NotAuthorized              = 8,
-	k_EGameSearchErrorCode_Failed_Unknown_Error              = 9,
+EGameSearchErrorCode :: enum {
+	OK                                = 1,
+	Failed_Search_Already_In_Progress = 2,
+	Failed_No_Search_In_Progress      = 3,
+	Failed_Not_Lobby_Leader           = 4,
+	Failed_No_Host_Available          = 5,
+	Failed_Search_Params_Invalid      = 6,
+	Failed_Offline                    = 7,
+	Failed_NotAuthorized              = 8,
+	Failed_Unknown_Error              = 9,
 }
 
-EPlayerResult_t :: enum {
-	k_EPlayerResultFailedToConnect = 1,
-	k_EPlayerResultAbandoned       = 2,
-	k_EPlayerResultKicked          = 3,
-	k_EPlayerResultIncomplete      = 4,
-	k_EPlayerResultCompleted       = 5,
+EPlayerResult :: enum {
+	FailedToConnect = 1,
+	Abandoned       = 2,
+	Kicked          = 3,
+	Incomplete      = 4,
+	Completed       = 5,
 }
 
 ESteamIPv6ConnectivityProtocol :: enum {
-	k_ESteamIPv6ConnectivityProtocol_Invalid = 0,
-	k_ESteamIPv6ConnectivityProtocol_HTTP    = 1,
-	k_ESteamIPv6ConnectivityProtocol_UDP     = 2,
+	Invalid = 0,
+	HTTP    = 1,
+	UDP     = 2,
 }
 
 ESteamIPv6ConnectivityState :: enum {
-	k_ESteamIPv6ConnectivityState_Unknown = 0,
-	k_ESteamIPv6ConnectivityState_Good    = 1,
-	k_ESteamIPv6ConnectivityState_Bad     = 2,
+	Unknown = 0,
+	Good    = 1,
+	Bad     = 2,
 }
 
 EFriendRelationship :: enum {
-	k_EFriendRelationshipNone                 = 0,
-	k_EFriendRelationshipBlocked              = 1,
-	k_EFriendRelationshipRequestRecipient     = 2,
-	k_EFriendRelationshipFriend               = 3,
-	k_EFriendRelationshipRequestInitiator     = 4,
-	k_EFriendRelationshipIgnored              = 5,
-	k_EFriendRelationshipIgnoredFriend        = 6,
-	k_EFriendRelationshipSuggested_DEPRECATED = 7,
-	k_EFriendRelationshipMax                  = 8,
+	None                 = 0,
+	Blocked              = 1,
+	RequestRecipient     = 2,
+	Friend               = 3,
+	RequestInitiator     = 4,
+	Ignored              = 5,
+	IgnoredFriend        = 6,
+	Suggested_DEPRECATED = 7,
+	Max                  = 8,
 }
 
 EPersonaState :: enum {
-	k_EPersonaStateOffline        = 0,
-	k_EPersonaStateOnline         = 1,
-	k_EPersonaStateBusy           = 2,
-	k_EPersonaStateAway           = 3,
-	k_EPersonaStateSnooze         = 4,
-	k_EPersonaStateLookingToTrade = 5,
-	k_EPersonaStateLookingToPlay  = 6,
-	k_EPersonaStateInvisible      = 7,
-	k_EPersonaStateMax            = 8,
+	Offline        = 0,
+	Online         = 1,
+	Busy           = 2,
+	Away           = 3,
+	Snooze         = 4,
+	LookingToTrade = 5,
+	LookingToPlay  = 6,
+	Invisible      = 7,
+	Max            = 8,
 }
 
 EFriendFlags :: enum {
-	k_EFriendFlagNone                 = 0,
-	k_EFriendFlagBlocked              = 1,
-	k_EFriendFlagFriendshipRequested  = 2,
-	k_EFriendFlagImmediate            = 4,
-	k_EFriendFlagClanMember           = 8,
-	k_EFriendFlagOnGameServer         = 16,
-	k_EFriendFlagRequestingFriendship = 128,
-	k_EFriendFlagRequestingInfo       = 256,
-	k_EFriendFlagIgnored              = 512,
-	k_EFriendFlagIgnoredFriend        = 1024,
-	k_EFriendFlagChatMember           = 4096,
-	k_EFriendFlagAll                  = 65535,
+	None                 = 0,
+	Blocked              = 1,
+	FriendshipRequested  = 2,
+	Immediate            = 4,
+	ClanMember           = 8,
+	OnGameServer         = 16,
+	RequestingFriendship = 128,
+	RequestingInfo       = 256,
+	Ignored              = 512,
+	IgnoredFriend        = 1024,
+	ChatMember           = 4096,
+	All                  = 65535,
 }
 
 EUserRestriction :: enum {
-	k_nUserRestrictionNone        = 0,
-	k_nUserRestrictionUnknown     = 1,
-	k_nUserRestrictionAnyChat     = 2,
-	k_nUserRestrictionVoiceChat   = 4,
-	k_nUserRestrictionGroupChat   = 8,
-	k_nUserRestrictionRating      = 16,
-	k_nUserRestrictionGameInvites = 32,
-	k_nUserRestrictionTrading     = 64,
+	None        = 0,
+	Unknown     = 1,
+	AnyChat     = 2,
+	VoiceChat   = 4,
+	GroupChat   = 8,
+	Rating      = 16,
+	GameInvites = 32,
+	Trading     = 64,
 }
 
 EOverlayToStoreFlag :: enum {
-	k_EOverlayToStoreFlag_None             = 0,
-	k_EOverlayToStoreFlag_AddToCart        = 1,
-	k_EOverlayToStoreFlag_AddToCartAndShow = 2,
+	None             = 0,
+	AddToCart        = 1,
+	AddToCartAndShow = 2,
 }
 
 EActivateGameOverlayToWebPageMode :: enum {
-	k_EActivateGameOverlayToWebPageMode_Default = 0,
-	k_EActivateGameOverlayToWebPageMode_Modal   = 1,
+	Default = 0,
+	Modal   = 1,
 }
 
 ECommunityProfileItemType :: enum {
-	k_ECommunityProfileItemType_AnimatedAvatar        = 0,
-	k_ECommunityProfileItemType_AvatarFrame           = 1,
-	k_ECommunityProfileItemType_ProfileModifier       = 2,
-	k_ECommunityProfileItemType_ProfileBackground     = 3,
-	k_ECommunityProfileItemType_MiniProfileBackground = 4,
+	AnimatedAvatar        = 0,
+	AvatarFrame           = 1,
+	ProfileModifier       = 2,
+	ProfileBackground     = 3,
+	MiniProfileBackground = 4,
 }
 
 ECommunityProfileItemProperty :: enum {
-	k_ECommunityProfileItemProperty_ImageSmall     = 0,
-	k_ECommunityProfileItemProperty_ImageLarge     = 1,
-	k_ECommunityProfileItemProperty_InternalName   = 2,
-	k_ECommunityProfileItemProperty_Title          = 3,
-	k_ECommunityProfileItemProperty_Description    = 4,
-	k_ECommunityProfileItemProperty_AppID          = 5,
-	k_ECommunityProfileItemProperty_TypeID         = 6,
-	k_ECommunityProfileItemProperty_Class          = 7,
-	k_ECommunityProfileItemProperty_MovieWebM      = 8,
-	k_ECommunityProfileItemProperty_MovieMP4       = 9,
-	k_ECommunityProfileItemProperty_MovieWebMSmall = 10,
-	k_ECommunityProfileItemProperty_MovieMP4Small  = 11,
+	ImageSmall     = 0,
+	ImageLarge     = 1,
+	InternalName   = 2,
+	Title          = 3,
+	Description    = 4,
+	AppID          = 5,
+	TypeID         = 6,
+	Class          = 7,
+	MovieWebM      = 8,
+	MovieMP4       = 9,
+	MovieWebMSmall = 10,
+	MovieMP4Small  = 11,
 }
 
 EPersonaChange :: enum {
-	k_EPersonaChangeName                = 1,
-	k_EPersonaChangeStatus              = 2,
-	k_EPersonaChangeComeOnline          = 4,
-	k_EPersonaChangeGoneOffline         = 8,
-	k_EPersonaChangeGamePlayed          = 16,
-	k_EPersonaChangeGameServer          = 32,
-	k_EPersonaChangeAvatar              = 64,
-	k_EPersonaChangeJoinedSource        = 128,
-	k_EPersonaChangeLeftSource          = 256,
-	k_EPersonaChangeRelationshipChanged = 512,
-	k_EPersonaChangeNameFirstSet        = 1024,
-	k_EPersonaChangeBroadcast           = 2048,
-	k_EPersonaChangeNickname            = 4096,
-	k_EPersonaChangeSteamLevel          = 8192,
-	k_EPersonaChangeRichPresence        = 16384,
+	Name                = 1,
+	Status              = 2,
+	ComeOnline          = 4,
+	GoneOffline         = 8,
+	GamePlayed          = 16,
+	GameServer          = 32,
+	Avatar              = 64,
+	JoinedSource        = 128,
+	LeftSource          = 256,
+	RelationshipChanged = 512,
+	NameFirstSet        = 1024,
+	Broadcast           = 2048,
+	Nickname            = 4096,
+	SteamLevel          = 8192,
+	RichPresence        = 16384,
 }
 
 ESteamAPICallFailure :: enum {
-	k_ESteamAPICallFailureNone               = -1,
-	k_ESteamAPICallFailureSteamGone          = 0,
-	k_ESteamAPICallFailureNetworkFailure     = 1,
-	k_ESteamAPICallFailureInvalidHandle      = 2,
-	k_ESteamAPICallFailureMismatchedCallback = 3,
+	None               = -1,
+	SteamGone          = 0,
+	NetworkFailure     = 1,
+	InvalidHandle      = 2,
+	MismatchedCallback = 3,
 }
 
 EGamepadTextInputMode :: enum {
-	k_EGamepadTextInputModeNormal   = 0,
-	k_EGamepadTextInputModePassword = 1,
+	Normal   = 0,
+	Password = 1,
 }
 
 EGamepadTextInputLineMode :: enum {
-	k_EGamepadTextInputLineModeSingleLine    = 0,
-	k_EGamepadTextInputLineModeMultipleLines = 1,
+	SingleLine    = 0,
+	MultipleLines = 1,
 }
 
-Ef32ingGamepadTextInputMode :: enum {
-	k_Ef32ingGamepadTextInputModeModeSingleLine    = 0,
-	k_Ef32ingGamepadTextInputModeModeMultipleLines = 1,
-	k_Ef32ingGamepadTextInputModeModeEmail         = 2,
-	k_Ef32ingGamepadTextInputModeModeNumeric       = 3,
+EFloatingGamepadTextInputMode :: enum {
+	SingleLine    = 0,
+	MultipleLines = 1,
+	Email         = 2,
+	Numeric       = 3,
 }
 
 ETextFilteringContext :: enum {
-	k_ETextFilteringContextUnknown     = 0,
-	k_ETextFilteringContextGameContent = 1,
-	k_ETextFilteringContextChat        = 2,
-	k_ETextFilteringContextName        = 3,
+	Unknown     = 0,
+	GameContent = 1,
+	Chat        = 2,
+	Name        = 3,
 }
 
 ECheckFileSignature :: enum {
-	k_ECheckFileSignatureInvalidSignature             = 0,
-	k_ECheckFileSignatureValidSignature               = 1,
-	k_ECheckFileSignatureFileNotFound                 = 2,
-	k_ECheckFileSignatureNoSignaturesFoundForThisApp  = 3,
-	k_ECheckFileSignatureNoSignaturesFoundForThisFile = 4,
+	InvalidSignature             = 0,
+	ValidSignature               = 1,
+	FileNotFound                 = 2,
+	NoSignaturesFoundForThisApp  = 3,
+	NoSignaturesFoundForThisFile = 4,
 }
 
 EMatchMakingServerResponse :: enum {
-	eServerResponded               = 0,
-	eServerFailedToRespond         = 1,
-	eNoServersListedOnMasterServer = 2,
+	ServerResponded               = 0,
+	ServerFailedToRespond         = 1,
+	NoServersListedOnMasterServer = 2,
 }
 
 ELobbyType :: enum {
-	k_ELobbyTypePrivate       = 0,
-	k_ELobbyTypeFriendsOnly   = 1,
-	k_ELobbyTypePublic        = 2,
-	k_ELobbyTypeInvisible     = 3,
-	k_ELobbyTypePrivateUnique = 4,
+	Private       = 0,
+	FriendsOnly   = 1,
+	Public        = 2,
+	Invisible     = 3,
+	PrivateUnique = 4,
 }
 
 ELobbyComparison :: enum {
-	k_ELobbyComparisonEqualToOrLessThan    = -2,
-	k_ELobbyComparisonLessThan             = -1,
-	k_ELobbyComparisonEqual                = 0,
-	k_ELobbyComparisonGreaterThan          = 1,
-	k_ELobbyComparisonEqualToOrGreaterThan = 2,
-	k_ELobbyComparisonNotEqual             = 3,
+	EqualToOrLessThan    = -2,
+	LessThan             = -1,
+	Equal                = 0,
+	GreaterThan          = 1,
+	EqualToOrGreaterThan = 2,
+	NotEqual             = 3,
 }
 
 ELobbyDistanceFilter :: enum {
-	k_ELobbyDistanceFilterClose     = 0,
-	k_ELobbyDistanceFilterDefault   = 1,
-	k_ELobbyDistanceFilterFar       = 2,
-	k_ELobbyDistanceFilterWorldwide = 3,
+	Close     = 0,
+	Default   = 1,
+	Far       = 2,
+	Worldwide = 3,
 }
 
 EChatMemberStateChange :: enum {
-	k_EChatMemberStateChangeEntered      = 1,
-	k_EChatMemberStateChangeLeft         = 2,
-	k_EChatMemberStateChangeDisconnected = 4,
-	k_EChatMemberStateChangeKicked       = 8,
-	k_EChatMemberStateChangeBanned       = 16,
+	Entered      = 1,
+	Left         = 2,
+	Disconnected = 4,
+	Kicked       = 8,
+	Banned       = 16,
 }
 
 ESteamPartyBeaconLocationType :: enum {
-	k_ESteamPartyBeaconLocationType_Invalid   = 0,
-	k_ESteamPartyBeaconLocationType_ChatGroup = 1,
-	k_ESteamPartyBeaconLocationType_Max       = 2,
+	Invalid   = 0,
+	ChatGroup = 1,
+	Max       = 2,
 }
 
 ESteamPartyBeaconLocationData :: enum {
-	k_ESteamPartyBeaconLocationDataInvalid       = 0,
-	k_ESteamPartyBeaconLocationDataName          = 1,
-	k_ESteamPartyBeaconLocationDataIconURLSmall  = 2,
-	k_ESteamPartyBeaconLocationDataIconURLMedium = 3,
-	k_ESteamPartyBeaconLocationDataIconURLLarge  = 4,
+	Invalid       = 0,
+	Name          = 1,
+	IconURLSmall  = 2,
+	IconURLMedium = 3,
+	IconURLLarge  = 4,
 }
 
 ERemoteStoragePlatform :: enum {
-	k_ERemoteStoragePlatformNone    = 0,
-	k_ERemoteStoragePlatformWindows = 1,
-	k_ERemoteStoragePlatformOSX     = 2,
-	k_ERemoteStoragePlatformPS3     = 4,
-	k_ERemoteStoragePlatformLinux   = 8,
-	k_ERemoteStoragePlatformSwitch  = 16,
-	k_ERemoteStoragePlatformAndroid = 32,
-	k_ERemoteStoragePlatformIOS     = 64,
-	k_ERemoteStoragePlatformAll     = -1,
+	None    = 0,
+	Windows = 1,
+	OSX     = 2,
+	PS3     = 4,
+	Linux   = 8,
+	Switch  = 16,
+	Android = 32,
+	IOS     = 64,
+	All     = -1,
 }
 
 ERemoteStoragePublishedFileVisibility :: enum {
-	k_ERemoteStoragePublishedFileVisibilityPublic      = 0,
-	k_ERemoteStoragePublishedFileVisibilityFriendsOnly = 1,
-	k_ERemoteStoragePublishedFileVisibilityPrivate     = 2,
-	k_ERemoteStoragePublishedFileVisibilityUnlisted    = 3,
+	Public      = 0,
+	FriendsOnly = 1,
+	Private     = 2,
+	Unlisted    = 3,
 }
 
 EWorkshopFileType :: enum {
-	k_EWorkshopFileTypeFirst                  = 0,
-	k_EWorkshopFileTypeCommunity              = 0,
-	k_EWorkshopFileTypeMicrotransaction       = 1,
-	k_EWorkshopFileTypeCollection             = 2,
-	k_EWorkshopFileTypeArt                    = 3,
-	k_EWorkshopFileTypeVideo                  = 4,
-	k_EWorkshopFileTypeScreenshot             = 5,
-	k_EWorkshopFileTypeGame                   = 6,
-	k_EWorkshopFileTypeSoftware               = 7,
-	k_EWorkshopFileTypeConcept                = 8,
-	k_EWorkshopFileTypeWebGuide               = 9,
-	k_EWorkshopFileTypeIntegratedGuide        = 10,
-	k_EWorkshopFileTypeMerch                  = 11,
-	k_EWorkshopFileTypeControllerBinding      = 12,
-	k_EWorkshopFileTypeSteamworksAccessInvite = 13,
-	k_EWorkshopFileTypeSteamVideo             = 14,
-	k_EWorkshopFileTypeGameManagedItem        = 15,
-	k_EWorkshopFileTypeMax                    = 16,
+	First                  = 0,
+	Community              = 0,
+	Microtransaction       = 1,
+	Collection             = 2,
+	Art                    = 3,
+	Video                  = 4,
+	Screenshot             = 5,
+	Game                   = 6,
+	Software               = 7,
+	Concept                = 8,
+	WebGuide               = 9,
+	IntegratedGuide        = 10,
+	Merch                  = 11,
+	ControllerBinding      = 12,
+	SteamworksAccessInvite = 13,
+	SteamVideo             = 14,
+	GameManagedItem        = 15,
+	Max                    = 16,
 }
 
 EWorkshopVote :: enum {
-	k_EWorkshopVoteUnvoted = 0,
-	k_EWorkshopVoteFor     = 1,
-	k_EWorkshopVoteAgainst = 2,
-	k_EWorkshopVoteLater   = 3,
+	Unvoted = 0,
+	For     = 1,
+	Against = 2,
+	Later   = 3,
 }
 
 EWorkshopFileAction :: enum {
-	k_EWorkshopFileActionPlayed    = 0,
-	k_EWorkshopFileActionCompleted = 1,
+	Played    = 0,
+	Completed = 1,
 }
 
 EWorkshopEnumerationType :: enum {
-	k_EWorkshopEnumerationTypeRankedByVote            = 0,
-	k_EWorkshopEnumerationTypeRecent                  = 1,
-	k_EWorkshopEnumerationTypeTrending                = 2,
-	k_EWorkshopEnumerationTypeFavoritesOfFriends      = 3,
-	k_EWorkshopEnumerationTypeVotedByFriends          = 4,
-	k_EWorkshopEnumerationTypeContentByFriends        = 5,
-	k_EWorkshopEnumerationTypeRecentFromFollowedUsers = 6,
+	RankedByVote            = 0,
+	Recent                  = 1,
+	Trending                = 2,
+	FavoritesOfFriends      = 3,
+	VotedByFriends          = 4,
+	ContentByFriends        = 5,
+	RecentFromFollowedUsers = 6,
 }
 
 EWorkshopVideoProvider :: enum {
-	k_EWorkshopVideoProviderNone    = 0,
-	k_EWorkshopVideoProviderYoutube = 1,
+	None    = 0,
+	Youtube = 1,
 }
 
 EUGCReadAction :: enum {
-	k_EUGCRead_ContinueReadingUntilFinished = 0,
-	k_EUGCRead_ContinueReading              = 1,
-	k_EUGCRead_Close                        = 2,
+	ContinueReadingUntilFinished = 0,
+	ContinueReading              = 1,
+	Close                        = 2,
 }
 
 ERemoteStorageLocalFileChange :: enum {
-	k_ERemoteStorageLocalFileChange_Invalid     = 0,
-	k_ERemoteStorageLocalFileChange_FileUpdated = 1,
-	k_ERemoteStorageLocalFileChange_FileDeleted = 2,
+	Invalid     = 0,
+	FileUpdated = 1,
+	FileDeleted = 2,
 }
 
 ERemoteStorageFilePathType :: enum {
-	k_ERemoteStorageFilePathType_Invalid     = 0,
-	k_ERemoteStorageFilePathType_Absolute    = 1,
-	k_ERemoteStorageFilePathType_APIFilename = 2,
+	Invalid     = 0,
+	Absolute    = 1,
+	APIFilename = 2,
 }
 
 ELeaderboardDataRequest :: enum {
-	k_ELeaderboardDataRequestGlobal           = 0,
-	k_ELeaderboardDataRequestGlobalAroundUser = 1,
-	k_ELeaderboardDataRequestFriends          = 2,
-	k_ELeaderboardDataRequestUsers            = 3,
+	Global           = 0,
+	GlobalAroundUser = 1,
+	Friends          = 2,
+	Users            = 3,
 }
 
 ELeaderboardSortMethod :: enum {
-	k_ELeaderboardSortMethodNone       = 0,
-	k_ELeaderboardSortMethodAscending  = 1,
-	k_ELeaderboardSortMethodDescending = 2,
+	MethodNone       = 0,
+	MethodAscending  = 1,
+	MethodDescending = 2,
 }
 
 ELeaderboardDisplayType :: enum {
-	k_ELeaderboardDisplayTypeNone             = 0,
-	k_ELeaderboardDisplayTypeNumeric          = 1,
-	k_ELeaderboardDisplayTypeTimeSeconds      = 2,
-	k_ELeaderboardDisplayTypeTimeMilliSeconds = 3,
+	None             = 0,
+	Numeric          = 1,
+	TimeSeconds      = 2,
+	TimeMilliSeconds = 3,
 }
 
 ELeaderboardUploadScoreMethod :: enum {
-	k_ELeaderboardUploadScoreMethodNone        = 0,
-	k_ELeaderboardUploadScoreMethodKeepBest    = 1,
-	k_ELeaderboardUploadScoreMethodForceUpdate = 2,
+	None        = 0,
+	KeepBest    = 1,
+	ForceUpdate = 2,
 }
 
 ERegisterActivationCodeResult :: enum {
-	k_ERegisterActivationCodeResultOK                = 0,
-	k_ERegisterActivationCodeResultFail              = 1,
-	k_ERegisterActivationCodeResultAlreadyRegistered = 2,
-	k_ERegisterActivationCodeResultTimeout           = 3,
-	k_ERegisterActivationCodeAlreadyOwned            = 4,
+	OK                = 0,
+	Fail              = 1,
+	AlreadyRegistered = 2,
+	Timeout           = 3,
+	AlreadyOwned      = 4,
 }
 
 EP2PSessionError :: enum {
-	k_EP2PSessionErrorNone                           = 0,
-	k_EP2PSessionErrorNoRightsToApp                  = 2,
-	k_EP2PSessionErrorTimeout                        = 4,
-	k_EP2PSessionErrorNotRunningApp_DELETED          = 1,
-	k_EP2PSessionErrorDestinationNotLoggedIn_DELETED = 3,
-	k_EP2PSessionErrorMax                            = 5,
+	None                           = 0,
+	NoRightsToApp                  = 2,
+	Timeout                        = 4,
+	NotRunningApp_DELETED          = 1,
+	DestinationNotLoggedIn_DELETED = 3,
+	Max                            = 5,
 }
 
 EP2PSend :: enum {
-	k_EP2PSendUnreliable            = 0,
-	k_EP2PSendUnreliableNoDelay     = 1,
-	k_EP2PSendReliable              = 2,
-	k_EP2PSendReliableWithBuffering = 3,
+	Unreliable            = 0,
+	UnreliableNoDelay     = 1,
+	Reliable              = 2,
+	ReliableWithBuffering = 3,
 }
 
 ESNetSocketState :: enum {
-	k_ESNetSocketStateInvalid                  = 0,
-	k_ESNetSocketStateConnected                = 1,
-	k_ESNetSocketStateInitiated                = 10,
-	k_ESNetSocketStateLocalCandidatesFound     = 11,
-	k_ESNetSocketStateReceivedRemoteCandidates = 12,
-	k_ESNetSocketStateChallengeHandshake       = 15,
-	k_ESNetSocketStateDisconnecting            = 21,
-	k_ESNetSocketStateLocalDisconnect          = 22,
-	k_ESNetSocketStateTimeoutDuringConnect     = 23,
-	k_ESNetSocketStateRemoteEndDisconnected    = 24,
-	k_ESNetSocketStateConnectionBroken         = 25,
+	Invalid                  = 0,
+	Connected                = 1,
+	Initiated                = 10,
+	LocalCandidatesFound     = 11,
+	ReceivedRemoteCandidates = 12,
+	ChallengeHandshake       = 15,
+	Disconnecting            = 21,
+	LocalDisconnect          = 22,
+	TimeoutDuringConnect     = 23,
+	RemoteEndDisconnected    = 24,
+	ConnectionBroken         = 25,
 }
 
 ESNetSocketConnectionType :: enum {
-	k_ESNetSocketConnectionTypeNotConnected = 0,
-	k_ESNetSocketConnectionTypeUDP          = 1,
-	k_ESNetSocketConnectionTypeUDPRelay     = 2,
+	NotConnected = 0,
+	UDP          = 1,
+	UDPRelay     = 2,
 }
 
 EVRScreenshotType :: enum {
-	k_EVRScreenshotType_None           = 0,
-	k_EVRScreenshotType_Mono           = 1,
-	k_EVRScreenshotType_Stereo         = 2,
-	k_EVRScreenshotType_MonoCubemap    = 3,
-	k_EVRScreenshotType_MonoPanorama   = 4,
-	k_EVRScreenshotType_StereoPanorama = 5,
+	None           = 0,
+	Mono           = 1,
+	Stereo         = 2,
+	MonoCubemap    = 3,
+	MonoPanorama   = 4,
+	StereoPanorama = 5,
 }
 
-AudioPlayback_Status :: enum {
-	AudioPlayback_Undefined = 0,
-	AudioPlayback_Playing   = 1,
-	AudioPlayback_Paused    = 2,
-	AudioPlayback_Idle      = 3,
+AudioPlaybacStatus :: enum {
+	Undefined = 0,
+	Playing   = 1,
+	Paused    = 2,
+	Idle      = 3,
 }
 
 EHTTPMethod :: enum {
-	k_EHTTPMethodInvalid = 0,
-	k_EHTTPMethodGET     = 1,
-	k_EHTTPMethodHEAD    = 2,
-	k_EHTTPMethodPOST    = 3,
-	k_EHTTPMethodPUT     = 4,
-	k_EHTTPMethodDELETE  = 5,
-	k_EHTTPMethodOPTIONS = 6,
-	k_EHTTPMethodPATCH   = 7,
+	Invalid = 0,
+	GET     = 1,
+	HEAD    = 2,
+	POST    = 3,
+	PUT     = 4,
+	DELETE  = 5,
+	OPTIONS = 6,
+	PATCH   = 7,
 }
 
 EHTTPStatusCode :: enum {
-	k_EHTTPStatusCodeInvalid                         = 0,
-	k_EHTTPStatusCode100Continue                     = 100,
-	k_EHTTPStatusCode101SwitchingProtocols           = 101,
-	k_EHTTPStatusCode200OK                           = 200,
-	k_EHTTPStatusCode201Created                      = 201,
-	k_EHTTPStatusCode202Accepted                     = 202,
-	k_EHTTPStatusCode203NonAuthoritative             = 203,
-	k_EHTTPStatusCode204NoContent                    = 204,
-	k_EHTTPStatusCode205ResetContent                 = 205,
-	k_EHTTPStatusCode206PartialContent               = 206,
-	k_EHTTPStatusCode300MultipleChoices              = 300,
-	k_EHTTPStatusCode301MovedPermanently             = 301,
-	k_EHTTPStatusCode302Found                        = 302,
-	k_EHTTPStatusCode303SeeOther                     = 303,
-	k_EHTTPStatusCode304NotModified                  = 304,
-	k_EHTTPStatusCode305UseProxy                     = 305,
-	k_EHTTPStatusCode307TemporaryRedirect            = 307,
-	k_EHTTPStatusCode400BadRequest                   = 400,
-	k_EHTTPStatusCode401Unauthorized                 = 401,
-	k_EHTTPStatusCode402PaymentRequired              = 402,
-	k_EHTTPStatusCode403Forbidden                    = 403,
-	k_EHTTPStatusCode404NotFound                     = 404,
-	k_EHTTPStatusCode405MethodNotAllowed             = 405,
-	k_EHTTPStatusCode406NotAcceptable                = 406,
-	k_EHTTPStatusCode407ProxyAuthRequired            = 407,
-	k_EHTTPStatusCode408RequestTimeout               = 408,
-	k_EHTTPStatusCode409Conflict                     = 409,
-	k_EHTTPStatusCode410Gone                         = 410,
-	k_EHTTPStatusCode411LengthRequired               = 411,
-	k_EHTTPStatusCode412PreconditionFailed           = 412,
-	k_EHTTPStatusCode413RequestEntityTooLarge        = 413,
-	k_EHTTPStatusCode414RequestURITooLong            = 414,
-	k_EHTTPStatusCode415UnsupportedMediaType         = 415,
-	k_EHTTPStatusCode416RequestedRangeNotSatisfiable = 416,
-	k_EHTTPStatusCode417ExpectationFailed            = 417,
-	k_EHTTPStatusCode4xxUnknown                      = 418,
-	k_EHTTPStatusCode429TooManyRequests              = 429,
-	k_EHTTPStatusCode444ConnectionClosed             = 444,
-	k_EHTTPStatusCode500InternalServerError          = 500,
-	k_EHTTPStatusCode501NotImplemented               = 501,
-	k_EHTTPStatusCode502BadGateway                   = 502,
-	k_EHTTPStatusCode503ServiceUnavailable           = 503,
-	k_EHTTPStatusCode504GatewayTimeout               = 504,
-	k_EHTTPStatusCode505HTTPVersionNotSupported      = 505,
-	k_EHTTPStatusCode5xxUnknown                      = 599,
+	CodeInvalid                         = 0,
+	Code100Continue                     = 100,
+	Code101SwitchingProtocols           = 101,
+	Code200OK                           = 200,
+	Code201Created                      = 201,
+	Code202Accepted                     = 202,
+	Code203NonAuthoritative             = 203,
+	Code204NoContent                    = 204,
+	Code205ResetContent                 = 205,
+	Code206PartialContent               = 206,
+	Code300MultipleChoices              = 300,
+	Code301MovedPermanently             = 301,
+	Code302Found                        = 302,
+	Code303SeeOther                     = 303,
+	Code304NotModified                  = 304,
+	Code305UseProxy                     = 305,
+	Code307TemporaryRedirect            = 307,
+	Code400BadRequest                   = 400,
+	Code401Unauthorized                 = 401,
+	Code402PaymentRequired              = 402,
+	Code403Forbidden                    = 403,
+	Code404NotFound                     = 404,
+	Code405MethodNotAllowed             = 405,
+	Code406NotAcceptable                = 406,
+	Code407ProxyAuthRequired            = 407,
+	Code408RequestTimeout               = 408,
+	Code409Conflict                     = 409,
+	Code410Gone                         = 410,
+	Code411LengthRequired               = 411,
+	Code412PreconditionFailed           = 412,
+	Code413RequestEntityTooLarge        = 413,
+	Code414RequestURITooLong            = 414,
+	Code415UnsupportedMediaType         = 415,
+	Code416RequestedRangeNotSatisfiable = 416,
+	Code417ExpectationFailed            = 417,
+	Code4xxUnknown                      = 418,
+	Code429TooManyRequests              = 429,
+	Code444ConnectionClosed             = 444,
+	Code500InternalServerError          = 500,
+	Code501NotImplemented               = 501,
+	Code502BadGateway                   = 502,
+	Code503ServiceUnavailable           = 503,
+	Code504GatewayTimeout               = 504,
+	Code505HTTPVersionNotSupported      = 505,
+	Code5xxUnknown                      = 599,
 }
 
 EInputSourceMode :: enum {
-	k_EInputSourceMode_None           = 0,
-	k_EInputSourceMode_Dpad           = 1,
-	k_EInputSourceMode_Buttons        = 2,
-	k_EInputSourceMode_FourButtons    = 3,
-	k_EInputSourceMode_AbsoluteMouse  = 4,
-	k_EInputSourceMode_RelativeMouse  = 5,
-	k_EInputSourceMode_JoystickMove   = 6,
-	k_EInputSourceMode_JoystickMouse  = 7,
-	k_EInputSourceMode_JoystickCamera = 8,
-	k_EInputSourceMode_ScrollWheel    = 9,
-	k_EInputSourceMode_Trigger        = 10,
-	k_EInputSourceMode_TouchMenu      = 11,
-	k_EInputSourceMode_MouseJoystick  = 12,
-	k_EInputSourceMode_MouseRegion    = 13,
-	k_EInputSourceMode_RadialMenu     = 14,
-	k_EInputSourceMode_SingleButton   = 15,
-	k_EInputSourceMode_Switches       = 16,
+	None           = 0,
+	Dpad           = 1,
+	Buttons        = 2,
+	FourButtons    = 3,
+	AbsoluteMouse  = 4,
+	RelativeMouse  = 5,
+	JoystickMove   = 6,
+	JoystickMouse  = 7,
+	JoystickCamera = 8,
+	ScrollWheel    = 9,
+	Trigger        = 10,
+	TouchMenu      = 11,
+	MouseJoystick  = 12,
+	MouseRegion    = 13,
+	RadialMenu     = 14,
+	SingleButton   = 15,
+	Switches       = 16,
 }
 
 EInputActionOrigin :: enum {
-	k_EInputActionOrigin_None                                = 0,
-	k_EInputActionOrigin_SteamController_A                   = 1,
-	k_EInputActionOrigin_SteamController_B                   = 2,
-	k_EInputActionOrigin_SteamController_X                   = 3,
-	k_EInputActionOrigin_SteamController_Y                   = 4,
-	k_EInputActionOrigin_SteamController_LeftBumper          = 5,
-	k_EInputActionOrigin_SteamController_RightBumper         = 6,
-	k_EInputActionOrigin_SteamController_LeftGrip            = 7,
-	k_EInputActionOrigin_SteamController_RightGrip           = 8,
-	k_EInputActionOrigin_SteamController_Start               = 9,
-	k_EInputActionOrigin_SteamController_Back                = 10,
-	k_EInputActionOrigin_SteamController_LeftPad_Touch       = 11,
-	k_EInputActionOrigin_SteamController_LeftPad_Swipe       = 12,
-	k_EInputActionOrigin_SteamController_LeftPad_Click       = 13,
-	k_EInputActionOrigin_SteamController_LeftPad_DPadNorth   = 14,
-	k_EInputActionOrigin_SteamController_LeftPad_DPadSouth   = 15,
-	k_EInputActionOrigin_SteamController_LeftPad_DPadWest    = 16,
-	k_EInputActionOrigin_SteamController_LeftPad_DPadEast    = 17,
-	k_EInputActionOrigin_SteamController_RightPad_Touch      = 18,
-	k_EInputActionOrigin_SteamController_RightPad_Swipe      = 19,
-	k_EInputActionOrigin_SteamController_RightPad_Click      = 20,
-	k_EInputActionOrigin_SteamController_RightPad_DPadNorth  = 21,
-	k_EInputActionOrigin_SteamController_RightPad_DPadSouth  = 22,
-	k_EInputActionOrigin_SteamController_RightPad_DPadWest   = 23,
-	k_EInputActionOrigin_SteamController_RightPad_DPadEast   = 24,
-	k_EInputActionOrigin_SteamController_LeftTrigger_Pull    = 25,
-	k_EInputActionOrigin_SteamController_LeftTrigger_Click   = 26,
-	k_EInputActionOrigin_SteamController_RightTrigger_Pull   = 27,
-	k_EInputActionOrigin_SteamController_RightTrigger_Click  = 28,
-	k_EInputActionOrigin_SteamController_LeftStick_Move      = 29,
-	k_EInputActionOrigin_SteamController_LeftStick_Click     = 30,
-	k_EInputActionOrigin_SteamController_LeftStick_DPadNorth = 31,
-	k_EInputActionOrigin_SteamController_LeftStick_DPadSouth = 32,
-	k_EInputActionOrigin_SteamController_LeftStick_DPadWest  = 33,
-	k_EInputActionOrigin_SteamController_LeftStick_DPadEast  = 34,
-	k_EInputActionOrigin_SteamController_Gyro_Move           = 35,
-	k_EInputActionOrigin_SteamController_Gyro_Pitch          = 36,
-	k_EInputActionOrigin_SteamController_Gyro_Yaw            = 37,
-	k_EInputActionOrigin_SteamController_Gyro_Roll           = 38,
-	k_EInputActionOrigin_SteamController_Reserved0           = 39,
-	k_EInputActionOrigin_SteamController_Reserved1           = 40,
-	k_EInputActionOrigin_SteamController_Reserved2           = 41,
-	k_EInputActionOrigin_SteamController_Reserved3           = 42,
-	k_EInputActionOrigin_SteamController_Reserved4           = 43,
-	k_EInputActionOrigin_SteamController_Reserved5           = 44,
-	k_EInputActionOrigin_SteamController_Reserved6           = 45,
-	k_EInputActionOrigin_SteamController_Reserved7           = 46,
-	k_EInputActionOrigin_SteamController_Reserved8           = 47,
-	k_EInputActionOrigin_SteamController_Reserved9           = 48,
-	k_EInputActionOrigin_SteamController_Reserved10          = 49,
-	k_EInputActionOrigin_PS4_X                               = 50,
-	k_EInputActionOrigin_PS4_Circle                          = 51,
-	k_EInputActionOrigin_PS4_Triangle                        = 52,
-	k_EInputActionOrigin_PS4_Square                          = 53,
-	k_EInputActionOrigin_PS4_LeftBumper                      = 54,
-	k_EInputActionOrigin_PS4_RightBumper                     = 55,
-	k_EInputActionOrigin_PS4_Options                         = 56,
-	k_EInputActionOrigin_PS4_Share                           = 57,
-	k_EInputActionOrigin_PS4_LeftPad_Touch                   = 58,
-	k_EInputActionOrigin_PS4_LeftPad_Swipe                   = 59,
-	k_EInputActionOrigin_PS4_LeftPad_Click                   = 60,
-	k_EInputActionOrigin_PS4_LeftPad_DPadNorth               = 61,
-	k_EInputActionOrigin_PS4_LeftPad_DPadSouth               = 62,
-	k_EInputActionOrigin_PS4_LeftPad_DPadWest                = 63,
-	k_EInputActionOrigin_PS4_LeftPad_DPadEast                = 64,
-	k_EInputActionOrigin_PS4_RightPad_Touch                  = 65,
-	k_EInputActionOrigin_PS4_RightPad_Swipe                  = 66,
-	k_EInputActionOrigin_PS4_RightPad_Click                  = 67,
-	k_EInputActionOrigin_PS4_RightPad_DPadNorth              = 68,
-	k_EInputActionOrigin_PS4_RightPad_DPadSouth              = 69,
-	k_EInputActionOrigin_PS4_RightPad_DPadWest               = 70,
-	k_EInputActionOrigin_PS4_RightPad_DPadEast               = 71,
-	k_EInputActionOrigin_PS4_CenterPad_Touch                 = 72,
-	k_EInputActionOrigin_PS4_CenterPad_Swipe                 = 73,
-	k_EInputActionOrigin_PS4_CenterPad_Click                 = 74,
-	k_EInputActionOrigin_PS4_CenterPad_DPadNorth             = 75,
-	k_EInputActionOrigin_PS4_CenterPad_DPadSouth             = 76,
-	k_EInputActionOrigin_PS4_CenterPad_DPadWest              = 77,
-	k_EInputActionOrigin_PS4_CenterPad_DPadEast              = 78,
-	k_EInputActionOrigin_PS4_LeftTrigger_Pull                = 79,
-	k_EInputActionOrigin_PS4_LeftTrigger_Click               = 80,
-	k_EInputActionOrigin_PS4_RightTrigger_Pull               = 81,
-	k_EInputActionOrigin_PS4_RightTrigger_Click              = 82,
-	k_EInputActionOrigin_PS4_LeftStick_Move                  = 83,
-	k_EInputActionOrigin_PS4_LeftStick_Click                 = 84,
-	k_EInputActionOrigin_PS4_LeftStick_DPadNorth             = 85,
-	k_EInputActionOrigin_PS4_LeftStick_DPadSouth             = 86,
-	k_EInputActionOrigin_PS4_LeftStick_DPadWest              = 87,
-	k_EInputActionOrigin_PS4_LeftStick_DPadEast              = 88,
-	k_EInputActionOrigin_PS4_RightStick_Move                 = 89,
-	k_EInputActionOrigin_PS4_RightStick_Click                = 90,
-	k_EInputActionOrigin_PS4_RightStick_DPadNorth            = 91,
-	k_EInputActionOrigin_PS4_RightStick_DPadSouth            = 92,
-	k_EInputActionOrigin_PS4_RightStick_DPadWest             = 93,
-	k_EInputActionOrigin_PS4_RightStick_DPadEast             = 94,
-	k_EInputActionOrigin_PS4_DPad_North                      = 95,
-	k_EInputActionOrigin_PS4_DPad_South                      = 96,
-	k_EInputActionOrigin_PS4_DPad_West                       = 97,
-	k_EInputActionOrigin_PS4_DPad_East                       = 98,
-	k_EInputActionOrigin_PS4_Gyro_Move                       = 99,
-	k_EInputActionOrigin_PS4_Gyro_Pitch                      = 100,
-	k_EInputActionOrigin_PS4_Gyro_Yaw                        = 101,
-	k_EInputActionOrigin_PS4_Gyro_Roll                       = 102,
-	k_EInputActionOrigin_PS4_DPad_Move                       = 103,
-	k_EInputActionOrigin_PS4_Reserved1                       = 104,
-	k_EInputActionOrigin_PS4_Reserved2                       = 105,
-	k_EInputActionOrigin_PS4_Reserved3                       = 106,
-	k_EInputActionOrigin_PS4_Reserved4                       = 107,
-	k_EInputActionOrigin_PS4_Reserved5                       = 108,
-	k_EInputActionOrigin_PS4_Reserved6                       = 109,
-	k_EInputActionOrigin_PS4_Reserved7                       = 110,
-	k_EInputActionOrigin_PS4_Reserved8                       = 111,
-	k_EInputActionOrigin_PS4_Reserved9                       = 112,
-	k_EInputActionOrigin_PS4_Reserved10                      = 113,
-	k_EInputActionOrigin_XBoxOne_A                           = 114,
-	k_EInputActionOrigin_XBoxOne_B                           = 115,
-	k_EInputActionOrigin_XBoxOne_X                           = 116,
-	k_EInputActionOrigin_XBoxOne_Y                           = 117,
-	k_EInputActionOrigin_XBoxOne_LeftBumper                  = 118,
-	k_EInputActionOrigin_XBoxOne_RightBumper                 = 119,
-	k_EInputActionOrigin_XBoxOne_Menu                        = 120,
-	k_EInputActionOrigin_XBoxOne_View                        = 121,
-	k_EInputActionOrigin_XBoxOne_LeftTrigger_Pull            = 122,
-	k_EInputActionOrigin_XBoxOne_LeftTrigger_Click           = 123,
-	k_EInputActionOrigin_XBoxOne_RightTrigger_Pull           = 124,
-	k_EInputActionOrigin_XBoxOne_RightTrigger_Click          = 125,
-	k_EInputActionOrigin_XBoxOne_LeftStick_Move              = 126,
-	k_EInputActionOrigin_XBoxOne_LeftStick_Click             = 127,
-	k_EInputActionOrigin_XBoxOne_LeftStick_DPadNorth         = 128,
-	k_EInputActionOrigin_XBoxOne_LeftStick_DPadSouth         = 129,
-	k_EInputActionOrigin_XBoxOne_LeftStick_DPadWest          = 130,
-	k_EInputActionOrigin_XBoxOne_LeftStick_DPadEast          = 131,
-	k_EInputActionOrigin_XBoxOne_RightStick_Move             = 132,
-	k_EInputActionOrigin_XBoxOne_RightStick_Click            = 133,
-	k_EInputActionOrigin_XBoxOne_RightStick_DPadNorth        = 134,
-	k_EInputActionOrigin_XBoxOne_RightStick_DPadSouth        = 135,
-	k_EInputActionOrigin_XBoxOne_RightStick_DPadWest         = 136,
-	k_EInputActionOrigin_XBoxOne_RightStick_DPadEast         = 137,
-	k_EInputActionOrigin_XBoxOne_DPad_North                  = 138,
-	k_EInputActionOrigin_XBoxOne_DPad_South                  = 139,
-	k_EInputActionOrigin_XBoxOne_DPad_West                   = 140,
-	k_EInputActionOrigin_XBoxOne_DPad_East                   = 141,
-	k_EInputActionOrigin_XBoxOne_DPad_Move                   = 142,
-	k_EInputActionOrigin_XBoxOne_LeftGrip_Lower              = 143,
-	k_EInputActionOrigin_XBoxOne_LeftGrip_Upper              = 144,
-	k_EInputActionOrigin_XBoxOne_RightGrip_Lower             = 145,
-	k_EInputActionOrigin_XBoxOne_RightGrip_Upper             = 146,
-	k_EInputActionOrigin_XBoxOne_Share                       = 147,
-	k_EInputActionOrigin_XBoxOne_Reserved6                   = 148,
-	k_EInputActionOrigin_XBoxOne_Reserved7                   = 149,
-	k_EInputActionOrigin_XBoxOne_Reserved8                   = 150,
-	k_EInputActionOrigin_XBoxOne_Reserved9                   = 151,
-	k_EInputActionOrigin_XBoxOne_Reserved10                  = 152,
-	k_EInputActionOrigin_XBox360_A                           = 153,
-	k_EInputActionOrigin_XBox360_B                           = 154,
-	k_EInputActionOrigin_XBox360_X                           = 155,
-	k_EInputActionOrigin_XBox360_Y                           = 156,
-	k_EInputActionOrigin_XBox360_LeftBumper                  = 157,
-	k_EInputActionOrigin_XBox360_RightBumper                 = 158,
-	k_EInputActionOrigin_XBox360_Start                       = 159,
-	k_EInputActionOrigin_XBox360_Back                        = 160,
-	k_EInputActionOrigin_XBox360_LeftTrigger_Pull            = 161,
-	k_EInputActionOrigin_XBox360_LeftTrigger_Click           = 162,
-	k_EInputActionOrigin_XBox360_RightTrigger_Pull           = 163,
-	k_EInputActionOrigin_XBox360_RightTrigger_Click          = 164,
-	k_EInputActionOrigin_XBox360_LeftStick_Move              = 165,
-	k_EInputActionOrigin_XBox360_LeftStick_Click             = 166,
-	k_EInputActionOrigin_XBox360_LeftStick_DPadNorth         = 167,
-	k_EInputActionOrigin_XBox360_LeftStick_DPadSouth         = 168,
-	k_EInputActionOrigin_XBox360_LeftStick_DPadWest          = 169,
-	k_EInputActionOrigin_XBox360_LeftStick_DPadEast          = 170,
-	k_EInputActionOrigin_XBox360_RightStick_Move             = 171,
-	k_EInputActionOrigin_XBox360_RightStick_Click            = 172,
-	k_EInputActionOrigin_XBox360_RightStick_DPadNorth        = 173,
-	k_EInputActionOrigin_XBox360_RightStick_DPadSouth        = 174,
-	k_EInputActionOrigin_XBox360_RightStick_DPadWest         = 175,
-	k_EInputActionOrigin_XBox360_RightStick_DPadEast         = 176,
-	k_EInputActionOrigin_XBox360_DPad_North                  = 177,
-	k_EInputActionOrigin_XBox360_DPad_South                  = 178,
-	k_EInputActionOrigin_XBox360_DPad_West                   = 179,
-	k_EInputActionOrigin_XBox360_DPad_East                   = 180,
-	k_EInputActionOrigin_XBox360_DPad_Move                   = 181,
-	k_EInputActionOrigin_XBox360_Reserved1                   = 182,
-	k_EInputActionOrigin_XBox360_Reserved2                   = 183,
-	k_EInputActionOrigin_XBox360_Reserved3                   = 184,
-	k_EInputActionOrigin_XBox360_Reserved4                   = 185,
-	k_EInputActionOrigin_XBox360_Reserved5                   = 186,
-	k_EInputActionOrigin_XBox360_Reserved6                   = 187,
-	k_EInputActionOrigin_XBox360_Reserved7                   = 188,
-	k_EInputActionOrigin_XBox360_Reserved8                   = 189,
-	k_EInputActionOrigin_XBox360_Reserved9                   = 190,
-	k_EInputActionOrigin_XBox360_Reserved10                  = 191,
-	k_EInputActionOrigin_Switch_A                            = 192,
-	k_EInputActionOrigin_Switch_B                            = 193,
-	k_EInputActionOrigin_Switch_X                            = 194,
-	k_EInputActionOrigin_Switch_Y                            = 195,
-	k_EInputActionOrigin_Switch_LeftBumper                   = 196,
-	k_EInputActionOrigin_Switch_RightBumper                  = 197,
-	k_EInputActionOrigin_Switch_Plus                         = 198,
-	k_EInputActionOrigin_Switch_Minus                        = 199,
-	k_EInputActionOrigin_Switch_Capture                      = 200,
-	k_EInputActionOrigin_Switch_LeftTrigger_Pull             = 201,
-	k_EInputActionOrigin_Switch_LeftTrigger_Click            = 202,
-	k_EInputActionOrigin_Switch_RightTrigger_Pull            = 203,
-	k_EInputActionOrigin_Switch_RightTrigger_Click           = 204,
-	k_EInputActionOrigin_Switch_LeftStick_Move               = 205,
-	k_EInputActionOrigin_Switch_LeftStick_Click              = 206,
-	k_EInputActionOrigin_Switch_LeftStick_DPadNorth          = 207,
-	k_EInputActionOrigin_Switch_LeftStick_DPadSouth          = 208,
-	k_EInputActionOrigin_Switch_LeftStick_DPadWest           = 209,
-	k_EInputActionOrigin_Switch_LeftStick_DPadEast           = 210,
-	k_EInputActionOrigin_Switch_RightStick_Move              = 211,
-	k_EInputActionOrigin_Switch_RightStick_Click             = 212,
-	k_EInputActionOrigin_Switch_RightStick_DPadNorth         = 213,
-	k_EInputActionOrigin_Switch_RightStick_DPadSouth         = 214,
-	k_EInputActionOrigin_Switch_RightStick_DPadWest          = 215,
-	k_EInputActionOrigin_Switch_RightStick_DPadEast          = 216,
-	k_EInputActionOrigin_Switch_DPad_North                   = 217,
-	k_EInputActionOrigin_Switch_DPad_South                   = 218,
-	k_EInputActionOrigin_Switch_DPad_West                    = 219,
-	k_EInputActionOrigin_Switch_DPad_East                    = 220,
-	k_EInputActionOrigin_Switch_ProGyro_Move                 = 221,
-	k_EInputActionOrigin_Switch_ProGyro_Pitch                = 222,
-	k_EInputActionOrigin_Switch_ProGyro_Yaw                  = 223,
-	k_EInputActionOrigin_Switch_ProGyro_Roll                 = 224,
-	k_EInputActionOrigin_Switch_DPad_Move                    = 225,
-	k_EInputActionOrigin_Switch_Reserved1                    = 226,
-	k_EInputActionOrigin_Switch_Reserved2                    = 227,
-	k_EInputActionOrigin_Switch_Reserved3                    = 228,
-	k_EInputActionOrigin_Switch_Reserved4                    = 229,
-	k_EInputActionOrigin_Switch_Reserved5                    = 230,
-	k_EInputActionOrigin_Switch_Reserved6                    = 231,
-	k_EInputActionOrigin_Switch_Reserved7                    = 232,
-	k_EInputActionOrigin_Switch_Reserved8                    = 233,
-	k_EInputActionOrigin_Switch_Reserved9                    = 234,
-	k_EInputActionOrigin_Switch_Reserved10                   = 235,
-	k_EInputActionOrigin_Switch_RightGyro_Move               = 236,
-	k_EInputActionOrigin_Switch_RightGyro_Pitch              = 237,
-	k_EInputActionOrigin_Switch_RightGyro_Yaw                = 238,
-	k_EInputActionOrigin_Switch_RightGyro_Roll               = 239,
-	k_EInputActionOrigin_Switch_LeftGyro_Move                = 240,
-	k_EInputActionOrigin_Switch_LeftGyro_Pitch               = 241,
-	k_EInputActionOrigin_Switch_LeftGyro_Yaw                 = 242,
-	k_EInputActionOrigin_Switch_LeftGyro_Roll                = 243,
-	k_EInputActionOrigin_Switch_LeftGrip_Lower               = 244,
-	k_EInputActionOrigin_Switch_LeftGrip_Upper               = 245,
-	k_EInputActionOrigin_Switch_RightGrip_Lower              = 246,
-	k_EInputActionOrigin_Switch_RightGrip_Upper              = 247,
-	k_EInputActionOrigin_Switch_Reserved11                   = 248,
-	k_EInputActionOrigin_Switch_Reserved12                   = 249,
-	k_EInputActionOrigin_Switch_Reserved13                   = 250,
-	k_EInputActionOrigin_Switch_Reserved14                   = 251,
-	k_EInputActionOrigin_Switch_Reserved15                   = 252,
-	k_EInputActionOrigin_Switch_Reserved16                   = 253,
-	k_EInputActionOrigin_Switch_Reserved17                   = 254,
-	k_EInputActionOrigin_Switch_Reserved18                   = 255,
-	k_EInputActionOrigin_Switch_Reserved19                   = 256,
-	k_EInputActionOrigin_Switch_Reserved20                   = 257,
-	k_EInputActionOrigin_PS5_X                               = 258,
-	k_EInputActionOrigin_PS5_Circle                          = 259,
-	k_EInputActionOrigin_PS5_Triangle                        = 260,
-	k_EInputActionOrigin_PS5_Square                          = 261,
-	k_EInputActionOrigin_PS5_LeftBumper                      = 262,
-	k_EInputActionOrigin_PS5_RightBumper                     = 263,
-	k_EInputActionOrigin_PS5_Option                          = 264,
-	k_EInputActionOrigin_PS5_Create                          = 265,
-	k_EInputActionOrigin_PS5_Mute                            = 266,
-	k_EInputActionOrigin_PS5_LeftPad_Touch                   = 267,
-	k_EInputActionOrigin_PS5_LeftPad_Swipe                   = 268,
-	k_EInputActionOrigin_PS5_LeftPad_Click                   = 269,
-	k_EInputActionOrigin_PS5_LeftPad_DPadNorth               = 270,
-	k_EInputActionOrigin_PS5_LeftPad_DPadSouth               = 271,
-	k_EInputActionOrigin_PS5_LeftPad_DPadWest                = 272,
-	k_EInputActionOrigin_PS5_LeftPad_DPadEast                = 273,
-	k_EInputActionOrigin_PS5_RightPad_Touch                  = 274,
-	k_EInputActionOrigin_PS5_RightPad_Swipe                  = 275,
-	k_EInputActionOrigin_PS5_RightPad_Click                  = 276,
-	k_EInputActionOrigin_PS5_RightPad_DPadNorth              = 277,
-	k_EInputActionOrigin_PS5_RightPad_DPadSouth              = 278,
-	k_EInputActionOrigin_PS5_RightPad_DPadWest               = 279,
-	k_EInputActionOrigin_PS5_RightPad_DPadEast               = 280,
-	k_EInputActionOrigin_PS5_CenterPad_Touch                 = 281,
-	k_EInputActionOrigin_PS5_CenterPad_Swipe                 = 282,
-	k_EInputActionOrigin_PS5_CenterPad_Click                 = 283,
-	k_EInputActionOrigin_PS5_CenterPad_DPadNorth             = 284,
-	k_EInputActionOrigin_PS5_CenterPad_DPadSouth             = 285,
-	k_EInputActionOrigin_PS5_CenterPad_DPadWest              = 286,
-	k_EInputActionOrigin_PS5_CenterPad_DPadEast              = 287,
-	k_EInputActionOrigin_PS5_LeftTrigger_Pull                = 288,
-	k_EInputActionOrigin_PS5_LeftTrigger_Click               = 289,
-	k_EInputActionOrigin_PS5_RightTrigger_Pull               = 290,
-	k_EInputActionOrigin_PS5_RightTrigger_Click              = 291,
-	k_EInputActionOrigin_PS5_LeftStick_Move                  = 292,
-	k_EInputActionOrigin_PS5_LeftStick_Click                 = 293,
-	k_EInputActionOrigin_PS5_LeftStick_DPadNorth             = 294,
-	k_EInputActionOrigin_PS5_LeftStick_DPadSouth             = 295,
-	k_EInputActionOrigin_PS5_LeftStick_DPadWest              = 296,
-	k_EInputActionOrigin_PS5_LeftStick_DPadEast              = 297,
-	k_EInputActionOrigin_PS5_RightStick_Move                 = 298,
-	k_EInputActionOrigin_PS5_RightStick_Click                = 299,
-	k_EInputActionOrigin_PS5_RightStick_DPadNorth            = 300,
-	k_EInputActionOrigin_PS5_RightStick_DPadSouth            = 301,
-	k_EInputActionOrigin_PS5_RightStick_DPadWest             = 302,
-	k_EInputActionOrigin_PS5_RightStick_DPadEast             = 303,
-	k_EInputActionOrigin_PS5_DPad_North                      = 304,
-	k_EInputActionOrigin_PS5_DPad_South                      = 305,
-	k_EInputActionOrigin_PS5_DPad_West                       = 306,
-	k_EInputActionOrigin_PS5_DPad_East                       = 307,
-	k_EInputActionOrigin_PS5_Gyro_Move                       = 308,
-	k_EInputActionOrigin_PS5_Gyro_Pitch                      = 309,
-	k_EInputActionOrigin_PS5_Gyro_Yaw                        = 310,
-	k_EInputActionOrigin_PS5_Gyro_Roll                       = 311,
-	k_EInputActionOrigin_PS5_DPad_Move                       = 312,
-	k_EInputActionOrigin_PS5_Reserved1                       = 313,
-	k_EInputActionOrigin_PS5_Reserved2                       = 314,
-	k_EInputActionOrigin_PS5_Reserved3                       = 315,
-	k_EInputActionOrigin_PS5_Reserved4                       = 316,
-	k_EInputActionOrigin_PS5_Reserved5                       = 317,
-	k_EInputActionOrigin_PS5_Reserved6                       = 318,
-	k_EInputActionOrigin_PS5_Reserved7                       = 319,
-	k_EInputActionOrigin_PS5_Reserved8                       = 320,
-	k_EInputActionOrigin_PS5_Reserved9                       = 321,
-	k_EInputActionOrigin_PS5_Reserved10                      = 322,
-	k_EInputActionOrigin_PS5_Reserved11                      = 323,
-	k_EInputActionOrigin_PS5_Reserved12                      = 324,
-	k_EInputActionOrigin_PS5_Reserved13                      = 325,
-	k_EInputActionOrigin_PS5_Reserved14                      = 326,
-	k_EInputActionOrigin_PS5_Reserved15                      = 327,
-	k_EInputActionOrigin_PS5_Reserved16                      = 328,
-	k_EInputActionOrigin_PS5_Reserved17                      = 329,
-	k_EInputActionOrigin_PS5_Reserved18                      = 330,
-	k_EInputActionOrigin_PS5_Reserved19                      = 331,
-	k_EInputActionOrigin_PS5_Reserved20                      = 332,
-	k_EInputActionOrigin_SteamDeck_A                         = 333,
-	k_EInputActionOrigin_SteamDeck_B                         = 334,
-	k_EInputActionOrigin_SteamDeck_X                         = 335,
-	k_EInputActionOrigin_SteamDeck_Y                         = 336,
-	k_EInputActionOrigin_SteamDeck_L1                        = 337,
-	k_EInputActionOrigin_SteamDeck_R1                        = 338,
-	k_EInputActionOrigin_SteamDeck_Menu                      = 339,
-	k_EInputActionOrigin_SteamDeck_View                      = 340,
-	k_EInputActionOrigin_SteamDeck_LeftPad_Touch             = 341,
-	k_EInputActionOrigin_SteamDeck_LeftPad_Swipe             = 342,
-	k_EInputActionOrigin_SteamDeck_LeftPad_Click             = 343,
-	k_EInputActionOrigin_SteamDeck_LeftPad_DPadNorth         = 344,
-	k_EInputActionOrigin_SteamDeck_LeftPad_DPadSouth         = 345,
-	k_EInputActionOrigin_SteamDeck_LeftPad_DPadWest          = 346,
-	k_EInputActionOrigin_SteamDeck_LeftPad_DPadEast          = 347,
-	k_EInputActionOrigin_SteamDeck_RightPad_Touch            = 348,
-	k_EInputActionOrigin_SteamDeck_RightPad_Swipe            = 349,
-	k_EInputActionOrigin_SteamDeck_RightPad_Click            = 350,
-	k_EInputActionOrigin_SteamDeck_RightPad_DPadNorth        = 351,
-	k_EInputActionOrigin_SteamDeck_RightPad_DPadSouth        = 352,
-	k_EInputActionOrigin_SteamDeck_RightPad_DPadWest         = 353,
-	k_EInputActionOrigin_SteamDeck_RightPad_DPadEast         = 354,
-	k_EInputActionOrigin_SteamDeck_L2_SoftPull               = 355,
-	k_EInputActionOrigin_SteamDeck_L2                        = 356,
-	k_EInputActionOrigin_SteamDeck_R2_SoftPull               = 357,
-	k_EInputActionOrigin_SteamDeck_R2                        = 358,
-	k_EInputActionOrigin_SteamDeck_LeftStick_Move            = 359,
-	k_EInputActionOrigin_SteamDeck_L3                        = 360,
-	k_EInputActionOrigin_SteamDeck_LeftStick_DPadNorth       = 361,
-	k_EInputActionOrigin_SteamDeck_LeftStick_DPadSouth       = 362,
-	k_EInputActionOrigin_SteamDeck_LeftStick_DPadWest        = 363,
-	k_EInputActionOrigin_SteamDeck_LeftStick_DPadEast        = 364,
-	k_EInputActionOrigin_SteamDeck_LeftStick_Touch           = 365,
-	k_EInputActionOrigin_SteamDeck_RightStick_Move           = 366,
-	k_EInputActionOrigin_SteamDeck_R3                        = 367,
-	k_EInputActionOrigin_SteamDeck_RightStick_DPadNorth      = 368,
-	k_EInputActionOrigin_SteamDeck_RightStick_DPadSouth      = 369,
-	k_EInputActionOrigin_SteamDeck_RightStick_DPadWest       = 370,
-	k_EInputActionOrigin_SteamDeck_RightStick_DPadEast       = 371,
-	k_EInputActionOrigin_SteamDeck_RightStick_Touch          = 372,
-	k_EInputActionOrigin_SteamDeck_L4                        = 373,
-	k_EInputActionOrigin_SteamDeck_R4                        = 374,
-	k_EInputActionOrigin_SteamDeck_L5                        = 375,
-	k_EInputActionOrigin_SteamDeck_R5                        = 376,
-	k_EInputActionOrigin_SteamDeck_DPad_Move                 = 377,
-	k_EInputActionOrigin_SteamDeck_DPad_North                = 378,
-	k_EInputActionOrigin_SteamDeck_DPad_South                = 379,
-	k_EInputActionOrigin_SteamDeck_DPad_West                 = 380,
-	k_EInputActionOrigin_SteamDeck_DPad_East                 = 381,
-	k_EInputActionOrigin_SteamDeck_Gyro_Move                 = 382,
-	k_EInputActionOrigin_SteamDeck_Gyro_Pitch                = 383,
-	k_EInputActionOrigin_SteamDeck_Gyro_Yaw                  = 384,
-	k_EInputActionOrigin_SteamDeck_Gyro_Roll                 = 385,
-	k_EInputActionOrigin_SteamDeck_Reserved1                 = 386,
-	k_EInputActionOrigin_SteamDeck_Reserved2                 = 387,
-	k_EInputActionOrigin_SteamDeck_Reserved3                 = 388,
-	k_EInputActionOrigin_SteamDeck_Reserved4                 = 389,
-	k_EInputActionOrigin_SteamDeck_Reserved5                 = 390,
-	k_EInputActionOrigin_SteamDeck_Reserved6                 = 391,
-	k_EInputActionOrigin_SteamDeck_Reserved7                 = 392,
-	k_EInputActionOrigin_SteamDeck_Reserved8                 = 393,
-	k_EInputActionOrigin_SteamDeck_Reserved9                 = 394,
-	k_EInputActionOrigin_SteamDeck_Reserved10                = 395,
-	k_EInputActionOrigin_SteamDeck_Reserved11                = 396,
-	k_EInputActionOrigin_SteamDeck_Reserved12                = 397,
-	k_EInputActionOrigin_SteamDeck_Reserved13                = 398,
-	k_EInputActionOrigin_SteamDeck_Reserved14                = 399,
-	k_EInputActionOrigin_SteamDeck_Reserved15                = 400,
-	k_EInputActionOrigin_SteamDeck_Reserved16                = 401,
-	k_EInputActionOrigin_SteamDeck_Reserved17                = 402,
-	k_EInputActionOrigin_SteamDeck_Reserved18                = 403,
-	k_EInputActionOrigin_SteamDeck_Reserved19                = 404,
-	k_EInputActionOrigin_SteamDeck_Reserved20                = 405,
-	k_EInputActionOrigin_Count                               = 406,
-	k_EInputActionOrigin_MaximumPossibleValue                = 32767,
+	None                               = 0,
+	SteamController_A                  = 1,
+	SteamController_B                  = 2,
+	SteamController_X                  = 3,
+	SteamController_Y                  = 4,
+	SteamController_LeftBumper         = 5,
+	SteamController_RightBumper        = 6,
+	SteamController_LeftGrip           = 7,
+	SteamController_RightGrip          = 8,
+	SteamController_Start              = 9,
+	SteamController_Back               = 10,
+	SteamController_LeftPad_Touch      = 11,
+	SteamController_LeftPad_Swipe      = 12,
+	SteamController_LeftPad_Click      = 13,
+	SteamController_LeftPad_DPadNorth  = 14,
+	SteamController_LeftPad_DPadSouth  = 15,
+	SteamController_LeftPad_DPadWest   = 16,
+	SteamController_LeftPad_DPadEast   = 17,
+	SteamController_RightPad_Touch     = 18,
+	SteamController_RightPad_Swipe     = 19,
+	SteamController_RightPad_Click     = 20,
+	SteamController_RightPad_DPadNorth = 21,
+	SteamController_RightPad_DPadSouth = 22,
+	SteamController_RightPad_DPadWest  = 23,
+	SteamController_RightPad_DPadEast  = 24,
+	SteamController_LeftTrigger_Pull   = 25,
+	SteamController_LeftTrigger_Click  = 26,
+	SteamController_RightTrigger_Pull  = 27,
+	SteamController_RightTrigger_Click = 28,
+	SteamController_LeftSticMove       = 29,
+	SteamController_LeftSticClick      = 30,
+	SteamController_LeftSticDPadNorth  = 31,
+	SteamController_LeftSticDPadSouth  = 32,
+	SteamController_LeftSticDPadWest   = 33,
+	SteamController_LeftSticDPadEast   = 34,
+	SteamController_Gyro_Move          = 35,
+	SteamController_Gyro_Pitch         = 36,
+	SteamController_Gyro_Yaw           = 37,
+	SteamController_Gyro_Roll          = 38,
+	SteamController_Reserved0          = 39,
+	SteamController_Reserved1          = 40,
+	SteamController_Reserved2          = 41,
+	SteamController_Reserved3          = 42,
+	SteamController_Reserved4          = 43,
+	SteamController_Reserved5          = 44,
+	SteamController_Reserved6          = 45,
+	SteamController_Reserved7          = 46,
+	SteamController_Reserved8          = 47,
+	SteamController_Reserved9          = 48,
+	SteamController_Reserved10         = 49,
+	PS4_X                              = 50,
+	PS4_Circle                         = 51,
+	PS4_Triangle                       = 52,
+	PS4_Square                         = 53,
+	PS4_LeftBumper                     = 54,
+	PS4_RightBumper                    = 55,
+	PS4_Options                        = 56,
+	PS4_Share                          = 57,
+	PS4_LeftPad_Touch                  = 58,
+	PS4_LeftPad_Swipe                  = 59,
+	PS4_LeftPad_Click                  = 60,
+	PS4_LeftPad_DPadNorth              = 61,
+	PS4_LeftPad_DPadSouth              = 62,
+	PS4_LeftPad_DPadWest               = 63,
+	PS4_LeftPad_DPadEast               = 64,
+	PS4_RightPad_Touch                 = 65,
+	PS4_RightPad_Swipe                 = 66,
+	PS4_RightPad_Click                 = 67,
+	PS4_RightPad_DPadNorth             = 68,
+	PS4_RightPad_DPadSouth             = 69,
+	PS4_RightPad_DPadWest              = 70,
+	PS4_RightPad_DPadEast              = 71,
+	PS4_CenterPad_Touch                = 72,
+	PS4_CenterPad_Swipe                = 73,
+	PS4_CenterPad_Click                = 74,
+	PS4_CenterPad_DPadNorth            = 75,
+	PS4_CenterPad_DPadSouth            = 76,
+	PS4_CenterPad_DPadWest             = 77,
+	PS4_CenterPad_DPadEast             = 78,
+	PS4_LeftTrigger_Pull               = 79,
+	PS4_LeftTrigger_Click              = 80,
+	PS4_RightTrigger_Pull              = 81,
+	PS4_RightTrigger_Click             = 82,
+	PS4_LeftSticMove                   = 83,
+	PS4_LeftSticClick                  = 84,
+	PS4_LeftSticDPadNorth              = 85,
+	PS4_LeftSticDPadSouth              = 86,
+	PS4_LeftSticDPadWest               = 87,
+	PS4_LeftSticDPadEast               = 88,
+	PS4_RightSticMove                  = 89,
+	PS4_RightSticClick                 = 90,
+	PS4_RightSticDPadNorth             = 91,
+	PS4_RightSticDPadSouth             = 92,
+	PS4_RightSticDPadWest              = 93,
+	PS4_RightSticDPadEast              = 94,
+	PS4_DPad_North                     = 95,
+	PS4_DPad_South                     = 96,
+	PS4_DPad_West                      = 97,
+	PS4_DPad_East                      = 98,
+	PS4_Gyro_Move                      = 99,
+	PS4_Gyro_Pitch                     = 100,
+	PS4_Gyro_Yaw                       = 101,
+	PS4_Gyro_Roll                      = 102,
+	PS4_DPad_Move                      = 103,
+	PS4_Reserved1                      = 104,
+	PS4_Reserved2                      = 105,
+	PS4_Reserved3                      = 106,
+	PS4_Reserved4                      = 107,
+	PS4_Reserved5                      = 108,
+	PS4_Reserved6                      = 109,
+	PS4_Reserved7                      = 110,
+	PS4_Reserved8                      = 111,
+	PS4_Reserved9                      = 112,
+	PS4_Reserved10                     = 113,
+	XBoxOne_A                          = 114,
+	XBoxOne_B                          = 115,
+	XBoxOne_X                          = 116,
+	XBoxOne_Y                          = 117,
+	XBoxOne_LeftBumper                 = 118,
+	XBoxOne_RightBumper                = 119,
+	XBoxOne_Menu                       = 120,
+	XBoxOne_View                       = 121,
+	XBoxOne_LeftTrigger_Pull           = 122,
+	XBoxOne_LeftTrigger_Click          = 123,
+	XBoxOne_RightTrigger_Pull          = 124,
+	XBoxOne_RightTrigger_Click         = 125,
+	XBoxOne_LeftSticMove               = 126,
+	XBoxOne_LeftSticClick              = 127,
+	XBoxOne_LeftSticDPadNorth          = 128,
+	XBoxOne_LeftSticDPadSouth          = 129,
+	XBoxOne_LeftSticDPadWest           = 130,
+	XBoxOne_LeftSticDPadEast           = 131,
+	XBoxOne_RightSticMove              = 132,
+	XBoxOne_RightSticClick             = 133,
+	XBoxOne_RightSticDPadNorth         = 134,
+	XBoxOne_RightSticDPadSouth         = 135,
+	XBoxOne_RightSticDPadWest          = 136,
+	XBoxOne_RightSticDPadEast          = 137,
+	XBoxOne_DPad_North                 = 138,
+	XBoxOne_DPad_South                 = 139,
+	XBoxOne_DPad_West                  = 140,
+	XBoxOne_DPad_East                  = 141,
+	XBoxOne_DPad_Move                  = 142,
+	XBoxOne_LeftGrip_Lower             = 143,
+	XBoxOne_LeftGrip_Upper             = 144,
+	XBoxOne_RightGrip_Lower            = 145,
+	XBoxOne_RightGrip_Upper            = 146,
+	XBoxOne_Share                      = 147,
+	XBoxOne_Reserved6                  = 148,
+	XBoxOne_Reserved7                  = 149,
+	XBoxOne_Reserved8                  = 150,
+	XBoxOne_Reserved9                  = 151,
+	XBoxOne_Reserved10                 = 152,
+	XBox360_A                          = 153,
+	XBox360_B                          = 154,
+	XBox360_X                          = 155,
+	XBox360_Y                          = 156,
+	XBox360_LeftBumper                 = 157,
+	XBox360_RightBumper                = 158,
+	XBox360_Start                      = 159,
+	XBox360_Back                       = 160,
+	XBox360_LeftTrigger_Pull           = 161,
+	XBox360_LeftTrigger_Click          = 162,
+	XBox360_RightTrigger_Pull          = 163,
+	XBox360_RightTrigger_Click         = 164,
+	XBox360_LeftSticMove               = 165,
+	XBox360_LeftSticClick              = 166,
+	XBox360_LeftSticDPadNorth          = 167,
+	XBox360_LeftSticDPadSouth          = 168,
+	XBox360_LeftSticDPadWest           = 169,
+	XBox360_LeftSticDPadEast           = 170,
+	XBox360_RightSticMove              = 171,
+	XBox360_RightSticClick             = 172,
+	XBox360_RightSticDPadNorth         = 173,
+	XBox360_RightSticDPadSouth         = 174,
+	XBox360_RightSticDPadWest          = 175,
+	XBox360_RightSticDPadEast          = 176,
+	XBox360_DPad_North                 = 177,
+	XBox360_DPad_South                 = 178,
+	XBox360_DPad_West                  = 179,
+	XBox360_DPad_East                  = 180,
+	XBox360_DPad_Move                  = 181,
+	XBox360_Reserved1                  = 182,
+	XBox360_Reserved2                  = 183,
+	XBox360_Reserved3                  = 184,
+	XBox360_Reserved4                  = 185,
+	XBox360_Reserved5                  = 186,
+	XBox360_Reserved6                  = 187,
+	XBox360_Reserved7                  = 188,
+	XBox360_Reserved8                  = 189,
+	XBox360_Reserved9                  = 190,
+	XBox360_Reserved10                 = 191,
+	Switch_A                           = 192,
+	Switch_B                           = 193,
+	Switch_X                           = 194,
+	Switch_Y                           = 195,
+	Switch_LeftBumper                  = 196,
+	Switch_RightBumper                 = 197,
+	Switch_Plus                        = 198,
+	Switch_Minus                       = 199,
+	Switch_Capture                     = 200,
+	Switch_LeftTrigger_Pull            = 201,
+	Switch_LeftTrigger_Click           = 202,
+	Switch_RightTrigger_Pull           = 203,
+	Switch_RightTrigger_Click          = 204,
+	Switch_LeftSticMove                = 205,
+	Switch_LeftSticClick               = 206,
+	Switch_LeftSticDPadNorth           = 207,
+	Switch_LeftSticDPadSouth           = 208,
+	Switch_LeftSticDPadWest            = 209,
+	Switch_LeftSticDPadEast            = 210,
+	Switch_RightSticMove               = 211,
+	Switch_RightSticClick              = 212,
+	Switch_RightSticDPadNorth          = 213,
+	Switch_RightSticDPadSouth          = 214,
+	Switch_RightSticDPadWest           = 215,
+	Switch_RightSticDPadEast           = 216,
+	Switch_DPad_North                  = 217,
+	Switch_DPad_South                  = 218,
+	Switch_DPad_West                   = 219,
+	Switch_DPad_East                   = 220,
+	Switch_ProGyro_Move                = 221,
+	Switch_ProGyro_Pitch               = 222,
+	Switch_ProGyro_Yaw                 = 223,
+	Switch_ProGyro_Roll                = 224,
+	Switch_DPad_Move                   = 225,
+	Switch_Reserved1                   = 226,
+	Switch_Reserved2                   = 227,
+	Switch_Reserved3                   = 228,
+	Switch_Reserved4                   = 229,
+	Switch_Reserved5                   = 230,
+	Switch_Reserved6                   = 231,
+	Switch_Reserved7                   = 232,
+	Switch_Reserved8                   = 233,
+	Switch_Reserved9                   = 234,
+	Switch_Reserved10                  = 235,
+	Switch_RightGyro_Move              = 236,
+	Switch_RightGyro_Pitch             = 237,
+	Switch_RightGyro_Yaw               = 238,
+	Switch_RightGyro_Roll              = 239,
+	Switch_LeftGyro_Move               = 240,
+	Switch_LeftGyro_Pitch              = 241,
+	Switch_LeftGyro_Yaw                = 242,
+	Switch_LeftGyro_Roll               = 243,
+	Switch_LeftGrip_Lower              = 244,
+	Switch_LeftGrip_Upper              = 245,
+	Switch_RightGrip_Lower             = 246,
+	Switch_RightGrip_Upper             = 247,
+	Switch_Reserved11                  = 248,
+	Switch_Reserved12                  = 249,
+	Switch_Reserved13                  = 250,
+	Switch_Reserved14                  = 251,
+	Switch_Reserved15                  = 252,
+	Switch_Reserved16                  = 253,
+	Switch_Reserved17                  = 254,
+	Switch_Reserved18                  = 255,
+	Switch_Reserved19                  = 256,
+	Switch_Reserved20                  = 257,
+	PS5_X                              = 258,
+	PS5_Circle                         = 259,
+	PS5_Triangle                       = 260,
+	PS5_Square                         = 261,
+	PS5_LeftBumper                     = 262,
+	PS5_RightBumper                    = 263,
+	PS5_Option                         = 264,
+	PS5_Create                         = 265,
+	PS5_Mute                           = 266,
+	PS5_LeftPad_Touch                  = 267,
+	PS5_LeftPad_Swipe                  = 268,
+	PS5_LeftPad_Click                  = 269,
+	PS5_LeftPad_DPadNorth              = 270,
+	PS5_LeftPad_DPadSouth              = 271,
+	PS5_LeftPad_DPadWest               = 272,
+	PS5_LeftPad_DPadEast               = 273,
+	PS5_RightPad_Touch                 = 274,
+	PS5_RightPad_Swipe                 = 275,
+	PS5_RightPad_Click                 = 276,
+	PS5_RightPad_DPadNorth             = 277,
+	PS5_RightPad_DPadSouth             = 278,
+	PS5_RightPad_DPadWest              = 279,
+	PS5_RightPad_DPadEast              = 280,
+	PS5_CenterPad_Touch                = 281,
+	PS5_CenterPad_Swipe                = 282,
+	PS5_CenterPad_Click                = 283,
+	PS5_CenterPad_DPadNorth            = 284,
+	PS5_CenterPad_DPadSouth            = 285,
+	PS5_CenterPad_DPadWest             = 286,
+	PS5_CenterPad_DPadEast             = 287,
+	PS5_LeftTrigger_Pull               = 288,
+	PS5_LeftTrigger_Click              = 289,
+	PS5_RightTrigger_Pull              = 290,
+	PS5_RightTrigger_Click             = 291,
+	PS5_LeftSticMove                   = 292,
+	PS5_LeftSticClick                  = 293,
+	PS5_LeftSticDPadNorth              = 294,
+	PS5_LeftSticDPadSouth              = 295,
+	PS5_LeftSticDPadWest               = 296,
+	PS5_LeftSticDPadEast               = 297,
+	PS5_RightSticMove                  = 298,
+	PS5_RightSticClick                 = 299,
+	PS5_RightSticDPadNorth             = 300,
+	PS5_RightSticDPadSouth             = 301,
+	PS5_RightSticDPadWest              = 302,
+	PS5_RightSticDPadEast              = 303,
+	PS5_DPad_North                     = 304,
+	PS5_DPad_South                     = 305,
+	PS5_DPad_West                      = 306,
+	PS5_DPad_East                      = 307,
+	PS5_Gyro_Move                      = 308,
+	PS5_Gyro_Pitch                     = 309,
+	PS5_Gyro_Yaw                       = 310,
+	PS5_Gyro_Roll                      = 311,
+	PS5_DPad_Move                      = 312,
+	PS5_Reserved1                      = 313,
+	PS5_Reserved2                      = 314,
+	PS5_Reserved3                      = 315,
+	PS5_Reserved4                      = 316,
+	PS5_Reserved5                      = 317,
+	PS5_Reserved6                      = 318,
+	PS5_Reserved7                      = 319,
+	PS5_Reserved8                      = 320,
+	PS5_Reserved9                      = 321,
+	PS5_Reserved10                     = 322,
+	PS5_Reserved11                     = 323,
+	PS5_Reserved12                     = 324,
+	PS5_Reserved13                     = 325,
+	PS5_Reserved14                     = 326,
+	PS5_Reserved15                     = 327,
+	PS5_Reserved16                     = 328,
+	PS5_Reserved17                     = 329,
+	PS5_Reserved18                     = 330,
+	PS5_Reserved19                     = 331,
+	PS5_Reserved20                     = 332,
+	SteamDecA                          = 333,
+	SteamDecB                          = 334,
+	SteamDecX                          = 335,
+	SteamDecY                          = 336,
+	SteamDecL1                         = 337,
+	SteamDecR1                         = 338,
+	SteamDecMenu                       = 339,
+	SteamDecView                       = 340,
+	SteamDecLeftPad_Touch              = 341,
+	SteamDecLeftPad_Swipe              = 342,
+	SteamDecLeftPad_Click              = 343,
+	SteamDecLeftPad_DPadNorth          = 344,
+	SteamDecLeftPad_DPadSouth          = 345,
+	SteamDecLeftPad_DPadWest           = 346,
+	SteamDecLeftPad_DPadEast           = 347,
+	SteamDecRightPad_Touch             = 348,
+	SteamDecRightPad_Swipe             = 349,
+	SteamDecRightPad_Click             = 350,
+	SteamDecRightPad_DPadNorth         = 351,
+	SteamDecRightPad_DPadSouth         = 352,
+	SteamDecRightPad_DPadWest          = 353,
+	SteamDecRightPad_DPadEast          = 354,
+	SteamDecL2_SoftPull                = 355,
+	SteamDecL2                         = 356,
+	SteamDecR2_SoftPull                = 357,
+	SteamDecR2                         = 358,
+	SteamDecLeftSticMove               = 359,
+	SteamDecL3                         = 360,
+	SteamDecLeftSticDPadNorth          = 361,
+	SteamDecLeftSticDPadSouth          = 362,
+	SteamDecLeftSticDPadWest           = 363,
+	SteamDecLeftSticDPadEast           = 364,
+	SteamDecLeftSticTouch              = 365,
+	SteamDecRightSticMove              = 366,
+	SteamDecR3                         = 367,
+	SteamDecRightSticDPadNorth         = 368,
+	SteamDecRightSticDPadSouth         = 369,
+	SteamDecRightSticDPadWest          = 370,
+	SteamDecRightSticDPadEast          = 371,
+	SteamDecRightSticTouch             = 372,
+	SteamDecL4                         = 373,
+	SteamDecR4                         = 374,
+	SteamDecL5                         = 375,
+	SteamDecR5                         = 376,
+	SteamDecDPad_Move                  = 377,
+	SteamDecDPad_North                 = 378,
+	SteamDecDPad_South                 = 379,
+	SteamDecDPad_West                  = 380,
+	SteamDecDPad_East                  = 381,
+	SteamDecGyro_Move                  = 382,
+	SteamDecGyro_Pitch                 = 383,
+	SteamDecGyro_Yaw                   = 384,
+	SteamDecGyro_Roll                  = 385,
+	SteamDecReserved1                  = 386,
+	SteamDecReserved2                  = 387,
+	SteamDecReserved3                  = 388,
+	SteamDecReserved4                  = 389,
+	SteamDecReserved5                  = 390,
+	SteamDecReserved6                  = 391,
+	SteamDecReserved7                  = 392,
+	SteamDecReserved8                  = 393,
+	SteamDecReserved9                  = 394,
+	SteamDecReserved10                 = 395,
+	SteamDecReserved11                 = 396,
+	SteamDecReserved12                 = 397,
+	SteamDecReserved13                 = 398,
+	SteamDecReserved14                 = 399,
+	SteamDecReserved15                 = 400,
+	SteamDecReserved16                 = 401,
+	SteamDecReserved17                 = 402,
+	SteamDecReserved18                 = 403,
+	SteamDecReserved19                 = 404,
+	SteamDecReserved20                 = 405,
+	Count                              = 406,
+	MaximumPossibleValue               = 32767,
 }
 
 EXboxOrigin :: enum {
-	k_EXboxOrigin_A                    = 0,
-	k_EXboxOrigin_B                    = 1,
-	k_EXboxOrigin_X                    = 2,
-	k_EXboxOrigin_Y                    = 3,
-	k_EXboxOrigin_LeftBumper           = 4,
-	k_EXboxOrigin_RightBumper          = 5,
-	k_EXboxOrigin_Menu                 = 6,
-	k_EXboxOrigin_View                 = 7,
-	k_EXboxOrigin_LeftTrigger_Pull     = 8,
-	k_EXboxOrigin_LeftTrigger_Click    = 9,
-	k_EXboxOrigin_RightTrigger_Pull    = 10,
-	k_EXboxOrigin_RightTrigger_Click   = 11,
-	k_EXboxOrigin_LeftStick_Move       = 12,
-	k_EXboxOrigin_LeftStick_Click      = 13,
-	k_EXboxOrigin_LeftStick_DPadNorth  = 14,
-	k_EXboxOrigin_LeftStick_DPadSouth  = 15,
-	k_EXboxOrigin_LeftStick_DPadWest   = 16,
-	k_EXboxOrigin_LeftStick_DPadEast   = 17,
-	k_EXboxOrigin_RightStick_Move      = 18,
-	k_EXboxOrigin_RightStick_Click     = 19,
-	k_EXboxOrigin_RightStick_DPadNorth = 20,
-	k_EXboxOrigin_RightStick_DPadSouth = 21,
-	k_EXboxOrigin_RightStick_DPadWest  = 22,
-	k_EXboxOrigin_RightStick_DPadEast  = 23,
-	k_EXboxOrigin_DPad_North           = 24,
-	k_EXboxOrigin_DPad_South           = 25,
-	k_EXboxOrigin_DPad_West            = 26,
-	k_EXboxOrigin_DPad_East            = 27,
-	k_EXboxOrigin_Count                = 28,
+	A                  = 0,
+	B                  = 1,
+	X                  = 2,
+	Y                  = 3,
+	LeftBumper         = 4,
+	RightBumper        = 5,
+	Menu               = 6,
+	View               = 7,
+	LeftTrigger_Pull   = 8,
+	LeftTrigger_Click  = 9,
+	RightTrigger_Pull  = 10,
+	RightTrigger_Click = 11,
+	LeftSticMove       = 12,
+	LeftSticClick      = 13,
+	LeftSticDPadNorth  = 14,
+	LeftSticDPadSouth  = 15,
+	LeftSticDPadWest   = 16,
+	LeftSticDPadEast   = 17,
+	RightSticMove      = 18,
+	RightSticClick     = 19,
+	RightSticDPadNorth = 20,
+	RightSticDPadSouth = 21,
+	RightSticDPadWest  = 22,
+	RightSticDPadEast  = 23,
+	DPad_North         = 24,
+	DPad_South         = 25,
+	DPad_West          = 26,
+	DPad_East          = 27,
+	Count              = 28,
 }
 
 ESteamControllerPad :: enum {
-	k_ESteamControllerPad_Left  = 0,
-	k_ESteamControllerPad_Right = 1,
+	Left  = 0,
+	Right = 1,
 }
 
 EControllerHapticLocation :: enum {
-	k_EControllerHapticLocation_Left  = 1,
-	k_EControllerHapticLocation_Right = 2,
-	k_EControllerHapticLocation_Both  = 3,
+	Left  = 1,
+	Right = 2,
+	Both  = 3,
 }
 
 EControllerHapticType :: enum {
-	k_EControllerHapticType_Off   = 0,
-	k_EControllerHapticType_Tick  = 1,
-	k_EControllerHapticType_Click = 2,
+	Off   = 0,
+	Tick  = 1,
+	Click = 2,
 }
 
 ESteamInputType :: enum {
-	k_ESteamInputType_Unknown              = 0,
-	k_ESteamInputType_SteamController      = 1,
-	k_ESteamInputType_XBox360Controller    = 2,
-	k_ESteamInputType_XBoxOneController    = 3,
-	k_ESteamInputType_GenericGamepad       = 4,
-	k_ESteamInputType_PS4Controller        = 5,
-	k_ESteamInputType_AppleMFiController   = 6,
-	k_ESteamInputType_AndroidController    = 7,
-	k_ESteamInputType_SwitchJoyConPair     = 8,
-	k_ESteamInputType_SwitchJoyConSingle   = 9,
-	k_ESteamInputType_SwitchProController  = 10,
-	k_ESteamInputType_MobileTouch          = 11,
-	k_ESteamInputType_PS3Controller        = 12,
-	k_ESteamInputType_PS5Controller        = 13,
-	k_ESteamInputType_SteamDeckController  = 14,
-	k_ESteamInputType_Count                = 15,
-	k_ESteamInputType_MaximumPossibleValue = 255,
+	Unknown              = 0,
+	SteamController      = 1,
+	XBox360Controller    = 2,
+	XBoxOneController    = 3,
+	GenericGamepad       = 4,
+	PS4Controller        = 5,
+	AppleMFiController   = 6,
+	AndroidController    = 7,
+	SwitchJoyConPair     = 8,
+	SwitchJoyConSingle   = 9,
+	SwitchProController  = 10,
+	MobileTouch          = 11,
+	PS3Controller        = 12,
+	PS5Controller        = 13,
+	SteamDeckController  = 14,
+	Count                = 15,
+	MaximumPossibleValue = 255,
 }
 
 ESteamInputConfigurationEnableType :: enum {
-	k_ESteamInputConfigurationEnableType_None        = 0,
-	k_ESteamInputConfigurationEnableType_Playstation = 1,
-	k_ESteamInputConfigurationEnableType_Xbox        = 2,
-	k_ESteamInputConfigurationEnableType_Generic     = 4,
-	k_ESteamInputConfigurationEnableType_Switch      = 8,
+	None        = 0,
+	Playstation = 1,
+	Xbox        = 2,
+	Generic     = 4,
+	Switch      = 8,
 }
 
 ESteamInputLEDFlag :: enum {
-	k_ESteamInputLEDFlag_SetColor           = 0,
-	k_ESteamInputLEDFlag_RestoreUserDefault = 1,
+	SetColor           = 0,
+	RestoreUserDefault = 1,
 }
 
 ESteamInputGlyphSize :: enum {
-	k_ESteamInputGlyphSize_Small  = 0,
-	k_ESteamInputGlyphSize_Medium = 1,
-	k_ESteamInputGlyphSize_Large  = 2,
-	k_ESteamInputGlyphSize_Count  = 3,
+	Small  = 0,
+	Medium = 1,
+	Large  = 2,
+	Count  = 3,
 }
 
 ESteamInputGlyphStyle :: enum {
-	ESteamInputGlyphStyle_Knockout         = 0,
-	ESteamInputGlyphStyle_Light            = 1,
-	ESteamInputGlyphStyle_Dark             = 2,
-	ESteamInputGlyphStyle_NeutralColorABXY = 16,
-	ESteamInputGlyphStyle_SolidABXY        = 32,
+	Knockout         = 0,
+	Light            = 1,
+	Dark             = 2,
+	NeutralColorABXY = 16,
+	SolidABXY        = 32,
 }
 
 ESteamInputActionEventType :: enum {
-	ESteamInputActionEventType_DigitalAction = 0,
-	ESteamInputActionEventType_AnalogAction  = 1,
+	DigitalAction = 0,
+	AnalogAction  = 1,
 }
 
 EControllerActionOrigin :: enum {
-	k_EControllerActionOrigin_None                             = 0,
-	k_EControllerActionOrigin_A                                = 1,
-	k_EControllerActionOrigin_B                                = 2,
-	k_EControllerActionOrigin_X                                = 3,
-	k_EControllerActionOrigin_Y                                = 4,
-	k_EControllerActionOrigin_LeftBumper                       = 5,
-	k_EControllerActionOrigin_RightBumper                      = 6,
-	k_EControllerActionOrigin_LeftGrip                         = 7,
-	k_EControllerActionOrigin_RightGrip                        = 8,
-	k_EControllerActionOrigin_Start                            = 9,
-	k_EControllerActionOrigin_Back                             = 10,
-	k_EControllerActionOrigin_LeftPad_Touch                    = 11,
-	k_EControllerActionOrigin_LeftPad_Swipe                    = 12,
-	k_EControllerActionOrigin_LeftPad_Click                    = 13,
-	k_EControllerActionOrigin_LeftPad_DPadNorth                = 14,
-	k_EControllerActionOrigin_LeftPad_DPadSouth                = 15,
-	k_EControllerActionOrigin_LeftPad_DPadWest                 = 16,
-	k_EControllerActionOrigin_LeftPad_DPadEast                 = 17,
-	k_EControllerActionOrigin_RightPad_Touch                   = 18,
-	k_EControllerActionOrigin_RightPad_Swipe                   = 19,
-	k_EControllerActionOrigin_RightPad_Click                   = 20,
-	k_EControllerActionOrigin_RightPad_DPadNorth               = 21,
-	k_EControllerActionOrigin_RightPad_DPadSouth               = 22,
-	k_EControllerActionOrigin_RightPad_DPadWest                = 23,
-	k_EControllerActionOrigin_RightPad_DPadEast                = 24,
-	k_EControllerActionOrigin_LeftTrigger_Pull                 = 25,
-	k_EControllerActionOrigin_LeftTrigger_Click                = 26,
-	k_EControllerActionOrigin_RightTrigger_Pull                = 27,
-	k_EControllerActionOrigin_RightTrigger_Click               = 28,
-	k_EControllerActionOrigin_LeftStick_Move                   = 29,
-	k_EControllerActionOrigin_LeftStick_Click                  = 30,
-	k_EControllerActionOrigin_LeftStick_DPadNorth              = 31,
-	k_EControllerActionOrigin_LeftStick_DPadSouth              = 32,
-	k_EControllerActionOrigin_LeftStick_DPadWest               = 33,
-	k_EControllerActionOrigin_LeftStick_DPadEast               = 34,
-	k_EControllerActionOrigin_Gyro_Move                        = 35,
-	k_EControllerActionOrigin_Gyro_Pitch                       = 36,
-	k_EControllerActionOrigin_Gyro_Yaw                         = 37,
-	k_EControllerActionOrigin_Gyro_Roll                        = 38,
-	k_EControllerActionOrigin_PS4_X                            = 39,
-	k_EControllerActionOrigin_PS4_Circle                       = 40,
-	k_EControllerActionOrigin_PS4_Triangle                     = 41,
-	k_EControllerActionOrigin_PS4_Square                       = 42,
-	k_EControllerActionOrigin_PS4_LeftBumper                   = 43,
-	k_EControllerActionOrigin_PS4_RightBumper                  = 44,
-	k_EControllerActionOrigin_PS4_Options                      = 45,
-	k_EControllerActionOrigin_PS4_Share                        = 46,
-	k_EControllerActionOrigin_PS4_LeftPad_Touch                = 47,
-	k_EControllerActionOrigin_PS4_LeftPad_Swipe                = 48,
-	k_EControllerActionOrigin_PS4_LeftPad_Click                = 49,
-	k_EControllerActionOrigin_PS4_LeftPad_DPadNorth            = 50,
-	k_EControllerActionOrigin_PS4_LeftPad_DPadSouth            = 51,
-	k_EControllerActionOrigin_PS4_LeftPad_DPadWest             = 52,
-	k_EControllerActionOrigin_PS4_LeftPad_DPadEast             = 53,
-	k_EControllerActionOrigin_PS4_RightPad_Touch               = 54,
-	k_EControllerActionOrigin_PS4_RightPad_Swipe               = 55,
-	k_EControllerActionOrigin_PS4_RightPad_Click               = 56,
-	k_EControllerActionOrigin_PS4_RightPad_DPadNorth           = 57,
-	k_EControllerActionOrigin_PS4_RightPad_DPadSouth           = 58,
-	k_EControllerActionOrigin_PS4_RightPad_DPadWest            = 59,
-	k_EControllerActionOrigin_PS4_RightPad_DPadEast            = 60,
-	k_EControllerActionOrigin_PS4_CenterPad_Touch              = 61,
-	k_EControllerActionOrigin_PS4_CenterPad_Swipe              = 62,
-	k_EControllerActionOrigin_PS4_CenterPad_Click              = 63,
-	k_EControllerActionOrigin_PS4_CenterPad_DPadNorth          = 64,
-	k_EControllerActionOrigin_PS4_CenterPad_DPadSouth          = 65,
-	k_EControllerActionOrigin_PS4_CenterPad_DPadWest           = 66,
-	k_EControllerActionOrigin_PS4_CenterPad_DPadEast           = 67,
-	k_EControllerActionOrigin_PS4_LeftTrigger_Pull             = 68,
-	k_EControllerActionOrigin_PS4_LeftTrigger_Click            = 69,
-	k_EControllerActionOrigin_PS4_RightTrigger_Pull            = 70,
-	k_EControllerActionOrigin_PS4_RightTrigger_Click           = 71,
-	k_EControllerActionOrigin_PS4_LeftStick_Move               = 72,
-	k_EControllerActionOrigin_PS4_LeftStick_Click              = 73,
-	k_EControllerActionOrigin_PS4_LeftStick_DPadNorth          = 74,
-	k_EControllerActionOrigin_PS4_LeftStick_DPadSouth          = 75,
-	k_EControllerActionOrigin_PS4_LeftStick_DPadWest           = 76,
-	k_EControllerActionOrigin_PS4_LeftStick_DPadEast           = 77,
-	k_EControllerActionOrigin_PS4_RightStick_Move              = 78,
-	k_EControllerActionOrigin_PS4_RightStick_Click             = 79,
-	k_EControllerActionOrigin_PS4_RightStick_DPadNorth         = 80,
-	k_EControllerActionOrigin_PS4_RightStick_DPadSouth         = 81,
-	k_EControllerActionOrigin_PS4_RightStick_DPadWest          = 82,
-	k_EControllerActionOrigin_PS4_RightStick_DPadEast          = 83,
-	k_EControllerActionOrigin_PS4_DPad_North                   = 84,
-	k_EControllerActionOrigin_PS4_DPad_South                   = 85,
-	k_EControllerActionOrigin_PS4_DPad_West                    = 86,
-	k_EControllerActionOrigin_PS4_DPad_East                    = 87,
-	k_EControllerActionOrigin_PS4_Gyro_Move                    = 88,
-	k_EControllerActionOrigin_PS4_Gyro_Pitch                   = 89,
-	k_EControllerActionOrigin_PS4_Gyro_Yaw                     = 90,
-	k_EControllerActionOrigin_PS4_Gyro_Roll                    = 91,
-	k_EControllerActionOrigin_XBoxOne_A                        = 92,
-	k_EControllerActionOrigin_XBoxOne_B                        = 93,
-	k_EControllerActionOrigin_XBoxOne_X                        = 94,
-	k_EControllerActionOrigin_XBoxOne_Y                        = 95,
-	k_EControllerActionOrigin_XBoxOne_LeftBumper               = 96,
-	k_EControllerActionOrigin_XBoxOne_RightBumper              = 97,
-	k_EControllerActionOrigin_XBoxOne_Menu                     = 98,
-	k_EControllerActionOrigin_XBoxOne_View                     = 99,
-	k_EControllerActionOrigin_XBoxOne_LeftTrigger_Pull         = 100,
-	k_EControllerActionOrigin_XBoxOne_LeftTrigger_Click        = 101,
-	k_EControllerActionOrigin_XBoxOne_RightTrigger_Pull        = 102,
-	k_EControllerActionOrigin_XBoxOne_RightTrigger_Click       = 103,
-	k_EControllerActionOrigin_XBoxOne_LeftStick_Move           = 104,
-	k_EControllerActionOrigin_XBoxOne_LeftStick_Click          = 105,
-	k_EControllerActionOrigin_XBoxOne_LeftStick_DPadNorth      = 106,
-	k_EControllerActionOrigin_XBoxOne_LeftStick_DPadSouth      = 107,
-	k_EControllerActionOrigin_XBoxOne_LeftStick_DPadWest       = 108,
-	k_EControllerActionOrigin_XBoxOne_LeftStick_DPadEast       = 109,
-	k_EControllerActionOrigin_XBoxOne_RightStick_Move          = 110,
-	k_EControllerActionOrigin_XBoxOne_RightStick_Click         = 111,
-	k_EControllerActionOrigin_XBoxOne_RightStick_DPadNorth     = 112,
-	k_EControllerActionOrigin_XBoxOne_RightStick_DPadSouth     = 113,
-	k_EControllerActionOrigin_XBoxOne_RightStick_DPadWest      = 114,
-	k_EControllerActionOrigin_XBoxOne_RightStick_DPadEast      = 115,
-	k_EControllerActionOrigin_XBoxOne_DPad_North               = 116,
-	k_EControllerActionOrigin_XBoxOne_DPad_South               = 117,
-	k_EControllerActionOrigin_XBoxOne_DPad_West                = 118,
-	k_EControllerActionOrigin_XBoxOne_DPad_East                = 119,
-	k_EControllerActionOrigin_XBox360_A                        = 120,
-	k_EControllerActionOrigin_XBox360_B                        = 121,
-	k_EControllerActionOrigin_XBox360_X                        = 122,
-	k_EControllerActionOrigin_XBox360_Y                        = 123,
-	k_EControllerActionOrigin_XBox360_LeftBumper               = 124,
-	k_EControllerActionOrigin_XBox360_RightBumper              = 125,
-	k_EControllerActionOrigin_XBox360_Start                    = 126,
-	k_EControllerActionOrigin_XBox360_Back                     = 127,
-	k_EControllerActionOrigin_XBox360_LeftTrigger_Pull         = 128,
-	k_EControllerActionOrigin_XBox360_LeftTrigger_Click        = 129,
-	k_EControllerActionOrigin_XBox360_RightTrigger_Pull        = 130,
-	k_EControllerActionOrigin_XBox360_RightTrigger_Click       = 131,
-	k_EControllerActionOrigin_XBox360_LeftStick_Move           = 132,
-	k_EControllerActionOrigin_XBox360_LeftStick_Click          = 133,
-	k_EControllerActionOrigin_XBox360_LeftStick_DPadNorth      = 134,
-	k_EControllerActionOrigin_XBox360_LeftStick_DPadSouth      = 135,
-	k_EControllerActionOrigin_XBox360_LeftStick_DPadWest       = 136,
-	k_EControllerActionOrigin_XBox360_LeftStick_DPadEast       = 137,
-	k_EControllerActionOrigin_XBox360_RightStick_Move          = 138,
-	k_EControllerActionOrigin_XBox360_RightStick_Click         = 139,
-	k_EControllerActionOrigin_XBox360_RightStick_DPadNorth     = 140,
-	k_EControllerActionOrigin_XBox360_RightStick_DPadSouth     = 141,
-	k_EControllerActionOrigin_XBox360_RightStick_DPadWest      = 142,
-	k_EControllerActionOrigin_XBox360_RightStick_DPadEast      = 143,
-	k_EControllerActionOrigin_XBox360_DPad_North               = 144,
-	k_EControllerActionOrigin_XBox360_DPad_South               = 145,
-	k_EControllerActionOrigin_XBox360_DPad_West                = 146,
-	k_EControllerActionOrigin_XBox360_DPad_East                = 147,
-	k_EControllerActionOrigin_SteamV2_A                        = 148,
-	k_EControllerActionOrigin_SteamV2_B                        = 149,
-	k_EControllerActionOrigin_SteamV2_X                        = 150,
-	k_EControllerActionOrigin_SteamV2_Y                        = 151,
-	k_EControllerActionOrigin_SteamV2_LeftBumper               = 152,
-	k_EControllerActionOrigin_SteamV2_RightBumper              = 153,
-	k_EControllerActionOrigin_SteamV2_LeftGrip_Lower           = 154,
-	k_EControllerActionOrigin_SteamV2_LeftGrip_Upper           = 155,
-	k_EControllerActionOrigin_SteamV2_RightGrip_Lower          = 156,
-	k_EControllerActionOrigin_SteamV2_RightGrip_Upper          = 157,
-	k_EControllerActionOrigin_SteamV2_LeftBumper_Pressure      = 158,
-	k_EControllerActionOrigin_SteamV2_RightBumper_Pressure     = 159,
-	k_EControllerActionOrigin_SteamV2_LeftGrip_Pressure        = 160,
-	k_EControllerActionOrigin_SteamV2_RightGrip_Pressure       = 161,
-	k_EControllerActionOrigin_SteamV2_LeftGrip_Upper_Pressure  = 162,
-	k_EControllerActionOrigin_SteamV2_RightGrip_Upper_Pressure = 163,
-	k_EControllerActionOrigin_SteamV2_Start                    = 164,
-	k_EControllerActionOrigin_SteamV2_Back                     = 165,
-	k_EControllerActionOrigin_SteamV2_LeftPad_Touch            = 166,
-	k_EControllerActionOrigin_SteamV2_LeftPad_Swipe            = 167,
-	k_EControllerActionOrigin_SteamV2_LeftPad_Click            = 168,
-	k_EControllerActionOrigin_SteamV2_LeftPad_Pressure         = 169,
-	k_EControllerActionOrigin_SteamV2_LeftPad_DPadNorth        = 170,
-	k_EControllerActionOrigin_SteamV2_LeftPad_DPadSouth        = 171,
-	k_EControllerActionOrigin_SteamV2_LeftPad_DPadWest         = 172,
-	k_EControllerActionOrigin_SteamV2_LeftPad_DPadEast         = 173,
-	k_EControllerActionOrigin_SteamV2_RightPad_Touch           = 174,
-	k_EControllerActionOrigin_SteamV2_RightPad_Swipe           = 175,
-	k_EControllerActionOrigin_SteamV2_RightPad_Click           = 176,
-	k_EControllerActionOrigin_SteamV2_RightPad_Pressure        = 177,
-	k_EControllerActionOrigin_SteamV2_RightPad_DPadNorth       = 178,
-	k_EControllerActionOrigin_SteamV2_RightPad_DPadSouth       = 179,
-	k_EControllerActionOrigin_SteamV2_RightPad_DPadWest        = 180,
-	k_EControllerActionOrigin_SteamV2_RightPad_DPadEast        = 181,
-	k_EControllerActionOrigin_SteamV2_LeftTrigger_Pull         = 182,
-	k_EControllerActionOrigin_SteamV2_LeftTrigger_Click        = 183,
-	k_EControllerActionOrigin_SteamV2_RightTrigger_Pull        = 184,
-	k_EControllerActionOrigin_SteamV2_RightTrigger_Click       = 185,
-	k_EControllerActionOrigin_SteamV2_LeftStick_Move           = 186,
-	k_EControllerActionOrigin_SteamV2_LeftStick_Click          = 187,
-	k_EControllerActionOrigin_SteamV2_LeftStick_DPadNorth      = 188,
-	k_EControllerActionOrigin_SteamV2_LeftStick_DPadSouth      = 189,
-	k_EControllerActionOrigin_SteamV2_LeftStick_DPadWest       = 190,
-	k_EControllerActionOrigin_SteamV2_LeftStick_DPadEast       = 191,
-	k_EControllerActionOrigin_SteamV2_Gyro_Move                = 192,
-	k_EControllerActionOrigin_SteamV2_Gyro_Pitch               = 193,
-	k_EControllerActionOrigin_SteamV2_Gyro_Yaw                 = 194,
-	k_EControllerActionOrigin_SteamV2_Gyro_Roll                = 195,
-	k_EControllerActionOrigin_Switch_A                         = 196,
-	k_EControllerActionOrigin_Switch_B                         = 197,
-	k_EControllerActionOrigin_Switch_X                         = 198,
-	k_EControllerActionOrigin_Switch_Y                         = 199,
-	k_EControllerActionOrigin_Switch_LeftBumper                = 200,
-	k_EControllerActionOrigin_Switch_RightBumper               = 201,
-	k_EControllerActionOrigin_Switch_Plus                      = 202,
-	k_EControllerActionOrigin_Switch_Minus                     = 203,
-	k_EControllerActionOrigin_Switch_Capture                   = 204,
-	k_EControllerActionOrigin_Switch_LeftTrigger_Pull          = 205,
-	k_EControllerActionOrigin_Switch_LeftTrigger_Click         = 206,
-	k_EControllerActionOrigin_Switch_RightTrigger_Pull         = 207,
-	k_EControllerActionOrigin_Switch_RightTrigger_Click        = 208,
-	k_EControllerActionOrigin_Switch_LeftStick_Move            = 209,
-	k_EControllerActionOrigin_Switch_LeftStick_Click           = 210,
-	k_EControllerActionOrigin_Switch_LeftStick_DPadNorth       = 211,
-	k_EControllerActionOrigin_Switch_LeftStick_DPadSouth       = 212,
-	k_EControllerActionOrigin_Switch_LeftStick_DPadWest        = 213,
-	k_EControllerActionOrigin_Switch_LeftStick_DPadEast        = 214,
-	k_EControllerActionOrigin_Switch_RightStick_Move           = 215,
-	k_EControllerActionOrigin_Switch_RightStick_Click          = 216,
-	k_EControllerActionOrigin_Switch_RightStick_DPadNorth      = 217,
-	k_EControllerActionOrigin_Switch_RightStick_DPadSouth      = 218,
-	k_EControllerActionOrigin_Switch_RightStick_DPadWest       = 219,
-	k_EControllerActionOrigin_Switch_RightStick_DPadEast       = 220,
-	k_EControllerActionOrigin_Switch_DPad_North                = 221,
-	k_EControllerActionOrigin_Switch_DPad_South                = 222,
-	k_EControllerActionOrigin_Switch_DPad_West                 = 223,
-	k_EControllerActionOrigin_Switch_DPad_East                 = 224,
-	k_EControllerActionOrigin_Switch_ProGyro_Move              = 225,
-	k_EControllerActionOrigin_Switch_ProGyro_Pitch             = 226,
-	k_EControllerActionOrigin_Switch_ProGyro_Yaw               = 227,
-	k_EControllerActionOrigin_Switch_ProGyro_Roll              = 228,
-	k_EControllerActionOrigin_Switch_RightGyro_Move            = 229,
-	k_EControllerActionOrigin_Switch_RightGyro_Pitch           = 230,
-	k_EControllerActionOrigin_Switch_RightGyro_Yaw             = 231,
-	k_EControllerActionOrigin_Switch_RightGyro_Roll            = 232,
-	k_EControllerActionOrigin_Switch_LeftGyro_Move             = 233,
-	k_EControllerActionOrigin_Switch_LeftGyro_Pitch            = 234,
-	k_EControllerActionOrigin_Switch_LeftGyro_Yaw              = 235,
-	k_EControllerActionOrigin_Switch_LeftGyro_Roll             = 236,
-	k_EControllerActionOrigin_Switch_LeftGrip_Lower            = 237,
-	k_EControllerActionOrigin_Switch_LeftGrip_Upper            = 238,
-	k_EControllerActionOrigin_Switch_RightGrip_Lower           = 239,
-	k_EControllerActionOrigin_Switch_RightGrip_Upper           = 240,
-	k_EControllerActionOrigin_PS4_DPad_Move                    = 241,
-	k_EControllerActionOrigin_XBoxOne_DPad_Move                = 242,
-	k_EControllerActionOrigin_XBox360_DPad_Move                = 243,
-	k_EControllerActionOrigin_Switch_DPad_Move                 = 244,
-	k_EControllerActionOrigin_PS5_X                            = 245,
-	k_EControllerActionOrigin_PS5_Circle                       = 246,
-	k_EControllerActionOrigin_PS5_Triangle                     = 247,
-	k_EControllerActionOrigin_PS5_Square                       = 248,
-	k_EControllerActionOrigin_PS5_LeftBumper                   = 249,
-	k_EControllerActionOrigin_PS5_RightBumper                  = 250,
-	k_EControllerActionOrigin_PS5_Option                       = 251,
-	k_EControllerActionOrigin_PS5_Create                       = 252,
-	k_EControllerActionOrigin_PS5_Mute                         = 253,
-	k_EControllerActionOrigin_PS5_LeftPad_Touch                = 254,
-	k_EControllerActionOrigin_PS5_LeftPad_Swipe                = 255,
-	k_EControllerActionOrigin_PS5_LeftPad_Click                = 256,
-	k_EControllerActionOrigin_PS5_LeftPad_DPadNorth            = 257,
-	k_EControllerActionOrigin_PS5_LeftPad_DPadSouth            = 258,
-	k_EControllerActionOrigin_PS5_LeftPad_DPadWest             = 259,
-	k_EControllerActionOrigin_PS5_LeftPad_DPadEast             = 260,
-	k_EControllerActionOrigin_PS5_RightPad_Touch               = 261,
-	k_EControllerActionOrigin_PS5_RightPad_Swipe               = 262,
-	k_EControllerActionOrigin_PS5_RightPad_Click               = 263,
-	k_EControllerActionOrigin_PS5_RightPad_DPadNorth           = 264,
-	k_EControllerActionOrigin_PS5_RightPad_DPadSouth           = 265,
-	k_EControllerActionOrigin_PS5_RightPad_DPadWest            = 266,
-	k_EControllerActionOrigin_PS5_RightPad_DPadEast            = 267,
-	k_EControllerActionOrigin_PS5_CenterPad_Touch              = 268,
-	k_EControllerActionOrigin_PS5_CenterPad_Swipe              = 269,
-	k_EControllerActionOrigin_PS5_CenterPad_Click              = 270,
-	k_EControllerActionOrigin_PS5_CenterPad_DPadNorth          = 271,
-	k_EControllerActionOrigin_PS5_CenterPad_DPadSouth          = 272,
-	k_EControllerActionOrigin_PS5_CenterPad_DPadWest           = 273,
-	k_EControllerActionOrigin_PS5_CenterPad_DPadEast           = 274,
-	k_EControllerActionOrigin_PS5_LeftTrigger_Pull             = 275,
-	k_EControllerActionOrigin_PS5_LeftTrigger_Click            = 276,
-	k_EControllerActionOrigin_PS5_RightTrigger_Pull            = 277,
-	k_EControllerActionOrigin_PS5_RightTrigger_Click           = 278,
-	k_EControllerActionOrigin_PS5_LeftStick_Move               = 279,
-	k_EControllerActionOrigin_PS5_LeftStick_Click              = 280,
-	k_EControllerActionOrigin_PS5_LeftStick_DPadNorth          = 281,
-	k_EControllerActionOrigin_PS5_LeftStick_DPadSouth          = 282,
-	k_EControllerActionOrigin_PS5_LeftStick_DPadWest           = 283,
-	k_EControllerActionOrigin_PS5_LeftStick_DPadEast           = 284,
-	k_EControllerActionOrigin_PS5_RightStick_Move              = 285,
-	k_EControllerActionOrigin_PS5_RightStick_Click             = 286,
-	k_EControllerActionOrigin_PS5_RightStick_DPadNorth         = 287,
-	k_EControllerActionOrigin_PS5_RightStick_DPadSouth         = 288,
-	k_EControllerActionOrigin_PS5_RightStick_DPadWest          = 289,
-	k_EControllerActionOrigin_PS5_RightStick_DPadEast          = 290,
-	k_EControllerActionOrigin_PS5_DPad_Move                    = 291,
-	k_EControllerActionOrigin_PS5_DPad_North                   = 292,
-	k_EControllerActionOrigin_PS5_DPad_South                   = 293,
-	k_EControllerActionOrigin_PS5_DPad_West                    = 294,
-	k_EControllerActionOrigin_PS5_DPad_East                    = 295,
-	k_EControllerActionOrigin_PS5_Gyro_Move                    = 296,
-	k_EControllerActionOrigin_PS5_Gyro_Pitch                   = 297,
-	k_EControllerActionOrigin_PS5_Gyro_Yaw                     = 298,
-	k_EControllerActionOrigin_PS5_Gyro_Roll                    = 299,
-	k_EControllerActionOrigin_XBoxOne_LeftGrip_Lower           = 300,
-	k_EControllerActionOrigin_XBoxOne_LeftGrip_Upper           = 301,
-	k_EControllerActionOrigin_XBoxOne_RightGrip_Lower          = 302,
-	k_EControllerActionOrigin_XBoxOne_RightGrip_Upper          = 303,
-	k_EControllerActionOrigin_XBoxOne_Share                    = 304,
-	k_EControllerActionOrigin_SteamDeck_A                      = 305,
-	k_EControllerActionOrigin_SteamDeck_B                      = 306,
-	k_EControllerActionOrigin_SteamDeck_X                      = 307,
-	k_EControllerActionOrigin_SteamDeck_Y                      = 308,
-	k_EControllerActionOrigin_SteamDeck_L1                     = 309,
-	k_EControllerActionOrigin_SteamDeck_R1                     = 310,
-	k_EControllerActionOrigin_SteamDeck_Menu                   = 311,
-	k_EControllerActionOrigin_SteamDeck_View                   = 312,
-	k_EControllerActionOrigin_SteamDeck_LeftPad_Touch          = 313,
-	k_EControllerActionOrigin_SteamDeck_LeftPad_Swipe          = 314,
-	k_EControllerActionOrigin_SteamDeck_LeftPad_Click          = 315,
-	k_EControllerActionOrigin_SteamDeck_LeftPad_DPadNorth      = 316,
-	k_EControllerActionOrigin_SteamDeck_LeftPad_DPadSouth      = 317,
-	k_EControllerActionOrigin_SteamDeck_LeftPad_DPadWest       = 318,
-	k_EControllerActionOrigin_SteamDeck_LeftPad_DPadEast       = 319,
-	k_EControllerActionOrigin_SteamDeck_RightPad_Touch         = 320,
-	k_EControllerActionOrigin_SteamDeck_RightPad_Swipe         = 321,
-	k_EControllerActionOrigin_SteamDeck_RightPad_Click         = 322,
-	k_EControllerActionOrigin_SteamDeck_RightPad_DPadNorth     = 323,
-	k_EControllerActionOrigin_SteamDeck_RightPad_DPadSouth     = 324,
-	k_EControllerActionOrigin_SteamDeck_RightPad_DPadWest      = 325,
-	k_EControllerActionOrigin_SteamDeck_RightPad_DPadEast      = 326,
-	k_EControllerActionOrigin_SteamDeck_L2_SoftPull            = 327,
-	k_EControllerActionOrigin_SteamDeck_L2                     = 328,
-	k_EControllerActionOrigin_SteamDeck_R2_SoftPull            = 329,
-	k_EControllerActionOrigin_SteamDeck_R2                     = 330,
-	k_EControllerActionOrigin_SteamDeck_LeftStick_Move         = 331,
-	k_EControllerActionOrigin_SteamDeck_L3                     = 332,
-	k_EControllerActionOrigin_SteamDeck_LeftStick_DPadNorth    = 333,
-	k_EControllerActionOrigin_SteamDeck_LeftStick_DPadSouth    = 334,
-	k_EControllerActionOrigin_SteamDeck_LeftStick_DPadWest     = 335,
-	k_EControllerActionOrigin_SteamDeck_LeftStick_DPadEast     = 336,
-	k_EControllerActionOrigin_SteamDeck_LeftStick_Touch        = 337,
-	k_EControllerActionOrigin_SteamDeck_RightStick_Move        = 338,
-	k_EControllerActionOrigin_SteamDeck_R3                     = 339,
-	k_EControllerActionOrigin_SteamDeck_RightStick_DPadNorth   = 340,
-	k_EControllerActionOrigin_SteamDeck_RightStick_DPadSouth   = 341,
-	k_EControllerActionOrigin_SteamDeck_RightStick_DPadWest    = 342,
-	k_EControllerActionOrigin_SteamDeck_RightStick_DPadEast    = 343,
-	k_EControllerActionOrigin_SteamDeck_RightStick_Touch       = 344,
-	k_EControllerActionOrigin_SteamDeck_L4                     = 345,
-	k_EControllerActionOrigin_SteamDeck_R4                     = 346,
-	k_EControllerActionOrigin_SteamDeck_L5                     = 347,
-	k_EControllerActionOrigin_SteamDeck_R5                     = 348,
-	k_EControllerActionOrigin_SteamDeck_DPad_Move              = 349,
-	k_EControllerActionOrigin_SteamDeck_DPad_North             = 350,
-	k_EControllerActionOrigin_SteamDeck_DPad_South             = 351,
-	k_EControllerActionOrigin_SteamDeck_DPad_West              = 352,
-	k_EControllerActionOrigin_SteamDeck_DPad_East              = 353,
-	k_EControllerActionOrigin_SteamDeck_Gyro_Move              = 354,
-	k_EControllerActionOrigin_SteamDeck_Gyro_Pitch             = 355,
-	k_EControllerActionOrigin_SteamDeck_Gyro_Yaw               = 356,
-	k_EControllerActionOrigin_SteamDeck_Gyro_Roll              = 357,
-	k_EControllerActionOrigin_SteamDeck_Reserved1              = 358,
-	k_EControllerActionOrigin_SteamDeck_Reserved2              = 359,
-	k_EControllerActionOrigin_SteamDeck_Reserved3              = 360,
-	k_EControllerActionOrigin_SteamDeck_Reserved4              = 361,
-	k_EControllerActionOrigin_SteamDeck_Reserved5              = 362,
-	k_EControllerActionOrigin_SteamDeck_Reserved6              = 363,
-	k_EControllerActionOrigin_SteamDeck_Reserved7              = 364,
-	k_EControllerActionOrigin_SteamDeck_Reserved8              = 365,
-	k_EControllerActionOrigin_SteamDeck_Reserved9              = 366,
-	k_EControllerActionOrigin_SteamDeck_Reserved10             = 367,
-	k_EControllerActionOrigin_SteamDeck_Reserved11             = 368,
-	k_EControllerActionOrigin_SteamDeck_Reserved12             = 369,
-	k_EControllerActionOrigin_SteamDeck_Reserved13             = 370,
-	k_EControllerActionOrigin_SteamDeck_Reserved14             = 371,
-	k_EControllerActionOrigin_SteamDeck_Reserved15             = 372,
-	k_EControllerActionOrigin_SteamDeck_Reserved16             = 373,
-	k_EControllerActionOrigin_SteamDeck_Reserved17             = 374,
-	k_EControllerActionOrigin_SteamDeck_Reserved18             = 375,
-	k_EControllerActionOrigin_SteamDeck_Reserved19             = 376,
-	k_EControllerActionOrigin_SteamDeck_Reserved20             = 377,
-	k_EControllerActionOrigin_Count                            = 378,
-	k_EControllerActionOrigin_MaximumPossibleValue             = 32767,
+	None                             = 0,
+	A                                = 1,
+	B                                = 2,
+	X                                = 3,
+	Y                                = 4,
+	LeftBumper                       = 5,
+	RightBumper                      = 6,
+	LeftGrip                         = 7,
+	RightGrip                        = 8,
+	Start                            = 9,
+	Back                             = 10,
+	LeftPad_Touch                    = 11,
+	LeftPad_Swipe                    = 12,
+	LeftPad_Click                    = 13,
+	LeftPad_DPadNorth                = 14,
+	LeftPad_DPadSouth                = 15,
+	LeftPad_DPadWest                 = 16,
+	LeftPad_DPadEast                 = 17,
+	RightPad_Touch                   = 18,
+	RightPad_Swipe                   = 19,
+	RightPad_Click                   = 20,
+	RightPad_DPadNorth               = 21,
+	RightPad_DPadSouth               = 22,
+	RightPad_DPadWest                = 23,
+	RightPad_DPadEast                = 24,
+	LeftTrigger_Pull                 = 25,
+	LeftTrigger_Click                = 26,
+	RightTrigger_Pull                = 27,
+	RightTrigger_Click               = 28,
+	LeftSticMove                     = 29,
+	LeftSticClick                    = 30,
+	LeftSticDPadNorth                = 31,
+	LeftSticDPadSouth                = 32,
+	LeftSticDPadWest                 = 33,
+	LeftSticDPadEast                 = 34,
+	Gyro_Move                        = 35,
+	Gyro_Pitch                       = 36,
+	Gyro_Yaw                         = 37,
+	Gyro_Roll                        = 38,
+	PS4_X                            = 39,
+	PS4_Circle                       = 40,
+	PS4_Triangle                     = 41,
+	PS4_Square                       = 42,
+	PS4_LeftBumper                   = 43,
+	PS4_RightBumper                  = 44,
+	PS4_Options                      = 45,
+	PS4_Share                        = 46,
+	PS4_LeftPad_Touch                = 47,
+	PS4_LeftPad_Swipe                = 48,
+	PS4_LeftPad_Click                = 49,
+	PS4_LeftPad_DPadNorth            = 50,
+	PS4_LeftPad_DPadSouth            = 51,
+	PS4_LeftPad_DPadWest             = 52,
+	PS4_LeftPad_DPadEast             = 53,
+	PS4_RightPad_Touch               = 54,
+	PS4_RightPad_Swipe               = 55,
+	PS4_RightPad_Click               = 56,
+	PS4_RightPad_DPadNorth           = 57,
+	PS4_RightPad_DPadSouth           = 58,
+	PS4_RightPad_DPadWest            = 59,
+	PS4_RightPad_DPadEast            = 60,
+	PS4_CenterPad_Touch              = 61,
+	PS4_CenterPad_Swipe              = 62,
+	PS4_CenterPad_Click              = 63,
+	PS4_CenterPad_DPadNorth          = 64,
+	PS4_CenterPad_DPadSouth          = 65,
+	PS4_CenterPad_DPadWest           = 66,
+	PS4_CenterPad_DPadEast           = 67,
+	PS4_LeftTrigger_Pull             = 68,
+	PS4_LeftTrigger_Click            = 69,
+	PS4_RightTrigger_Pull            = 70,
+	PS4_RightTrigger_Click           = 71,
+	PS4_LeftSticMove                 = 72,
+	PS4_LeftSticClick                = 73,
+	PS4_LeftSticDPadNorth            = 74,
+	PS4_LeftSticDPadSouth            = 75,
+	PS4_LeftSticDPadWest             = 76,
+	PS4_LeftSticDPadEast             = 77,
+	PS4_RightSticMove                = 78,
+	PS4_RightSticClick               = 79,
+	PS4_RightSticDPadNorth           = 80,
+	PS4_RightSticDPadSouth           = 81,
+	PS4_RightSticDPadWest            = 82,
+	PS4_RightSticDPadEast            = 83,
+	PS4_DPad_North                   = 84,
+	PS4_DPad_South                   = 85,
+	PS4_DPad_West                    = 86,
+	PS4_DPad_East                    = 87,
+	PS4_Gyro_Move                    = 88,
+	PS4_Gyro_Pitch                   = 89,
+	PS4_Gyro_Yaw                     = 90,
+	PS4_Gyro_Roll                    = 91,
+	XBoxOne_A                        = 92,
+	XBoxOne_B                        = 93,
+	XBoxOne_X                        = 94,
+	XBoxOne_Y                        = 95,
+	XBoxOne_LeftBumper               = 96,
+	XBoxOne_RightBumper              = 97,
+	XBoxOne_Menu                     = 98,
+	XBoxOne_View                     = 99,
+	XBoxOne_LeftTrigger_Pull         = 100,
+	XBoxOne_LeftTrigger_Click        = 101,
+	XBoxOne_RightTrigger_Pull        = 102,
+	XBoxOne_RightTrigger_Click       = 103,
+	XBoxOne_LeftSticMove             = 104,
+	XBoxOne_LeftSticClick            = 105,
+	XBoxOne_LeftSticDPadNorth        = 106,
+	XBoxOne_LeftSticDPadSouth        = 107,
+	XBoxOne_LeftSticDPadWest         = 108,
+	XBoxOne_LeftSticDPadEast         = 109,
+	XBoxOne_RightSticMove            = 110,
+	XBoxOne_RightSticClick           = 111,
+	XBoxOne_RightSticDPadNorth       = 112,
+	XBoxOne_RightSticDPadSouth       = 113,
+	XBoxOne_RightSticDPadWest        = 114,
+	XBoxOne_RightSticDPadEast        = 115,
+	XBoxOne_DPad_North               = 116,
+	XBoxOne_DPad_South               = 117,
+	XBoxOne_DPad_West                = 118,
+	XBoxOne_DPad_East                = 119,
+	XBox360_A                        = 120,
+	XBox360_B                        = 121,
+	XBox360_X                        = 122,
+	XBox360_Y                        = 123,
+	XBox360_LeftBumper               = 124,
+	XBox360_RightBumper              = 125,
+	XBox360_Start                    = 126,
+	XBox360_Back                     = 127,
+	XBox360_LeftTrigger_Pull         = 128,
+	XBox360_LeftTrigger_Click        = 129,
+	XBox360_RightTrigger_Pull        = 130,
+	XBox360_RightTrigger_Click       = 131,
+	XBox360_LeftSticMove             = 132,
+	XBox360_LeftSticClick            = 133,
+	XBox360_LeftSticDPadNorth        = 134,
+	XBox360_LeftSticDPadSouth        = 135,
+	XBox360_LeftSticDPadWest         = 136,
+	XBox360_LeftSticDPadEast         = 137,
+	XBox360_RightSticMove            = 138,
+	XBox360_RightSticClick           = 139,
+	XBox360_RightSticDPadNorth       = 140,
+	XBox360_RightSticDPadSouth       = 141,
+	XBox360_RightSticDPadWest        = 142,
+	XBox360_RightSticDPadEast        = 143,
+	XBox360_DPad_North               = 144,
+	XBox360_DPad_South               = 145,
+	XBox360_DPad_West                = 146,
+	XBox360_DPad_East                = 147,
+	SteamV2_A                        = 148,
+	SteamV2_B                        = 149,
+	SteamV2_X                        = 150,
+	SteamV2_Y                        = 151,
+	SteamV2_LeftBumper               = 152,
+	SteamV2_RightBumper              = 153,
+	SteamV2_LeftGrip_Lower           = 154,
+	SteamV2_LeftGrip_Upper           = 155,
+	SteamV2_RightGrip_Lower          = 156,
+	SteamV2_RightGrip_Upper          = 157,
+	SteamV2_LeftBumper_Pressure      = 158,
+	SteamV2_RightBumper_Pressure     = 159,
+	SteamV2_LeftGrip_Pressure        = 160,
+	SteamV2_RightGrip_Pressure       = 161,
+	SteamV2_LeftGrip_Upper_Pressure  = 162,
+	SteamV2_RightGrip_Upper_Pressure = 163,
+	SteamV2_Start                    = 164,
+	SteamV2_Back                     = 165,
+	SteamV2_LeftPad_Touch            = 166,
+	SteamV2_LeftPad_Swipe            = 167,
+	SteamV2_LeftPad_Click            = 168,
+	SteamV2_LeftPad_Pressure         = 169,
+	SteamV2_LeftPad_DPadNorth        = 170,
+	SteamV2_LeftPad_DPadSouth        = 171,
+	SteamV2_LeftPad_DPadWest         = 172,
+	SteamV2_LeftPad_DPadEast         = 173,
+	SteamV2_RightPad_Touch           = 174,
+	SteamV2_RightPad_Swipe           = 175,
+	SteamV2_RightPad_Click           = 176,
+	SteamV2_RightPad_Pressure        = 177,
+	SteamV2_RightPad_DPadNorth       = 178,
+	SteamV2_RightPad_DPadSouth       = 179,
+	SteamV2_RightPad_DPadWest        = 180,
+	SteamV2_RightPad_DPadEast        = 181,
+	SteamV2_LeftTrigger_Pull         = 182,
+	SteamV2_LeftTrigger_Click        = 183,
+	SteamV2_RightTrigger_Pull        = 184,
+	SteamV2_RightTrigger_Click       = 185,
+	SteamV2_LeftSticMove             = 186,
+	SteamV2_LeftSticClick            = 187,
+	SteamV2_LeftSticDPadNorth        = 188,
+	SteamV2_LeftSticDPadSouth        = 189,
+	SteamV2_LeftSticDPadWest         = 190,
+	SteamV2_LeftSticDPadEast         = 191,
+	SteamV2_Gyro_Move                = 192,
+	SteamV2_Gyro_Pitch               = 193,
+	SteamV2_Gyro_Yaw                 = 194,
+	SteamV2_Gyro_Roll                = 195,
+	Switch_A                         = 196,
+	Switch_B                         = 197,
+	Switch_X                         = 198,
+	Switch_Y                         = 199,
+	Switch_LeftBumper                = 200,
+	Switch_RightBumper               = 201,
+	Switch_Plus                      = 202,
+	Switch_Minus                     = 203,
+	Switch_Capture                   = 204,
+	Switch_LeftTrigger_Pull          = 205,
+	Switch_LeftTrigger_Click         = 206,
+	Switch_RightTrigger_Pull         = 207,
+	Switch_RightTrigger_Click        = 208,
+	Switch_LeftSticMove              = 209,
+	Switch_LeftSticClick             = 210,
+	Switch_LeftSticDPadNorth         = 211,
+	Switch_LeftSticDPadSouth         = 212,
+	Switch_LeftSticDPadWest          = 213,
+	Switch_LeftSticDPadEast          = 214,
+	Switch_RightSticMove             = 215,
+	Switch_RightSticClick            = 216,
+	Switch_RightSticDPadNorth        = 217,
+	Switch_RightSticDPadSouth        = 218,
+	Switch_RightSticDPadWest         = 219,
+	Switch_RightSticDPadEast         = 220,
+	Switch_DPad_North                = 221,
+	Switch_DPad_South                = 222,
+	Switch_DPad_West                 = 223,
+	Switch_DPad_East                 = 224,
+	Switch_ProGyro_Move              = 225,
+	Switch_ProGyro_Pitch             = 226,
+	Switch_ProGyro_Yaw               = 227,
+	Switch_ProGyro_Roll              = 228,
+	Switch_RightGyro_Move            = 229,
+	Switch_RightGyro_Pitch           = 230,
+	Switch_RightGyro_Yaw             = 231,
+	Switch_RightGyro_Roll            = 232,
+	Switch_LeftGyro_Move             = 233,
+	Switch_LeftGyro_Pitch            = 234,
+	Switch_LeftGyro_Yaw              = 235,
+	Switch_LeftGyro_Roll             = 236,
+	Switch_LeftGrip_Lower            = 237,
+	Switch_LeftGrip_Upper            = 238,
+	Switch_RightGrip_Lower           = 239,
+	Switch_RightGrip_Upper           = 240,
+	PS4_DPad_Move                    = 241,
+	XBoxOne_DPad_Move                = 242,
+	XBox360_DPad_Move                = 243,
+	Switch_DPad_Move                 = 244,
+	PS5_X                            = 245,
+	PS5_Circle                       = 246,
+	PS5_Triangle                     = 247,
+	PS5_Square                       = 248,
+	PS5_LeftBumper                   = 249,
+	PS5_RightBumper                  = 250,
+	PS5_Option                       = 251,
+	PS5_Create                       = 252,
+	PS5_Mute                         = 253,
+	PS5_LeftPad_Touch                = 254,
+	PS5_LeftPad_Swipe                = 255,
+	PS5_LeftPad_Click                = 256,
+	PS5_LeftPad_DPadNorth            = 257,
+	PS5_LeftPad_DPadSouth            = 258,
+	PS5_LeftPad_DPadWest             = 259,
+	PS5_LeftPad_DPadEast             = 260,
+	PS5_RightPad_Touch               = 261,
+	PS5_RightPad_Swipe               = 262,
+	PS5_RightPad_Click               = 263,
+	PS5_RightPad_DPadNorth           = 264,
+	PS5_RightPad_DPadSouth           = 265,
+	PS5_RightPad_DPadWest            = 266,
+	PS5_RightPad_DPadEast            = 267,
+	PS5_CenterPad_Touch              = 268,
+	PS5_CenterPad_Swipe              = 269,
+	PS5_CenterPad_Click              = 270,
+	PS5_CenterPad_DPadNorth          = 271,
+	PS5_CenterPad_DPadSouth          = 272,
+	PS5_CenterPad_DPadWest           = 273,
+	PS5_CenterPad_DPadEast           = 274,
+	PS5_LeftTrigger_Pull             = 275,
+	PS5_LeftTrigger_Click            = 276,
+	PS5_RightTrigger_Pull            = 277,
+	PS5_RightTrigger_Click           = 278,
+	PS5_LeftSticMove                 = 279,
+	PS5_LeftSticClick                = 280,
+	PS5_LeftSticDPadNorth            = 281,
+	PS5_LeftSticDPadSouth            = 282,
+	PS5_LeftSticDPadWest             = 283,
+	PS5_LeftSticDPadEast             = 284,
+	PS5_RightSticMove                = 285,
+	PS5_RightSticClick               = 286,
+	PS5_RightSticDPadNorth           = 287,
+	PS5_RightSticDPadSouth           = 288,
+	PS5_RightSticDPadWest            = 289,
+	PS5_RightSticDPadEast            = 290,
+	PS5_DPad_Move                    = 291,
+	PS5_DPad_North                   = 292,
+	PS5_DPad_South                   = 293,
+	PS5_DPad_West                    = 294,
+	PS5_DPad_East                    = 295,
+	PS5_Gyro_Move                    = 296,
+	PS5_Gyro_Pitch                   = 297,
+	PS5_Gyro_Yaw                     = 298,
+	PS5_Gyro_Roll                    = 299,
+	XBoxOne_LeftGrip_Lower           = 300,
+	XBoxOne_LeftGrip_Upper           = 301,
+	XBoxOne_RightGrip_Lower          = 302,
+	XBoxOne_RightGrip_Upper          = 303,
+	XBoxOne_Share                    = 304,
+	SteamDecA                        = 305,
+	SteamDecB                        = 306,
+	SteamDecX                        = 307,
+	SteamDecY                        = 308,
+	SteamDecL1                       = 309,
+	SteamDecR1                       = 310,
+	SteamDecMenu                     = 311,
+	SteamDecView                     = 312,
+	SteamDecLeftPad_Touch            = 313,
+	SteamDecLeftPad_Swipe            = 314,
+	SteamDecLeftPad_Click            = 315,
+	SteamDecLeftPad_DPadNorth        = 316,
+	SteamDecLeftPad_DPadSouth        = 317,
+	SteamDecLeftPad_DPadWest         = 318,
+	SteamDecLeftPad_DPadEast         = 319,
+	SteamDecRightPad_Touch           = 320,
+	SteamDecRightPad_Swipe           = 321,
+	SteamDecRightPad_Click           = 322,
+	SteamDecRightPad_DPadNorth       = 323,
+	SteamDecRightPad_DPadSouth       = 324,
+	SteamDecRightPad_DPadWest        = 325,
+	SteamDecRightPad_DPadEast        = 326,
+	SteamDecL2_SoftPull              = 327,
+	SteamDecL2                       = 328,
+	SteamDecR2_SoftPull              = 329,
+	SteamDecR2                       = 330,
+	SteamDecLeftSticMove             = 331,
+	SteamDecL3                       = 332,
+	SteamDecLeftSticDPadNorth        = 333,
+	SteamDecLeftSticDPadSouth        = 334,
+	SteamDecLeftSticDPadWest         = 335,
+	SteamDecLeftSticDPadEast         = 336,
+	SteamDecLeftSticTouch            = 337,
+	SteamDecRightSticMove            = 338,
+	SteamDecR3                       = 339,
+	SteamDecRightSticDPadNorth       = 340,
+	SteamDecRightSticDPadSouth       = 341,
+	SteamDecRightSticDPadWest        = 342,
+	SteamDecRightSticDPadEast        = 343,
+	SteamDecRightSticTouch           = 344,
+	SteamDecL4                       = 345,
+	SteamDecR4                       = 346,
+	SteamDecL5                       = 347,
+	SteamDecR5                       = 348,
+	SteamDecDPad_Move                = 349,
+	SteamDecDPad_North               = 350,
+	SteamDecDPad_South               = 351,
+	SteamDecDPad_West                = 352,
+	SteamDecDPad_East                = 353,
+	SteamDecGyro_Move                = 354,
+	SteamDecGyro_Pitch               = 355,
+	SteamDecGyro_Yaw                 = 356,
+	SteamDecGyro_Roll                = 357,
+	SteamDecReserved1                = 358,
+	SteamDecReserved2                = 359,
+	SteamDecReserved3                = 360,
+	SteamDecReserved4                = 361,
+	SteamDecReserved5                = 362,
+	SteamDecReserved6                = 363,
+	SteamDecReserved7                = 364,
+	SteamDecReserved8                = 365,
+	SteamDecReserved9                = 366,
+	SteamDecReserved10               = 367,
+	SteamDecReserved11               = 368,
+	SteamDecReserved12               = 369,
+	SteamDecReserved13               = 370,
+	SteamDecReserved14               = 371,
+	SteamDecReserved15               = 372,
+	SteamDecReserved16               = 373,
+	SteamDecReserved17               = 374,
+	SteamDecReserved18               = 375,
+	SteamDecReserved19               = 376,
+	SteamDecReserved20               = 377,
+	Count                            = 378,
+	MaximumPossibleValue             = 32767,
 }
 
 ESteamControllerLEDFlag :: enum {
-	k_ESteamControllerLEDFlag_SetColor           = 0,
-	k_ESteamControllerLEDFlag_RestoreUserDefault = 1,
+	SetColor           = 0,
+	RestoreUserDefault = 1,
 }
 
 EUGCMatchingUGCType :: enum {
-	k_EUGCMatchingUGCType_Items              = 0,
-	k_EUGCMatchingUGCType_Items_Mtx          = 1,
-	k_EUGCMatchingUGCType_Items_ReadyToUse   = 2,
-	k_EUGCMatchingUGCType_Collections        = 3,
-	k_EUGCMatchingUGCType_Artwork            = 4,
-	k_EUGCMatchingUGCType_Videos             = 5,
-	k_EUGCMatchingUGCType_Screenshots        = 6,
-	k_EUGCMatchingUGCType_AllGuides          = 7,
-	k_EUGCMatchingUGCType_WebGuides          = 8,
-	k_EUGCMatchingUGCType_IntegratedGuides   = 9,
-	k_EUGCMatchingUGCType_UsableInGame       = 10,
-	k_EUGCMatchingUGCType_ControllerBindings = 11,
-	k_EUGCMatchingUGCType_GameManagedItems   = 12,
-	k_EUGCMatchingUGCType_All                = -1,
+	Items              = 0,
+	Items_Mtx          = 1,
+	Items_ReadyToUse   = 2,
+	Collections        = 3,
+	Artwork            = 4,
+	Videos             = 5,
+	Screenshots        = 6,
+	AllGuides          = 7,
+	WebGuides          = 8,
+	IntegratedGuides   = 9,
+	UsableInGame       = 10,
+	ControllerBindings = 11,
+	GameManagedItems   = 12,
+	All                = -1,
 }
 
 EUserUGCList :: enum {
-	k_EUserUGCList_Published     = 0,
-	k_EUserUGCList_VotedOn       = 1,
-	k_EUserUGCList_VotedUp       = 2,
-	k_EUserUGCList_VotedDown     = 3,
-	k_EUserUGCList_WillVoteLater = 4,
-	k_EUserUGCList_Favorited     = 5,
-	k_EUserUGCList_Subscribed    = 6,
-	k_EUserUGCList_UsedOrPlayed  = 7,
-	k_EUserUGCList_Followed      = 8,
+	Published     = 0,
+	VotedOn       = 1,
+	VotedUp       = 2,
+	VotedDown     = 3,
+	WillVoteLater = 4,
+	Favorited     = 5,
+	Subscribed    = 6,
+	UsedOrPlayed  = 7,
+	Followed      = 8,
 }
 
 EUserUGCListSortOrder :: enum {
-	k_EUserUGCListSortOrder_CreationOrderDesc    = 0,
-	k_EUserUGCListSortOrder_CreationOrderAsc     = 1,
-	k_EUserUGCListSortOrder_TitleAsc             = 2,
-	k_EUserUGCListSortOrder_LastUpdatedDesc      = 3,
-	k_EUserUGCListSortOrder_SubscriptionDateDesc = 4,
-	k_EUserUGCListSortOrder_VoteScoreDesc        = 5,
-	k_EUserUGCListSortOrder_ForModeration        = 6,
+	CreationOrderDesc    = 0,
+	CreationOrderAsc     = 1,
+	TitleAsc             = 2,
+	LastUpdatedDesc      = 3,
+	SubscriptionDateDesc = 4,
+	VoteScoreDesc        = 5,
+	ForModeration        = 6,
 }
 
 EUGCQuery :: enum {
-	k_EUGCQuery_RankedByVote                                  = 0,
-	k_EUGCQuery_RankedByPublicationDate                       = 1,
-	k_EUGCQuery_AcceptedForGameRankedByAcceptanceDate         = 2,
-	k_EUGCQuery_RankedByTrend                                 = 3,
-	k_EUGCQuery_FavoritedByFriendsRankedByPublicationDate     = 4,
-	k_EUGCQuery_CreatedByFriendsRankedByPublicationDate       = 5,
-	k_EUGCQuery_RankedByNumTimesReported                      = 6,
-	k_EUGCQuery_CreatedByFollowedUsersRankedByPublicationDate = 7,
-	k_EUGCQuery_NotYetRated                                   = 8,
-	k_EUGCQuery_RankedByTotalVotesAsc                         = 9,
-	k_EUGCQuery_RankedByVotesUp                               = 10,
-	k_EUGCQuery_RankedByTextSearch                            = 11,
-	k_EUGCQuery_RankedByTotalUniqueSubscriptions              = 12,
-	k_EUGCQuery_RankedByPlaytimeTrend                         = 13,
-	k_EUGCQuery_RankedByTotalPlaytime                         = 14,
-	k_EUGCQuery_RankedByAveragePlaytimeTrend                  = 15,
-	k_EUGCQuery_RankedByLifetimeAveragePlaytime               = 16,
-	k_EUGCQuery_RankedByPlaytimeSessionsTrend                 = 17,
-	k_EUGCQuery_RankedByLifetimePlaytimeSessions              = 18,
-	k_EUGCQuery_RankedByLastUpdatedDate                       = 19,
+	RankedByVote                                  = 0,
+	RankedByPublicationDate                       = 1,
+	AcceptedForGameRankedByAcceptanceDate         = 2,
+	RankedByTrend                                 = 3,
+	FavoritedByFriendsRankedByPublicationDate     = 4,
+	CreatedByFriendsRankedByPublicationDate       = 5,
+	RankedByNumTimesReported                      = 6,
+	CreatedByFollowedUsersRankedByPublicationDate = 7,
+	NotYetRated                                   = 8,
+	RankedByTotalVotesAsc                         = 9,
+	RankedByVotesUp                               = 10,
+	RankedByTextSearch                            = 11,
+	RankedByTotalUniqueSubscriptions              = 12,
+	RankedByPlaytimeTrend                         = 13,
+	RankedByTotalPlaytime                         = 14,
+	RankedByAveragePlaytimeTrend                  = 15,
+	RankedByLifetimeAveragePlaytime               = 16,
+	RankedByPlaytimeSessionsTrend                 = 17,
+	RankedByLifetimePlaytimeSessions              = 18,
+	RankedByLastUpdatedDate                       = 19,
 }
 
 EItemUpdateStatus :: enum {
-	k_EItemUpdateStatusInvalid              = 0,
-	k_EItemUpdateStatusPreparingConfig      = 1,
-	k_EItemUpdateStatusPreparingContent     = 2,
-	k_EItemUpdateStatusUploadingContent     = 3,
-	k_EItemUpdateStatusUploadingPreviewFile = 4,
-	k_EItemUpdateStatusCommittingChanges    = 5,
+	Invalid              = 0,
+	PreparingConfig      = 1,
+	PreparingContent     = 2,
+	UploadingContent     = 3,
+	UploadingPreviewFile = 4,
+	CommittingChanges    = 5,
 }
 
 EItemState :: enum {
-	k_EItemStateNone            = 0,
-	k_EItemStateSubscribed      = 1,
-	k_EItemStateLegacyItem      = 2,
-	k_EItemStateInstalled       = 4,
-	k_EItemStateNeedsUpdate     = 8,
-	k_EItemStateDownloading     = 16,
-	k_EItemStateDownloadPending = 32,
+	None            = 0,
+	Subscribed      = 1,
+	LegacyItem      = 2,
+	Installed       = 4,
+	NeedsUpdate     = 8,
+	Downloading     = 16,
+	DownloadPending = 32,
 }
 
 EItemStatistic :: enum {
-	k_EItemStatistic_NumSubscriptions                    = 0,
-	k_EItemStatistic_NumFavorites                        = 1,
-	k_EItemStatistic_NumFollowers                        = 2,
-	k_EItemStatistic_NumUniqueSubscriptions              = 3,
-	k_EItemStatistic_NumUniqueFavorites                  = 4,
-	k_EItemStatistic_NumUniqueFollowers                  = 5,
-	k_EItemStatistic_NumUniqueWebsiteViews               = 6,
-	k_EItemStatistic_ReportScore                         = 7,
-	k_EItemStatistic_NumSecondsPlayed                    = 8,
-	k_EItemStatistic_NumPlaytimeSessions                 = 9,
-	k_EItemStatistic_NumComments                         = 10,
-	k_EItemStatistic_NumSecondsPlayedDuringTimePeriod    = 11,
-	k_EItemStatistic_NumPlaytimeSessionsDuringTimePeriod = 12,
+	NumSubscriptions                    = 0,
+	NumFavorites                        = 1,
+	NumFollowers                        = 2,
+	NumUniqueSubscriptions              = 3,
+	NumUniqueFavorites                  = 4,
+	NumUniqueFollowers                  = 5,
+	NumUniqueWebsiteViews               = 6,
+	ReportScore                         = 7,
+	NumSecondsPlayed                    = 8,
+	NumPlaytimeSessions                 = 9,
+	NumComments                         = 10,
+	NumSecondsPlayedDuringTimePeriod    = 11,
+	NumPlaytimeSessionsDuringTimePeriod = 12,
 }
 
 EItemPreviewType :: enum {
-	k_EItemPreviewType_Image                          = 0,
-	k_EItemPreviewType_YouTubeVideo                   = 1,
-	k_EItemPreviewType_Sketchfab                      = 2,
-	k_EItemPreviewType_EnvironmentMap_HorizontalCross = 3,
-	k_EItemPreviewType_EnvironmentMap_LatLong         = 4,
-	k_EItemPreviewType_ReservedMax                    = 255,
+	Image                          = 0,
+	YouTubeVideo                   = 1,
+	Sketchfab                      = 2,
+	EnvironmentMap_HorizontalCross = 3,
+	EnvironmentMap_LatLong         = 4,
+	ReservedMax                    = 255,
 }
 
 ESteamItemFlags :: enum {
-	k_ESteamItemNoTrade  = 1,
-	k_ESteamItemRemoved  = 256,
-	k_ESteamItemConsumed = 512,
+	NoTrade  = 1,
+	Removed  = 256,
+	Consumed = 512,
 }
 
 EParentalFeature :: enum {
-	k_EFeatureInvalid       = 0,
-	k_EFeatureStore         = 1,
-	k_EFeatureCommunity     = 2,
-	k_EFeatureProfile       = 3,
-	k_EFeatureFriends       = 4,
-	k_EFeatureNews          = 5,
-	k_EFeatureTrading       = 6,
-	k_EFeatureSettings      = 7,
-	k_EFeatureConsole       = 8,
-	k_EFeatureBrowser       = 9,
-	k_EFeatureParentalSetup = 10,
-	k_EFeatureLibrary       = 11,
-	k_EFeatureTest          = 12,
-	k_EFeatureSiteLicense   = 13,
-	k_EFeatureMax           = 14,
+	Invalid       = 0,
+	Store         = 1,
+	Community     = 2,
+	Profile       = 3,
+	Friends       = 4,
+	News          = 5,
+	Trading       = 6,
+	Settings      = 7,
+	Console       = 8,
+	Browser       = 9,
+	ParentalSetup = 10,
+	Library       = 11,
+	Test          = 12,
+	SiteLicense   = 13,
+	Max           = 14,
 }
 
 ESteamDeviceFormFactor :: enum {
-	k_ESteamDeviceFormFactorUnknown  = 0,
-	k_ESteamDeviceFormFactorPhone    = 1,
-	k_ESteamDeviceFormFactorTablet   = 2,
-	k_ESteamDeviceFormFactorComputer = 3,
-	k_ESteamDeviceFormFactorTV       = 4,
+	Unknown  = 0,
+	Phone    = 1,
+	Tablet   = 2,
+	Computer = 3,
+	TV       = 4,
 }
 
 ESteamNetworkingAvailability :: enum {
-	k_ESteamNetworkingAvailability_CannotTry   = -102,
-	k_ESteamNetworkingAvailability_Failed      = -101,
-	k_ESteamNetworkingAvailability_Previously  = -100,
-	k_ESteamNetworkingAvailability_Retrying    = -10,
-	k_ESteamNetworkingAvailability_NeverTried  = 1,
-	k_ESteamNetworkingAvailability_Waiting     = 2,
-	k_ESteamNetworkingAvailability_Attempting  = 3,
-	k_ESteamNetworkingAvailability_Current     = 100,
-	k_ESteamNetworkingAvailability_Unknown     = 0,
-	k_ESteamNetworkingAvailability__Force32bit = 2147483647,
+	CannotTry   = -102,
+	Failed      = -101,
+	Previously  = -100,
+	Retrying    = -10,
+	NeverTried  = 1,
+	Waiting     = 2,
+	Attempting  = 3,
+	Current     = 100,
+	Unknown     = 0,
+	_Force32bit = 2147483647,
 }
 
 ESteamNetworkingIdentityType :: enum {
-	k_ESteamNetworkingIdentityType_Invalid        = 0,
-	k_ESteamNetworkingIdentityType_SteamID        = 16,
-	k_ESteamNetworkingIdentityType_XboxPairwiseID = 17,
-	k_ESteamNetworkingIdentityType_SonyPSN        = 18,
-	k_ESteamNetworkingIdentityType_GoogleStadia   = 19,
-	k_ESteamNetworkingIdentityType_IPAddress      = 1,
-	k_ESteamNetworkingIdentityType_GenericString  = 2,
-	k_ESteamNetworkingIdentityType_GenericBytes   = 3,
-	k_ESteamNetworkingIdentityType_UnknownType    = 4,
-	k_ESteamNetworkingIdentityType__Force32bit    = 2147483647,
+	Invalid        = 0,
+	SteamID        = 16,
+	XboxPairwiseID = 17,
+	SonyPSN        = 18,
+	GoogleStadia   = 19,
+	IPAddress      = 1,
+	GenericString  = 2,
+	GenericBytes   = 3,
+	UnknownType    = 4,
+	_Force32bit    = 2147483647,
 }
 
 ESteamNetworkingFakeIPType :: enum {
-	k_ESteamNetworkingFakeIPType_Invalid     = 0,
-	k_ESteamNetworkingFakeIPType_NotFake     = 1,
-	k_ESteamNetworkingFakeIPType_GlobalIPv4  = 2,
-	k_ESteamNetworkingFakeIPType_LocalIPv4   = 3,
-	k_ESteamNetworkingFakeIPType__Force32Bit = 2147483647,
+	Invalid     = 0,
+	NotFake     = 1,
+	GlobalIPv4  = 2,
+	LocalIPv4   = 3,
+	_Force32Bit = 2147483647,
 }
 
 ESteamNetworkingConnectionState :: enum {
-	k_ESteamNetworkingConnectionState_None                   = 0,
-	k_ESteamNetworkingConnectionState_Connecting             = 1,
-	k_ESteamNetworkingConnectionState_FindingRoute           = 2,
-	k_ESteamNetworkingConnectionState_Connected              = 3,
-	k_ESteamNetworkingConnectionState_ClosedByPeer           = 4,
-	k_ESteamNetworkingConnectionState_ProblemDetectedLocally = 5,
-	k_ESteamNetworkingConnectionState_FinWait                = -1,
-	k_ESteamNetworkingConnectionState_Linger                 = -2,
-	k_ESteamNetworkingConnectionState_Dead                   = -3,
-	k_ESteamNetworkingConnectionState__Force32Bit            = 2147483647,
+	None                   = 0,
+	Connecting             = 1,
+	FindingRoute           = 2,
+	Connected              = 3,
+	ClosedByPeer           = 4,
+	ProblemDetectedLocally = 5,
+	FinWait                = -1,
+	Linger                 = -2,
+	Dead                   = -3,
+	_Force32Bit            = 2147483647,
 }
 
 ESteamNetConnectionEnd :: enum {
-	k_ESteamNetConnectionEnd_Invalid                          = 0,
-	k_ESteamNetConnectionEnd_App_Min                          = 1000,
-	k_ESteamNetConnectionEnd_App_Generic                      = 1000,
-	k_ESteamNetConnectionEnd_App_Max                          = 1999,
-	k_ESteamNetConnectionEnd_AppException_Min                 = 2000,
-	k_ESteamNetConnectionEnd_AppException_Generic             = 2000,
-	k_ESteamNetConnectionEnd_AppException_Max                 = 2999,
-	k_ESteamNetConnectionEnd_Local_Min                        = 3000,
-	k_ESteamNetConnectionEnd_Local_OfflineMode                = 3001,
-	k_ESteamNetConnectionEnd_Local_ManyRelayConnectivity      = 3002,
-	k_ESteamNetConnectionEnd_Local_HostedServerPrimaryRelay   = 3003,
-	k_ESteamNetConnectionEnd_Local_NetworkConfig              = 3004,
-	k_ESteamNetConnectionEnd_Local_Rights                     = 3005,
-	k_ESteamNetConnectionEnd_Local_P2P_ICE_NoPublicAddresses  = 3006,
-	k_ESteamNetConnectionEnd_Local_Max                        = 3999,
-	k_ESteamNetConnectionEnd_Remote_Min                       = 4000,
-	k_ESteamNetConnectionEnd_Remote_Timeout                   = 4001,
-	k_ESteamNetConnectionEnd_Remote_BadCrypt                  = 4002,
-	k_ESteamNetConnectionEnd_Remote_BadCert                   = 4003,
-	k_ESteamNetConnectionEnd_Remote_BadProtocolVersion        = 4006,
-	k_ESteamNetConnectionEnd_Remote_P2P_ICE_NoPublicAddresses = 4007,
-	k_ESteamNetConnectionEnd_Remote_Max                       = 4999,
-	k_ESteamNetConnectionEnd_Misc_Min                         = 5000,
-	k_ESteamNetConnectionEnd_Misc_Generic                     = 5001,
-	k_ESteamNetConnectionEnd_Misc_InternalError               = 5002,
-	k_ESteamNetConnectionEnd_Misc_Timeout                     = 5003,
-	k_ESteamNetConnectionEnd_Misc_SteamConnectivity           = 5005,
-	k_ESteamNetConnectionEnd_Misc_NoRelaySessionsToClient     = 5006,
-	k_ESteamNetConnectionEnd_Misc_P2P_Rendezvous              = 5008,
-	k_ESteamNetConnectionEnd_Misc_P2P_NAT_Firewall            = 5009,
-	k_ESteamNetConnectionEnd_Misc_PeerSentNoConnection        = 5010,
-	k_ESteamNetConnectionEnd_Misc_Max                         = 5999,
-	k_ESteamNetConnectionEnd__Force32Bit                      = 2147483647,
+	Invalid                          = 0,
+	App_Min                          = 1000,
+	App_Generic                      = 1000,
+	App_Max                          = 1999,
+	AppException_Min                 = 2000,
+	AppException_Generic             = 2000,
+	AppException_Max                 = 2999,
+	Local_Min                        = 3000,
+	Local_OfflineMode                = 3001,
+	Local_ManyRelayConnectivity      = 3002,
+	Local_HostedServerPrimaryRelay   = 3003,
+	Local_NetworkConfig              = 3004,
+	Local_Rights                     = 3005,
+	Local_P2P_ICE_NoPublicAddresses  = 3006,
+	Local_Max                        = 3999,
+	Remote_Min                       = 4000,
+	Remote_Timeout                   = 4001,
+	Remote_BadCrypt                  = 4002,
+	Remote_BadCert                   = 4003,
+	Remote_BadProtocolVersion        = 4006,
+	Remote_P2P_ICE_NoPublicAddresses = 4007,
+	Remote_Max                       = 4999,
+	Misc_Min                         = 5000,
+	Misc_Generic                     = 5001,
+	Misc_InternalError               = 5002,
+	Misc_Timeout                     = 5003,
+	Misc_SteamConnectivity           = 5005,
+	Misc_NoRelaySessionsToClient     = 5006,
+	Misc_P2P_Rendezvous              = 5008,
+	Misc_P2P_NAT_Firewall            = 5009,
+	Misc_PeerSentNoConnection        = 5010,
+	Misc_Max                         = 5999,
+	_Force32Bit                      = 2147483647,
 }
 
 ESteamNetworkingConfigScope :: enum {
-	k_ESteamNetworkingConfig_Global           = 1,
-	k_ESteamNetworkingConfig_SocketsInterface = 2,
-	k_ESteamNetworkingConfig_ListenSocket     = 3,
-	k_ESteamNetworkingConfig_Connection       = 4,
-	k_ESteamNetworkingConfigScope__Force32Bit = 2147483647,
+	Global           = 1,
+	SocketsInterface = 2,
+	ListenSocket     = 3,
+	Connection       = 4,
+	_Force32Bit      = 2147483647,
 }
 
 ESteamNetworkingConfigDataType :: enum {
-	k_ESteamNetworkingConfig_Int32               = 1,
-	k_ESteamNetworkingConfig_Int64               = 2,
-	k_ESteamNetworkingConfig_f32                 = 3,
-	k_ESteamNetworkingConfig_String              = 4,
-	k_ESteamNetworkingConfig_Ptr                 = 5,
-	k_ESteamNetworkingConfigDataType__Force32Bit = 2147483647,
+	Int32       = 1,
+	Int64       = 2,
+	Float       = 3,
+	String      = 4,
+	Ptr         = 5,
+	_Force32Bit = 2147483647,
 }
 
 ESteamNetworkingConfigValue :: enum {
-	k_ESteamNetworkingConfig_Invalid                                        = 0,
-	k_ESteamNetworkingConfig_TimeoutInitial                                 = 24,
-	k_ESteamNetworkingConfig_TimeoutConnected                               = 25,
-	k_ESteamNetworkingConfig_SendBufferSize                                 = 9,
-	k_ESteamNetworkingConfig_ConnectionUserData                             = 40,
-	k_ESteamNetworkingConfig_SendRateMin                                    = 10,
-	k_ESteamNetworkingConfig_SendRateMax                                    = 11,
-	k_ESteamNetworkingConfig_NagleTime                                      = 12,
-	k_ESteamNetworkingConfig_IP_AllowWithoutAuth                            = 23,
-	k_ESteamNetworkingConfig_MTU_PacketSize                                 = 32,
-	k_ESteamNetworkingConfig_MTU_DataSize                                   = 33,
-	k_ESteamNetworkingConfig_Unencrypted                                    = 34,
-	k_ESteamNetworkingConfig_SymmetricConnect                               = 37,
-	k_ESteamNetworkingConfig_LocalVirtualPort                               = 38,
-	k_ESteamNetworkingConfig_DualWifi_Enable                                = 39,
-	k_ESteamNetworkingConfig_EnableDiagnosticsUI                            = 46,
-	k_ESteamNetworkingConfig_FakePacketLoss_Send                            = 2,
-	k_ESteamNetworkingConfig_FakePacketLoss_Recv                            = 3,
-	k_ESteamNetworkingConfig_FakePacketLag_Send                             = 4,
-	k_ESteamNetworkingConfig_FakePacketLag_Recv                             = 5,
-	k_ESteamNetworkingConfig_FakePacketReorder_Send                         = 6,
-	k_ESteamNetworkingConfig_FakePacketReorder_Recv                         = 7,
-	k_ESteamNetworkingConfig_FakePacketReorder_Time                         = 8,
-	k_ESteamNetworkingConfig_FakePacketDup_Send                             = 26,
-	k_ESteamNetworkingConfig_FakePacketDup_Recv                             = 27,
-	k_ESteamNetworkingConfig_FakePacketDup_TimeMax                          = 28,
-	k_ESteamNetworkingConfig_PacketTraceMaxBytes                            = 41,
-	k_ESteamNetworkingConfig_FakeRateLimit_Send_Rate                        = 42,
-	k_ESteamNetworkingConfig_FakeRateLimit_Send_Burst                       = 43,
-	k_ESteamNetworkingConfig_FakeRateLimit_Recv_Rate                        = 44,
-	k_ESteamNetworkingConfig_FakeRateLimit_Recv_Burst                       = 45,
-	k_ESteamNetworkingConfig_Callback_ConnectionStatusChanged               = 201,
-	k_ESteamNetworkingConfig_Callback_AuthStatusChanged                     = 202,
-	k_ESteamNetworkingConfig_Callback_RelayNetworkStatusChanged             = 203,
-	k_ESteamNetworkingConfig_Callback_MessagesSessionRequest                = 204,
-	k_ESteamNetworkingConfig_Callback_MessagesSessionFailed                 = 205,
-	k_ESteamNetworkingConfig_Callback_CreateConnectionSignaling             = 206,
-	k_ESteamNetworkingConfig_Callback_FakeIPResult                          = 207,
-	k_ESteamNetworkingConfig_P2P_STUN_ServerList                            = 103,
-	k_ESteamNetworkingConfig_P2P_Transport_ICE_Enable                       = 104,
-	k_ESteamNetworkingConfig_P2P_Transport_ICE_Penalty                      = 105,
-	k_ESteamNetworkingConfig_P2P_Transport_SDR_Penalty                      = 106,
-	k_ESteamNetworkingConfig_P2P_TURN_ServerList                            = 107,
-	k_ESteamNetworkingConfig_P2P_TURN_UserList                              = 108,
-	k_ESteamNetworkingConfig_P2P_TURN_PassList                              = 109,
-	k_ESteamNetworkingConfig_P2P_Transport_ICE_Implementation               = 110,
-	k_ESteamNetworkingConfig_SDRClient_ConsecutitivePingTimeoutsFailInitial = 19,
-	k_ESteamNetworkingConfig_SDRClient_ConsecutitivePingTimeoutsFail        = 20,
-	k_ESteamNetworkingConfig_SDRClient_MinPingsBeforePingAccurate           = 21,
-	k_ESteamNetworkingConfig_SDRClient_SingleSocket                         = 22,
-	k_ESteamNetworkingConfig_SDRClient_ForceRelayCluster                    = 29,
-	k_ESteamNetworkingConfig_SDRClient_DebugTicketAddress                   = 30,
-	k_ESteamNetworkingConfig_SDRClient_ForceProxyAddr                       = 31,
-	k_ESteamNetworkingConfig_SDRClient_FakeClusterPing                      = 36,
-	k_ESteamNetworkingConfig_LogLevel_AckRTT                                = 13,
-	k_ESteamNetworkingConfig_LogLevel_PacketDecode                          = 14,
-	k_ESteamNetworkingConfig_LogLevel_Message                               = 15,
-	k_ESteamNetworkingConfig_LogLevel_PacketGaps                            = 16,
-	k_ESteamNetworkingConfig_LogLevel_P2PRendezvous                         = 17,
-	k_ESteamNetworkingConfig_LogLevel_SDRRelayPings                         = 18,
-	k_ESteamNetworkingConfig_DELETED_EnumerateDevVars                       = 35,
-	k_ESteamNetworkingConfigValue__Force32Bit                               = 2147483647,
+	Invalid                                        = 0,
+	TimeoutInitial                                 = 24,
+	TimeoutConnected                               = 25,
+	SendBufferSize                                 = 9,
+	ConnectionUserData                             = 40,
+	SendRateMin                                    = 10,
+	SendRateMax                                    = 11,
+	NagleTime                                      = 12,
+	IP_AllowWithoutAuth                            = 23,
+	MTU_PacketSize                                 = 32,
+	MTU_DataSize                                   = 33,
+	Unencrypted                                    = 34,
+	SymmetricConnect                               = 37,
+	LocalVirtualPort                               = 38,
+	DualWifi_Enable                                = 39,
+	EnableDiagnosticsUI                            = 46,
+	FakePacketLoss_Send                            = 2,
+	FakePacketLoss_Recv                            = 3,
+	FakePacketLag_Send                             = 4,
+	FakePacketLag_Recv                             = 5,
+	FakePacketReorder_Send                         = 6,
+	FakePacketReorder_Recv                         = 7,
+	FakePacketReorder_Time                         = 8,
+	FakePacketDup_Send                             = 26,
+	FakePacketDup_Recv                             = 27,
+	FakePacketDup_TimeMax                          = 28,
+	PacketTraceMaxBytes                            = 41,
+	FakeRateLimit_Send_Rate                        = 42,
+	FakeRateLimit_Send_Burst                       = 43,
+	FakeRateLimit_Recv_Rate                        = 44,
+	FakeRateLimit_Recv_Burst                       = 45,
+	CallbacConnectionStatusChanged                 = 201,
+	CallbacAuthStatusChanged                       = 202,
+	CallbacRelayNetworkStatusChanged               = 203,
+	CallbacMessagesSessionRequest                  = 204,
+	CallbacMessagesSessionFailed                   = 205,
+	CallbacCreateConnectionSignaling               = 206,
+	CallbacFakeIPResult                            = 207,
+	P2P_STUN_ServerList                            = 103,
+	P2P_Transport_ICE_Enable                       = 104,
+	P2P_Transport_ICE_Penalty                      = 105,
+	P2P_Transport_SDR_Penalty                      = 106,
+	P2P_TURN_ServerList                            = 107,
+	P2P_TURN_UserList                              = 108,
+	P2P_TURN_PassList                              = 109,
+	P2P_Transport_ICE_Implementation               = 110,
+	SDRClient_ConsecutitivePingTimeoutsFailInitial = 19,
+	SDRClient_ConsecutitivePingTimeoutsFail        = 20,
+	SDRClient_MinPingsBeforePingAccurate           = 21,
+	SDRClient_SingleSocket                         = 22,
+	SDRClient_ForceRelayCluster                    = 29,
+	SDRClient_DebugTicketAddress                   = 30,
+	SDRClient_ForceProxyAddr                       = 31,
+	SDRClient_FakeClusterPing                      = 36,
+	LogLevel_AckRTT                                = 13,
+	LogLevel_PacketDecode                          = 14,
+	LogLevel_Message                               = 15,
+	LogLevel_PacketGaps                            = 16,
+	LogLevel_P2PRendezvous                         = 17,
+	LogLevel_SDRRelayPings                         = 18,
+	DELETED_EnumerateDevVars                       = 35,
+	_Force32Bit                                    = 2147483647,
 }
 
 ESteamNetworkingGetConfigValueResult :: enum {
-	k_ESteamNetworkingGetConfigValue_BadValue          = -1,
-	k_ESteamNetworkingGetConfigValue_BadScopeObj       = -2,
-	k_ESteamNetworkingGetConfigValue_BufferTooSmall    = -3,
-	k_ESteamNetworkingGetConfigValue_OK                = 1,
-	k_ESteamNetworkingGetConfigValue_OKInherited       = 2,
-	k_ESteamNetworkingGetConfigValueResult__Force32Bit = 2147483647,
+	BadValue           = -1,
+	BadScopeObj        = -2,
+	BufferTooSmall     = -3,
+	OK                 = 1,
+	OKInherited        = 2,
+	Result__Force32Bit = 2147483647,
 }
 
 ESteamNetworkingSocketsDebugOutputType :: enum {
-	k_ESteamNetworkingSocketsDebugOutputType_None        = 0,
-	k_ESteamNetworkingSocketsDebugOutputType_Bug         = 1,
-	k_ESteamNetworkingSocketsDebugOutputType_Error       = 2,
-	k_ESteamNetworkingSocketsDebugOutputType_Important   = 3,
-	k_ESteamNetworkingSocketsDebugOutputType_Warning     = 4,
-	k_ESteamNetworkingSocketsDebugOutputType_Msg         = 5,
-	k_ESteamNetworkingSocketsDebugOutputType_Verbose     = 6,
-	k_ESteamNetworkingSocketsDebugOutputType_Debug       = 7,
-	k_ESteamNetworkingSocketsDebugOutputType_Everything  = 8,
-	k_ESteamNetworkingSocketsDebugOutputType__Force32Bit = 2147483647,
+	None        = 0,
+	Bug         = 1,
+	Error       = 2,
+	Important   = 3,
+	Warning     = 4,
+	Msg         = 5,
+	Verbose     = 6,
+	Debug       = 7,
+	Everything  = 8,
+	_Force32Bit = 2147483647,
 }
 
 EServerMode :: enum {
-	eServerModeInvalid                 = 0,
-	eServerModeNoAuthentication        = 1,
-	eServerModeAuthentication          = 2,
-	eServerModeAuthenticationAndSecure = 3,
+	Invalid                 = 0,
+	NoAuthentication        = 1,
+	Authentication          = 2,
+	AuthenticationAndSecure = 3,
 }
 
 IHTMLSurface_EHTMLMouseButton :: enum {
-	eHTMLMouseButton_Left   = 0,
-	eHTMLMouseButton_Right  = 1,
-	eHTMLMouseButton_Middle = 2,
+	Left   = 0,
+	Right  = 1,
+	Middle = 2,
 }
 
 IHTMLSurface_EMouseCursor :: enum {
-	dc_user           = 0,
-	dc_none           = 1,
-	dc_arrow          = 2,
-	dc_ibeam          = 3,
-	dc_hourglass      = 4,
-	dc_waitarrow      = 5,
-	dc_crosshair      = 6,
-	dc_up             = 7,
-	dc_sizenw         = 8,
-	dc_sizese         = 9,
-	dc_sizene         = 10,
-	dc_sizesw         = 11,
-	dc_sizew          = 12,
-	dc_sizee          = 13,
-	dc_sizen          = 14,
-	dc_sizes          = 15,
-	dc_sizewe         = 16,
-	dc_sizens         = 17,
-	dc_sizeall        = 18,
-	dc_no             = 19,
-	dc_hand           = 20,
-	dc_blank          = 21,
-	dc_middle_pan     = 22,
-	dc_north_pan      = 23,
-	dc_north_east_pan = 24,
-	dc_east_pan       = 25,
-	dc_south_east_pan = 26,
-	dc_south_pan      = 27,
-	dc_south_west_pan = 28,
-	dc_west_pan       = 29,
-	dc_north_west_pan = 30,
-	dc_alias          = 31,
-	dc_cell           = 32,
-	dc_colresize      = 33,
-	dc_copycur        = 34,
-	dc_verticaltext   = 35,
-	dc_rowresize      = 36,
-	dc_zoomin         = 37,
-	dc_zoomout        = 38,
-	dc_help           = 39,
-	dc_custom         = 40,
-	dc_last           = 41,
+	user           = 0,
+	none           = 1,
+	arrow          = 2,
+	ibeam          = 3,
+	hourglass      = 4,
+	waitarrow      = 5,
+	crosshair      = 6,
+	up             = 7,
+	sizenw         = 8,
+	sizese         = 9,
+	sizene         = 10,
+	sizesw         = 11,
+	sizew          = 12,
+	sizee          = 13,
+	sizen          = 14,
+	sizes          = 15,
+	sizewe         = 16,
+	sizens         = 17,
+	sizeall        = 18,
+	no             = 19,
+	hand           = 20,
+	blank          = 21,
+	middle_pan     = 22,
+	north_pan      = 23,
+	north_east_pan = 24,
+	east_pan       = 25,
+	south_east_pan = 26,
+	south_pan      = 27,
+	south_west_pan = 28,
+	west_pan       = 29,
+	north_west_pan = 30,
+	alias          = 31,
+	cell           = 32,
+	colresize      = 33,
+	copycur        = 34,
+	verticaltext   = 35,
+	rowresize      = 36,
+	zoomin         = 37,
+	zoomout        = 38,
+	help           = 39,
+	custom         = 40,
+	last           = 41,
 }
 
 IHTMLSurface_EHTMLKeyModifiers :: enum {
-	k_eHTMLKeyModifier_None      = 0,
-	k_eHTMLKeyModifier_AltDown   = 1,
-	k_eHTMLKeyModifier_CtrlDown  = 2,
-	k_eHTMLKeyModifier_ShiftDown = 4,
+	None      = 0,
+	AltDown   = 1,
+	CtrlDown  = 2,
+	ShiftDown = 4,
 }
 
-SteamIPAddress_t :: struct #packed {
-	m_rgubIPv6: [16]uint8,
-	m_eType:    ESteamIPType,
+SteamIPAddress :: struct #packed {
+	rgubIPv6: [16]uint8,
+	eType:    ESteamIPType,
 }
 
-FriendGameInfo_t :: struct #packed {
-	m_gameID:       CGameID,
-	m_unGameIP:     uint32,
-	m_usGamePort:   uint16,
-	m_usQueryPort:  uint16,
-	m_steamIDLobby: CSteamID,
+FriendGameInfo :: struct #packed {
+	gameID:       CGameID,
+	unGameIP:     uint32,
+	usGamePort:   uint16,
+	usQueryPort:  uint16,
+	steamIDLobby: CSteamID,
 }
 
-MatchMakingKeyValuePair_t :: struct #packed {
-	m_szKey:   [256]u8,
-	m_szValue: [256]u8,
+MatchMakingKeyValuePair :: struct #packed {
+	szKey:   [256]u8,
+	szValue: [256]u8,
 }
 
-servernetadr_t :: struct #packed {
-	m_usConnectionPort: uint16,
-	m_usQueryPort:      uint16,
-	m_unIP:             uint32,
+servernetadr :: struct #packed {
+	usConnectionPort: uint16,
+	usQueryPort:      uint16,
+	unIP:             uint32,
 }
 
-gameserveritem_t :: struct #packed {
-	m_NetAdr:                 servernetadr_t,
-	m_nPing:                  c.int,
-	m_bHadSuccessfulResponse: bool,
-	m_bDoNotRefresh:          bool,
-	m_szGameDir:              [32]u8,
-	m_szMap:                  [32]u8,
-	m_szGameDescription:      [64]u8,
-	m_nAppID:                 uint32,
-	m_nPlayers:               c.int,
-	m_nMaxPlayers:            c.int,
-	m_nBotPlayers:            c.int,
-	m_bPassword:              bool,
-	m_bSecure:                bool,
-	m_ulTimeLastPlayed:       uint32,
-	m_nServerVersion:         c.int,
-	m_szServerName:           [64]u8,
-	m_szGameTags:             [128]u8,
-	m_steamID:                CSteamID,
+gameserveritet :: struct #packed {
+	NetAdr:                 servernetadr,
+	nPing:                  c.int,
+	bHadSuccessfulResponse: bool,
+	bDoNotRefresh:          bool,
+	szGameDir:              [32]u8,
+	szMap:                  [32]u8,
+	szGameDescription:      [64]u8,
+	nAppID:                 uint32,
+	nPlayers:               c.int,
+	nMaxPlayers:            c.int,
+	nBotPlayers:            c.int,
+	bPassword:              bool,
+	bSecure:                bool,
+	ulTimeLastPlayed:       uint32,
+	nServerVersion:         c.int,
+	szServerName:           [64]u8,
+	szGameTags:             [128]u8,
+	steamID:                CSteamID,
 }
 
-SteamPartyBeaconLocation_t :: struct #packed {
-	m_eType:        ESteamPartyBeaconLocationType,
-	m_ulLocationID: uint64,
+SteamPartyBeaconLocation :: struct #packed {
+	eType:        ESteamPartyBeaconLocationType,
+	ulLocationID: uint64,
 }
 
-SteamParamStringArray_t :: struct #packed {
-	m_ppStrings:   ^cstring,
-	m_nNumStrings: int32,
+SteamParamStringArray :: struct #packed {
+	ppStrings:   ^cstring,
+	nNumStrings: int32,
 }
 
-LeaderboardEntry_t :: struct #packed {
-	m_steamIDUser: CSteamID,
-	m_nGlobalRank: int32,
-	m_nScore:      int32,
-	m_cDetails:    int32,
-	m_hUGC:        UGCHandle_t,
+LeaderboardEntry :: struct #packed {
+	steamIDUser: CSteamID,
+	nGlobalRank: int32,
+	nScore:      int32,
+	cDetails:    int32,
+	hUGC:        UGCHandle,
 }
 
-P2PSessionState_t :: struct #packed {
-	m_bConnectionActive:     uint8,
-	m_bConnecting:           uint8,
-	m_eP2PSessionError:      uint8,
-	m_bUsingRelay:           uint8,
-	m_nBytesQueuedForSend:   int32,
-	m_nPacketsQueuedForSend: int32,
-	m_nRemoteIP:             uint32,
-	m_nRemotePort:           uint16,
+P2PSessionState :: struct #packed {
+	bConnectionActive:     uint8,
+	bConnecting:           uint8,
+	eP2PSessionError:      uint8,
+	bUsingRelay:           uint8,
+	nBytesQueuedForSend:   int32,
+	nPacketsQueuedForSend: int32,
+	nRemoteIP:             uint32,
+	nRemotePort:           uint16,
 }
 
-InputAnalogActionData_t :: struct #packed {
+InputAnalogActionData :: struct #packed {
 	eMode:   EInputSourceMode,
 	x:       f32,
 	y:       f32,
 	bActive: bool,
 }
 
-InputDigitalActionData_t :: struct #packed {
+InputDigitalActionData :: struct #packed {
 	bState:  bool,
 	bActive: bool,
 }
 
-InputMotionData_t :: struct #packed {
+InputMotionData :: struct #packed {
 	rotQuatX:  f32,
 	rotQuatY:  f32,
 	rotQuatZ:  f32,
@@ -3631,121 +3631,124 @@ InputMotionData_t :: struct #packed {
 	rotVelZ:   f32,
 }
 
-SteamUGCDetails_t :: struct #packed {
-	m_nPublishedFileId:     PublishedFileId_t,
-	m_eResult:              EResult,
-	m_eFileType:            EWorkshopFileType,
-	m_nCreatorAppID:        AppId_t,
-	m_nConsumerAppID:       AppId_t,
-	m_rgchTitle:            [129]u8,
-	m_rgchDescription:      [8000]u8,
-	m_ulSteamIDOwner:       uint64,
-	m_rtimeCreated:         uint32,
-	m_rtimeUpdated:         uint32,
-	m_rtimeAddedToUserList: uint32,
-	m_eVisibility:          ERemoteStoragePublishedFileVisibility,
-	m_bBanned:              bool,
-	m_bAcceptedForUse:      bool,
-	m_bTagsTruncated:       bool,
-	m_rgchTags:             [1025]u8,
-	m_hFile:                UGCHandle_t,
-	m_hPreviewFile:         UGCHandle_t,
-	m_pchFileName:          [260]u8,
-	m_nFileSize:            int32,
-	m_nPreviewFileSize:     int32,
-	m_rgchURL:              [256]u8,
-	m_unVotesUp:            uint32,
-	m_unVotesDown:          uint32,
-	m_flScore:              f32,
-	m_unNumChildren:        uint32,
+SteamUGCDetails :: struct #packed {
+	nPublishedFileId:     PublishedFileId,
+	eResult:              EResult,
+	eFileType:            EWorkshopFileType,
+	nCreatorAppID:        AppId,
+	nConsumerAppID:       AppId,
+	rgchTitle:            [129]u8,
+	rgchDescription:      [8000]u8,
+	ulSteamIDOwner:       uint64,
+	rtimeCreated:         uint32,
+	rtimeUpdated:         uint32,
+	rtimeAddedToUserList: uint32,
+	eVisibility:          ERemoteStoragePublishedFileVisibility,
+	bBanned:              bool,
+	bAcceptedForUse:      bool,
+	bTagsTruncated:       bool,
+	rgchTags:             [1025]u8,
+	hFile:                UGCHandle,
+	hPreviewFile:         UGCHandle,
+	pchFileName:          [260]u8,
+	nFileSize:            int32,
+	nPreviewFileSize:     int32,
+	rgchURL:              [256]u8,
+	unVotesUp:            uint32,
+	unVotesDown:          uint32,
+	flScore:              f32,
+	unNumChildren:        uint32,
 }
 
-SteamItemDetails_t :: struct #packed {
-	m_itemId:      SteamItemInstanceID_t,
-	m_iDefinition: SteamItemDef_t,
-	m_unQuantity:  uint16,
-	m_unFlags:     uint16,
+SteamItemDetails :: struct #packed {
+	itemId:      SteamItemInstanceID,
+	iDefinition: SteamItemDef,
+	unQuantity:  uint16,
+	unFlags:     uint16,
 }
 
 SteamNetworkingIPAddr :: struct #packed {
-	m_ipv6: [16]uint8,
-	m_port: uint16,
+	ipv6: [16]uint8,
+	port: uint16,
 }
 
 SteamNetworkingIdentity :: struct #packed {
-	m_eType:              ESteamNetworkingIdentityType,
-	m_cbSize:             c.int,
-	m_szUnknownRawString: [128]u8,
+	eType:              ESteamNetworkingIdentityType,
+	cbSize:             c.int,
+	szUnknownRawString: [128]u8,
 }
 
-SteamNetConnectionInfo_t :: struct #packed {
-	m_identityRemote:          SteamNetworkingIdentity,
-	m_nUserData:               int64,
-	m_hListenSocket:           HSteamListenSocket,
-	m_addrRemote:              SteamNetworkingIPAddr,
-	m__pad1:                   uint16,
-	m_idPOPRemote:             SteamNetworkingPOPID,
-	m_idPOPRelay:              SteamNetworkingPOPID,
-	m_eState:                  ESteamNetworkingConnectionState,
-	m_eEndReason:              c.int,
-	m_szEndDebug:              [128]u8,
-	m_szConnectionDescription: [128]u8,
-	m_nFlags:                  c.int,
-	reserved:                  [63]uint32,
+SteamNetConnectionInfo :: struct #packed {
+	identityRemote:          SteamNetworkingIdentity,
+	nUserData:               int64,
+	hListenSocket:           HSteamListenSocket,
+	addrRemote:              SteamNetworkingIPAddr,
+	_pad1:                   uint16,
+	idPOPRemote:             SteamNetworkingPOPID,
+	idPOPRelay:              SteamNetworkingPOPID,
+	eState:                  ESteamNetworkingConnectionState,
+	eEndReason:              c.int,
+	szEndDebug:              [128]u8,
+	szConnectionDescription: [128]u8,
+	nFlags:                  c.int,
+	reserved:                [63]uint32,
 }
 
-SteamNetConnectionRealTimeStatus_t :: struct #packed {
-	m_eState:                    ESteamNetworkingConnectionState,
-	m_nPing:                     c.int,
-	m_flConnectionQualityLocal:  f32,
-	m_flConnectionQualityRemote: f32,
-	m_flOutPacketsPerSec:        f32,
-	m_flOutBytesPerSec:          f32,
-	m_flInPacketsPerSec:         f32,
-	m_flInBytesPerSec:           f32,
-	m_nSendRateBytesPerSecond:   c.int,
-	m_cbPendingUnreliable:       c.int,
-	m_cbPendingReliable:         c.int,
-	m_cbSentUnackedReliable:     c.int,
-	m_usecQueueTime:             SteamNetworkingMicroseconds,
-	reserved:                    [16]uint32,
+SteamNetConnectionRealTimeStatus :: struct #packed {
+	eState:                    ESteamNetworkingConnectionState,
+	nPing:                     c.int,
+	flConnectionQualityLocal:  f32,
+	flConnectionQualityRemote: f32,
+	flOutPacketsPerSec:        f32,
+	flOutBytesPerSec:          f32,
+	flInPacketsPerSec:         f32,
+	flInBytesPerSec:           f32,
+	nSendRateBytesPerSecond:   c.int,
+	cbPendingUnreliable:       c.int,
+	cbPendingReliable:         c.int,
+	cbSentUnackedReliable:     c.int,
+	usecQueueTime:             SteamNetworkingMicroseconds,
+	reserved:                  [16]uint32,
 }
 
-SteamNetConnectionRealTimeLaneStatus_t :: struct #packed {
-	m_cbPendingUnreliable:   c.int,
-	m_cbPendingReliable:     c.int,
-	m_cbSentUnackedReliable: c.int,
-	_reservePad1:            c.int,
-	m_usecQueueTime:         SteamNetworkingMicroseconds,
-	reserved:                [10]uint32,
+SteamNetConnectionRealTimeLaneStatus :: struct #packed {
+	cbPendingUnreliable:   c.int,
+	cbPendingReliable:     c.int,
+	cbSentUnackedReliable: c.int,
+	_reservePad1:          c.int,
+	usecQueueTime:         SteamNetworkingMicroseconds,
+	reserved:              [10]uint32,
 }
 
-SteamNetworkPingLocation_t :: struct #packed {
-	m_data: [512]uint8,
+SteamNetworkPingLocation :: struct #packed {
+	data: [512]uint8,
 }
 
-SteamNetworkingConfigValue_t :: struct #packed {
-	m_eValue:    ESteamNetworkingConfigValue,
-	m_eDataType: ESteamNetworkingConfigDataType,
-	m_int64:     int64,
+SteamNetworkingConfigValue :: struct #packed {
+	eValue:    ESteamNetworkingConfigValue,
+	eDataType: ESteamNetworkingConfigDataType,
+	int64:     int64,
 }
 
 SteamDatagramHostedAddress :: struct #packed {
-	m_cbSize: c.int,
-	m_data:   [128]u8,
+	cbSize: c.int,
+	data:   [128]u8,
 }
 
 SteamDatagramGameCoordinatorServerLogin :: struct #packed {
-	m_identity:  SteamNetworkingIdentity,
-	m_routing:   SteamDatagramHostedAddress,
-	m_nAppID:    AppId_t,
-	m_rtime:     RTime32,
-	m_cbAppData: c.int,
-	m_appData:   [2048]u8,
+	identity:  SteamNetworkingIdentity,
+	routing:   SteamDatagramHostedAddress,
+	nAppID:    AppId,
+	rtime:     RTime32,
+	cbAppData: c.int,
+	appData:   [2048]u8,
 }
 
-SteamAPIWarningMessageHook_t :: proc "c" (_: c.int, _: cstring)
+SteamAPIWarningMessageHook :: proc "c" (_: c.int, _: cstring)
 
+// ----------------
+// Accessor Aliases
+// ----------------
 
 Client :: SteamClient
 User: proc "c" () -> ^IUser : SteamUser_v021
@@ -3774,6 +3777,10 @@ ParentalSettings: proc "c" () -> ^IParentalSettings : SteamParentalSettings_v001
 RemotePlay: proc "c" () -> ^IRemotePlay : SteamRemotePlay_v001
 NetworkingMessages_SteamAPI: proc "c" () -> ^INetworkingMessages : SteamNetworkingMessages_SteamAPI_v002
 NetworkingSockets_SteamAPI: proc "c" () -> ^INetworkingSockets : SteamNetworkingSockets_SteamAPI_v012
+
+// ---------------
+// Interface types
+// ---------------
 
 IClient :: distinct rawptr
 IUser :: distinct rawptr
@@ -3843,7 +3850,7 @@ foreign lib {
 	// Returns true if the current process should terminate. Steam is now re-launching your application.
 	//
 	// Returns false if no action needs to be taken. This means that your executable was started through
-	// the Steam client, or a steam_appid.txt file is present in your game's directory (for development).
+	// the Steam client, or a steaappid.txt file is present in your game's directory (for development).
 	// Your current process should continue if false is returned.
 	//
 	// NOTE: If you use the Steam DRM wrapper on your primary executable file, this check is unnecessary
@@ -3874,7 +3881,7 @@ foreign lib {
 	// DEPRECATED - implementation is Windows only, and the path returned is a UTF-8 string which must be converted to UTF-16 for use with Win32 APIs
 	SteamAPI_GetSteamInstallPath :: proc "c" () -> cstring ---
 
-	// sets whether or not Steam_RunCallbacks() should do a try {} catch (...) {} around calls to issuing callbacks
+	// sets whether or not SteaRunCallbacks() should do a try {} catch (...) {} around calls to issuing callbacks
 	// This is ignored if you are using the manual callback dispatch method
 	bTryCatchCallbacks :: proc "c" () ---
 
@@ -3885,9 +3892,9 @@ foreign lib {
 	// pchDate should be of the format "Mmm dd yyyy" (such as from the __ DATE __ macro )
 	// pchTime should be of the format "hh:mm:ss" (such as from the __ TIME __ macro )
 	// bFullMemoryDumps (Win32 only) -- writes out a uuid-full.dmp in the client/dumps folder
-	// pvContext-- can be NULL, will be the void * context passed into m_pfnPreMinidumpCallback
-	// PFNPreMinidumpCallback m_pfnPreMinidumpCallback   -- optional callback which occurs just before a .dmp file is written during a crash.  Applications can hook this to allow adding additional information into the .dmp comment stream.
-	UseBreakpadCrashHandler :: proc "c" (pchVersion: cstring, pchDate: cstring, pchTime: cstring, bFullMemoryDumps: bool, pvContext: rawptr, m_pfnPreMinidumpCallback: PFNPreMinidumpCallback) ---
+	// pvContext-- can be NULL, will be the void * context passed into pfnPreMinidumpCallback
+	// PFNPreMinidumpCallback pfnPreMinidumpCallback   -- optional callback which occurs just before a .dmp file is written during a crash.  Applications can hook this to allow adding additional information into the .dmp comment stream.
+	UseBreakpadCrashHandler :: proc "c" (pchVersion: cstring, pchDate: cstring, pchTime: cstring, bFullMemoryDumps: bool, pvContext: rawptr, pfnPreMinidumpCallback: PFNPreMinidumpCallback) ---
 	SetBreakpadAppID :: proc "c" (unAppID: uint32) ---
 
 	/// Inform the API that you wish to use manual event dispatch.  This must be called after SteamAPI_Init, but before
@@ -3901,8 +3908,8 @@ foreign lib {
 	ManualDispatch_FreeLastCallback :: proc "c" (hSteamPipe: HSteamPipe) ---
 
 	/// Return the call result for the specified call on the specified pipe.  You really should
-	/// only call this in a handler for SteamAPICallCompleted_t callback.
-	ManualDispatch_GetAPICallResult :: proc "c" (hSteamPipe: HSteamPipe, hSteamAPICall: SteamAPICall_t, pCallback: rawptr, cubCallback: c.int, iCallbackExpected: c.int, pbFailed: ^bool) -> bool ---
+	/// only call this in a handler for SteamAPICallCompletedcallback.
+	ManualDispatch_GetAPICallResult :: proc "c" (hSteamPipe: HSteamPipe, hSteamAPICall: SteamAPICall, pCallback: rawptr, cubCallback: c.int, iCallbackExpected: c.int, pbFailed: ^bool) -> bool ---
 }
 
 // ---------
@@ -3952,7 +3959,7 @@ foreign lib {
 	Client_ReleaseUser :: proc(self: ^IClient, hSteamPipe: HSteamPipe, hUser: HSteamUser) ---
 	Client_GetIUser :: proc(self: ^IClient, hSteamUser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^IUser ---
 	Client_GetIGameServer :: proc(self: ^IClient, hSteamUser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^IGameServer ---
-	Client_SetLocalIPBinding :: proc(self: ^IClient, unIP: ^SteamIPAddress_t, usPort: uint16) ---
+	Client_SetLocalIPBinding :: proc(self: ^IClient, unIP: ^SteamIPAddress, usPort: uint16) ---
 	Client_GetIFriends :: proc(self: ^IClient, hSteamUser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^IFriends ---
 	Client_GetIUtils :: proc(self: ^IClient, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^IUtils ---
 	Client_GetIMatchmaking :: proc(self: ^IClient, hSteamUser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^IMatchmaking ---
@@ -3966,7 +3973,7 @@ foreign lib {
 	Client_GetIScreenshots :: proc(self: ^IClient, hSteamuser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^IScreenshots ---
 	Client_GetIGameSearch :: proc(self: ^IClient, hSteamuser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^IGameSearch ---
 	Client_GetIPCCallCount :: proc(self: ^IClient) -> uint32 ---
-	Client_SetWarningMessageHook :: proc(self: ^IClient, pFunction: SteamAPIWarningMessageHook_t) ---
+	Client_SetWarningMessageHook :: proc(self: ^IClient, pFunction: SteamAPIWarningMessageHook) ---
 	Client_BShutdownIfAllPipesClosed :: proc(self: ^IClient) -> bool ---
 	Client_GetIHTTP :: proc(self: ^IClient, hSteamuser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^IHTTP ---
 	Client_GetIController :: proc(self: ^IClient, hSteamUser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^IController ---
@@ -3999,46 +4006,46 @@ foreign lib {
 	User_BeginAuthSession :: proc(self: ^IUser, pAuthTicket: rawptr, cbAuthTicket: c.int, steamID: CSteamID) -> EBeginAuthSessionResult ---
 	User_EndAuthSession :: proc(self: ^IUser, steamID: CSteamID) ---
 	User_CancelAuthTicket :: proc(self: ^IUser, hAuthTicket: HAuthTicket) ---
-	User_UserHasLicenseForApp :: proc(self: ^IUser, steamID: CSteamID, appID: AppId_t) -> EUserHasLicenseForAppResult ---
+	User_UserHasLicenseForApp :: proc(self: ^IUser, steamID: CSteamID, appID: AppId) -> EUserHasLicenseForAppResult ---
 	User_BIsBehindNAT :: proc(self: ^IUser) -> bool ---
 	User_AdvertiseGame :: proc(self: ^IUser, steamIDGameServer: CSteamID, unIPServer: uint32, usPortServer: uint16) ---
-	User_RequestEncryptedAppTicket :: proc(self: ^IUser, pDataToInclude: rawptr, cbDataToInclude: c.int) -> SteamAPICall_t ---
+	User_RequestEncryptedAppTicket :: proc(self: ^IUser, pDataToInclude: rawptr, cbDataToInclude: c.int) -> SteamAPICall ---
 	User_GetEncryptedAppTicket :: proc(self: ^IUser, pTicket: rawptr, cbMaxTicket: c.int, pcbTicket: ^uint32) -> bool ---
 	User_GetGameBadgeLevel :: proc(self: ^IUser, nSeries: c.int, bFoil: bool) -> c.int ---
 	User_GetPlayerSteamLevel :: proc(self: ^IUser) -> c.int ---
-	User_RequestStoreAuthURL :: proc(self: ^IUser, pchRedirectURL: cstring) -> SteamAPICall_t ---
+	User_RequestStoreAuthURL :: proc(self: ^IUser, pchRedirectURL: cstring) -> SteamAPICall ---
 	User_BIsPhoneVerified :: proc(self: ^IUser) -> bool ---
 	User_BIsTwoFactorEnabled :: proc(self: ^IUser) -> bool ---
 	User_BIsPhoneIdentifying :: proc(self: ^IUser) -> bool ---
 	User_BIsPhoneRequiringVerification :: proc(self: ^IUser) -> bool ---
-	User_GetMarketEligibility :: proc(self: ^IUser) -> SteamAPICall_t ---
-	User_GetDurationControl :: proc(self: ^IUser) -> SteamAPICall_t ---
+	User_GetMarketEligibility :: proc(self: ^IUser) -> SteamAPICall ---
+	User_GetDurationControl :: proc(self: ^IUser) -> SteamAPICall ---
 	User_BSetDurationControlOnlineState :: proc(self: ^IUser, eNewState: EDurationControlOnlineState) -> bool ---
 
 	Friends_GetPersonaName :: proc(self: ^IFriends) -> cstring ---
-	Friends_SetPersonaName :: proc(self: ^IFriends, pchPersonaName: cstring) -> SteamAPICall_t ---
+	Friends_SetPersonaName :: proc(self: ^IFriends, pchPersonaName: cstring) -> SteamAPICall ---
 	Friends_GetPersonaState :: proc(self: ^IFriends) -> EPersonaState ---
 	Friends_GetFriendCount :: proc(self: ^IFriends, iFriendFlags: c.int) -> c.int ---
 	Friends_GetFriendByIndex :: proc(self: ^IFriends, iFriend: c.int, iFriendFlags: c.int) -> CSteamID ---
 	Friends_GetFriendRelationship :: proc(self: ^IFriends, steamIDFriend: CSteamID) -> EFriendRelationship ---
 	Friends_GetFriendPersonaState :: proc(self: ^IFriends, steamIDFriend: CSteamID) -> EPersonaState ---
 	Friends_GetFriendPersonaName :: proc(self: ^IFriends, steamIDFriend: CSteamID) -> cstring ---
-	Friends_GetFriendGamePlayed :: proc(self: ^IFriends, steamIDFriend: CSteamID, pFriendGameInfo: ^FriendGameInfo_t) -> bool ---
+	Friends_GetFriendGamePlayed :: proc(self: ^IFriends, steamIDFriend: CSteamID, pFriendGameInfo: ^FriendGameInfo) -> bool ---
 	Friends_GetFriendPersonaNameHistory :: proc(self: ^IFriends, steamIDFriend: CSteamID, iPersonaName: c.int) -> cstring ---
 	Friends_GetFriendSteamLevel :: proc(self: ^IFriends, steamIDFriend: CSteamID) -> c.int ---
 	Friends_GetPlayerNickname :: proc(self: ^IFriends, steamIDPlayer: CSteamID) -> cstring ---
 	Friends_GetFriendsGroupCount :: proc(self: ^IFriends) -> c.int ---
-	Friends_GetFriendsGroupIDByIndex :: proc(self: ^IFriends, iFG: c.int) -> FriendsGroupID_t ---
-	Friends_GetFriendsGroupName :: proc(self: ^IFriends, friendsGroupID: FriendsGroupID_t) -> cstring ---
-	Friends_GetFriendsGroupMembersCount :: proc(self: ^IFriends, friendsGroupID: FriendsGroupID_t) -> c.int ---
-	Friends_GetFriendsGroupMembersList :: proc(self: ^IFriends, friendsGroupID: FriendsGroupID_t, pOutSteamIDMembers: ^CSteamID, nMembersCount: c.int) ---
+	Friends_GetFriendsGroupIDByIndex :: proc(self: ^IFriends, iFG: c.int) -> FriendsGroupID ---
+	Friends_GetFriendsGroupName :: proc(self: ^IFriends, friendsGroupID: FriendsGroupID) -> cstring ---
+	Friends_GetFriendsGroupMembersCount :: proc(self: ^IFriends, friendsGroupID: FriendsGroupID) -> c.int ---
+	Friends_GetFriendsGroupMembersList :: proc(self: ^IFriends, friendsGroupID: FriendsGroupID, pOutSteamIDMembers: ^CSteamID, nMembersCount: c.int) ---
 	Friends_HasFriend :: proc(self: ^IFriends, steamIDFriend: CSteamID, iFriendFlags: c.int) -> bool ---
 	Friends_GetClanCount :: proc(self: ^IFriends) -> c.int ---
 	Friends_GetClanByIndex :: proc(self: ^IFriends, iClan: c.int) -> CSteamID ---
 	Friends_GetClanName :: proc(self: ^IFriends, steamIDClan: CSteamID) -> cstring ---
 	Friends_GetClanTag :: proc(self: ^IFriends, steamIDClan: CSteamID) -> cstring ---
 	Friends_GetClanActivityCounts :: proc(self: ^IFriends, steamIDClan: CSteamID, pnOnline: ^int, pnInGame: ^int, pnChatting: ^int) -> bool ---
-	Friends_DownloadClanActivityCounts :: proc(self: ^IFriends, psteamIDClans: ^CSteamID, cClansToRequest: c.int) -> SteamAPICall_t ---
+	Friends_DownloadClanActivityCounts :: proc(self: ^IFriends, psteamIDClans: ^CSteamID, cClansToRequest: c.int) -> SteamAPICall ---
 	Friends_GetFriendCountFromSource :: proc(self: ^IFriends, steamIDSource: CSteamID) -> c.int ---
 	Friends_GetFriendFromSourceByIndex :: proc(self: ^IFriends, steamIDSource: CSteamID, iFriend: c.int) -> CSteamID ---
 	Friends_IsUserInSource :: proc(self: ^IFriends, steamIDUser: CSteamID, steamIDSource: CSteamID) -> bool ---
@@ -4046,14 +4053,14 @@ foreign lib {
 	Friends_ActivateGameOverlay :: proc(self: ^IFriends, pchDialog: cstring) ---
 	Friends_ActivateGameOverlayToUser :: proc(self: ^IFriends, pchDialog: cstring, steamID: CSteamID) ---
 	Friends_ActivateGameOverlayToWebPage :: proc(self: ^IFriends, pchURL: cstring, eMode: EActivateGameOverlayToWebPageMode) ---
-	Friends_ActivateGameOverlayToStore :: proc(self: ^IFriends, nAppID: AppId_t, eFlag: EOverlayToStoreFlag) ---
+	Friends_ActivateGameOverlayToStore :: proc(self: ^IFriends, nAppID: AppId, eFlag: EOverlayToStoreFlag) ---
 	Friends_SetPlayedWith :: proc(self: ^IFriends, steamIDUserPlayedWith: CSteamID) ---
 	Friends_ActivateGameOverlayInviteDialog :: proc(self: ^IFriends, steamIDLobby: CSteamID) ---
 	Friends_GetSmallFriendAvatar :: proc(self: ^IFriends, steamIDFriend: CSteamID) -> c.int ---
 	Friends_GetMediumFriendAvatar :: proc(self: ^IFriends, steamIDFriend: CSteamID) -> c.int ---
 	Friends_GetLargeFriendAvatar :: proc(self: ^IFriends, steamIDFriend: CSteamID) -> c.int ---
 	Friends_RequestUserInformation :: proc(self: ^IFriends, steamIDUser: CSteamID, bRequireNameOnly: bool) -> bool ---
-	Friends_RequestClanOfficerList :: proc(self: ^IFriends, steamIDClan: CSteamID) -> SteamAPICall_t ---
+	Friends_RequestClanOfficerList :: proc(self: ^IFriends, steamIDClan: CSteamID) -> SteamAPICall ---
 	Friends_GetClanOwner :: proc(self: ^IFriends, steamIDClan: CSteamID) -> CSteamID ---
 	Friends_GetClanOfficerCount :: proc(self: ^IFriends, steamIDClan: CSteamID) -> c.int ---
 	Friends_GetClanOfficerByIndex :: proc(self: ^IFriends, steamIDClan: CSteamID, iOfficer: c.int) -> CSteamID ---
@@ -4068,8 +4075,8 @@ foreign lib {
 	Friends_GetCoplayFriendCount :: proc(self: ^IFriends) -> c.int ---
 	Friends_GetCoplayFriend :: proc(self: ^IFriends, iCoplayFriend: c.int) -> CSteamID ---
 	Friends_GetFriendCoplayTime :: proc(self: ^IFriends, steamIDFriend: CSteamID) -> c.int ---
-	Friends_GetFriendCoplayGame :: proc(self: ^IFriends, steamIDFriend: CSteamID) -> AppId_t ---
-	Friends_JoinClanChatRoom :: proc(self: ^IFriends, steamIDClan: CSteamID) -> SteamAPICall_t ---
+	Friends_GetFriendCoplayGame :: proc(self: ^IFriends, steamIDFriend: CSteamID) -> AppId ---
+	Friends_JoinClanChatRoom :: proc(self: ^IFriends, steamIDClan: CSteamID) -> SteamAPICall ---
 	Friends_LeaveClanChatRoom :: proc(self: ^IFriends, steamIDClan: CSteamID) -> bool ---
 	Friends_GetClanChatMemberCount :: proc(self: ^IFriends, steamIDClan: CSteamID) -> c.int ---
 	Friends_GetChatMemberByIndex :: proc(self: ^IFriends, steamIDClan: CSteamID, iUser: c.int) -> CSteamID ---
@@ -4082,16 +4089,16 @@ foreign lib {
 	Friends_SetListenForFriendsMessages :: proc(self: ^IFriends, bInterceptEnabled: bool) -> bool ---
 	Friends_ReplyToFriendMessage :: proc(self: ^IFriends, steamIDFriend: CSteamID, pchMsgToSend: cstring) -> bool ---
 	Friends_GetFriendMessage :: proc(self: ^IFriends, steamIDFriend: CSteamID, iMessageID: c.int, pvData: rawptr, cubData: c.int, peChatEntryType: ^EChatEntryType) -> c.int ---
-	Friends_GetFollowerCount :: proc(self: ^IFriends, steamID: CSteamID) -> SteamAPICall_t ---
-	Friends_IsFollowing :: proc(self: ^IFriends, steamID: CSteamID) -> SteamAPICall_t ---
-	Friends_EnumerateFollowingList :: proc(self: ^IFriends, unStartIndex: uint32) -> SteamAPICall_t ---
+	Friends_GetFollowerCount :: proc(self: ^IFriends, steamID: CSteamID) -> SteamAPICall ---
+	Friends_IsFollowing :: proc(self: ^IFriends, steamID: CSteamID) -> SteamAPICall ---
+	Friends_EnumerateFollowingList :: proc(self: ^IFriends, unStartIndex: uint32) -> SteamAPICall ---
 	Friends_IsClanPublic :: proc(self: ^IFriends, steamIDClan: CSteamID) -> bool ---
 	Friends_IsClanOfficialGameGroup :: proc(self: ^IFriends, steamIDClan: CSteamID) -> bool ---
 	Friends_GetNumChatsWithUnreadPriorityMessages :: proc(self: ^IFriends) -> c.int ---
 	Friends_ActivateGameOverlayRemotePlayTogetherInviteDialog :: proc(self: ^IFriends, steamIDLobby: CSteamID) ---
 	Friends_RegisterProtocolInOverlayBrowser :: proc(self: ^IFriends, pchProtocol: cstring) -> bool ---
 	Friends_ActivateGameOverlayInviteDialogConnectString :: proc(self: ^IFriends, pchConnectString: cstring) ---
-	Friends_RequestEquippedProfileItems :: proc(self: ^IFriends, steamID: CSteamID) -> SteamAPICall_t ---
+	Friends_RequestEquippedProfileItems :: proc(self: ^IFriends, steamID: CSteamID) -> SteamAPICall ---
 	Friends_BHasEquippedProfileItem :: proc(self: ^IFriends, steamID: CSteamID, itemType: ECommunityProfileItemType) -> bool ---
 	Friends_GetProfileItemPropertyString :: proc(self: ^IFriends, steamID: CSteamID, itemType: ECommunityProfileItemType, prop: ECommunityProfileItemProperty) -> cstring ---
 	Friends_GetProfileItemPropertyUint :: proc(self: ^IFriends, steamID: CSteamID, itemType: ECommunityProfileItemType, prop: ECommunityProfileItemProperty) -> uint32 ---
@@ -4106,14 +4113,14 @@ foreign lib {
 	Utils_GetCurrentBatteryPower :: proc(self: ^IUtils) -> uint8 ---
 	Utils_GetAppID :: proc(self: ^IUtils) -> uint32 ---
 	Utils_SetOverlayNotificationPosition :: proc(self: ^IUtils, eNotificationPosition: ENotificationPosition) ---
-	Utils_IsAPICallCompleted :: proc(self: ^IUtils, hSteamAPICall: SteamAPICall_t, pbFailed: ^bool) -> bool ---
-	Utils_GetAPICallFailureReason :: proc(self: ^IUtils, hSteamAPICall: SteamAPICall_t) -> ESteamAPICallFailure ---
-	Utils_GetAPICallResult :: proc(self: ^IUtils, hSteamAPICall: SteamAPICall_t, pCallback: rawptr, cubCallback: c.int, iCallbackExpected: c.int, pbFailed: ^bool) -> bool ---
+	Utils_IsAPICallCompleted :: proc(self: ^IUtils, hSteamAPICall: SteamAPICall, pbFailed: ^bool) -> bool ---
+	Utils_GetAPICallFailureReason :: proc(self: ^IUtils, hSteamAPICall: SteamAPICall) -> ESteamAPICallFailure ---
+	Utils_GetAPICallResult :: proc(self: ^IUtils, hSteamAPICall: SteamAPICall, pCallback: rawptr, cubCallback: c.int, iCallbackExpected: c.int, pbFailed: ^bool) -> bool ---
 	Utils_GetIPCCallCount :: proc(self: ^IUtils) -> uint32 ---
-	Utils_SetWarningMessageHook :: proc(self: ^IUtils, pFunction: SteamAPIWarningMessageHook_t) ---
+	Utils_SetWarningMessageHook :: proc(self: ^IUtils, pFunction: SteamAPIWarningMessageHook) ---
 	Utils_IsOverlayEnabled :: proc(self: ^IUtils) -> bool ---
 	Utils_BOverlayNeedsPresent :: proc(self: ^IUtils) -> bool ---
-	Utils_CheckFileSignature :: proc(self: ^IUtils, szFileName: cstring) -> SteamAPICall_t ---
+	Utils_CheckFileSignature :: proc(self: ^IUtils, szFileName: cstring) -> SteamAPICall ---
 	Utils_ShowGamepadTextInput :: proc(self: ^IUtils, eInputMode: EGamepadTextInputMode, eLineInputMode: EGamepadTextInputLineMode, pchDescription: cstring, unCharMax: uint32, pchExistingText: cstring) -> bool ---
 	Utils_GetEnteredGamepadTextLength :: proc(self: ^IUtils) -> uint32 ---
 	Utils_GetEnteredGamepadTextInput :: proc(self: ^IUtils, pchText: u8, cchText: uint32) -> bool ---
@@ -4134,10 +4141,10 @@ foreign lib {
 	Utils_Dismissf32ingGamepadTextInput :: proc(self: ^IUtils) -> bool ---
 
 	Matchmaking_GetFavoriteGameCount :: proc(self: ^IMatchmaking) -> c.int ---
-	Matchmaking_GetFavoriteGame :: proc(self: ^IMatchmaking, iGame: c.int, pnAppID: ^AppId_t, pnIP: ^uint32, pnConnPort: ^uint16, pnQueryPort: ^uint16, punFlags: ^uint32, pRTime32LastPlayedOnServer: ^uint32) -> bool ---
-	Matchmaking_AddFavoriteGame :: proc(self: ^IMatchmaking, nAppID: AppId_t, nIP: uint32, nConnPort: uint16, nQueryPort: uint16, unFlags: uint32, rTime32LastPlayedOnServer: uint32) -> c.int ---
-	Matchmaking_RemoveFavoriteGame :: proc(self: ^IMatchmaking, nAppID: AppId_t, nIP: uint32, nConnPort: uint16, nQueryPort: uint16, unFlags: uint32) -> bool ---
-	Matchmaking_RequestLobbyList :: proc(self: ^IMatchmaking) -> SteamAPICall_t ---
+	Matchmaking_GetFavoriteGame :: proc(self: ^IMatchmaking, iGame: c.int, pnAppID: ^AppId, pnIP: ^uint32, pnConnPort: ^uint16, pnQueryPort: ^uint16, punFlags: ^uint32, pRTime32LastPlayedOnServer: ^uint32) -> bool ---
+	Matchmaking_AddFavoriteGame :: proc(self: ^IMatchmaking, nAppID: AppId, nIP: uint32, nConnPort: uint16, nQueryPort: uint16, unFlags: uint32, rTime32LastPlayedOnServer: uint32) -> c.int ---
+	Matchmaking_RemoveFavoriteGame :: proc(self: ^IMatchmaking, nAppID: AppId, nIP: uint32, nConnPort: uint16, nQueryPort: uint16, unFlags: uint32) -> bool ---
+	Matchmaking_RequestLobbyList :: proc(self: ^IMatchmaking) -> SteamAPICall ---
 	Matchmaking_AddRequestLobbyListStringFilter :: proc(self: ^IMatchmaking, pchKeyToMatch: cstring, pchValueToMatch: cstring, eComparisonType: ELobbyComparison) ---
 	Matchmaking_AddRequestLobbyListNumericalFilter :: proc(self: ^IMatchmaking, pchKeyToMatch: cstring, nValueToMatch: c.int, eComparisonType: ELobbyComparison) ---
 	Matchmaking_AddRequestLobbyListNearValueFilter :: proc(self: ^IMatchmaking, pchKeyToMatch: cstring, nValueToBeCloseTo: c.int) ---
@@ -4146,8 +4153,8 @@ foreign lib {
 	Matchmaking_AddRequestLobbyListResultCountFilter :: proc(self: ^IMatchmaking, cMaxResults: c.int) ---
 	Matchmaking_AddRequestLobbyListCompatibleMembersFilter :: proc(self: ^IMatchmaking, steamIDLobby: CSteamID) ---
 	Matchmaking_GetLobbyByIndex :: proc(self: ^IMatchmaking, iLobby: c.int) -> CSteamID ---
-	Matchmaking_CreateLobby :: proc(self: ^IMatchmaking, eLobbyType: ELobbyType, cMaxMembers: c.int) -> SteamAPICall_t ---
-	Matchmaking_JoinLobby :: proc(self: ^IMatchmaking, steamIDLobby: CSteamID) -> SteamAPICall_t ---
+	Matchmaking_CreateLobby :: proc(self: ^IMatchmaking, eLobbyType: ELobbyType, cMaxMembers: c.int) -> SteamAPICall ---
+	Matchmaking_JoinLobby :: proc(self: ^IMatchmaking, steamIDLobby: CSteamID) -> SteamAPICall ---
 	Matchmaking_LeaveLobby :: proc(self: ^IMatchmaking, steamIDLobby: CSteamID) ---
 	Matchmaking_InviteUserToLobby :: proc(self: ^IMatchmaking, steamIDLobby: CSteamID, steamIDInvitee: CSteamID) -> bool ---
 	Matchmaking_GetNumLobbyMembers :: proc(self: ^IMatchmaking, steamIDLobby: CSteamID) -> c.int ---
@@ -4176,7 +4183,7 @@ foreign lib {
 	MatchmakingServerListResponse_ServerFailedToRespond :: proc(self: ^IMatchmakingServerListResponse, hRequest: HServerListRequest, iServer: c.int) ---
 	MatchmakingServerListResponse_RefreshComplete :: proc(self: ^IMatchmakingServerListResponse, hRequest: HServerListRequest, response: EMatchMakingServerResponse) ---
 
-	MatchmakingPingResponse_ServerResponded :: proc(self: ^IMatchmakingPingResponse, server: ^gameserveritem_t) ---
+	MatchmakingPingResponse_ServerResponded :: proc(self: ^IMatchmakingPingResponse, server: ^gameserveritet) ---
 	MatchmakingPingResponse_ServerFailedToRespond :: proc(self: ^IMatchmakingPingResponse) ---
 
 	MatchmakingPlayersResponse_AddPlayerToList :: proc(self: ^IMatchmakingPlayersResponse, pchName: cstring, nScore: c.int, flTimePlayed: f32) ---
@@ -4187,14 +4194,14 @@ foreign lib {
 	MatchmakingRulesResponse_RulesFailedToRespond :: proc(self: ^IMatchmakingRulesResponse) ---
 	MatchmakingRulesResponse_RulesRefreshComplete :: proc(self: ^IMatchmakingRulesResponse) ---
 
-	MatchmakingServers_RequestInternetServerList :: proc(self: ^IMatchmakingServers, iApp: AppId_t, ppchFilters: ^^MatchMakingKeyValuePair_t, nFilters: uint32, pRequestServersResponse: ^IMatchmakingServerListResponse) -> HServerListRequest ---
-	MatchmakingServers_RequestLANServerList :: proc(self: ^IMatchmakingServers, iApp: AppId_t, pRequestServersResponse: ^IMatchmakingServerListResponse) -> HServerListRequest ---
-	MatchmakingServers_RequestFriendsServerList :: proc(self: ^IMatchmakingServers, iApp: AppId_t, ppchFilters: ^^MatchMakingKeyValuePair_t, nFilters: uint32, pRequestServersResponse: ^IMatchmakingServerListResponse) -> HServerListRequest ---
-	MatchmakingServers_RequestFavoritesServerList :: proc(self: ^IMatchmakingServers, iApp: AppId_t, ppchFilters: ^^MatchMakingKeyValuePair_t, nFilters: uint32, pRequestServersResponse: ^IMatchmakingServerListResponse) -> HServerListRequest ---
-	MatchmakingServers_RequestHistoryServerList :: proc(self: ^IMatchmakingServers, iApp: AppId_t, ppchFilters: ^^MatchMakingKeyValuePair_t, nFilters: uint32, pRequestServersResponse: ^IMatchmakingServerListResponse) -> HServerListRequest ---
-	MatchmakingServers_RequestSpectatorServerList :: proc(self: ^IMatchmakingServers, iApp: AppId_t, ppchFilters: ^^MatchMakingKeyValuePair_t, nFilters: uint32, pRequestServersResponse: ^IMatchmakingServerListResponse) -> HServerListRequest ---
+	MatchmakingServers_RequestInternetServerList :: proc(self: ^IMatchmakingServers, iApp: AppId, ppchFilters: ^^MatchMakingKeyValuePair, nFilters: uint32, pRequestServersResponse: ^IMatchmakingServerListResponse) -> HServerListRequest ---
+	MatchmakingServers_RequestLANServerList :: proc(self: ^IMatchmakingServers, iApp: AppId, pRequestServersResponse: ^IMatchmakingServerListResponse) -> HServerListRequest ---
+	MatchmakingServers_RequestFriendsServerList :: proc(self: ^IMatchmakingServers, iApp: AppId, ppchFilters: ^^MatchMakingKeyValuePair, nFilters: uint32, pRequestServersResponse: ^IMatchmakingServerListResponse) -> HServerListRequest ---
+	MatchmakingServers_RequestFavoritesServerList :: proc(self: ^IMatchmakingServers, iApp: AppId, ppchFilters: ^^MatchMakingKeyValuePair, nFilters: uint32, pRequestServersResponse: ^IMatchmakingServerListResponse) -> HServerListRequest ---
+	MatchmakingServers_RequestHistoryServerList :: proc(self: ^IMatchmakingServers, iApp: AppId, ppchFilters: ^^MatchMakingKeyValuePair, nFilters: uint32, pRequestServersResponse: ^IMatchmakingServerListResponse) -> HServerListRequest ---
+	MatchmakingServers_RequestSpectatorServerList :: proc(self: ^IMatchmakingServers, iApp: AppId, ppchFilters: ^^MatchMakingKeyValuePair, nFilters: uint32, pRequestServersResponse: ^IMatchmakingServerListResponse) -> HServerListRequest ---
 	MatchmakingServers_ReleaseRequest :: proc(self: ^IMatchmakingServers, hServerListRequest: HServerListRequest) ---
-	MatchmakingServers_GetServerDetails :: proc(self: ^IMatchmakingServers, hRequest: HServerListRequest, iServer: c.int) -> ^gameserveritem_t ---
+	MatchmakingServers_GetServerDetails :: proc(self: ^IMatchmakingServers, hRequest: HServerListRequest, iServer: c.int) -> ^gameserveritet ---
 	MatchmakingServers_CancelQuery :: proc(self: ^IMatchmakingServers, hRequest: HServerListRequest) ---
 	MatchmakingServers_RefreshQuery :: proc(self: ^IMatchmakingServers, hRequest: HServerListRequest) ---
 	MatchmakingServers_IsRefreshing :: proc(self: ^IMatchmakingServers, hRequest: HServerListRequest) -> bool ---
@@ -4205,47 +4212,47 @@ foreign lib {
 	MatchmakingServers_ServerRules :: proc(self: ^IMatchmakingServers, unIP: uint32, usPort: uint16, pRequestServersResponse: ^IMatchmakingRulesResponse) -> HServerQuery ---
 	MatchmakingServers_CancelServerQuery :: proc(self: ^IMatchmakingServers, hServerQuery: HServerQuery) ---
 
-	GameSearch_AddGameSearchParams :: proc(self: ^IGameSearch, pchKeyToFind: cstring, pchValuesToFind: cstring) -> EGameSearchErrorCode_t ---
-	GameSearch_SearchForGameWithLobby :: proc(self: ^IGameSearch, steamIDLobby: CSteamID, nPlayerMin: c.int, nPlayerMax: c.int) -> EGameSearchErrorCode_t ---
-	GameSearch_SearchForGameSolo :: proc(self: ^IGameSearch, nPlayerMin: c.int, nPlayerMax: c.int) -> EGameSearchErrorCode_t ---
-	GameSearch_AcceptGame :: proc(self: ^IGameSearch) -> EGameSearchErrorCode_t ---
-	GameSearch_DeclineGame :: proc(self: ^IGameSearch) -> EGameSearchErrorCode_t ---
-	GameSearch_RetrieveConnectionDetails :: proc(self: ^IGameSearch, steamIDHost: CSteamID, pchConnectionDetails: ^u8, cubConnectionDetails: c.int) -> EGameSearchErrorCode_t ---
-	GameSearch_EndGameSearch :: proc(self: ^IGameSearch) -> EGameSearchErrorCode_t ---
-	GameSearch_SetGameHostParams :: proc(self: ^IGameSearch, pchKey: cstring, pchValue: cstring) -> EGameSearchErrorCode_t ---
-	GameSearch_SetConnectionDetails :: proc(self: ^IGameSearch, pchConnectionDetails: cstring, cubConnectionDetails: c.int) -> EGameSearchErrorCode_t ---
-	GameSearch_RequestPlayersForGame :: proc(self: ^IGameSearch, nPlayerMin: c.int, nPlayerMax: c.int, nMaxTeamSize: c.int) -> EGameSearchErrorCode_t ---
-	GameSearch_HostConfirmGameStart :: proc(self: ^IGameSearch, ullUniqueGameID: uint64) -> EGameSearchErrorCode_t ---
-	GameSearch_CancelRequestPlayersForGame :: proc(self: ^IGameSearch) -> EGameSearchErrorCode_t ---
-	GameSearch_SubmitPlayerResult :: proc(self: ^IGameSearch, ullUniqueGameID: uint64, steamIDPlayer: CSteamID, EPlayerResult: EPlayerResult_t) -> EGameSearchErrorCode_t ---
-	GameSearch_EndGame :: proc(self: ^IGameSearch, ullUniqueGameID: uint64) -> EGameSearchErrorCode_t ---
+	GameSearch_AddGameSearchParams :: proc(self: ^IGameSearch, pchKeyToFind: cstring, pchValuesToFind: cstring) -> EGameSearchErrorCode ---
+	GameSearch_SearchForGameWithLobby :: proc(self: ^IGameSearch, steamIDLobby: CSteamID, nPlayerMin: c.int, nPlayerMax: c.int) -> EGameSearchErrorCode ---
+	GameSearch_SearchForGameSolo :: proc(self: ^IGameSearch, nPlayerMin: c.int, nPlayerMax: c.int) -> EGameSearchErrorCode ---
+	GameSearch_AcceptGame :: proc(self: ^IGameSearch) -> EGameSearchErrorCode ---
+	GameSearch_DeclineGame :: proc(self: ^IGameSearch) -> EGameSearchErrorCode ---
+	GameSearch_RetrieveConnectionDetails :: proc(self: ^IGameSearch, steamIDHost: CSteamID, pchConnectionDetails: ^u8, cubConnectionDetails: c.int) -> EGameSearchErrorCode ---
+	GameSearch_EndGameSearch :: proc(self: ^IGameSearch) -> EGameSearchErrorCode ---
+	GameSearch_SetGameHostParams :: proc(self: ^IGameSearch, pchKey: cstring, pchValue: cstring) -> EGameSearchErrorCode ---
+	GameSearch_SetConnectionDetails :: proc(self: ^IGameSearch, pchConnectionDetails: cstring, cubConnectionDetails: c.int) -> EGameSearchErrorCode ---
+	GameSearch_RequestPlayersForGame :: proc(self: ^IGameSearch, nPlayerMin: c.int, nPlayerMax: c.int, nMaxTeamSize: c.int) -> EGameSearchErrorCode ---
+	GameSearch_HostConfirmGameStart :: proc(self: ^IGameSearch, ullUniqueGameID: uint64) -> EGameSearchErrorCode ---
+	GameSearch_CancelRequestPlayersForGame :: proc(self: ^IGameSearch) -> EGameSearchErrorCode ---
+	GameSearch_SubmitPlayerResult :: proc(self: ^IGameSearch, ullUniqueGameID: uint64, steamIDPlayer: CSteamID, EPlayerResult: EPlayerResult) -> EGameSearchErrorCode ---
+	GameSearch_EndGame :: proc(self: ^IGameSearch, ullUniqueGameID: uint64) -> EGameSearchErrorCode ---
 
 	Parties_GetNumActiveBeacons :: proc(self: ^IParties) -> uint32 ---
-	Parties_GetBeaconByIndex :: proc(self: ^IParties, unIndex: uint32) -> PartyBeaconID_t ---
-	Parties_GetBeaconDetails :: proc(self: ^IParties, ulBeaconID: PartyBeaconID_t, pSteamIDBeaconOwner: ^CSteamID, pLocation: ^SteamPartyBeaconLocation_t, pchMetadata: ^u8, cchMetadata: c.int) -> bool ---
-	Parties_JoinParty :: proc(self: ^IParties, ulBeaconID: PartyBeaconID_t) -> SteamAPICall_t ---
+	Parties_GetBeaconByIndex :: proc(self: ^IParties, unIndex: uint32) -> PartyBeaconID ---
+	Parties_GetBeaconDetails :: proc(self: ^IParties, ulBeaconID: PartyBeaconID, pSteamIDBeaconOwner: ^CSteamID, pLocation: ^SteamPartyBeaconLocation, pchMetadata: ^u8, cchMetadata: c.int) -> bool ---
+	Parties_JoinParty :: proc(self: ^IParties, ulBeaconID: PartyBeaconID) -> SteamAPICall ---
 	Parties_GetNumAvailableBeaconLocations :: proc(self: ^IParties, puNumLocations: ^uint32) -> bool ---
-	Parties_GetAvailableBeaconLocations :: proc(self: ^IParties, pLocationList: ^SteamPartyBeaconLocation_t, uMaxNumLocations: uint32) -> bool ---
-	Parties_CreateBeacon :: proc(self: ^IParties, unOpenSlots: uint32, pBeaconLocation: ^SteamPartyBeaconLocation_t, pchConnectString: cstring, pchMetadata: cstring) -> SteamAPICall_t ---
-	Parties_OnReservationCompleted :: proc(self: ^IParties, ulBeacon: PartyBeaconID_t, steamIDUser: CSteamID) ---
-	Parties_CancelReservation :: proc(self: ^IParties, ulBeacon: PartyBeaconID_t, steamIDUser: CSteamID) ---
-	Parties_ChangeNumOpenSlots :: proc(self: ^IParties, ulBeacon: PartyBeaconID_t, unOpenSlots: uint32) -> SteamAPICall_t ---
-	Parties_DestroyBeacon :: proc(self: ^IParties, ulBeacon: PartyBeaconID_t) -> bool ---
-	Parties_GetBeaconLocationData :: proc(self: ^IParties, BeaconLocation: SteamPartyBeaconLocation_t, eData: ESteamPartyBeaconLocationData, pchDataStringOut: ^u8, cchDataStringOut: c.int) -> bool ---
+	Parties_GetAvailableBeaconLocations :: proc(self: ^IParties, pLocationList: ^SteamPartyBeaconLocation, uMaxNumLocations: uint32) -> bool ---
+	Parties_CreateBeacon :: proc(self: ^IParties, unOpenSlots: uint32, pBeaconLocation: ^SteamPartyBeaconLocation, pchConnectString: cstring, pchMetadata: cstring) -> SteamAPICall ---
+	Parties_OnReservationCompleted :: proc(self: ^IParties, ulBeacon: PartyBeaconID, steamIDUser: CSteamID) ---
+	Parties_CancelReservation :: proc(self: ^IParties, ulBeacon: PartyBeaconID, steamIDUser: CSteamID) ---
+	Parties_ChangeNumOpenSlots :: proc(self: ^IParties, ulBeacon: PartyBeaconID, unOpenSlots: uint32) -> SteamAPICall ---
+	Parties_DestroyBeacon :: proc(self: ^IParties, ulBeacon: PartyBeaconID) -> bool ---
+	Parties_GetBeaconLocationData :: proc(self: ^IParties, BeaconLocation: SteamPartyBeaconLocation, eData: ESteamPartyBeaconLocationData, pchDataStringOut: ^u8, cchDataStringOut: c.int) -> bool ---
 
 	RemoteStorage_FileWrite :: proc(self: ^IRemoteStorage, pchFile: cstring, pvData: rawptr, cubData: int32) -> bool ---
 	RemoteStorage_FileRead :: proc(self: ^IRemoteStorage, pchFile: cstring, pvData: rawptr, cubDataToRead: int32) -> int32 ---
-	RemoteStorage_FileWriteAsync :: proc(self: ^IRemoteStorage, pchFile: cstring, pvData: rawptr, cubData: uint32) -> SteamAPICall_t ---
-	RemoteStorage_FileReadAsync :: proc(self: ^IRemoteStorage, pchFile: cstring, nOffset: uint32, cubToRead: uint32) -> SteamAPICall_t ---
-	RemoteStorage_FileReadAsyncComplete :: proc(self: ^IRemoteStorage, hReadCall: SteamAPICall_t, pvBuffer: rawptr, cubToRead: uint32) -> bool ---
+	RemoteStorage_FileWriteAsync :: proc(self: ^IRemoteStorage, pchFile: cstring, pvData: rawptr, cubData: uint32) -> SteamAPICall ---
+	RemoteStorage_FileReadAsync :: proc(self: ^IRemoteStorage, pchFile: cstring, nOffset: uint32, cubToRead: uint32) -> SteamAPICall ---
+	RemoteStorage_FileReadAsyncComplete :: proc(self: ^IRemoteStorage, hReadCall: SteamAPICall, pvBuffer: rawptr, cubToRead: uint32) -> bool ---
 	RemoteStorage_FileForget :: proc(self: ^IRemoteStorage, pchFile: cstring) -> bool ---
 	RemoteStorage_FileDelete :: proc(self: ^IRemoteStorage, pchFile: cstring) -> bool ---
-	RemoteStorage_FileShare :: proc(self: ^IRemoteStorage, pchFile: cstring) -> SteamAPICall_t ---
+	RemoteStorage_FileShare :: proc(self: ^IRemoteStorage, pchFile: cstring) -> SteamAPICall ---
 	RemoteStorage_SetSyncPlatforms :: proc(self: ^IRemoteStorage, pchFile: cstring, eRemoteStoragePlatform: ERemoteStoragePlatform) -> bool ---
-	RemoteStorage_FileWriteStreamOpen :: proc(self: ^IRemoteStorage, pchFile: cstring) -> UGCFileWriteStreamHandle_t ---
-	RemoteStorage_FileWriteStreamWriteChunk :: proc(self: ^IRemoteStorage, writeHandle: UGCFileWriteStreamHandle_t, pvData: rawptr, cubData: int32) -> bool ---
-	RemoteStorage_FileWriteStreamClose :: proc(self: ^IRemoteStorage, writeHandle: UGCFileWriteStreamHandle_t) -> bool ---
-	RemoteStorage_FileWriteStreamCancel :: proc(self: ^IRemoteStorage, writeHandle: UGCFileWriteStreamHandle_t) -> bool ---
+	RemoteStorage_FileWriteStreamOpen :: proc(self: ^IRemoteStorage, pchFile: cstring) -> UGCFileWriteStreamHandle ---
+	RemoteStorage_FileWriteStreamWriteChunk :: proc(self: ^IRemoteStorage, writeHandle: UGCFileWriteStreamHandle, pvData: rawptr, cubData: int32) -> bool ---
+	RemoteStorage_FileWriteStreamClose :: proc(self: ^IRemoteStorage, writeHandle: UGCFileWriteStreamHandle) -> bool ---
+	RemoteStorage_FileWriteStreamCancel :: proc(self: ^IRemoteStorage, writeHandle: UGCFileWriteStreamHandle) -> bool ---
 	RemoteStorage_FileExists :: proc(self: ^IRemoteStorage, pchFile: cstring) -> bool ---
 	RemoteStorage_FilePersisted :: proc(self: ^IRemoteStorage, pchFile: cstring) -> bool ---
 	RemoteStorage_GetFileSize :: proc(self: ^IRemoteStorage, pchFile: cstring) -> int32 ---
@@ -4257,37 +4264,37 @@ foreign lib {
 	RemoteStorage_IsCloudEnabledForAccount :: proc(self: ^IRemoteStorage) -> bool ---
 	RemoteStorage_IsCloudEnabledForApp :: proc(self: ^IRemoteStorage) -> bool ---
 	RemoteStorage_SetCloudEnabledForApp :: proc(self: ^IRemoteStorage, bEnabled: bool) ---
-	RemoteStorage_UGCDownload :: proc(self: ^IRemoteStorage, hContent: UGCHandle_t, unPriority: uint32) -> SteamAPICall_t ---
-	RemoteStorage_GetUGCDownloadProgress :: proc(self: ^IRemoteStorage, hContent: UGCHandle_t, pnBytesDownloaded: ^int32, pnBytesExpected: ^int32) -> bool ---
-	RemoteStorage_GetUGCDetails :: proc(self: ^IRemoteStorage, hContent: UGCHandle_t, pnAppID: ^AppId_t, ppchName: ^^u8, pnFileSizeInBytes: ^int32, pSteamIDOwner: ^CSteamID) -> bool ---
-	RemoteStorage_UGCRead :: proc(self: ^IRemoteStorage, hContent: UGCHandle_t, pvData: rawptr, cubDataToRead: int32, cOffset: uint32, eAction: EUGCReadAction) -> int32 ---
+	RemoteStorage_UGCDownload :: proc(self: ^IRemoteStorage, hContent: UGCHandle, unPriority: uint32) -> SteamAPICall ---
+	RemoteStorage_GetUGCDownloadProgress :: proc(self: ^IRemoteStorage, hContent: UGCHandle, pnBytesDownloaded: ^int32, pnBytesExpected: ^int32) -> bool ---
+	RemoteStorage_GetUGCDetails :: proc(self: ^IRemoteStorage, hContent: UGCHandle, pnAppID: ^AppId, ppchName: ^^u8, pnFileSizeInBytes: ^int32, pSteamIDOwner: ^CSteamID) -> bool ---
+	RemoteStorage_UGCRead :: proc(self: ^IRemoteStorage, hContent: UGCHandle, pvData: rawptr, cubDataToRead: int32, cOffset: uint32, eAction: EUGCReadAction) -> int32 ---
 	RemoteStorage_GetCachedUGCCount :: proc(self: ^IRemoteStorage) -> int32 ---
-	RemoteStorage_GetCachedUGCHandle :: proc(self: ^IRemoteStorage, iCachedContent: int32) -> UGCHandle_t ---
-	RemoteStorage_PublishWorkshopFile :: proc(self: ^IRemoteStorage, pchFile: cstring, pchPreviewFile: cstring, nConsumerAppId: AppId_t, pchTitle: cstring, pchDescription: cstring, eVisibility: ERemoteStoragePublishedFileVisibility, pTags: ^SteamParamStringArray_t, eWorkshopFileType: EWorkshopFileType) -> SteamAPICall_t ---
-	RemoteStorage_CreatePublishedFileUpdateRequest :: proc(self: ^IRemoteStorage, unPublishedFileId: PublishedFileId_t) -> PublishedFileUpdateHandle_t ---
-	RemoteStorage_UpdatePublishedFileFile :: proc(self: ^IRemoteStorage, updateHandle: PublishedFileUpdateHandle_t, pchFile: cstring) -> bool ---
-	RemoteStorage_UpdatePublishedFilePreviewFile :: proc(self: ^IRemoteStorage, updateHandle: PublishedFileUpdateHandle_t, pchPreviewFile: cstring) -> bool ---
-	RemoteStorage_UpdatePublishedFileTitle :: proc(self: ^IRemoteStorage, updateHandle: PublishedFileUpdateHandle_t, pchTitle: cstring) -> bool ---
-	RemoteStorage_UpdatePublishedFileDescription :: proc(self: ^IRemoteStorage, updateHandle: PublishedFileUpdateHandle_t, pchDescription: cstring) -> bool ---
-	RemoteStorage_UpdatePublishedFileVisibility :: proc(self: ^IRemoteStorage, updateHandle: PublishedFileUpdateHandle_t, eVisibility: ERemoteStoragePublishedFileVisibility) -> bool ---
-	RemoteStorage_UpdatePublishedFileTags :: proc(self: ^IRemoteStorage, updateHandle: PublishedFileUpdateHandle_t, pTags: ^SteamParamStringArray_t) -> bool ---
-	RemoteStorage_CommitPublishedFileUpdate :: proc(self: ^IRemoteStorage, updateHandle: PublishedFileUpdateHandle_t) -> SteamAPICall_t ---
-	RemoteStorage_GetPublishedFileDetails :: proc(self: ^IRemoteStorage, unPublishedFileId: PublishedFileId_t, unMaxSecondsOld: uint32) -> SteamAPICall_t ---
-	RemoteStorage_DeletePublishedFile :: proc(self: ^IRemoteStorage, unPublishedFileId: PublishedFileId_t) -> SteamAPICall_t ---
-	RemoteStorage_EnumerateUserPublishedFiles :: proc(self: ^IRemoteStorage, unStartIndex: uint32) -> SteamAPICall_t ---
-	RemoteStorage_SubscribePublishedFile :: proc(self: ^IRemoteStorage, unPublishedFileId: PublishedFileId_t) -> SteamAPICall_t ---
-	RemoteStorage_EnumerateUserSubscribedFiles :: proc(self: ^IRemoteStorage, unStartIndex: uint32) -> SteamAPICall_t ---
-	RemoteStorage_UnsubscribePublishedFile :: proc(self: ^IRemoteStorage, unPublishedFileId: PublishedFileId_t) -> SteamAPICall_t ---
-	RemoteStorage_UpdatePublishedFileSetChangeDescription :: proc(self: ^IRemoteStorage, updateHandle: PublishedFileUpdateHandle_t, pchChangeDescription: cstring) -> bool ---
-	RemoteStorage_GetPublishedItemVoteDetails :: proc(self: ^IRemoteStorage, unPublishedFileId: PublishedFileId_t) -> SteamAPICall_t ---
-	RemoteStorage_UpdateUserPublishedItemVote :: proc(self: ^IRemoteStorage, unPublishedFileId: PublishedFileId_t, bVoteUp: bool) -> SteamAPICall_t ---
-	RemoteStorage_GetUserPublishedItemVoteDetails :: proc(self: ^IRemoteStorage, unPublishedFileId: PublishedFileId_t) -> SteamAPICall_t ---
-	RemoteStorage_EnumerateUserSharedWorkshopFiles :: proc(self: ^IRemoteStorage, steamId: CSteamID, unStartIndex: uint32, pRequiredTags: ^SteamParamStringArray_t, pExcludedTags: ^SteamParamStringArray_t) -> SteamAPICall_t ---
-	RemoteStorage_PublishVideo :: proc(self: ^IRemoteStorage, eVideoProvider: EWorkshopVideoProvider, pchVideoAccount: cstring, pchVideoIdentifier: cstring, pchPreviewFile: cstring, nConsumerAppId: AppId_t, pchTitle: cstring, pchDescription: cstring, eVisibility: ERemoteStoragePublishedFileVisibility, pTags: ^SteamParamStringArray_t) -> SteamAPICall_t ---
-	RemoteStorage_SetUserPublishedFileAction :: proc(self: ^IRemoteStorage, unPublishedFileId: PublishedFileId_t, eAction: EWorkshopFileAction) -> SteamAPICall_t ---
-	RemoteStorage_EnumeratePublishedFilesByUserAction :: proc(self: ^IRemoteStorage, eAction: EWorkshopFileAction, unStartIndex: uint32) -> SteamAPICall_t ---
-	RemoteStorage_EnumeratePublishedWorkshopFiles :: proc(self: ^IRemoteStorage, eEnumerationType: EWorkshopEnumerationType, unStartIndex: uint32, unCount: uint32, unDays: uint32, pTags: ^SteamParamStringArray_t, pUserTags: ^SteamParamStringArray_t) -> SteamAPICall_t ---
-	RemoteStorage_UGCDownloadToLocation :: proc(self: ^IRemoteStorage, hContent: UGCHandle_t, pchLocation: cstring, unPriority: uint32) -> SteamAPICall_t ---
+	RemoteStorage_GetCachedUGCHandle :: proc(self: ^IRemoteStorage, iCachedContent: int32) -> UGCHandle ---
+	RemoteStorage_PublishWorkshopFile :: proc(self: ^IRemoteStorage, pchFile: cstring, pchPreviewFile: cstring, nConsumerAppId: AppId, pchTitle: cstring, pchDescription: cstring, eVisibility: ERemoteStoragePublishedFileVisibility, pTags: ^SteamParamStringArray, eWorkshopFileType: EWorkshopFileType) -> SteamAPICall ---
+	RemoteStorage_CreatePublishedFileUpdateRequest :: proc(self: ^IRemoteStorage, unPublishedFileId: PublishedFileId) -> PublishedFileUpdateHandle ---
+	RemoteStorage_UpdatePublishedFileFile :: proc(self: ^IRemoteStorage, updateHandle: PublishedFileUpdateHandle, pchFile: cstring) -> bool ---
+	RemoteStorage_UpdatePublishedFilePreviewFile :: proc(self: ^IRemoteStorage, updateHandle: PublishedFileUpdateHandle, pchPreviewFile: cstring) -> bool ---
+	RemoteStorage_UpdatePublishedFileTitle :: proc(self: ^IRemoteStorage, updateHandle: PublishedFileUpdateHandle, pchTitle: cstring) -> bool ---
+	RemoteStorage_UpdatePublishedFileDescription :: proc(self: ^IRemoteStorage, updateHandle: PublishedFileUpdateHandle, pchDescription: cstring) -> bool ---
+	RemoteStorage_UpdatePublishedFileVisibility :: proc(self: ^IRemoteStorage, updateHandle: PublishedFileUpdateHandle, eVisibility: ERemoteStoragePublishedFileVisibility) -> bool ---
+	RemoteStorage_UpdatePublishedFileTags :: proc(self: ^IRemoteStorage, updateHandle: PublishedFileUpdateHandle, pTags: ^SteamParamStringArray) -> bool ---
+	RemoteStorage_CommitPublishedFileUpdate :: proc(self: ^IRemoteStorage, updateHandle: PublishedFileUpdateHandle) -> SteamAPICall ---
+	RemoteStorage_GetPublishedFileDetails :: proc(self: ^IRemoteStorage, unPublishedFileId: PublishedFileId, unMaxSecondsOld: uint32) -> SteamAPICall ---
+	RemoteStorage_DeletePublishedFile :: proc(self: ^IRemoteStorage, unPublishedFileId: PublishedFileId) -> SteamAPICall ---
+	RemoteStorage_EnumerateUserPublishedFiles :: proc(self: ^IRemoteStorage, unStartIndex: uint32) -> SteamAPICall ---
+	RemoteStorage_SubscribePublishedFile :: proc(self: ^IRemoteStorage, unPublishedFileId: PublishedFileId) -> SteamAPICall ---
+	RemoteStorage_EnumerateUserSubscribedFiles :: proc(self: ^IRemoteStorage, unStartIndex: uint32) -> SteamAPICall ---
+	RemoteStorage_UnsubscribePublishedFile :: proc(self: ^IRemoteStorage, unPublishedFileId: PublishedFileId) -> SteamAPICall ---
+	RemoteStorage_UpdatePublishedFileSetChangeDescription :: proc(self: ^IRemoteStorage, updateHandle: PublishedFileUpdateHandle, pchChangeDescription: cstring) -> bool ---
+	RemoteStorage_GetPublishedItemVoteDetails :: proc(self: ^IRemoteStorage, unPublishedFileId: PublishedFileId) -> SteamAPICall ---
+	RemoteStorage_UpdateUserPublishedItemVote :: proc(self: ^IRemoteStorage, unPublishedFileId: PublishedFileId, bVoteUp: bool) -> SteamAPICall ---
+	RemoteStorage_GetUserPublishedItemVoteDetails :: proc(self: ^IRemoteStorage, unPublishedFileId: PublishedFileId) -> SteamAPICall ---
+	RemoteStorage_EnumerateUserSharedWorkshopFiles :: proc(self: ^IRemoteStorage, steamId: CSteamID, unStartIndex: uint32, pRequiredTags: ^SteamParamStringArray, pExcludedTags: ^SteamParamStringArray) -> SteamAPICall ---
+	RemoteStorage_PublishVideo :: proc(self: ^IRemoteStorage, eVideoProvider: EWorkshopVideoProvider, pchVideoAccount: cstring, pchVideoIdentifier: cstring, pchPreviewFile: cstring, nConsumerAppId: AppId, pchTitle: cstring, pchDescription: cstring, eVisibility: ERemoteStoragePublishedFileVisibility, pTags: ^SteamParamStringArray) -> SteamAPICall ---
+	RemoteStorage_SetUserPublishedFileAction :: proc(self: ^IRemoteStorage, unPublishedFileId: PublishedFileId, eAction: EWorkshopFileAction) -> SteamAPICall ---
+	RemoteStorage_EnumeratePublishedFilesByUserAction :: proc(self: ^IRemoteStorage, eAction: EWorkshopFileAction, unStartIndex: uint32) -> SteamAPICall ---
+	RemoteStorage_EnumeratePublishedWorkshopFiles :: proc(self: ^IRemoteStorage, eEnumerationType: EWorkshopEnumerationType, unStartIndex: uint32, unCount: uint32, unDays: uint32, pTags: ^SteamParamStringArray, pUserTags: ^SteamParamStringArray) -> SteamAPICall ---
+	RemoteStorage_UGCDownloadToLocation :: proc(self: ^IRemoteStorage, hContent: UGCHandle, pchLocation: cstring, unPriority: uint32) -> SteamAPICall ---
 	RemoteStorage_GetLocalFileChangeCount :: proc(self: ^IRemoteStorage) -> int32 ---
 	RemoteStorage_GetLocalFileChange :: proc(self: ^IRemoteStorage, iFile: c.int, pEChangeType: ^ERemoteStorageLocalFileChange, pEFilePathType: ^ERemoteStorageFilePathType) -> cstring ---
 	RemoteStorage_BeginFileWriteBatch :: proc(self: ^IRemoteStorage) -> bool ---
@@ -4309,29 +4316,29 @@ foreign lib {
 	UserStats_IndicateAchievementProgress :: proc(self: ^IUserStats, pchName: cstring, nCurProgress: uint32, nMaxProgress: uint32) -> bool ---
 	UserStats_GetNumAchievements :: proc(self: ^IUserStats) -> uint32 ---
 	UserStats_GetAchievementName :: proc(self: ^IUserStats, iAchievement: uint32) -> cstring ---
-	UserStats_RequestUserStats :: proc(self: ^IUserStats, steamIDUser: CSteamID) -> SteamAPICall_t ---
+	UserStats_RequestUserStats :: proc(self: ^IUserStats, steamIDUser: CSteamID) -> SteamAPICall ---
 	UserStats_GetUserStatInt32 :: proc(self: ^IUserStats, steamIDUser: CSteamID, pchName: cstring, pData: ^int32) -> bool ---
 	UserStats_GetUserStatFloat :: proc(self: ^IUserStats, steamIDUser: CSteamID, pchName: cstring, pData: ^f32) -> bool ---
 	UserStats_GetUserAchievement :: proc(self: ^IUserStats, steamIDUser: CSteamID, pchName: cstring, pbAchieved: ^bool) -> bool ---
 	UserStats_GetUserAchievementAndUnlockTime :: proc(self: ^IUserStats, steamIDUser: CSteamID, pchName: cstring, pbAchieved: ^bool, punUnlockTime: ^uint32) -> bool ---
 	UserStats_ResetAllStats :: proc(self: ^IUserStats, bAchievementsToo: bool) -> bool ---
-	UserStats_FindOrCreateLeaderboard :: proc(self: ^IUserStats, pchLeaderboardName: cstring, eLeaderboardSortMethod: ELeaderboardSortMethod, eLeaderboardDisplayType: ELeaderboardDisplayType) -> SteamAPICall_t ---
-	UserStats_FindLeaderboard :: proc(self: ^IUserStats, pchLeaderboardName: cstring) -> SteamAPICall_t ---
-	UserStats_GetLeaderboardName :: proc(self: ^IUserStats, hSteamLeaderboard: SteamLeaderboard_t) -> cstring ---
-	UserStats_GetLeaderboardEntryCount :: proc(self: ^IUserStats, hSteamLeaderboard: SteamLeaderboard_t) -> c.int ---
-	UserStats_GetLeaderboardSortMethod :: proc(self: ^IUserStats, hSteamLeaderboard: SteamLeaderboard_t) -> ELeaderboardSortMethod ---
-	UserStats_GetLeaderboardDisplayType :: proc(self: ^IUserStats, hSteamLeaderboard: SteamLeaderboard_t) -> ELeaderboardDisplayType ---
-	UserStats_DownloadLeaderboardEntries :: proc(self: ^IUserStats, hSteamLeaderboard: SteamLeaderboard_t, eLeaderboardDataRequest: ELeaderboardDataRequest, nRangeStart: c.int, nRangeEnd: c.int) -> SteamAPICall_t ---
-	UserStats_DownloadLeaderboardEntriesForUsers :: proc(self: ^IUserStats, hSteamLeaderboard: SteamLeaderboard_t, prgUsers: ^CSteamID, cUsers: c.int) -> SteamAPICall_t ---
-	UserStats_GetDownloadedLeaderboardEntry :: proc(self: ^IUserStats, hSteamLeaderboardEntries: SteamLeaderboardEntries_t, index: c.int, pLeaderboardEntry: ^LeaderboardEntry_t, pDetails: ^int32, cDetailsMax: c.int) -> bool ---
-	UserStats_UploadLeaderboardScore :: proc(self: ^IUserStats, hSteamLeaderboard: SteamLeaderboard_t, eLeaderboardUploadScoreMethod: ELeaderboardUploadScoreMethod, nScore: int32, pScoreDetails: ^int32, cScoreDetailsCount: c.int) -> SteamAPICall_t ---
-	UserStats_AttachLeaderboardUGC :: proc(self: ^IUserStats, hSteamLeaderboard: SteamLeaderboard_t, hUGC: UGCHandle_t) -> SteamAPICall_t ---
-	UserStats_GetNumberOfCurrentPlayers :: proc(self: ^IUserStats) -> SteamAPICall_t ---
-	UserStats_RequestGlobalAchievementPercentages :: proc(self: ^IUserStats) -> SteamAPICall_t ---
+	UserStats_FindOrCreateLeaderboard :: proc(self: ^IUserStats, pchLeaderboardName: cstring, eLeaderboardSortMethod: ELeaderboardSortMethod, eLeaderboardDisplayType: ELeaderboardDisplayType) -> SteamAPICall ---
+	UserStats_FindLeaderboard :: proc(self: ^IUserStats, pchLeaderboardName: cstring) -> SteamAPICall ---
+	UserStats_GetLeaderboardName :: proc(self: ^IUserStats, hSteamLeaderboard: SteamLeaderboard) -> cstring ---
+	UserStats_GetLeaderboardEntryCount :: proc(self: ^IUserStats, hSteamLeaderboard: SteamLeaderboard) -> c.int ---
+	UserStats_GetLeaderboardSortMethod :: proc(self: ^IUserStats, hSteamLeaderboard: SteamLeaderboard) -> ELeaderboardSortMethod ---
+	UserStats_GetLeaderboardDisplayType :: proc(self: ^IUserStats, hSteamLeaderboard: SteamLeaderboard) -> ELeaderboardDisplayType ---
+	UserStats_DownloadLeaderboardEntries :: proc(self: ^IUserStats, hSteamLeaderboard: SteamLeaderboard, eLeaderboardDataRequest: ELeaderboardDataRequest, nRangeStart: c.int, nRangeEnd: c.int) -> SteamAPICall ---
+	UserStats_DownloadLeaderboardEntriesForUsers :: proc(self: ^IUserStats, hSteamLeaderboard: SteamLeaderboard, prgUsers: ^CSteamID, cUsers: c.int) -> SteamAPICall ---
+	UserStats_GetDownloadedLeaderboardEntry :: proc(self: ^IUserStats, hSteamLeaderboardEntries: SteamLeaderboardEntries, index: c.int, pLeaderboardEntry: ^LeaderboardEntry, pDetails: ^int32, cDetailsMax: c.int) -> bool ---
+	UserStats_UploadLeaderboardScore :: proc(self: ^IUserStats, hSteamLeaderboard: SteamLeaderboard, eLeaderboardUploadScoreMethod: ELeaderboardUploadScoreMethod, nScore: int32, pScoreDetails: ^int32, cScoreDetailsCount: c.int) -> SteamAPICall ---
+	UserStats_AttachLeaderboardUGC :: proc(self: ^IUserStats, hSteamLeaderboard: SteamLeaderboard, hUGC: UGCHandle) -> SteamAPICall ---
+	UserStats_GetNumberOfCurrentPlayers :: proc(self: ^IUserStats) -> SteamAPICall ---
+	UserStats_RequestGlobalAchievementPercentages :: proc(self: ^IUserStats) -> SteamAPICall ---
 	UserStats_GetMostAchievedAchievementInfo :: proc(self: ^IUserStats, pchName: ^u8, unNameBufLen: uint32, pflPercent: ^f32, pbAchieved: ^bool) -> c.int ---
 	UserStats_GetNextMostAchievedAchievementInfo :: proc(self: ^IUserStats, iIteratorPrevious: c.int, pchName: ^u8, unNameBufLen: uint32, pflPercent: ^f32, pbAchieved: ^bool) -> c.int ---
 	UserStats_GetAchievementAchievedPercent :: proc(self: ^IUserStats, pchName: cstring, pflPercent: ^f32) -> bool ---
-	UserStats_RequestGlobalStats :: proc(self: ^IUserStats, nHistoryDays: c.int) -> SteamAPICall_t ---
+	UserStats_RequestGlobalStats :: proc(self: ^IUserStats, nHistoryDays: c.int) -> SteamAPICall ---
 	UserStats_GetGlobalStatInt64 :: proc(self: ^IUserStats, pchStatName: cstring, pData: ^int64) -> bool ---
 	UserStats_GetGlobalStatFloat64 :: proc(self: ^IUserStats, pchStatName: cstring, pData: ^f64) -> bool ---
 	UserStats_GetGlobalStatHistoryInt64 :: proc(self: ^IUserStats, pchStatName: cstring, pData: ^int64, cubData: uint32) -> int32 ---
@@ -4345,30 +4352,30 @@ foreign lib {
 	Apps_BIsVACBanned :: proc(self: ^IApps) -> bool ---
 	Apps_GetCurrentGameLanguage :: proc(self: ^IApps) -> cstring ---
 	Apps_GetAvailableGameLanguages :: proc(self: ^IApps) -> cstring ---
-	Apps_BIsSubscribedApp :: proc(self: ^IApps, appID: AppId_t) -> bool ---
-	Apps_BIsDlcInstalled :: proc(self: ^IApps, appID: AppId_t) -> bool ---
-	Apps_GetEarliestPurchaseUnixTime :: proc(self: ^IApps, nAppID: AppId_t) -> uint32 ---
+	Apps_BIsSubscribedApp :: proc(self: ^IApps, appID: AppId) -> bool ---
+	Apps_BIsDlcInstalled :: proc(self: ^IApps, appID: AppId) -> bool ---
+	Apps_GetEarliestPurchaseUnixTime :: proc(self: ^IApps, nAppID: AppId) -> uint32 ---
 	Apps_BIsSubscribedFromFreeWeekend :: proc(self: ^IApps) -> bool ---
 	Apps_GetDLCCount :: proc(self: ^IApps) -> c.int ---
-	Apps_BGetDLCDataByIndex :: proc(self: ^IApps, iDLC: c.int, pAppID: ^AppId_t, pbAvailable: ^bool, pchName: ^u8, cchNameBufferSize: c.int) -> bool ---
-	Apps_InstallDLC :: proc(self: ^IApps, nAppID: AppId_t) ---
-	Apps_UninstallDLC :: proc(self: ^IApps, nAppID: AppId_t) ---
-	Apps_RequestAppProofOfPurchaseKey :: proc(self: ^IApps, nAppID: AppId_t) ---
+	Apps_BGetDLCDataByIndex :: proc(self: ^IApps, iDLC: c.int, pAppID: ^AppId, pbAvailable: ^bool, pchName: ^u8, cchNameBufferSize: c.int) -> bool ---
+	Apps_InstallDLC :: proc(self: ^IApps, nAppID: AppId) ---
+	Apps_UninstallDLC :: proc(self: ^IApps, nAppID: AppId) ---
+	Apps_RequestAppProofOfPurchaseKey :: proc(self: ^IApps, nAppID: AppId) ---
 	Apps_GetCurrentBetaName :: proc(self: ^IApps, pchName: ^u8, cchNameBufferSize: c.int) -> bool ---
 	Apps_MarkContentCorrupt :: proc(self: ^IApps, bMissingFilesOnly: bool) -> bool ---
-	Apps_GetInstalledDepots :: proc(self: ^IApps, appID: AppId_t, pvecDepots: ^DepotId_t, cMaxDepots: uint32) -> uint32 ---
-	Apps_GetAppInstallDir :: proc(self: ^IApps, appID: AppId_t, pchFolder: ^u8, cchFolderBufferSize: uint32) -> uint32 ---
-	Apps_BIsAppInstalled :: proc(self: ^IApps, appID: AppId_t) -> bool ---
+	Apps_GetInstalledDepots :: proc(self: ^IApps, appID: AppId, pvecDepots: ^DepotId, cMaxDepots: uint32) -> uint32 ---
+	Apps_GetAppInstallDir :: proc(self: ^IApps, appID: AppId, pchFolder: ^u8, cchFolderBufferSize: uint32) -> uint32 ---
+	Apps_BIsAppInstalled :: proc(self: ^IApps, appID: AppId) -> bool ---
 	Apps_GetAppOwner :: proc(self: ^IApps) -> CSteamID ---
 	Apps_GetLaunchQueryParam :: proc(self: ^IApps, pchKey: cstring) -> cstring ---
-	Apps_GetDlcDownloadProgress :: proc(self: ^IApps, nAppID: AppId_t, punBytesDownloaded: ^uint64, punBytesTotal: ^uint64) -> bool ---
+	Apps_GetDlcDownloadProgress :: proc(self: ^IApps, nAppID: AppId, punBytesDownloaded: ^uint64, punBytesTotal: ^uint64) -> bool ---
 	Apps_GetAppBuildId :: proc(self: ^IApps) -> c.int ---
 	Apps_RequestAllProofOfPurchaseKeys :: proc(self: ^IApps) ---
-	Apps_GetFileDetails :: proc(self: ^IApps, pszFileName: cstring) -> SteamAPICall_t ---
+	Apps_GetFileDetails :: proc(self: ^IApps, pszFileName: cstring) -> SteamAPICall ---
 	Apps_GetLaunchCommandLine :: proc(self: ^IApps, pszCommandLine: ^u8, cubCommandLine: c.int) -> c.int ---
 	Apps_BIsSubscribedFromFamilySharing :: proc(self: ^IApps) -> bool ---
 	Apps_BIsTimedTrial :: proc(self: ^IApps, punSecondsAllowed: ^uint32, punSecondsPlayed: ^uint32) -> bool ---
-	Apps_SetDlcContext :: proc(self: ^IApps, nAppID: AppId_t) -> bool ---
+	Apps_SetDlcContext :: proc(self: ^IApps, nAppID: AppId) -> bool ---
 
 	Networking_SendP2PPacket :: proc(self: ^INetworking, steamIDRemote: CSteamID, pubData: rawptr, cubData: uint32, eP2PSendType: EP2PSend, nChannel: c.int) -> bool ---
 	Networking_IsP2PPacketAvailable :: proc(self: ^INetworking, pcubMsgSize: ^uint32, nChannel: c.int) -> bool ---
@@ -4376,22 +4383,22 @@ foreign lib {
 	Networking_AcceptP2PSessionWithUser :: proc(self: ^INetworking, steamIDRemote: CSteamID) -> bool ---
 	Networking_CloseP2PSessionWithUser :: proc(self: ^INetworking, steamIDRemote: CSteamID) -> bool ---
 	Networking_CloseP2PChannelWithUser :: proc(self: ^INetworking, steamIDRemote: CSteamID, nChannel: c.int) -> bool ---
-	Networking_GetP2PSessionState :: proc(self: ^INetworking, steamIDRemote: CSteamID, pConnectionState: ^P2PSessionState_t) -> bool ---
+	Networking_GetP2PSessionState :: proc(self: ^INetworking, steamIDRemote: CSteamID, pConnectionState: ^P2PSessionState) -> bool ---
 	Networking_AllowP2PPacketRelay :: proc(self: ^INetworking, bAllow: bool) -> bool ---
-	Networking_CreateListenSocket :: proc(self: ^INetworking, nVirtualP2PPort: c.int, nIP: SteamIPAddress_t, nPort: uint16, bAllowUseOfPacketRelay: bool) -> SNetListenSocket_t ---
-	Networking_CreateP2PConnectionSocket :: proc(self: ^INetworking, steamIDTarget: CSteamID, nVirtualPort: c.int, nTimeoutSec: c.int, bAllowUseOfPacketRelay: bool) -> SNetSocket_t ---
-	Networking_CreateConnectionSocket :: proc(self: ^INetworking, nIP: SteamIPAddress_t, nPort: uint16, nTimeoutSec: c.int) -> SNetSocket_t ---
-	Networking_DestroySocket :: proc(self: ^INetworking, hSocket: SNetSocket_t, bNotifyRemoteEnd: bool) -> bool ---
-	Networking_DestroyListenSocket :: proc(self: ^INetworking, hSocket: SNetListenSocket_t, bNotifyRemoteEnd: bool) -> bool ---
-	Networking_SendDataOnSocket :: proc(self: ^INetworking, hSocket: SNetSocket_t, pubData: rawptr, cubData: uint32, bReliable: bool) -> bool ---
-	Networking_IsDataAvailableOnSocket :: proc(self: ^INetworking, hSocket: SNetSocket_t, pcubMsgSize: ^uint32) -> bool ---
-	Networking_RetrieveDataFromSocket :: proc(self: ^INetworking, hSocket: SNetSocket_t, pubDest: rawptr, cubDest: uint32, pcubMsgSize: ^uint32) -> bool ---
-	Networking_IsDataAvailable :: proc(self: ^INetworking, hListenSocket: SNetListenSocket_t, pcubMsgSize: ^uint32, phSocket: ^SNetSocket_t) -> bool ---
-	Networking_RetrieveData :: proc(self: ^INetworking, hListenSocket: SNetListenSocket_t, pubDest: rawptr, cubDest: uint32, pcubMsgSize: ^uint32, phSocket: ^SNetSocket_t) -> bool ---
-	Networking_GetSocketInfo :: proc(self: ^INetworking, hSocket: SNetSocket_t, pSteamIDRemote: ^CSteamID, peSocketStatus: ^int, punIPRemote: ^SteamIPAddress_t, punPortRemote: ^uint16) -> bool ---
-	Networking_GetListenSocketInfo :: proc(self: ^INetworking, hListenSocket: SNetListenSocket_t, pnIP: ^SteamIPAddress_t, pnPort: ^uint16) -> bool ---
-	Networking_GetSocketConnectionType :: proc(self: ^INetworking, hSocket: SNetSocket_t) -> ESNetSocketConnectionType ---
-	Networking_GetMaxPacketSize :: proc(self: ^INetworking, hSocket: SNetSocket_t) -> c.int ---
+	Networking_CreateListenSocket :: proc(self: ^INetworking, nVirtualP2PPort: c.int, nIP: SteamIPAddress, nPort: uint16, bAllowUseOfPacketRelay: bool) -> SNetListenSocket ---
+	Networking_CreateP2PConnectionSocket :: proc(self: ^INetworking, steamIDTarget: CSteamID, nVirtualPort: c.int, nTimeoutSec: c.int, bAllowUseOfPacketRelay: bool) -> SNetSocket ---
+	Networking_CreateConnectionSocket :: proc(self: ^INetworking, nIP: SteamIPAddress, nPort: uint16, nTimeoutSec: c.int) -> SNetSocket ---
+	Networking_DestroySocket :: proc(self: ^INetworking, hSocket: SNetSocket, bNotifyRemoteEnd: bool) -> bool ---
+	Networking_DestroyListenSocket :: proc(self: ^INetworking, hSocket: SNetListenSocket, bNotifyRemoteEnd: bool) -> bool ---
+	Networking_SendDataOnSocket :: proc(self: ^INetworking, hSocket: SNetSocket, pubData: rawptr, cubData: uint32, bReliable: bool) -> bool ---
+	Networking_IsDataAvailableOnSocket :: proc(self: ^INetworking, hSocket: SNetSocket, pcubMsgSize: ^uint32) -> bool ---
+	Networking_RetrieveDataFromSocket :: proc(self: ^INetworking, hSocket: SNetSocket, pubDest: rawptr, cubDest: uint32, pcubMsgSize: ^uint32) -> bool ---
+	Networking_IsDataAvailable :: proc(self: ^INetworking, hListenSocket: SNetListenSocket, pcubMsgSize: ^uint32, phSocket: ^SNetSocket) -> bool ---
+	Networking_RetrieveData :: proc(self: ^INetworking, hListenSocket: SNetListenSocket, pubDest: rawptr, cubDest: uint32, pcubMsgSize: ^uint32, phSocket: ^SNetSocket) -> bool ---
+	Networking_GetSocketInfo :: proc(self: ^INetworking, hSocket: SNetSocket, pSteamIDRemote: ^CSteamID, peSocketStatus: ^int, punIPRemote: ^SteamIPAddress, punPortRemote: ^uint16) -> bool ---
+	Networking_GetListenSocketInfo :: proc(self: ^INetworking, hListenSocket: SNetListenSocket, pnIP: ^SteamIPAddress, pnPort: ^uint16) -> bool ---
+	Networking_GetSocketConnectionType :: proc(self: ^INetworking, hSocket: SNetSocket) -> ESNetSocketConnectionType ---
+	Networking_GetMaxPacketSize :: proc(self: ^INetworking, hSocket: SNetSocket) -> c.int ---
 
 	Screenshots_WriteScreenshot :: proc(self: ^IScreenshots, pubRGB: rawptr, cubRGB: uint32, nWidth: c.int, nHeight: c.int) -> ScreenshotHandle ---
 	Screenshots_AddScreenshotToLibrary :: proc(self: ^IScreenshots, pchFilename: cstring, pchThumbnailFilename: cstring, nWidth: c.int, nHeight: c.int) -> ScreenshotHandle ---
@@ -4399,13 +4406,13 @@ foreign lib {
 	Screenshots_HookScreenshots :: proc(self: ^IScreenshots, bHook: bool) ---
 	Screenshots_SetLocation :: proc(self: ^IScreenshots, hScreenshot: ScreenshotHandle, pchLocation: cstring) -> bool ---
 	Screenshots_TagUser :: proc(self: ^IScreenshots, hScreenshot: ScreenshotHandle, steamID: CSteamID) -> bool ---
-	Screenshots_TagPublishedFile :: proc(self: ^IScreenshots, hScreenshot: ScreenshotHandle, unPublishedFileID: PublishedFileId_t) -> bool ---
+	Screenshots_TagPublishedFile :: proc(self: ^IScreenshots, hScreenshot: ScreenshotHandle, unPublishedFileID: PublishedFileId) -> bool ---
 	Screenshots_IsScreenshotsHooked :: proc(self: ^IScreenshots) -> bool ---
 	Screenshots_AddVRScreenshotToLibrary :: proc(self: ^IScreenshots, eType: EVRScreenshotType, pchFilename: cstring, pchVRFilename: cstring) -> ScreenshotHandle ---
 
 	Music_BIsEnabled :: proc(self: ^IMusic) -> bool ---
 	Music_BIsPlaying :: proc(self: ^IMusic) -> bool ---
-	Music_GetPlaybackStatus :: proc(self: ^IMusic) -> AudioPlayback_Status ---
+	Music_GetPlaybackStatus :: proc(self: ^IMusic) -> AudioPlaybacStatus ---
 	Music_Play :: proc(self: ^IMusic) ---
 	Music_Pause :: proc(self: ^IMusic) ---
 	Music_PlayPrevious :: proc(self: ^IMusic) ---
@@ -4425,7 +4432,7 @@ foreign lib {
 	MusicRemote_EnableLooped :: proc(self: ^IMusicRemote, bValue: bool) -> bool ---
 	MusicRemote_EnableQueue :: proc(self: ^IMusicRemote, bValue: bool) -> bool ---
 	MusicRemote_EnablePlaylists :: proc(self: ^IMusicRemote, bValue: bool) -> bool ---
-	MusicRemote_UpdatePlaybackStatus :: proc(self: ^IMusicRemote, nStatus: AudioPlayback_Status) -> bool ---
+	MusicRemote_UpdatePlaybackStatus :: proc(self: ^IMusicRemote, nStatus: AudioPlaybacStatus) -> bool ---
 	MusicRemote_UpdateShuffled :: proc(self: ^IMusicRemote, bValue: bool) -> bool ---
 	MusicRemote_UpdateLooped :: proc(self: ^IMusicRemote, bValue: bool) -> bool ---
 	MusicRemote_UpdateVolume :: proc(self: ^IMusicRemote, flValue: f32) -> bool ---
@@ -4451,8 +4458,8 @@ foreign lib {
 	HTTP_SetHTTPRequestNetworkActivityTimeout :: proc(self: ^IHTTP, hRequest: HTTPRequestHandle, unTimeoutSeconds: uint32) -> bool ---
 	HTTP_SetHTTPRequestHeaderValue :: proc(self: ^IHTTP, hRequest: HTTPRequestHandle, pchHeaderName: cstring, pchHeaderValue: cstring) -> bool ---
 	HTTP_SetHTTPRequestGetOrPostParameter :: proc(self: ^IHTTP, hRequest: HTTPRequestHandle, pchParamName: cstring, pchParamValue: cstring) -> bool ---
-	HTTP_SendHTTPRequest :: proc(self: ^IHTTP, hRequest: HTTPRequestHandle, pCallHandle: ^SteamAPICall_t) -> bool ---
-	HTTP_SendHTTPRequestAndStreamResponse :: proc(self: ^IHTTP, hRequest: HTTPRequestHandle, pCallHandle: ^SteamAPICall_t) -> bool ---
+	HTTP_SendHTTPRequest :: proc(self: ^IHTTP, hRequest: HTTPRequestHandle, pCallHandle: ^SteamAPICall) -> bool ---
+	HTTP_SendHTTPRequestAndStreamResponse :: proc(self: ^IHTTP, hRequest: HTTPRequestHandle, pCallHandle: ^SteamAPICall) -> bool ---
 	HTTP_DeferHTTPRequest :: proc(self: ^IHTTP, hRequest: HTTPRequestHandle) -> bool ---
 	HTTP_PrioritizeHTTPRequest :: proc(self: ^IHTTP, hRequest: HTTPRequestHandle) -> bool ---
 	HTTP_GetHTTPResponseHeaderSize :: proc(self: ^IHTTP, hRequest: HTTPRequestHandle, pchHeaderName: cstring, unResponseHeaderSize: ^uint32) -> bool ---
@@ -4478,179 +4485,179 @@ foreign lib {
 	Input_RunFrame :: proc(self: ^IInput, bReservedValue: bool) ---
 	Input_BWaitForData :: proc(self: ^IInput, bWaitForever: bool, unTimeout: uint32) -> bool ---
 	Input_BNewDataAvailable :: proc(self: ^IInput) -> bool ---
-	Input_GetConnectedControllers :: proc(self: ^IInput, handlesOut: ^InputHandle_t) -> c.int ---
+	Input_GetConnectedControllers :: proc(self: ^IInput, handlesOut: ^InputHandle) -> c.int ---
 	Input_EnableDeviceCallbacks :: proc(self: ^IInput) ---
 	Input_EnableActionEventCallbacks :: proc(self: ^IInput, pCallback: SteamInputActionEventCallbackPointer) ---
-	Input_GetActionSetHandle :: proc(self: ^IInput, pszActionSetName: cstring) -> InputActionSetHandle_t ---
-	Input_ActivateActionSet :: proc(self: ^IInput, inputHandle: InputHandle_t, actionSetHandle: InputActionSetHandle_t) ---
-	Input_GetCurrentActionSet :: proc(self: ^IInput, inputHandle: InputHandle_t) -> InputActionSetHandle_t ---
-	Input_ActivateActionSetLayer :: proc(self: ^IInput, inputHandle: InputHandle_t, actionSetLayerHandle: InputActionSetHandle_t) ---
-	Input_DeactivateActionSetLayer :: proc(self: ^IInput, inputHandle: InputHandle_t, actionSetLayerHandle: InputActionSetHandle_t) ---
-	Input_DeactivateAllActionSetLayers :: proc(self: ^IInput, inputHandle: InputHandle_t) ---
-	Input_GetActiveActionSetLayers :: proc(self: ^IInput, inputHandle: InputHandle_t, handlesOut: ^InputActionSetHandle_t) -> c.int ---
-	Input_GetDigitalActionHandle :: proc(self: ^IInput, pszActionName: cstring) -> InputDigitalActionHandle_t ---
-	Input_GetDigitalActionData :: proc(self: ^IInput, inputHandle: InputHandle_t, digitalActionHandle: InputDigitalActionHandle_t) -> InputDigitalActionData_t ---
-	Input_GetDigitalActionOrigins :: proc(self: ^IInput, inputHandle: InputHandle_t, actionSetHandle: InputActionSetHandle_t, digitalActionHandle: InputDigitalActionHandle_t, originsOut: ^EInputActionOrigin) -> c.int ---
-	Input_GetStringForDigitalActionName :: proc(self: ^IInput, eActionHandle: InputDigitalActionHandle_t) -> cstring ---
-	Input_GetAnalogActionHandle :: proc(self: ^IInput, pszActionName: cstring) -> InputAnalogActionHandle_t ---
-	Input_GetAnalogActionData :: proc(self: ^IInput, inputHandle: InputHandle_t, analogActionHandle: InputAnalogActionHandle_t) -> InputAnalogActionData_t ---
-	Input_GetAnalogActionOrigins :: proc(self: ^IInput, inputHandle: InputHandle_t, actionSetHandle: InputActionSetHandle_t, analogActionHandle: InputAnalogActionHandle_t, originsOut: ^EInputActionOrigin) -> c.int ---
+	Input_GetActionSetHandle :: proc(self: ^IInput, pszActionSetName: cstring) -> InputActionSetHandle ---
+	Input_ActivateActionSet :: proc(self: ^IInput, inputHandle: InputHandle, actionSetHandle: InputActionSetHandle) ---
+	Input_GetCurrentActionSet :: proc(self: ^IInput, inputHandle: InputHandle) -> InputActionSetHandle ---
+	Input_ActivateActionSetLayer :: proc(self: ^IInput, inputHandle: InputHandle, actionSetLayerHandle: InputActionSetHandle) ---
+	Input_DeactivateActionSetLayer :: proc(self: ^IInput, inputHandle: InputHandle, actionSetLayerHandle: InputActionSetHandle) ---
+	Input_DeactivateAllActionSetLayers :: proc(self: ^IInput, inputHandle: InputHandle) ---
+	Input_GetActiveActionSetLayers :: proc(self: ^IInput, inputHandle: InputHandle, handlesOut: ^InputActionSetHandle) -> c.int ---
+	Input_GetDigitalActionHandle :: proc(self: ^IInput, pszActionName: cstring) -> InputDigitalActionHandle ---
+	Input_GetDigitalActionData :: proc(self: ^IInput, inputHandle: InputHandle, digitalActionHandle: InputDigitalActionHandle) -> InputDigitalActionData ---
+	Input_GetDigitalActionOrigins :: proc(self: ^IInput, inputHandle: InputHandle, actionSetHandle: InputActionSetHandle, digitalActionHandle: InputDigitalActionHandle, originsOut: ^EInputActionOrigin) -> c.int ---
+	Input_GetStringForDigitalActionName :: proc(self: ^IInput, eActionHandle: InputDigitalActionHandle) -> cstring ---
+	Input_GetAnalogActionHandle :: proc(self: ^IInput, pszActionName: cstring) -> InputAnalogActionHandle ---
+	Input_GetAnalogActionData :: proc(self: ^IInput, inputHandle: InputHandle, analogActionHandle: InputAnalogActionHandle) -> InputAnalogActionData ---
+	Input_GetAnalogActionOrigins :: proc(self: ^IInput, inputHandle: InputHandle, actionSetHandle: InputActionSetHandle, analogActionHandle: InputAnalogActionHandle, originsOut: ^EInputActionOrigin) -> c.int ---
 	Input_GetGlyphPNGForActionOrigin :: proc(self: ^IInput, eOrigin: EInputActionOrigin, eSize: ESteamInputGlyphSize, unFlags: uint32) -> cstring ---
 	Input_GetGlyphSVGForActionOrigin :: proc(self: ^IInput, eOrigin: EInputActionOrigin, unFlags: uint32) -> cstring ---
 	Input_GetGlyphForActionOrigin_Legacy :: proc(self: ^IInput, eOrigin: EInputActionOrigin) -> cstring ---
 	Input_GetStringForActionOrigin :: proc(self: ^IInput, eOrigin: EInputActionOrigin) -> cstring ---
-	Input_GetStringForAnalogActionName :: proc(self: ^IInput, eActionHandle: InputAnalogActionHandle_t) -> cstring ---
-	Input_StopAnalogActionMomentum :: proc(self: ^IInput, inputHandle: InputHandle_t, eAction: InputAnalogActionHandle_t) ---
-	Input_GetMotionData :: proc(self: ^IInput, inputHandle: InputHandle_t) -> InputMotionData_t ---
-	Input_TriggerVibration :: proc(self: ^IInput, inputHandle: InputHandle_t, usLeftSpeed: c.ushort, usRightSpeed: c.ushort) ---
-	Input_TriggerVibrationExtended :: proc(self: ^IInput, inputHandle: InputHandle_t, usLeftSpeed: c.ushort, usRightSpeed: c.ushort, usLeftTriggerSpeed: c.ushort, usRightTriggerSpeed: c.ushort) ---
-	Input_TriggerSimpleHapticEvent :: proc(self: ^IInput, inputHandle: InputHandle_t, eHapticLocation: EControllerHapticLocation, nIntensity: uint8, nGainDB: i8, nOtherIntensity: uint8, nOtherGainDB: i8) ---
-	Input_SetLEDColor :: proc(self: ^IInput, inputHandle: InputHandle_t, nColorR: uint8, nColorG: uint8, nColorB: uint8, nFlags: c.uint) ---
-	Input_Legacy_TriggerHapticPulse :: proc(self: ^IInput, inputHandle: InputHandle_t, eTargetPad: ESteamControllerPad, usDurationMicroSec: c.ushort) ---
-	Input_Legacy_TriggerRepeatedHapticPulse :: proc(self: ^IInput, inputHandle: InputHandle_t, eTargetPad: ESteamControllerPad, usDurationMicroSec: c.ushort, usOffMicroSec: c.ushort, unRepeat: c.ushort, nFlags: c.uint) ---
-	Input_ShowBindingPanel :: proc(self: ^IInput, inputHandle: InputHandle_t) -> bool ---
-	Input_GetInputTypeForHandle :: proc(self: ^IInput, inputHandle: InputHandle_t) -> ESteamInputType ---
-	Input_GetControllerForGamepadIndex :: proc(self: ^IInput, nIndex: c.int) -> InputHandle_t ---
-	Input_GetGamepadIndexForController :: proc(self: ^IInput, ulinputHandle: InputHandle_t) -> c.int ---
+	Input_GetStringForAnalogActionName :: proc(self: ^IInput, eActionHandle: InputAnalogActionHandle) -> cstring ---
+	Input_StopAnalogActionMomentum :: proc(self: ^IInput, inputHandle: InputHandle, eAction: InputAnalogActionHandle) ---
+	Input_GetMotionData :: proc(self: ^IInput, inputHandle: InputHandle) -> InputMotionData ---
+	Input_TriggerVibration :: proc(self: ^IInput, inputHandle: InputHandle, usLeftSpeed: c.ushort, usRightSpeed: c.ushort) ---
+	Input_TriggerVibrationExtended :: proc(self: ^IInput, inputHandle: InputHandle, usLeftSpeed: c.ushort, usRightSpeed: c.ushort, usLeftTriggerSpeed: c.ushort, usRightTriggerSpeed: c.ushort) ---
+	Input_TriggerSimpleHapticEvent :: proc(self: ^IInput, inputHandle: InputHandle, eHapticLocation: EControllerHapticLocation, nIntensity: uint8, nGainDB: i8, nOtherIntensity: uint8, nOtherGainDB: i8) ---
+	Input_SetLEDColor :: proc(self: ^IInput, inputHandle: InputHandle, nColorR: uint8, nColorG: uint8, nColorB: uint8, nFlags: c.uint) ---
+	Input_Legacy_TriggerHapticPulse :: proc(self: ^IInput, inputHandle: InputHandle, eTargetPad: ESteamControllerPad, usDurationMicroSec: c.ushort) ---
+	Input_Legacy_TriggerRepeatedHapticPulse :: proc(self: ^IInput, inputHandle: InputHandle, eTargetPad: ESteamControllerPad, usDurationMicroSec: c.ushort, usOffMicroSec: c.ushort, unRepeat: c.ushort, nFlags: c.uint) ---
+	Input_ShowBindingPanel :: proc(self: ^IInput, inputHandle: InputHandle) -> bool ---
+	Input_GetInputTypeForHandle :: proc(self: ^IInput, inputHandle: InputHandle) -> ESteamInputType ---
+	Input_GetControllerForGamepadIndex :: proc(self: ^IInput, nIndex: c.int) -> InputHandle ---
+	Input_GetGamepadIndexForController :: proc(self: ^IInput, ulinputHandle: InputHandle) -> c.int ---
 	Input_GetStringForXboxOrigin :: proc(self: ^IInput, eOrigin: EXboxOrigin) -> cstring ---
 	Input_GetGlyphForXboxOrigin :: proc(self: ^IInput, eOrigin: EXboxOrigin) -> cstring ---
-	Input_GetActionOriginFromXboxOrigin :: proc(self: ^IInput, inputHandle: InputHandle_t, eOrigin: EXboxOrigin) -> EInputActionOrigin ---
+	Input_GetActionOriginFromXboxOrigin :: proc(self: ^IInput, inputHandle: InputHandle, eOrigin: EXboxOrigin) -> EInputActionOrigin ---
 	Input_TranslateActionOrigin :: proc(self: ^IInput, eDestinationInputType: ESteamInputType, eSourceOrigin: EInputActionOrigin) -> EInputActionOrigin ---
-	Input_GetDeviceBindingRevision :: proc(self: ^IInput, inputHandle: InputHandle_t, pMajor: ^int, pMinor: ^int) -> bool ---
-	Input_GetRemotePlaySessionID :: proc(self: ^IInput, inputHandle: InputHandle_t) -> uint32 ---
+	Input_GetDeviceBindingRevision :: proc(self: ^IInput, inputHandle: InputHandle, pMajor: ^int, pMinor: ^int) -> bool ---
+	Input_GetRemotePlaySessionID :: proc(self: ^IInput, inputHandle: InputHandle) -> uint32 ---
 	Input_GetSessionInputConfigurationSettings :: proc(self: ^IInput) -> uint16 ---
-	// IInput_SetDualSenseTriggerEffect :: proc(self: ^IInput, inputHandle: InputHandle_t, pParam: ^ScePadTriggerEffectParam) ---
+	// IInput_SetDualSenseTriggerEffect :: proc(self: ^IInput, inputHandle: InputHandle, pParam: ^ScePadTriggerEffectParam) ---
 
 	Controller_Init :: proc(self: ^IController) -> bool ---
 	Controller_Shutdown :: proc(self: ^IController) -> bool ---
 	Controller_RunFrame :: proc(self: ^IController) ---
-	Controller_GetConnectedControllers :: proc(self: ^IController, handlesOut: ^ControllerHandle_t) -> c.int ---
-	Controller_GetActionSetHandle :: proc(self: ^IController, pszActionSetName: cstring) -> ControllerActionSetHandle_t ---
-	Controller_ActivateActionSet :: proc(self: ^IController, controllerHandle: ControllerHandle_t, actionSetHandle: ControllerActionSetHandle_t) ---
-	Controller_GetCurrentActionSet :: proc(self: ^IController, controllerHandle: ControllerHandle_t) -> ControllerActionSetHandle_t ---
-	Controller_ActivateActionSetLayer :: proc(self: ^IController, controllerHandle: ControllerHandle_t, actionSetLayerHandle: ControllerActionSetHandle_t) ---
-	Controller_DeactivateActionSetLayer :: proc(self: ^IController, controllerHandle: ControllerHandle_t, actionSetLayerHandle: ControllerActionSetHandle_t) ---
-	Controller_DeactivateAllActionSetLayers :: proc(self: ^IController, controllerHandle: ControllerHandle_t) ---
-	Controller_GetActiveActionSetLayers :: proc(self: ^IController, controllerHandle: ControllerHandle_t, handlesOut: ^ControllerActionSetHandle_t) -> c.int ---
-	Controller_GetDigitalActionHandle :: proc(self: ^IController, pszActionName: cstring) -> ControllerDigitalActionHandle_t ---
-	Controller_GetDigitalActionData :: proc(self: ^IController, controllerHandle: ControllerHandle_t, digitalActionHandle: ControllerDigitalActionHandle_t) -> InputDigitalActionData_t ---
-	Controller_GetDigitalActionOrigins :: proc(self: ^IController, controllerHandle: ControllerHandle_t, actionSetHandle: ControllerActionSetHandle_t, digitalActionHandle: ControllerDigitalActionHandle_t, originsOut: ^EControllerActionOrigin) -> c.int ---
-	Controller_GetAnalogActionHandle :: proc(self: ^IController, pszActionName: cstring) -> ControllerAnalogActionHandle_t ---
-	Controller_GetAnalogActionData :: proc(self: ^IController, controllerHandle: ControllerHandle_t, analogActionHandle: ControllerAnalogActionHandle_t) -> InputAnalogActionData_t ---
-	Controller_GetAnalogActionOrigins :: proc(self: ^IController, controllerHandle: ControllerHandle_t, actionSetHandle: ControllerActionSetHandle_t, analogActionHandle: ControllerAnalogActionHandle_t, originsOut: ^EControllerActionOrigin) -> c.int ---
+	Controller_GetConnectedControllers :: proc(self: ^IController, handlesOut: ^ControllerHandle) -> c.int ---
+	Controller_GetActionSetHandle :: proc(self: ^IController, pszActionSetName: cstring) -> ControllerActionSetHandle ---
+	Controller_ActivateActionSet :: proc(self: ^IController, controllerHandle: ControllerHandle, actionSetHandle: ControllerActionSetHandle) ---
+	Controller_GetCurrentActionSet :: proc(self: ^IController, controllerHandle: ControllerHandle) -> ControllerActionSetHandle ---
+	Controller_ActivateActionSetLayer :: proc(self: ^IController, controllerHandle: ControllerHandle, actionSetLayerHandle: ControllerActionSetHandle) ---
+	Controller_DeactivateActionSetLayer :: proc(self: ^IController, controllerHandle: ControllerHandle, actionSetLayerHandle: ControllerActionSetHandle) ---
+	Controller_DeactivateAllActionSetLayers :: proc(self: ^IController, controllerHandle: ControllerHandle) ---
+	Controller_GetActiveActionSetLayers :: proc(self: ^IController, controllerHandle: ControllerHandle, handlesOut: ^ControllerActionSetHandle) -> c.int ---
+	Controller_GetDigitalActionHandle :: proc(self: ^IController, pszActionName: cstring) -> ControllerDigitalActionHandle ---
+	Controller_GetDigitalActionData :: proc(self: ^IController, controllerHandle: ControllerHandle, digitalActionHandle: ControllerDigitalActionHandle) -> InputDigitalActionData ---
+	Controller_GetDigitalActionOrigins :: proc(self: ^IController, controllerHandle: ControllerHandle, actionSetHandle: ControllerActionSetHandle, digitalActionHandle: ControllerDigitalActionHandle, originsOut: ^EControllerActionOrigin) -> c.int ---
+	Controller_GetAnalogActionHandle :: proc(self: ^IController, pszActionName: cstring) -> ControllerAnalogActionHandle ---
+	Controller_GetAnalogActionData :: proc(self: ^IController, controllerHandle: ControllerHandle, analogActionHandle: ControllerAnalogActionHandle) -> InputAnalogActionData ---
+	Controller_GetAnalogActionOrigins :: proc(self: ^IController, controllerHandle: ControllerHandle, actionSetHandle: ControllerActionSetHandle, analogActionHandle: ControllerAnalogActionHandle, originsOut: ^EControllerActionOrigin) -> c.int ---
 	Controller_GetGlyphForActionOrigin :: proc(self: ^IController, eOrigin: EControllerActionOrigin) -> cstring ---
 	Controller_GetStringForActionOrigin :: proc(self: ^IController, eOrigin: EControllerActionOrigin) -> cstring ---
-	Controller_StopAnalogActionMomentum :: proc(self: ^IController, controllerHandle: ControllerHandle_t, eAction: ControllerAnalogActionHandle_t) ---
-	Controller_GetMotionData :: proc(self: ^IController, controllerHandle: ControllerHandle_t) -> InputMotionData_t ---
-	Controller_TriggerHapticPulse :: proc(self: ^IController, controllerHandle: ControllerHandle_t, eTargetPad: ESteamControllerPad, usDurationMicroSec: c.ushort) ---
-	Controller_TriggerRepeatedHapticPulse :: proc(self: ^IController, controllerHandle: ControllerHandle_t, eTargetPad: ESteamControllerPad, usDurationMicroSec: c.ushort, usOffMicroSec: c.ushort, unRepeat: c.ushort, nFlags: c.uint) ---
-	Controller_TriggerVibration :: proc(self: ^IController, controllerHandle: ControllerHandle_t, usLeftSpeed: c.ushort, usRightSpeed: c.ushort) ---
-	Controller_SetLEDColor :: proc(self: ^IController, controllerHandle: ControllerHandle_t, nColorR: uint8, nColorG: uint8, nColorB: uint8, nFlags: c.uint) ---
-	Controller_ShowBindingPanel :: proc(self: ^IController, controllerHandle: ControllerHandle_t) -> bool ---
-	Controller_GetInputTypeForHandle :: proc(self: ^IController, controllerHandle: ControllerHandle_t) -> ESteamInputType ---
-	Controller_GetControllerForGamepadIndex :: proc(self: ^IController, nIndex: c.int) -> ControllerHandle_t ---
-	Controller_GetGamepadIndexForController :: proc(self: ^IController, ulControllerHandle: ControllerHandle_t) -> c.int ---
+	Controller_StopAnalogActionMomentum :: proc(self: ^IController, controllerHandle: ControllerHandle, eAction: ControllerAnalogActionHandle) ---
+	Controller_GetMotionData :: proc(self: ^IController, controllerHandle: ControllerHandle) -> InputMotionData ---
+	Controller_TriggerHapticPulse :: proc(self: ^IController, controllerHandle: ControllerHandle, eTargetPad: ESteamControllerPad, usDurationMicroSec: c.ushort) ---
+	Controller_TriggerRepeatedHapticPulse :: proc(self: ^IController, controllerHandle: ControllerHandle, eTargetPad: ESteamControllerPad, usDurationMicroSec: c.ushort, usOffMicroSec: c.ushort, unRepeat: c.ushort, nFlags: c.uint) ---
+	Controller_TriggerVibration :: proc(self: ^IController, controllerHandle: ControllerHandle, usLeftSpeed: c.ushort, usRightSpeed: c.ushort) ---
+	Controller_SetLEDColor :: proc(self: ^IController, controllerHandle: ControllerHandle, nColorR: uint8, nColorG: uint8, nColorB: uint8, nFlags: c.uint) ---
+	Controller_ShowBindingPanel :: proc(self: ^IController, controllerHandle: ControllerHandle) -> bool ---
+	Controller_GetInputTypeForHandle :: proc(self: ^IController, controllerHandle: ControllerHandle) -> ESteamInputType ---
+	Controller_GetControllerForGamepadIndex :: proc(self: ^IController, nIndex: c.int) -> ControllerHandle ---
+	Controller_GetGamepadIndexForController :: proc(self: ^IController, ulControllerHandle: ControllerHandle) -> c.int ---
 	Controller_GetStringForXboxOrigin :: proc(self: ^IController, eOrigin: EXboxOrigin) -> cstring ---
 	Controller_GetGlyphForXboxOrigin :: proc(self: ^IController, eOrigin: EXboxOrigin) -> cstring ---
-	Controller_GetActionOriginFromXboxOrigin :: proc(self: ^IController, controllerHandle: ControllerHandle_t, eOrigin: EXboxOrigin) -> EControllerActionOrigin ---
+	Controller_GetActionOriginFromXboxOrigin :: proc(self: ^IController, controllerHandle: ControllerHandle, eOrigin: EXboxOrigin) -> EControllerActionOrigin ---
 	Controller_TranslateActionOrigin :: proc(self: ^IController, eDestinationInputType: ESteamInputType, eSourceOrigin: EControllerActionOrigin) -> EControllerActionOrigin ---
-	Controller_GetControllerBindingRevision :: proc(self: ^IController, controllerHandle: ControllerHandle_t, pMajor: ^int, pMinor: ^int) -> bool ---
+	Controller_GetControllerBindingRevision :: proc(self: ^IController, controllerHandle: ControllerHandle, pMajor: ^int, pMinor: ^int) -> bool ---
 
-	UGC_CreateQueryUserUGCRequest :: proc(self: ^IUGC, unAccountID: AccountID_t, eListType: EUserUGCList, eMatchingUGCType: EUGCMatchingUGCType, eSortOrder: EUserUGCListSortOrder, nCreatorAppID: AppId_t, nConsumerAppID: AppId_t, unPage: uint32) -> UGCQueryHandle_t ---
-	UGC_CreateQueryAllUGCRequestByPage :: proc(self: ^IUGC, eQueryType: EUGCQuery, eMatchingeMatchingUGCTypeFileType: EUGCMatchingUGCType, nCreatorAppID: AppId_t, nConsumerAppID: AppId_t, unPage: uint32) -> UGCQueryHandle_t ---
-	UGC_CreateQueryAllUGCRequestByCursor :: proc(self: ^IUGC, eQueryType: EUGCQuery, eMatchingeMatchingUGCTypeFileType: EUGCMatchingUGCType, nCreatorAppID: AppId_t, nConsumerAppID: AppId_t, pchCursor: cstring) -> UGCQueryHandle_t ---
-	UGC_CreateQueryUGCDetailsRequest :: proc(self: ^IUGC, pvecPublishedFileID: ^PublishedFileId_t, unNumPublishedFileIDs: uint32) -> UGCQueryHandle_t ---
-	UGC_SendQueryUGCRequest :: proc(self: ^IUGC, handle: UGCQueryHandle_t) -> SteamAPICall_t ---
-	UGC_GetQueryUGCResult :: proc(self: ^IUGC, handle: UGCQueryHandle_t, index: uint32, pDetails: ^SteamUGCDetails_t) -> bool ---
-	UGC_GetQueryUGCNumTags :: proc(self: ^IUGC, handle: UGCQueryHandle_t, index: uint32) -> uint32 ---
-	UGC_GetQueryUGCTag :: proc(self: ^IUGC, handle: UGCQueryHandle_t, index: uint32, indexTag: uint32, pchValue: ^u8, cchValueSize: uint32) -> bool ---
-	UGC_GetQueryUGCTagDisplayName :: proc(self: ^IUGC, handle: UGCQueryHandle_t, index: uint32, indexTag: uint32, pchValue: ^u8, cchValueSize: uint32) -> bool ---
-	UGC_GetQueryUGCPreviewURL :: proc(self: ^IUGC, handle: UGCQueryHandle_t, index: uint32, pchURL: ^u8, cchURLSize: uint32) -> bool ---
-	UGC_GetQueryUGCMetadata :: proc(self: ^IUGC, handle: UGCQueryHandle_t, index: uint32, pchMetadata: ^u8, cchMetadatasize: uint32) -> bool ---
-	UGC_GetQueryUGCChildren :: proc(self: ^IUGC, handle: UGCQueryHandle_t, index: uint32, pvecPublishedFileID: ^PublishedFileId_t, cMaxEntries: uint32) -> bool ---
-	UGC_GetQueryUGCStatistic :: proc(self: ^IUGC, handle: UGCQueryHandle_t, index: uint32, eStatType: EItemStatistic, pStatValue: ^uint64) -> bool ---
-	UGC_GetQueryUGCNumAdditionalPreviews :: proc(self: ^IUGC, handle: UGCQueryHandle_t, index: uint32) -> uint32 ---
-	UGC_GetQueryUGCAdditionalPreview :: proc(self: ^IUGC, handle: UGCQueryHandle_t, index: uint32, previewIndex: uint32, pchURLOrVideoID: ^u8, cchURLSize: uint32, pchOriginalFileName: ^u8, cchOriginalFileNameSize: uint32, pPreviewType: ^EItemPreviewType) -> bool ---
-	UGC_GetQueryUGCNumKeyValueTags :: proc(self: ^IUGC, handle: UGCQueryHandle_t, index: uint32) -> uint32 ---
-	UGC_GetQueryUGCKeyValueTag :: proc(self: ^IUGC, handle: UGCQueryHandle_t, index: uint32, pchKey: cstring, pchValue: ^u8, cchValueSize: uint32) -> bool ---
-	UGC_ReleaseQueryUGCRequest :: proc(self: ^IUGC, handle: UGCQueryHandle_t) -> bool ---
-	UGC_AddRequiredTag :: proc(self: ^IUGC, handle: UGCQueryHandle_t, pTagName: cstring) -> bool ---
-	UGC_AddRequiredTagGroup :: proc(self: ^IUGC, handle: UGCQueryHandle_t, pTagGroups: ^SteamParamStringArray_t) -> bool ---
-	UGC_AddExcludedTag :: proc(self: ^IUGC, handle: UGCQueryHandle_t, pTagName: cstring) -> bool ---
-	UGC_SetReturnOnlyIDs :: proc(self: ^IUGC, handle: UGCQueryHandle_t, bReturnOnlyIDs: bool) -> bool ---
-	UGC_SetReturnKeyValueTags :: proc(self: ^IUGC, handle: UGCQueryHandle_t, bReturnKeyValueTags: bool) -> bool ---
-	UGC_SetReturnLongDescription :: proc(self: ^IUGC, handle: UGCQueryHandle_t, bReturnLongDescription: bool) -> bool ---
-	UGC_SetReturnMetadata :: proc(self: ^IUGC, handle: UGCQueryHandle_t, bReturnMetadata: bool) -> bool ---
-	UGC_SetReturnChildren :: proc(self: ^IUGC, handle: UGCQueryHandle_t, bReturnChildren: bool) -> bool ---
-	UGC_SetReturnAdditionalPreviews :: proc(self: ^IUGC, handle: UGCQueryHandle_t, bReturnAdditionalPreviews: bool) -> bool ---
-	UGC_SetReturnTotalOnly :: proc(self: ^IUGC, handle: UGCQueryHandle_t, bReturnTotalOnly: bool) -> bool ---
-	UGC_SetReturnPlaytimeStats :: proc(self: ^IUGC, handle: UGCQueryHandle_t, unDays: uint32) -> bool ---
-	UGC_SetLanguage :: proc(self: ^IUGC, handle: UGCQueryHandle_t, pchLanguage: cstring) -> bool ---
-	UGC_SetAllowCachedResponse :: proc(self: ^IUGC, handle: UGCQueryHandle_t, unMaxAgeSeconds: uint32) -> bool ---
-	UGC_SetCloudFileNameFilter :: proc(self: ^IUGC, handle: UGCQueryHandle_t, pMatchCloudFileName: cstring) -> bool ---
-	UGC_SetMatchAnyTag :: proc(self: ^IUGC, handle: UGCQueryHandle_t, bMatchAnyTag: bool) -> bool ---
-	UGC_SetSearchText :: proc(self: ^IUGC, handle: UGCQueryHandle_t, pSearchText: cstring) -> bool ---
-	UGC_SetRankedByTrendDays :: proc(self: ^IUGC, handle: UGCQueryHandle_t, unDays: uint32) -> bool ---
-	UGC_SetTimeCreatedDateRange :: proc(self: ^IUGC, handle: UGCQueryHandle_t, rtStart: RTime32, rtEnd: RTime32) -> bool ---
-	UGC_SetTimeUpdatedDateRange :: proc(self: ^IUGC, handle: UGCQueryHandle_t, rtStart: RTime32, rtEnd: RTime32) -> bool ---
-	UGC_AddRequiredKeyValueTag :: proc(self: ^IUGC, handle: UGCQueryHandle_t, pKey: cstring, pValue: cstring) -> bool ---
-	UGC_RequestUGCDetails :: proc(self: ^IUGC, nPublishedFileID: PublishedFileId_t, unMaxAgeSeconds: uint32) -> SteamAPICall_t ---
-	UGC_CreateItem :: proc(self: ^IUGC, nConsumerAppId: AppId_t, eFileType: EWorkshopFileType) -> SteamAPICall_t ---
-	UGC_StartItemUpdate :: proc(self: ^IUGC, nConsumerAppId: AppId_t, nPublishedFileID: PublishedFileId_t) -> UGCUpdateHandle_t ---
-	UGC_SetItemTitle :: proc(self: ^IUGC, handle: UGCUpdateHandle_t, pchTitle: cstring) -> bool ---
-	UGC_SetItemDescription :: proc(self: ^IUGC, handle: UGCUpdateHandle_t, pchDescription: cstring) -> bool ---
-	UGC_SetItemUpdateLanguage :: proc(self: ^IUGC, handle: UGCUpdateHandle_t, pchLanguage: cstring) -> bool ---
-	UGC_SetItemMetadata :: proc(self: ^IUGC, handle: UGCUpdateHandle_t, pchMetaData: cstring) -> bool ---
-	UGC_SetItemVisibility :: proc(self: ^IUGC, handle: UGCUpdateHandle_t, eVisibility: ERemoteStoragePublishedFileVisibility) -> bool ---
-	UGC_SetItemTags :: proc(self: ^IUGC, updateHandle: UGCUpdateHandle_t, pTags: ^SteamParamStringArray_t) -> bool ---
-	UGC_SetItemContent :: proc(self: ^IUGC, handle: UGCUpdateHandle_t, pszContentFolder: cstring) -> bool ---
-	UGC_SetItemPreview :: proc(self: ^IUGC, handle: UGCUpdateHandle_t, pszPreviewFile: cstring) -> bool ---
-	UGC_SetAllowLegacyUpload :: proc(self: ^IUGC, handle: UGCUpdateHandle_t, bAllowLegacyUpload: bool) -> bool ---
-	UGC_RemoveAllItemKeyValueTags :: proc(self: ^IUGC, handle: UGCUpdateHandle_t) -> bool ---
-	UGC_RemoveItemKeyValueTags :: proc(self: ^IUGC, handle: UGCUpdateHandle_t, pchKey: cstring) -> bool ---
-	UGC_AddItemKeyValueTag :: proc(self: ^IUGC, handle: UGCUpdateHandle_t, pchKey: cstring, pchValue: cstring) -> bool ---
-	UGC_AddItemPreviewFile :: proc(self: ^IUGC, handle: UGCUpdateHandle_t, pszPreviewFile: cstring, type: EItemPreviewType) -> bool ---
-	UGC_AddItemPreviewVideo :: proc(self: ^IUGC, handle: UGCUpdateHandle_t, pszVideoID: cstring) -> bool ---
-	UGC_UpdateItemPreviewFile :: proc(self: ^IUGC, handle: UGCUpdateHandle_t, index: uint32, pszPreviewFile: cstring) -> bool ---
-	UGC_UpdateItemPreviewVideo :: proc(self: ^IUGC, handle: UGCUpdateHandle_t, index: uint32, pszVideoID: cstring) -> bool ---
-	UGC_RemoveItemPreview :: proc(self: ^IUGC, handle: UGCUpdateHandle_t, index: uint32) -> bool ---
-	UGC_SubmitItemUpdate :: proc(self: ^IUGC, handle: UGCUpdateHandle_t, pchChangeNote: cstring) -> SteamAPICall_t ---
-	UGC_GetItemUpdateProgress :: proc(self: ^IUGC, handle: UGCUpdateHandle_t, punBytesProcessed: ^uint64, punBytesTotal: ^uint64) -> EItemUpdateStatus ---
-	UGC_SetUserItemVote :: proc(self: ^IUGC, nPublishedFileID: PublishedFileId_t, bVoteUp: bool) -> SteamAPICall_t ---
-	UGC_GetUserItemVote :: proc(self: ^IUGC, nPublishedFileID: PublishedFileId_t) -> SteamAPICall_t ---
-	UGC_AddItemToFavorites :: proc(self: ^IUGC, nAppId: AppId_t, nPublishedFileID: PublishedFileId_t) -> SteamAPICall_t ---
-	UGC_RemoveItemFromFavorites :: proc(self: ^IUGC, nAppId: AppId_t, nPublishedFileID: PublishedFileId_t) -> SteamAPICall_t ---
-	UGC_SubscribeItem :: proc(self: ^IUGC, nPublishedFileID: PublishedFileId_t) -> SteamAPICall_t ---
-	UGC_UnsubscribeItem :: proc(self: ^IUGC, nPublishedFileID: PublishedFileId_t) -> SteamAPICall_t ---
+	UGC_CreateQueryUserUGCRequest :: proc(self: ^IUGC, unAccountID: AccountID, eListType: EUserUGCList, eMatchingUGCType: EUGCMatchingUGCType, eSortOrder: EUserUGCListSortOrder, nCreatorAppID: AppId, nConsumerAppID: AppId, unPage: uint32) -> UGCQueryHandle ---
+	UGC_CreateQueryAllUGCRequestByPage :: proc(self: ^IUGC, eQueryType: EUGCQuery, eMatchingeMatchingUGCTypeFileType: EUGCMatchingUGCType, nCreatorAppID: AppId, nConsumerAppID: AppId, unPage: uint32) -> UGCQueryHandle ---
+	UGC_CreateQueryAllUGCRequestByCursor :: proc(self: ^IUGC, eQueryType: EUGCQuery, eMatchingeMatchingUGCTypeFileType: EUGCMatchingUGCType, nCreatorAppID: AppId, nConsumerAppID: AppId, pchCursor: cstring) -> UGCQueryHandle ---
+	UGC_CreateQueryUGCDetailsRequest :: proc(self: ^IUGC, pvecPublishedFileID: ^PublishedFileId, unNumPublishedFileIDs: uint32) -> UGCQueryHandle ---
+	UGC_SendQueryUGCRequest :: proc(self: ^IUGC, handle: UGCQueryHandle) -> SteamAPICall ---
+	UGC_GetQueryUGCResult :: proc(self: ^IUGC, handle: UGCQueryHandle, index: uint32, pDetails: ^SteamUGCDetails) -> bool ---
+	UGC_GetQueryUGCNumTags :: proc(self: ^IUGC, handle: UGCQueryHandle, index: uint32) -> uint32 ---
+	UGC_GetQueryUGCTag :: proc(self: ^IUGC, handle: UGCQueryHandle, index: uint32, indexTag: uint32, pchValue: ^u8, cchValueSize: uint32) -> bool ---
+	UGC_GetQueryUGCTagDisplayName :: proc(self: ^IUGC, handle: UGCQueryHandle, index: uint32, indexTag: uint32, pchValue: ^u8, cchValueSize: uint32) -> bool ---
+	UGC_GetQueryUGCPreviewURL :: proc(self: ^IUGC, handle: UGCQueryHandle, index: uint32, pchURL: ^u8, cchURLSize: uint32) -> bool ---
+	UGC_GetQueryUGCMetadata :: proc(self: ^IUGC, handle: UGCQueryHandle, index: uint32, pchMetadata: ^u8, cchMetadatasize: uint32) -> bool ---
+	UGC_GetQueryUGCChildren :: proc(self: ^IUGC, handle: UGCQueryHandle, index: uint32, pvecPublishedFileID: ^PublishedFileId, cMaxEntries: uint32) -> bool ---
+	UGC_GetQueryUGCStatistic :: proc(self: ^IUGC, handle: UGCQueryHandle, index: uint32, eStatType: EItemStatistic, pStatValue: ^uint64) -> bool ---
+	UGC_GetQueryUGCNumAdditionalPreviews :: proc(self: ^IUGC, handle: UGCQueryHandle, index: uint32) -> uint32 ---
+	UGC_GetQueryUGCAdditionalPreview :: proc(self: ^IUGC, handle: UGCQueryHandle, index: uint32, previewIndex: uint32, pchURLOrVideoID: ^u8, cchURLSize: uint32, pchOriginalFileName: ^u8, cchOriginalFileNameSize: uint32, pPreviewType: ^EItemPreviewType) -> bool ---
+	UGC_GetQueryUGCNumKeyValueTags :: proc(self: ^IUGC, handle: UGCQueryHandle, index: uint32) -> uint32 ---
+	UGC_GetQueryUGCKeyValueTag :: proc(self: ^IUGC, handle: UGCQueryHandle, index: uint32, pchKey: cstring, pchValue: ^u8, cchValueSize: uint32) -> bool ---
+	UGC_ReleaseQueryUGCRequest :: proc(self: ^IUGC, handle: UGCQueryHandle) -> bool ---
+	UGC_AddRequiredTag :: proc(self: ^IUGC, handle: UGCQueryHandle, pTagName: cstring) -> bool ---
+	UGC_AddRequiredTagGroup :: proc(self: ^IUGC, handle: UGCQueryHandle, pTagGroups: ^SteamParamStringArray) -> bool ---
+	UGC_AddExcludedTag :: proc(self: ^IUGC, handle: UGCQueryHandle, pTagName: cstring) -> bool ---
+	UGC_SetReturnOnlyIDs :: proc(self: ^IUGC, handle: UGCQueryHandle, bReturnOnlyIDs: bool) -> bool ---
+	UGC_SetReturnKeyValueTags :: proc(self: ^IUGC, handle: UGCQueryHandle, bReturnKeyValueTags: bool) -> bool ---
+	UGC_SetReturnLongDescription :: proc(self: ^IUGC, handle: UGCQueryHandle, bReturnLongDescription: bool) -> bool ---
+	UGC_SetReturnMetadata :: proc(self: ^IUGC, handle: UGCQueryHandle, bReturnMetadata: bool) -> bool ---
+	UGC_SetReturnChildren :: proc(self: ^IUGC, handle: UGCQueryHandle, bReturnChildren: bool) -> bool ---
+	UGC_SetReturnAdditionalPreviews :: proc(self: ^IUGC, handle: UGCQueryHandle, bReturnAdditionalPreviews: bool) -> bool ---
+	UGC_SetReturnTotalOnly :: proc(self: ^IUGC, handle: UGCQueryHandle, bReturnTotalOnly: bool) -> bool ---
+	UGC_SetReturnPlaytimeStats :: proc(self: ^IUGC, handle: UGCQueryHandle, unDays: uint32) -> bool ---
+	UGC_SetLanguage :: proc(self: ^IUGC, handle: UGCQueryHandle, pchLanguage: cstring) -> bool ---
+	UGC_SetAllowCachedResponse :: proc(self: ^IUGC, handle: UGCQueryHandle, unMaxAgeSeconds: uint32) -> bool ---
+	UGC_SetCloudFileNameFilter :: proc(self: ^IUGC, handle: UGCQueryHandle, pMatchCloudFileName: cstring) -> bool ---
+	UGC_SetMatchAnyTag :: proc(self: ^IUGC, handle: UGCQueryHandle, bMatchAnyTag: bool) -> bool ---
+	UGC_SetSearchText :: proc(self: ^IUGC, handle: UGCQueryHandle, pSearchText: cstring) -> bool ---
+	UGC_SetRankedByTrendDays :: proc(self: ^IUGC, handle: UGCQueryHandle, unDays: uint32) -> bool ---
+	UGC_SetTimeCreatedDateRange :: proc(self: ^IUGC, handle: UGCQueryHandle, rtStart: RTime32, rtEnd: RTime32) -> bool ---
+	UGC_SetTimeUpdatedDateRange :: proc(self: ^IUGC, handle: UGCQueryHandle, rtStart: RTime32, rtEnd: RTime32) -> bool ---
+	UGC_AddRequiredKeyValueTag :: proc(self: ^IUGC, handle: UGCQueryHandle, pKey: cstring, pValue: cstring) -> bool ---
+	UGC_RequestUGCDetails :: proc(self: ^IUGC, nPublishedFileID: PublishedFileId, unMaxAgeSeconds: uint32) -> SteamAPICall ---
+	UGC_CreateItem :: proc(self: ^IUGC, nConsumerAppId: AppId, eFileType: EWorkshopFileType) -> SteamAPICall ---
+	UGC_StartItemUpdate :: proc(self: ^IUGC, nConsumerAppId: AppId, nPublishedFileID: PublishedFileId) -> UGCUpdateHandle ---
+	UGC_SetItemTitle :: proc(self: ^IUGC, handle: UGCUpdateHandle, pchTitle: cstring) -> bool ---
+	UGC_SetItemDescription :: proc(self: ^IUGC, handle: UGCUpdateHandle, pchDescription: cstring) -> bool ---
+	UGC_SetItemUpdateLanguage :: proc(self: ^IUGC, handle: UGCUpdateHandle, pchLanguage: cstring) -> bool ---
+	UGC_SetItemMetadata :: proc(self: ^IUGC, handle: UGCUpdateHandle, pchMetaData: cstring) -> bool ---
+	UGC_SetItemVisibility :: proc(self: ^IUGC, handle: UGCUpdateHandle, eVisibility: ERemoteStoragePublishedFileVisibility) -> bool ---
+	UGC_SetItemTags :: proc(self: ^IUGC, updateHandle: UGCUpdateHandle, pTags: ^SteamParamStringArray) -> bool ---
+	UGC_SetItemContent :: proc(self: ^IUGC, handle: UGCUpdateHandle, pszContentFolder: cstring) -> bool ---
+	UGC_SetItemPreview :: proc(self: ^IUGC, handle: UGCUpdateHandle, pszPreviewFile: cstring) -> bool ---
+	UGC_SetAllowLegacyUpload :: proc(self: ^IUGC, handle: UGCUpdateHandle, bAllowLegacyUpload: bool) -> bool ---
+	UGC_RemoveAllItemKeyValueTags :: proc(self: ^IUGC, handle: UGCUpdateHandle) -> bool ---
+	UGC_RemoveItemKeyValueTags :: proc(self: ^IUGC, handle: UGCUpdateHandle, pchKey: cstring) -> bool ---
+	UGC_AddItemKeyValueTag :: proc(self: ^IUGC, handle: UGCUpdateHandle, pchKey: cstring, pchValue: cstring) -> bool ---
+	UGC_AddItemPreviewFile :: proc(self: ^IUGC, handle: UGCUpdateHandle, pszPreviewFile: cstring, type: EItemPreviewType) -> bool ---
+	UGC_AddItemPreviewVideo :: proc(self: ^IUGC, handle: UGCUpdateHandle, pszVideoID: cstring) -> bool ---
+	UGC_UpdateItemPreviewFile :: proc(self: ^IUGC, handle: UGCUpdateHandle, index: uint32, pszPreviewFile: cstring) -> bool ---
+	UGC_UpdateItemPreviewVideo :: proc(self: ^IUGC, handle: UGCUpdateHandle, index: uint32, pszVideoID: cstring) -> bool ---
+	UGC_RemoveItemPreview :: proc(self: ^IUGC, handle: UGCUpdateHandle, index: uint32) -> bool ---
+	UGC_SubmitItemUpdate :: proc(self: ^IUGC, handle: UGCUpdateHandle, pchChangeNote: cstring) -> SteamAPICall ---
+	UGC_GetItemUpdateProgress :: proc(self: ^IUGC, handle: UGCUpdateHandle, punBytesProcessed: ^uint64, punBytesTotal: ^uint64) -> EItemUpdateStatus ---
+	UGC_SetUserItemVote :: proc(self: ^IUGC, nPublishedFileID: PublishedFileId, bVoteUp: bool) -> SteamAPICall ---
+	UGC_GetUserItemVote :: proc(self: ^IUGC, nPublishedFileID: PublishedFileId) -> SteamAPICall ---
+	UGC_AddItemToFavorites :: proc(self: ^IUGC, nAppId: AppId, nPublishedFileID: PublishedFileId) -> SteamAPICall ---
+	UGC_RemoveItemFromFavorites :: proc(self: ^IUGC, nAppId: AppId, nPublishedFileID: PublishedFileId) -> SteamAPICall ---
+	UGC_SubscribeItem :: proc(self: ^IUGC, nPublishedFileID: PublishedFileId) -> SteamAPICall ---
+	UGC_UnsubscribeItem :: proc(self: ^IUGC, nPublishedFileID: PublishedFileId) -> SteamAPICall ---
 	UGC_GetNumSubscribedItems :: proc(self: ^IUGC) -> uint32 ---
-	UGC_GetSubscribedItems :: proc(self: ^IUGC, pvecPublishedFileID: ^PublishedFileId_t, cMaxEntries: uint32) -> uint32 ---
-	UGC_GetItemState :: proc(self: ^IUGC, nPublishedFileID: PublishedFileId_t) -> uint32 ---
-	UGC_GetItemInstallInfo :: proc(self: ^IUGC, nPublishedFileID: PublishedFileId_t, punSizeOnDisk: ^uint64, pchFolder: ^u8, cchFolderSize: uint32, punTimeStamp: ^uint32) -> bool ---
-	UGC_GetItemDownloadInfo :: proc(self: ^IUGC, nPublishedFileID: PublishedFileId_t, punBytesDownloaded: ^uint64, punBytesTotal: ^uint64) -> bool ---
-	UGC_DownloadItem :: proc(self: ^IUGC, nPublishedFileID: PublishedFileId_t, bHighPriority: bool) -> bool ---
-	UGC_BInitWorkshopForGameServer :: proc(self: ^IUGC, unWorkshopDepotID: DepotId_t, pszFolder: cstring) -> bool ---
+	UGC_GetSubscribedItems :: proc(self: ^IUGC, pvecPublishedFileID: ^PublishedFileId, cMaxEntries: uint32) -> uint32 ---
+	UGC_GetItemState :: proc(self: ^IUGC, nPublishedFileID: PublishedFileId) -> uint32 ---
+	UGC_GetItemInstallInfo :: proc(self: ^IUGC, nPublishedFileID: PublishedFileId, punSizeOnDisk: ^uint64, pchFolder: ^u8, cchFolderSize: uint32, punTimeStamp: ^uint32) -> bool ---
+	UGC_GetItemDownloadInfo :: proc(self: ^IUGC, nPublishedFileID: PublishedFileId, punBytesDownloaded: ^uint64, punBytesTotal: ^uint64) -> bool ---
+	UGC_DownloadItem :: proc(self: ^IUGC, nPublishedFileID: PublishedFileId, bHighPriority: bool) -> bool ---
+	UGC_BInitWorkshopForGameServer :: proc(self: ^IUGC, unWorkshopDepotID: DepotId, pszFolder: cstring) -> bool ---
 	UGC_SuspendDownloads :: proc(self: ^IUGC, bSuspend: bool) ---
-	UGC_StartPlaytimeTracking :: proc(self: ^IUGC, pvecPublishedFileID: ^PublishedFileId_t, unNumPublishedFileIDs: uint32) -> SteamAPICall_t ---
-	UGC_StopPlaytimeTracking :: proc(self: ^IUGC, pvecPublishedFileID: ^PublishedFileId_t, unNumPublishedFileIDs: uint32) -> SteamAPICall_t ---
-	UGC_StopPlaytimeTrackingForAllItems :: proc(self: ^IUGC) -> SteamAPICall_t ---
-	UGC_AddDependency :: proc(self: ^IUGC, nParentPublishedFileID: PublishedFileId_t, nChildPublishedFileID: PublishedFileId_t) -> SteamAPICall_t ---
-	UGC_RemoveDependency :: proc(self: ^IUGC, nParentPublishedFileID: PublishedFileId_t, nChildPublishedFileID: PublishedFileId_t) -> SteamAPICall_t ---
-	UGC_AddAppDependency :: proc(self: ^IUGC, nPublishedFileID: PublishedFileId_t, nAppID: AppId_t) -> SteamAPICall_t ---
-	UGC_RemoveAppDependency :: proc(self: ^IUGC, nPublishedFileID: PublishedFileId_t, nAppID: AppId_t) -> SteamAPICall_t ---
-	UGC_GetAppDependencies :: proc(self: ^IUGC, nPublishedFileID: PublishedFileId_t) -> SteamAPICall_t ---
-	UGC_DeleteItem :: proc(self: ^IUGC, nPublishedFileID: PublishedFileId_t) -> SteamAPICall_t ---
+	UGC_StartPlaytimeTracking :: proc(self: ^IUGC, pvecPublishedFileID: ^PublishedFileId, unNumPublishedFileIDs: uint32) -> SteamAPICall ---
+	UGC_StopPlaytimeTracking :: proc(self: ^IUGC, pvecPublishedFileID: ^PublishedFileId, unNumPublishedFileIDs: uint32) -> SteamAPICall ---
+	UGC_StopPlaytimeTrackingForAllItems :: proc(self: ^IUGC) -> SteamAPICall ---
+	UGC_AddDependency :: proc(self: ^IUGC, nParentPublishedFileID: PublishedFileId, nChildPublishedFileID: PublishedFileId) -> SteamAPICall ---
+	UGC_RemoveDependency :: proc(self: ^IUGC, nParentPublishedFileID: PublishedFileId, nChildPublishedFileID: PublishedFileId) -> SteamAPICall ---
+	UGC_AddAppDependency :: proc(self: ^IUGC, nPublishedFileID: PublishedFileId, nAppID: AppId) -> SteamAPICall ---
+	UGC_RemoveAppDependency :: proc(self: ^IUGC, nPublishedFileID: PublishedFileId, nAppID: AppId) -> SteamAPICall ---
+	UGC_GetAppDependencies :: proc(self: ^IUGC, nPublishedFileID: PublishedFileId) -> SteamAPICall ---
+	UGC_DeleteItem :: proc(self: ^IUGC, nPublishedFileID: PublishedFileId) -> SteamAPICall ---
 	UGC_ShowWorkshopEULA :: proc(self: ^IUGC) -> bool ---
-	UGC_GetWorkshopEULAStatus :: proc(self: ^IUGC) -> SteamAPICall_t ---
+	UGC_GetWorkshopEULAStatus :: proc(self: ^IUGC) -> SteamAPICall ---
 
 	AppList_GetNumInstalledApps :: proc(self: ^IAppList) -> uint32 ---
-	AppList_GetInstalledApps :: proc(self: ^IAppList, pvecAppID: ^AppId_t, unMaxAppIDs: uint32) -> uint32 ---
-	AppList_GetAppName :: proc(self: ^IAppList, nAppID: AppId_t, pchName: ^u8, cchNameMax: c.int) -> c.int ---
-	AppList_GetAppInstallDir :: proc(self: ^IAppList, nAppID: AppId_t, pchDirectory: ^u8, cchNameMax: c.int) -> c.int ---
-	AppList_GetAppBuildId :: proc(self: ^IAppList, nAppID: AppId_t) -> c.int ---
+	AppList_GetInstalledApps :: proc(self: ^IAppList, pvecAppID: ^AppId, unMaxAppIDs: uint32) -> uint32 ---
+	AppList_GetAppName :: proc(self: ^IAppList, nAppID: AppId, pchName: ^u8, cchNameMax: c.int) -> c.int ---
+	AppList_GetAppInstallDir :: proc(self: ^IAppList, nAppID: AppId, pchDirectory: ^u8, cchNameMax: c.int) -> c.int ---
+	AppList_GetAppBuildId :: proc(self: ^IAppList, nAppID: AppId) -> c.int ---
 
 	HTMLSurface_Init :: proc(self: ^IHTMLSurface) -> bool ---
 	HTMLSurface_Shutdown :: proc(self: ^IHTMLSurface) -> bool ---
-	HTMLSurface_CreateBrowser :: proc(self: ^IHTMLSurface, pchUserAgent: cstring, pchUserCSS: cstring) -> SteamAPICall_t ---
+	HTMLSurface_CreateBrowser :: proc(self: ^IHTMLSurface, pchUserAgent: cstring, pchUserCSS: cstring) -> SteamAPICall ---
 	HTMLSurface_RemoveBrowser :: proc(self: ^IHTMLSurface, unBrowserHandle: HHTMLBrowser) ---
 	HTMLSurface_LoadURL :: proc(self: ^IHTMLSurface, unBrowserHandle: HHTMLBrowser, pchURL: cstring, pchPostData: cstring) ---
 	HTMLSurface_SetSize :: proc(self: ^IHTMLSurface, unBrowserHandle: HHTMLBrowser, unWidth: uint32, unHeight: uint32) ---
@@ -4686,76 +4693,76 @@ foreign lib {
 	HTMLSurface_JSDialogResponse :: proc(self: ^IHTMLSurface, unBrowserHandle: HHTMLBrowser, bResult: bool) ---
 	HTMLSurface_FileLoadDialogResponse :: proc(self: ^IHTMLSurface, unBrowserHandle: HHTMLBrowser, pchSelectedFiles: ^cstring) ---
 
-	Inventory_GetResultStatus :: proc(self: ^IInventory, resultHandle: SteamInventoryResult_t) -> EResult ---
-	Inventory_GetResultItems :: proc(self: ^IInventory, resultHandle: SteamInventoryResult_t, pOutItemsArray: ^SteamItemDetails_t, punOutItemsArraySize: ^uint32) -> bool ---
-	Inventory_GetResultItemProperty :: proc(self: ^IInventory, resultHandle: SteamInventoryResult_t, unItemIndex: uint32, pchPropertyName: cstring, pchValueBuffer: ^u8, punValueBufferSizeOut: ^uint32) -> bool ---
-	Inventory_GetResultTimestamp :: proc(self: ^IInventory, resultHandle: SteamInventoryResult_t) -> uint32 ---
-	Inventory_CheckResultSteamID :: proc(self: ^IInventory, resultHandle: SteamInventoryResult_t, steamIDExpected: CSteamID) -> bool ---
-	Inventory_DestroyResult :: proc(self: ^IInventory, resultHandle: SteamInventoryResult_t) ---
-	Inventory_GetAllItems :: proc(self: ^IInventory, pResultHandle: ^SteamInventoryResult_t) -> bool ---
-	Inventory_GetItemsByID :: proc(self: ^IInventory, pResultHandle: ^SteamInventoryResult_t, pInstanceIDs: ^SteamItemInstanceID_t, unCountInstanceIDs: uint32) -> bool ---
-	Inventory_SerializeResult :: proc(self: ^IInventory, resultHandle: SteamInventoryResult_t, pOutBuffer: rawptr, punOutBufferSize: ^uint32) -> bool ---
-	Inventory_DeserializeResult :: proc(self: ^IInventory, pOutResultHandle: ^SteamInventoryResult_t, pBuffer: rawptr, unBufferSize: uint32, bRESERVED_MUST_BE_FALSE: bool) -> bool ---
-	Inventory_GenerateItems :: proc(self: ^IInventory, pResultHandle: ^SteamInventoryResult_t, pArrayItemDefs: ^SteamItemDef_t, punArrayQuantity: ^uint32, unArrayLength: uint32) -> bool ---
-	Inventory_GrantPromoItems :: proc(self: ^IInventory, pResultHandle: ^SteamInventoryResult_t) -> bool ---
-	Inventory_AddPromoItem :: proc(self: ^IInventory, pResultHandle: ^SteamInventoryResult_t, itemDef: SteamItemDef_t) -> bool ---
-	Inventory_AddPromoItems :: proc(self: ^IInventory, pResultHandle: ^SteamInventoryResult_t, pArrayItemDefs: ^SteamItemDef_t, unArrayLength: uint32) -> bool ---
-	Inventory_ConsumeItem :: proc(self: ^IInventory, pResultHandle: ^SteamInventoryResult_t, itemConsume: SteamItemInstanceID_t, unQuantity: uint32) -> bool ---
-	Inventory_ExchangeItems :: proc(self: ^IInventory, pResultHandle: ^SteamInventoryResult_t, pArrayGenerate: ^SteamItemDef_t, punArrayGenerateQuantity: ^uint32, unArrayGenerateLength: uint32, pArrayDestroy: ^SteamItemInstanceID_t, punArrayDestroyQuantity: ^uint32, unArrayDestroyLength: uint32) -> bool ---
-	Inventory_TransferItemQuantity :: proc(self: ^IInventory, pResultHandle: ^SteamInventoryResult_t, itemIdSource: SteamItemInstanceID_t, unQuantity: uint32, itemIdDest: SteamItemInstanceID_t) -> bool ---
+	Inventory_GetResultStatus :: proc(self: ^IInventory, resultHandle: SteamInventoryResult) -> EResult ---
+	Inventory_GetResultItems :: proc(self: ^IInventory, resultHandle: SteamInventoryResult, pOutItemsArray: ^SteamItemDetails, punOutItemsArraySize: ^uint32) -> bool ---
+	Inventory_GetResultItemProperty :: proc(self: ^IInventory, resultHandle: SteamInventoryResult, unItemIndex: uint32, pchPropertyName: cstring, pchValueBuffer: ^u8, punValueBufferSizeOut: ^uint32) -> bool ---
+	Inventory_GetResultTimestamp :: proc(self: ^IInventory, resultHandle: SteamInventoryResult) -> uint32 ---
+	Inventory_CheckResultSteamID :: proc(self: ^IInventory, resultHandle: SteamInventoryResult, steamIDExpected: CSteamID) -> bool ---
+	Inventory_DestroyResult :: proc(self: ^IInventory, resultHandle: SteamInventoryResult) ---
+	Inventory_GetAllItems :: proc(self: ^IInventory, pResultHandle: ^SteamInventoryResult) -> bool ---
+	Inventory_GetItemsByID :: proc(self: ^IInventory, pResultHandle: ^SteamInventoryResult, pInstanceIDs: ^SteamItemInstanceID, unCountInstanceIDs: uint32) -> bool ---
+	Inventory_SerializeResult :: proc(self: ^IInventory, resultHandle: SteamInventoryResult, pOutBuffer: rawptr, punOutBufferSize: ^uint32) -> bool ---
+	Inventory_DeserializeResult :: proc(self: ^IInventory, pOutResultHandle: ^SteamInventoryResult, pBuffer: rawptr, unBufferSize: uint32, bRESERVED_MUST_BE_FALSE: bool) -> bool ---
+	Inventory_GenerateItems :: proc(self: ^IInventory, pResultHandle: ^SteamInventoryResult, pArrayItemDefs: ^SteamItemDef, punArrayQuantity: ^uint32, unArrayLength: uint32) -> bool ---
+	Inventory_GrantPromoItems :: proc(self: ^IInventory, pResultHandle: ^SteamInventoryResult) -> bool ---
+	Inventory_AddPromoItem :: proc(self: ^IInventory, pResultHandle: ^SteamInventoryResult, itemDef: SteamItemDef) -> bool ---
+	Inventory_AddPromoItems :: proc(self: ^IInventory, pResultHandle: ^SteamInventoryResult, pArrayItemDefs: ^SteamItemDef, unArrayLength: uint32) -> bool ---
+	Inventory_ConsumeItem :: proc(self: ^IInventory, pResultHandle: ^SteamInventoryResult, itemConsume: SteamItemInstanceID, unQuantity: uint32) -> bool ---
+	Inventory_ExchangeItems :: proc(self: ^IInventory, pResultHandle: ^SteamInventoryResult, pArrayGenerate: ^SteamItemDef, punArrayGenerateQuantity: ^uint32, unArrayGenerateLength: uint32, pArrayDestroy: ^SteamItemInstanceID, punArrayDestroyQuantity: ^uint32, unArrayDestroyLength: uint32) -> bool ---
+	Inventory_TransferItemQuantity :: proc(self: ^IInventory, pResultHandle: ^SteamInventoryResult, itemIdSource: SteamItemInstanceID, unQuantity: uint32, itemIdDest: SteamItemInstanceID) -> bool ---
 	Inventory_SendItemDropHeartbeat :: proc(self: ^IInventory) ---
-	Inventory_TriggerItemDrop :: proc(self: ^IInventory, pResultHandle: ^SteamInventoryResult_t, dropListDefinition: SteamItemDef_t) -> bool ---
-	Inventory_TradeItems :: proc(self: ^IInventory, pResultHandle: ^SteamInventoryResult_t, steamIDTradePartner: CSteamID, pArrayGive: ^SteamItemInstanceID_t, pArrayGiveQuantity: ^uint32, nArrayGiveLength: uint32, pArrayGet: ^SteamItemInstanceID_t, pArrayGetQuantity: ^uint32, nArrayGetLength: uint32) -> bool ---
+	Inventory_TriggerItemDrop :: proc(self: ^IInventory, pResultHandle: ^SteamInventoryResult, dropListDefinition: SteamItemDef) -> bool ---
+	Inventory_TradeItems :: proc(self: ^IInventory, pResultHandle: ^SteamInventoryResult, steamIDTradePartner: CSteamID, pArrayGive: ^SteamItemInstanceID, pArrayGiveQuantity: ^uint32, nArrayGiveLength: uint32, pArrayGet: ^SteamItemInstanceID, pArrayGetQuantity: ^uint32, nArrayGetLength: uint32) -> bool ---
 	Inventory_LoadItemDefinitions :: proc(self: ^IInventory) -> bool ---
-	Inventory_GetItemDefinitionIDs :: proc(self: ^IInventory, pItemDefIDs: ^SteamItemDef_t, punItemDefIDsArraySize: ^uint32) -> bool ---
-	Inventory_GetItemDefinitionProperty :: proc(self: ^IInventory, iDefinition: SteamItemDef_t, pchPropertyName: cstring, pchValueBuffer: ^u8, punValueBufferSizeOut: ^uint32) -> bool ---
-	Inventory_RequestEligiblePromoItemDefinitionsIDs :: proc(self: ^IInventory, steamID: CSteamID) -> SteamAPICall_t ---
-	Inventory_GetEligiblePromoItemDefinitionIDs :: proc(self: ^IInventory, steamID: CSteamID, pItemDefIDs: ^SteamItemDef_t, punItemDefIDsArraySize: ^uint32) -> bool ---
-	Inventory_StartPurchase :: proc(self: ^IInventory, pArrayItemDefs: ^SteamItemDef_t, punArrayQuantity: ^uint32, unArrayLength: uint32) -> SteamAPICall_t ---
-	Inventory_RequestPrices :: proc(self: ^IInventory) -> SteamAPICall_t ---
+	Inventory_GetItemDefinitionIDs :: proc(self: ^IInventory, pItemDefIDs: ^SteamItemDef, punItemDefIDsArraySize: ^uint32) -> bool ---
+	Inventory_GetItemDefinitionProperty :: proc(self: ^IInventory, iDefinition: SteamItemDef, pchPropertyName: cstring, pchValueBuffer: ^u8, punValueBufferSizeOut: ^uint32) -> bool ---
+	Inventory_RequestEligiblePromoItemDefinitionsIDs :: proc(self: ^IInventory, steamID: CSteamID) -> SteamAPICall ---
+	Inventory_GetEligiblePromoItemDefinitionIDs :: proc(self: ^IInventory, steamID: CSteamID, pItemDefIDs: ^SteamItemDef, punItemDefIDsArraySize: ^uint32) -> bool ---
+	Inventory_StartPurchase :: proc(self: ^IInventory, pArrayItemDefs: ^SteamItemDef, punArrayQuantity: ^uint32, unArrayLength: uint32) -> SteamAPICall ---
+	Inventory_RequestPrices :: proc(self: ^IInventory) -> SteamAPICall ---
 	Inventory_GetNumItemsWithPrices :: proc(self: ^IInventory) -> uint32 ---
-	Inventory_GetItemsWithPrices :: proc(self: ^IInventory, pArrayItemDefs: ^SteamItemDef_t, pCurrentPrices: ^uint64, pBasePrices: ^uint64, unArrayLength: uint32) -> bool ---
-	Inventory_GetItemPrice :: proc(self: ^IInventory, iDefinition: SteamItemDef_t, pCurrentPrice: ^uint64, pBasePrice: ^uint64) -> bool ---
-	Inventory_StartUpdateProperties :: proc(self: ^IInventory) -> SteamInventoryUpdateHandle_t ---
-	Inventory_RemoveProperty :: proc(self: ^IInventory, handle: SteamInventoryUpdateHandle_t, nItemID: SteamItemInstanceID_t, pchPropertyName: cstring) -> bool ---
-	Inventory_SetProperty :: proc(self: ^IInventory, handle: SteamInventoryUpdateHandle_t, nItemID: SteamItemInstanceID_t, pchPropertyName: cstring, pchPropertyValue: cstring) -> bool ---
-	Inventory_SetPropertyBool :: proc(self: ^IInventory, handle: SteamInventoryUpdateHandle_t, nItemID: SteamItemInstanceID_t, pchPropertyName: cstring, bValue: bool) -> bool ---
-	Inventory_SetPropertyInt64 :: proc(self: ^IInventory, handle: SteamInventoryUpdateHandle_t, nItemID: SteamItemInstanceID_t, pchPropertyName: cstring, nValue: int64) -> bool ---
-	Inventory_SetPropertyFloat :: proc(self: ^IInventory, handle: SteamInventoryUpdateHandle_t, nItemID: SteamItemInstanceID_t, pchPropertyName: cstring, flValue: f32) -> bool ---
-	Inventory_SubmitUpdateProperties :: proc(self: ^IInventory, handle: SteamInventoryUpdateHandle_t, pResultHandle: ^SteamInventoryResult_t) -> bool ---
-	Inventory_InspectItem :: proc(self: ^IInventory, pResultHandle: ^SteamInventoryResult_t, pchItemToken: cstring) -> bool ---
+	Inventory_GetItemsWithPrices :: proc(self: ^IInventory, pArrayItemDefs: ^SteamItemDef, pCurrentPrices: ^uint64, pBasePrices: ^uint64, unArrayLength: uint32) -> bool ---
+	Inventory_GetItemPrice :: proc(self: ^IInventory, iDefinition: SteamItemDef, pCurrentPrice: ^uint64, pBasePrice: ^uint64) -> bool ---
+	Inventory_StartUpdateProperties :: proc(self: ^IInventory) -> SteamInventoryUpdateHandle ---
+	Inventory_RemoveProperty :: proc(self: ^IInventory, handle: SteamInventoryUpdateHandle, nItemID: SteamItemInstanceID, pchPropertyName: cstring) -> bool ---
+	Inventory_SetProperty :: proc(self: ^IInventory, handle: SteamInventoryUpdateHandle, nItemID: SteamItemInstanceID, pchPropertyName: cstring, pchPropertyValue: cstring) -> bool ---
+	Inventory_SetPropertyBool :: proc(self: ^IInventory, handle: SteamInventoryUpdateHandle, nItemID: SteamItemInstanceID, pchPropertyName: cstring, bValue: bool) -> bool ---
+	Inventory_SetPropertyInt64 :: proc(self: ^IInventory, handle: SteamInventoryUpdateHandle, nItemID: SteamItemInstanceID, pchPropertyName: cstring, nValue: int64) -> bool ---
+	Inventory_SetPropertyFloat :: proc(self: ^IInventory, handle: SteamInventoryUpdateHandle, nItemID: SteamItemInstanceID, pchPropertyName: cstring, flValue: f32) -> bool ---
+	Inventory_SubmitUpdateProperties :: proc(self: ^IInventory, handle: SteamInventoryUpdateHandle, pResultHandle: ^SteamInventoryResult) -> bool ---
+	Inventory_InspectItem :: proc(self: ^IInventory, pResultHandle: ^SteamInventoryResult, pchItemToken: cstring) -> bool ---
 
-	Video_GetVideoURL :: proc(self: ^IVideo, unVideoAppID: AppId_t) ---
+	Video_GetVideoURL :: proc(self: ^IVideo, unVideoAppID: AppId) ---
 	Video_IsBroadcasting :: proc(self: ^IVideo, pnNumViewers: ^int) -> bool ---
-	Video_GetOPFSettings :: proc(self: ^IVideo, unVideoAppID: AppId_t) ---
-	Video_GetOPFStringForApp :: proc(self: ^IVideo, unVideoAppID: AppId_t, pchBuffer: ^u8, pnBufferSize: ^int32) -> bool ---
+	Video_GetOPFSettings :: proc(self: ^IVideo, unVideoAppID: AppId) ---
+	Video_GetOPFStringForApp :: proc(self: ^IVideo, unVideoAppID: AppId, pchBuffer: ^u8, pnBufferSize: ^int32) -> bool ---
 
 	ParentalSettings_BIsParentalLockEnabled :: proc(self: ^IParentalSettings) -> bool ---
 	ParentalSettings_BIsParentalLockLocked :: proc(self: ^IParentalSettings) -> bool ---
-	ParentalSettings_BIsAppBlocked :: proc(self: ^IParentalSettings, nAppID: AppId_t) -> bool ---
-	ParentalSettings_BIsAppInBlockList :: proc(self: ^IParentalSettings, nAppID: AppId_t) -> bool ---
+	ParentalSettings_BIsAppBlocked :: proc(self: ^IParentalSettings, nAppID: AppId) -> bool ---
+	ParentalSettings_BIsAppInBlockList :: proc(self: ^IParentalSettings, nAppID: AppId) -> bool ---
 	ParentalSettings_BIsFeatureBlocked :: proc(self: ^IParentalSettings, eFeature: EParentalFeature) -> bool ---
 	ParentalSettings_BIsFeatureInBlockList :: proc(self: ^IParentalSettings, eFeature: EParentalFeature) -> bool ---
 
 	RemotePlay_GetSessionCount :: proc(self: ^IRemotePlay) -> uint32 ---
-	RemotePlay_GetSessionID :: proc(self: ^IRemotePlay, iSessionIndex: c.int) -> RemotePlaySessionID_t ---
-	RemotePlay_GetSessionSteamID :: proc(self: ^IRemotePlay, unSessionID: RemotePlaySessionID_t) -> CSteamID ---
-	RemotePlay_GetSessionClientName :: proc(self: ^IRemotePlay, unSessionID: RemotePlaySessionID_t) -> cstring ---
-	RemotePlay_GetSessionClientFormFactor :: proc(self: ^IRemotePlay, unSessionID: RemotePlaySessionID_t) -> ESteamDeviceFormFactor ---
-	RemotePlay_BGetSessionClientResolution :: proc(self: ^IRemotePlay, unSessionID: RemotePlaySessionID_t, pnResolutionX: ^int, pnResolutionY: ^int) -> bool ---
+	RemotePlay_GetSessionID :: proc(self: ^IRemotePlay, iSessionIndex: c.int) -> RemotePlaySessionID ---
+	RemotePlay_GetSessionSteamID :: proc(self: ^IRemotePlay, unSessionID: RemotePlaySessionID) -> CSteamID ---
+	RemotePlay_GetSessionClientName :: proc(self: ^IRemotePlay, unSessionID: RemotePlaySessionID) -> cstring ---
+	RemotePlay_GetSessionClientFormFactor :: proc(self: ^IRemotePlay, unSessionID: RemotePlaySessionID) -> ESteamDeviceFormFactor ---
+	RemotePlay_BGetSessionClientResolution :: proc(self: ^IRemotePlay, unSessionID: RemotePlaySessionID, pnResolutionX: ^int, pnResolutionY: ^int) -> bool ---
 	RemotePlay_BSendRemotePlayTogetherInvite :: proc(self: ^IRemotePlay, steamIDFriend: CSteamID) -> bool ---
 
 	NetworkingMessages_SendMessageToUser :: proc(self: ^INetworkingMessages, identityRemote: ^SteamNetworkingIdentity, pubData: rawptr, cubData: uint32, nSendFlags: c.int, nRemoteChannel: c.int) -> EResult ---
-	NetworkingMessages_ReceiveMessagesOnChannel :: proc(self: ^INetworkingMessages, nLocalChannel: c.int, ppOutMessages: ^^SteamNetworkingMessage_t, nMaxMessages: c.int) -> c.int ---
+	NetworkingMessages_ReceiveMessagesOnChannel :: proc(self: ^INetworkingMessages, nLocalChannel: c.int, ppOutMessages: ^^SteamNetworkingMessage, nMaxMessages: c.int) -> c.int ---
 	NetworkingMessages_AcceptSessionWithUser :: proc(self: ^INetworkingMessages, identityRemote: ^SteamNetworkingIdentity) -> bool ---
 	NetworkingMessages_CloseSessionWithUser :: proc(self: ^INetworkingMessages, identityRemote: ^SteamNetworkingIdentity) -> bool ---
 	NetworkingMessages_CloseChannelWithUser :: proc(self: ^INetworkingMessages, identityRemote: ^SteamNetworkingIdentity, nLocalChannel: c.int) -> bool ---
-	NetworkingMessages_GetSessionConnectionInfo :: proc(self: ^INetworkingMessages, identityRemote: ^SteamNetworkingIdentity, pConnectionInfo: ^SteamNetConnectionInfo_t, pQuickStatus: ^SteamNetConnectionRealTimeStatus_t) -> ESteamNetworkingConnectionState ---
+	NetworkingMessages_GetSessionConnectionInfo :: proc(self: ^INetworkingMessages, identityRemote: ^SteamNetworkingIdentity, pConnectionInfo: ^SteamNetConnectionInfo, pQuickStatus: ^SteamNetConnectionRealTimeStatus) -> ESteamNetworkingConnectionState ---
 
-	NetworkingSockets_CreateListenSocketIP :: proc(self: ^INetworkingSockets, localAddress: ^SteamNetworkingIPAddr, nOptions: c.int, pOptions: ^SteamNetworkingConfigValue_t) -> HSteamListenSocket ---
-	NetworkingSockets_ConnectByIPAddress :: proc(self: ^INetworkingSockets, address: ^SteamNetworkingIPAddr, nOptions: c.int, pOptions: ^SteamNetworkingConfigValue_t) -> HSteamNetConnection ---
-	NetworkingSockets_CreateListenSocketP2P :: proc(self: ^INetworkingSockets, nLocalVirtualPort: c.int, nOptions: c.int, pOptions: ^SteamNetworkingConfigValue_t) -> HSteamListenSocket ---
-	NetworkingSockets_ConnectP2P :: proc(self: ^INetworkingSockets, identityRemote: ^SteamNetworkingIdentity, nRemoteVirtualPort: c.int, nOptions: c.int, pOptions: ^SteamNetworkingConfigValue_t) -> HSteamNetConnection ---
+	NetworkingSockets_CreateListenSocketIP :: proc(self: ^INetworkingSockets, localAddress: ^SteamNetworkingIPAddr, nOptions: c.int, pOptions: ^SteamNetworkingConfigValue) -> HSteamListenSocket ---
+	NetworkingSockets_ConnectByIPAddress :: proc(self: ^INetworkingSockets, address: ^SteamNetworkingIPAddr, nOptions: c.int, pOptions: ^SteamNetworkingConfigValue) -> HSteamNetConnection ---
+	NetworkingSockets_CreateListenSocketP2P :: proc(self: ^INetworkingSockets, nLocalVirtualPort: c.int, nOptions: c.int, pOptions: ^SteamNetworkingConfigValue) -> HSteamListenSocket ---
+	NetworkingSockets_ConnectP2P :: proc(self: ^INetworkingSockets, identityRemote: ^SteamNetworkingIdentity, nRemoteVirtualPort: c.int, nOptions: c.int, pOptions: ^SteamNetworkingConfigValue) -> HSteamNetConnection ---
 	NetworkingSockets_AcceptConnection :: proc(self: ^INetworkingSockets, hConn: HSteamNetConnection) -> EResult ---
 	NetworkingSockets_CloseConnection :: proc(self: ^INetworkingSockets, hPeer: HSteamNetConnection, nReason: c.int, pszDebug: cstring, bEnableLinger: bool) -> bool ---
 	NetworkingSockets_CloseListenSocket :: proc(self: ^INetworkingSockets, hSocket: HSteamListenSocket) -> bool ---
@@ -4765,48 +4772,48 @@ foreign lib {
 	NetworkingSockets_GetConnectionName :: proc(self: ^INetworkingSockets, hPeer: HSteamNetConnection, pszName: ^u8, nMaxLen: c.int) -> bool ---
 	NetworkingSockets_SendMessageToConnection :: proc(self: ^INetworkingSockets, hConn: HSteamNetConnection, pData: rawptr, cbData: uint32, nSendFlags: c.int, pOutMessageNumber: ^int64) -> EResult ---
 	NetworkingSockets_FlushMessagesOnConnection :: proc(self: ^INetworkingSockets, hConn: HSteamNetConnection) -> EResult ---
-	NetworkingSockets_ReceiveMessagesOnConnection :: proc(self: ^INetworkingSockets, hConn: HSteamNetConnection, ppOutMessages: ^^SteamNetworkingMessage_t, nMaxMessages: c.int) -> c.int ---
-	NetworkingSockets_GetConnectionInfo :: proc(self: ^INetworkingSockets, hConn: HSteamNetConnection, pInfo: ^SteamNetConnectionInfo_t) -> bool ---
-	NetworkingSockets_GetConnectionRealTimeStatus :: proc(self: ^INetworkingSockets, hConn: HSteamNetConnection, pStatus: ^SteamNetConnectionRealTimeStatus_t, nLanes: c.int, pLanes: ^SteamNetConnectionRealTimeLaneStatus_t) -> EResult ---
+	NetworkingSockets_ReceiveMessagesOnConnection :: proc(self: ^INetworkingSockets, hConn: HSteamNetConnection, ppOutMessages: ^^SteamNetworkingMessage, nMaxMessages: c.int) -> c.int ---
+	NetworkingSockets_GetConnectionInfo :: proc(self: ^INetworkingSockets, hConn: HSteamNetConnection, pInfo: ^SteamNetConnectionInfo) -> bool ---
+	NetworkingSockets_GetConnectionRealTimeStatus :: proc(self: ^INetworkingSockets, hConn: HSteamNetConnection, pStatus: ^SteamNetConnectionRealTimeStatus, nLanes: c.int, pLanes: ^SteamNetConnectionRealTimeLaneStatus) -> EResult ---
 	NetworkingSockets_GetDetailedConnectionStatus :: proc(self: ^INetworkingSockets, hConn: HSteamNetConnection, pszBuf: ^u8, cbBuf: c.int) -> c.int ---
 	NetworkingSockets_GetListenSocketAddress :: proc(self: ^INetworkingSockets, hSocket: HSteamListenSocket, address: ^SteamNetworkingIPAddr) -> bool ---
 	NetworkingSockets_CreateSocketPair :: proc(self: ^INetworkingSockets, pOutConnection1: ^HSteamNetConnection, pOutConnection2: ^HSteamNetConnection, bUseNetworkLoopback: bool, pIdentity1: ^SteamNetworkingIdentity, pIdentity2: ^SteamNetworkingIdentity) -> bool ---
 	NetworkingSockets_ConfigureConnectionLanes :: proc(self: ^INetworkingSockets, hConn: HSteamNetConnection, nNumLanes: c.int, pLanePriorities: ^int, pLaneWeights: ^uint16) -> EResult ---
 	NetworkingSockets_GetIdentity :: proc(self: ^INetworkingSockets, pIdentity: ^SteamNetworkingIdentity) -> bool ---
 	NetworkingSockets_InitAuthentication :: proc(self: ^INetworkingSockets) -> ESteamNetworkingAvailability ---
-	NetworkingSockets_GetAuthenticationStatus :: proc(self: ^INetworkingSockets, pDetails: ^SteamNetAuthenticationStatus_t) -> ESteamNetworkingAvailability ---
+	NetworkingSockets_GetAuthenticationStatus :: proc(self: ^INetworkingSockets, pDetails: ^SteamNetAuthenticationStatus) -> ESteamNetworkingAvailability ---
 	NetworkingSockets_CreatePollGroup :: proc(self: ^INetworkingSockets) -> HSteamNetPollGroup ---
 	NetworkingSockets_DestroyPollGroup :: proc(self: ^INetworkingSockets, hPollGroup: HSteamNetPollGroup) -> bool ---
 	NetworkingSockets_SetConnectionPollGroup :: proc(self: ^INetworkingSockets, hConn: HSteamNetConnection, hPollGroup: HSteamNetPollGroup) -> bool ---
-	NetworkingSockets_ReceiveMessagesOnPollGroup :: proc(self: ^INetworkingSockets, hPollGroup: HSteamNetPollGroup, ppOutMessages: ^^SteamNetworkingMessage_t, nMaxMessages: c.int) -> c.int ---
+	NetworkingSockets_ReceiveMessagesOnPollGroup :: proc(self: ^INetworkingSockets, hPollGroup: HSteamNetPollGroup, ppOutMessages: ^^SteamNetworkingMessage, nMaxMessages: c.int) -> c.int ---
 	NetworkingSockets_ReceivedRelayAuthTicket :: proc(self: ^INetworkingSockets, pvTicket: rawptr, cbTicket: c.int, pOutParsedTicket: SteamDatagramRelayAuthTicketPtr) -> bool ---
 	NetworkingSockets_FindRelayAuthTicketForServer :: proc(self: ^INetworkingSockets, identityGameServer: ^SteamNetworkingIdentity, nRemoteVirtualPort: c.int, pOutParsedTicket: SteamDatagramRelayAuthTicketPtr) -> c.int ---
-	NetworkingSockets_ConnectToHostedDedicatedServer :: proc(self: ^INetworkingSockets, identityTarget: ^SteamNetworkingIdentity, nRemoteVirtualPort: c.int, nOptions: c.int, pOptions: ^SteamNetworkingConfigValue_t) -> HSteamNetConnection ---
+	NetworkingSockets_ConnectToHostedDedicatedServer :: proc(self: ^INetworkingSockets, identityTarget: ^SteamNetworkingIdentity, nRemoteVirtualPort: c.int, nOptions: c.int, pOptions: ^SteamNetworkingConfigValue) -> HSteamNetConnection ---
 	NetworkingSockets_GetHostedDedicatedServerPort :: proc(self: ^INetworkingSockets) -> uint16 ---
 	NetworkingSockets_GetHostedDedicatedServerPOPID :: proc(self: ^INetworkingSockets) -> SteamNetworkingPOPID ---
 	NetworkingSockets_GetHostedDedicatedServerAddress :: proc(self: ^INetworkingSockets, pRouting: ^SteamDatagramHostedAddress) -> EResult ---
-	NetworkingSockets_CreateHostedDedicatedServerListenSocket :: proc(self: ^INetworkingSockets, nLocalVirtualPort: c.int, nOptions: c.int, pOptions: ^SteamNetworkingConfigValue_t) -> HSteamListenSocket ---
+	NetworkingSockets_CreateHostedDedicatedServerListenSocket :: proc(self: ^INetworkingSockets, nLocalVirtualPort: c.int, nOptions: c.int, pOptions: ^SteamNetworkingConfigValue) -> HSteamListenSocket ---
 	NetworkingSockets_GetGameCoordinatorServerLogin :: proc(self: ^INetworkingSockets, pLoginInfo: ^SteamDatagramGameCoordinatorServerLogin, pcbSignedBlob: ^int, pBlob: rawptr) -> EResult ---
-	NetworkingSockets_ConnectP2PCustomSignaling :: proc(self: ^INetworkingSockets, pSignaling: SteamDatagramRelayAuthTicketPtr, pPeerIdentity: ^SteamNetworkingIdentity, nRemoteVirtualPort: c.int, nOptions: c.int, pOptions: ^SteamNetworkingConfigValue_t) -> HSteamNetConnection ---
+	NetworkingSockets_ConnectP2PCustomSignaling :: proc(self: ^INetworkingSockets, pSignaling: SteamDatagramRelayAuthTicketPtr, pPeerIdentity: ^SteamNetworkingIdentity, nRemoteVirtualPort: c.int, nOptions: c.int, pOptions: ^SteamNetworkingConfigValue) -> HSteamNetConnection ---
 	NetworkingSockets_ReceivedP2PCustomSignal :: proc(self: ^INetworkingSockets, pMsg: rawptr, cbMsg: c.int, pContext: INetworkingSignalingRecvContextPtr) -> bool ---
 	NetworkingSockets_GetCertificateRequest :: proc(self: ^INetworkingSockets, pcbBlob: ^int, pBlob: rawptr, errMsg: ^SteamNetworkingErrMsg) -> bool ---
 	NetworkingSockets_SetCertificate :: proc(self: ^INetworkingSockets, pCertificate: rawptr, cbCertificate: c.int, errMsg: ^SteamNetworkingErrMsg) -> bool ---
 	NetworkingSockets_ResetIdentity :: proc(self: ^INetworkingSockets, pIdentity: ^SteamNetworkingIdentity) ---
 	NetworkingSockets_RunCallbacks :: proc(self: ^INetworkingSockets) ---
 	NetworkingSockets_BeginAsyncRequestFakeIP :: proc(self: ^INetworkingSockets, nNumPorts: c.int) -> bool ---
-	NetworkingSockets_GetFakeIP :: proc(self: ^INetworkingSockets, idxFirstPort: c.int, pInfo: ^SteamNetworkingFakeIPResult_t) ---
-	NetworkingSockets_CreateListenSocketP2PFakeIP :: proc(self: ^INetworkingSockets, idxFakePort: c.int, nOptions: c.int, pOptions: ^SteamNetworkingConfigValue_t) -> HSteamListenSocket ---
+	NetworkingSockets_GetFakeIP :: proc(self: ^INetworkingSockets, idxFirstPort: c.int, pInfo: ^SteamNetworkingFakeIPResult) ---
+	NetworkingSockets_CreateListenSocketP2PFakeIP :: proc(self: ^INetworkingSockets, idxFakePort: c.int, nOptions: c.int, pOptions: ^SteamNetworkingConfigValue) -> HSteamListenSocket ---
 	NetworkingSockets_GetRemoteFakeIPForConnection :: proc(self: ^INetworkingSockets, hConn: HSteamNetConnection, pOutAddr: ^SteamNetworkingIPAddr) -> EResult ---
 	NetworkingSockets_CreateFakeUDPPort :: proc(self: ^INetworkingSockets, idxFakeServerPort: c.int) -> ^INetworkingFakeUDPPort ---
 
-	NetworkingUtils_AllocateMessage :: proc(self: ^INetworkingUtils, cbAllocateBuffer: c.int) -> ^SteamNetworkingMessage_t ---
+	NetworkingUtils_AllocateMessage :: proc(self: ^INetworkingUtils, cbAllocateBuffer: c.int) -> ^SteamNetworkingMessage ---
 	NetworkingUtils_InitRelayNetworkAccess :: proc(self: ^INetworkingUtils) ---
-	NetworkingUtils_GetRelayNetworkStatus :: proc(self: ^INetworkingUtils, pDetails: ^SteamRelayNetworkStatus_t) -> ESteamNetworkingAvailability ---
-	NetworkingUtils_GetLocalPingLocation :: proc(self: ^INetworkingUtils, result: ^SteamNetworkPingLocation_t) -> f32 ---
-	NetworkingUtils_EstimatePingTimeBetweenTwoLocations :: proc(self: ^INetworkingUtils, location1: ^SteamNetworkPingLocation_t, location2: ^SteamNetworkPingLocation_t) -> c.int ---
-	NetworkingUtils_EstimatePingTimeFromLocalHost :: proc(self: ^INetworkingUtils, remoteLocation: ^SteamNetworkPingLocation_t) -> c.int ---
-	NetworkingUtils_ConvertPingLocationToString :: proc(self: ^INetworkingUtils, location: ^SteamNetworkPingLocation_t, pszBuf: ^u8, cchBufSize: c.int) ---
-	NetworkingUtils_ParsePingLocationString :: proc(self: ^INetworkingUtils, pszString: cstring, result: ^SteamNetworkPingLocation_t) -> bool ---
+	NetworkingUtils_GetRelayNetworkStatus :: proc(self: ^INetworkingUtils, pDetails: ^SteamRelayNetworkStatus) -> ESteamNetworkingAvailability ---
+	NetworkingUtils_GetLocalPingLocation :: proc(self: ^INetworkingUtils, result: ^SteamNetworkPingLocation) -> f32 ---
+	NetworkingUtils_EstimatePingTimeBetweenTwoLocations :: proc(self: ^INetworkingUtils, location1: ^SteamNetworkPingLocation, location2: ^SteamNetworkPingLocation) -> c.int ---
+	NetworkingUtils_EstimatePingTimeFromLocalHost :: proc(self: ^INetworkingUtils, remoteLocation: ^SteamNetworkPingLocation) -> c.int ---
+	NetworkingUtils_ConvertPingLocationToString :: proc(self: ^INetworkingUtils, location: ^SteamNetworkPingLocation, pszBuf: ^u8, cchBufSize: c.int) ---
+	NetworkingUtils_ParsePingLocationString :: proc(self: ^INetworkingUtils, pszString: cstring, result: ^SteamNetworkPingLocation) -> bool ---
 	NetworkingUtils_CheckPingDataUpToDate :: proc(self: ^INetworkingUtils, flMaxAgeSeconds: f32) -> bool ---
 	NetworkingUtils_GetPingToDataCenter :: proc(self: ^INetworkingUtils, popID: SteamNetworkingPOPID, pViaRelayPoP: ^SteamNetworkingPOPID) -> c.int ---
 	NetworkingUtils_GetDirectPingToPOP :: proc(self: ^INetworkingUtils, popID: SteamNetworkingPOPID) -> c.int ---
@@ -4824,14 +4831,14 @@ foreign lib {
 	NetworkingUtils_SetConnectionConfigValueInt32 :: proc(self: ^INetworkingUtils, hConn: HSteamNetConnection, eValue: ESteamNetworkingConfigValue, val: int32) -> bool ---
 	NetworkingUtils_SetConnectionConfigValueFloat :: proc(self: ^INetworkingUtils, hConn: HSteamNetConnection, eValue: ESteamNetworkingConfigValue, val: f32) -> bool ---
 	NetworkingUtils_SetConnectionConfigValueString :: proc(self: ^INetworkingUtils, hConn: HSteamNetConnection, eValue: ESteamNetworkingConfigValue, val: cstring) -> bool ---
-	NetworkingUtils_SetGlobalCallback_SteamNetConnectionStatusChanged :: proc(self: ^INetworkingUtils, fnCallback: FnSteamNetConnectionStatusChanged) -> bool ---
-	NetworkingUtils_SetGlobalCallback_SteamNetAuthenticationStatusChanged :: proc(self: ^INetworkingUtils, fnCallback: FnSteamNetAuthenticationStatusChanged) -> bool ---
-	NetworkingUtils_SetGlobalCallback_SteamRelayNetworkStatusChanged :: proc(self: ^INetworkingUtils, fnCallback: FnSteamRelayNetworkStatusChanged) -> bool ---
-	NetworkingUtils_SetGlobalCallback_FakeIPResult :: proc(self: ^INetworkingUtils, fnCallback: FnSteamNetworkingFakeIPResult) -> bool ---
-	NetworkingUtils_SetGlobalCallback_MessagesSessionRequest :: proc(self: ^INetworkingUtils, fnCallback: FnSteamNetworkingMessagesSessionRequest) -> bool ---
-	NetworkingUtils_SetGlobalCallback_MessagesSessionFailed :: proc(self: ^INetworkingUtils, fnCallback: FnSteamNetworkingMessagesSessionFailed) -> bool ---
+	NetworkingUtils_SetGlobalCallbacSteamNetConnectionStatusChanged :: proc(self: ^INetworkingUtils, fnCallback: FnSteamNetConnectionStatusChanged) -> bool ---
+	NetworkingUtils_SetGlobalCallbacSteamNetAuthenticationStatusChanged :: proc(self: ^INetworkingUtils, fnCallback: FnSteamNetAuthenticationStatusChanged) -> bool ---
+	NetworkingUtils_SetGlobalCallbacSteamRelayNetworkStatusChanged :: proc(self: ^INetworkingUtils, fnCallback: FnSteamRelayNetworkStatusChanged) -> bool ---
+	NetworkingUtils_SetGlobalCallbacFakeIPResult :: proc(self: ^INetworkingUtils, fnCallback: FnSteamNetworkingFakeIPResult) -> bool ---
+	NetworkingUtils_SetGlobalCallbacMessagesSessionRequest :: proc(self: ^INetworkingUtils, fnCallback: FnSteamNetworkingMessagesSessionRequest) -> bool ---
+	NetworkingUtils_SetGlobalCallbacMessagesSessionFailed :: proc(self: ^INetworkingUtils, fnCallback: FnSteamNetworkingMessagesSessionFailed) -> bool ---
 	NetworkingUtils_SetConfigValue :: proc(self: ^INetworkingUtils, eValue: ESteamNetworkingConfigValue, eScopeType: ESteamNetworkingConfigScope, scopeObj: intptr, eDataType: ESteamNetworkingConfigDataType, pArg: rawptr) -> bool ---
-	NetworkingUtils_SetConfigValueStruct :: proc(self: ^INetworkingUtils, opt: ^SteamNetworkingConfigValue_t, eScopeType: ESteamNetworkingConfigScope, scopeObj: intptr) -> bool ---
+	NetworkingUtils_SetConfigValueStruct :: proc(self: ^INetworkingUtils, opt: ^SteamNetworkingConfigValue, eScopeType: ESteamNetworkingConfigScope, scopeObj: intptr) -> bool ---
 	NetworkingUtils_GetConfigValue :: proc(self: ^INetworkingUtils, eValue: ESteamNetworkingConfigValue, eScopeType: ESteamNetworkingConfigScope, scopeObj: intptr, pOutDataType: ^ESteamNetworkingConfigDataType, pResult: rawptr, cbResult: ^int) -> ESteamNetworkingGetConfigValueResult ---
 	NetworkingUtils_GetConfigValueInfo :: proc(self: ^INetworkingUtils, eValue: ESteamNetworkingConfigValue, pOutDataType: ^ESteamNetworkingConfigDataType, pOutScope: ^ESteamNetworkingConfigScope) -> cstring ---
 	NetworkingUtils_IterateGenericEditableConfigValues :: proc(self: ^INetworkingUtils, eCurrent: ESteamNetworkingConfigValue, bEnumerateDevVars: bool) -> ESteamNetworkingConfigValue ---
@@ -4869,21 +4876,21 @@ foreign lib {
 	GameServer_BeginAuthSession :: proc(self: ^IGameServer, pAuthTicket: rawptr, cbAuthTicket: c.int, steamID: CSteamID) -> EBeginAuthSessionResult ---
 	GameServer_EndAuthSession :: proc(self: ^IGameServer, steamID: CSteamID) ---
 	GameServer_CancelAuthTicket :: proc(self: ^IGameServer, hAuthTicket: HAuthTicket) ---
-	GameServer_UserHasLicenseForApp :: proc(self: ^IGameServer, steamID: CSteamID, appID: AppId_t) -> EUserHasLicenseForAppResult ---
+	GameServer_UserHasLicenseForApp :: proc(self: ^IGameServer, steamID: CSteamID, appID: AppId) -> EUserHasLicenseForAppResult ---
 	GameServer_RequestUserGroupStatus :: proc(self: ^IGameServer, steamIDUser: CSteamID, steamIDGroup: CSteamID) -> bool ---
 	GameServer_GetGameplayStats :: proc(self: ^IGameServer) ---
-	GameServer_GetServerReputation :: proc(self: ^IGameServer) -> SteamAPICall_t ---
-	GameServer_GetPublicIP :: proc(self: ^IGameServer) -> SteamIPAddress_t ---
+	GameServer_GetServerReputation :: proc(self: ^IGameServer) -> SteamAPICall ---
+	GameServer_GetPublicIP :: proc(self: ^IGameServer) -> SteamIPAddress ---
 	GameServer_HandleIncomingPacket :: proc(self: ^IGameServer, pData: rawptr, cbData: c.int, srcIP: uint32, srcPort: uint16) -> bool ---
 	GameServer_GetNextOutgoingPacket :: proc(self: ^IGameServer, pOut: rawptr, cbMaxOut: c.int, pNetAdr: ^uint32, pPort: ^uint16) -> c.int ---
-	GameServer_AssociateWithClan :: proc(self: ^IGameServer, steamIDClan: CSteamID) -> SteamAPICall_t ---
-	GameServer_ComputeNewPlayerCompatibility :: proc(self: ^IGameServer, steamIDNewPlayer: CSteamID) -> SteamAPICall_t ---
+	GameServer_AssociateWithClan :: proc(self: ^IGameServer, steamIDClan: CSteamID) -> SteamAPICall ---
+	GameServer_ComputeNewPlayerCompatibility :: proc(self: ^IGameServer, steamIDNewPlayer: CSteamID) -> SteamAPICall ---
 	GameServer_SendUserConnectAndAuthenticate_DEPRECATED :: proc(self: ^IGameServer, unIPClient: uint32, pvAuthBlob: rawptr, cubAuthBlobSize: uint32, pSteamIDUser: ^CSteamID) -> bool ---
 	GameServer_CreateUnauthenticatedUserConnection :: proc(self: ^IGameServer) -> CSteamID ---
 	GameServer_SendUserDisconnect_DEPRECATED :: proc(self: ^IGameServer, steamIDUser: CSteamID) ---
 	GameServer_BUpdateUserData :: proc(self: ^IGameServer, steamIDUser: CSteamID, pchPlayerName: cstring, uScore: uint32) -> bool ---
 
-	GameServerStats_RequestUserStats :: proc(self: ^IGameServerStats, steamIDUser: CSteamID) -> SteamAPICall_t ---
+	GameServerStats_RequestUserStats :: proc(self: ^IGameServerStats, steamIDUser: CSteamID) -> SteamAPICall ---
 	GameServerStats_GetUserStatInt32 :: proc(self: ^IGameServerStats, steamIDUser: CSteamID, pchName: cstring, pData: ^int32) -> bool ---
 	GameServerStats_GetUserStatFloat :: proc(self: ^IGameServerStats, steamIDUser: CSteamID, pchName: cstring, pData: ^f32) -> bool ---
 	GameServerStats_GetUserAchievement :: proc(self: ^IGameServerStats, steamIDUser: CSteamID, pchName: cstring, pbAchieved: ^bool) -> bool ---
@@ -4892,28 +4899,28 @@ foreign lib {
 	GameServerStats_UpdateUserAvgRateStat :: proc(self: ^IGameServerStats, steamIDUser: CSteamID, pchName: cstring, flCountThisSession: f32, dSessionLength: f64) -> bool ---
 	GameServerStats_SetUserAchievement :: proc(self: ^IGameServerStats, steamIDUser: CSteamID, pchName: cstring) -> bool ---
 	GameServerStats_ClearUserAchievement :: proc(self: ^IGameServerStats, steamIDUser: CSteamID, pchName: cstring) -> bool ---
-	GameServerStats_StoreUserStats :: proc(self: ^IGameServerStats, steamIDUser: CSteamID) -> SteamAPICall_t ---
+	GameServerStats_StoreUserStats :: proc(self: ^IGameServerStats, steamIDUser: CSteamID) -> SteamAPICall ---
 
 	NetworkingFakeUDPPort_DestroyFakeUDPPort :: proc(self: ^INetworkingFakeUDPPort) ---
 	NetworkingFakeUDPPort_SendMessageToFakeIP :: proc(self: ^INetworkingFakeUDPPort, remoteAddress: ^SteamNetworkingIPAddr, pData: rawptr, cbData: uint32, nSendFlags: c.int) -> EResult ---
-	NetworkingFakeUDPPort_ReceiveMessages :: proc(self: ^INetworkingFakeUDPPort, ppOutMessages: ^^SteamNetworkingMessage_t, nMaxMessages: c.int) -> c.int ---
+	NetworkingFakeUDPPort_ReceiveMessages :: proc(self: ^INetworkingFakeUDPPort, ppOutMessages: ^^SteamNetworkingMessage, nMaxMessages: c.int) -> c.int ---
 	NetworkingFakeUDPPort_ScheduleCleanup :: proc(self: ^INetworkingFakeUDPPort, remoteAddress: ^SteamNetworkingIPAddr) ---
 
-	SteamIPAddress_t_IsSet :: proc(self: ^SteamIPAddress_t) -> bool ---
-	MatchMakingKeyValuePair_t_Construct :: proc(self: ^MatchMakingKeyValuePair_t) ---
-	servernetadr_t_Construct :: proc(self: ^servernetadr_t) ---
-	servernetadr_t_Init :: proc(self: ^servernetadr_t, ip: c.uint, usQueryPort: uint16, usConnectionPort: uint16) ---
-	servernetadr_t_GetQueryPort :: proc(self: ^servernetadr_t) -> uint16 ---
-	servernetadr_t_SetQueryPort :: proc(self: ^servernetadr_t, usPort: uint16) ---
-	servernetadr_t_GetConnectionPort :: proc(self: ^servernetadr_t) -> uint16 ---
-	servernetadr_t_SetConnectionPort :: proc(self: ^servernetadr_t, usPort: uint16) ---
-	servernetadr_t_GetIP :: proc(self: ^servernetadr_t) -> uint32 ---
-	servernetadr_t_SetIP :: proc(self: ^servernetadr_t, unIP: uint32) ---
-	servernetadr_t_GetConnectionAddressString :: proc(self: ^servernetadr_t) -> cstring ---
-	servernetadr_t_GetQueryAddressString :: proc(self: ^servernetadr_t) -> cstring ---
-	gameserveritem_t_Construct :: proc(self: ^gameserveritem_t) ---
-	gameserveritem_t_GetName :: proc(self: ^gameserveritem_t) -> cstring ---
-	gameserveritem_t_SetName :: proc(self: ^gameserveritem_t, pName: cstring) ---
+	SteamIPAddress_t_IsSet :: proc(self: ^SteamIPAddress) -> bool ---
+	MatchMakingKeyValuePair_t_Construct :: proc(self: ^MatchMakingKeyValuePair) ---
+	servernetadr_t_Construct :: proc(self: ^servernetadr) ---
+	servernetadr_t_Init :: proc(self: ^servernetadr, ip: c.uint, usQueryPort: uint16, usConnectionPort: uint16) ---
+	servernetadr_t_GetQueryPort :: proc(self: ^servernetadr) -> uint16 ---
+	servernetadr_t_SetQueryPort :: proc(self: ^servernetadr, usPort: uint16) ---
+	servernetadr_t_GetConnectionPort :: proc(self: ^servernetadr) -> uint16 ---
+	servernetadr_t_SetConnectionPort :: proc(self: ^servernetadr, usPort: uint16) ---
+	servernetadr_t_GetIP :: proc(self: ^servernetadr) -> uint32 ---
+	servernetadr_t_SetIP :: proc(self: ^servernetadr, unIP: uint32) ---
+	servernetadr_t_GetConnectionAddressString :: proc(self: ^servernetadr) -> cstring ---
+	servernetadr_t_GetQueryAddressString :: proc(self: ^servernetadr) -> cstring ---
+	gameserveritet_Construct :: proc(self: ^gameserveritet) ---
+	gameserveritet_GetName :: proc(self: ^gameserveritet) -> cstring ---
+	gameserveritet_SetName :: proc(self: ^gameserveritet, pName: cstring) ---
 	SteamNetworkingIPAddr_Clear :: proc(self: ^SteamNetworkingIPAddr) ---
 	SteamNetworkingIPAddr_IsIPv6AllZeros :: proc(self: ^SteamNetworkingIPAddr) -> bool ---
 	SteamNetworkingIPAddr_SetIPv6 :: proc(self: ^SteamNetworkingIPAddr, ipv6: ^uint8, nPort: uint16) ---
@@ -4952,12 +4959,12 @@ foreign lib {
 	SteamNetworkingIdentity_GetGenericBytes :: proc(self: ^SteamNetworkingIdentity, cbLen: ^int) -> ^uint8 ---
 	SteamNetworkingIdentity_ToString :: proc(self: ^SteamNetworkingIdentity, buf: ^u8, cbBuf: uint32) ---
 	SteamNetworkingIdentity_ParseString :: proc(self: ^SteamNetworkingIdentity, pszStr: cstring) -> bool ---
-	SteamNetworkingMessage_t_Release :: proc(self: ^SteamNetworkingMessage_t) ---
-	SteamNetworkingConfigValue_t_SetInt32 :: proc(self: ^SteamNetworkingConfigValue_t, eVal: ESteamNetworkingConfigValue, data: int32) ---
-	SteamNetworkingConfigValue_t_SetInt64 :: proc(self: ^SteamNetworkingConfigValue_t, eVal: ESteamNetworkingConfigValue, data: int64) ---
-	SteamNetworkingConfigValue_t_SetFloat :: proc(self: ^SteamNetworkingConfigValue_t, eVal: ESteamNetworkingConfigValue, data: f32) ---
-	SteamNetworkingConfigValue_t_SetPtr :: proc(self: ^SteamNetworkingConfigValue_t, eVal: ESteamNetworkingConfigValue, data: rawptr) ---
-	SteamNetworkingConfigValue_t_SetString :: proc(self: ^SteamNetworkingConfigValue_t, eVal: ESteamNetworkingConfigValue, data: cstring) ---
+	SteamNetworkingMessage_t_Release :: proc(self: ^SteamNetworkingMessage) ---
+	SteamNetworkingConfigValue_t_SetInt32 :: proc(self: ^SteamNetworkingConfigValue, eVal: ESteamNetworkingConfigValue, data: int32) ---
+	SteamNetworkingConfigValue_t_SetInt64 :: proc(self: ^SteamNetworkingConfigValue, eVal: ESteamNetworkingConfigValue, data: int64) ---
+	SteamNetworkingConfigValue_t_SetFloat :: proc(self: ^SteamNetworkingConfigValue, eVal: ESteamNetworkingConfigValue, data: f32) ---
+	SteamNetworkingConfigValue_t_SetPtr :: proc(self: ^SteamNetworkingConfigValue, eVal: ESteamNetworkingConfigValue, data: rawptr) ---
+	SteamNetworkingConfigValue_t_SetString :: proc(self: ^SteamNetworkingConfigValue, eVal: ESteamNetworkingConfigValue, data: cstring) ---
 	SteamDatagramHostedAddress_Clear :: proc(self: ^SteamDatagramHostedAddress) ---
 	SteamDatagramHostedAddress_GetPopID :: proc(self: ^SteamDatagramHostedAddress) -> SteamNetworkingPOPID ---
 	SteamDatagramHostedAddress_SetDevAddress :: proc(self: ^SteamDatagramHostedAddress, nIP: uint32, nPort: uint16, popid: SteamNetworkingPOPID) ---
