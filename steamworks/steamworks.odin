@@ -1,6 +1,6 @@
 package steamworks
 import "core:c"
-foreign import lib "steamworks_api.lib"
+foreign import lib "steam_api64.lib"
 
 // HACK
 CSteamID :: u64

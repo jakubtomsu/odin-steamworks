@@ -149,7 +149,7 @@ main :: proc() {
 
 				println(&finalBuf, "package steamworks")
 				println(&finalBuf, "import \"core:c\"")
-				println(&finalBuf, "foreign import lib \"steamworks_api.lib\"")
+				println(&finalBuf, "foreign import lib \"steam_api.lib\"")
 				println(&finalBuf)
 
 				println(&finalBuf, strings.to_string(buf))

@@ -1,6 +1,6 @@
 package steamworks
 import "core:c"
-foreign import lib "steamworks_api.lib"
+foreign import lib "steam_api64.lib"
 
 intptr :: distinct int
 
@@ -331,6 +331,12 @@ RequestPlayersForGameResultCallback_t :: struct #packed {
 	m_nTotalPlayersAcceptedGame: int32,
 	m_nSuggestedTeamIndex:       int32,
 	m_ullUniqueGameID:           uint64,
+}
+
+RequestPlayersForGameResultCallback_t_PlayerAcceptState_t :: enum {
+	k_EStateUnknown        = 0,
+	k_EStatePlayerAccepted = 1,
+	k_EStatePlayerDeclined = 2,
 }
 
 RequestPlayersForGameFinalResultCallback_t :: struct #packed {
@@ -1239,7 +1245,7 @@ k_ScreenshotThumbWidth: c.int : 200
 kNumUGCResultsPerPage: uint32 : 50
 k_cchDeveloperMetadataMax: uint32 : 5000
 INVALID_HTMLBROWSER: uint32 : 0
-k_SteamItemInstanceIDInvalid: SteamItemInstanceID_t : ~0
+k_SteamItemInstanceIDInvalid: SteamItemInstanceID_t : ~SteamItemInstanceID_t(0)
 k_SteamInventoryResultInvalid: SteamInventoryResult_t : -1
 k_HSteamNetConnection_Invalid: HSteamNetConnection : 0
 k_HSteamListenSocket_Invalid: HSteamListenSocket : 0
@@ -3661,6 +3667,7 @@ SteamDatagramGameCoordinatorServerLogin :: struct #packed {
 	m_appData:   [2048]u8,
 }
 
+SteamAPIWarningMessageHook_t :: proc "c" (_: int, _: cstring)
 
 @(link_prefix = "SteamAPI_", default_calling_convention = "c")
 foreign lib {
@@ -4253,7 +4260,7 @@ foreign lib {
 	ISteamInput_GetDeviceBindingRevision :: proc(self: ^ISteamInput, inputHandle: InputHandle_t, pMajor: ^int, pMinor: ^int) -> bool ---
 	ISteamInput_GetRemotePlaySessionID :: proc(self: ^ISteamInput, inputHandle: InputHandle_t) -> uint32 ---
 	ISteamInput_GetSessionInputConfigurationSettings :: proc(self: ^ISteamInput) -> uint16 ---
-	ISteamInput_SetDualSenseTriggerEffect :: proc(self: ^ISteamInput, inputHandle: InputHandle_t, pParam: ^ScePadTriggerEffectParam) ---
+	// ISteamInput_SetDualSenseTriggerEffect :: proc(self: ^ISteamInput, inputHandle: InputHandle_t, pParam: ^ScePadTriggerEffectParam) ---
 	SteamInput_v006 :: proc() -> ^ISteamInput ---
 
 	ISteamController_Init :: proc(self: ^ISteamController) -> bool ---
@@ -4308,7 +4315,6 @@ foreign lib {
 	ISteamUGC_GetQueryUGCNumAdditionalPreviews :: proc(self: ^ISteamUGC, handle: UGCQueryHandle_t, index: uint32) -> uint32 ---
 	ISteamUGC_GetQueryUGCAdditionalPreview :: proc(self: ^ISteamUGC, handle: UGCQueryHandle_t, index: uint32, previewIndex: uint32, pchURLOrVideoID: ^u8, cchURLSize: uint32, pchOriginalFileName: ^u8, cchOriginalFileNameSize: uint32, pPreviewType: ^EItemPreviewType) -> bool ---
 	ISteamUGC_GetQueryUGCNumKeyValueTags :: proc(self: ^ISteamUGC, handle: UGCQueryHandle_t, index: uint32) -> uint32 ---
-	ISteamUGC_GetQueryUGCKeyValueTag :: proc(self: ^ISteamUGC, handle: UGCQueryHandle_t, index: uint32, keyValueTagIndex: uint32, pchKey: ^u8, cchKeySize: uint32, pchValue: ^u8, cchValueSize: uint32) -> bool ---
 	ISteamUGC_GetQueryUGCKeyValueTag :: proc(self: ^ISteamUGC, handle: UGCQueryHandle_t, index: uint32, pchKey: cstring, pchValue: ^u8, cchValueSize: uint32) -> bool ---
 	ISteamUGC_ReleaseQueryUGCRequest :: proc(self: ^ISteamUGC, handle: UGCQueryHandle_t) -> bool ---
 	ISteamUGC_AddRequiredTag :: proc(self: ^ISteamUGC, handle: UGCQueryHandle_t, pTagName: cstring) -> bool ---
@@ -4524,16 +4530,16 @@ foreign lib {
 	ISteamNetworkingSockets_DestroyPollGroup :: proc(self: ^ISteamNetworkingSockets, hPollGroup: HSteamNetPollGroup) -> bool ---
 	ISteamNetworkingSockets_SetConnectionPollGroup :: proc(self: ^ISteamNetworkingSockets, hConn: HSteamNetConnection, hPollGroup: HSteamNetPollGroup) -> bool ---
 	ISteamNetworkingSockets_ReceiveMessagesOnPollGroup :: proc(self: ^ISteamNetworkingSockets, hPollGroup: HSteamNetPollGroup, ppOutMessages: ^^SteamNetworkingMessage_t, nMaxMessages: c.int) -> c.int ---
-	ISteamNetworkingSockets_ReceivedRelayAuthTicket :: proc(self: ^ISteamNetworkingSockets, pvTicket: rawptr, cbTicket: c.int, pOutParsedTicket: ^SteamDatagramRelayAuthTicket) -> bool ---
-	ISteamNetworkingSockets_FindRelayAuthTicketForServer :: proc(self: ^ISteamNetworkingSockets, identityGameServer: ^SteamNetworkingIdentity, nRemoteVirtualPort: c.int, pOutParsedTicket: ^SteamDatagramRelayAuthTicket) -> c.int ---
+	ISteamNetworkingSockets_ReceivedRelayAuthTicket :: proc(self: ^ISteamNetworkingSockets, pvTicket: rawptr, cbTicket: c.int, pOutParsedTicket: SteamDatagramRelayAuthTicketPtr) -> bool ---
+	ISteamNetworkingSockets_FindRelayAuthTicketForServer :: proc(self: ^ISteamNetworkingSockets, identityGameServer: ^SteamNetworkingIdentity, nRemoteVirtualPort: c.int, pOutParsedTicket: SteamDatagramRelayAuthTicketPtr) -> c.int ---
 	ISteamNetworkingSockets_ConnectToHostedDedicatedServer :: proc(self: ^ISteamNetworkingSockets, identityTarget: ^SteamNetworkingIdentity, nRemoteVirtualPort: c.int, nOptions: c.int, pOptions: ^SteamNetworkingConfigValue_t) -> HSteamNetConnection ---
 	ISteamNetworkingSockets_GetHostedDedicatedServerPort :: proc(self: ^ISteamNetworkingSockets) -> uint16 ---
 	ISteamNetworkingSockets_GetHostedDedicatedServerPOPID :: proc(self: ^ISteamNetworkingSockets) -> SteamNetworkingPOPID ---
 	ISteamNetworkingSockets_GetHostedDedicatedServerAddress :: proc(self: ^ISteamNetworkingSockets, pRouting: ^SteamDatagramHostedAddress) -> EResult ---
 	ISteamNetworkingSockets_CreateHostedDedicatedServerListenSocket :: proc(self: ^ISteamNetworkingSockets, nLocalVirtualPort: c.int, nOptions: c.int, pOptions: ^SteamNetworkingConfigValue_t) -> HSteamListenSocket ---
 	ISteamNetworkingSockets_GetGameCoordinatorServerLogin :: proc(self: ^ISteamNetworkingSockets, pLoginInfo: ^SteamDatagramGameCoordinatorServerLogin, pcbSignedBlob: ^int, pBlob: rawptr) -> EResult ---
-	ISteamNetworkingSockets_ConnectP2PCustomSignaling :: proc(self: ^ISteamNetworkingSockets, pSignaling: ^ISteamNetworkingConnectionSignaling, pPeerIdentity: ^SteamNetworkingIdentity, nRemoteVirtualPort: c.int, nOptions: c.int, pOptions: ^SteamNetworkingConfigValue_t) -> HSteamNetConnection ---
-	ISteamNetworkingSockets_ReceivedP2PCustomSignal :: proc(self: ^ISteamNetworkingSockets, pMsg: rawptr, cbMsg: c.int, pContext: ^ISteamNetworkingSignalingRecvContext) -> bool ---
+	ISteamNetworkingSockets_ConnectP2PCustomSignaling :: proc(self: ^ISteamNetworkingSockets, pSignaling: SteamDatagramRelayAuthTicketPtr, pPeerIdentity: ^SteamNetworkingIdentity, nRemoteVirtualPort: c.int, nOptions: c.int, pOptions: ^SteamNetworkingConfigValue_t) -> HSteamNetConnection ---
+	ISteamNetworkingSockets_ReceivedP2PCustomSignal :: proc(self: ^ISteamNetworkingSockets, pMsg: rawptr, cbMsg: c.int, pContext: ISteamNetworkingSignalingRecvContextPtr) -> bool ---
 	ISteamNetworkingSockets_GetCertificateRequest :: proc(self: ^ISteamNetworkingSockets, pcbBlob: ^int, pBlob: rawptr, errMsg: ^SteamNetworkingErrMsg) -> bool ---
 	ISteamNetworkingSockets_SetCertificate :: proc(self: ^ISteamNetworkingSockets, pCertificate: rawptr, cbCertificate: c.int, errMsg: ^SteamNetworkingErrMsg) -> bool ---
 	ISteamNetworkingSockets_ResetIdentity :: proc(self: ^ISteamNetworkingSockets, pIdentity: ^SteamNetworkingIdentity) ---
@@ -4708,3 +4714,19 @@ foreign lib {
 	SteamDatagramHostedAddress_GetPopID :: proc(self: ^SteamDatagramHostedAddress) -> SteamNetworkingPOPID ---
 	SteamDatagramHostedAddress_SetDevAddress :: proc(self: ^SteamDatagramHostedAddress, nIP: uint32, nPort: uint16, popid: SteamNetworkingPOPID) ---
 } // foreign lib
+
+CGameID_EGameIDType :: enum {
+	k_EGameIDTypeApp      = 0,
+	k_EGameIDTypeGameMod  = 1,
+	k_EGameIDTypeShortcut = 2,
+	k_EGameIDTypeP2P      = 3,
+}
+
+// HACK
+CGameID :: struct #packed {
+	m_ulGameID: uint64,
+}
+
+SteamDatagramRelayAuthTicketPtr :: distinct rawptr
+ISteamNetworkingConnectionSignalingPtr :: distinct rawptr
+ISteamNetworkingSignalingRecvContextPtr :: distinct rawptr
