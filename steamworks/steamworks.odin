@@ -11,8 +11,8 @@ CGameID :: uint64
 CSteamID :: u64
 
 SteamDatagramRelayAuthTicketPtr :: distinct rawptr
-ISteamNetworkingConnectionSignalingPtr :: distinct rawptr
-ISteamNetworkingSignalingRecvContextPtr :: distinct rawptr
+INetworkingConnectionSignalingPtr :: distinct rawptr
+INetworkingSignalingRecvContextPtr :: distinct rawptr
 
 // ---------
 // Constants
@@ -3474,13 +3474,13 @@ EServerMode :: enum {
 	eServerModeAuthenticationAndSecure = 3,
 }
 
-ISteamHTMLSurface_EHTMLMouseButton :: enum {
+IHTMLSurface_EHTMLMouseButton :: enum {
 	eHTMLMouseButton_Left   = 0,
 	eHTMLMouseButton_Right  = 1,
 	eHTMLMouseButton_Middle = 2,
 }
 
-ISteamHTMLSurface_EMouseCursor :: enum {
+IHTMLSurface_EMouseCursor :: enum {
 	dc_user           = 0,
 	dc_none           = 1,
 	dc_arrow          = 2,
@@ -3525,75 +3525,12 @@ ISteamHTMLSurface_EMouseCursor :: enum {
 	dc_last           = 41,
 }
 
-ISteamHTMLSurface_EHTMLKeyModifiers :: enum {
+IHTMLSurface_EHTMLKeyModifiers :: enum {
 	k_eHTMLKeyModifier_None      = 0,
 	k_eHTMLKeyModifier_AltDown   = 1,
 	k_eHTMLKeyModifier_CtrlDown  = 2,
 	k_eHTMLKeyModifier_ShiftDown = 4,
 }
-
-SteamUser: proc "c" () -> ^ISteamUser : SteamUser_v021
-SteamFriends: proc "c" () -> ^ISteamFriends : SteamFriends_v017
-SteamUtils: proc "c" () -> ^ISteamUtils : SteamUtils_v010
-SteamMatchmaking: proc "c" () -> ^ISteamMatchmaking : SteamMatchmaking_v009
-SteamMatchmakingServers: proc "c" () -> ^ISteamMatchmakingServers : SteamMatchmakingServers_v002
-SteamGameSearch: proc "c" () -> ^ISteamGameSearch : SteamGameSearch_v001
-SteamParties: proc "c" () -> ^ISteamParties : SteamParties_v002
-SteamRemoteStorage: proc "c" () -> ^ISteamRemoteStorage : SteamRemoteStorage_v016
-SteamUserStats: proc "c" () -> ^ISteamUserStats : SteamUserStats_v012
-SteamApps: proc "c" () -> ^ISteamApps : SteamApps_v008
-SteamNetworking: proc "c" () -> ^ISteamNetworking : SteamNetworking_v006
-SteamScreenshots: proc "c" () -> ^ISteamScreenshots : SteamScreenshots_v003
-SteamMusic: proc "c" () -> ^ISteamMusic : SteamMusic_v001
-SteamMusicRemote: proc "c" () -> ^ISteamMusicRemote : SteamMusicRemote_v001
-SteamHTTP: proc "c" () -> ^ISteamHTTP : SteamHTTP_v003
-SteamInput: proc "c" () -> ^ISteamInput : SteamInput_v006
-SteamController: proc "c" () -> ^ISteamController : SteamController_v008
-SteamUGC: proc "c" () -> ^ISteamUGC : SteamUGC_v016
-SteamAppList: proc "c" () -> ^ISteamAppList : SteamAppList_v001
-SteamHTMLSurface: proc "c" () -> ^ISteamHTMLSurface : SteamHTMLSurface_v005
-SteamInventory: proc "c" () -> ^ISteamInventory : SteamInventory_v003
-SteamVideo: proc "c" () -> ^ISteamVideo : SteamVideo_v002
-SteamParentalSettings: proc "c" () -> ^ISteamParentalSettings : SteamParentalSettings_v001
-SteamRemotePlay: proc "c" () -> ^ISteamRemotePlay : SteamRemotePlay_v001
-SteamNetworkingMessages_SteamAPI: proc "c" () -> ^ISteamNetworkingMessages : SteamNetworkingMessages_SteamAPI_v002
-SteamNetworkingSockets_SteamAPI: proc "c" () -> ^ISteamNetworkingSockets : SteamNetworkingSockets_SteamAPI_v012
-
-ISteamClient :: distinct rawptr
-ISteamUser :: distinct rawptr
-ISteamFriends :: distinct rawptr
-ISteamUtils :: distinct rawptr
-ISteamMatchmaking :: distinct rawptr
-ISteamMatchmakingServerListResponse :: distinct rawptr
-ISteamMatchmakingPingResponse :: distinct rawptr
-ISteamMatchmakingPlayersResponse :: distinct rawptr
-ISteamMatchmakingRulesResponse :: distinct rawptr
-ISteamMatchmakingServers :: distinct rawptr
-ISteamGameSearch :: distinct rawptr
-ISteamParties :: distinct rawptr
-ISteamRemoteStorage :: distinct rawptr
-ISteamUserStats :: distinct rawptr
-ISteamApps :: distinct rawptr
-ISteamNetworking :: distinct rawptr
-ISteamScreenshots :: distinct rawptr
-ISteamMusic :: distinct rawptr
-ISteamMusicRemote :: distinct rawptr
-ISteamHTTP :: distinct rawptr
-ISteamInput :: distinct rawptr
-ISteamController :: distinct rawptr
-ISteamUGC :: distinct rawptr
-ISteamAppList :: distinct rawptr
-ISteamHTMLSurface :: distinct rawptr
-ISteamInventory :: distinct rawptr
-ISteamVideo :: distinct rawptr
-ISteamParentalSettings :: distinct rawptr
-ISteamRemotePlay :: distinct rawptr
-ISteamNetworkingMessages :: distinct rawptr
-ISteamNetworkingSockets :: distinct rawptr
-ISteamNetworkingUtils :: distinct rawptr
-ISteamGameServer :: distinct rawptr
-ISteamGameServerStats :: distinct rawptr
-ISteamNetworkingFakeUDPPort :: distinct rawptr
 
 SteamIPAddress_t :: struct #packed {
 	m_rgubIPv6: [16]uint8,
@@ -3809,22 +3746,90 @@ SteamDatagramGameCoordinatorServerLogin :: struct #packed {
 
 SteamAPIWarningMessageHook_t :: proc "c" (_: c.int, _: cstring)
 
+
+Client :: SteamClient
+User: proc "c" () -> ^IUser : SteamUser_v021
+Friends: proc "c" () -> ^IFriends : SteamFriends_v017
+Utils: proc "c" () -> ^IUtils : SteamUtils_v010
+Matchmaking: proc "c" () -> ^IMatchmaking : SteamMatchmaking_v009
+MatchmakingServers: proc "c" () -> ^IMatchmakingServers : SteamMatchmakingServers_v002
+GameSearch: proc "c" () -> ^IGameSearch : SteamGameSearch_v001
+Parties: proc "c" () -> ^IParties : SteamParties_v002
+RemoteStorage: proc "c" () -> ^IRemoteStorage : SteamRemoteStorage_v016
+UserStats: proc "c" () -> ^IUserStats : SteamUserStats_v012
+Apps: proc "c" () -> ^IApps : SteamApps_v008
+Networking: proc "c" () -> ^INetworking : SteamNetworking_v006
+Screenshots: proc "c" () -> ^IScreenshots : SteamScreenshots_v003
+Music: proc "c" () -> ^IMusic : SteamMusic_v001
+MusicRemote: proc "c" () -> ^IMusicRemote : SteamMusicRemote_v001
+HTTP: proc "c" () -> ^IHTTP : SteamHTTP_v003
+Input: proc "c" () -> ^IInput : SteamInput_v006
+Controller: proc "c" () -> ^IController : SteamController_v008
+UGC: proc "c" () -> ^IUGC : SteamUGC_v016
+AppList: proc "c" () -> ^IAppList : SteamAppList_v001
+HTMLSurface: proc "c" () -> ^IHTMLSurface : SteamHTMLSurface_v005
+Inventory: proc "c" () -> ^IInventory : SteamInventory_v003
+Video: proc "c" () -> ^IVideo : SteamVideo_v002
+ParentalSettings: proc "c" () -> ^IParentalSettings : SteamParentalSettings_v001
+RemotePlay: proc "c" () -> ^IRemotePlay : SteamRemotePlay_v001
+NetworkingMessages_SteamAPI: proc "c" () -> ^INetworkingMessages : SteamNetworkingMessages_SteamAPI_v002
+NetworkingSockets_SteamAPI: proc "c" () -> ^INetworkingSockets : SteamNetworkingSockets_SteamAPI_v012
+
+IClient :: distinct rawptr
+IUser :: distinct rawptr
+IFriends :: distinct rawptr
+IUtils :: distinct rawptr
+IMatchmaking :: distinct rawptr
+IMatchmakingServerListResponse :: distinct rawptr
+IMatchmakingPingResponse :: distinct rawptr
+IMatchmakingPlayersResponse :: distinct rawptr
+IMatchmakingRulesResponse :: distinct rawptr
+IMatchmakingServers :: distinct rawptr
+IGameSearch :: distinct rawptr
+IParties :: distinct rawptr
+IRemoteStorage :: distinct rawptr
+IUserStats :: distinct rawptr
+IApps :: distinct rawptr
+INetworking :: distinct rawptr
+IScreenshots :: distinct rawptr
+IMusic :: distinct rawptr
+IMusicRemote :: distinct rawptr
+IHTTP :: distinct rawptr
+IInput :: distinct rawptr
+IController :: distinct rawptr
+IUGC :: distinct rawptr
+IAppList :: distinct rawptr
+IHTMLSurface :: distinct rawptr
+IInventory :: distinct rawptr
+IVideo :: distinct rawptr
+IParentalSettings :: distinct rawptr
+IRemotePlay :: distinct rawptr
+INetworkingMessages :: distinct rawptr
+INetworkingSockets :: distinct rawptr
+INetworkingUtils :: distinct rawptr
+IGameServer :: distinct rawptr
+IGameServerStats :: distinct rawptr
+INetworkingFakeUDPPort :: distinct rawptr
+
+
 // No 'SteamAPI_' prefix
 @(default_calling_convention = "c")
 foreign lib {
-	SteamClient :: proc() -> ^ISteamClient ---
+	SteamClient :: proc() -> ^IClient ---
 }
+
+// --------------------------
+// Global SteamAPI functionns
+// --------------------------
 
 @(link_prefix = "SteamAPI_", default_calling_convention = "c")
 foreign lib {
-
 	//----------------------------------------------------------------------------------------------------------------------------------------------------------//
 	//	Steam API setup & shutdown
 	//
 	//	These functions manage loading, initializing and shutdown of the steamclient.dll
 	//
 	//----------------------------------------------------------------------------------------------------------------------------------------------------------//
-
 
 	// SteamAPI_Init must be called before using any other API functions. If it fails, an
 	// error message will be output to the debugger (or stderr) with further information.
@@ -3898,990 +3903,1001 @@ foreign lib {
 	/// Return the call result for the specified call on the specified pipe.  You really should
 	/// only call this in a handler for SteamAPICallCompleted_t callback.
 	ManualDispatch_GetAPICallResult :: proc "c" (hSteamPipe: HSteamPipe, hSteamAPICall: SteamAPICall_t, pCallback: rawptr, cubCallback: c.int, iCallbackExpected: c.int, pbFailed: ^bool) -> bool ---
+}
 
-	// ----------
-	// Interfaces
-	// ----------
+// ---------
+// Accessors
+// ---------
 
-	ISteamClient_CreateSteamPipe :: proc(self: ^ISteamClient) -> HSteamPipe ---
-	ISteamClient_BReleaseSteamPipe :: proc(self: ^ISteamClient, hSteamPipe: HSteamPipe) -> bool ---
-	ISteamClient_ConnectToGlobalUser :: proc(self: ^ISteamClient, hSteamPipe: HSteamPipe) -> HSteamUser ---
-	ISteamClient_CreateLocalUser :: proc(self: ^ISteamClient, phSteamPipe: ^HSteamPipe, eAccountType: EAccountType) -> HSteamUser ---
-	ISteamClient_ReleaseUser :: proc(self: ^ISteamClient, hSteamPipe: HSteamPipe, hUser: HSteamUser) ---
-	ISteamClient_GetISteamUser :: proc(self: ^ISteamClient, hSteamUser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^ISteamUser ---
-	ISteamClient_GetISteamGameServer :: proc(self: ^ISteamClient, hSteamUser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^ISteamGameServer ---
-	ISteamClient_SetLocalIPBinding :: proc(self: ^ISteamClient, unIP: ^SteamIPAddress_t, usPort: uint16) ---
-	ISteamClient_GetISteamFriends :: proc(self: ^ISteamClient, hSteamUser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^ISteamFriends ---
-	ISteamClient_GetISteamUtils :: proc(self: ^ISteamClient, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^ISteamUtils ---
-	ISteamClient_GetISteamMatchmaking :: proc(self: ^ISteamClient, hSteamUser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^ISteamMatchmaking ---
-	ISteamClient_GetISteamMatchmakingServers :: proc(self: ^ISteamClient, hSteamUser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^ISteamMatchmakingServers ---
-	ISteamClient_GetISteamGenericInterface :: proc(self: ^ISteamClient, hSteamUser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> rawptr ---
-	ISteamClient_GetISteamUserStats :: proc(self: ^ISteamClient, hSteamUser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^ISteamUserStats ---
-	ISteamClient_GetISteamGameServerStats :: proc(self: ^ISteamClient, hSteamuser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^ISteamGameServerStats ---
-	ISteamClient_GetISteamApps :: proc(self: ^ISteamClient, hSteamUser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^ISteamApps ---
-	ISteamClient_GetISteamNetworking :: proc(self: ^ISteamClient, hSteamUser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^ISteamNetworking ---
-	ISteamClient_GetISteamRemoteStorage :: proc(self: ^ISteamClient, hSteamuser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^ISteamRemoteStorage ---
-	ISteamClient_GetISteamScreenshots :: proc(self: ^ISteamClient, hSteamuser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^ISteamScreenshots ---
-	ISteamClient_GetISteamGameSearch :: proc(self: ^ISteamClient, hSteamuser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^ISteamGameSearch ---
-	ISteamClient_GetIPCCallCount :: proc(self: ^ISteamClient) -> uint32 ---
-	ISteamClient_SetWarningMessageHook :: proc(self: ^ISteamClient, pFunction: SteamAPIWarningMessageHook_t) ---
-	ISteamClient_BShutdownIfAllPipesClosed :: proc(self: ^ISteamClient) -> bool ---
-	ISteamClient_GetISteamHTTP :: proc(self: ^ISteamClient, hSteamuser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^ISteamHTTP ---
-	ISteamClient_GetISteamController :: proc(self: ^ISteamClient, hSteamUser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^ISteamController ---
-	ISteamClient_GetISteamUGC :: proc(self: ^ISteamClient, hSteamUser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^ISteamUGC ---
-	ISteamClient_GetISteamAppList :: proc(self: ^ISteamClient, hSteamUser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^ISteamAppList ---
-	ISteamClient_GetISteamMusic :: proc(self: ^ISteamClient, hSteamuser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^ISteamMusic ---
-	ISteamClient_GetISteamMusicRemote :: proc(self: ^ISteamClient, hSteamuser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^ISteamMusicRemote ---
-	ISteamClient_GetISteamHTMLSurface :: proc(self: ^ISteamClient, hSteamuser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^ISteamHTMLSurface ---
-	ISteamClient_GetISteamInventory :: proc(self: ^ISteamClient, hSteamuser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^ISteamInventory ---
-	ISteamClient_GetISteamVideo :: proc(self: ^ISteamClient, hSteamuser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^ISteamVideo ---
-	ISteamClient_GetISteamParentalSettings :: proc(self: ^ISteamClient, hSteamuser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^ISteamParentalSettings ---
-	ISteamClient_GetISteamInput :: proc(self: ^ISteamClient, hSteamUser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^ISteamInput ---
-	ISteamClient_GetISteamParties :: proc(self: ^ISteamClient, hSteamUser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^ISteamParties ---
-	ISteamClient_GetISteamRemotePlay :: proc(self: ^ISteamClient, hSteamUser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^ISteamRemotePlay ---
+@(link_prefix = "SteamAPI_", default_calling_convention = "c")
+foreign lib {
+	SteamUser_v021 :: proc() -> ^IUser ---
+	SteamFriends_v017 :: proc() -> ^IFriends ---
+	SteamUtils_v010 :: proc() -> ^IUtils ---
+	SteamMatchmaking_v009 :: proc() -> ^IMatchmaking ---
+	SteamMatchmakingServers_v002 :: proc() -> ^IMatchmakingServers ---
+	SteamGameSearch_v001 :: proc() -> ^IGameSearch ---
+	SteamParties_v002 :: proc() -> ^IParties ---
+	SteamRemoteStorage_v016 :: proc() -> ^IRemoteStorage ---
+	SteamUserStats_v012 :: proc() -> ^IUserStats ---
+	SteamApps_v008 :: proc() -> ^IApps ---
+	SteamNetworking_v006 :: proc() -> ^INetworking ---
+	SteamScreenshots_v003 :: proc() -> ^IScreenshots ---
+	SteamMusic_v001 :: proc() -> ^IMusic ---
+	SteamMusicRemote_v001 :: proc() -> ^IMusicRemote ---
+	SteamHTTP_v003 :: proc() -> ^IHTTP ---
+	SteamInput_v006 :: proc() -> ^IInput ---
+	SteamController_v008 :: proc() -> ^IController ---
+	SteamUGC_v016 :: proc() -> ^IUGC ---
+	SteamAppList_v001 :: proc() -> ^IAppList ---
+	SteamHTMLSurface_v005 :: proc() -> ^IHTMLSurface ---
+	SteamInventory_v003 :: proc() -> ^IInventory ---
+	SteamVideo_v002 :: proc() -> ^IVideo ---
+	SteamParentalSettings_v001 :: proc() -> ^IParentalSettings ---
+	SteamRemotePlay_v001 :: proc() -> ^IRemotePlay ---
+	SteamNetworkingMessages_SteamAPI_v002 :: proc() -> ^INetworkingMessages ---
+	SteamNetworkingSockets_SteamAPI_v012 :: proc() -> ^INetworkingSockets ---
+}
 
-	ISteamUser_GetHSteamUser :: proc(self: ^ISteamUser) -> HSteamUser ---
-	ISteamUser_BLoggedOn :: proc(self: ^ISteamUser) -> bool ---
-	ISteamUser_GetSteamID :: proc(self: ^ISteamUser) -> CSteamID ---
-	ISteamUser_InitiateGameConnection_DEPRECATED :: proc(self: ^ISteamUser, pAuthBlob: rawptr, cbMaxAuthBlob: c.int, steamIDGameServer: CSteamID, unIPServer: uint32, usPortServer: uint16, bSecure: bool) -> c.int ---
-	ISteamUser_TerminateGameConnection_DEPRECATED :: proc(self: ^ISteamUser, unIPServer: uint32, usPortServer: uint16) ---
-	ISteamUser_TrackAppUsageEvent :: proc(self: ^ISteamUser, gameID: CGameID, eAppUsageEvent: c.int, pchExtraInfo: cstring) ---
-	ISteamUser_GetUserDataFolder :: proc(self: ^ISteamUser, pchBuffer: ^u8, cubBuffer: c.int) -> bool ---
-	ISteamUser_StartVoiceRecording :: proc(self: ^ISteamUser) ---
-	ISteamUser_StopVoiceRecording :: proc(self: ^ISteamUser) ---
-	ISteamUser_GetAvailableVoice :: proc(self: ^ISteamUser, pcbCompressed: ^uint32, pcbUncompressed_Deprecated: ^uint32, nUncompressedVoiceDesiredSampleRate_Deprecated: uint32) -> EVoiceResult ---
-	ISteamUser_GetVoice :: proc(self: ^ISteamUser, bWantCompressed: bool, pDestBuffer: rawptr, cbDestBufferSize: uint32, nBytesWritten: ^uint32, bWantUncompressed_Deprecated: bool, pUncompressedDestBuffer_Deprecated: rawptr, cbUncompressedDestBufferSize_Deprecated: uint32, nUncompressBytesWritten_Deprecated: ^uint32, nUncompressedVoiceDesiredSampleRate_Deprecated: uint32) -> EVoiceResult ---
-	ISteamUser_DecompressVoice :: proc(self: ^ISteamUser, pCompressed: rawptr, cbCompressed: uint32, pDestBuffer: rawptr, cbDestBufferSize: uint32, nBytesWritten: ^uint32, nDesiredSampleRate: uint32) -> EVoiceResult ---
-	ISteamUser_GetVoiceOptimalSampleRate :: proc(self: ^ISteamUser) -> uint32 ---
-	ISteamUser_GetAuthSessionTicket :: proc(self: ^ISteamUser, pTicket: rawptr, cbMaxTicket: c.int, pcbTicket: ^uint32) -> HAuthTicket ---
-	ISteamUser_BeginAuthSession :: proc(self: ^ISteamUser, pAuthTicket: rawptr, cbAuthTicket: c.int, steamID: CSteamID) -> EBeginAuthSessionResult ---
-	ISteamUser_EndAuthSession :: proc(self: ^ISteamUser, steamID: CSteamID) ---
-	ISteamUser_CancelAuthTicket :: proc(self: ^ISteamUser, hAuthTicket: HAuthTicket) ---
-	ISteamUser_UserHasLicenseForApp :: proc(self: ^ISteamUser, steamID: CSteamID, appID: AppId_t) -> EUserHasLicenseForAppResult ---
-	ISteamUser_BIsBehindNAT :: proc(self: ^ISteamUser) -> bool ---
-	ISteamUser_AdvertiseGame :: proc(self: ^ISteamUser, steamIDGameServer: CSteamID, unIPServer: uint32, usPortServer: uint16) ---
-	ISteamUser_RequestEncryptedAppTicket :: proc(self: ^ISteamUser, pDataToInclude: rawptr, cbDataToInclude: c.int) -> SteamAPICall_t ---
-	ISteamUser_GetEncryptedAppTicket :: proc(self: ^ISteamUser, pTicket: rawptr, cbMaxTicket: c.int, pcbTicket: ^uint32) -> bool ---
-	ISteamUser_GetGameBadgeLevel :: proc(self: ^ISteamUser, nSeries: c.int, bFoil: bool) -> c.int ---
-	ISteamUser_GetPlayerSteamLevel :: proc(self: ^ISteamUser) -> c.int ---
-	ISteamUser_RequestStoreAuthURL :: proc(self: ^ISteamUser, pchRedirectURL: cstring) -> SteamAPICall_t ---
-	ISteamUser_BIsPhoneVerified :: proc(self: ^ISteamUser) -> bool ---
-	ISteamUser_BIsTwoFactorEnabled :: proc(self: ^ISteamUser) -> bool ---
-	ISteamUser_BIsPhoneIdentifying :: proc(self: ^ISteamUser) -> bool ---
-	ISteamUser_BIsPhoneRequiringVerification :: proc(self: ^ISteamUser) -> bool ---
-	ISteamUser_GetMarketEligibility :: proc(self: ^ISteamUser) -> SteamAPICall_t ---
-	ISteamUser_GetDurationControl :: proc(self: ^ISteamUser) -> SteamAPICall_t ---
-	ISteamUser_BSetDurationControlOnlineState :: proc(self: ^ISteamUser, eNewState: EDurationControlOnlineState) -> bool ---
-	SteamUser_v021 :: proc() -> ^ISteamUser ---
+// ----------
+// Interfaces
+// ----------
 
-	ISteamFriends_GetPersonaName :: proc(self: ^ISteamFriends) -> cstring ---
-	ISteamFriends_SetPersonaName :: proc(self: ^ISteamFriends, pchPersonaName: cstring) -> SteamAPICall_t ---
-	ISteamFriends_GetPersonaState :: proc(self: ^ISteamFriends) -> EPersonaState ---
-	ISteamFriends_GetFriendCount :: proc(self: ^ISteamFriends, iFriendFlags: c.int) -> c.int ---
-	ISteamFriends_GetFriendByIndex :: proc(self: ^ISteamFriends, iFriend: c.int, iFriendFlags: c.int) -> CSteamID ---
-	ISteamFriends_GetFriendRelationship :: proc(self: ^ISteamFriends, steamIDFriend: CSteamID) -> EFriendRelationship ---
-	ISteamFriends_GetFriendPersonaState :: proc(self: ^ISteamFriends, steamIDFriend: CSteamID) -> EPersonaState ---
-	ISteamFriends_GetFriendPersonaName :: proc(self: ^ISteamFriends, steamIDFriend: CSteamID) -> cstring ---
-	ISteamFriends_GetFriendGamePlayed :: proc(self: ^ISteamFriends, steamIDFriend: CSteamID, pFriendGameInfo: ^FriendGameInfo_t) -> bool ---
-	ISteamFriends_GetFriendPersonaNameHistory :: proc(self: ^ISteamFriends, steamIDFriend: CSteamID, iPersonaName: c.int) -> cstring ---
-	ISteamFriends_GetFriendSteamLevel :: proc(self: ^ISteamFriends, steamIDFriend: CSteamID) -> c.int ---
-	ISteamFriends_GetPlayerNickname :: proc(self: ^ISteamFriends, steamIDPlayer: CSteamID) -> cstring ---
-	ISteamFriends_GetFriendsGroupCount :: proc(self: ^ISteamFriends) -> c.int ---
-	ISteamFriends_GetFriendsGroupIDByIndex :: proc(self: ^ISteamFriends, iFG: c.int) -> FriendsGroupID_t ---
-	ISteamFriends_GetFriendsGroupName :: proc(self: ^ISteamFriends, friendsGroupID: FriendsGroupID_t) -> cstring ---
-	ISteamFriends_GetFriendsGroupMembersCount :: proc(self: ^ISteamFriends, friendsGroupID: FriendsGroupID_t) -> c.int ---
-	ISteamFriends_GetFriendsGroupMembersList :: proc(self: ^ISteamFriends, friendsGroupID: FriendsGroupID_t, pOutSteamIDMembers: ^CSteamID, nMembersCount: c.int) ---
-	ISteamFriends_HasFriend :: proc(self: ^ISteamFriends, steamIDFriend: CSteamID, iFriendFlags: c.int) -> bool ---
-	ISteamFriends_GetClanCount :: proc(self: ^ISteamFriends) -> c.int ---
-	ISteamFriends_GetClanByIndex :: proc(self: ^ISteamFriends, iClan: c.int) -> CSteamID ---
-	ISteamFriends_GetClanName :: proc(self: ^ISteamFriends, steamIDClan: CSteamID) -> cstring ---
-	ISteamFriends_GetClanTag :: proc(self: ^ISteamFriends, steamIDClan: CSteamID) -> cstring ---
-	ISteamFriends_GetClanActivityCounts :: proc(self: ^ISteamFriends, steamIDClan: CSteamID, pnOnline: ^int, pnInGame: ^int, pnChatting: ^int) -> bool ---
-	ISteamFriends_DownloadClanActivityCounts :: proc(self: ^ISteamFriends, psteamIDClans: ^CSteamID, cClansToRequest: c.int) -> SteamAPICall_t ---
-	ISteamFriends_GetFriendCountFromSource :: proc(self: ^ISteamFriends, steamIDSource: CSteamID) -> c.int ---
-	ISteamFriends_GetFriendFromSourceByIndex :: proc(self: ^ISteamFriends, steamIDSource: CSteamID, iFriend: c.int) -> CSteamID ---
-	ISteamFriends_IsUserInSource :: proc(self: ^ISteamFriends, steamIDUser: CSteamID, steamIDSource: CSteamID) -> bool ---
-	ISteamFriends_SetInGameVoiceSpeaking :: proc(self: ^ISteamFriends, steamIDUser: CSteamID, bSpeaking: bool) ---
-	ISteamFriends_ActivateGameOverlay :: proc(self: ^ISteamFriends, pchDialog: cstring) ---
-	ISteamFriends_ActivateGameOverlayToUser :: proc(self: ^ISteamFriends, pchDialog: cstring, steamID: CSteamID) ---
-	ISteamFriends_ActivateGameOverlayToWebPage :: proc(self: ^ISteamFriends, pchURL: cstring, eMode: EActivateGameOverlayToWebPageMode) ---
-	ISteamFriends_ActivateGameOverlayToStore :: proc(self: ^ISteamFriends, nAppID: AppId_t, eFlag: EOverlayToStoreFlag) ---
-	ISteamFriends_SetPlayedWith :: proc(self: ^ISteamFriends, steamIDUserPlayedWith: CSteamID) ---
-	ISteamFriends_ActivateGameOverlayInviteDialog :: proc(self: ^ISteamFriends, steamIDLobby: CSteamID) ---
-	ISteamFriends_GetSmallFriendAvatar :: proc(self: ^ISteamFriends, steamIDFriend: CSteamID) -> c.int ---
-	ISteamFriends_GetMediumFriendAvatar :: proc(self: ^ISteamFriends, steamIDFriend: CSteamID) -> c.int ---
-	ISteamFriends_GetLargeFriendAvatar :: proc(self: ^ISteamFriends, steamIDFriend: CSteamID) -> c.int ---
-	ISteamFriends_RequestUserInformation :: proc(self: ^ISteamFriends, steamIDUser: CSteamID, bRequireNameOnly: bool) -> bool ---
-	ISteamFriends_RequestClanOfficerList :: proc(self: ^ISteamFriends, steamIDClan: CSteamID) -> SteamAPICall_t ---
-	ISteamFriends_GetClanOwner :: proc(self: ^ISteamFriends, steamIDClan: CSteamID) -> CSteamID ---
-	ISteamFriends_GetClanOfficerCount :: proc(self: ^ISteamFriends, steamIDClan: CSteamID) -> c.int ---
-	ISteamFriends_GetClanOfficerByIndex :: proc(self: ^ISteamFriends, steamIDClan: CSteamID, iOfficer: c.int) -> CSteamID ---
-	ISteamFriends_GetUserRestrictions :: proc(self: ^ISteamFriends) -> uint32 ---
-	ISteamFriends_SetRichPresence :: proc(self: ^ISteamFriends, pchKey: cstring, pchValue: cstring) -> bool ---
-	ISteamFriends_ClearRichPresence :: proc(self: ^ISteamFriends) ---
-	ISteamFriends_GetFriendRichPresence :: proc(self: ^ISteamFriends, steamIDFriend: CSteamID, pchKey: cstring) -> cstring ---
-	ISteamFriends_GetFriendRichPresenceKeyCount :: proc(self: ^ISteamFriends, steamIDFriend: CSteamID) -> c.int ---
-	ISteamFriends_GetFriendRichPresenceKeyByIndex :: proc(self: ^ISteamFriends, steamIDFriend: CSteamID, iKey: c.int) -> cstring ---
-	ISteamFriends_RequestFriendRichPresence :: proc(self: ^ISteamFriends, steamIDFriend: CSteamID) ---
-	ISteamFriends_InviteUserToGame :: proc(self: ^ISteamFriends, steamIDFriend: CSteamID, pchConnectString: cstring) -> bool ---
-	ISteamFriends_GetCoplayFriendCount :: proc(self: ^ISteamFriends) -> c.int ---
-	ISteamFriends_GetCoplayFriend :: proc(self: ^ISteamFriends, iCoplayFriend: c.int) -> CSteamID ---
-	ISteamFriends_GetFriendCoplayTime :: proc(self: ^ISteamFriends, steamIDFriend: CSteamID) -> c.int ---
-	ISteamFriends_GetFriendCoplayGame :: proc(self: ^ISteamFriends, steamIDFriend: CSteamID) -> AppId_t ---
-	ISteamFriends_JoinClanChatRoom :: proc(self: ^ISteamFriends, steamIDClan: CSteamID) -> SteamAPICall_t ---
-	ISteamFriends_LeaveClanChatRoom :: proc(self: ^ISteamFriends, steamIDClan: CSteamID) -> bool ---
-	ISteamFriends_GetClanChatMemberCount :: proc(self: ^ISteamFriends, steamIDClan: CSteamID) -> c.int ---
-	ISteamFriends_GetChatMemberByIndex :: proc(self: ^ISteamFriends, steamIDClan: CSteamID, iUser: c.int) -> CSteamID ---
-	ISteamFriends_SendClanChatMessage :: proc(self: ^ISteamFriends, steamIDClanChat: CSteamID, pchText: cstring) -> bool ---
-	ISteamFriends_GetClanChatMessage :: proc(self: ^ISteamFriends, steamIDClanChat: CSteamID, iMessage: c.int, prgchText: rawptr, cchTextMax: c.int, peChatEntryType: ^EChatEntryType, psteamidChatter: ^CSteamID) -> c.int ---
-	ISteamFriends_IsClanChatAdmin :: proc(self: ^ISteamFriends, steamIDClanChat: CSteamID, steamIDUser: CSteamID) -> bool ---
-	ISteamFriends_IsClanChatWindowOpenInSteam :: proc(self: ^ISteamFriends, steamIDClanChat: CSteamID) -> bool ---
-	ISteamFriends_OpenClanChatWindowInSteam :: proc(self: ^ISteamFriends, steamIDClanChat: CSteamID) -> bool ---
-	ISteamFriends_CloseClanChatWindowInSteam :: proc(self: ^ISteamFriends, steamIDClanChat: CSteamID) -> bool ---
-	ISteamFriends_SetListenForFriendsMessages :: proc(self: ^ISteamFriends, bInterceptEnabled: bool) -> bool ---
-	ISteamFriends_ReplyToFriendMessage :: proc(self: ^ISteamFriends, steamIDFriend: CSteamID, pchMsgToSend: cstring) -> bool ---
-	ISteamFriends_GetFriendMessage :: proc(self: ^ISteamFriends, steamIDFriend: CSteamID, iMessageID: c.int, pvData: rawptr, cubData: c.int, peChatEntryType: ^EChatEntryType) -> c.int ---
-	ISteamFriends_GetFollowerCount :: proc(self: ^ISteamFriends, steamID: CSteamID) -> SteamAPICall_t ---
-	ISteamFriends_IsFollowing :: proc(self: ^ISteamFriends, steamID: CSteamID) -> SteamAPICall_t ---
-	ISteamFriends_EnumerateFollowingList :: proc(self: ^ISteamFriends, unStartIndex: uint32) -> SteamAPICall_t ---
-	ISteamFriends_IsClanPublic :: proc(self: ^ISteamFriends, steamIDClan: CSteamID) -> bool ---
-	ISteamFriends_IsClanOfficialGameGroup :: proc(self: ^ISteamFriends, steamIDClan: CSteamID) -> bool ---
-	ISteamFriends_GetNumChatsWithUnreadPriorityMessages :: proc(self: ^ISteamFriends) -> c.int ---
-	ISteamFriends_ActivateGameOverlayRemotePlayTogetherInviteDialog :: proc(self: ^ISteamFriends, steamIDLobby: CSteamID) ---
-	ISteamFriends_RegisterProtocolInOverlayBrowser :: proc(self: ^ISteamFriends, pchProtocol: cstring) -> bool ---
-	ISteamFriends_ActivateGameOverlayInviteDialogConnectString :: proc(self: ^ISteamFriends, pchConnectString: cstring) ---
-	ISteamFriends_RequestEquippedProfileItems :: proc(self: ^ISteamFriends, steamID: CSteamID) -> SteamAPICall_t ---
-	ISteamFriends_BHasEquippedProfileItem :: proc(self: ^ISteamFriends, steamID: CSteamID, itemType: ECommunityProfileItemType) -> bool ---
-	ISteamFriends_GetProfileItemPropertyString :: proc(self: ^ISteamFriends, steamID: CSteamID, itemType: ECommunityProfileItemType, prop: ECommunityProfileItemProperty) -> cstring ---
-	ISteamFriends_GetProfileItemPropertyUint :: proc(self: ^ISteamFriends, steamID: CSteamID, itemType: ECommunityProfileItemType, prop: ECommunityProfileItemProperty) -> uint32 ---
-	SteamFriends_v017 :: proc() -> ^ISteamFriends ---
+@(link_prefix = "SteamAPI_ISteam", default_calling_convention = "c")
+foreign lib {
+	Client_CreateSteamPipe :: proc(self: ^IClient) -> HSteamPipe ---
+	Client_BReleaseSteamPipe :: proc(self: ^IClient, hSteamPipe: HSteamPipe) -> bool ---
+	Client_ConnectToGlobalUser :: proc(self: ^IClient, hSteamPipe: HSteamPipe) -> HSteamUser ---
+	Client_CreateLocalUser :: proc(self: ^IClient, phSteamPipe: ^HSteamPipe, eAccountType: EAccountType) -> HSteamUser ---
+	Client_ReleaseUser :: proc(self: ^IClient, hSteamPipe: HSteamPipe, hUser: HSteamUser) ---
+	Client_GetIUser :: proc(self: ^IClient, hSteamUser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^IUser ---
+	Client_GetIGameServer :: proc(self: ^IClient, hSteamUser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^IGameServer ---
+	Client_SetLocalIPBinding :: proc(self: ^IClient, unIP: ^SteamIPAddress_t, usPort: uint16) ---
+	Client_GetIFriends :: proc(self: ^IClient, hSteamUser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^IFriends ---
+	Client_GetIUtils :: proc(self: ^IClient, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^IUtils ---
+	Client_GetIMatchmaking :: proc(self: ^IClient, hSteamUser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^IMatchmaking ---
+	Client_GetIMatchmakingServers :: proc(self: ^IClient, hSteamUser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^IMatchmakingServers ---
+	Client_GetIGenericInterface :: proc(self: ^IClient, hSteamUser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> rawptr ---
+	Client_GetIUserStats :: proc(self: ^IClient, hSteamUser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^IUserStats ---
+	Client_GetIGameServerStats :: proc(self: ^IClient, hSteamuser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^IGameServerStats ---
+	Client_GetIApps :: proc(self: ^IClient, hSteamUser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^IApps ---
+	Client_GetINetworking :: proc(self: ^IClient, hSteamUser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^INetworking ---
+	Client_GetIRemoteStorage :: proc(self: ^IClient, hSteamuser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^IRemoteStorage ---
+	Client_GetIScreenshots :: proc(self: ^IClient, hSteamuser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^IScreenshots ---
+	Client_GetIGameSearch :: proc(self: ^IClient, hSteamuser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^IGameSearch ---
+	Client_GetIPCCallCount :: proc(self: ^IClient) -> uint32 ---
+	Client_SetWarningMessageHook :: proc(self: ^IClient, pFunction: SteamAPIWarningMessageHook_t) ---
+	Client_BShutdownIfAllPipesClosed :: proc(self: ^IClient) -> bool ---
+	Client_GetIHTTP :: proc(self: ^IClient, hSteamuser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^IHTTP ---
+	Client_GetIController :: proc(self: ^IClient, hSteamUser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^IController ---
+	Client_GetIUGC :: proc(self: ^IClient, hSteamUser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^IUGC ---
+	Client_GetIAppList :: proc(self: ^IClient, hSteamUser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^IAppList ---
+	Client_GetIMusic :: proc(self: ^IClient, hSteamuser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^IMusic ---
+	Client_GetIMusicRemote :: proc(self: ^IClient, hSteamuser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^IMusicRemote ---
+	Client_GetIHTMLSurface :: proc(self: ^IClient, hSteamuser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^IHTMLSurface ---
+	Client_GetIInventory :: proc(self: ^IClient, hSteamuser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^IInventory ---
+	Client_GetIVideo :: proc(self: ^IClient, hSteamuser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^IVideo ---
+	Client_GetIParentalSettings :: proc(self: ^IClient, hSteamuser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^IParentalSettings ---
+	Client_GetIInput :: proc(self: ^IClient, hSteamUser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^IInput ---
+	Client_GetIParties :: proc(self: ^IClient, hSteamUser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^IParties ---
+	Client_GetIRemotePlay :: proc(self: ^IClient, hSteamUser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^IRemotePlay ---
 
-	ISteamUtils_GetSecondsSinceAppActive :: proc(self: ^ISteamUtils) -> uint32 ---
-	ISteamUtils_GetSecondsSinceComputerActive :: proc(self: ^ISteamUtils) -> uint32 ---
-	ISteamUtils_GetConnectedUniverse :: proc(self: ^ISteamUtils) -> EUniverse ---
-	ISteamUtils_GetServerRealTime :: proc(self: ^ISteamUtils) -> uint32 ---
-	ISteamUtils_GetIPCountry :: proc(self: ^ISteamUtils) -> cstring ---
-	ISteamUtils_GetImageSize :: proc(self: ^ISteamUtils, iImage: c.int, pnWidth: ^uint32, pnHeight: ^uint32) -> bool ---
-	ISteamUtils_GetImageRGBA :: proc(self: ^ISteamUtils, iImage: c.int, pubDest: ^uint8, nDestBufferSize: c.int) -> bool ---
-	ISteamUtils_GetCurrentBatteryPower :: proc(self: ^ISteamUtils) -> uint8 ---
-	ISteamUtils_GetAppID :: proc(self: ^ISteamUtils) -> uint32 ---
-	ISteamUtils_SetOverlayNotificationPosition :: proc(self: ^ISteamUtils, eNotificationPosition: ENotificationPosition) ---
-	ISteamUtils_IsAPICallCompleted :: proc(self: ^ISteamUtils, hSteamAPICall: SteamAPICall_t, pbFailed: ^bool) -> bool ---
-	ISteamUtils_GetAPICallFailureReason :: proc(self: ^ISteamUtils, hSteamAPICall: SteamAPICall_t) -> ESteamAPICallFailure ---
-	ISteamUtils_GetAPICallResult :: proc(self: ^ISteamUtils, hSteamAPICall: SteamAPICall_t, pCallback: rawptr, cubCallback: c.int, iCallbackExpected: c.int, pbFailed: ^bool) -> bool ---
-	ISteamUtils_GetIPCCallCount :: proc(self: ^ISteamUtils) -> uint32 ---
-	ISteamUtils_SetWarningMessageHook :: proc(self: ^ISteamUtils, pFunction: SteamAPIWarningMessageHook_t) ---
-	ISteamUtils_IsOverlayEnabled :: proc(self: ^ISteamUtils) -> bool ---
-	ISteamUtils_BOverlayNeedsPresent :: proc(self: ^ISteamUtils) -> bool ---
-	ISteamUtils_CheckFileSignature :: proc(self: ^ISteamUtils, szFileName: cstring) -> SteamAPICall_t ---
-	ISteamUtils_ShowGamepadTextInput :: proc(self: ^ISteamUtils, eInputMode: EGamepadTextInputMode, eLineInputMode: EGamepadTextInputLineMode, pchDescription: cstring, unCharMax: uint32, pchExistingText: cstring) -> bool ---
-	ISteamUtils_GetEnteredGamepadTextLength :: proc(self: ^ISteamUtils) -> uint32 ---
-	ISteamUtils_GetEnteredGamepadTextInput :: proc(self: ^ISteamUtils, pchText: u8, cchText: uint32) -> bool ---
-	ISteamUtils_GetSteamUILanguage :: proc(self: ^ISteamUtils) -> cstring ---
-	ISteamUtils_IsSteamRunningInVR :: proc(self: ^ISteamUtils) -> bool ---
-	ISteamUtils_SetOverlayNotificationInset :: proc(self: ^ISteamUtils, nHorizontalInset: c.int, nVerticalInset: c.int) ---
-	ISteamUtils_IsSteamInBigPictureMode :: proc(self: ^ISteamUtils) -> bool ---
-	ISteamUtils_StartVRDashboard :: proc(self: ^ISteamUtils) ---
-	ISteamUtils_IsVRHeadsetStreamingEnabled :: proc(self: ^ISteamUtils) -> bool ---
-	ISteamUtils_SetVRHeadsetStreamingEnabled :: proc(self: ^ISteamUtils, bEnabled: bool) ---
-	ISteamUtils_IsSteamChinaLauncher :: proc(self: ^ISteamUtils) -> bool ---
-	ISteamUtils_InitFilterText :: proc(self: ^ISteamUtils, unFilterOptions: uint32) -> bool ---
-	ISteamUtils_FilterText :: proc(self: ^ISteamUtils, eContext: ETextFilteringContext, sourceSteamID: CSteamID, pchInputMessage: cstring, pchOutFilteredText: ^u8, nByteSizeOutFilteredText: uint32) -> c.int ---
-	ISteamUtils_GetIPv6ConnectivityState :: proc(self: ^ISteamUtils, eProtocol: ESteamIPv6ConnectivityProtocol) -> ESteamIPv6ConnectivityState ---
-	ISteamUtils_IsSteamRunningOnSteamDeck :: proc(self: ^ISteamUtils) -> bool ---
-	ISteamUtils_Showf32ingGamepadTextInput :: proc(self: ^ISteamUtils, eKeyboardMode: Ef32ingGamepadTextInputMode, nTextFieldXPosition: c.int, nTextFieldYPosition: c.int, nTextFieldWidth: c.int, nTextFieldHeight: c.int) -> bool ---
-	ISteamUtils_SetGameLauncherMode :: proc(self: ^ISteamUtils, bLauncherMode: bool) ---
-	ISteamUtils_Dismissf32ingGamepadTextInput :: proc(self: ^ISteamUtils) -> bool ---
-	SteamUtils_v010 :: proc() -> ^ISteamUtils ---
+	User_GetHSteamUser :: proc(self: ^IUser) -> HSteamUser ---
+	User_BLoggedOn :: proc(self: ^IUser) -> bool ---
+	User_GetSteamID :: proc(self: ^IUser) -> CSteamID ---
+	User_InitiateGameConnection_DEPRECATED :: proc(self: ^IUser, pAuthBlob: rawptr, cbMaxAuthBlob: c.int, steamIDGameServer: CSteamID, unIPServer: uint32, usPortServer: uint16, bSecure: bool) -> c.int ---
+	User_TerminateGameConnection_DEPRECATED :: proc(self: ^IUser, unIPServer: uint32, usPortServer: uint16) ---
+	User_TrackAppUsageEvent :: proc(self: ^IUser, gameID: CGameID, eAppUsageEvent: c.int, pchExtraInfo: cstring) ---
+	User_GetUserDataFolder :: proc(self: ^IUser, pchBuffer: ^u8, cubBuffer: c.int) -> bool ---
+	User_StartVoiceRecording :: proc(self: ^IUser) ---
+	User_StopVoiceRecording :: proc(self: ^IUser) ---
+	User_GetAvailableVoice :: proc(self: ^IUser, pcbCompressed: ^uint32, pcbUncompressed_Deprecated: ^uint32, nUncompressedVoiceDesiredSampleRate_Deprecated: uint32) -> EVoiceResult ---
+	User_GetVoice :: proc(self: ^IUser, bWantCompressed: bool, pDestBuffer: rawptr, cbDestBufferSize: uint32, nBytesWritten: ^uint32, bWantUncompressed_Deprecated: bool, pUncompressedDestBuffer_Deprecated: rawptr, cbUncompressedDestBufferSize_Deprecated: uint32, nUncompressBytesWritten_Deprecated: ^uint32, nUncompressedVoiceDesiredSampleRate_Deprecated: uint32) -> EVoiceResult ---
+	User_DecompressVoice :: proc(self: ^IUser, pCompressed: rawptr, cbCompressed: uint32, pDestBuffer: rawptr, cbDestBufferSize: uint32, nBytesWritten: ^uint32, nDesiredSampleRate: uint32) -> EVoiceResult ---
+	User_GetVoiceOptimalSampleRate :: proc(self: ^IUser) -> uint32 ---
+	User_GetAuthSessionTicket :: proc(self: ^IUser, pTicket: rawptr, cbMaxTicket: c.int, pcbTicket: ^uint32) -> HAuthTicket ---
+	User_BeginAuthSession :: proc(self: ^IUser, pAuthTicket: rawptr, cbAuthTicket: c.int, steamID: CSteamID) -> EBeginAuthSessionResult ---
+	User_EndAuthSession :: proc(self: ^IUser, steamID: CSteamID) ---
+	User_CancelAuthTicket :: proc(self: ^IUser, hAuthTicket: HAuthTicket) ---
+	User_UserHasLicenseForApp :: proc(self: ^IUser, steamID: CSteamID, appID: AppId_t) -> EUserHasLicenseForAppResult ---
+	User_BIsBehindNAT :: proc(self: ^IUser) -> bool ---
+	User_AdvertiseGame :: proc(self: ^IUser, steamIDGameServer: CSteamID, unIPServer: uint32, usPortServer: uint16) ---
+	User_RequestEncryptedAppTicket :: proc(self: ^IUser, pDataToInclude: rawptr, cbDataToInclude: c.int) -> SteamAPICall_t ---
+	User_GetEncryptedAppTicket :: proc(self: ^IUser, pTicket: rawptr, cbMaxTicket: c.int, pcbTicket: ^uint32) -> bool ---
+	User_GetGameBadgeLevel :: proc(self: ^IUser, nSeries: c.int, bFoil: bool) -> c.int ---
+	User_GetPlayerSteamLevel :: proc(self: ^IUser) -> c.int ---
+	User_RequestStoreAuthURL :: proc(self: ^IUser, pchRedirectURL: cstring) -> SteamAPICall_t ---
+	User_BIsPhoneVerified :: proc(self: ^IUser) -> bool ---
+	User_BIsTwoFactorEnabled :: proc(self: ^IUser) -> bool ---
+	User_BIsPhoneIdentifying :: proc(self: ^IUser) -> bool ---
+	User_BIsPhoneRequiringVerification :: proc(self: ^IUser) -> bool ---
+	User_GetMarketEligibility :: proc(self: ^IUser) -> SteamAPICall_t ---
+	User_GetDurationControl :: proc(self: ^IUser) -> SteamAPICall_t ---
+	User_BSetDurationControlOnlineState :: proc(self: ^IUser, eNewState: EDurationControlOnlineState) -> bool ---
 
-	ISteamMatchmaking_GetFavoriteGameCount :: proc(self: ^ISteamMatchmaking) -> c.int ---
-	ISteamMatchmaking_GetFavoriteGame :: proc(self: ^ISteamMatchmaking, iGame: c.int, pnAppID: ^AppId_t, pnIP: ^uint32, pnConnPort: ^uint16, pnQueryPort: ^uint16, punFlags: ^uint32, pRTime32LastPlayedOnServer: ^uint32) -> bool ---
-	ISteamMatchmaking_AddFavoriteGame :: proc(self: ^ISteamMatchmaking, nAppID: AppId_t, nIP: uint32, nConnPort: uint16, nQueryPort: uint16, unFlags: uint32, rTime32LastPlayedOnServer: uint32) -> c.int ---
-	ISteamMatchmaking_RemoveFavoriteGame :: proc(self: ^ISteamMatchmaking, nAppID: AppId_t, nIP: uint32, nConnPort: uint16, nQueryPort: uint16, unFlags: uint32) -> bool ---
-	ISteamMatchmaking_RequestLobbyList :: proc(self: ^ISteamMatchmaking) -> SteamAPICall_t ---
-	ISteamMatchmaking_AddRequestLobbyListStringFilter :: proc(self: ^ISteamMatchmaking, pchKeyToMatch: cstring, pchValueToMatch: cstring, eComparisonType: ELobbyComparison) ---
-	ISteamMatchmaking_AddRequestLobbyListNumericalFilter :: proc(self: ^ISteamMatchmaking, pchKeyToMatch: cstring, nValueToMatch: c.int, eComparisonType: ELobbyComparison) ---
-	ISteamMatchmaking_AddRequestLobbyListNearValueFilter :: proc(self: ^ISteamMatchmaking, pchKeyToMatch: cstring, nValueToBeCloseTo: c.int) ---
-	ISteamMatchmaking_AddRequestLobbyListFilterSlotsAvailable :: proc(self: ^ISteamMatchmaking, nSlotsAvailable: c.int) ---
-	ISteamMatchmaking_AddRequestLobbyListDistanceFilter :: proc(self: ^ISteamMatchmaking, eLobbyDistanceFilter: ELobbyDistanceFilter) ---
-	ISteamMatchmaking_AddRequestLobbyListResultCountFilter :: proc(self: ^ISteamMatchmaking, cMaxResults: c.int) ---
-	ISteamMatchmaking_AddRequestLobbyListCompatibleMembersFilter :: proc(self: ^ISteamMatchmaking, steamIDLobby: CSteamID) ---
-	ISteamMatchmaking_GetLobbyByIndex :: proc(self: ^ISteamMatchmaking, iLobby: c.int) -> CSteamID ---
-	ISteamMatchmaking_CreateLobby :: proc(self: ^ISteamMatchmaking, eLobbyType: ELobbyType, cMaxMembers: c.int) -> SteamAPICall_t ---
-	ISteamMatchmaking_JoinLobby :: proc(self: ^ISteamMatchmaking, steamIDLobby: CSteamID) -> SteamAPICall_t ---
-	ISteamMatchmaking_LeaveLobby :: proc(self: ^ISteamMatchmaking, steamIDLobby: CSteamID) ---
-	ISteamMatchmaking_InviteUserToLobby :: proc(self: ^ISteamMatchmaking, steamIDLobby: CSteamID, steamIDInvitee: CSteamID) -> bool ---
-	ISteamMatchmaking_GetNumLobbyMembers :: proc(self: ^ISteamMatchmaking, steamIDLobby: CSteamID) -> c.int ---
-	ISteamMatchmaking_GetLobbyMemberByIndex :: proc(self: ^ISteamMatchmaking, steamIDLobby: CSteamID, iMember: c.int) -> CSteamID ---
-	ISteamMatchmaking_GetLobbyData :: proc(self: ^ISteamMatchmaking, steamIDLobby: CSteamID, pchKey: cstring) -> cstring ---
-	ISteamMatchmaking_SetLobbyData :: proc(self: ^ISteamMatchmaking, steamIDLobby: CSteamID, pchKey: cstring, pchValue: cstring) -> bool ---
-	ISteamMatchmaking_GetLobbyDataCount :: proc(self: ^ISteamMatchmaking, steamIDLobby: CSteamID) -> c.int ---
-	ISteamMatchmaking_GetLobbyDataByIndex :: proc(self: ^ISteamMatchmaking, steamIDLobby: CSteamID, iLobbyData: c.int, pchKey: ^u8, cchKeyBufferSize: c.int, pchValue: ^u8, cchValueBufferSize: c.int) -> bool ---
-	ISteamMatchmaking_DeleteLobbyData :: proc(self: ^ISteamMatchmaking, steamIDLobby: CSteamID, pchKey: cstring) -> bool ---
-	ISteamMatchmaking_GetLobbyMemberData :: proc(self: ^ISteamMatchmaking, steamIDLobby: CSteamID, steamIDUser: CSteamID, pchKey: cstring) -> cstring ---
-	ISteamMatchmaking_SetLobbyMemberData :: proc(self: ^ISteamMatchmaking, steamIDLobby: CSteamID, pchKey: cstring, pchValue: cstring) ---
-	ISteamMatchmaking_SendLobbyChatMsg :: proc(self: ^ISteamMatchmaking, steamIDLobby: CSteamID, pvMsgBody: rawptr, cubMsgBody: c.int) -> bool ---
-	ISteamMatchmaking_GetLobbyChatEntry :: proc(self: ^ISteamMatchmaking, steamIDLobby: CSteamID, iChatID: c.int, pSteamIDUser: ^CSteamID, pvData: rawptr, cubData: c.int, peChatEntryType: ^EChatEntryType) -> c.int ---
-	ISteamMatchmaking_RequestLobbyData :: proc(self: ^ISteamMatchmaking, steamIDLobby: CSteamID) -> bool ---
-	ISteamMatchmaking_SetLobbyGameServer :: proc(self: ^ISteamMatchmaking, steamIDLobby: CSteamID, unGameServerIP: uint32, unGameServerPort: uint16, steamIDGameServer: CSteamID) ---
-	ISteamMatchmaking_GetLobbyGameServer :: proc(self: ^ISteamMatchmaking, steamIDLobby: CSteamID, punGameServerIP: ^uint32, punGameServerPort: ^uint16, psteamIDGameServer: ^CSteamID) -> bool ---
-	ISteamMatchmaking_SetLobbyMemberLimit :: proc(self: ^ISteamMatchmaking, steamIDLobby: CSteamID, cMaxMembers: c.int) -> bool ---
-	ISteamMatchmaking_GetLobbyMemberLimit :: proc(self: ^ISteamMatchmaking, steamIDLobby: CSteamID) -> c.int ---
-	ISteamMatchmaking_SetLobbyType :: proc(self: ^ISteamMatchmaking, steamIDLobby: CSteamID, eLobbyType: ELobbyType) -> bool ---
-	ISteamMatchmaking_SetLobbyJoinable :: proc(self: ^ISteamMatchmaking, steamIDLobby: CSteamID, bLobbyJoinable: bool) -> bool ---
-	ISteamMatchmaking_GetLobbyOwner :: proc(self: ^ISteamMatchmaking, steamIDLobby: CSteamID) -> CSteamID ---
-	ISteamMatchmaking_SetLobbyOwner :: proc(self: ^ISteamMatchmaking, steamIDLobby: CSteamID, steamIDNewOwner: CSteamID) -> bool ---
-	ISteamMatchmaking_SetLinkedLobby :: proc(self: ^ISteamMatchmaking, steamIDLobby: CSteamID, steamIDLobbyDependent: CSteamID) -> bool ---
-	SteamMatchmaking_v009 :: proc() -> ^ISteamMatchmaking ---
+	Friends_GetPersonaName :: proc(self: ^IFriends) -> cstring ---
+	Friends_SetPersonaName :: proc(self: ^IFriends, pchPersonaName: cstring) -> SteamAPICall_t ---
+	Friends_GetPersonaState :: proc(self: ^IFriends) -> EPersonaState ---
+	Friends_GetFriendCount :: proc(self: ^IFriends, iFriendFlags: c.int) -> c.int ---
+	Friends_GetFriendByIndex :: proc(self: ^IFriends, iFriend: c.int, iFriendFlags: c.int) -> CSteamID ---
+	Friends_GetFriendRelationship :: proc(self: ^IFriends, steamIDFriend: CSteamID) -> EFriendRelationship ---
+	Friends_GetFriendPersonaState :: proc(self: ^IFriends, steamIDFriend: CSteamID) -> EPersonaState ---
+	Friends_GetFriendPersonaName :: proc(self: ^IFriends, steamIDFriend: CSteamID) -> cstring ---
+	Friends_GetFriendGamePlayed :: proc(self: ^IFriends, steamIDFriend: CSteamID, pFriendGameInfo: ^FriendGameInfo_t) -> bool ---
+	Friends_GetFriendPersonaNameHistory :: proc(self: ^IFriends, steamIDFriend: CSteamID, iPersonaName: c.int) -> cstring ---
+	Friends_GetFriendSteamLevel :: proc(self: ^IFriends, steamIDFriend: CSteamID) -> c.int ---
+	Friends_GetPlayerNickname :: proc(self: ^IFriends, steamIDPlayer: CSteamID) -> cstring ---
+	Friends_GetFriendsGroupCount :: proc(self: ^IFriends) -> c.int ---
+	Friends_GetFriendsGroupIDByIndex :: proc(self: ^IFriends, iFG: c.int) -> FriendsGroupID_t ---
+	Friends_GetFriendsGroupName :: proc(self: ^IFriends, friendsGroupID: FriendsGroupID_t) -> cstring ---
+	Friends_GetFriendsGroupMembersCount :: proc(self: ^IFriends, friendsGroupID: FriendsGroupID_t) -> c.int ---
+	Friends_GetFriendsGroupMembersList :: proc(self: ^IFriends, friendsGroupID: FriendsGroupID_t, pOutSteamIDMembers: ^CSteamID, nMembersCount: c.int) ---
+	Friends_HasFriend :: proc(self: ^IFriends, steamIDFriend: CSteamID, iFriendFlags: c.int) -> bool ---
+	Friends_GetClanCount :: proc(self: ^IFriends) -> c.int ---
+	Friends_GetClanByIndex :: proc(self: ^IFriends, iClan: c.int) -> CSteamID ---
+	Friends_GetClanName :: proc(self: ^IFriends, steamIDClan: CSteamID) -> cstring ---
+	Friends_GetClanTag :: proc(self: ^IFriends, steamIDClan: CSteamID) -> cstring ---
+	Friends_GetClanActivityCounts :: proc(self: ^IFriends, steamIDClan: CSteamID, pnOnline: ^int, pnInGame: ^int, pnChatting: ^int) -> bool ---
+	Friends_DownloadClanActivityCounts :: proc(self: ^IFriends, psteamIDClans: ^CSteamID, cClansToRequest: c.int) -> SteamAPICall_t ---
+	Friends_GetFriendCountFromSource :: proc(self: ^IFriends, steamIDSource: CSteamID) -> c.int ---
+	Friends_GetFriendFromSourceByIndex :: proc(self: ^IFriends, steamIDSource: CSteamID, iFriend: c.int) -> CSteamID ---
+	Friends_IsUserInSource :: proc(self: ^IFriends, steamIDUser: CSteamID, steamIDSource: CSteamID) -> bool ---
+	Friends_SetInGameVoiceSpeaking :: proc(self: ^IFriends, steamIDUser: CSteamID, bSpeaking: bool) ---
+	Friends_ActivateGameOverlay :: proc(self: ^IFriends, pchDialog: cstring) ---
+	Friends_ActivateGameOverlayToUser :: proc(self: ^IFriends, pchDialog: cstring, steamID: CSteamID) ---
+	Friends_ActivateGameOverlayToWebPage :: proc(self: ^IFriends, pchURL: cstring, eMode: EActivateGameOverlayToWebPageMode) ---
+	Friends_ActivateGameOverlayToStore :: proc(self: ^IFriends, nAppID: AppId_t, eFlag: EOverlayToStoreFlag) ---
+	Friends_SetPlayedWith :: proc(self: ^IFriends, steamIDUserPlayedWith: CSteamID) ---
+	Friends_ActivateGameOverlayInviteDialog :: proc(self: ^IFriends, steamIDLobby: CSteamID) ---
+	Friends_GetSmallFriendAvatar :: proc(self: ^IFriends, steamIDFriend: CSteamID) -> c.int ---
+	Friends_GetMediumFriendAvatar :: proc(self: ^IFriends, steamIDFriend: CSteamID) -> c.int ---
+	Friends_GetLargeFriendAvatar :: proc(self: ^IFriends, steamIDFriend: CSteamID) -> c.int ---
+	Friends_RequestUserInformation :: proc(self: ^IFriends, steamIDUser: CSteamID, bRequireNameOnly: bool) -> bool ---
+	Friends_RequestClanOfficerList :: proc(self: ^IFriends, steamIDClan: CSteamID) -> SteamAPICall_t ---
+	Friends_GetClanOwner :: proc(self: ^IFriends, steamIDClan: CSteamID) -> CSteamID ---
+	Friends_GetClanOfficerCount :: proc(self: ^IFriends, steamIDClan: CSteamID) -> c.int ---
+	Friends_GetClanOfficerByIndex :: proc(self: ^IFriends, steamIDClan: CSteamID, iOfficer: c.int) -> CSteamID ---
+	Friends_GetUserRestrictions :: proc(self: ^IFriends) -> uint32 ---
+	Friends_SetRichPresence :: proc(self: ^IFriends, pchKey: cstring, pchValue: cstring) -> bool ---
+	Friends_ClearRichPresence :: proc(self: ^IFriends) ---
+	Friends_GetFriendRichPresence :: proc(self: ^IFriends, steamIDFriend: CSteamID, pchKey: cstring) -> cstring ---
+	Friends_GetFriendRichPresenceKeyCount :: proc(self: ^IFriends, steamIDFriend: CSteamID) -> c.int ---
+	Friends_GetFriendRichPresenceKeyByIndex :: proc(self: ^IFriends, steamIDFriend: CSteamID, iKey: c.int) -> cstring ---
+	Friends_RequestFriendRichPresence :: proc(self: ^IFriends, steamIDFriend: CSteamID) ---
+	Friends_InviteUserToGame :: proc(self: ^IFriends, steamIDFriend: CSteamID, pchConnectString: cstring) -> bool ---
+	Friends_GetCoplayFriendCount :: proc(self: ^IFriends) -> c.int ---
+	Friends_GetCoplayFriend :: proc(self: ^IFriends, iCoplayFriend: c.int) -> CSteamID ---
+	Friends_GetFriendCoplayTime :: proc(self: ^IFriends, steamIDFriend: CSteamID) -> c.int ---
+	Friends_GetFriendCoplayGame :: proc(self: ^IFriends, steamIDFriend: CSteamID) -> AppId_t ---
+	Friends_JoinClanChatRoom :: proc(self: ^IFriends, steamIDClan: CSteamID) -> SteamAPICall_t ---
+	Friends_LeaveClanChatRoom :: proc(self: ^IFriends, steamIDClan: CSteamID) -> bool ---
+	Friends_GetClanChatMemberCount :: proc(self: ^IFriends, steamIDClan: CSteamID) -> c.int ---
+	Friends_GetChatMemberByIndex :: proc(self: ^IFriends, steamIDClan: CSteamID, iUser: c.int) -> CSteamID ---
+	Friends_SendClanChatMessage :: proc(self: ^IFriends, steamIDClanChat: CSteamID, pchText: cstring) -> bool ---
+	Friends_GetClanChatMessage :: proc(self: ^IFriends, steamIDClanChat: CSteamID, iMessage: c.int, prgchText: rawptr, cchTextMax: c.int, peChatEntryType: ^EChatEntryType, psteamidChatter: ^CSteamID) -> c.int ---
+	Friends_IsClanChatAdmin :: proc(self: ^IFriends, steamIDClanChat: CSteamID, steamIDUser: CSteamID) -> bool ---
+	Friends_IsClanChatWindowOpenInSteam :: proc(self: ^IFriends, steamIDClanChat: CSteamID) -> bool ---
+	Friends_OpenClanChatWindowInSteam :: proc(self: ^IFriends, steamIDClanChat: CSteamID) -> bool ---
+	Friends_CloseClanChatWindowInSteam :: proc(self: ^IFriends, steamIDClanChat: CSteamID) -> bool ---
+	Friends_SetListenForFriendsMessages :: proc(self: ^IFriends, bInterceptEnabled: bool) -> bool ---
+	Friends_ReplyToFriendMessage :: proc(self: ^IFriends, steamIDFriend: CSteamID, pchMsgToSend: cstring) -> bool ---
+	Friends_GetFriendMessage :: proc(self: ^IFriends, steamIDFriend: CSteamID, iMessageID: c.int, pvData: rawptr, cubData: c.int, peChatEntryType: ^EChatEntryType) -> c.int ---
+	Friends_GetFollowerCount :: proc(self: ^IFriends, steamID: CSteamID) -> SteamAPICall_t ---
+	Friends_IsFollowing :: proc(self: ^IFriends, steamID: CSteamID) -> SteamAPICall_t ---
+	Friends_EnumerateFollowingList :: proc(self: ^IFriends, unStartIndex: uint32) -> SteamAPICall_t ---
+	Friends_IsClanPublic :: proc(self: ^IFriends, steamIDClan: CSteamID) -> bool ---
+	Friends_IsClanOfficialGameGroup :: proc(self: ^IFriends, steamIDClan: CSteamID) -> bool ---
+	Friends_GetNumChatsWithUnreadPriorityMessages :: proc(self: ^IFriends) -> c.int ---
+	Friends_ActivateGameOverlayRemotePlayTogetherInviteDialog :: proc(self: ^IFriends, steamIDLobby: CSteamID) ---
+	Friends_RegisterProtocolInOverlayBrowser :: proc(self: ^IFriends, pchProtocol: cstring) -> bool ---
+	Friends_ActivateGameOverlayInviteDialogConnectString :: proc(self: ^IFriends, pchConnectString: cstring) ---
+	Friends_RequestEquippedProfileItems :: proc(self: ^IFriends, steamID: CSteamID) -> SteamAPICall_t ---
+	Friends_BHasEquippedProfileItem :: proc(self: ^IFriends, steamID: CSteamID, itemType: ECommunityProfileItemType) -> bool ---
+	Friends_GetProfileItemPropertyString :: proc(self: ^IFriends, steamID: CSteamID, itemType: ECommunityProfileItemType, prop: ECommunityProfileItemProperty) -> cstring ---
+	Friends_GetProfileItemPropertyUint :: proc(self: ^IFriends, steamID: CSteamID, itemType: ECommunityProfileItemType, prop: ECommunityProfileItemProperty) -> uint32 ---
 
-	ISteamMatchmakingServerListResponse_ServerResponded :: proc(self: ^ISteamMatchmakingServerListResponse, hRequest: HServerListRequest, iServer: c.int) ---
-	ISteamMatchmakingServerListResponse_ServerFailedToRespond :: proc(self: ^ISteamMatchmakingServerListResponse, hRequest: HServerListRequest, iServer: c.int) ---
-	ISteamMatchmakingServerListResponse_RefreshComplete :: proc(self: ^ISteamMatchmakingServerListResponse, hRequest: HServerListRequest, response: EMatchMakingServerResponse) ---
+	Utils_GetSecondsSinceAppActive :: proc(self: ^IUtils) -> uint32 ---
+	Utils_GetSecondsSinceComputerActive :: proc(self: ^IUtils) -> uint32 ---
+	Utils_GetConnectedUniverse :: proc(self: ^IUtils) -> EUniverse ---
+	Utils_GetServerRealTime :: proc(self: ^IUtils) -> uint32 ---
+	Utils_GetIPCountry :: proc(self: ^IUtils) -> cstring ---
+	Utils_GetImageSize :: proc(self: ^IUtils, iImage: c.int, pnWidth: ^uint32, pnHeight: ^uint32) -> bool ---
+	Utils_GetImageRGBA :: proc(self: ^IUtils, iImage: c.int, pubDest: ^uint8, nDestBufferSize: c.int) -> bool ---
+	Utils_GetCurrentBatteryPower :: proc(self: ^IUtils) -> uint8 ---
+	Utils_GetAppID :: proc(self: ^IUtils) -> uint32 ---
+	Utils_SetOverlayNotificationPosition :: proc(self: ^IUtils, eNotificationPosition: ENotificationPosition) ---
+	Utils_IsAPICallCompleted :: proc(self: ^IUtils, hSteamAPICall: SteamAPICall_t, pbFailed: ^bool) -> bool ---
+	Utils_GetAPICallFailureReason :: proc(self: ^IUtils, hSteamAPICall: SteamAPICall_t) -> ESteamAPICallFailure ---
+	Utils_GetAPICallResult :: proc(self: ^IUtils, hSteamAPICall: SteamAPICall_t, pCallback: rawptr, cubCallback: c.int, iCallbackExpected: c.int, pbFailed: ^bool) -> bool ---
+	Utils_GetIPCCallCount :: proc(self: ^IUtils) -> uint32 ---
+	Utils_SetWarningMessageHook :: proc(self: ^IUtils, pFunction: SteamAPIWarningMessageHook_t) ---
+	Utils_IsOverlayEnabled :: proc(self: ^IUtils) -> bool ---
+	Utils_BOverlayNeedsPresent :: proc(self: ^IUtils) -> bool ---
+	Utils_CheckFileSignature :: proc(self: ^IUtils, szFileName: cstring) -> SteamAPICall_t ---
+	Utils_ShowGamepadTextInput :: proc(self: ^IUtils, eInputMode: EGamepadTextInputMode, eLineInputMode: EGamepadTextInputLineMode, pchDescription: cstring, unCharMax: uint32, pchExistingText: cstring) -> bool ---
+	Utils_GetEnteredGamepadTextLength :: proc(self: ^IUtils) -> uint32 ---
+	Utils_GetEnteredGamepadTextInput :: proc(self: ^IUtils, pchText: u8, cchText: uint32) -> bool ---
+	Utils_GetSteamUILanguage :: proc(self: ^IUtils) -> cstring ---
+	Utils_IsSteamRunningInVR :: proc(self: ^IUtils) -> bool ---
+	Utils_SetOverlayNotificationInset :: proc(self: ^IUtils, nHorizontalInset: c.int, nVerticalInset: c.int) ---
+	Utils_IsSteamInBigPictureMode :: proc(self: ^IUtils) -> bool ---
+	Utils_StartVRDashboard :: proc(self: ^IUtils) ---
+	Utils_IsVRHeadsetStreamingEnabled :: proc(self: ^IUtils) -> bool ---
+	Utils_SetVRHeadsetStreamingEnabled :: proc(self: ^IUtils, bEnabled: bool) ---
+	Utils_IsSteamChinaLauncher :: proc(self: ^IUtils) -> bool ---
+	Utils_InitFilterText :: proc(self: ^IUtils, unFilterOptions: uint32) -> bool ---
+	Utils_FilterText :: proc(self: ^IUtils, eContext: ETextFilteringContext, sourceSteamID: CSteamID, pchInputMessage: cstring, pchOutFilteredText: ^u8, nByteSizeOutFilteredText: uint32) -> c.int ---
+	Utils_GetIPv6ConnectivityState :: proc(self: ^IUtils, eProtocol: ESteamIPv6ConnectivityProtocol) -> ESteamIPv6ConnectivityState ---
+	Utils_IsSteamRunningOnSteamDeck :: proc(self: ^IUtils) -> bool ---
+	Utils_Showf32ingGamepadTextInput :: proc(self: ^IUtils, eKeyboardMode: Ef32ingGamepadTextInputMode, nTextFieldXPosition: c.int, nTextFieldYPosition: c.int, nTextFieldWidth: c.int, nTextFieldHeight: c.int) -> bool ---
+	Utils_SetGameLauncherMode :: proc(self: ^IUtils, bLauncherMode: bool) ---
+	Utils_Dismissf32ingGamepadTextInput :: proc(self: ^IUtils) -> bool ---
 
-	ISteamMatchmakingPingResponse_ServerResponded :: proc(self: ^ISteamMatchmakingPingResponse, server: ^gameserveritem_t) ---
-	ISteamMatchmakingPingResponse_ServerFailedToRespond :: proc(self: ^ISteamMatchmakingPingResponse) ---
+	Matchmaking_GetFavoriteGameCount :: proc(self: ^IMatchmaking) -> c.int ---
+	Matchmaking_GetFavoriteGame :: proc(self: ^IMatchmaking, iGame: c.int, pnAppID: ^AppId_t, pnIP: ^uint32, pnConnPort: ^uint16, pnQueryPort: ^uint16, punFlags: ^uint32, pRTime32LastPlayedOnServer: ^uint32) -> bool ---
+	Matchmaking_AddFavoriteGame :: proc(self: ^IMatchmaking, nAppID: AppId_t, nIP: uint32, nConnPort: uint16, nQueryPort: uint16, unFlags: uint32, rTime32LastPlayedOnServer: uint32) -> c.int ---
+	Matchmaking_RemoveFavoriteGame :: proc(self: ^IMatchmaking, nAppID: AppId_t, nIP: uint32, nConnPort: uint16, nQueryPort: uint16, unFlags: uint32) -> bool ---
+	Matchmaking_RequestLobbyList :: proc(self: ^IMatchmaking) -> SteamAPICall_t ---
+	Matchmaking_AddRequestLobbyListStringFilter :: proc(self: ^IMatchmaking, pchKeyToMatch: cstring, pchValueToMatch: cstring, eComparisonType: ELobbyComparison) ---
+	Matchmaking_AddRequestLobbyListNumericalFilter :: proc(self: ^IMatchmaking, pchKeyToMatch: cstring, nValueToMatch: c.int, eComparisonType: ELobbyComparison) ---
+	Matchmaking_AddRequestLobbyListNearValueFilter :: proc(self: ^IMatchmaking, pchKeyToMatch: cstring, nValueToBeCloseTo: c.int) ---
+	Matchmaking_AddRequestLobbyListFilterSlotsAvailable :: proc(self: ^IMatchmaking, nSlotsAvailable: c.int) ---
+	Matchmaking_AddRequestLobbyListDistanceFilter :: proc(self: ^IMatchmaking, eLobbyDistanceFilter: ELobbyDistanceFilter) ---
+	Matchmaking_AddRequestLobbyListResultCountFilter :: proc(self: ^IMatchmaking, cMaxResults: c.int) ---
+	Matchmaking_AddRequestLobbyListCompatibleMembersFilter :: proc(self: ^IMatchmaking, steamIDLobby: CSteamID) ---
+	Matchmaking_GetLobbyByIndex :: proc(self: ^IMatchmaking, iLobby: c.int) -> CSteamID ---
+	Matchmaking_CreateLobby :: proc(self: ^IMatchmaking, eLobbyType: ELobbyType, cMaxMembers: c.int) -> SteamAPICall_t ---
+	Matchmaking_JoinLobby :: proc(self: ^IMatchmaking, steamIDLobby: CSteamID) -> SteamAPICall_t ---
+	Matchmaking_LeaveLobby :: proc(self: ^IMatchmaking, steamIDLobby: CSteamID) ---
+	Matchmaking_InviteUserToLobby :: proc(self: ^IMatchmaking, steamIDLobby: CSteamID, steamIDInvitee: CSteamID) -> bool ---
+	Matchmaking_GetNumLobbyMembers :: proc(self: ^IMatchmaking, steamIDLobby: CSteamID) -> c.int ---
+	Matchmaking_GetLobbyMemberByIndex :: proc(self: ^IMatchmaking, steamIDLobby: CSteamID, iMember: c.int) -> CSteamID ---
+	Matchmaking_GetLobbyData :: proc(self: ^IMatchmaking, steamIDLobby: CSteamID, pchKey: cstring) -> cstring ---
+	Matchmaking_SetLobbyData :: proc(self: ^IMatchmaking, steamIDLobby: CSteamID, pchKey: cstring, pchValue: cstring) -> bool ---
+	Matchmaking_GetLobbyDataCount :: proc(self: ^IMatchmaking, steamIDLobby: CSteamID) -> c.int ---
+	Matchmaking_GetLobbyDataByIndex :: proc(self: ^IMatchmaking, steamIDLobby: CSteamID, iLobbyData: c.int, pchKey: ^u8, cchKeyBufferSize: c.int, pchValue: ^u8, cchValueBufferSize: c.int) -> bool ---
+	Matchmaking_DeleteLobbyData :: proc(self: ^IMatchmaking, steamIDLobby: CSteamID, pchKey: cstring) -> bool ---
+	Matchmaking_GetLobbyMemberData :: proc(self: ^IMatchmaking, steamIDLobby: CSteamID, steamIDUser: CSteamID, pchKey: cstring) -> cstring ---
+	Matchmaking_SetLobbyMemberData :: proc(self: ^IMatchmaking, steamIDLobby: CSteamID, pchKey: cstring, pchValue: cstring) ---
+	Matchmaking_SendLobbyChatMsg :: proc(self: ^IMatchmaking, steamIDLobby: CSteamID, pvMsgBody: rawptr, cubMsgBody: c.int) -> bool ---
+	Matchmaking_GetLobbyChatEntry :: proc(self: ^IMatchmaking, steamIDLobby: CSteamID, iChatID: c.int, pSteamIDUser: ^CSteamID, pvData: rawptr, cubData: c.int, peChatEntryType: ^EChatEntryType) -> c.int ---
+	Matchmaking_RequestLobbyData :: proc(self: ^IMatchmaking, steamIDLobby: CSteamID) -> bool ---
+	Matchmaking_SetLobbyGameServer :: proc(self: ^IMatchmaking, steamIDLobby: CSteamID, unGameServerIP: uint32, unGameServerPort: uint16, steamIDGameServer: CSteamID) ---
+	Matchmaking_GetLobbyGameServer :: proc(self: ^IMatchmaking, steamIDLobby: CSteamID, punGameServerIP: ^uint32, punGameServerPort: ^uint16, psteamIDGameServer: ^CSteamID) -> bool ---
+	Matchmaking_SetLobbyMemberLimit :: proc(self: ^IMatchmaking, steamIDLobby: CSteamID, cMaxMembers: c.int) -> bool ---
+	Matchmaking_GetLobbyMemberLimit :: proc(self: ^IMatchmaking, steamIDLobby: CSteamID) -> c.int ---
+	Matchmaking_SetLobbyType :: proc(self: ^IMatchmaking, steamIDLobby: CSteamID, eLobbyType: ELobbyType) -> bool ---
+	Matchmaking_SetLobbyJoinable :: proc(self: ^IMatchmaking, steamIDLobby: CSteamID, bLobbyJoinable: bool) -> bool ---
+	Matchmaking_GetLobbyOwner :: proc(self: ^IMatchmaking, steamIDLobby: CSteamID) -> CSteamID ---
+	Matchmaking_SetLobbyOwner :: proc(self: ^IMatchmaking, steamIDLobby: CSteamID, steamIDNewOwner: CSteamID) -> bool ---
+	Matchmaking_SetLinkedLobby :: proc(self: ^IMatchmaking, steamIDLobby: CSteamID, steamIDLobbyDependent: CSteamID) -> bool ---
 
-	ISteamMatchmakingPlayersResponse_AddPlayerToList :: proc(self: ^ISteamMatchmakingPlayersResponse, pchName: cstring, nScore: c.int, flTimePlayed: f32) ---
-	ISteamMatchmakingPlayersResponse_PlayersFailedToRespond :: proc(self: ^ISteamMatchmakingPlayersResponse) ---
-	ISteamMatchmakingPlayersResponse_PlayersRefreshComplete :: proc(self: ^ISteamMatchmakingPlayersResponse) ---
+	MatchmakingServerListResponse_ServerResponded :: proc(self: ^IMatchmakingServerListResponse, hRequest: HServerListRequest, iServer: c.int) ---
+	MatchmakingServerListResponse_ServerFailedToRespond :: proc(self: ^IMatchmakingServerListResponse, hRequest: HServerListRequest, iServer: c.int) ---
+	MatchmakingServerListResponse_RefreshComplete :: proc(self: ^IMatchmakingServerListResponse, hRequest: HServerListRequest, response: EMatchMakingServerResponse) ---
 
-	ISteamMatchmakingRulesResponse_RulesResponded :: proc(self: ^ISteamMatchmakingRulesResponse, pchRule: cstring, pchValue: cstring) ---
-	ISteamMatchmakingRulesResponse_RulesFailedToRespond :: proc(self: ^ISteamMatchmakingRulesResponse) ---
-	ISteamMatchmakingRulesResponse_RulesRefreshComplete :: proc(self: ^ISteamMatchmakingRulesResponse) ---
+	MatchmakingPingResponse_ServerResponded :: proc(self: ^IMatchmakingPingResponse, server: ^gameserveritem_t) ---
+	MatchmakingPingResponse_ServerFailedToRespond :: proc(self: ^IMatchmakingPingResponse) ---
 
-	ISteamMatchmakingServers_RequestInternetServerList :: proc(self: ^ISteamMatchmakingServers, iApp: AppId_t, ppchFilters: ^^MatchMakingKeyValuePair_t, nFilters: uint32, pRequestServersResponse: ^ISteamMatchmakingServerListResponse) -> HServerListRequest ---
-	ISteamMatchmakingServers_RequestLANServerList :: proc(self: ^ISteamMatchmakingServers, iApp: AppId_t, pRequestServersResponse: ^ISteamMatchmakingServerListResponse) -> HServerListRequest ---
-	ISteamMatchmakingServers_RequestFriendsServerList :: proc(self: ^ISteamMatchmakingServers, iApp: AppId_t, ppchFilters: ^^MatchMakingKeyValuePair_t, nFilters: uint32, pRequestServersResponse: ^ISteamMatchmakingServerListResponse) -> HServerListRequest ---
-	ISteamMatchmakingServers_RequestFavoritesServerList :: proc(self: ^ISteamMatchmakingServers, iApp: AppId_t, ppchFilters: ^^MatchMakingKeyValuePair_t, nFilters: uint32, pRequestServersResponse: ^ISteamMatchmakingServerListResponse) -> HServerListRequest ---
-	ISteamMatchmakingServers_RequestHistoryServerList :: proc(self: ^ISteamMatchmakingServers, iApp: AppId_t, ppchFilters: ^^MatchMakingKeyValuePair_t, nFilters: uint32, pRequestServersResponse: ^ISteamMatchmakingServerListResponse) -> HServerListRequest ---
-	ISteamMatchmakingServers_RequestSpectatorServerList :: proc(self: ^ISteamMatchmakingServers, iApp: AppId_t, ppchFilters: ^^MatchMakingKeyValuePair_t, nFilters: uint32, pRequestServersResponse: ^ISteamMatchmakingServerListResponse) -> HServerListRequest ---
-	ISteamMatchmakingServers_ReleaseRequest :: proc(self: ^ISteamMatchmakingServers, hServerListRequest: HServerListRequest) ---
-	ISteamMatchmakingServers_GetServerDetails :: proc(self: ^ISteamMatchmakingServers, hRequest: HServerListRequest, iServer: c.int) -> ^gameserveritem_t ---
-	ISteamMatchmakingServers_CancelQuery :: proc(self: ^ISteamMatchmakingServers, hRequest: HServerListRequest) ---
-	ISteamMatchmakingServers_RefreshQuery :: proc(self: ^ISteamMatchmakingServers, hRequest: HServerListRequest) ---
-	ISteamMatchmakingServers_IsRefreshing :: proc(self: ^ISteamMatchmakingServers, hRequest: HServerListRequest) -> bool ---
-	ISteamMatchmakingServers_GetServerCount :: proc(self: ^ISteamMatchmakingServers, hRequest: HServerListRequest) -> c.int ---
-	ISteamMatchmakingServers_RefreshServer :: proc(self: ^ISteamMatchmakingServers, hRequest: HServerListRequest, iServer: c.int) ---
-	ISteamMatchmakingServers_PingServer :: proc(self: ^ISteamMatchmakingServers, unIP: uint32, usPort: uint16, pRequestServersResponse: ^ISteamMatchmakingPingResponse) -> HServerQuery ---
-	ISteamMatchmakingServers_PlayerDetails :: proc(self: ^ISteamMatchmakingServers, unIP: uint32, usPort: uint16, pRequestServersResponse: ^ISteamMatchmakingPlayersResponse) -> HServerQuery ---
-	ISteamMatchmakingServers_ServerRules :: proc(self: ^ISteamMatchmakingServers, unIP: uint32, usPort: uint16, pRequestServersResponse: ^ISteamMatchmakingRulesResponse) -> HServerQuery ---
-	ISteamMatchmakingServers_CancelServerQuery :: proc(self: ^ISteamMatchmakingServers, hServerQuery: HServerQuery) ---
-	SteamMatchmakingServers_v002 :: proc() -> ^ISteamMatchmakingServers ---
+	MatchmakingPlayersResponse_AddPlayerToList :: proc(self: ^IMatchmakingPlayersResponse, pchName: cstring, nScore: c.int, flTimePlayed: f32) ---
+	MatchmakingPlayersResponse_PlayersFailedToRespond :: proc(self: ^IMatchmakingPlayersResponse) ---
+	MatchmakingPlayersResponse_PlayersRefreshComplete :: proc(self: ^IMatchmakingPlayersResponse) ---
 
-	ISteamGameSearch_AddGameSearchParams :: proc(self: ^ISteamGameSearch, pchKeyToFind: cstring, pchValuesToFind: cstring) -> EGameSearchErrorCode_t ---
-	ISteamGameSearch_SearchForGameWithLobby :: proc(self: ^ISteamGameSearch, steamIDLobby: CSteamID, nPlayerMin: c.int, nPlayerMax: c.int) -> EGameSearchErrorCode_t ---
-	ISteamGameSearch_SearchForGameSolo :: proc(self: ^ISteamGameSearch, nPlayerMin: c.int, nPlayerMax: c.int) -> EGameSearchErrorCode_t ---
-	ISteamGameSearch_AcceptGame :: proc(self: ^ISteamGameSearch) -> EGameSearchErrorCode_t ---
-	ISteamGameSearch_DeclineGame :: proc(self: ^ISteamGameSearch) -> EGameSearchErrorCode_t ---
-	ISteamGameSearch_RetrieveConnectionDetails :: proc(self: ^ISteamGameSearch, steamIDHost: CSteamID, pchConnectionDetails: ^u8, cubConnectionDetails: c.int) -> EGameSearchErrorCode_t ---
-	ISteamGameSearch_EndGameSearch :: proc(self: ^ISteamGameSearch) -> EGameSearchErrorCode_t ---
-	ISteamGameSearch_SetGameHostParams :: proc(self: ^ISteamGameSearch, pchKey: cstring, pchValue: cstring) -> EGameSearchErrorCode_t ---
-	ISteamGameSearch_SetConnectionDetails :: proc(self: ^ISteamGameSearch, pchConnectionDetails: cstring, cubConnectionDetails: c.int) -> EGameSearchErrorCode_t ---
-	ISteamGameSearch_RequestPlayersForGame :: proc(self: ^ISteamGameSearch, nPlayerMin: c.int, nPlayerMax: c.int, nMaxTeamSize: c.int) -> EGameSearchErrorCode_t ---
-	ISteamGameSearch_HostConfirmGameStart :: proc(self: ^ISteamGameSearch, ullUniqueGameID: uint64) -> EGameSearchErrorCode_t ---
-	ISteamGameSearch_CancelRequestPlayersForGame :: proc(self: ^ISteamGameSearch) -> EGameSearchErrorCode_t ---
-	ISteamGameSearch_SubmitPlayerResult :: proc(self: ^ISteamGameSearch, ullUniqueGameID: uint64, steamIDPlayer: CSteamID, EPlayerResult: EPlayerResult_t) -> EGameSearchErrorCode_t ---
-	ISteamGameSearch_EndGame :: proc(self: ^ISteamGameSearch, ullUniqueGameID: uint64) -> EGameSearchErrorCode_t ---
-	SteamGameSearch_v001 :: proc() -> ^ISteamGameSearch ---
+	MatchmakingRulesResponse_RulesResponded :: proc(self: ^IMatchmakingRulesResponse, pchRule: cstring, pchValue: cstring) ---
+	MatchmakingRulesResponse_RulesFailedToRespond :: proc(self: ^IMatchmakingRulesResponse) ---
+	MatchmakingRulesResponse_RulesRefreshComplete :: proc(self: ^IMatchmakingRulesResponse) ---
 
-	ISteamParties_GetNumActiveBeacons :: proc(self: ^ISteamParties) -> uint32 ---
-	ISteamParties_GetBeaconByIndex :: proc(self: ^ISteamParties, unIndex: uint32) -> PartyBeaconID_t ---
-	ISteamParties_GetBeaconDetails :: proc(self: ^ISteamParties, ulBeaconID: PartyBeaconID_t, pSteamIDBeaconOwner: ^CSteamID, pLocation: ^SteamPartyBeaconLocation_t, pchMetadata: ^u8, cchMetadata: c.int) -> bool ---
-	ISteamParties_JoinParty :: proc(self: ^ISteamParties, ulBeaconID: PartyBeaconID_t) -> SteamAPICall_t ---
-	ISteamParties_GetNumAvailableBeaconLocations :: proc(self: ^ISteamParties, puNumLocations: ^uint32) -> bool ---
-	ISteamParties_GetAvailableBeaconLocations :: proc(self: ^ISteamParties, pLocationList: ^SteamPartyBeaconLocation_t, uMaxNumLocations: uint32) -> bool ---
-	ISteamParties_CreateBeacon :: proc(self: ^ISteamParties, unOpenSlots: uint32, pBeaconLocation: ^SteamPartyBeaconLocation_t, pchConnectString: cstring, pchMetadata: cstring) -> SteamAPICall_t ---
-	ISteamParties_OnReservationCompleted :: proc(self: ^ISteamParties, ulBeacon: PartyBeaconID_t, steamIDUser: CSteamID) ---
-	ISteamParties_CancelReservation :: proc(self: ^ISteamParties, ulBeacon: PartyBeaconID_t, steamIDUser: CSteamID) ---
-	ISteamParties_ChangeNumOpenSlots :: proc(self: ^ISteamParties, ulBeacon: PartyBeaconID_t, unOpenSlots: uint32) -> SteamAPICall_t ---
-	ISteamParties_DestroyBeacon :: proc(self: ^ISteamParties, ulBeacon: PartyBeaconID_t) -> bool ---
-	ISteamParties_GetBeaconLocationData :: proc(self: ^ISteamParties, BeaconLocation: SteamPartyBeaconLocation_t, eData: ESteamPartyBeaconLocationData, pchDataStringOut: ^u8, cchDataStringOut: c.int) -> bool ---
-	SteamParties_v002 :: proc() -> ^ISteamParties ---
+	MatchmakingServers_RequestInternetServerList :: proc(self: ^IMatchmakingServers, iApp: AppId_t, ppchFilters: ^^MatchMakingKeyValuePair_t, nFilters: uint32, pRequestServersResponse: ^IMatchmakingServerListResponse) -> HServerListRequest ---
+	MatchmakingServers_RequestLANServerList :: proc(self: ^IMatchmakingServers, iApp: AppId_t, pRequestServersResponse: ^IMatchmakingServerListResponse) -> HServerListRequest ---
+	MatchmakingServers_RequestFriendsServerList :: proc(self: ^IMatchmakingServers, iApp: AppId_t, ppchFilters: ^^MatchMakingKeyValuePair_t, nFilters: uint32, pRequestServersResponse: ^IMatchmakingServerListResponse) -> HServerListRequest ---
+	MatchmakingServers_RequestFavoritesServerList :: proc(self: ^IMatchmakingServers, iApp: AppId_t, ppchFilters: ^^MatchMakingKeyValuePair_t, nFilters: uint32, pRequestServersResponse: ^IMatchmakingServerListResponse) -> HServerListRequest ---
+	MatchmakingServers_RequestHistoryServerList :: proc(self: ^IMatchmakingServers, iApp: AppId_t, ppchFilters: ^^MatchMakingKeyValuePair_t, nFilters: uint32, pRequestServersResponse: ^IMatchmakingServerListResponse) -> HServerListRequest ---
+	MatchmakingServers_RequestSpectatorServerList :: proc(self: ^IMatchmakingServers, iApp: AppId_t, ppchFilters: ^^MatchMakingKeyValuePair_t, nFilters: uint32, pRequestServersResponse: ^IMatchmakingServerListResponse) -> HServerListRequest ---
+	MatchmakingServers_ReleaseRequest :: proc(self: ^IMatchmakingServers, hServerListRequest: HServerListRequest) ---
+	MatchmakingServers_GetServerDetails :: proc(self: ^IMatchmakingServers, hRequest: HServerListRequest, iServer: c.int) -> ^gameserveritem_t ---
+	MatchmakingServers_CancelQuery :: proc(self: ^IMatchmakingServers, hRequest: HServerListRequest) ---
+	MatchmakingServers_RefreshQuery :: proc(self: ^IMatchmakingServers, hRequest: HServerListRequest) ---
+	MatchmakingServers_IsRefreshing :: proc(self: ^IMatchmakingServers, hRequest: HServerListRequest) -> bool ---
+	MatchmakingServers_GetServerCount :: proc(self: ^IMatchmakingServers, hRequest: HServerListRequest) -> c.int ---
+	MatchmakingServers_RefreshServer :: proc(self: ^IMatchmakingServers, hRequest: HServerListRequest, iServer: c.int) ---
+	MatchmakingServers_PingServer :: proc(self: ^IMatchmakingServers, unIP: uint32, usPort: uint16, pRequestServersResponse: ^IMatchmakingPingResponse) -> HServerQuery ---
+	MatchmakingServers_PlayerDetails :: proc(self: ^IMatchmakingServers, unIP: uint32, usPort: uint16, pRequestServersResponse: ^IMatchmakingPlayersResponse) -> HServerQuery ---
+	MatchmakingServers_ServerRules :: proc(self: ^IMatchmakingServers, unIP: uint32, usPort: uint16, pRequestServersResponse: ^IMatchmakingRulesResponse) -> HServerQuery ---
+	MatchmakingServers_CancelServerQuery :: proc(self: ^IMatchmakingServers, hServerQuery: HServerQuery) ---
 
-	ISteamRemoteStorage_FileWrite :: proc(self: ^ISteamRemoteStorage, pchFile: cstring, pvData: rawptr, cubData: int32) -> bool ---
-	ISteamRemoteStorage_FileRead :: proc(self: ^ISteamRemoteStorage, pchFile: cstring, pvData: rawptr, cubDataToRead: int32) -> int32 ---
-	ISteamRemoteStorage_FileWriteAsync :: proc(self: ^ISteamRemoteStorage, pchFile: cstring, pvData: rawptr, cubData: uint32) -> SteamAPICall_t ---
-	ISteamRemoteStorage_FileReadAsync :: proc(self: ^ISteamRemoteStorage, pchFile: cstring, nOffset: uint32, cubToRead: uint32) -> SteamAPICall_t ---
-	ISteamRemoteStorage_FileReadAsyncComplete :: proc(self: ^ISteamRemoteStorage, hReadCall: SteamAPICall_t, pvBuffer: rawptr, cubToRead: uint32) -> bool ---
-	ISteamRemoteStorage_FileForget :: proc(self: ^ISteamRemoteStorage, pchFile: cstring) -> bool ---
-	ISteamRemoteStorage_FileDelete :: proc(self: ^ISteamRemoteStorage, pchFile: cstring) -> bool ---
-	ISteamRemoteStorage_FileShare :: proc(self: ^ISteamRemoteStorage, pchFile: cstring) -> SteamAPICall_t ---
-	ISteamRemoteStorage_SetSyncPlatforms :: proc(self: ^ISteamRemoteStorage, pchFile: cstring, eRemoteStoragePlatform: ERemoteStoragePlatform) -> bool ---
-	ISteamRemoteStorage_FileWriteStreamOpen :: proc(self: ^ISteamRemoteStorage, pchFile: cstring) -> UGCFileWriteStreamHandle_t ---
-	ISteamRemoteStorage_FileWriteStreamWriteChunk :: proc(self: ^ISteamRemoteStorage, writeHandle: UGCFileWriteStreamHandle_t, pvData: rawptr, cubData: int32) -> bool ---
-	ISteamRemoteStorage_FileWriteStreamClose :: proc(self: ^ISteamRemoteStorage, writeHandle: UGCFileWriteStreamHandle_t) -> bool ---
-	ISteamRemoteStorage_FileWriteStreamCancel :: proc(self: ^ISteamRemoteStorage, writeHandle: UGCFileWriteStreamHandle_t) -> bool ---
-	ISteamRemoteStorage_FileExists :: proc(self: ^ISteamRemoteStorage, pchFile: cstring) -> bool ---
-	ISteamRemoteStorage_FilePersisted :: proc(self: ^ISteamRemoteStorage, pchFile: cstring) -> bool ---
-	ISteamRemoteStorage_GetFileSize :: proc(self: ^ISteamRemoteStorage, pchFile: cstring) -> int32 ---
-	ISteamRemoteStorage_GetFileTimestamp :: proc(self: ^ISteamRemoteStorage, pchFile: cstring) -> int64 ---
-	ISteamRemoteStorage_GetSyncPlatforms :: proc(self: ^ISteamRemoteStorage, pchFile: cstring) -> ERemoteStoragePlatform ---
-	ISteamRemoteStorage_GetFileCount :: proc(self: ^ISteamRemoteStorage) -> int32 ---
-	ISteamRemoteStorage_GetFileNameAndSize :: proc(self: ^ISteamRemoteStorage, iFile: c.int, pnFileSizeInBytes: ^int32) -> cstring ---
-	ISteamRemoteStorage_GetQuota :: proc(self: ^ISteamRemoteStorage, pnTotalBytes: ^uint64, puAvailableBytes: ^uint64) -> bool ---
-	ISteamRemoteStorage_IsCloudEnabledForAccount :: proc(self: ^ISteamRemoteStorage) -> bool ---
-	ISteamRemoteStorage_IsCloudEnabledForApp :: proc(self: ^ISteamRemoteStorage) -> bool ---
-	ISteamRemoteStorage_SetCloudEnabledForApp :: proc(self: ^ISteamRemoteStorage, bEnabled: bool) ---
-	ISteamRemoteStorage_UGCDownload :: proc(self: ^ISteamRemoteStorage, hContent: UGCHandle_t, unPriority: uint32) -> SteamAPICall_t ---
-	ISteamRemoteStorage_GetUGCDownloadProgress :: proc(self: ^ISteamRemoteStorage, hContent: UGCHandle_t, pnBytesDownloaded: ^int32, pnBytesExpected: ^int32) -> bool ---
-	ISteamRemoteStorage_GetUGCDetails :: proc(self: ^ISteamRemoteStorage, hContent: UGCHandle_t, pnAppID: ^AppId_t, ppchName: ^^u8, pnFileSizeInBytes: ^int32, pSteamIDOwner: ^CSteamID) -> bool ---
-	ISteamRemoteStorage_UGCRead :: proc(self: ^ISteamRemoteStorage, hContent: UGCHandle_t, pvData: rawptr, cubDataToRead: int32, cOffset: uint32, eAction: EUGCReadAction) -> int32 ---
-	ISteamRemoteStorage_GetCachedUGCCount :: proc(self: ^ISteamRemoteStorage) -> int32 ---
-	ISteamRemoteStorage_GetCachedUGCHandle :: proc(self: ^ISteamRemoteStorage, iCachedContent: int32) -> UGCHandle_t ---
-	ISteamRemoteStorage_PublishWorkshopFile :: proc(self: ^ISteamRemoteStorage, pchFile: cstring, pchPreviewFile: cstring, nConsumerAppId: AppId_t, pchTitle: cstring, pchDescription: cstring, eVisibility: ERemoteStoragePublishedFileVisibility, pTags: ^SteamParamStringArray_t, eWorkshopFileType: EWorkshopFileType) -> SteamAPICall_t ---
-	ISteamRemoteStorage_CreatePublishedFileUpdateRequest :: proc(self: ^ISteamRemoteStorage, unPublishedFileId: PublishedFileId_t) -> PublishedFileUpdateHandle_t ---
-	ISteamRemoteStorage_UpdatePublishedFileFile :: proc(self: ^ISteamRemoteStorage, updateHandle: PublishedFileUpdateHandle_t, pchFile: cstring) -> bool ---
-	ISteamRemoteStorage_UpdatePublishedFilePreviewFile :: proc(self: ^ISteamRemoteStorage, updateHandle: PublishedFileUpdateHandle_t, pchPreviewFile: cstring) -> bool ---
-	ISteamRemoteStorage_UpdatePublishedFileTitle :: proc(self: ^ISteamRemoteStorage, updateHandle: PublishedFileUpdateHandle_t, pchTitle: cstring) -> bool ---
-	ISteamRemoteStorage_UpdatePublishedFileDescription :: proc(self: ^ISteamRemoteStorage, updateHandle: PublishedFileUpdateHandle_t, pchDescription: cstring) -> bool ---
-	ISteamRemoteStorage_UpdatePublishedFileVisibility :: proc(self: ^ISteamRemoteStorage, updateHandle: PublishedFileUpdateHandle_t, eVisibility: ERemoteStoragePublishedFileVisibility) -> bool ---
-	ISteamRemoteStorage_UpdatePublishedFileTags :: proc(self: ^ISteamRemoteStorage, updateHandle: PublishedFileUpdateHandle_t, pTags: ^SteamParamStringArray_t) -> bool ---
-	ISteamRemoteStorage_CommitPublishedFileUpdate :: proc(self: ^ISteamRemoteStorage, updateHandle: PublishedFileUpdateHandle_t) -> SteamAPICall_t ---
-	ISteamRemoteStorage_GetPublishedFileDetails :: proc(self: ^ISteamRemoteStorage, unPublishedFileId: PublishedFileId_t, unMaxSecondsOld: uint32) -> SteamAPICall_t ---
-	ISteamRemoteStorage_DeletePublishedFile :: proc(self: ^ISteamRemoteStorage, unPublishedFileId: PublishedFileId_t) -> SteamAPICall_t ---
-	ISteamRemoteStorage_EnumerateUserPublishedFiles :: proc(self: ^ISteamRemoteStorage, unStartIndex: uint32) -> SteamAPICall_t ---
-	ISteamRemoteStorage_SubscribePublishedFile :: proc(self: ^ISteamRemoteStorage, unPublishedFileId: PublishedFileId_t) -> SteamAPICall_t ---
-	ISteamRemoteStorage_EnumerateUserSubscribedFiles :: proc(self: ^ISteamRemoteStorage, unStartIndex: uint32) -> SteamAPICall_t ---
-	ISteamRemoteStorage_UnsubscribePublishedFile :: proc(self: ^ISteamRemoteStorage, unPublishedFileId: PublishedFileId_t) -> SteamAPICall_t ---
-	ISteamRemoteStorage_UpdatePublishedFileSetChangeDescription :: proc(self: ^ISteamRemoteStorage, updateHandle: PublishedFileUpdateHandle_t, pchChangeDescription: cstring) -> bool ---
-	ISteamRemoteStorage_GetPublishedItemVoteDetails :: proc(self: ^ISteamRemoteStorage, unPublishedFileId: PublishedFileId_t) -> SteamAPICall_t ---
-	ISteamRemoteStorage_UpdateUserPublishedItemVote :: proc(self: ^ISteamRemoteStorage, unPublishedFileId: PublishedFileId_t, bVoteUp: bool) -> SteamAPICall_t ---
-	ISteamRemoteStorage_GetUserPublishedItemVoteDetails :: proc(self: ^ISteamRemoteStorage, unPublishedFileId: PublishedFileId_t) -> SteamAPICall_t ---
-	ISteamRemoteStorage_EnumerateUserSharedWorkshopFiles :: proc(self: ^ISteamRemoteStorage, steamId: CSteamID, unStartIndex: uint32, pRequiredTags: ^SteamParamStringArray_t, pExcludedTags: ^SteamParamStringArray_t) -> SteamAPICall_t ---
-	ISteamRemoteStorage_PublishVideo :: proc(self: ^ISteamRemoteStorage, eVideoProvider: EWorkshopVideoProvider, pchVideoAccount: cstring, pchVideoIdentifier: cstring, pchPreviewFile: cstring, nConsumerAppId: AppId_t, pchTitle: cstring, pchDescription: cstring, eVisibility: ERemoteStoragePublishedFileVisibility, pTags: ^SteamParamStringArray_t) -> SteamAPICall_t ---
-	ISteamRemoteStorage_SetUserPublishedFileAction :: proc(self: ^ISteamRemoteStorage, unPublishedFileId: PublishedFileId_t, eAction: EWorkshopFileAction) -> SteamAPICall_t ---
-	ISteamRemoteStorage_EnumeratePublishedFilesByUserAction :: proc(self: ^ISteamRemoteStorage, eAction: EWorkshopFileAction, unStartIndex: uint32) -> SteamAPICall_t ---
-	ISteamRemoteStorage_EnumeratePublishedWorkshopFiles :: proc(self: ^ISteamRemoteStorage, eEnumerationType: EWorkshopEnumerationType, unStartIndex: uint32, unCount: uint32, unDays: uint32, pTags: ^SteamParamStringArray_t, pUserTags: ^SteamParamStringArray_t) -> SteamAPICall_t ---
-	ISteamRemoteStorage_UGCDownloadToLocation :: proc(self: ^ISteamRemoteStorage, hContent: UGCHandle_t, pchLocation: cstring, unPriority: uint32) -> SteamAPICall_t ---
-	ISteamRemoteStorage_GetLocalFileChangeCount :: proc(self: ^ISteamRemoteStorage) -> int32 ---
-	ISteamRemoteStorage_GetLocalFileChange :: proc(self: ^ISteamRemoteStorage, iFile: c.int, pEChangeType: ^ERemoteStorageLocalFileChange, pEFilePathType: ^ERemoteStorageFilePathType) -> cstring ---
-	ISteamRemoteStorage_BeginFileWriteBatch :: proc(self: ^ISteamRemoteStorage) -> bool ---
-	ISteamRemoteStorage_EndFileWriteBatch :: proc(self: ^ISteamRemoteStorage) -> bool ---
-	SteamRemoteStorage_v016 :: proc() -> ^ISteamRemoteStorage ---
+	GameSearch_AddGameSearchParams :: proc(self: ^IGameSearch, pchKeyToFind: cstring, pchValuesToFind: cstring) -> EGameSearchErrorCode_t ---
+	GameSearch_SearchForGameWithLobby :: proc(self: ^IGameSearch, steamIDLobby: CSteamID, nPlayerMin: c.int, nPlayerMax: c.int) -> EGameSearchErrorCode_t ---
+	GameSearch_SearchForGameSolo :: proc(self: ^IGameSearch, nPlayerMin: c.int, nPlayerMax: c.int) -> EGameSearchErrorCode_t ---
+	GameSearch_AcceptGame :: proc(self: ^IGameSearch) -> EGameSearchErrorCode_t ---
+	GameSearch_DeclineGame :: proc(self: ^IGameSearch) -> EGameSearchErrorCode_t ---
+	GameSearch_RetrieveConnectionDetails :: proc(self: ^IGameSearch, steamIDHost: CSteamID, pchConnectionDetails: ^u8, cubConnectionDetails: c.int) -> EGameSearchErrorCode_t ---
+	GameSearch_EndGameSearch :: proc(self: ^IGameSearch) -> EGameSearchErrorCode_t ---
+	GameSearch_SetGameHostParams :: proc(self: ^IGameSearch, pchKey: cstring, pchValue: cstring) -> EGameSearchErrorCode_t ---
+	GameSearch_SetConnectionDetails :: proc(self: ^IGameSearch, pchConnectionDetails: cstring, cubConnectionDetails: c.int) -> EGameSearchErrorCode_t ---
+	GameSearch_RequestPlayersForGame :: proc(self: ^IGameSearch, nPlayerMin: c.int, nPlayerMax: c.int, nMaxTeamSize: c.int) -> EGameSearchErrorCode_t ---
+	GameSearch_HostConfirmGameStart :: proc(self: ^IGameSearch, ullUniqueGameID: uint64) -> EGameSearchErrorCode_t ---
+	GameSearch_CancelRequestPlayersForGame :: proc(self: ^IGameSearch) -> EGameSearchErrorCode_t ---
+	GameSearch_SubmitPlayerResult :: proc(self: ^IGameSearch, ullUniqueGameID: uint64, steamIDPlayer: CSteamID, EPlayerResult: EPlayerResult_t) -> EGameSearchErrorCode_t ---
+	GameSearch_EndGame :: proc(self: ^IGameSearch, ullUniqueGameID: uint64) -> EGameSearchErrorCode_t ---
 
-	ISteamUserStats_RequestCurrentStats :: proc(self: ^ISteamUserStats) -> bool ---
-	ISteamUserStats_GetStatInt32 :: proc(self: ^ISteamUserStats, pchName: cstring, pData: ^int32) -> bool ---
-	ISteamUserStats_GetStatFloat :: proc(self: ^ISteamUserStats, pchName: cstring, pData: ^f32) -> bool ---
-	ISteamUserStats_SetStatInt32 :: proc(self: ^ISteamUserStats, pchName: cstring, nData: int32) -> bool ---
-	ISteamUserStats_SetStatFloat :: proc(self: ^ISteamUserStats, pchName: cstring, fData: f32) -> bool ---
-	ISteamUserStats_UpdateAvgRateStat :: proc(self: ^ISteamUserStats, pchName: cstring, flCountThisSession: f32, dSessionLength: f64) -> bool ---
-	ISteamUserStats_GetAchievement :: proc(self: ^ISteamUserStats, pchName: cstring, pbAchieved: ^bool) -> bool ---
-	ISteamUserStats_SetAchievement :: proc(self: ^ISteamUserStats, pchName: cstring) -> bool ---
-	ISteamUserStats_ClearAchievement :: proc(self: ^ISteamUserStats, pchName: cstring) -> bool ---
-	ISteamUserStats_GetAchievementAndUnlockTime :: proc(self: ^ISteamUserStats, pchName: cstring, pbAchieved: ^bool, punUnlockTime: ^uint32) -> bool ---
-	ISteamUserStats_StoreStats :: proc(self: ^ISteamUserStats) -> bool ---
-	ISteamUserStats_GetAchievementIcon :: proc(self: ^ISteamUserStats, pchName: cstring) -> c.int ---
-	ISteamUserStats_GetAchievementDisplayAttribute :: proc(self: ^ISteamUserStats, pchName: cstring, pchKey: cstring) -> cstring ---
-	ISteamUserStats_IndicateAchievementProgress :: proc(self: ^ISteamUserStats, pchName: cstring, nCurProgress: uint32, nMaxProgress: uint32) -> bool ---
-	ISteamUserStats_GetNumAchievements :: proc(self: ^ISteamUserStats) -> uint32 ---
-	ISteamUserStats_GetAchievementName :: proc(self: ^ISteamUserStats, iAchievement: uint32) -> cstring ---
-	ISteamUserStats_RequestUserStats :: proc(self: ^ISteamUserStats, steamIDUser: CSteamID) -> SteamAPICall_t ---
-	ISteamUserStats_GetUserStatInt32 :: proc(self: ^ISteamUserStats, steamIDUser: CSteamID, pchName: cstring, pData: ^int32) -> bool ---
-	ISteamUserStats_GetUserStatFloat :: proc(self: ^ISteamUserStats, steamIDUser: CSteamID, pchName: cstring, pData: ^f32) -> bool ---
-	ISteamUserStats_GetUserAchievement :: proc(self: ^ISteamUserStats, steamIDUser: CSteamID, pchName: cstring, pbAchieved: ^bool) -> bool ---
-	ISteamUserStats_GetUserAchievementAndUnlockTime :: proc(self: ^ISteamUserStats, steamIDUser: CSteamID, pchName: cstring, pbAchieved: ^bool, punUnlockTime: ^uint32) -> bool ---
-	ISteamUserStats_ResetAllStats :: proc(self: ^ISteamUserStats, bAchievementsToo: bool) -> bool ---
-	ISteamUserStats_FindOrCreateLeaderboard :: proc(self: ^ISteamUserStats, pchLeaderboardName: cstring, eLeaderboardSortMethod: ELeaderboardSortMethod, eLeaderboardDisplayType: ELeaderboardDisplayType) -> SteamAPICall_t ---
-	ISteamUserStats_FindLeaderboard :: proc(self: ^ISteamUserStats, pchLeaderboardName: cstring) -> SteamAPICall_t ---
-	ISteamUserStats_GetLeaderboardName :: proc(self: ^ISteamUserStats, hSteamLeaderboard: SteamLeaderboard_t) -> cstring ---
-	ISteamUserStats_GetLeaderboardEntryCount :: proc(self: ^ISteamUserStats, hSteamLeaderboard: SteamLeaderboard_t) -> c.int ---
-	ISteamUserStats_GetLeaderboardSortMethod :: proc(self: ^ISteamUserStats, hSteamLeaderboard: SteamLeaderboard_t) -> ELeaderboardSortMethod ---
-	ISteamUserStats_GetLeaderboardDisplayType :: proc(self: ^ISteamUserStats, hSteamLeaderboard: SteamLeaderboard_t) -> ELeaderboardDisplayType ---
-	ISteamUserStats_DownloadLeaderboardEntries :: proc(self: ^ISteamUserStats, hSteamLeaderboard: SteamLeaderboard_t, eLeaderboardDataRequest: ELeaderboardDataRequest, nRangeStart: c.int, nRangeEnd: c.int) -> SteamAPICall_t ---
-	ISteamUserStats_DownloadLeaderboardEntriesForUsers :: proc(self: ^ISteamUserStats, hSteamLeaderboard: SteamLeaderboard_t, prgUsers: ^CSteamID, cUsers: c.int) -> SteamAPICall_t ---
-	ISteamUserStats_GetDownloadedLeaderboardEntry :: proc(self: ^ISteamUserStats, hSteamLeaderboardEntries: SteamLeaderboardEntries_t, index: c.int, pLeaderboardEntry: ^LeaderboardEntry_t, pDetails: ^int32, cDetailsMax: c.int) -> bool ---
-	ISteamUserStats_UploadLeaderboardScore :: proc(self: ^ISteamUserStats, hSteamLeaderboard: SteamLeaderboard_t, eLeaderboardUploadScoreMethod: ELeaderboardUploadScoreMethod, nScore: int32, pScoreDetails: ^int32, cScoreDetailsCount: c.int) -> SteamAPICall_t ---
-	ISteamUserStats_AttachLeaderboardUGC :: proc(self: ^ISteamUserStats, hSteamLeaderboard: SteamLeaderboard_t, hUGC: UGCHandle_t) -> SteamAPICall_t ---
-	ISteamUserStats_GetNumberOfCurrentPlayers :: proc(self: ^ISteamUserStats) -> SteamAPICall_t ---
-	ISteamUserStats_RequestGlobalAchievementPercentages :: proc(self: ^ISteamUserStats) -> SteamAPICall_t ---
-	ISteamUserStats_GetMostAchievedAchievementInfo :: proc(self: ^ISteamUserStats, pchName: ^u8, unNameBufLen: uint32, pflPercent: ^f32, pbAchieved: ^bool) -> c.int ---
-	ISteamUserStats_GetNextMostAchievedAchievementInfo :: proc(self: ^ISteamUserStats, iIteratorPrevious: c.int, pchName: ^u8, unNameBufLen: uint32, pflPercent: ^f32, pbAchieved: ^bool) -> c.int ---
-	ISteamUserStats_GetAchievementAchievedPercent :: proc(self: ^ISteamUserStats, pchName: cstring, pflPercent: ^f32) -> bool ---
-	ISteamUserStats_RequestGlobalStats :: proc(self: ^ISteamUserStats, nHistoryDays: c.int) -> SteamAPICall_t ---
-	ISteamUserStats_GetGlobalStatInt64 :: proc(self: ^ISteamUserStats, pchStatName: cstring, pData: ^int64) -> bool ---
-	ISteamUserStats_GetGlobalStatFloat64 :: proc(self: ^ISteamUserStats, pchStatName: cstring, pData: ^f64) -> bool ---
-	ISteamUserStats_GetGlobalStatHistoryInt64 :: proc(self: ^ISteamUserStats, pchStatName: cstring, pData: ^int64, cubData: uint32) -> int32 ---
-	ISteamUserStats_GetGlobalStatHistoryFloat64 :: proc(self: ^ISteamUserStats, pchStatName: cstring, pData: ^f64, cubData: uint32) -> int32 ---
-	ISteamUserStats_GetAchievementProgressLimitsInt32 :: proc(self: ^ISteamUserStats, pchName: cstring, pnMinProgress: ^int32, pnMaxProgress: ^int32) -> bool ---
-	ISteamUserStats_GetAchievementProgressLimitsFloat :: proc(self: ^ISteamUserStats, pchName: cstring, pfMinProgress: ^f32, pfMaxProgress: ^f32) -> bool ---
-	SteamUserStats_v012 :: proc() -> ^ISteamUserStats ---
+	Parties_GetNumActiveBeacons :: proc(self: ^IParties) -> uint32 ---
+	Parties_GetBeaconByIndex :: proc(self: ^IParties, unIndex: uint32) -> PartyBeaconID_t ---
+	Parties_GetBeaconDetails :: proc(self: ^IParties, ulBeaconID: PartyBeaconID_t, pSteamIDBeaconOwner: ^CSteamID, pLocation: ^SteamPartyBeaconLocation_t, pchMetadata: ^u8, cchMetadata: c.int) -> bool ---
+	Parties_JoinParty :: proc(self: ^IParties, ulBeaconID: PartyBeaconID_t) -> SteamAPICall_t ---
+	Parties_GetNumAvailableBeaconLocations :: proc(self: ^IParties, puNumLocations: ^uint32) -> bool ---
+	Parties_GetAvailableBeaconLocations :: proc(self: ^IParties, pLocationList: ^SteamPartyBeaconLocation_t, uMaxNumLocations: uint32) -> bool ---
+	Parties_CreateBeacon :: proc(self: ^IParties, unOpenSlots: uint32, pBeaconLocation: ^SteamPartyBeaconLocation_t, pchConnectString: cstring, pchMetadata: cstring) -> SteamAPICall_t ---
+	Parties_OnReservationCompleted :: proc(self: ^IParties, ulBeacon: PartyBeaconID_t, steamIDUser: CSteamID) ---
+	Parties_CancelReservation :: proc(self: ^IParties, ulBeacon: PartyBeaconID_t, steamIDUser: CSteamID) ---
+	Parties_ChangeNumOpenSlots :: proc(self: ^IParties, ulBeacon: PartyBeaconID_t, unOpenSlots: uint32) -> SteamAPICall_t ---
+	Parties_DestroyBeacon :: proc(self: ^IParties, ulBeacon: PartyBeaconID_t) -> bool ---
+	Parties_GetBeaconLocationData :: proc(self: ^IParties, BeaconLocation: SteamPartyBeaconLocation_t, eData: ESteamPartyBeaconLocationData, pchDataStringOut: ^u8, cchDataStringOut: c.int) -> bool ---
 
-	ISteamApps_BIsSubscribed :: proc(self: ^ISteamApps) -> bool ---
-	ISteamApps_BIsLowViolence :: proc(self: ^ISteamApps) -> bool ---
-	ISteamApps_BIsCybercafe :: proc(self: ^ISteamApps) -> bool ---
-	ISteamApps_BIsVACBanned :: proc(self: ^ISteamApps) -> bool ---
-	ISteamApps_GetCurrentGameLanguage :: proc(self: ^ISteamApps) -> cstring ---
-	ISteamApps_GetAvailableGameLanguages :: proc(self: ^ISteamApps) -> cstring ---
-	ISteamApps_BIsSubscribedApp :: proc(self: ^ISteamApps, appID: AppId_t) -> bool ---
-	ISteamApps_BIsDlcInstalled :: proc(self: ^ISteamApps, appID: AppId_t) -> bool ---
-	ISteamApps_GetEarliestPurchaseUnixTime :: proc(self: ^ISteamApps, nAppID: AppId_t) -> uint32 ---
-	ISteamApps_BIsSubscribedFromFreeWeekend :: proc(self: ^ISteamApps) -> bool ---
-	ISteamApps_GetDLCCount :: proc(self: ^ISteamApps) -> c.int ---
-	ISteamApps_BGetDLCDataByIndex :: proc(self: ^ISteamApps, iDLC: c.int, pAppID: ^AppId_t, pbAvailable: ^bool, pchName: ^u8, cchNameBufferSize: c.int) -> bool ---
-	ISteamApps_InstallDLC :: proc(self: ^ISteamApps, nAppID: AppId_t) ---
-	ISteamApps_UninstallDLC :: proc(self: ^ISteamApps, nAppID: AppId_t) ---
-	ISteamApps_RequestAppProofOfPurchaseKey :: proc(self: ^ISteamApps, nAppID: AppId_t) ---
-	ISteamApps_GetCurrentBetaName :: proc(self: ^ISteamApps, pchName: ^u8, cchNameBufferSize: c.int) -> bool ---
-	ISteamApps_MarkContentCorrupt :: proc(self: ^ISteamApps, bMissingFilesOnly: bool) -> bool ---
-	ISteamApps_GetInstalledDepots :: proc(self: ^ISteamApps, appID: AppId_t, pvecDepots: ^DepotId_t, cMaxDepots: uint32) -> uint32 ---
-	ISteamApps_GetAppInstallDir :: proc(self: ^ISteamApps, appID: AppId_t, pchFolder: ^u8, cchFolderBufferSize: uint32) -> uint32 ---
-	ISteamApps_BIsAppInstalled :: proc(self: ^ISteamApps, appID: AppId_t) -> bool ---
-	ISteamApps_GetAppOwner :: proc(self: ^ISteamApps) -> CSteamID ---
-	ISteamApps_GetLaunchQueryParam :: proc(self: ^ISteamApps, pchKey: cstring) -> cstring ---
-	ISteamApps_GetDlcDownloadProgress :: proc(self: ^ISteamApps, nAppID: AppId_t, punBytesDownloaded: ^uint64, punBytesTotal: ^uint64) -> bool ---
-	ISteamApps_GetAppBuildId :: proc(self: ^ISteamApps) -> c.int ---
-	ISteamApps_RequestAllProofOfPurchaseKeys :: proc(self: ^ISteamApps) ---
-	ISteamApps_GetFileDetails :: proc(self: ^ISteamApps, pszFileName: cstring) -> SteamAPICall_t ---
-	ISteamApps_GetLaunchCommandLine :: proc(self: ^ISteamApps, pszCommandLine: ^u8, cubCommandLine: c.int) -> c.int ---
-	ISteamApps_BIsSubscribedFromFamilySharing :: proc(self: ^ISteamApps) -> bool ---
-	ISteamApps_BIsTimedTrial :: proc(self: ^ISteamApps, punSecondsAllowed: ^uint32, punSecondsPlayed: ^uint32) -> bool ---
-	ISteamApps_SetDlcContext :: proc(self: ^ISteamApps, nAppID: AppId_t) -> bool ---
-	SteamApps_v008 :: proc() -> ^ISteamApps ---
+	RemoteStorage_FileWrite :: proc(self: ^IRemoteStorage, pchFile: cstring, pvData: rawptr, cubData: int32) -> bool ---
+	RemoteStorage_FileRead :: proc(self: ^IRemoteStorage, pchFile: cstring, pvData: rawptr, cubDataToRead: int32) -> int32 ---
+	RemoteStorage_FileWriteAsync :: proc(self: ^IRemoteStorage, pchFile: cstring, pvData: rawptr, cubData: uint32) -> SteamAPICall_t ---
+	RemoteStorage_FileReadAsync :: proc(self: ^IRemoteStorage, pchFile: cstring, nOffset: uint32, cubToRead: uint32) -> SteamAPICall_t ---
+	RemoteStorage_FileReadAsyncComplete :: proc(self: ^IRemoteStorage, hReadCall: SteamAPICall_t, pvBuffer: rawptr, cubToRead: uint32) -> bool ---
+	RemoteStorage_FileForget :: proc(self: ^IRemoteStorage, pchFile: cstring) -> bool ---
+	RemoteStorage_FileDelete :: proc(self: ^IRemoteStorage, pchFile: cstring) -> bool ---
+	RemoteStorage_FileShare :: proc(self: ^IRemoteStorage, pchFile: cstring) -> SteamAPICall_t ---
+	RemoteStorage_SetSyncPlatforms :: proc(self: ^IRemoteStorage, pchFile: cstring, eRemoteStoragePlatform: ERemoteStoragePlatform) -> bool ---
+	RemoteStorage_FileWriteStreamOpen :: proc(self: ^IRemoteStorage, pchFile: cstring) -> UGCFileWriteStreamHandle_t ---
+	RemoteStorage_FileWriteStreamWriteChunk :: proc(self: ^IRemoteStorage, writeHandle: UGCFileWriteStreamHandle_t, pvData: rawptr, cubData: int32) -> bool ---
+	RemoteStorage_FileWriteStreamClose :: proc(self: ^IRemoteStorage, writeHandle: UGCFileWriteStreamHandle_t) -> bool ---
+	RemoteStorage_FileWriteStreamCancel :: proc(self: ^IRemoteStorage, writeHandle: UGCFileWriteStreamHandle_t) -> bool ---
+	RemoteStorage_FileExists :: proc(self: ^IRemoteStorage, pchFile: cstring) -> bool ---
+	RemoteStorage_FilePersisted :: proc(self: ^IRemoteStorage, pchFile: cstring) -> bool ---
+	RemoteStorage_GetFileSize :: proc(self: ^IRemoteStorage, pchFile: cstring) -> int32 ---
+	RemoteStorage_GetFileTimestamp :: proc(self: ^IRemoteStorage, pchFile: cstring) -> int64 ---
+	RemoteStorage_GetSyncPlatforms :: proc(self: ^IRemoteStorage, pchFile: cstring) -> ERemoteStoragePlatform ---
+	RemoteStorage_GetFileCount :: proc(self: ^IRemoteStorage) -> int32 ---
+	RemoteStorage_GetFileNameAndSize :: proc(self: ^IRemoteStorage, iFile: c.int, pnFileSizeInBytes: ^int32) -> cstring ---
+	RemoteStorage_GetQuota :: proc(self: ^IRemoteStorage, pnTotalBytes: ^uint64, puAvailableBytes: ^uint64) -> bool ---
+	RemoteStorage_IsCloudEnabledForAccount :: proc(self: ^IRemoteStorage) -> bool ---
+	RemoteStorage_IsCloudEnabledForApp :: proc(self: ^IRemoteStorage) -> bool ---
+	RemoteStorage_SetCloudEnabledForApp :: proc(self: ^IRemoteStorage, bEnabled: bool) ---
+	RemoteStorage_UGCDownload :: proc(self: ^IRemoteStorage, hContent: UGCHandle_t, unPriority: uint32) -> SteamAPICall_t ---
+	RemoteStorage_GetUGCDownloadProgress :: proc(self: ^IRemoteStorage, hContent: UGCHandle_t, pnBytesDownloaded: ^int32, pnBytesExpected: ^int32) -> bool ---
+	RemoteStorage_GetUGCDetails :: proc(self: ^IRemoteStorage, hContent: UGCHandle_t, pnAppID: ^AppId_t, ppchName: ^^u8, pnFileSizeInBytes: ^int32, pSteamIDOwner: ^CSteamID) -> bool ---
+	RemoteStorage_UGCRead :: proc(self: ^IRemoteStorage, hContent: UGCHandle_t, pvData: rawptr, cubDataToRead: int32, cOffset: uint32, eAction: EUGCReadAction) -> int32 ---
+	RemoteStorage_GetCachedUGCCount :: proc(self: ^IRemoteStorage) -> int32 ---
+	RemoteStorage_GetCachedUGCHandle :: proc(self: ^IRemoteStorage, iCachedContent: int32) -> UGCHandle_t ---
+	RemoteStorage_PublishWorkshopFile :: proc(self: ^IRemoteStorage, pchFile: cstring, pchPreviewFile: cstring, nConsumerAppId: AppId_t, pchTitle: cstring, pchDescription: cstring, eVisibility: ERemoteStoragePublishedFileVisibility, pTags: ^SteamParamStringArray_t, eWorkshopFileType: EWorkshopFileType) -> SteamAPICall_t ---
+	RemoteStorage_CreatePublishedFileUpdateRequest :: proc(self: ^IRemoteStorage, unPublishedFileId: PublishedFileId_t) -> PublishedFileUpdateHandle_t ---
+	RemoteStorage_UpdatePublishedFileFile :: proc(self: ^IRemoteStorage, updateHandle: PublishedFileUpdateHandle_t, pchFile: cstring) -> bool ---
+	RemoteStorage_UpdatePublishedFilePreviewFile :: proc(self: ^IRemoteStorage, updateHandle: PublishedFileUpdateHandle_t, pchPreviewFile: cstring) -> bool ---
+	RemoteStorage_UpdatePublishedFileTitle :: proc(self: ^IRemoteStorage, updateHandle: PublishedFileUpdateHandle_t, pchTitle: cstring) -> bool ---
+	RemoteStorage_UpdatePublishedFileDescription :: proc(self: ^IRemoteStorage, updateHandle: PublishedFileUpdateHandle_t, pchDescription: cstring) -> bool ---
+	RemoteStorage_UpdatePublishedFileVisibility :: proc(self: ^IRemoteStorage, updateHandle: PublishedFileUpdateHandle_t, eVisibility: ERemoteStoragePublishedFileVisibility) -> bool ---
+	RemoteStorage_UpdatePublishedFileTags :: proc(self: ^IRemoteStorage, updateHandle: PublishedFileUpdateHandle_t, pTags: ^SteamParamStringArray_t) -> bool ---
+	RemoteStorage_CommitPublishedFileUpdate :: proc(self: ^IRemoteStorage, updateHandle: PublishedFileUpdateHandle_t) -> SteamAPICall_t ---
+	RemoteStorage_GetPublishedFileDetails :: proc(self: ^IRemoteStorage, unPublishedFileId: PublishedFileId_t, unMaxSecondsOld: uint32) -> SteamAPICall_t ---
+	RemoteStorage_DeletePublishedFile :: proc(self: ^IRemoteStorage, unPublishedFileId: PublishedFileId_t) -> SteamAPICall_t ---
+	RemoteStorage_EnumerateUserPublishedFiles :: proc(self: ^IRemoteStorage, unStartIndex: uint32) -> SteamAPICall_t ---
+	RemoteStorage_SubscribePublishedFile :: proc(self: ^IRemoteStorage, unPublishedFileId: PublishedFileId_t) -> SteamAPICall_t ---
+	RemoteStorage_EnumerateUserSubscribedFiles :: proc(self: ^IRemoteStorage, unStartIndex: uint32) -> SteamAPICall_t ---
+	RemoteStorage_UnsubscribePublishedFile :: proc(self: ^IRemoteStorage, unPublishedFileId: PublishedFileId_t) -> SteamAPICall_t ---
+	RemoteStorage_UpdatePublishedFileSetChangeDescription :: proc(self: ^IRemoteStorage, updateHandle: PublishedFileUpdateHandle_t, pchChangeDescription: cstring) -> bool ---
+	RemoteStorage_GetPublishedItemVoteDetails :: proc(self: ^IRemoteStorage, unPublishedFileId: PublishedFileId_t) -> SteamAPICall_t ---
+	RemoteStorage_UpdateUserPublishedItemVote :: proc(self: ^IRemoteStorage, unPublishedFileId: PublishedFileId_t, bVoteUp: bool) -> SteamAPICall_t ---
+	RemoteStorage_GetUserPublishedItemVoteDetails :: proc(self: ^IRemoteStorage, unPublishedFileId: PublishedFileId_t) -> SteamAPICall_t ---
+	RemoteStorage_EnumerateUserSharedWorkshopFiles :: proc(self: ^IRemoteStorage, steamId: CSteamID, unStartIndex: uint32, pRequiredTags: ^SteamParamStringArray_t, pExcludedTags: ^SteamParamStringArray_t) -> SteamAPICall_t ---
+	RemoteStorage_PublishVideo :: proc(self: ^IRemoteStorage, eVideoProvider: EWorkshopVideoProvider, pchVideoAccount: cstring, pchVideoIdentifier: cstring, pchPreviewFile: cstring, nConsumerAppId: AppId_t, pchTitle: cstring, pchDescription: cstring, eVisibility: ERemoteStoragePublishedFileVisibility, pTags: ^SteamParamStringArray_t) -> SteamAPICall_t ---
+	RemoteStorage_SetUserPublishedFileAction :: proc(self: ^IRemoteStorage, unPublishedFileId: PublishedFileId_t, eAction: EWorkshopFileAction) -> SteamAPICall_t ---
+	RemoteStorage_EnumeratePublishedFilesByUserAction :: proc(self: ^IRemoteStorage, eAction: EWorkshopFileAction, unStartIndex: uint32) -> SteamAPICall_t ---
+	RemoteStorage_EnumeratePublishedWorkshopFiles :: proc(self: ^IRemoteStorage, eEnumerationType: EWorkshopEnumerationType, unStartIndex: uint32, unCount: uint32, unDays: uint32, pTags: ^SteamParamStringArray_t, pUserTags: ^SteamParamStringArray_t) -> SteamAPICall_t ---
+	RemoteStorage_UGCDownloadToLocation :: proc(self: ^IRemoteStorage, hContent: UGCHandle_t, pchLocation: cstring, unPriority: uint32) -> SteamAPICall_t ---
+	RemoteStorage_GetLocalFileChangeCount :: proc(self: ^IRemoteStorage) -> int32 ---
+	RemoteStorage_GetLocalFileChange :: proc(self: ^IRemoteStorage, iFile: c.int, pEChangeType: ^ERemoteStorageLocalFileChange, pEFilePathType: ^ERemoteStorageFilePathType) -> cstring ---
+	RemoteStorage_BeginFileWriteBatch :: proc(self: ^IRemoteStorage) -> bool ---
+	RemoteStorage_EndFileWriteBatch :: proc(self: ^IRemoteStorage) -> bool ---
 
-	ISteamNetworking_SendP2PPacket :: proc(self: ^ISteamNetworking, steamIDRemote: CSteamID, pubData: rawptr, cubData: uint32, eP2PSendType: EP2PSend, nChannel: c.int) -> bool ---
-	ISteamNetworking_IsP2PPacketAvailable :: proc(self: ^ISteamNetworking, pcubMsgSize: ^uint32, nChannel: c.int) -> bool ---
-	ISteamNetworking_ReadP2PPacket :: proc(self: ^ISteamNetworking, pubDest: rawptr, cubDest: uint32, pcubMsgSize: ^uint32, psteamIDRemote: ^CSteamID, nChannel: c.int) -> bool ---
-	ISteamNetworking_AcceptP2PSessionWithUser :: proc(self: ^ISteamNetworking, steamIDRemote: CSteamID) -> bool ---
-	ISteamNetworking_CloseP2PSessionWithUser :: proc(self: ^ISteamNetworking, steamIDRemote: CSteamID) -> bool ---
-	ISteamNetworking_CloseP2PChannelWithUser :: proc(self: ^ISteamNetworking, steamIDRemote: CSteamID, nChannel: c.int) -> bool ---
-	ISteamNetworking_GetP2PSessionState :: proc(self: ^ISteamNetworking, steamIDRemote: CSteamID, pConnectionState: ^P2PSessionState_t) -> bool ---
-	ISteamNetworking_AllowP2PPacketRelay :: proc(self: ^ISteamNetworking, bAllow: bool) -> bool ---
-	ISteamNetworking_CreateListenSocket :: proc(self: ^ISteamNetworking, nVirtualP2PPort: c.int, nIP: SteamIPAddress_t, nPort: uint16, bAllowUseOfPacketRelay: bool) -> SNetListenSocket_t ---
-	ISteamNetworking_CreateP2PConnectionSocket :: proc(self: ^ISteamNetworking, steamIDTarget: CSteamID, nVirtualPort: c.int, nTimeoutSec: c.int, bAllowUseOfPacketRelay: bool) -> SNetSocket_t ---
-	ISteamNetworking_CreateConnectionSocket :: proc(self: ^ISteamNetworking, nIP: SteamIPAddress_t, nPort: uint16, nTimeoutSec: c.int) -> SNetSocket_t ---
-	ISteamNetworking_DestroySocket :: proc(self: ^ISteamNetworking, hSocket: SNetSocket_t, bNotifyRemoteEnd: bool) -> bool ---
-	ISteamNetworking_DestroyListenSocket :: proc(self: ^ISteamNetworking, hSocket: SNetListenSocket_t, bNotifyRemoteEnd: bool) -> bool ---
-	ISteamNetworking_SendDataOnSocket :: proc(self: ^ISteamNetworking, hSocket: SNetSocket_t, pubData: rawptr, cubData: uint32, bReliable: bool) -> bool ---
-	ISteamNetworking_IsDataAvailableOnSocket :: proc(self: ^ISteamNetworking, hSocket: SNetSocket_t, pcubMsgSize: ^uint32) -> bool ---
-	ISteamNetworking_RetrieveDataFromSocket :: proc(self: ^ISteamNetworking, hSocket: SNetSocket_t, pubDest: rawptr, cubDest: uint32, pcubMsgSize: ^uint32) -> bool ---
-	ISteamNetworking_IsDataAvailable :: proc(self: ^ISteamNetworking, hListenSocket: SNetListenSocket_t, pcubMsgSize: ^uint32, phSocket: ^SNetSocket_t) -> bool ---
-	ISteamNetworking_RetrieveData :: proc(self: ^ISteamNetworking, hListenSocket: SNetListenSocket_t, pubDest: rawptr, cubDest: uint32, pcubMsgSize: ^uint32, phSocket: ^SNetSocket_t) -> bool ---
-	ISteamNetworking_GetSocketInfo :: proc(self: ^ISteamNetworking, hSocket: SNetSocket_t, pSteamIDRemote: ^CSteamID, peSocketStatus: ^int, punIPRemote: ^SteamIPAddress_t, punPortRemote: ^uint16) -> bool ---
-	ISteamNetworking_GetListenSocketInfo :: proc(self: ^ISteamNetworking, hListenSocket: SNetListenSocket_t, pnIP: ^SteamIPAddress_t, pnPort: ^uint16) -> bool ---
-	ISteamNetworking_GetSocketConnectionType :: proc(self: ^ISteamNetworking, hSocket: SNetSocket_t) -> ESNetSocketConnectionType ---
-	ISteamNetworking_GetMaxPacketSize :: proc(self: ^ISteamNetworking, hSocket: SNetSocket_t) -> c.int ---
-	SteamNetworking_v006 :: proc() -> ^ISteamNetworking ---
+	UserStats_RequestCurrentStats :: proc(self: ^IUserStats) -> bool ---
+	UserStats_GetStatInt32 :: proc(self: ^IUserStats, pchName: cstring, pData: ^int32) -> bool ---
+	UserStats_GetStatFloat :: proc(self: ^IUserStats, pchName: cstring, pData: ^f32) -> bool ---
+	UserStats_SetStatInt32 :: proc(self: ^IUserStats, pchName: cstring, nData: int32) -> bool ---
+	UserStats_SetStatFloat :: proc(self: ^IUserStats, pchName: cstring, fData: f32) -> bool ---
+	UserStats_UpdateAvgRateStat :: proc(self: ^IUserStats, pchName: cstring, flCountThisSession: f32, dSessionLength: f64) -> bool ---
+	UserStats_GetAchievement :: proc(self: ^IUserStats, pchName: cstring, pbAchieved: ^bool) -> bool ---
+	UserStats_SetAchievement :: proc(self: ^IUserStats, pchName: cstring) -> bool ---
+	UserStats_ClearAchievement :: proc(self: ^IUserStats, pchName: cstring) -> bool ---
+	UserStats_GetAchievementAndUnlockTime :: proc(self: ^IUserStats, pchName: cstring, pbAchieved: ^bool, punUnlockTime: ^uint32) -> bool ---
+	UserStats_StoreStats :: proc(self: ^IUserStats) -> bool ---
+	UserStats_GetAchievementIcon :: proc(self: ^IUserStats, pchName: cstring) -> c.int ---
+	UserStats_GetAchievementDisplayAttribute :: proc(self: ^IUserStats, pchName: cstring, pchKey: cstring) -> cstring ---
+	UserStats_IndicateAchievementProgress :: proc(self: ^IUserStats, pchName: cstring, nCurProgress: uint32, nMaxProgress: uint32) -> bool ---
+	UserStats_GetNumAchievements :: proc(self: ^IUserStats) -> uint32 ---
+	UserStats_GetAchievementName :: proc(self: ^IUserStats, iAchievement: uint32) -> cstring ---
+	UserStats_RequestUserStats :: proc(self: ^IUserStats, steamIDUser: CSteamID) -> SteamAPICall_t ---
+	UserStats_GetUserStatInt32 :: proc(self: ^IUserStats, steamIDUser: CSteamID, pchName: cstring, pData: ^int32) -> bool ---
+	UserStats_GetUserStatFloat :: proc(self: ^IUserStats, steamIDUser: CSteamID, pchName: cstring, pData: ^f32) -> bool ---
+	UserStats_GetUserAchievement :: proc(self: ^IUserStats, steamIDUser: CSteamID, pchName: cstring, pbAchieved: ^bool) -> bool ---
+	UserStats_GetUserAchievementAndUnlockTime :: proc(self: ^IUserStats, steamIDUser: CSteamID, pchName: cstring, pbAchieved: ^bool, punUnlockTime: ^uint32) -> bool ---
+	UserStats_ResetAllStats :: proc(self: ^IUserStats, bAchievementsToo: bool) -> bool ---
+	UserStats_FindOrCreateLeaderboard :: proc(self: ^IUserStats, pchLeaderboardName: cstring, eLeaderboardSortMethod: ELeaderboardSortMethod, eLeaderboardDisplayType: ELeaderboardDisplayType) -> SteamAPICall_t ---
+	UserStats_FindLeaderboard :: proc(self: ^IUserStats, pchLeaderboardName: cstring) -> SteamAPICall_t ---
+	UserStats_GetLeaderboardName :: proc(self: ^IUserStats, hSteamLeaderboard: SteamLeaderboard_t) -> cstring ---
+	UserStats_GetLeaderboardEntryCount :: proc(self: ^IUserStats, hSteamLeaderboard: SteamLeaderboard_t) -> c.int ---
+	UserStats_GetLeaderboardSortMethod :: proc(self: ^IUserStats, hSteamLeaderboard: SteamLeaderboard_t) -> ELeaderboardSortMethod ---
+	UserStats_GetLeaderboardDisplayType :: proc(self: ^IUserStats, hSteamLeaderboard: SteamLeaderboard_t) -> ELeaderboardDisplayType ---
+	UserStats_DownloadLeaderboardEntries :: proc(self: ^IUserStats, hSteamLeaderboard: SteamLeaderboard_t, eLeaderboardDataRequest: ELeaderboardDataRequest, nRangeStart: c.int, nRangeEnd: c.int) -> SteamAPICall_t ---
+	UserStats_DownloadLeaderboardEntriesForUsers :: proc(self: ^IUserStats, hSteamLeaderboard: SteamLeaderboard_t, prgUsers: ^CSteamID, cUsers: c.int) -> SteamAPICall_t ---
+	UserStats_GetDownloadedLeaderboardEntry :: proc(self: ^IUserStats, hSteamLeaderboardEntries: SteamLeaderboardEntries_t, index: c.int, pLeaderboardEntry: ^LeaderboardEntry_t, pDetails: ^int32, cDetailsMax: c.int) -> bool ---
+	UserStats_UploadLeaderboardScore :: proc(self: ^IUserStats, hSteamLeaderboard: SteamLeaderboard_t, eLeaderboardUploadScoreMethod: ELeaderboardUploadScoreMethod, nScore: int32, pScoreDetails: ^int32, cScoreDetailsCount: c.int) -> SteamAPICall_t ---
+	UserStats_AttachLeaderboardUGC :: proc(self: ^IUserStats, hSteamLeaderboard: SteamLeaderboard_t, hUGC: UGCHandle_t) -> SteamAPICall_t ---
+	UserStats_GetNumberOfCurrentPlayers :: proc(self: ^IUserStats) -> SteamAPICall_t ---
+	UserStats_RequestGlobalAchievementPercentages :: proc(self: ^IUserStats) -> SteamAPICall_t ---
+	UserStats_GetMostAchievedAchievementInfo :: proc(self: ^IUserStats, pchName: ^u8, unNameBufLen: uint32, pflPercent: ^f32, pbAchieved: ^bool) -> c.int ---
+	UserStats_GetNextMostAchievedAchievementInfo :: proc(self: ^IUserStats, iIteratorPrevious: c.int, pchName: ^u8, unNameBufLen: uint32, pflPercent: ^f32, pbAchieved: ^bool) -> c.int ---
+	UserStats_GetAchievementAchievedPercent :: proc(self: ^IUserStats, pchName: cstring, pflPercent: ^f32) -> bool ---
+	UserStats_RequestGlobalStats :: proc(self: ^IUserStats, nHistoryDays: c.int) -> SteamAPICall_t ---
+	UserStats_GetGlobalStatInt64 :: proc(self: ^IUserStats, pchStatName: cstring, pData: ^int64) -> bool ---
+	UserStats_GetGlobalStatFloat64 :: proc(self: ^IUserStats, pchStatName: cstring, pData: ^f64) -> bool ---
+	UserStats_GetGlobalStatHistoryInt64 :: proc(self: ^IUserStats, pchStatName: cstring, pData: ^int64, cubData: uint32) -> int32 ---
+	UserStats_GetGlobalStatHistoryFloat64 :: proc(self: ^IUserStats, pchStatName: cstring, pData: ^f64, cubData: uint32) -> int32 ---
+	UserStats_GetAchievementProgressLimitsInt32 :: proc(self: ^IUserStats, pchName: cstring, pnMinProgress: ^int32, pnMaxProgress: ^int32) -> bool ---
+	UserStats_GetAchievementProgressLimitsFloat :: proc(self: ^IUserStats, pchName: cstring, pfMinProgress: ^f32, pfMaxProgress: ^f32) -> bool ---
 
-	ISteamScreenshots_WriteScreenshot :: proc(self: ^ISteamScreenshots, pubRGB: rawptr, cubRGB: uint32, nWidth: c.int, nHeight: c.int) -> ScreenshotHandle ---
-	ISteamScreenshots_AddScreenshotToLibrary :: proc(self: ^ISteamScreenshots, pchFilename: cstring, pchThumbnailFilename: cstring, nWidth: c.int, nHeight: c.int) -> ScreenshotHandle ---
-	ISteamScreenshots_TriggerScreenshot :: proc(self: ^ISteamScreenshots) ---
-	ISteamScreenshots_HookScreenshots :: proc(self: ^ISteamScreenshots, bHook: bool) ---
-	ISteamScreenshots_SetLocation :: proc(self: ^ISteamScreenshots, hScreenshot: ScreenshotHandle, pchLocation: cstring) -> bool ---
-	ISteamScreenshots_TagUser :: proc(self: ^ISteamScreenshots, hScreenshot: ScreenshotHandle, steamID: CSteamID) -> bool ---
-	ISteamScreenshots_TagPublishedFile :: proc(self: ^ISteamScreenshots, hScreenshot: ScreenshotHandle, unPublishedFileID: PublishedFileId_t) -> bool ---
-	ISteamScreenshots_IsScreenshotsHooked :: proc(self: ^ISteamScreenshots) -> bool ---
-	ISteamScreenshots_AddVRScreenshotToLibrary :: proc(self: ^ISteamScreenshots, eType: EVRScreenshotType, pchFilename: cstring, pchVRFilename: cstring) -> ScreenshotHandle ---
-	SteamScreenshots_v003 :: proc() -> ^ISteamScreenshots ---
+	Apps_BIsSubscribed :: proc(self: ^IApps) -> bool ---
+	Apps_BIsLowViolence :: proc(self: ^IApps) -> bool ---
+	Apps_BIsCybercafe :: proc(self: ^IApps) -> bool ---
+	Apps_BIsVACBanned :: proc(self: ^IApps) -> bool ---
+	Apps_GetCurrentGameLanguage :: proc(self: ^IApps) -> cstring ---
+	Apps_GetAvailableGameLanguages :: proc(self: ^IApps) -> cstring ---
+	Apps_BIsSubscribedApp :: proc(self: ^IApps, appID: AppId_t) -> bool ---
+	Apps_BIsDlcInstalled :: proc(self: ^IApps, appID: AppId_t) -> bool ---
+	Apps_GetEarliestPurchaseUnixTime :: proc(self: ^IApps, nAppID: AppId_t) -> uint32 ---
+	Apps_BIsSubscribedFromFreeWeekend :: proc(self: ^IApps) -> bool ---
+	Apps_GetDLCCount :: proc(self: ^IApps) -> c.int ---
+	Apps_BGetDLCDataByIndex :: proc(self: ^IApps, iDLC: c.int, pAppID: ^AppId_t, pbAvailable: ^bool, pchName: ^u8, cchNameBufferSize: c.int) -> bool ---
+	Apps_InstallDLC :: proc(self: ^IApps, nAppID: AppId_t) ---
+	Apps_UninstallDLC :: proc(self: ^IApps, nAppID: AppId_t) ---
+	Apps_RequestAppProofOfPurchaseKey :: proc(self: ^IApps, nAppID: AppId_t) ---
+	Apps_GetCurrentBetaName :: proc(self: ^IApps, pchName: ^u8, cchNameBufferSize: c.int) -> bool ---
+	Apps_MarkContentCorrupt :: proc(self: ^IApps, bMissingFilesOnly: bool) -> bool ---
+	Apps_GetInstalledDepots :: proc(self: ^IApps, appID: AppId_t, pvecDepots: ^DepotId_t, cMaxDepots: uint32) -> uint32 ---
+	Apps_GetAppInstallDir :: proc(self: ^IApps, appID: AppId_t, pchFolder: ^u8, cchFolderBufferSize: uint32) -> uint32 ---
+	Apps_BIsAppInstalled :: proc(self: ^IApps, appID: AppId_t) -> bool ---
+	Apps_GetAppOwner :: proc(self: ^IApps) -> CSteamID ---
+	Apps_GetLaunchQueryParam :: proc(self: ^IApps, pchKey: cstring) -> cstring ---
+	Apps_GetDlcDownloadProgress :: proc(self: ^IApps, nAppID: AppId_t, punBytesDownloaded: ^uint64, punBytesTotal: ^uint64) -> bool ---
+	Apps_GetAppBuildId :: proc(self: ^IApps) -> c.int ---
+	Apps_RequestAllProofOfPurchaseKeys :: proc(self: ^IApps) ---
+	Apps_GetFileDetails :: proc(self: ^IApps, pszFileName: cstring) -> SteamAPICall_t ---
+	Apps_GetLaunchCommandLine :: proc(self: ^IApps, pszCommandLine: ^u8, cubCommandLine: c.int) -> c.int ---
+	Apps_BIsSubscribedFromFamilySharing :: proc(self: ^IApps) -> bool ---
+	Apps_BIsTimedTrial :: proc(self: ^IApps, punSecondsAllowed: ^uint32, punSecondsPlayed: ^uint32) -> bool ---
+	Apps_SetDlcContext :: proc(self: ^IApps, nAppID: AppId_t) -> bool ---
 
-	ISteamMusic_BIsEnabled :: proc(self: ^ISteamMusic) -> bool ---
-	ISteamMusic_BIsPlaying :: proc(self: ^ISteamMusic) -> bool ---
-	ISteamMusic_GetPlaybackStatus :: proc(self: ^ISteamMusic) -> AudioPlayback_Status ---
-	ISteamMusic_Play :: proc(self: ^ISteamMusic) ---
-	ISteamMusic_Pause :: proc(self: ^ISteamMusic) ---
-	ISteamMusic_PlayPrevious :: proc(self: ^ISteamMusic) ---
-	ISteamMusic_PlayNext :: proc(self: ^ISteamMusic) ---
-	ISteamMusic_SetVolume :: proc(self: ^ISteamMusic, flVolume: f32) ---
-	ISteamMusic_GetVolume :: proc(self: ^ISteamMusic) -> f32 ---
-	SteamMusic_v001 :: proc() -> ^ISteamMusic ---
+	Networking_SendP2PPacket :: proc(self: ^INetworking, steamIDRemote: CSteamID, pubData: rawptr, cubData: uint32, eP2PSendType: EP2PSend, nChannel: c.int) -> bool ---
+	Networking_IsP2PPacketAvailable :: proc(self: ^INetworking, pcubMsgSize: ^uint32, nChannel: c.int) -> bool ---
+	Networking_ReadP2PPacket :: proc(self: ^INetworking, pubDest: rawptr, cubDest: uint32, pcubMsgSize: ^uint32, psteamIDRemote: ^CSteamID, nChannel: c.int) -> bool ---
+	Networking_AcceptP2PSessionWithUser :: proc(self: ^INetworking, steamIDRemote: CSteamID) -> bool ---
+	Networking_CloseP2PSessionWithUser :: proc(self: ^INetworking, steamIDRemote: CSteamID) -> bool ---
+	Networking_CloseP2PChannelWithUser :: proc(self: ^INetworking, steamIDRemote: CSteamID, nChannel: c.int) -> bool ---
+	Networking_GetP2PSessionState :: proc(self: ^INetworking, steamIDRemote: CSteamID, pConnectionState: ^P2PSessionState_t) -> bool ---
+	Networking_AllowP2PPacketRelay :: proc(self: ^INetworking, bAllow: bool) -> bool ---
+	Networking_CreateListenSocket :: proc(self: ^INetworking, nVirtualP2PPort: c.int, nIP: SteamIPAddress_t, nPort: uint16, bAllowUseOfPacketRelay: bool) -> SNetListenSocket_t ---
+	Networking_CreateP2PConnectionSocket :: proc(self: ^INetworking, steamIDTarget: CSteamID, nVirtualPort: c.int, nTimeoutSec: c.int, bAllowUseOfPacketRelay: bool) -> SNetSocket_t ---
+	Networking_CreateConnectionSocket :: proc(self: ^INetworking, nIP: SteamIPAddress_t, nPort: uint16, nTimeoutSec: c.int) -> SNetSocket_t ---
+	Networking_DestroySocket :: proc(self: ^INetworking, hSocket: SNetSocket_t, bNotifyRemoteEnd: bool) -> bool ---
+	Networking_DestroyListenSocket :: proc(self: ^INetworking, hSocket: SNetListenSocket_t, bNotifyRemoteEnd: bool) -> bool ---
+	Networking_SendDataOnSocket :: proc(self: ^INetworking, hSocket: SNetSocket_t, pubData: rawptr, cubData: uint32, bReliable: bool) -> bool ---
+	Networking_IsDataAvailableOnSocket :: proc(self: ^INetworking, hSocket: SNetSocket_t, pcubMsgSize: ^uint32) -> bool ---
+	Networking_RetrieveDataFromSocket :: proc(self: ^INetworking, hSocket: SNetSocket_t, pubDest: rawptr, cubDest: uint32, pcubMsgSize: ^uint32) -> bool ---
+	Networking_IsDataAvailable :: proc(self: ^INetworking, hListenSocket: SNetListenSocket_t, pcubMsgSize: ^uint32, phSocket: ^SNetSocket_t) -> bool ---
+	Networking_RetrieveData :: proc(self: ^INetworking, hListenSocket: SNetListenSocket_t, pubDest: rawptr, cubDest: uint32, pcubMsgSize: ^uint32, phSocket: ^SNetSocket_t) -> bool ---
+	Networking_GetSocketInfo :: proc(self: ^INetworking, hSocket: SNetSocket_t, pSteamIDRemote: ^CSteamID, peSocketStatus: ^int, punIPRemote: ^SteamIPAddress_t, punPortRemote: ^uint16) -> bool ---
+	Networking_GetListenSocketInfo :: proc(self: ^INetworking, hListenSocket: SNetListenSocket_t, pnIP: ^SteamIPAddress_t, pnPort: ^uint16) -> bool ---
+	Networking_GetSocketConnectionType :: proc(self: ^INetworking, hSocket: SNetSocket_t) -> ESNetSocketConnectionType ---
+	Networking_GetMaxPacketSize :: proc(self: ^INetworking, hSocket: SNetSocket_t) -> c.int ---
 
-	ISteamMusicRemote_RegisterSteamMusicRemote :: proc(self: ^ISteamMusicRemote, pchName: cstring) -> bool ---
-	ISteamMusicRemote_DeregisterSteamMusicRemote :: proc(self: ^ISteamMusicRemote) -> bool ---
-	ISteamMusicRemote_BIsCurrentMusicRemote :: proc(self: ^ISteamMusicRemote) -> bool ---
-	ISteamMusicRemote_BActivationSuccess :: proc(self: ^ISteamMusicRemote, bValue: bool) -> bool ---
-	ISteamMusicRemote_SetDisplayName :: proc(self: ^ISteamMusicRemote, pchDisplayName: cstring) -> bool ---
-	ISteamMusicRemote_SetPNGIcon_64x64 :: proc(self: ^ISteamMusicRemote, pvBuffer: rawptr, cbBufferLength: uint32) -> bool ---
-	ISteamMusicRemote_EnablePlayPrevious :: proc(self: ^ISteamMusicRemote, bValue: bool) -> bool ---
-	ISteamMusicRemote_EnablePlayNext :: proc(self: ^ISteamMusicRemote, bValue: bool) -> bool ---
-	ISteamMusicRemote_EnableShuffled :: proc(self: ^ISteamMusicRemote, bValue: bool) -> bool ---
-	ISteamMusicRemote_EnableLooped :: proc(self: ^ISteamMusicRemote, bValue: bool) -> bool ---
-	ISteamMusicRemote_EnableQueue :: proc(self: ^ISteamMusicRemote, bValue: bool) -> bool ---
-	ISteamMusicRemote_EnablePlaylists :: proc(self: ^ISteamMusicRemote, bValue: bool) -> bool ---
-	ISteamMusicRemote_UpdatePlaybackStatus :: proc(self: ^ISteamMusicRemote, nStatus: AudioPlayback_Status) -> bool ---
-	ISteamMusicRemote_UpdateShuffled :: proc(self: ^ISteamMusicRemote, bValue: bool) -> bool ---
-	ISteamMusicRemote_UpdateLooped :: proc(self: ^ISteamMusicRemote, bValue: bool) -> bool ---
-	ISteamMusicRemote_UpdateVolume :: proc(self: ^ISteamMusicRemote, flValue: f32) -> bool ---
-	ISteamMusicRemote_CurrentEntryWillChange :: proc(self: ^ISteamMusicRemote) -> bool ---
-	ISteamMusicRemote_CurrentEntryIsAvailable :: proc(self: ^ISteamMusicRemote, bAvailable: bool) -> bool ---
-	ISteamMusicRemote_UpdateCurrentEntryText :: proc(self: ^ISteamMusicRemote, pchText: cstring) -> bool ---
-	ISteamMusicRemote_UpdateCurrentEntryElapsedSeconds :: proc(self: ^ISteamMusicRemote, nValue: c.int) -> bool ---
-	ISteamMusicRemote_UpdateCurrentEntryCoverArt :: proc(self: ^ISteamMusicRemote, pvBuffer: rawptr, cbBufferLength: uint32) -> bool ---
-	ISteamMusicRemote_CurrentEntryDidChange :: proc(self: ^ISteamMusicRemote) -> bool ---
-	ISteamMusicRemote_QueueWillChange :: proc(self: ^ISteamMusicRemote) -> bool ---
-	ISteamMusicRemote_ResetQueueEntries :: proc(self: ^ISteamMusicRemote) -> bool ---
-	ISteamMusicRemote_SetQueueEntry :: proc(self: ^ISteamMusicRemote, nID: c.int, nPosition: c.int, pchEntryText: cstring) -> bool ---
-	ISteamMusicRemote_SetCurrentQueueEntry :: proc(self: ^ISteamMusicRemote, nID: c.int) -> bool ---
-	ISteamMusicRemote_QueueDidChange :: proc(self: ^ISteamMusicRemote) -> bool ---
-	ISteamMusicRemote_PlaylistWillChange :: proc(self: ^ISteamMusicRemote) -> bool ---
-	ISteamMusicRemote_ResetPlaylistEntries :: proc(self: ^ISteamMusicRemote) -> bool ---
-	ISteamMusicRemote_SetPlaylistEntry :: proc(self: ^ISteamMusicRemote, nID: c.int, nPosition: c.int, pchEntryText: cstring) -> bool ---
-	ISteamMusicRemote_SetCurrentPlaylistEntry :: proc(self: ^ISteamMusicRemote, nID: c.int) -> bool ---
-	ISteamMusicRemote_PlaylistDidChange :: proc(self: ^ISteamMusicRemote) -> bool ---
-	SteamMusicRemote_v001 :: proc() -> ^ISteamMusicRemote ---
+	Screenshots_WriteScreenshot :: proc(self: ^IScreenshots, pubRGB: rawptr, cubRGB: uint32, nWidth: c.int, nHeight: c.int) -> ScreenshotHandle ---
+	Screenshots_AddScreenshotToLibrary :: proc(self: ^IScreenshots, pchFilename: cstring, pchThumbnailFilename: cstring, nWidth: c.int, nHeight: c.int) -> ScreenshotHandle ---
+	Screenshots_TriggerScreenshot :: proc(self: ^IScreenshots) ---
+	Screenshots_HookScreenshots :: proc(self: ^IScreenshots, bHook: bool) ---
+	Screenshots_SetLocation :: proc(self: ^IScreenshots, hScreenshot: ScreenshotHandle, pchLocation: cstring) -> bool ---
+	Screenshots_TagUser :: proc(self: ^IScreenshots, hScreenshot: ScreenshotHandle, steamID: CSteamID) -> bool ---
+	Screenshots_TagPublishedFile :: proc(self: ^IScreenshots, hScreenshot: ScreenshotHandle, unPublishedFileID: PublishedFileId_t) -> bool ---
+	Screenshots_IsScreenshotsHooked :: proc(self: ^IScreenshots) -> bool ---
+	Screenshots_AddVRScreenshotToLibrary :: proc(self: ^IScreenshots, eType: EVRScreenshotType, pchFilename: cstring, pchVRFilename: cstring) -> ScreenshotHandle ---
 
-	ISteamHTTP_CreateHTTPRequest :: proc(self: ^ISteamHTTP, eHTTPRequestMethod: EHTTPMethod, pchAbsoluteURL: cstring) -> HTTPRequestHandle ---
-	ISteamHTTP_SetHTTPRequestContextValue :: proc(self: ^ISteamHTTP, hRequest: HTTPRequestHandle, ulContextValue: uint64) -> bool ---
-	ISteamHTTP_SetHTTPRequestNetworkActivityTimeout :: proc(self: ^ISteamHTTP, hRequest: HTTPRequestHandle, unTimeoutSeconds: uint32) -> bool ---
-	ISteamHTTP_SetHTTPRequestHeaderValue :: proc(self: ^ISteamHTTP, hRequest: HTTPRequestHandle, pchHeaderName: cstring, pchHeaderValue: cstring) -> bool ---
-	ISteamHTTP_SetHTTPRequestGetOrPostParameter :: proc(self: ^ISteamHTTP, hRequest: HTTPRequestHandle, pchParamName: cstring, pchParamValue: cstring) -> bool ---
-	ISteamHTTP_SendHTTPRequest :: proc(self: ^ISteamHTTP, hRequest: HTTPRequestHandle, pCallHandle: ^SteamAPICall_t) -> bool ---
-	ISteamHTTP_SendHTTPRequestAndStreamResponse :: proc(self: ^ISteamHTTP, hRequest: HTTPRequestHandle, pCallHandle: ^SteamAPICall_t) -> bool ---
-	ISteamHTTP_DeferHTTPRequest :: proc(self: ^ISteamHTTP, hRequest: HTTPRequestHandle) -> bool ---
-	ISteamHTTP_PrioritizeHTTPRequest :: proc(self: ^ISteamHTTP, hRequest: HTTPRequestHandle) -> bool ---
-	ISteamHTTP_GetHTTPResponseHeaderSize :: proc(self: ^ISteamHTTP, hRequest: HTTPRequestHandle, pchHeaderName: cstring, unResponseHeaderSize: ^uint32) -> bool ---
-	ISteamHTTP_GetHTTPResponseHeaderValue :: proc(self: ^ISteamHTTP, hRequest: HTTPRequestHandle, pchHeaderName: cstring, pHeaderValueBuffer: ^uint8, unBufferSize: uint32) -> bool ---
-	ISteamHTTP_GetHTTPResponseBodySize :: proc(self: ^ISteamHTTP, hRequest: HTTPRequestHandle, unBodySize: ^uint32) -> bool ---
-	ISteamHTTP_GetHTTPResponseBodyData :: proc(self: ^ISteamHTTP, hRequest: HTTPRequestHandle, pBodyDataBuffer: ^uint8, unBufferSize: uint32) -> bool ---
-	ISteamHTTP_GetHTTPStreamingResponseBodyData :: proc(self: ^ISteamHTTP, hRequest: HTTPRequestHandle, cOffset: uint32, pBodyDataBuffer: ^uint8, unBufferSize: uint32) -> bool ---
-	ISteamHTTP_ReleaseHTTPRequest :: proc(self: ^ISteamHTTP, hRequest: HTTPRequestHandle) -> bool ---
-	ISteamHTTP_GetHTTPDownloadProgressPct :: proc(self: ^ISteamHTTP, hRequest: HTTPRequestHandle, pflPercentOut: ^f32) -> bool ---
-	ISteamHTTP_SetHTTPRequestRawPostBody :: proc(self: ^ISteamHTTP, hRequest: HTTPRequestHandle, pchContentType: cstring, pubBody: ^uint8, unBodyLen: uint32) -> bool ---
-	ISteamHTTP_CreateCookieContainer :: proc(self: ^ISteamHTTP, bAllowResponsesToModify: bool) -> HTTPCookieContainerHandle ---
-	ISteamHTTP_ReleaseCookieContainer :: proc(self: ^ISteamHTTP, hCookieContainer: HTTPCookieContainerHandle) -> bool ---
-	ISteamHTTP_SetCookie :: proc(self: ^ISteamHTTP, hCookieContainer: HTTPCookieContainerHandle, pchHost: cstring, pchUrl: cstring, pchCookie: cstring) -> bool ---
-	ISteamHTTP_SetHTTPRequestCookieContainer :: proc(self: ^ISteamHTTP, hRequest: HTTPRequestHandle, hCookieContainer: HTTPCookieContainerHandle) -> bool ---
-	ISteamHTTP_SetHTTPRequestUserAgentInfo :: proc(self: ^ISteamHTTP, hRequest: HTTPRequestHandle, pchUserAgentInfo: cstring) -> bool ---
-	ISteamHTTP_SetHTTPRequestRequiresVerifiedCertificate :: proc(self: ^ISteamHTTP, hRequest: HTTPRequestHandle, bRequireVerifiedCertificate: bool) -> bool ---
-	ISteamHTTP_SetHTTPRequestAbsoluteTimeoutMS :: proc(self: ^ISteamHTTP, hRequest: HTTPRequestHandle, unMilliseconds: uint32) -> bool ---
-	ISteamHTTP_GetHTTPRequestWasTimedOut :: proc(self: ^ISteamHTTP, hRequest: HTTPRequestHandle, pbWasTimedOut: ^bool) -> bool ---
-	SteamHTTP_v003 :: proc() -> ^ISteamHTTP ---
+	Music_BIsEnabled :: proc(self: ^IMusic) -> bool ---
+	Music_BIsPlaying :: proc(self: ^IMusic) -> bool ---
+	Music_GetPlaybackStatus :: proc(self: ^IMusic) -> AudioPlayback_Status ---
+	Music_Play :: proc(self: ^IMusic) ---
+	Music_Pause :: proc(self: ^IMusic) ---
+	Music_PlayPrevious :: proc(self: ^IMusic) ---
+	Music_PlayNext :: proc(self: ^IMusic) ---
+	Music_SetVolume :: proc(self: ^IMusic, flVolume: f32) ---
+	Music_GetVolume :: proc(self: ^IMusic) -> f32 ---
 
-	ISteamInput_Init :: proc(self: ^ISteamInput, bExplicitlyCallRunFrame: bool) -> bool ---
-	ISteamInput_Shutdown :: proc(self: ^ISteamInput) -> bool ---
-	ISteamInput_SetInputActionManifestFilePath :: proc(self: ^ISteamInput, pchInputActionManifestAbsolutePath: cstring) -> bool ---
-	ISteamInput_RunFrame :: proc(self: ^ISteamInput, bReservedValue: bool) ---
-	ISteamInput_BWaitForData :: proc(self: ^ISteamInput, bWaitForever: bool, unTimeout: uint32) -> bool ---
-	ISteamInput_BNewDataAvailable :: proc(self: ^ISteamInput) -> bool ---
-	ISteamInput_GetConnectedControllers :: proc(self: ^ISteamInput, handlesOut: ^InputHandle_t) -> c.int ---
-	ISteamInput_EnableDeviceCallbacks :: proc(self: ^ISteamInput) ---
-	ISteamInput_EnableActionEventCallbacks :: proc(self: ^ISteamInput, pCallback: SteamInputActionEventCallbackPointer) ---
-	ISteamInput_GetActionSetHandle :: proc(self: ^ISteamInput, pszActionSetName: cstring) -> InputActionSetHandle_t ---
-	ISteamInput_ActivateActionSet :: proc(self: ^ISteamInput, inputHandle: InputHandle_t, actionSetHandle: InputActionSetHandle_t) ---
-	ISteamInput_GetCurrentActionSet :: proc(self: ^ISteamInput, inputHandle: InputHandle_t) -> InputActionSetHandle_t ---
-	ISteamInput_ActivateActionSetLayer :: proc(self: ^ISteamInput, inputHandle: InputHandle_t, actionSetLayerHandle: InputActionSetHandle_t) ---
-	ISteamInput_DeactivateActionSetLayer :: proc(self: ^ISteamInput, inputHandle: InputHandle_t, actionSetLayerHandle: InputActionSetHandle_t) ---
-	ISteamInput_DeactivateAllActionSetLayers :: proc(self: ^ISteamInput, inputHandle: InputHandle_t) ---
-	ISteamInput_GetActiveActionSetLayers :: proc(self: ^ISteamInput, inputHandle: InputHandle_t, handlesOut: ^InputActionSetHandle_t) -> c.int ---
-	ISteamInput_GetDigitalActionHandle :: proc(self: ^ISteamInput, pszActionName: cstring) -> InputDigitalActionHandle_t ---
-	ISteamInput_GetDigitalActionData :: proc(self: ^ISteamInput, inputHandle: InputHandle_t, digitalActionHandle: InputDigitalActionHandle_t) -> InputDigitalActionData_t ---
-	ISteamInput_GetDigitalActionOrigins :: proc(self: ^ISteamInput, inputHandle: InputHandle_t, actionSetHandle: InputActionSetHandle_t, digitalActionHandle: InputDigitalActionHandle_t, originsOut: ^EInputActionOrigin) -> c.int ---
-	ISteamInput_GetStringForDigitalActionName :: proc(self: ^ISteamInput, eActionHandle: InputDigitalActionHandle_t) -> cstring ---
-	ISteamInput_GetAnalogActionHandle :: proc(self: ^ISteamInput, pszActionName: cstring) -> InputAnalogActionHandle_t ---
-	ISteamInput_GetAnalogActionData :: proc(self: ^ISteamInput, inputHandle: InputHandle_t, analogActionHandle: InputAnalogActionHandle_t) -> InputAnalogActionData_t ---
-	ISteamInput_GetAnalogActionOrigins :: proc(self: ^ISteamInput, inputHandle: InputHandle_t, actionSetHandle: InputActionSetHandle_t, analogActionHandle: InputAnalogActionHandle_t, originsOut: ^EInputActionOrigin) -> c.int ---
-	ISteamInput_GetGlyphPNGForActionOrigin :: proc(self: ^ISteamInput, eOrigin: EInputActionOrigin, eSize: ESteamInputGlyphSize, unFlags: uint32) -> cstring ---
-	ISteamInput_GetGlyphSVGForActionOrigin :: proc(self: ^ISteamInput, eOrigin: EInputActionOrigin, unFlags: uint32) -> cstring ---
-	ISteamInput_GetGlyphForActionOrigin_Legacy :: proc(self: ^ISteamInput, eOrigin: EInputActionOrigin) -> cstring ---
-	ISteamInput_GetStringForActionOrigin :: proc(self: ^ISteamInput, eOrigin: EInputActionOrigin) -> cstring ---
-	ISteamInput_GetStringForAnalogActionName :: proc(self: ^ISteamInput, eActionHandle: InputAnalogActionHandle_t) -> cstring ---
-	ISteamInput_StopAnalogActionMomentum :: proc(self: ^ISteamInput, inputHandle: InputHandle_t, eAction: InputAnalogActionHandle_t) ---
-	ISteamInput_GetMotionData :: proc(self: ^ISteamInput, inputHandle: InputHandle_t) -> InputMotionData_t ---
-	ISteamInput_TriggerVibration :: proc(self: ^ISteamInput, inputHandle: InputHandle_t, usLeftSpeed: c.ushort, usRightSpeed: c.ushort) ---
-	ISteamInput_TriggerVibrationExtended :: proc(self: ^ISteamInput, inputHandle: InputHandle_t, usLeftSpeed: c.ushort, usRightSpeed: c.ushort, usLeftTriggerSpeed: c.ushort, usRightTriggerSpeed: c.ushort) ---
-	ISteamInput_TriggerSimpleHapticEvent :: proc(self: ^ISteamInput, inputHandle: InputHandle_t, eHapticLocation: EControllerHapticLocation, nIntensity: uint8, nGainDB: i8, nOtherIntensity: uint8, nOtherGainDB: i8) ---
-	ISteamInput_SetLEDColor :: proc(self: ^ISteamInput, inputHandle: InputHandle_t, nColorR: uint8, nColorG: uint8, nColorB: uint8, nFlags: c.uint) ---
-	ISteamInput_Legacy_TriggerHapticPulse :: proc(self: ^ISteamInput, inputHandle: InputHandle_t, eTargetPad: ESteamControllerPad, usDurationMicroSec: c.ushort) ---
-	ISteamInput_Legacy_TriggerRepeatedHapticPulse :: proc(self: ^ISteamInput, inputHandle: InputHandle_t, eTargetPad: ESteamControllerPad, usDurationMicroSec: c.ushort, usOffMicroSec: c.ushort, unRepeat: c.ushort, nFlags: c.uint) ---
-	ISteamInput_ShowBindingPanel :: proc(self: ^ISteamInput, inputHandle: InputHandle_t) -> bool ---
-	ISteamInput_GetInputTypeForHandle :: proc(self: ^ISteamInput, inputHandle: InputHandle_t) -> ESteamInputType ---
-	ISteamInput_GetControllerForGamepadIndex :: proc(self: ^ISteamInput, nIndex: c.int) -> InputHandle_t ---
-	ISteamInput_GetGamepadIndexForController :: proc(self: ^ISteamInput, ulinputHandle: InputHandle_t) -> c.int ---
-	ISteamInput_GetStringForXboxOrigin :: proc(self: ^ISteamInput, eOrigin: EXboxOrigin) -> cstring ---
-	ISteamInput_GetGlyphForXboxOrigin :: proc(self: ^ISteamInput, eOrigin: EXboxOrigin) -> cstring ---
-	ISteamInput_GetActionOriginFromXboxOrigin :: proc(self: ^ISteamInput, inputHandle: InputHandle_t, eOrigin: EXboxOrigin) -> EInputActionOrigin ---
-	ISteamInput_TranslateActionOrigin :: proc(self: ^ISteamInput, eDestinationInputType: ESteamInputType, eSourceOrigin: EInputActionOrigin) -> EInputActionOrigin ---
-	ISteamInput_GetDeviceBindingRevision :: proc(self: ^ISteamInput, inputHandle: InputHandle_t, pMajor: ^int, pMinor: ^int) -> bool ---
-	ISteamInput_GetRemotePlaySessionID :: proc(self: ^ISteamInput, inputHandle: InputHandle_t) -> uint32 ---
-	ISteamInput_GetSessionInputConfigurationSettings :: proc(self: ^ISteamInput) -> uint16 ---
-	// ISteamInput_SetDualSenseTriggerEffect :: proc(self: ^ISteamInput, inputHandle: InputHandle_t, pParam: ^ScePadTriggerEffectParam) ---
-	SteamInput_v006 :: proc() -> ^ISteamInput ---
+	MusicRemote_RegisterSteamMusicRemote :: proc(self: ^IMusicRemote, pchName: cstring) -> bool ---
+	MusicRemote_DeregisterSteamMusicRemote :: proc(self: ^IMusicRemote) -> bool ---
+	MusicRemote_BIsCurrentMusicRemote :: proc(self: ^IMusicRemote) -> bool ---
+	MusicRemote_BActivationSuccess :: proc(self: ^IMusicRemote, bValue: bool) -> bool ---
+	MusicRemote_SetDisplayName :: proc(self: ^IMusicRemote, pchDisplayName: cstring) -> bool ---
+	MusicRemote_SetPNGIcon_64x64 :: proc(self: ^IMusicRemote, pvBuffer: rawptr, cbBufferLength: uint32) -> bool ---
+	MusicRemote_EnablePlayPrevious :: proc(self: ^IMusicRemote, bValue: bool) -> bool ---
+	MusicRemote_EnablePlayNext :: proc(self: ^IMusicRemote, bValue: bool) -> bool ---
+	MusicRemote_EnableShuffled :: proc(self: ^IMusicRemote, bValue: bool) -> bool ---
+	MusicRemote_EnableLooped :: proc(self: ^IMusicRemote, bValue: bool) -> bool ---
+	MusicRemote_EnableQueue :: proc(self: ^IMusicRemote, bValue: bool) -> bool ---
+	MusicRemote_EnablePlaylists :: proc(self: ^IMusicRemote, bValue: bool) -> bool ---
+	MusicRemote_UpdatePlaybackStatus :: proc(self: ^IMusicRemote, nStatus: AudioPlayback_Status) -> bool ---
+	MusicRemote_UpdateShuffled :: proc(self: ^IMusicRemote, bValue: bool) -> bool ---
+	MusicRemote_UpdateLooped :: proc(self: ^IMusicRemote, bValue: bool) -> bool ---
+	MusicRemote_UpdateVolume :: proc(self: ^IMusicRemote, flValue: f32) -> bool ---
+	MusicRemote_CurrentEntryWillChange :: proc(self: ^IMusicRemote) -> bool ---
+	MusicRemote_CurrentEntryIsAvailable :: proc(self: ^IMusicRemote, bAvailable: bool) -> bool ---
+	MusicRemote_UpdateCurrentEntryText :: proc(self: ^IMusicRemote, pchText: cstring) -> bool ---
+	MusicRemote_UpdateCurrentEntryElapsedSeconds :: proc(self: ^IMusicRemote, nValue: c.int) -> bool ---
+	MusicRemote_UpdateCurrentEntryCoverArt :: proc(self: ^IMusicRemote, pvBuffer: rawptr, cbBufferLength: uint32) -> bool ---
+	MusicRemote_CurrentEntryDidChange :: proc(self: ^IMusicRemote) -> bool ---
+	MusicRemote_QueueWillChange :: proc(self: ^IMusicRemote) -> bool ---
+	MusicRemote_ResetQueueEntries :: proc(self: ^IMusicRemote) -> bool ---
+	MusicRemote_SetQueueEntry :: proc(self: ^IMusicRemote, nID: c.int, nPosition: c.int, pchEntryText: cstring) -> bool ---
+	MusicRemote_SetCurrentQueueEntry :: proc(self: ^IMusicRemote, nID: c.int) -> bool ---
+	MusicRemote_QueueDidChange :: proc(self: ^IMusicRemote) -> bool ---
+	MusicRemote_PlaylistWillChange :: proc(self: ^IMusicRemote) -> bool ---
+	MusicRemote_ResetPlaylistEntries :: proc(self: ^IMusicRemote) -> bool ---
+	MusicRemote_SetPlaylistEntry :: proc(self: ^IMusicRemote, nID: c.int, nPosition: c.int, pchEntryText: cstring) -> bool ---
+	MusicRemote_SetCurrentPlaylistEntry :: proc(self: ^IMusicRemote, nID: c.int) -> bool ---
+	MusicRemote_PlaylistDidChange :: proc(self: ^IMusicRemote) -> bool ---
 
-	ISteamController_Init :: proc(self: ^ISteamController) -> bool ---
-	ISteamController_Shutdown :: proc(self: ^ISteamController) -> bool ---
-	ISteamController_RunFrame :: proc(self: ^ISteamController) ---
-	ISteamController_GetConnectedControllers :: proc(self: ^ISteamController, handlesOut: ^ControllerHandle_t) -> c.int ---
-	ISteamController_GetActionSetHandle :: proc(self: ^ISteamController, pszActionSetName: cstring) -> ControllerActionSetHandle_t ---
-	ISteamController_ActivateActionSet :: proc(self: ^ISteamController, controllerHandle: ControllerHandle_t, actionSetHandle: ControllerActionSetHandle_t) ---
-	ISteamController_GetCurrentActionSet :: proc(self: ^ISteamController, controllerHandle: ControllerHandle_t) -> ControllerActionSetHandle_t ---
-	ISteamController_ActivateActionSetLayer :: proc(self: ^ISteamController, controllerHandle: ControllerHandle_t, actionSetLayerHandle: ControllerActionSetHandle_t) ---
-	ISteamController_DeactivateActionSetLayer :: proc(self: ^ISteamController, controllerHandle: ControllerHandle_t, actionSetLayerHandle: ControllerActionSetHandle_t) ---
-	ISteamController_DeactivateAllActionSetLayers :: proc(self: ^ISteamController, controllerHandle: ControllerHandle_t) ---
-	ISteamController_GetActiveActionSetLayers :: proc(self: ^ISteamController, controllerHandle: ControllerHandle_t, handlesOut: ^ControllerActionSetHandle_t) -> c.int ---
-	ISteamController_GetDigitalActionHandle :: proc(self: ^ISteamController, pszActionName: cstring) -> ControllerDigitalActionHandle_t ---
-	ISteamController_GetDigitalActionData :: proc(self: ^ISteamController, controllerHandle: ControllerHandle_t, digitalActionHandle: ControllerDigitalActionHandle_t) -> InputDigitalActionData_t ---
-	ISteamController_GetDigitalActionOrigins :: proc(self: ^ISteamController, controllerHandle: ControllerHandle_t, actionSetHandle: ControllerActionSetHandle_t, digitalActionHandle: ControllerDigitalActionHandle_t, originsOut: ^EControllerActionOrigin) -> c.int ---
-	ISteamController_GetAnalogActionHandle :: proc(self: ^ISteamController, pszActionName: cstring) -> ControllerAnalogActionHandle_t ---
-	ISteamController_GetAnalogActionData :: proc(self: ^ISteamController, controllerHandle: ControllerHandle_t, analogActionHandle: ControllerAnalogActionHandle_t) -> InputAnalogActionData_t ---
-	ISteamController_GetAnalogActionOrigins :: proc(self: ^ISteamController, controllerHandle: ControllerHandle_t, actionSetHandle: ControllerActionSetHandle_t, analogActionHandle: ControllerAnalogActionHandle_t, originsOut: ^EControllerActionOrigin) -> c.int ---
-	ISteamController_GetGlyphForActionOrigin :: proc(self: ^ISteamController, eOrigin: EControllerActionOrigin) -> cstring ---
-	ISteamController_GetStringForActionOrigin :: proc(self: ^ISteamController, eOrigin: EControllerActionOrigin) -> cstring ---
-	ISteamController_StopAnalogActionMomentum :: proc(self: ^ISteamController, controllerHandle: ControllerHandle_t, eAction: ControllerAnalogActionHandle_t) ---
-	ISteamController_GetMotionData :: proc(self: ^ISteamController, controllerHandle: ControllerHandle_t) -> InputMotionData_t ---
-	ISteamController_TriggerHapticPulse :: proc(self: ^ISteamController, controllerHandle: ControllerHandle_t, eTargetPad: ESteamControllerPad, usDurationMicroSec: c.ushort) ---
-	ISteamController_TriggerRepeatedHapticPulse :: proc(self: ^ISteamController, controllerHandle: ControllerHandle_t, eTargetPad: ESteamControllerPad, usDurationMicroSec: c.ushort, usOffMicroSec: c.ushort, unRepeat: c.ushort, nFlags: c.uint) ---
-	ISteamController_TriggerVibration :: proc(self: ^ISteamController, controllerHandle: ControllerHandle_t, usLeftSpeed: c.ushort, usRightSpeed: c.ushort) ---
-	ISteamController_SetLEDColor :: proc(self: ^ISteamController, controllerHandle: ControllerHandle_t, nColorR: uint8, nColorG: uint8, nColorB: uint8, nFlags: c.uint) ---
-	ISteamController_ShowBindingPanel :: proc(self: ^ISteamController, controllerHandle: ControllerHandle_t) -> bool ---
-	ISteamController_GetInputTypeForHandle :: proc(self: ^ISteamController, controllerHandle: ControllerHandle_t) -> ESteamInputType ---
-	ISteamController_GetControllerForGamepadIndex :: proc(self: ^ISteamController, nIndex: c.int) -> ControllerHandle_t ---
-	ISteamController_GetGamepadIndexForController :: proc(self: ^ISteamController, ulControllerHandle: ControllerHandle_t) -> c.int ---
-	ISteamController_GetStringForXboxOrigin :: proc(self: ^ISteamController, eOrigin: EXboxOrigin) -> cstring ---
-	ISteamController_GetGlyphForXboxOrigin :: proc(self: ^ISteamController, eOrigin: EXboxOrigin) -> cstring ---
-	ISteamController_GetActionOriginFromXboxOrigin :: proc(self: ^ISteamController, controllerHandle: ControllerHandle_t, eOrigin: EXboxOrigin) -> EControllerActionOrigin ---
-	ISteamController_TranslateActionOrigin :: proc(self: ^ISteamController, eDestinationInputType: ESteamInputType, eSourceOrigin: EControllerActionOrigin) -> EControllerActionOrigin ---
-	ISteamController_GetControllerBindingRevision :: proc(self: ^ISteamController, controllerHandle: ControllerHandle_t, pMajor: ^int, pMinor: ^int) -> bool ---
-	SteamController_v008 :: proc() -> ^ISteamController ---
+	HTTP_CreateHTTPRequest :: proc(self: ^IHTTP, eHTTPRequestMethod: EHTTPMethod, pchAbsoluteURL: cstring) -> HTTPRequestHandle ---
+	HTTP_SetHTTPRequestContextValue :: proc(self: ^IHTTP, hRequest: HTTPRequestHandle, ulContextValue: uint64) -> bool ---
+	HTTP_SetHTTPRequestNetworkActivityTimeout :: proc(self: ^IHTTP, hRequest: HTTPRequestHandle, unTimeoutSeconds: uint32) -> bool ---
+	HTTP_SetHTTPRequestHeaderValue :: proc(self: ^IHTTP, hRequest: HTTPRequestHandle, pchHeaderName: cstring, pchHeaderValue: cstring) -> bool ---
+	HTTP_SetHTTPRequestGetOrPostParameter :: proc(self: ^IHTTP, hRequest: HTTPRequestHandle, pchParamName: cstring, pchParamValue: cstring) -> bool ---
+	HTTP_SendHTTPRequest :: proc(self: ^IHTTP, hRequest: HTTPRequestHandle, pCallHandle: ^SteamAPICall_t) -> bool ---
+	HTTP_SendHTTPRequestAndStreamResponse :: proc(self: ^IHTTP, hRequest: HTTPRequestHandle, pCallHandle: ^SteamAPICall_t) -> bool ---
+	HTTP_DeferHTTPRequest :: proc(self: ^IHTTP, hRequest: HTTPRequestHandle) -> bool ---
+	HTTP_PrioritizeHTTPRequest :: proc(self: ^IHTTP, hRequest: HTTPRequestHandle) -> bool ---
+	HTTP_GetHTTPResponseHeaderSize :: proc(self: ^IHTTP, hRequest: HTTPRequestHandle, pchHeaderName: cstring, unResponseHeaderSize: ^uint32) -> bool ---
+	HTTP_GetHTTPResponseHeaderValue :: proc(self: ^IHTTP, hRequest: HTTPRequestHandle, pchHeaderName: cstring, pHeaderValueBuffer: ^uint8, unBufferSize: uint32) -> bool ---
+	HTTP_GetHTTPResponseBodySize :: proc(self: ^IHTTP, hRequest: HTTPRequestHandle, unBodySize: ^uint32) -> bool ---
+	HTTP_GetHTTPResponseBodyData :: proc(self: ^IHTTP, hRequest: HTTPRequestHandle, pBodyDataBuffer: ^uint8, unBufferSize: uint32) -> bool ---
+	HTTP_GetHTTPStreamingResponseBodyData :: proc(self: ^IHTTP, hRequest: HTTPRequestHandle, cOffset: uint32, pBodyDataBuffer: ^uint8, unBufferSize: uint32) -> bool ---
+	HTTP_ReleaseHTTPRequest :: proc(self: ^IHTTP, hRequest: HTTPRequestHandle) -> bool ---
+	HTTP_GetHTTPDownloadProgressPct :: proc(self: ^IHTTP, hRequest: HTTPRequestHandle, pflPercentOut: ^f32) -> bool ---
+	HTTP_SetHTTPRequestRawPostBody :: proc(self: ^IHTTP, hRequest: HTTPRequestHandle, pchContentType: cstring, pubBody: ^uint8, unBodyLen: uint32) -> bool ---
+	HTTP_CreateCookieContainer :: proc(self: ^IHTTP, bAllowResponsesToModify: bool) -> HTTPCookieContainerHandle ---
+	HTTP_ReleaseCookieContainer :: proc(self: ^IHTTP, hCookieContainer: HTTPCookieContainerHandle) -> bool ---
+	HTTP_SetCookie :: proc(self: ^IHTTP, hCookieContainer: HTTPCookieContainerHandle, pchHost: cstring, pchUrl: cstring, pchCookie: cstring) -> bool ---
+	HTTP_SetHTTPRequestCookieContainer :: proc(self: ^IHTTP, hRequest: HTTPRequestHandle, hCookieContainer: HTTPCookieContainerHandle) -> bool ---
+	HTTP_SetHTTPRequestUserAgentInfo :: proc(self: ^IHTTP, hRequest: HTTPRequestHandle, pchUserAgentInfo: cstring) -> bool ---
+	HTTP_SetHTTPRequestRequiresVerifiedCertificate :: proc(self: ^IHTTP, hRequest: HTTPRequestHandle, bRequireVerifiedCertificate: bool) -> bool ---
+	HTTP_SetHTTPRequestAbsoluteTimeoutMS :: proc(self: ^IHTTP, hRequest: HTTPRequestHandle, unMilliseconds: uint32) -> bool ---
+	HTTP_GetHTTPRequestWasTimedOut :: proc(self: ^IHTTP, hRequest: HTTPRequestHandle, pbWasTimedOut: ^bool) -> bool ---
 
-	ISteamUGC_CreateQueryUserUGCRequest :: proc(self: ^ISteamUGC, unAccountID: AccountID_t, eListType: EUserUGCList, eMatchingUGCType: EUGCMatchingUGCType, eSortOrder: EUserUGCListSortOrder, nCreatorAppID: AppId_t, nConsumerAppID: AppId_t, unPage: uint32) -> UGCQueryHandle_t ---
-	ISteamUGC_CreateQueryAllUGCRequestByPage :: proc(self: ^ISteamUGC, eQueryType: EUGCQuery, eMatchingeMatchingUGCTypeFileType: EUGCMatchingUGCType, nCreatorAppID: AppId_t, nConsumerAppID: AppId_t, unPage: uint32) -> UGCQueryHandle_t ---
-	ISteamUGC_CreateQueryAllUGCRequestByCursor :: proc(self: ^ISteamUGC, eQueryType: EUGCQuery, eMatchingeMatchingUGCTypeFileType: EUGCMatchingUGCType, nCreatorAppID: AppId_t, nConsumerAppID: AppId_t, pchCursor: cstring) -> UGCQueryHandle_t ---
-	ISteamUGC_CreateQueryUGCDetailsRequest :: proc(self: ^ISteamUGC, pvecPublishedFileID: ^PublishedFileId_t, unNumPublishedFileIDs: uint32) -> UGCQueryHandle_t ---
-	ISteamUGC_SendQueryUGCRequest :: proc(self: ^ISteamUGC, handle: UGCQueryHandle_t) -> SteamAPICall_t ---
-	ISteamUGC_GetQueryUGCResult :: proc(self: ^ISteamUGC, handle: UGCQueryHandle_t, index: uint32, pDetails: ^SteamUGCDetails_t) -> bool ---
-	ISteamUGC_GetQueryUGCNumTags :: proc(self: ^ISteamUGC, handle: UGCQueryHandle_t, index: uint32) -> uint32 ---
-	ISteamUGC_GetQueryUGCTag :: proc(self: ^ISteamUGC, handle: UGCQueryHandle_t, index: uint32, indexTag: uint32, pchValue: ^u8, cchValueSize: uint32) -> bool ---
-	ISteamUGC_GetQueryUGCTagDisplayName :: proc(self: ^ISteamUGC, handle: UGCQueryHandle_t, index: uint32, indexTag: uint32, pchValue: ^u8, cchValueSize: uint32) -> bool ---
-	ISteamUGC_GetQueryUGCPreviewURL :: proc(self: ^ISteamUGC, handle: UGCQueryHandle_t, index: uint32, pchURL: ^u8, cchURLSize: uint32) -> bool ---
-	ISteamUGC_GetQueryUGCMetadata :: proc(self: ^ISteamUGC, handle: UGCQueryHandle_t, index: uint32, pchMetadata: ^u8, cchMetadatasize: uint32) -> bool ---
-	ISteamUGC_GetQueryUGCChildren :: proc(self: ^ISteamUGC, handle: UGCQueryHandle_t, index: uint32, pvecPublishedFileID: ^PublishedFileId_t, cMaxEntries: uint32) -> bool ---
-	ISteamUGC_GetQueryUGCStatistic :: proc(self: ^ISteamUGC, handle: UGCQueryHandle_t, index: uint32, eStatType: EItemStatistic, pStatValue: ^uint64) -> bool ---
-	ISteamUGC_GetQueryUGCNumAdditionalPreviews :: proc(self: ^ISteamUGC, handle: UGCQueryHandle_t, index: uint32) -> uint32 ---
-	ISteamUGC_GetQueryUGCAdditionalPreview :: proc(self: ^ISteamUGC, handle: UGCQueryHandle_t, index: uint32, previewIndex: uint32, pchURLOrVideoID: ^u8, cchURLSize: uint32, pchOriginalFileName: ^u8, cchOriginalFileNameSize: uint32, pPreviewType: ^EItemPreviewType) -> bool ---
-	ISteamUGC_GetQueryUGCNumKeyValueTags :: proc(self: ^ISteamUGC, handle: UGCQueryHandle_t, index: uint32) -> uint32 ---
-	ISteamUGC_GetQueryUGCKeyValueTag :: proc(self: ^ISteamUGC, handle: UGCQueryHandle_t, index: uint32, pchKey: cstring, pchValue: ^u8, cchValueSize: uint32) -> bool ---
-	ISteamUGC_ReleaseQueryUGCRequest :: proc(self: ^ISteamUGC, handle: UGCQueryHandle_t) -> bool ---
-	ISteamUGC_AddRequiredTag :: proc(self: ^ISteamUGC, handle: UGCQueryHandle_t, pTagName: cstring) -> bool ---
-	ISteamUGC_AddRequiredTagGroup :: proc(self: ^ISteamUGC, handle: UGCQueryHandle_t, pTagGroups: ^SteamParamStringArray_t) -> bool ---
-	ISteamUGC_AddExcludedTag :: proc(self: ^ISteamUGC, handle: UGCQueryHandle_t, pTagName: cstring) -> bool ---
-	ISteamUGC_SetReturnOnlyIDs :: proc(self: ^ISteamUGC, handle: UGCQueryHandle_t, bReturnOnlyIDs: bool) -> bool ---
-	ISteamUGC_SetReturnKeyValueTags :: proc(self: ^ISteamUGC, handle: UGCQueryHandle_t, bReturnKeyValueTags: bool) -> bool ---
-	ISteamUGC_SetReturnLongDescription :: proc(self: ^ISteamUGC, handle: UGCQueryHandle_t, bReturnLongDescription: bool) -> bool ---
-	ISteamUGC_SetReturnMetadata :: proc(self: ^ISteamUGC, handle: UGCQueryHandle_t, bReturnMetadata: bool) -> bool ---
-	ISteamUGC_SetReturnChildren :: proc(self: ^ISteamUGC, handle: UGCQueryHandle_t, bReturnChildren: bool) -> bool ---
-	ISteamUGC_SetReturnAdditionalPreviews :: proc(self: ^ISteamUGC, handle: UGCQueryHandle_t, bReturnAdditionalPreviews: bool) -> bool ---
-	ISteamUGC_SetReturnTotalOnly :: proc(self: ^ISteamUGC, handle: UGCQueryHandle_t, bReturnTotalOnly: bool) -> bool ---
-	ISteamUGC_SetReturnPlaytimeStats :: proc(self: ^ISteamUGC, handle: UGCQueryHandle_t, unDays: uint32) -> bool ---
-	ISteamUGC_SetLanguage :: proc(self: ^ISteamUGC, handle: UGCQueryHandle_t, pchLanguage: cstring) -> bool ---
-	ISteamUGC_SetAllowCachedResponse :: proc(self: ^ISteamUGC, handle: UGCQueryHandle_t, unMaxAgeSeconds: uint32) -> bool ---
-	ISteamUGC_SetCloudFileNameFilter :: proc(self: ^ISteamUGC, handle: UGCQueryHandle_t, pMatchCloudFileName: cstring) -> bool ---
-	ISteamUGC_SetMatchAnyTag :: proc(self: ^ISteamUGC, handle: UGCQueryHandle_t, bMatchAnyTag: bool) -> bool ---
-	ISteamUGC_SetSearchText :: proc(self: ^ISteamUGC, handle: UGCQueryHandle_t, pSearchText: cstring) -> bool ---
-	ISteamUGC_SetRankedByTrendDays :: proc(self: ^ISteamUGC, handle: UGCQueryHandle_t, unDays: uint32) -> bool ---
-	ISteamUGC_SetTimeCreatedDateRange :: proc(self: ^ISteamUGC, handle: UGCQueryHandle_t, rtStart: RTime32, rtEnd: RTime32) -> bool ---
-	ISteamUGC_SetTimeUpdatedDateRange :: proc(self: ^ISteamUGC, handle: UGCQueryHandle_t, rtStart: RTime32, rtEnd: RTime32) -> bool ---
-	ISteamUGC_AddRequiredKeyValueTag :: proc(self: ^ISteamUGC, handle: UGCQueryHandle_t, pKey: cstring, pValue: cstring) -> bool ---
-	ISteamUGC_RequestUGCDetails :: proc(self: ^ISteamUGC, nPublishedFileID: PublishedFileId_t, unMaxAgeSeconds: uint32) -> SteamAPICall_t ---
-	ISteamUGC_CreateItem :: proc(self: ^ISteamUGC, nConsumerAppId: AppId_t, eFileType: EWorkshopFileType) -> SteamAPICall_t ---
-	ISteamUGC_StartItemUpdate :: proc(self: ^ISteamUGC, nConsumerAppId: AppId_t, nPublishedFileID: PublishedFileId_t) -> UGCUpdateHandle_t ---
-	ISteamUGC_SetItemTitle :: proc(self: ^ISteamUGC, handle: UGCUpdateHandle_t, pchTitle: cstring) -> bool ---
-	ISteamUGC_SetItemDescription :: proc(self: ^ISteamUGC, handle: UGCUpdateHandle_t, pchDescription: cstring) -> bool ---
-	ISteamUGC_SetItemUpdateLanguage :: proc(self: ^ISteamUGC, handle: UGCUpdateHandle_t, pchLanguage: cstring) -> bool ---
-	ISteamUGC_SetItemMetadata :: proc(self: ^ISteamUGC, handle: UGCUpdateHandle_t, pchMetaData: cstring) -> bool ---
-	ISteamUGC_SetItemVisibility :: proc(self: ^ISteamUGC, handle: UGCUpdateHandle_t, eVisibility: ERemoteStoragePublishedFileVisibility) -> bool ---
-	ISteamUGC_SetItemTags :: proc(self: ^ISteamUGC, updateHandle: UGCUpdateHandle_t, pTags: ^SteamParamStringArray_t) -> bool ---
-	ISteamUGC_SetItemContent :: proc(self: ^ISteamUGC, handle: UGCUpdateHandle_t, pszContentFolder: cstring) -> bool ---
-	ISteamUGC_SetItemPreview :: proc(self: ^ISteamUGC, handle: UGCUpdateHandle_t, pszPreviewFile: cstring) -> bool ---
-	ISteamUGC_SetAllowLegacyUpload :: proc(self: ^ISteamUGC, handle: UGCUpdateHandle_t, bAllowLegacyUpload: bool) -> bool ---
-	ISteamUGC_RemoveAllItemKeyValueTags :: proc(self: ^ISteamUGC, handle: UGCUpdateHandle_t) -> bool ---
-	ISteamUGC_RemoveItemKeyValueTags :: proc(self: ^ISteamUGC, handle: UGCUpdateHandle_t, pchKey: cstring) -> bool ---
-	ISteamUGC_AddItemKeyValueTag :: proc(self: ^ISteamUGC, handle: UGCUpdateHandle_t, pchKey: cstring, pchValue: cstring) -> bool ---
-	ISteamUGC_AddItemPreviewFile :: proc(self: ^ISteamUGC, handle: UGCUpdateHandle_t, pszPreviewFile: cstring, type: EItemPreviewType) -> bool ---
-	ISteamUGC_AddItemPreviewVideo :: proc(self: ^ISteamUGC, handle: UGCUpdateHandle_t, pszVideoID: cstring) -> bool ---
-	ISteamUGC_UpdateItemPreviewFile :: proc(self: ^ISteamUGC, handle: UGCUpdateHandle_t, index: uint32, pszPreviewFile: cstring) -> bool ---
-	ISteamUGC_UpdateItemPreviewVideo :: proc(self: ^ISteamUGC, handle: UGCUpdateHandle_t, index: uint32, pszVideoID: cstring) -> bool ---
-	ISteamUGC_RemoveItemPreview :: proc(self: ^ISteamUGC, handle: UGCUpdateHandle_t, index: uint32) -> bool ---
-	ISteamUGC_SubmitItemUpdate :: proc(self: ^ISteamUGC, handle: UGCUpdateHandle_t, pchChangeNote: cstring) -> SteamAPICall_t ---
-	ISteamUGC_GetItemUpdateProgress :: proc(self: ^ISteamUGC, handle: UGCUpdateHandle_t, punBytesProcessed: ^uint64, punBytesTotal: ^uint64) -> EItemUpdateStatus ---
-	ISteamUGC_SetUserItemVote :: proc(self: ^ISteamUGC, nPublishedFileID: PublishedFileId_t, bVoteUp: bool) -> SteamAPICall_t ---
-	ISteamUGC_GetUserItemVote :: proc(self: ^ISteamUGC, nPublishedFileID: PublishedFileId_t) -> SteamAPICall_t ---
-	ISteamUGC_AddItemToFavorites :: proc(self: ^ISteamUGC, nAppId: AppId_t, nPublishedFileID: PublishedFileId_t) -> SteamAPICall_t ---
-	ISteamUGC_RemoveItemFromFavorites :: proc(self: ^ISteamUGC, nAppId: AppId_t, nPublishedFileID: PublishedFileId_t) -> SteamAPICall_t ---
-	ISteamUGC_SubscribeItem :: proc(self: ^ISteamUGC, nPublishedFileID: PublishedFileId_t) -> SteamAPICall_t ---
-	ISteamUGC_UnsubscribeItem :: proc(self: ^ISteamUGC, nPublishedFileID: PublishedFileId_t) -> SteamAPICall_t ---
-	ISteamUGC_GetNumSubscribedItems :: proc(self: ^ISteamUGC) -> uint32 ---
-	ISteamUGC_GetSubscribedItems :: proc(self: ^ISteamUGC, pvecPublishedFileID: ^PublishedFileId_t, cMaxEntries: uint32) -> uint32 ---
-	ISteamUGC_GetItemState :: proc(self: ^ISteamUGC, nPublishedFileID: PublishedFileId_t) -> uint32 ---
-	ISteamUGC_GetItemInstallInfo :: proc(self: ^ISteamUGC, nPublishedFileID: PublishedFileId_t, punSizeOnDisk: ^uint64, pchFolder: ^u8, cchFolderSize: uint32, punTimeStamp: ^uint32) -> bool ---
-	ISteamUGC_GetItemDownloadInfo :: proc(self: ^ISteamUGC, nPublishedFileID: PublishedFileId_t, punBytesDownloaded: ^uint64, punBytesTotal: ^uint64) -> bool ---
-	ISteamUGC_DownloadItem :: proc(self: ^ISteamUGC, nPublishedFileID: PublishedFileId_t, bHighPriority: bool) -> bool ---
-	ISteamUGC_BInitWorkshopForGameServer :: proc(self: ^ISteamUGC, unWorkshopDepotID: DepotId_t, pszFolder: cstring) -> bool ---
-	ISteamUGC_SuspendDownloads :: proc(self: ^ISteamUGC, bSuspend: bool) ---
-	ISteamUGC_StartPlaytimeTracking :: proc(self: ^ISteamUGC, pvecPublishedFileID: ^PublishedFileId_t, unNumPublishedFileIDs: uint32) -> SteamAPICall_t ---
-	ISteamUGC_StopPlaytimeTracking :: proc(self: ^ISteamUGC, pvecPublishedFileID: ^PublishedFileId_t, unNumPublishedFileIDs: uint32) -> SteamAPICall_t ---
-	ISteamUGC_StopPlaytimeTrackingForAllItems :: proc(self: ^ISteamUGC) -> SteamAPICall_t ---
-	ISteamUGC_AddDependency :: proc(self: ^ISteamUGC, nParentPublishedFileID: PublishedFileId_t, nChildPublishedFileID: PublishedFileId_t) -> SteamAPICall_t ---
-	ISteamUGC_RemoveDependency :: proc(self: ^ISteamUGC, nParentPublishedFileID: PublishedFileId_t, nChildPublishedFileID: PublishedFileId_t) -> SteamAPICall_t ---
-	ISteamUGC_AddAppDependency :: proc(self: ^ISteamUGC, nPublishedFileID: PublishedFileId_t, nAppID: AppId_t) -> SteamAPICall_t ---
-	ISteamUGC_RemoveAppDependency :: proc(self: ^ISteamUGC, nPublishedFileID: PublishedFileId_t, nAppID: AppId_t) -> SteamAPICall_t ---
-	ISteamUGC_GetAppDependencies :: proc(self: ^ISteamUGC, nPublishedFileID: PublishedFileId_t) -> SteamAPICall_t ---
-	ISteamUGC_DeleteItem :: proc(self: ^ISteamUGC, nPublishedFileID: PublishedFileId_t) -> SteamAPICall_t ---
-	ISteamUGC_ShowWorkshopEULA :: proc(self: ^ISteamUGC) -> bool ---
-	ISteamUGC_GetWorkshopEULAStatus :: proc(self: ^ISteamUGC) -> SteamAPICall_t ---
-	SteamUGC_v016 :: proc() -> ^ISteamUGC ---
+	Input_Init :: proc(self: ^IInput, bExplicitlyCallRunFrame: bool) -> bool ---
+	Input_Shutdown :: proc(self: ^IInput) -> bool ---
+	Input_SetInputActionManifestFilePath :: proc(self: ^IInput, pchInputActionManifestAbsolutePath: cstring) -> bool ---
+	Input_RunFrame :: proc(self: ^IInput, bReservedValue: bool) ---
+	Input_BWaitForData :: proc(self: ^IInput, bWaitForever: bool, unTimeout: uint32) -> bool ---
+	Input_BNewDataAvailable :: proc(self: ^IInput) -> bool ---
+	Input_GetConnectedControllers :: proc(self: ^IInput, handlesOut: ^InputHandle_t) -> c.int ---
+	Input_EnableDeviceCallbacks :: proc(self: ^IInput) ---
+	Input_EnableActionEventCallbacks :: proc(self: ^IInput, pCallback: SteamInputActionEventCallbackPointer) ---
+	Input_GetActionSetHandle :: proc(self: ^IInput, pszActionSetName: cstring) -> InputActionSetHandle_t ---
+	Input_ActivateActionSet :: proc(self: ^IInput, inputHandle: InputHandle_t, actionSetHandle: InputActionSetHandle_t) ---
+	Input_GetCurrentActionSet :: proc(self: ^IInput, inputHandle: InputHandle_t) -> InputActionSetHandle_t ---
+	Input_ActivateActionSetLayer :: proc(self: ^IInput, inputHandle: InputHandle_t, actionSetLayerHandle: InputActionSetHandle_t) ---
+	Input_DeactivateActionSetLayer :: proc(self: ^IInput, inputHandle: InputHandle_t, actionSetLayerHandle: InputActionSetHandle_t) ---
+	Input_DeactivateAllActionSetLayers :: proc(self: ^IInput, inputHandle: InputHandle_t) ---
+	Input_GetActiveActionSetLayers :: proc(self: ^IInput, inputHandle: InputHandle_t, handlesOut: ^InputActionSetHandle_t) -> c.int ---
+	Input_GetDigitalActionHandle :: proc(self: ^IInput, pszActionName: cstring) -> InputDigitalActionHandle_t ---
+	Input_GetDigitalActionData :: proc(self: ^IInput, inputHandle: InputHandle_t, digitalActionHandle: InputDigitalActionHandle_t) -> InputDigitalActionData_t ---
+	Input_GetDigitalActionOrigins :: proc(self: ^IInput, inputHandle: InputHandle_t, actionSetHandle: InputActionSetHandle_t, digitalActionHandle: InputDigitalActionHandle_t, originsOut: ^EInputActionOrigin) -> c.int ---
+	Input_GetStringForDigitalActionName :: proc(self: ^IInput, eActionHandle: InputDigitalActionHandle_t) -> cstring ---
+	Input_GetAnalogActionHandle :: proc(self: ^IInput, pszActionName: cstring) -> InputAnalogActionHandle_t ---
+	Input_GetAnalogActionData :: proc(self: ^IInput, inputHandle: InputHandle_t, analogActionHandle: InputAnalogActionHandle_t) -> InputAnalogActionData_t ---
+	Input_GetAnalogActionOrigins :: proc(self: ^IInput, inputHandle: InputHandle_t, actionSetHandle: InputActionSetHandle_t, analogActionHandle: InputAnalogActionHandle_t, originsOut: ^EInputActionOrigin) -> c.int ---
+	Input_GetGlyphPNGForActionOrigin :: proc(self: ^IInput, eOrigin: EInputActionOrigin, eSize: ESteamInputGlyphSize, unFlags: uint32) -> cstring ---
+	Input_GetGlyphSVGForActionOrigin :: proc(self: ^IInput, eOrigin: EInputActionOrigin, unFlags: uint32) -> cstring ---
+	Input_GetGlyphForActionOrigin_Legacy :: proc(self: ^IInput, eOrigin: EInputActionOrigin) -> cstring ---
+	Input_GetStringForActionOrigin :: proc(self: ^IInput, eOrigin: EInputActionOrigin) -> cstring ---
+	Input_GetStringForAnalogActionName :: proc(self: ^IInput, eActionHandle: InputAnalogActionHandle_t) -> cstring ---
+	Input_StopAnalogActionMomentum :: proc(self: ^IInput, inputHandle: InputHandle_t, eAction: InputAnalogActionHandle_t) ---
+	Input_GetMotionData :: proc(self: ^IInput, inputHandle: InputHandle_t) -> InputMotionData_t ---
+	Input_TriggerVibration :: proc(self: ^IInput, inputHandle: InputHandle_t, usLeftSpeed: c.ushort, usRightSpeed: c.ushort) ---
+	Input_TriggerVibrationExtended :: proc(self: ^IInput, inputHandle: InputHandle_t, usLeftSpeed: c.ushort, usRightSpeed: c.ushort, usLeftTriggerSpeed: c.ushort, usRightTriggerSpeed: c.ushort) ---
+	Input_TriggerSimpleHapticEvent :: proc(self: ^IInput, inputHandle: InputHandle_t, eHapticLocation: EControllerHapticLocation, nIntensity: uint8, nGainDB: i8, nOtherIntensity: uint8, nOtherGainDB: i8) ---
+	Input_SetLEDColor :: proc(self: ^IInput, inputHandle: InputHandle_t, nColorR: uint8, nColorG: uint8, nColorB: uint8, nFlags: c.uint) ---
+	Input_Legacy_TriggerHapticPulse :: proc(self: ^IInput, inputHandle: InputHandle_t, eTargetPad: ESteamControllerPad, usDurationMicroSec: c.ushort) ---
+	Input_Legacy_TriggerRepeatedHapticPulse :: proc(self: ^IInput, inputHandle: InputHandle_t, eTargetPad: ESteamControllerPad, usDurationMicroSec: c.ushort, usOffMicroSec: c.ushort, unRepeat: c.ushort, nFlags: c.uint) ---
+	Input_ShowBindingPanel :: proc(self: ^IInput, inputHandle: InputHandle_t) -> bool ---
+	Input_GetInputTypeForHandle :: proc(self: ^IInput, inputHandle: InputHandle_t) -> ESteamInputType ---
+	Input_GetControllerForGamepadIndex :: proc(self: ^IInput, nIndex: c.int) -> InputHandle_t ---
+	Input_GetGamepadIndexForController :: proc(self: ^IInput, ulinputHandle: InputHandle_t) -> c.int ---
+	Input_GetStringForXboxOrigin :: proc(self: ^IInput, eOrigin: EXboxOrigin) -> cstring ---
+	Input_GetGlyphForXboxOrigin :: proc(self: ^IInput, eOrigin: EXboxOrigin) -> cstring ---
+	Input_GetActionOriginFromXboxOrigin :: proc(self: ^IInput, inputHandle: InputHandle_t, eOrigin: EXboxOrigin) -> EInputActionOrigin ---
+	Input_TranslateActionOrigin :: proc(self: ^IInput, eDestinationInputType: ESteamInputType, eSourceOrigin: EInputActionOrigin) -> EInputActionOrigin ---
+	Input_GetDeviceBindingRevision :: proc(self: ^IInput, inputHandle: InputHandle_t, pMajor: ^int, pMinor: ^int) -> bool ---
+	Input_GetRemotePlaySessionID :: proc(self: ^IInput, inputHandle: InputHandle_t) -> uint32 ---
+	Input_GetSessionInputConfigurationSettings :: proc(self: ^IInput) -> uint16 ---
+	// IInput_SetDualSenseTriggerEffect :: proc(self: ^IInput, inputHandle: InputHandle_t, pParam: ^ScePadTriggerEffectParam) ---
 
-	ISteamAppList_GetNumInstalledApps :: proc(self: ^ISteamAppList) -> uint32 ---
-	ISteamAppList_GetInstalledApps :: proc(self: ^ISteamAppList, pvecAppID: ^AppId_t, unMaxAppIDs: uint32) -> uint32 ---
-	ISteamAppList_GetAppName :: proc(self: ^ISteamAppList, nAppID: AppId_t, pchName: ^u8, cchNameMax: c.int) -> c.int ---
-	ISteamAppList_GetAppInstallDir :: proc(self: ^ISteamAppList, nAppID: AppId_t, pchDirectory: ^u8, cchNameMax: c.int) -> c.int ---
-	ISteamAppList_GetAppBuildId :: proc(self: ^ISteamAppList, nAppID: AppId_t) -> c.int ---
-	SteamAppList_v001 :: proc() -> ^ISteamAppList ---
+	Controller_Init :: proc(self: ^IController) -> bool ---
+	Controller_Shutdown :: proc(self: ^IController) -> bool ---
+	Controller_RunFrame :: proc(self: ^IController) ---
+	Controller_GetConnectedControllers :: proc(self: ^IController, handlesOut: ^ControllerHandle_t) -> c.int ---
+	Controller_GetActionSetHandle :: proc(self: ^IController, pszActionSetName: cstring) -> ControllerActionSetHandle_t ---
+	Controller_ActivateActionSet :: proc(self: ^IController, controllerHandle: ControllerHandle_t, actionSetHandle: ControllerActionSetHandle_t) ---
+	Controller_GetCurrentActionSet :: proc(self: ^IController, controllerHandle: ControllerHandle_t) -> ControllerActionSetHandle_t ---
+	Controller_ActivateActionSetLayer :: proc(self: ^IController, controllerHandle: ControllerHandle_t, actionSetLayerHandle: ControllerActionSetHandle_t) ---
+	Controller_DeactivateActionSetLayer :: proc(self: ^IController, controllerHandle: ControllerHandle_t, actionSetLayerHandle: ControllerActionSetHandle_t) ---
+	Controller_DeactivateAllActionSetLayers :: proc(self: ^IController, controllerHandle: ControllerHandle_t) ---
+	Controller_GetActiveActionSetLayers :: proc(self: ^IController, controllerHandle: ControllerHandle_t, handlesOut: ^ControllerActionSetHandle_t) -> c.int ---
+	Controller_GetDigitalActionHandle :: proc(self: ^IController, pszActionName: cstring) -> ControllerDigitalActionHandle_t ---
+	Controller_GetDigitalActionData :: proc(self: ^IController, controllerHandle: ControllerHandle_t, digitalActionHandle: ControllerDigitalActionHandle_t) -> InputDigitalActionData_t ---
+	Controller_GetDigitalActionOrigins :: proc(self: ^IController, controllerHandle: ControllerHandle_t, actionSetHandle: ControllerActionSetHandle_t, digitalActionHandle: ControllerDigitalActionHandle_t, originsOut: ^EControllerActionOrigin) -> c.int ---
+	Controller_GetAnalogActionHandle :: proc(self: ^IController, pszActionName: cstring) -> ControllerAnalogActionHandle_t ---
+	Controller_GetAnalogActionData :: proc(self: ^IController, controllerHandle: ControllerHandle_t, analogActionHandle: ControllerAnalogActionHandle_t) -> InputAnalogActionData_t ---
+	Controller_GetAnalogActionOrigins :: proc(self: ^IController, controllerHandle: ControllerHandle_t, actionSetHandle: ControllerActionSetHandle_t, analogActionHandle: ControllerAnalogActionHandle_t, originsOut: ^EControllerActionOrigin) -> c.int ---
+	Controller_GetGlyphForActionOrigin :: proc(self: ^IController, eOrigin: EControllerActionOrigin) -> cstring ---
+	Controller_GetStringForActionOrigin :: proc(self: ^IController, eOrigin: EControllerActionOrigin) -> cstring ---
+	Controller_StopAnalogActionMomentum :: proc(self: ^IController, controllerHandle: ControllerHandle_t, eAction: ControllerAnalogActionHandle_t) ---
+	Controller_GetMotionData :: proc(self: ^IController, controllerHandle: ControllerHandle_t) -> InputMotionData_t ---
+	Controller_TriggerHapticPulse :: proc(self: ^IController, controllerHandle: ControllerHandle_t, eTargetPad: ESteamControllerPad, usDurationMicroSec: c.ushort) ---
+	Controller_TriggerRepeatedHapticPulse :: proc(self: ^IController, controllerHandle: ControllerHandle_t, eTargetPad: ESteamControllerPad, usDurationMicroSec: c.ushort, usOffMicroSec: c.ushort, unRepeat: c.ushort, nFlags: c.uint) ---
+	Controller_TriggerVibration :: proc(self: ^IController, controllerHandle: ControllerHandle_t, usLeftSpeed: c.ushort, usRightSpeed: c.ushort) ---
+	Controller_SetLEDColor :: proc(self: ^IController, controllerHandle: ControllerHandle_t, nColorR: uint8, nColorG: uint8, nColorB: uint8, nFlags: c.uint) ---
+	Controller_ShowBindingPanel :: proc(self: ^IController, controllerHandle: ControllerHandle_t) -> bool ---
+	Controller_GetInputTypeForHandle :: proc(self: ^IController, controllerHandle: ControllerHandle_t) -> ESteamInputType ---
+	Controller_GetControllerForGamepadIndex :: proc(self: ^IController, nIndex: c.int) -> ControllerHandle_t ---
+	Controller_GetGamepadIndexForController :: proc(self: ^IController, ulControllerHandle: ControllerHandle_t) -> c.int ---
+	Controller_GetStringForXboxOrigin :: proc(self: ^IController, eOrigin: EXboxOrigin) -> cstring ---
+	Controller_GetGlyphForXboxOrigin :: proc(self: ^IController, eOrigin: EXboxOrigin) -> cstring ---
+	Controller_GetActionOriginFromXboxOrigin :: proc(self: ^IController, controllerHandle: ControllerHandle_t, eOrigin: EXboxOrigin) -> EControllerActionOrigin ---
+	Controller_TranslateActionOrigin :: proc(self: ^IController, eDestinationInputType: ESteamInputType, eSourceOrigin: EControllerActionOrigin) -> EControllerActionOrigin ---
+	Controller_GetControllerBindingRevision :: proc(self: ^IController, controllerHandle: ControllerHandle_t, pMajor: ^int, pMinor: ^int) -> bool ---
 
-	ISteamHTMLSurface_Init :: proc(self: ^ISteamHTMLSurface) -> bool ---
-	ISteamHTMLSurface_Shutdown :: proc(self: ^ISteamHTMLSurface) -> bool ---
-	ISteamHTMLSurface_CreateBrowser :: proc(self: ^ISteamHTMLSurface, pchUserAgent: cstring, pchUserCSS: cstring) -> SteamAPICall_t ---
-	ISteamHTMLSurface_RemoveBrowser :: proc(self: ^ISteamHTMLSurface, unBrowserHandle: HHTMLBrowser) ---
-	ISteamHTMLSurface_LoadURL :: proc(self: ^ISteamHTMLSurface, unBrowserHandle: HHTMLBrowser, pchURL: cstring, pchPostData: cstring) ---
-	ISteamHTMLSurface_SetSize :: proc(self: ^ISteamHTMLSurface, unBrowserHandle: HHTMLBrowser, unWidth: uint32, unHeight: uint32) ---
-	ISteamHTMLSurface_StopLoad :: proc(self: ^ISteamHTMLSurface, unBrowserHandle: HHTMLBrowser) ---
-	ISteamHTMLSurface_Reload :: proc(self: ^ISteamHTMLSurface, unBrowserHandle: HHTMLBrowser) ---
-	ISteamHTMLSurface_GoBack :: proc(self: ^ISteamHTMLSurface, unBrowserHandle: HHTMLBrowser) ---
-	ISteamHTMLSurface_GoForward :: proc(self: ^ISteamHTMLSurface, unBrowserHandle: HHTMLBrowser) ---
-	ISteamHTMLSurface_AddHeader :: proc(self: ^ISteamHTMLSurface, unBrowserHandle: HHTMLBrowser, pchKey: cstring, pchValue: cstring) ---
-	ISteamHTMLSurface_ExecuteJavascript :: proc(self: ^ISteamHTMLSurface, unBrowserHandle: HHTMLBrowser, pchScript: cstring) ---
-	ISteamHTMLSurface_MouseUp :: proc(self: ^ISteamHTMLSurface, unBrowserHandle: HHTMLBrowser, eMouseButton: ISteamHTMLSurface_EHTMLMouseButton) ---
-	ISteamHTMLSurface_MouseDown :: proc(self: ^ISteamHTMLSurface, unBrowserHandle: HHTMLBrowser, eMouseButton: ISteamHTMLSurface_EHTMLMouseButton) ---
-	ISteamHTMLSurface_MouseDoubleClick :: proc(self: ^ISteamHTMLSurface, unBrowserHandle: HHTMLBrowser, eMouseButton: ISteamHTMLSurface_EHTMLMouseButton) ---
-	ISteamHTMLSurface_MouseMove :: proc(self: ^ISteamHTMLSurface, unBrowserHandle: HHTMLBrowser, x: c.int, y: c.int) ---
-	ISteamHTMLSurface_MouseWheel :: proc(self: ^ISteamHTMLSurface, unBrowserHandle: HHTMLBrowser, nDelta: int32) ---
-	ISteamHTMLSurface_KeyDown :: proc(self: ^ISteamHTMLSurface, unBrowserHandle: HHTMLBrowser, nNativeKeyCode: uint32, eHTMLKeyModifiers: ISteamHTMLSurface_EHTMLKeyModifiers, bIsSystemKey: bool) ---
-	ISteamHTMLSurface_KeyUp :: proc(self: ^ISteamHTMLSurface, unBrowserHandle: HHTMLBrowser, nNativeKeyCode: uint32, eHTMLKeyModifiers: ISteamHTMLSurface_EHTMLKeyModifiers) ---
-	ISteamHTMLSurface_KeyChar :: proc(self: ^ISteamHTMLSurface, unBrowserHandle: HHTMLBrowser, cUnicodeChar: uint32, eHTMLKeyModifiers: ISteamHTMLSurface_EHTMLKeyModifiers) ---
-	ISteamHTMLSurface_SetHorizontalScroll :: proc(self: ^ISteamHTMLSurface, unBrowserHandle: HHTMLBrowser, nAbsolutePixelScroll: uint32) ---
-	ISteamHTMLSurface_SetVerticalScroll :: proc(self: ^ISteamHTMLSurface, unBrowserHandle: HHTMLBrowser, nAbsolutePixelScroll: uint32) ---
-	ISteamHTMLSurface_SetKeyFocus :: proc(self: ^ISteamHTMLSurface, unBrowserHandle: HHTMLBrowser, bHasKeyFocus: bool) ---
-	ISteamHTMLSurface_ViewSource :: proc(self: ^ISteamHTMLSurface, unBrowserHandle: HHTMLBrowser) ---
-	ISteamHTMLSurface_CopyToClipboard :: proc(self: ^ISteamHTMLSurface, unBrowserHandle: HHTMLBrowser) ---
-	ISteamHTMLSurface_PasteFromClipboard :: proc(self: ^ISteamHTMLSurface, unBrowserHandle: HHTMLBrowser) ---
-	ISteamHTMLSurface_Find :: proc(self: ^ISteamHTMLSurface, unBrowserHandle: HHTMLBrowser, pchSearchStr: cstring, bCurrentlyInFind: bool, bReverse: bool) ---
-	ISteamHTMLSurface_StopFind :: proc(self: ^ISteamHTMLSurface, unBrowserHandle: HHTMLBrowser) ---
-	ISteamHTMLSurface_GetLinkAtPosition :: proc(self: ^ISteamHTMLSurface, unBrowserHandle: HHTMLBrowser, x: c.int, y: c.int) ---
-	ISteamHTMLSurface_SetCookie :: proc(self: ^ISteamHTMLSurface, pchHostname: cstring, pchKey: cstring, pchValue: cstring, pchPath: cstring, nExpires: RTime32, bSecure: bool, bHTTPOnly: bool) ---
-	ISteamHTMLSurface_SetPageScaleFactor :: proc(self: ^ISteamHTMLSurface, unBrowserHandle: HHTMLBrowser, flZoom: f32, nPointX: c.int, nPointY: c.int) ---
-	ISteamHTMLSurface_SetBackgroundMode :: proc(self: ^ISteamHTMLSurface, unBrowserHandle: HHTMLBrowser, bBackgroundMode: bool) ---
-	ISteamHTMLSurface_SetDPIScalingFactor :: proc(self: ^ISteamHTMLSurface, unBrowserHandle: HHTMLBrowser, flDPIScaling: f32) ---
-	ISteamHTMLSurface_OpenDeveloperTools :: proc(self: ^ISteamHTMLSurface, unBrowserHandle: HHTMLBrowser) ---
-	ISteamHTMLSurface_AllowStartRequest :: proc(self: ^ISteamHTMLSurface, unBrowserHandle: HHTMLBrowser, bAllowed: bool) ---
-	ISteamHTMLSurface_JSDialogResponse :: proc(self: ^ISteamHTMLSurface, unBrowserHandle: HHTMLBrowser, bResult: bool) ---
-	ISteamHTMLSurface_FileLoadDialogResponse :: proc(self: ^ISteamHTMLSurface, unBrowserHandle: HHTMLBrowser, pchSelectedFiles: ^cstring) ---
-	SteamHTMLSurface_v005 :: proc() -> ^ISteamHTMLSurface ---
+	UGC_CreateQueryUserUGCRequest :: proc(self: ^IUGC, unAccountID: AccountID_t, eListType: EUserUGCList, eMatchingUGCType: EUGCMatchingUGCType, eSortOrder: EUserUGCListSortOrder, nCreatorAppID: AppId_t, nConsumerAppID: AppId_t, unPage: uint32) -> UGCQueryHandle_t ---
+	UGC_CreateQueryAllUGCRequestByPage :: proc(self: ^IUGC, eQueryType: EUGCQuery, eMatchingeMatchingUGCTypeFileType: EUGCMatchingUGCType, nCreatorAppID: AppId_t, nConsumerAppID: AppId_t, unPage: uint32) -> UGCQueryHandle_t ---
+	UGC_CreateQueryAllUGCRequestByCursor :: proc(self: ^IUGC, eQueryType: EUGCQuery, eMatchingeMatchingUGCTypeFileType: EUGCMatchingUGCType, nCreatorAppID: AppId_t, nConsumerAppID: AppId_t, pchCursor: cstring) -> UGCQueryHandle_t ---
+	UGC_CreateQueryUGCDetailsRequest :: proc(self: ^IUGC, pvecPublishedFileID: ^PublishedFileId_t, unNumPublishedFileIDs: uint32) -> UGCQueryHandle_t ---
+	UGC_SendQueryUGCRequest :: proc(self: ^IUGC, handle: UGCQueryHandle_t) -> SteamAPICall_t ---
+	UGC_GetQueryUGCResult :: proc(self: ^IUGC, handle: UGCQueryHandle_t, index: uint32, pDetails: ^SteamUGCDetails_t) -> bool ---
+	UGC_GetQueryUGCNumTags :: proc(self: ^IUGC, handle: UGCQueryHandle_t, index: uint32) -> uint32 ---
+	UGC_GetQueryUGCTag :: proc(self: ^IUGC, handle: UGCQueryHandle_t, index: uint32, indexTag: uint32, pchValue: ^u8, cchValueSize: uint32) -> bool ---
+	UGC_GetQueryUGCTagDisplayName :: proc(self: ^IUGC, handle: UGCQueryHandle_t, index: uint32, indexTag: uint32, pchValue: ^u8, cchValueSize: uint32) -> bool ---
+	UGC_GetQueryUGCPreviewURL :: proc(self: ^IUGC, handle: UGCQueryHandle_t, index: uint32, pchURL: ^u8, cchURLSize: uint32) -> bool ---
+	UGC_GetQueryUGCMetadata :: proc(self: ^IUGC, handle: UGCQueryHandle_t, index: uint32, pchMetadata: ^u8, cchMetadatasize: uint32) -> bool ---
+	UGC_GetQueryUGCChildren :: proc(self: ^IUGC, handle: UGCQueryHandle_t, index: uint32, pvecPublishedFileID: ^PublishedFileId_t, cMaxEntries: uint32) -> bool ---
+	UGC_GetQueryUGCStatistic :: proc(self: ^IUGC, handle: UGCQueryHandle_t, index: uint32, eStatType: EItemStatistic, pStatValue: ^uint64) -> bool ---
+	UGC_GetQueryUGCNumAdditionalPreviews :: proc(self: ^IUGC, handle: UGCQueryHandle_t, index: uint32) -> uint32 ---
+	UGC_GetQueryUGCAdditionalPreview :: proc(self: ^IUGC, handle: UGCQueryHandle_t, index: uint32, previewIndex: uint32, pchURLOrVideoID: ^u8, cchURLSize: uint32, pchOriginalFileName: ^u8, cchOriginalFileNameSize: uint32, pPreviewType: ^EItemPreviewType) -> bool ---
+	UGC_GetQueryUGCNumKeyValueTags :: proc(self: ^IUGC, handle: UGCQueryHandle_t, index: uint32) -> uint32 ---
+	UGC_GetQueryUGCKeyValueTag :: proc(self: ^IUGC, handle: UGCQueryHandle_t, index: uint32, pchKey: cstring, pchValue: ^u8, cchValueSize: uint32) -> bool ---
+	UGC_ReleaseQueryUGCRequest :: proc(self: ^IUGC, handle: UGCQueryHandle_t) -> bool ---
+	UGC_AddRequiredTag :: proc(self: ^IUGC, handle: UGCQueryHandle_t, pTagName: cstring) -> bool ---
+	UGC_AddRequiredTagGroup :: proc(self: ^IUGC, handle: UGCQueryHandle_t, pTagGroups: ^SteamParamStringArray_t) -> bool ---
+	UGC_AddExcludedTag :: proc(self: ^IUGC, handle: UGCQueryHandle_t, pTagName: cstring) -> bool ---
+	UGC_SetReturnOnlyIDs :: proc(self: ^IUGC, handle: UGCQueryHandle_t, bReturnOnlyIDs: bool) -> bool ---
+	UGC_SetReturnKeyValueTags :: proc(self: ^IUGC, handle: UGCQueryHandle_t, bReturnKeyValueTags: bool) -> bool ---
+	UGC_SetReturnLongDescription :: proc(self: ^IUGC, handle: UGCQueryHandle_t, bReturnLongDescription: bool) -> bool ---
+	UGC_SetReturnMetadata :: proc(self: ^IUGC, handle: UGCQueryHandle_t, bReturnMetadata: bool) -> bool ---
+	UGC_SetReturnChildren :: proc(self: ^IUGC, handle: UGCQueryHandle_t, bReturnChildren: bool) -> bool ---
+	UGC_SetReturnAdditionalPreviews :: proc(self: ^IUGC, handle: UGCQueryHandle_t, bReturnAdditionalPreviews: bool) -> bool ---
+	UGC_SetReturnTotalOnly :: proc(self: ^IUGC, handle: UGCQueryHandle_t, bReturnTotalOnly: bool) -> bool ---
+	UGC_SetReturnPlaytimeStats :: proc(self: ^IUGC, handle: UGCQueryHandle_t, unDays: uint32) -> bool ---
+	UGC_SetLanguage :: proc(self: ^IUGC, handle: UGCQueryHandle_t, pchLanguage: cstring) -> bool ---
+	UGC_SetAllowCachedResponse :: proc(self: ^IUGC, handle: UGCQueryHandle_t, unMaxAgeSeconds: uint32) -> bool ---
+	UGC_SetCloudFileNameFilter :: proc(self: ^IUGC, handle: UGCQueryHandle_t, pMatchCloudFileName: cstring) -> bool ---
+	UGC_SetMatchAnyTag :: proc(self: ^IUGC, handle: UGCQueryHandle_t, bMatchAnyTag: bool) -> bool ---
+	UGC_SetSearchText :: proc(self: ^IUGC, handle: UGCQueryHandle_t, pSearchText: cstring) -> bool ---
+	UGC_SetRankedByTrendDays :: proc(self: ^IUGC, handle: UGCQueryHandle_t, unDays: uint32) -> bool ---
+	UGC_SetTimeCreatedDateRange :: proc(self: ^IUGC, handle: UGCQueryHandle_t, rtStart: RTime32, rtEnd: RTime32) -> bool ---
+	UGC_SetTimeUpdatedDateRange :: proc(self: ^IUGC, handle: UGCQueryHandle_t, rtStart: RTime32, rtEnd: RTime32) -> bool ---
+	UGC_AddRequiredKeyValueTag :: proc(self: ^IUGC, handle: UGCQueryHandle_t, pKey: cstring, pValue: cstring) -> bool ---
+	UGC_RequestUGCDetails :: proc(self: ^IUGC, nPublishedFileID: PublishedFileId_t, unMaxAgeSeconds: uint32) -> SteamAPICall_t ---
+	UGC_CreateItem :: proc(self: ^IUGC, nConsumerAppId: AppId_t, eFileType: EWorkshopFileType) -> SteamAPICall_t ---
+	UGC_StartItemUpdate :: proc(self: ^IUGC, nConsumerAppId: AppId_t, nPublishedFileID: PublishedFileId_t) -> UGCUpdateHandle_t ---
+	UGC_SetItemTitle :: proc(self: ^IUGC, handle: UGCUpdateHandle_t, pchTitle: cstring) -> bool ---
+	UGC_SetItemDescription :: proc(self: ^IUGC, handle: UGCUpdateHandle_t, pchDescription: cstring) -> bool ---
+	UGC_SetItemUpdateLanguage :: proc(self: ^IUGC, handle: UGCUpdateHandle_t, pchLanguage: cstring) -> bool ---
+	UGC_SetItemMetadata :: proc(self: ^IUGC, handle: UGCUpdateHandle_t, pchMetaData: cstring) -> bool ---
+	UGC_SetItemVisibility :: proc(self: ^IUGC, handle: UGCUpdateHandle_t, eVisibility: ERemoteStoragePublishedFileVisibility) -> bool ---
+	UGC_SetItemTags :: proc(self: ^IUGC, updateHandle: UGCUpdateHandle_t, pTags: ^SteamParamStringArray_t) -> bool ---
+	UGC_SetItemContent :: proc(self: ^IUGC, handle: UGCUpdateHandle_t, pszContentFolder: cstring) -> bool ---
+	UGC_SetItemPreview :: proc(self: ^IUGC, handle: UGCUpdateHandle_t, pszPreviewFile: cstring) -> bool ---
+	UGC_SetAllowLegacyUpload :: proc(self: ^IUGC, handle: UGCUpdateHandle_t, bAllowLegacyUpload: bool) -> bool ---
+	UGC_RemoveAllItemKeyValueTags :: proc(self: ^IUGC, handle: UGCUpdateHandle_t) -> bool ---
+	UGC_RemoveItemKeyValueTags :: proc(self: ^IUGC, handle: UGCUpdateHandle_t, pchKey: cstring) -> bool ---
+	UGC_AddItemKeyValueTag :: proc(self: ^IUGC, handle: UGCUpdateHandle_t, pchKey: cstring, pchValue: cstring) -> bool ---
+	UGC_AddItemPreviewFile :: proc(self: ^IUGC, handle: UGCUpdateHandle_t, pszPreviewFile: cstring, type: EItemPreviewType) -> bool ---
+	UGC_AddItemPreviewVideo :: proc(self: ^IUGC, handle: UGCUpdateHandle_t, pszVideoID: cstring) -> bool ---
+	UGC_UpdateItemPreviewFile :: proc(self: ^IUGC, handle: UGCUpdateHandle_t, index: uint32, pszPreviewFile: cstring) -> bool ---
+	UGC_UpdateItemPreviewVideo :: proc(self: ^IUGC, handle: UGCUpdateHandle_t, index: uint32, pszVideoID: cstring) -> bool ---
+	UGC_RemoveItemPreview :: proc(self: ^IUGC, handle: UGCUpdateHandle_t, index: uint32) -> bool ---
+	UGC_SubmitItemUpdate :: proc(self: ^IUGC, handle: UGCUpdateHandle_t, pchChangeNote: cstring) -> SteamAPICall_t ---
+	UGC_GetItemUpdateProgress :: proc(self: ^IUGC, handle: UGCUpdateHandle_t, punBytesProcessed: ^uint64, punBytesTotal: ^uint64) -> EItemUpdateStatus ---
+	UGC_SetUserItemVote :: proc(self: ^IUGC, nPublishedFileID: PublishedFileId_t, bVoteUp: bool) -> SteamAPICall_t ---
+	UGC_GetUserItemVote :: proc(self: ^IUGC, nPublishedFileID: PublishedFileId_t) -> SteamAPICall_t ---
+	UGC_AddItemToFavorites :: proc(self: ^IUGC, nAppId: AppId_t, nPublishedFileID: PublishedFileId_t) -> SteamAPICall_t ---
+	UGC_RemoveItemFromFavorites :: proc(self: ^IUGC, nAppId: AppId_t, nPublishedFileID: PublishedFileId_t) -> SteamAPICall_t ---
+	UGC_SubscribeItem :: proc(self: ^IUGC, nPublishedFileID: PublishedFileId_t) -> SteamAPICall_t ---
+	UGC_UnsubscribeItem :: proc(self: ^IUGC, nPublishedFileID: PublishedFileId_t) -> SteamAPICall_t ---
+	UGC_GetNumSubscribedItems :: proc(self: ^IUGC) -> uint32 ---
+	UGC_GetSubscribedItems :: proc(self: ^IUGC, pvecPublishedFileID: ^PublishedFileId_t, cMaxEntries: uint32) -> uint32 ---
+	UGC_GetItemState :: proc(self: ^IUGC, nPublishedFileID: PublishedFileId_t) -> uint32 ---
+	UGC_GetItemInstallInfo :: proc(self: ^IUGC, nPublishedFileID: PublishedFileId_t, punSizeOnDisk: ^uint64, pchFolder: ^u8, cchFolderSize: uint32, punTimeStamp: ^uint32) -> bool ---
+	UGC_GetItemDownloadInfo :: proc(self: ^IUGC, nPublishedFileID: PublishedFileId_t, punBytesDownloaded: ^uint64, punBytesTotal: ^uint64) -> bool ---
+	UGC_DownloadItem :: proc(self: ^IUGC, nPublishedFileID: PublishedFileId_t, bHighPriority: bool) -> bool ---
+	UGC_BInitWorkshopForGameServer :: proc(self: ^IUGC, unWorkshopDepotID: DepotId_t, pszFolder: cstring) -> bool ---
+	UGC_SuspendDownloads :: proc(self: ^IUGC, bSuspend: bool) ---
+	UGC_StartPlaytimeTracking :: proc(self: ^IUGC, pvecPublishedFileID: ^PublishedFileId_t, unNumPublishedFileIDs: uint32) -> SteamAPICall_t ---
+	UGC_StopPlaytimeTracking :: proc(self: ^IUGC, pvecPublishedFileID: ^PublishedFileId_t, unNumPublishedFileIDs: uint32) -> SteamAPICall_t ---
+	UGC_StopPlaytimeTrackingForAllItems :: proc(self: ^IUGC) -> SteamAPICall_t ---
+	UGC_AddDependency :: proc(self: ^IUGC, nParentPublishedFileID: PublishedFileId_t, nChildPublishedFileID: PublishedFileId_t) -> SteamAPICall_t ---
+	UGC_RemoveDependency :: proc(self: ^IUGC, nParentPublishedFileID: PublishedFileId_t, nChildPublishedFileID: PublishedFileId_t) -> SteamAPICall_t ---
+	UGC_AddAppDependency :: proc(self: ^IUGC, nPublishedFileID: PublishedFileId_t, nAppID: AppId_t) -> SteamAPICall_t ---
+	UGC_RemoveAppDependency :: proc(self: ^IUGC, nPublishedFileID: PublishedFileId_t, nAppID: AppId_t) -> SteamAPICall_t ---
+	UGC_GetAppDependencies :: proc(self: ^IUGC, nPublishedFileID: PublishedFileId_t) -> SteamAPICall_t ---
+	UGC_DeleteItem :: proc(self: ^IUGC, nPublishedFileID: PublishedFileId_t) -> SteamAPICall_t ---
+	UGC_ShowWorkshopEULA :: proc(self: ^IUGC) -> bool ---
+	UGC_GetWorkshopEULAStatus :: proc(self: ^IUGC) -> SteamAPICall_t ---
 
-	ISteamInventory_GetResultStatus :: proc(self: ^ISteamInventory, resultHandle: SteamInventoryResult_t) -> EResult ---
-	ISteamInventory_GetResultItems :: proc(self: ^ISteamInventory, resultHandle: SteamInventoryResult_t, pOutItemsArray: ^SteamItemDetails_t, punOutItemsArraySize: ^uint32) -> bool ---
-	ISteamInventory_GetResultItemProperty :: proc(self: ^ISteamInventory, resultHandle: SteamInventoryResult_t, unItemIndex: uint32, pchPropertyName: cstring, pchValueBuffer: ^u8, punValueBufferSizeOut: ^uint32) -> bool ---
-	ISteamInventory_GetResultTimestamp :: proc(self: ^ISteamInventory, resultHandle: SteamInventoryResult_t) -> uint32 ---
-	ISteamInventory_CheckResultSteamID :: proc(self: ^ISteamInventory, resultHandle: SteamInventoryResult_t, steamIDExpected: CSteamID) -> bool ---
-	ISteamInventory_DestroyResult :: proc(self: ^ISteamInventory, resultHandle: SteamInventoryResult_t) ---
-	ISteamInventory_GetAllItems :: proc(self: ^ISteamInventory, pResultHandle: ^SteamInventoryResult_t) -> bool ---
-	ISteamInventory_GetItemsByID :: proc(self: ^ISteamInventory, pResultHandle: ^SteamInventoryResult_t, pInstanceIDs: ^SteamItemInstanceID_t, unCountInstanceIDs: uint32) -> bool ---
-	ISteamInventory_SerializeResult :: proc(self: ^ISteamInventory, resultHandle: SteamInventoryResult_t, pOutBuffer: rawptr, punOutBufferSize: ^uint32) -> bool ---
-	ISteamInventory_DeserializeResult :: proc(self: ^ISteamInventory, pOutResultHandle: ^SteamInventoryResult_t, pBuffer: rawptr, unBufferSize: uint32, bRESERVED_MUST_BE_FALSE: bool) -> bool ---
-	ISteamInventory_GenerateItems :: proc(self: ^ISteamInventory, pResultHandle: ^SteamInventoryResult_t, pArrayItemDefs: ^SteamItemDef_t, punArrayQuantity: ^uint32, unArrayLength: uint32) -> bool ---
-	ISteamInventory_GrantPromoItems :: proc(self: ^ISteamInventory, pResultHandle: ^SteamInventoryResult_t) -> bool ---
-	ISteamInventory_AddPromoItem :: proc(self: ^ISteamInventory, pResultHandle: ^SteamInventoryResult_t, itemDef: SteamItemDef_t) -> bool ---
-	ISteamInventory_AddPromoItems :: proc(self: ^ISteamInventory, pResultHandle: ^SteamInventoryResult_t, pArrayItemDefs: ^SteamItemDef_t, unArrayLength: uint32) -> bool ---
-	ISteamInventory_ConsumeItem :: proc(self: ^ISteamInventory, pResultHandle: ^SteamInventoryResult_t, itemConsume: SteamItemInstanceID_t, unQuantity: uint32) -> bool ---
-	ISteamInventory_ExchangeItems :: proc(self: ^ISteamInventory, pResultHandle: ^SteamInventoryResult_t, pArrayGenerate: ^SteamItemDef_t, punArrayGenerateQuantity: ^uint32, unArrayGenerateLength: uint32, pArrayDestroy: ^SteamItemInstanceID_t, punArrayDestroyQuantity: ^uint32, unArrayDestroyLength: uint32) -> bool ---
-	ISteamInventory_TransferItemQuantity :: proc(self: ^ISteamInventory, pResultHandle: ^SteamInventoryResult_t, itemIdSource: SteamItemInstanceID_t, unQuantity: uint32, itemIdDest: SteamItemInstanceID_t) -> bool ---
-	ISteamInventory_SendItemDropHeartbeat :: proc(self: ^ISteamInventory) ---
-	ISteamInventory_TriggerItemDrop :: proc(self: ^ISteamInventory, pResultHandle: ^SteamInventoryResult_t, dropListDefinition: SteamItemDef_t) -> bool ---
-	ISteamInventory_TradeItems :: proc(self: ^ISteamInventory, pResultHandle: ^SteamInventoryResult_t, steamIDTradePartner: CSteamID, pArrayGive: ^SteamItemInstanceID_t, pArrayGiveQuantity: ^uint32, nArrayGiveLength: uint32, pArrayGet: ^SteamItemInstanceID_t, pArrayGetQuantity: ^uint32, nArrayGetLength: uint32) -> bool ---
-	ISteamInventory_LoadItemDefinitions :: proc(self: ^ISteamInventory) -> bool ---
-	ISteamInventory_GetItemDefinitionIDs :: proc(self: ^ISteamInventory, pItemDefIDs: ^SteamItemDef_t, punItemDefIDsArraySize: ^uint32) -> bool ---
-	ISteamInventory_GetItemDefinitionProperty :: proc(self: ^ISteamInventory, iDefinition: SteamItemDef_t, pchPropertyName: cstring, pchValueBuffer: ^u8, punValueBufferSizeOut: ^uint32) -> bool ---
-	ISteamInventory_RequestEligiblePromoItemDefinitionsIDs :: proc(self: ^ISteamInventory, steamID: CSteamID) -> SteamAPICall_t ---
-	ISteamInventory_GetEligiblePromoItemDefinitionIDs :: proc(self: ^ISteamInventory, steamID: CSteamID, pItemDefIDs: ^SteamItemDef_t, punItemDefIDsArraySize: ^uint32) -> bool ---
-	ISteamInventory_StartPurchase :: proc(self: ^ISteamInventory, pArrayItemDefs: ^SteamItemDef_t, punArrayQuantity: ^uint32, unArrayLength: uint32) -> SteamAPICall_t ---
-	ISteamInventory_RequestPrices :: proc(self: ^ISteamInventory) -> SteamAPICall_t ---
-	ISteamInventory_GetNumItemsWithPrices :: proc(self: ^ISteamInventory) -> uint32 ---
-	ISteamInventory_GetItemsWithPrices :: proc(self: ^ISteamInventory, pArrayItemDefs: ^SteamItemDef_t, pCurrentPrices: ^uint64, pBasePrices: ^uint64, unArrayLength: uint32) -> bool ---
-	ISteamInventory_GetItemPrice :: proc(self: ^ISteamInventory, iDefinition: SteamItemDef_t, pCurrentPrice: ^uint64, pBasePrice: ^uint64) -> bool ---
-	ISteamInventory_StartUpdateProperties :: proc(self: ^ISteamInventory) -> SteamInventoryUpdateHandle_t ---
-	ISteamInventory_RemoveProperty :: proc(self: ^ISteamInventory, handle: SteamInventoryUpdateHandle_t, nItemID: SteamItemInstanceID_t, pchPropertyName: cstring) -> bool ---
-	ISteamInventory_SetProperty :: proc(self: ^ISteamInventory, handle: SteamInventoryUpdateHandle_t, nItemID: SteamItemInstanceID_t, pchPropertyName: cstring, pchPropertyValue: cstring) -> bool ---
-	ISteamInventory_SetPropertyBool :: proc(self: ^ISteamInventory, handle: SteamInventoryUpdateHandle_t, nItemID: SteamItemInstanceID_t, pchPropertyName: cstring, bValue: bool) -> bool ---
-	ISteamInventory_SetPropertyInt64 :: proc(self: ^ISteamInventory, handle: SteamInventoryUpdateHandle_t, nItemID: SteamItemInstanceID_t, pchPropertyName: cstring, nValue: int64) -> bool ---
-	ISteamInventory_SetPropertyFloat :: proc(self: ^ISteamInventory, handle: SteamInventoryUpdateHandle_t, nItemID: SteamItemInstanceID_t, pchPropertyName: cstring, flValue: f32) -> bool ---
-	ISteamInventory_SubmitUpdateProperties :: proc(self: ^ISteamInventory, handle: SteamInventoryUpdateHandle_t, pResultHandle: ^SteamInventoryResult_t) -> bool ---
-	ISteamInventory_InspectItem :: proc(self: ^ISteamInventory, pResultHandle: ^SteamInventoryResult_t, pchItemToken: cstring) -> bool ---
-	SteamInventory_v003 :: proc() -> ^ISteamInventory ---
+	AppList_GetNumInstalledApps :: proc(self: ^IAppList) -> uint32 ---
+	AppList_GetInstalledApps :: proc(self: ^IAppList, pvecAppID: ^AppId_t, unMaxAppIDs: uint32) -> uint32 ---
+	AppList_GetAppName :: proc(self: ^IAppList, nAppID: AppId_t, pchName: ^u8, cchNameMax: c.int) -> c.int ---
+	AppList_GetAppInstallDir :: proc(self: ^IAppList, nAppID: AppId_t, pchDirectory: ^u8, cchNameMax: c.int) -> c.int ---
+	AppList_GetAppBuildId :: proc(self: ^IAppList, nAppID: AppId_t) -> c.int ---
 
-	ISteamVideo_GetVideoURL :: proc(self: ^ISteamVideo, unVideoAppID: AppId_t) ---
-	ISteamVideo_IsBroadcasting :: proc(self: ^ISteamVideo, pnNumViewers: ^int) -> bool ---
-	ISteamVideo_GetOPFSettings :: proc(self: ^ISteamVideo, unVideoAppID: AppId_t) ---
-	ISteamVideo_GetOPFStringForApp :: proc(self: ^ISteamVideo, unVideoAppID: AppId_t, pchBuffer: ^u8, pnBufferSize: ^int32) -> bool ---
-	SteamVideo_v002 :: proc() -> ^ISteamVideo ---
+	HTMLSurface_Init :: proc(self: ^IHTMLSurface) -> bool ---
+	HTMLSurface_Shutdown :: proc(self: ^IHTMLSurface) -> bool ---
+	HTMLSurface_CreateBrowser :: proc(self: ^IHTMLSurface, pchUserAgent: cstring, pchUserCSS: cstring) -> SteamAPICall_t ---
+	HTMLSurface_RemoveBrowser :: proc(self: ^IHTMLSurface, unBrowserHandle: HHTMLBrowser) ---
+	HTMLSurface_LoadURL :: proc(self: ^IHTMLSurface, unBrowserHandle: HHTMLBrowser, pchURL: cstring, pchPostData: cstring) ---
+	HTMLSurface_SetSize :: proc(self: ^IHTMLSurface, unBrowserHandle: HHTMLBrowser, unWidth: uint32, unHeight: uint32) ---
+	HTMLSurface_StopLoad :: proc(self: ^IHTMLSurface, unBrowserHandle: HHTMLBrowser) ---
+	HTMLSurface_Reload :: proc(self: ^IHTMLSurface, unBrowserHandle: HHTMLBrowser) ---
+	HTMLSurface_GoBack :: proc(self: ^IHTMLSurface, unBrowserHandle: HHTMLBrowser) ---
+	HTMLSurface_GoForward :: proc(self: ^IHTMLSurface, unBrowserHandle: HHTMLBrowser) ---
+	HTMLSurface_AddHeader :: proc(self: ^IHTMLSurface, unBrowserHandle: HHTMLBrowser, pchKey: cstring, pchValue: cstring) ---
+	HTMLSurface_ExecuteJavascript :: proc(self: ^IHTMLSurface, unBrowserHandle: HHTMLBrowser, pchScript: cstring) ---
+	HTMLSurface_MouseUp :: proc(self: ^IHTMLSurface, unBrowserHandle: HHTMLBrowser, eMouseButton: IHTMLSurface_EHTMLMouseButton) ---
+	HTMLSurface_MouseDown :: proc(self: ^IHTMLSurface, unBrowserHandle: HHTMLBrowser, eMouseButton: IHTMLSurface_EHTMLMouseButton) ---
+	HTMLSurface_MouseDoubleClick :: proc(self: ^IHTMLSurface, unBrowserHandle: HHTMLBrowser, eMouseButton: IHTMLSurface_EHTMLMouseButton) ---
+	HTMLSurface_MouseMove :: proc(self: ^IHTMLSurface, unBrowserHandle: HHTMLBrowser, x: c.int, y: c.int) ---
+	HTMLSurface_MouseWheel :: proc(self: ^IHTMLSurface, unBrowserHandle: HHTMLBrowser, nDelta: int32) ---
+	HTMLSurface_KeyDown :: proc(self: ^IHTMLSurface, unBrowserHandle: HHTMLBrowser, nNativeKeyCode: uint32, eHTMLKeyModifiers: IHTMLSurface_EHTMLKeyModifiers, bIsSystemKey: bool) ---
+	HTMLSurface_KeyUp :: proc(self: ^IHTMLSurface, unBrowserHandle: HHTMLBrowser, nNativeKeyCode: uint32, eHTMLKeyModifiers: IHTMLSurface_EHTMLKeyModifiers) ---
+	HTMLSurface_KeyChar :: proc(self: ^IHTMLSurface, unBrowserHandle: HHTMLBrowser, cUnicodeChar: uint32, eHTMLKeyModifiers: IHTMLSurface_EHTMLKeyModifiers) ---
+	HTMLSurface_SetHorizontalScroll :: proc(self: ^IHTMLSurface, unBrowserHandle: HHTMLBrowser, nAbsolutePixelScroll: uint32) ---
+	HTMLSurface_SetVerticalScroll :: proc(self: ^IHTMLSurface, unBrowserHandle: HHTMLBrowser, nAbsolutePixelScroll: uint32) ---
+	HTMLSurface_SetKeyFocus :: proc(self: ^IHTMLSurface, unBrowserHandle: HHTMLBrowser, bHasKeyFocus: bool) ---
+	HTMLSurface_ViewSource :: proc(self: ^IHTMLSurface, unBrowserHandle: HHTMLBrowser) ---
+	HTMLSurface_CopyToClipboard :: proc(self: ^IHTMLSurface, unBrowserHandle: HHTMLBrowser) ---
+	HTMLSurface_PasteFromClipboard :: proc(self: ^IHTMLSurface, unBrowserHandle: HHTMLBrowser) ---
+	HTMLSurface_Find :: proc(self: ^IHTMLSurface, unBrowserHandle: HHTMLBrowser, pchSearchStr: cstring, bCurrentlyInFind: bool, bReverse: bool) ---
+	HTMLSurface_StopFind :: proc(self: ^IHTMLSurface, unBrowserHandle: HHTMLBrowser) ---
+	HTMLSurface_GetLinkAtPosition :: proc(self: ^IHTMLSurface, unBrowserHandle: HHTMLBrowser, x: c.int, y: c.int) ---
+	HTMLSurface_SetCookie :: proc(self: ^IHTMLSurface, pchHostname: cstring, pchKey: cstring, pchValue: cstring, pchPath: cstring, nExpires: RTime32, bSecure: bool, bHTTPOnly: bool) ---
+	HTMLSurface_SetPageScaleFactor :: proc(self: ^IHTMLSurface, unBrowserHandle: HHTMLBrowser, flZoom: f32, nPointX: c.int, nPointY: c.int) ---
+	HTMLSurface_SetBackgroundMode :: proc(self: ^IHTMLSurface, unBrowserHandle: HHTMLBrowser, bBackgroundMode: bool) ---
+	HTMLSurface_SetDPIScalingFactor :: proc(self: ^IHTMLSurface, unBrowserHandle: HHTMLBrowser, flDPIScaling: f32) ---
+	HTMLSurface_OpenDeveloperTools :: proc(self: ^IHTMLSurface, unBrowserHandle: HHTMLBrowser) ---
+	HTMLSurface_AllowStartRequest :: proc(self: ^IHTMLSurface, unBrowserHandle: HHTMLBrowser, bAllowed: bool) ---
+	HTMLSurface_JSDialogResponse :: proc(self: ^IHTMLSurface, unBrowserHandle: HHTMLBrowser, bResult: bool) ---
+	HTMLSurface_FileLoadDialogResponse :: proc(self: ^IHTMLSurface, unBrowserHandle: HHTMLBrowser, pchSelectedFiles: ^cstring) ---
 
-	ISteamParentalSettings_BIsParentalLockEnabled :: proc(self: ^ISteamParentalSettings) -> bool ---
-	ISteamParentalSettings_BIsParentalLockLocked :: proc(self: ^ISteamParentalSettings) -> bool ---
-	ISteamParentalSettings_BIsAppBlocked :: proc(self: ^ISteamParentalSettings, nAppID: AppId_t) -> bool ---
-	ISteamParentalSettings_BIsAppInBlockList :: proc(self: ^ISteamParentalSettings, nAppID: AppId_t) -> bool ---
-	ISteamParentalSettings_BIsFeatureBlocked :: proc(self: ^ISteamParentalSettings, eFeature: EParentalFeature) -> bool ---
-	ISteamParentalSettings_BIsFeatureInBlockList :: proc(self: ^ISteamParentalSettings, eFeature: EParentalFeature) -> bool ---
-	SteamParentalSettings_v001 :: proc() -> ^ISteamParentalSettings ---
+	Inventory_GetResultStatus :: proc(self: ^IInventory, resultHandle: SteamInventoryResult_t) -> EResult ---
+	Inventory_GetResultItems :: proc(self: ^IInventory, resultHandle: SteamInventoryResult_t, pOutItemsArray: ^SteamItemDetails_t, punOutItemsArraySize: ^uint32) -> bool ---
+	Inventory_GetResultItemProperty :: proc(self: ^IInventory, resultHandle: SteamInventoryResult_t, unItemIndex: uint32, pchPropertyName: cstring, pchValueBuffer: ^u8, punValueBufferSizeOut: ^uint32) -> bool ---
+	Inventory_GetResultTimestamp :: proc(self: ^IInventory, resultHandle: SteamInventoryResult_t) -> uint32 ---
+	Inventory_CheckResultSteamID :: proc(self: ^IInventory, resultHandle: SteamInventoryResult_t, steamIDExpected: CSteamID) -> bool ---
+	Inventory_DestroyResult :: proc(self: ^IInventory, resultHandle: SteamInventoryResult_t) ---
+	Inventory_GetAllItems :: proc(self: ^IInventory, pResultHandle: ^SteamInventoryResult_t) -> bool ---
+	Inventory_GetItemsByID :: proc(self: ^IInventory, pResultHandle: ^SteamInventoryResult_t, pInstanceIDs: ^SteamItemInstanceID_t, unCountInstanceIDs: uint32) -> bool ---
+	Inventory_SerializeResult :: proc(self: ^IInventory, resultHandle: SteamInventoryResult_t, pOutBuffer: rawptr, punOutBufferSize: ^uint32) -> bool ---
+	Inventory_DeserializeResult :: proc(self: ^IInventory, pOutResultHandle: ^SteamInventoryResult_t, pBuffer: rawptr, unBufferSize: uint32, bRESERVED_MUST_BE_FALSE: bool) -> bool ---
+	Inventory_GenerateItems :: proc(self: ^IInventory, pResultHandle: ^SteamInventoryResult_t, pArrayItemDefs: ^SteamItemDef_t, punArrayQuantity: ^uint32, unArrayLength: uint32) -> bool ---
+	Inventory_GrantPromoItems :: proc(self: ^IInventory, pResultHandle: ^SteamInventoryResult_t) -> bool ---
+	Inventory_AddPromoItem :: proc(self: ^IInventory, pResultHandle: ^SteamInventoryResult_t, itemDef: SteamItemDef_t) -> bool ---
+	Inventory_AddPromoItems :: proc(self: ^IInventory, pResultHandle: ^SteamInventoryResult_t, pArrayItemDefs: ^SteamItemDef_t, unArrayLength: uint32) -> bool ---
+	Inventory_ConsumeItem :: proc(self: ^IInventory, pResultHandle: ^SteamInventoryResult_t, itemConsume: SteamItemInstanceID_t, unQuantity: uint32) -> bool ---
+	Inventory_ExchangeItems :: proc(self: ^IInventory, pResultHandle: ^SteamInventoryResult_t, pArrayGenerate: ^SteamItemDef_t, punArrayGenerateQuantity: ^uint32, unArrayGenerateLength: uint32, pArrayDestroy: ^SteamItemInstanceID_t, punArrayDestroyQuantity: ^uint32, unArrayDestroyLength: uint32) -> bool ---
+	Inventory_TransferItemQuantity :: proc(self: ^IInventory, pResultHandle: ^SteamInventoryResult_t, itemIdSource: SteamItemInstanceID_t, unQuantity: uint32, itemIdDest: SteamItemInstanceID_t) -> bool ---
+	Inventory_SendItemDropHeartbeat :: proc(self: ^IInventory) ---
+	Inventory_TriggerItemDrop :: proc(self: ^IInventory, pResultHandle: ^SteamInventoryResult_t, dropListDefinition: SteamItemDef_t) -> bool ---
+	Inventory_TradeItems :: proc(self: ^IInventory, pResultHandle: ^SteamInventoryResult_t, steamIDTradePartner: CSteamID, pArrayGive: ^SteamItemInstanceID_t, pArrayGiveQuantity: ^uint32, nArrayGiveLength: uint32, pArrayGet: ^SteamItemInstanceID_t, pArrayGetQuantity: ^uint32, nArrayGetLength: uint32) -> bool ---
+	Inventory_LoadItemDefinitions :: proc(self: ^IInventory) -> bool ---
+	Inventory_GetItemDefinitionIDs :: proc(self: ^IInventory, pItemDefIDs: ^SteamItemDef_t, punItemDefIDsArraySize: ^uint32) -> bool ---
+	Inventory_GetItemDefinitionProperty :: proc(self: ^IInventory, iDefinition: SteamItemDef_t, pchPropertyName: cstring, pchValueBuffer: ^u8, punValueBufferSizeOut: ^uint32) -> bool ---
+	Inventory_RequestEligiblePromoItemDefinitionsIDs :: proc(self: ^IInventory, steamID: CSteamID) -> SteamAPICall_t ---
+	Inventory_GetEligiblePromoItemDefinitionIDs :: proc(self: ^IInventory, steamID: CSteamID, pItemDefIDs: ^SteamItemDef_t, punItemDefIDsArraySize: ^uint32) -> bool ---
+	Inventory_StartPurchase :: proc(self: ^IInventory, pArrayItemDefs: ^SteamItemDef_t, punArrayQuantity: ^uint32, unArrayLength: uint32) -> SteamAPICall_t ---
+	Inventory_RequestPrices :: proc(self: ^IInventory) -> SteamAPICall_t ---
+	Inventory_GetNumItemsWithPrices :: proc(self: ^IInventory) -> uint32 ---
+	Inventory_GetItemsWithPrices :: proc(self: ^IInventory, pArrayItemDefs: ^SteamItemDef_t, pCurrentPrices: ^uint64, pBasePrices: ^uint64, unArrayLength: uint32) -> bool ---
+	Inventory_GetItemPrice :: proc(self: ^IInventory, iDefinition: SteamItemDef_t, pCurrentPrice: ^uint64, pBasePrice: ^uint64) -> bool ---
+	Inventory_StartUpdateProperties :: proc(self: ^IInventory) -> SteamInventoryUpdateHandle_t ---
+	Inventory_RemoveProperty :: proc(self: ^IInventory, handle: SteamInventoryUpdateHandle_t, nItemID: SteamItemInstanceID_t, pchPropertyName: cstring) -> bool ---
+	Inventory_SetProperty :: proc(self: ^IInventory, handle: SteamInventoryUpdateHandle_t, nItemID: SteamItemInstanceID_t, pchPropertyName: cstring, pchPropertyValue: cstring) -> bool ---
+	Inventory_SetPropertyBool :: proc(self: ^IInventory, handle: SteamInventoryUpdateHandle_t, nItemID: SteamItemInstanceID_t, pchPropertyName: cstring, bValue: bool) -> bool ---
+	Inventory_SetPropertyInt64 :: proc(self: ^IInventory, handle: SteamInventoryUpdateHandle_t, nItemID: SteamItemInstanceID_t, pchPropertyName: cstring, nValue: int64) -> bool ---
+	Inventory_SetPropertyFloat :: proc(self: ^IInventory, handle: SteamInventoryUpdateHandle_t, nItemID: SteamItemInstanceID_t, pchPropertyName: cstring, flValue: f32) -> bool ---
+	Inventory_SubmitUpdateProperties :: proc(self: ^IInventory, handle: SteamInventoryUpdateHandle_t, pResultHandle: ^SteamInventoryResult_t) -> bool ---
+	Inventory_InspectItem :: proc(self: ^IInventory, pResultHandle: ^SteamInventoryResult_t, pchItemToken: cstring) -> bool ---
 
-	ISteamRemotePlay_GetSessionCount :: proc(self: ^ISteamRemotePlay) -> uint32 ---
-	ISteamRemotePlay_GetSessionID :: proc(self: ^ISteamRemotePlay, iSessionIndex: c.int) -> RemotePlaySessionID_t ---
-	ISteamRemotePlay_GetSessionSteamID :: proc(self: ^ISteamRemotePlay, unSessionID: RemotePlaySessionID_t) -> CSteamID ---
-	ISteamRemotePlay_GetSessionClientName :: proc(self: ^ISteamRemotePlay, unSessionID: RemotePlaySessionID_t) -> cstring ---
-	ISteamRemotePlay_GetSessionClientFormFactor :: proc(self: ^ISteamRemotePlay, unSessionID: RemotePlaySessionID_t) -> ESteamDeviceFormFactor ---
-	ISteamRemotePlay_BGetSessionClientResolution :: proc(self: ^ISteamRemotePlay, unSessionID: RemotePlaySessionID_t, pnResolutionX: ^int, pnResolutionY: ^int) -> bool ---
-	ISteamRemotePlay_BSendRemotePlayTogetherInvite :: proc(self: ^ISteamRemotePlay, steamIDFriend: CSteamID) -> bool ---
-	SteamRemotePlay_v001 :: proc() -> ^ISteamRemotePlay ---
+	Video_GetVideoURL :: proc(self: ^IVideo, unVideoAppID: AppId_t) ---
+	Video_IsBroadcasting :: proc(self: ^IVideo, pnNumViewers: ^int) -> bool ---
+	Video_GetOPFSettings :: proc(self: ^IVideo, unVideoAppID: AppId_t) ---
+	Video_GetOPFStringForApp :: proc(self: ^IVideo, unVideoAppID: AppId_t, pchBuffer: ^u8, pnBufferSize: ^int32) -> bool ---
 
-	ISteamNetworkingMessages_SendMessageToUser :: proc(self: ^ISteamNetworkingMessages, identityRemote: ^SteamNetworkingIdentity, pubData: rawptr, cubData: uint32, nSendFlags: c.int, nRemoteChannel: c.int) -> EResult ---
-	ISteamNetworkingMessages_ReceiveMessagesOnChannel :: proc(self: ^ISteamNetworkingMessages, nLocalChannel: c.int, ppOutMessages: ^^SteamNetworkingMessage_t, nMaxMessages: c.int) -> c.int ---
-	ISteamNetworkingMessages_AcceptSessionWithUser :: proc(self: ^ISteamNetworkingMessages, identityRemote: ^SteamNetworkingIdentity) -> bool ---
-	ISteamNetworkingMessages_CloseSessionWithUser :: proc(self: ^ISteamNetworkingMessages, identityRemote: ^SteamNetworkingIdentity) -> bool ---
-	ISteamNetworkingMessages_CloseChannelWithUser :: proc(self: ^ISteamNetworkingMessages, identityRemote: ^SteamNetworkingIdentity, nLocalChannel: c.int) -> bool ---
-	ISteamNetworkingMessages_GetSessionConnectionInfo :: proc(self: ^ISteamNetworkingMessages, identityRemote: ^SteamNetworkingIdentity, pConnectionInfo: ^SteamNetConnectionInfo_t, pQuickStatus: ^SteamNetConnectionRealTimeStatus_t) -> ESteamNetworkingConnectionState ---
-	SteamNetworkingMessages_SteamAPI_v002 :: proc() -> ^ISteamNetworkingMessages ---
+	ParentalSettings_BIsParentalLockEnabled :: proc(self: ^IParentalSettings) -> bool ---
+	ParentalSettings_BIsParentalLockLocked :: proc(self: ^IParentalSettings) -> bool ---
+	ParentalSettings_BIsAppBlocked :: proc(self: ^IParentalSettings, nAppID: AppId_t) -> bool ---
+	ParentalSettings_BIsAppInBlockList :: proc(self: ^IParentalSettings, nAppID: AppId_t) -> bool ---
+	ParentalSettings_BIsFeatureBlocked :: proc(self: ^IParentalSettings, eFeature: EParentalFeature) -> bool ---
+	ParentalSettings_BIsFeatureInBlockList :: proc(self: ^IParentalSettings, eFeature: EParentalFeature) -> bool ---
 
-	ISteamNetworkingSockets_CreateListenSocketIP :: proc(self: ^ISteamNetworkingSockets, localAddress: ^SteamNetworkingIPAddr, nOptions: c.int, pOptions: ^SteamNetworkingConfigValue_t) -> HSteamListenSocket ---
-	ISteamNetworkingSockets_ConnectByIPAddress :: proc(self: ^ISteamNetworkingSockets, address: ^SteamNetworkingIPAddr, nOptions: c.int, pOptions: ^SteamNetworkingConfigValue_t) -> HSteamNetConnection ---
-	ISteamNetworkingSockets_CreateListenSocketP2P :: proc(self: ^ISteamNetworkingSockets, nLocalVirtualPort: c.int, nOptions: c.int, pOptions: ^SteamNetworkingConfigValue_t) -> HSteamListenSocket ---
-	ISteamNetworkingSockets_ConnectP2P :: proc(self: ^ISteamNetworkingSockets, identityRemote: ^SteamNetworkingIdentity, nRemoteVirtualPort: c.int, nOptions: c.int, pOptions: ^SteamNetworkingConfigValue_t) -> HSteamNetConnection ---
-	ISteamNetworkingSockets_AcceptConnection :: proc(self: ^ISteamNetworkingSockets, hConn: HSteamNetConnection) -> EResult ---
-	ISteamNetworkingSockets_CloseConnection :: proc(self: ^ISteamNetworkingSockets, hPeer: HSteamNetConnection, nReason: c.int, pszDebug: cstring, bEnableLinger: bool) -> bool ---
-	ISteamNetworkingSockets_CloseListenSocket :: proc(self: ^ISteamNetworkingSockets, hSocket: HSteamListenSocket) -> bool ---
-	ISteamNetworkingSockets_SetConnectionUserData :: proc(self: ^ISteamNetworkingSockets, hPeer: HSteamNetConnection, nUserData: int64) -> bool ---
-	ISteamNetworkingSockets_GetConnectionUserData :: proc(self: ^ISteamNetworkingSockets, hPeer: HSteamNetConnection) -> int64 ---
-	ISteamNetworkingSockets_SetConnectionName :: proc(self: ^ISteamNetworkingSockets, hPeer: HSteamNetConnection, pszName: cstring) ---
-	ISteamNetworkingSockets_GetConnectionName :: proc(self: ^ISteamNetworkingSockets, hPeer: HSteamNetConnection, pszName: ^u8, nMaxLen: c.int) -> bool ---
-	ISteamNetworkingSockets_SendMessageToConnection :: proc(self: ^ISteamNetworkingSockets, hConn: HSteamNetConnection, pData: rawptr, cbData: uint32, nSendFlags: c.int, pOutMessageNumber: ^int64) -> EResult ---
-	ISteamNetworkingSockets_FlushMessagesOnConnection :: proc(self: ^ISteamNetworkingSockets, hConn: HSteamNetConnection) -> EResult ---
-	ISteamNetworkingSockets_ReceiveMessagesOnConnection :: proc(self: ^ISteamNetworkingSockets, hConn: HSteamNetConnection, ppOutMessages: ^^SteamNetworkingMessage_t, nMaxMessages: c.int) -> c.int ---
-	ISteamNetworkingSockets_GetConnectionInfo :: proc(self: ^ISteamNetworkingSockets, hConn: HSteamNetConnection, pInfo: ^SteamNetConnectionInfo_t) -> bool ---
-	ISteamNetworkingSockets_GetConnectionRealTimeStatus :: proc(self: ^ISteamNetworkingSockets, hConn: HSteamNetConnection, pStatus: ^SteamNetConnectionRealTimeStatus_t, nLanes: c.int, pLanes: ^SteamNetConnectionRealTimeLaneStatus_t) -> EResult ---
-	ISteamNetworkingSockets_GetDetailedConnectionStatus :: proc(self: ^ISteamNetworkingSockets, hConn: HSteamNetConnection, pszBuf: ^u8, cbBuf: c.int) -> c.int ---
-	ISteamNetworkingSockets_GetListenSocketAddress :: proc(self: ^ISteamNetworkingSockets, hSocket: HSteamListenSocket, address: ^SteamNetworkingIPAddr) -> bool ---
-	ISteamNetworkingSockets_CreateSocketPair :: proc(self: ^ISteamNetworkingSockets, pOutConnection1: ^HSteamNetConnection, pOutConnection2: ^HSteamNetConnection, bUseNetworkLoopback: bool, pIdentity1: ^SteamNetworkingIdentity, pIdentity2: ^SteamNetworkingIdentity) -> bool ---
-	ISteamNetworkingSockets_ConfigureConnectionLanes :: proc(self: ^ISteamNetworkingSockets, hConn: HSteamNetConnection, nNumLanes: c.int, pLanePriorities: ^int, pLaneWeights: ^uint16) -> EResult ---
-	ISteamNetworkingSockets_GetIdentity :: proc(self: ^ISteamNetworkingSockets, pIdentity: ^SteamNetworkingIdentity) -> bool ---
-	ISteamNetworkingSockets_InitAuthentication :: proc(self: ^ISteamNetworkingSockets) -> ESteamNetworkingAvailability ---
-	ISteamNetworkingSockets_GetAuthenticationStatus :: proc(self: ^ISteamNetworkingSockets, pDetails: ^SteamNetAuthenticationStatus_t) -> ESteamNetworkingAvailability ---
-	ISteamNetworkingSockets_CreatePollGroup :: proc(self: ^ISteamNetworkingSockets) -> HSteamNetPollGroup ---
-	ISteamNetworkingSockets_DestroyPollGroup :: proc(self: ^ISteamNetworkingSockets, hPollGroup: HSteamNetPollGroup) -> bool ---
-	ISteamNetworkingSockets_SetConnectionPollGroup :: proc(self: ^ISteamNetworkingSockets, hConn: HSteamNetConnection, hPollGroup: HSteamNetPollGroup) -> bool ---
-	ISteamNetworkingSockets_ReceiveMessagesOnPollGroup :: proc(self: ^ISteamNetworkingSockets, hPollGroup: HSteamNetPollGroup, ppOutMessages: ^^SteamNetworkingMessage_t, nMaxMessages: c.int) -> c.int ---
-	ISteamNetworkingSockets_ReceivedRelayAuthTicket :: proc(self: ^ISteamNetworkingSockets, pvTicket: rawptr, cbTicket: c.int, pOutParsedTicket: SteamDatagramRelayAuthTicketPtr) -> bool ---
-	ISteamNetworkingSockets_FindRelayAuthTicketForServer :: proc(self: ^ISteamNetworkingSockets, identityGameServer: ^SteamNetworkingIdentity, nRemoteVirtualPort: c.int, pOutParsedTicket: SteamDatagramRelayAuthTicketPtr) -> c.int ---
-	ISteamNetworkingSockets_ConnectToHostedDedicatedServer :: proc(self: ^ISteamNetworkingSockets, identityTarget: ^SteamNetworkingIdentity, nRemoteVirtualPort: c.int, nOptions: c.int, pOptions: ^SteamNetworkingConfigValue_t) -> HSteamNetConnection ---
-	ISteamNetworkingSockets_GetHostedDedicatedServerPort :: proc(self: ^ISteamNetworkingSockets) -> uint16 ---
-	ISteamNetworkingSockets_GetHostedDedicatedServerPOPID :: proc(self: ^ISteamNetworkingSockets) -> SteamNetworkingPOPID ---
-	ISteamNetworkingSockets_GetHostedDedicatedServerAddress :: proc(self: ^ISteamNetworkingSockets, pRouting: ^SteamDatagramHostedAddress) -> EResult ---
-	ISteamNetworkingSockets_CreateHostedDedicatedServerListenSocket :: proc(self: ^ISteamNetworkingSockets, nLocalVirtualPort: c.int, nOptions: c.int, pOptions: ^SteamNetworkingConfigValue_t) -> HSteamListenSocket ---
-	ISteamNetworkingSockets_GetGameCoordinatorServerLogin :: proc(self: ^ISteamNetworkingSockets, pLoginInfo: ^SteamDatagramGameCoordinatorServerLogin, pcbSignedBlob: ^int, pBlob: rawptr) -> EResult ---
-	ISteamNetworkingSockets_ConnectP2PCustomSignaling :: proc(self: ^ISteamNetworkingSockets, pSignaling: SteamDatagramRelayAuthTicketPtr, pPeerIdentity: ^SteamNetworkingIdentity, nRemoteVirtualPort: c.int, nOptions: c.int, pOptions: ^SteamNetworkingConfigValue_t) -> HSteamNetConnection ---
-	ISteamNetworkingSockets_ReceivedP2PCustomSignal :: proc(self: ^ISteamNetworkingSockets, pMsg: rawptr, cbMsg: c.int, pContext: ISteamNetworkingSignalingRecvContextPtr) -> bool ---
-	ISteamNetworkingSockets_GetCertificateRequest :: proc(self: ^ISteamNetworkingSockets, pcbBlob: ^int, pBlob: rawptr, errMsg: ^SteamNetworkingErrMsg) -> bool ---
-	ISteamNetworkingSockets_SetCertificate :: proc(self: ^ISteamNetworkingSockets, pCertificate: rawptr, cbCertificate: c.int, errMsg: ^SteamNetworkingErrMsg) -> bool ---
-	ISteamNetworkingSockets_ResetIdentity :: proc(self: ^ISteamNetworkingSockets, pIdentity: ^SteamNetworkingIdentity) ---
-	ISteamNetworkingSockets_RunCallbacks :: proc(self: ^ISteamNetworkingSockets) ---
-	ISteamNetworkingSockets_BeginAsyncRequestFakeIP :: proc(self: ^ISteamNetworkingSockets, nNumPorts: c.int) -> bool ---
-	ISteamNetworkingSockets_GetFakeIP :: proc(self: ^ISteamNetworkingSockets, idxFirstPort: c.int, pInfo: ^SteamNetworkingFakeIPResult_t) ---
-	ISteamNetworkingSockets_CreateListenSocketP2PFakeIP :: proc(self: ^ISteamNetworkingSockets, idxFakePort: c.int, nOptions: c.int, pOptions: ^SteamNetworkingConfigValue_t) -> HSteamListenSocket ---
-	ISteamNetworkingSockets_GetRemoteFakeIPForConnection :: proc(self: ^ISteamNetworkingSockets, hConn: HSteamNetConnection, pOutAddr: ^SteamNetworkingIPAddr) -> EResult ---
-	ISteamNetworkingSockets_CreateFakeUDPPort :: proc(self: ^ISteamNetworkingSockets, idxFakeServerPort: c.int) -> ^ISteamNetworkingFakeUDPPort ---
-	SteamNetworkingSockets_SteamAPI_v012 :: proc() -> ^ISteamNetworkingSockets ---
+	RemotePlay_GetSessionCount :: proc(self: ^IRemotePlay) -> uint32 ---
+	RemotePlay_GetSessionID :: proc(self: ^IRemotePlay, iSessionIndex: c.int) -> RemotePlaySessionID_t ---
+	RemotePlay_GetSessionSteamID :: proc(self: ^IRemotePlay, unSessionID: RemotePlaySessionID_t) -> CSteamID ---
+	RemotePlay_GetSessionClientName :: proc(self: ^IRemotePlay, unSessionID: RemotePlaySessionID_t) -> cstring ---
+	RemotePlay_GetSessionClientFormFactor :: proc(self: ^IRemotePlay, unSessionID: RemotePlaySessionID_t) -> ESteamDeviceFormFactor ---
+	RemotePlay_BGetSessionClientResolution :: proc(self: ^IRemotePlay, unSessionID: RemotePlaySessionID_t, pnResolutionX: ^int, pnResolutionY: ^int) -> bool ---
+	RemotePlay_BSendRemotePlayTogetherInvite :: proc(self: ^IRemotePlay, steamIDFriend: CSteamID) -> bool ---
 
-	ISteamNetworkingUtils_AllocateMessage :: proc(self: ^ISteamNetworkingUtils, cbAllocateBuffer: c.int) -> ^SteamNetworkingMessage_t ---
-	ISteamNetworkingUtils_InitRelayNetworkAccess :: proc(self: ^ISteamNetworkingUtils) ---
-	ISteamNetworkingUtils_GetRelayNetworkStatus :: proc(self: ^ISteamNetworkingUtils, pDetails: ^SteamRelayNetworkStatus_t) -> ESteamNetworkingAvailability ---
-	ISteamNetworkingUtils_GetLocalPingLocation :: proc(self: ^ISteamNetworkingUtils, result: ^SteamNetworkPingLocation_t) -> f32 ---
-	ISteamNetworkingUtils_EstimatePingTimeBetweenTwoLocations :: proc(self: ^ISteamNetworkingUtils, location1: ^SteamNetworkPingLocation_t, location2: ^SteamNetworkPingLocation_t) -> c.int ---
-	ISteamNetworkingUtils_EstimatePingTimeFromLocalHost :: proc(self: ^ISteamNetworkingUtils, remoteLocation: ^SteamNetworkPingLocation_t) -> c.int ---
-	ISteamNetworkingUtils_ConvertPingLocationToString :: proc(self: ^ISteamNetworkingUtils, location: ^SteamNetworkPingLocation_t, pszBuf: ^u8, cchBufSize: c.int) ---
-	ISteamNetworkingUtils_ParsePingLocationString :: proc(self: ^ISteamNetworkingUtils, pszString: cstring, result: ^SteamNetworkPingLocation_t) -> bool ---
-	ISteamNetworkingUtils_CheckPingDataUpToDate :: proc(self: ^ISteamNetworkingUtils, flMaxAgeSeconds: f32) -> bool ---
-	ISteamNetworkingUtils_GetPingToDataCenter :: proc(self: ^ISteamNetworkingUtils, popID: SteamNetworkingPOPID, pViaRelayPoP: ^SteamNetworkingPOPID) -> c.int ---
-	ISteamNetworkingUtils_GetDirectPingToPOP :: proc(self: ^ISteamNetworkingUtils, popID: SteamNetworkingPOPID) -> c.int ---
-	ISteamNetworkingUtils_GetPOPCount :: proc(self: ^ISteamNetworkingUtils) -> c.int ---
-	ISteamNetworkingUtils_GetPOPList :: proc(self: ^ISteamNetworkingUtils, list: ^SteamNetworkingPOPID, nListSz: c.int) -> c.int ---
-	ISteamNetworkingUtils_GetLocalTimestamp :: proc(self: ^ISteamNetworkingUtils) -> SteamNetworkingMicroseconds ---
-	ISteamNetworkingUtils_SetDebugOutputFunction :: proc(self: ^ISteamNetworkingUtils, eDetailLevel: ESteamNetworkingSocketsDebugOutputType, pfnFunc: FSteamNetworkingSocketsDebugOutput) ---
-	ISteamNetworkingUtils_IsFakeIPv4 :: proc(self: ^ISteamNetworkingUtils, nIPv4: uint32) -> bool ---
-	ISteamNetworkingUtils_GetIPv4FakeIPType :: proc(self: ^ISteamNetworkingUtils, nIPv4: uint32) -> ESteamNetworkingFakeIPType ---
-	ISteamNetworkingUtils_GetRealIdentityForFakeIP :: proc(self: ^ISteamNetworkingUtils, fakeIP: ^SteamNetworkingIPAddr, pOutRealIdentity: ^SteamNetworkingIdentity) -> EResult ---
-	ISteamNetworkingUtils_SetGlobalConfigValueInt32 :: proc(self: ^ISteamNetworkingUtils, eValue: ESteamNetworkingConfigValue, val: int32) -> bool ---
-	ISteamNetworkingUtils_SetGlobalConfigValueFloat :: proc(self: ^ISteamNetworkingUtils, eValue: ESteamNetworkingConfigValue, val: f32) -> bool ---
-	ISteamNetworkingUtils_SetGlobalConfigValueString :: proc(self: ^ISteamNetworkingUtils, eValue: ESteamNetworkingConfigValue, val: cstring) -> bool ---
-	ISteamNetworkingUtils_SetGlobalConfigValuePtr :: proc(self: ^ISteamNetworkingUtils, eValue: ESteamNetworkingConfigValue, val: rawptr) -> bool ---
-	ISteamNetworkingUtils_SetConnectionConfigValueInt32 :: proc(self: ^ISteamNetworkingUtils, hConn: HSteamNetConnection, eValue: ESteamNetworkingConfigValue, val: int32) -> bool ---
-	ISteamNetworkingUtils_SetConnectionConfigValueFloat :: proc(self: ^ISteamNetworkingUtils, hConn: HSteamNetConnection, eValue: ESteamNetworkingConfigValue, val: f32) -> bool ---
-	ISteamNetworkingUtils_SetConnectionConfigValueString :: proc(self: ^ISteamNetworkingUtils, hConn: HSteamNetConnection, eValue: ESteamNetworkingConfigValue, val: cstring) -> bool ---
-	ISteamNetworkingUtils_SetGlobalCallback_SteamNetConnectionStatusChanged :: proc(self: ^ISteamNetworkingUtils, fnCallback: FnSteamNetConnectionStatusChanged) -> bool ---
-	ISteamNetworkingUtils_SetGlobalCallback_SteamNetAuthenticationStatusChanged :: proc(self: ^ISteamNetworkingUtils, fnCallback: FnSteamNetAuthenticationStatusChanged) -> bool ---
-	ISteamNetworkingUtils_SetGlobalCallback_SteamRelayNetworkStatusChanged :: proc(self: ^ISteamNetworkingUtils, fnCallback: FnSteamRelayNetworkStatusChanged) -> bool ---
-	ISteamNetworkingUtils_SetGlobalCallback_FakeIPResult :: proc(self: ^ISteamNetworkingUtils, fnCallback: FnSteamNetworkingFakeIPResult) -> bool ---
-	ISteamNetworkingUtils_SetGlobalCallback_MessagesSessionRequest :: proc(self: ^ISteamNetworkingUtils, fnCallback: FnSteamNetworkingMessagesSessionRequest) -> bool ---
-	ISteamNetworkingUtils_SetGlobalCallback_MessagesSessionFailed :: proc(self: ^ISteamNetworkingUtils, fnCallback: FnSteamNetworkingMessagesSessionFailed) -> bool ---
-	ISteamNetworkingUtils_SetConfigValue :: proc(self: ^ISteamNetworkingUtils, eValue: ESteamNetworkingConfigValue, eScopeType: ESteamNetworkingConfigScope, scopeObj: intptr, eDataType: ESteamNetworkingConfigDataType, pArg: rawptr) -> bool ---
-	ISteamNetworkingUtils_SetConfigValueStruct :: proc(self: ^ISteamNetworkingUtils, opt: ^SteamNetworkingConfigValue_t, eScopeType: ESteamNetworkingConfigScope, scopeObj: intptr) -> bool ---
-	ISteamNetworkingUtils_GetConfigValue :: proc(self: ^ISteamNetworkingUtils, eValue: ESteamNetworkingConfigValue, eScopeType: ESteamNetworkingConfigScope, scopeObj: intptr, pOutDataType: ^ESteamNetworkingConfigDataType, pResult: rawptr, cbResult: ^int) -> ESteamNetworkingGetConfigValueResult ---
-	ISteamNetworkingUtils_GetConfigValueInfo :: proc(self: ^ISteamNetworkingUtils, eValue: ESteamNetworkingConfigValue, pOutDataType: ^ESteamNetworkingConfigDataType, pOutScope: ^ESteamNetworkingConfigScope) -> cstring ---
-	ISteamNetworkingUtils_IterateGenericEditableConfigValues :: proc(self: ^ISteamNetworkingUtils, eCurrent: ESteamNetworkingConfigValue, bEnumerateDevVars: bool) -> ESteamNetworkingConfigValue ---
-	ISteamNetworkingUtils_SteamNetworkingIPAddr_ToString :: proc(self: ^ISteamNetworkingUtils, addr: ^SteamNetworkingIPAddr, buf: ^u8, cbBuf: uint32, bWithPort: bool) ---
-	ISteamNetworkingUtils_SteamNetworkingIPAddr_ParseString :: proc(self: ^ISteamNetworkingUtils, pAddr: ^SteamNetworkingIPAddr, pszStr: cstring) -> bool ---
-	ISteamNetworkingUtils_SteamNetworkingIPAddr_GetFakeIPType :: proc(self: ^ISteamNetworkingUtils, addr: ^SteamNetworkingIPAddr) -> ESteamNetworkingFakeIPType ---
-	ISteamNetworkingUtils_SteamNetworkingIdentity_ToString :: proc(self: ^ISteamNetworkingUtils, identity: ^SteamNetworkingIdentity, buf: ^u8, cbBuf: uint32) ---
-	ISteamNetworkingUtils_SteamNetworkingIdentity_ParseString :: proc(self: ^ISteamNetworkingUtils, pIdentity: ^SteamNetworkingIdentity, pszStr: cstring) -> bool ---
+	NetworkingMessages_SendMessageToUser :: proc(self: ^INetworkingMessages, identityRemote: ^SteamNetworkingIdentity, pubData: rawptr, cubData: uint32, nSendFlags: c.int, nRemoteChannel: c.int) -> EResult ---
+	NetworkingMessages_ReceiveMessagesOnChannel :: proc(self: ^INetworkingMessages, nLocalChannel: c.int, ppOutMessages: ^^SteamNetworkingMessage_t, nMaxMessages: c.int) -> c.int ---
+	NetworkingMessages_AcceptSessionWithUser :: proc(self: ^INetworkingMessages, identityRemote: ^SteamNetworkingIdentity) -> bool ---
+	NetworkingMessages_CloseSessionWithUser :: proc(self: ^INetworkingMessages, identityRemote: ^SteamNetworkingIdentity) -> bool ---
+	NetworkingMessages_CloseChannelWithUser :: proc(self: ^INetworkingMessages, identityRemote: ^SteamNetworkingIdentity, nLocalChannel: c.int) -> bool ---
+	NetworkingMessages_GetSessionConnectionInfo :: proc(self: ^INetworkingMessages, identityRemote: ^SteamNetworkingIdentity, pConnectionInfo: ^SteamNetConnectionInfo_t, pQuickStatus: ^SteamNetConnectionRealTimeStatus_t) -> ESteamNetworkingConnectionState ---
 
-	ISteamGameServer_SetProduct :: proc(self: ^ISteamGameServer, pszProduct: cstring) ---
-	ISteamGameServer_SetGameDescription :: proc(self: ^ISteamGameServer, pszGameDescription: cstring) ---
-	ISteamGameServer_SetModDir :: proc(self: ^ISteamGameServer, pszModDir: cstring) ---
-	ISteamGameServer_SetDedicatedServer :: proc(self: ^ISteamGameServer, bDedicated: bool) ---
-	ISteamGameServer_LogOn :: proc(self: ^ISteamGameServer, pszToken: cstring) ---
-	ISteamGameServer_LogOnAnonymous :: proc(self: ^ISteamGameServer) ---
-	ISteamGameServer_LogOff :: proc(self: ^ISteamGameServer) ---
-	ISteamGameServer_BLoggedOn :: proc(self: ^ISteamGameServer) -> bool ---
-	ISteamGameServer_BSecure :: proc(self: ^ISteamGameServer) -> bool ---
-	ISteamGameServer_GetSteamID :: proc(self: ^ISteamGameServer) -> CSteamID ---
-	ISteamGameServer_WasRestartRequested :: proc(self: ^ISteamGameServer) -> bool ---
-	ISteamGameServer_SetMaxPlayerCount :: proc(self: ^ISteamGameServer, cPlayersMax: c.int) ---
-	ISteamGameServer_SetBotPlayerCount :: proc(self: ^ISteamGameServer, cBotplayers: c.int) ---
-	ISteamGameServer_SetServerName :: proc(self: ^ISteamGameServer, pszServerName: cstring) ---
-	ISteamGameServer_SetMapName :: proc(self: ^ISteamGameServer, pszMapName: cstring) ---
-	ISteamGameServer_SetPasswordProtected :: proc(self: ^ISteamGameServer, bPasswordProtected: bool) ---
-	ISteamGameServer_SetSpectatorPort :: proc(self: ^ISteamGameServer, unSpectatorPort: uint16) ---
-	ISteamGameServer_SetSpectatorServerName :: proc(self: ^ISteamGameServer, pszSpectatorServerName: cstring) ---
-	ISteamGameServer_ClearAllKeyValues :: proc(self: ^ISteamGameServer) ---
-	ISteamGameServer_SetKeyValue :: proc(self: ^ISteamGameServer, pKey: cstring, pValue: cstring) ---
-	ISteamGameServer_SetGameTags :: proc(self: ^ISteamGameServer, pchGameTags: cstring) ---
-	ISteamGameServer_SetGameData :: proc(self: ^ISteamGameServer, pchGameData: cstring) ---
-	ISteamGameServer_SetRegion :: proc(self: ^ISteamGameServer, pszRegion: cstring) ---
-	ISteamGameServer_SetAdvertiseServerActive :: proc(self: ^ISteamGameServer, bActive: bool) ---
-	ISteamGameServer_GetAuthSessionTicket :: proc(self: ^ISteamGameServer, pTicket: rawptr, cbMaxTicket: c.int, pcbTicket: ^uint32) -> HAuthTicket ---
-	ISteamGameServer_BeginAuthSession :: proc(self: ^ISteamGameServer, pAuthTicket: rawptr, cbAuthTicket: c.int, steamID: CSteamID) -> EBeginAuthSessionResult ---
-	ISteamGameServer_EndAuthSession :: proc(self: ^ISteamGameServer, steamID: CSteamID) ---
-	ISteamGameServer_CancelAuthTicket :: proc(self: ^ISteamGameServer, hAuthTicket: HAuthTicket) ---
-	ISteamGameServer_UserHasLicenseForApp :: proc(self: ^ISteamGameServer, steamID: CSteamID, appID: AppId_t) -> EUserHasLicenseForAppResult ---
-	ISteamGameServer_RequestUserGroupStatus :: proc(self: ^ISteamGameServer, steamIDUser: CSteamID, steamIDGroup: CSteamID) -> bool ---
-	ISteamGameServer_GetGameplayStats :: proc(self: ^ISteamGameServer) ---
-	ISteamGameServer_GetServerReputation :: proc(self: ^ISteamGameServer) -> SteamAPICall_t ---
-	ISteamGameServer_GetPublicIP :: proc(self: ^ISteamGameServer) -> SteamIPAddress_t ---
-	ISteamGameServer_HandleIncomingPacket :: proc(self: ^ISteamGameServer, pData: rawptr, cbData: c.int, srcIP: uint32, srcPort: uint16) -> bool ---
-	ISteamGameServer_GetNextOutgoingPacket :: proc(self: ^ISteamGameServer, pOut: rawptr, cbMaxOut: c.int, pNetAdr: ^uint32, pPort: ^uint16) -> c.int ---
-	ISteamGameServer_AssociateWithClan :: proc(self: ^ISteamGameServer, steamIDClan: CSteamID) -> SteamAPICall_t ---
-	ISteamGameServer_ComputeNewPlayerCompatibility :: proc(self: ^ISteamGameServer, steamIDNewPlayer: CSteamID) -> SteamAPICall_t ---
-	ISteamGameServer_SendUserConnectAndAuthenticate_DEPRECATED :: proc(self: ^ISteamGameServer, unIPClient: uint32, pvAuthBlob: rawptr, cubAuthBlobSize: uint32, pSteamIDUser: ^CSteamID) -> bool ---
-	ISteamGameServer_CreateUnauthenticatedUserConnection :: proc(self: ^ISteamGameServer) -> CSteamID ---
-	ISteamGameServer_SendUserDisconnect_DEPRECATED :: proc(self: ^ISteamGameServer, steamIDUser: CSteamID) ---
-	ISteamGameServer_BUpdateUserData :: proc(self: ^ISteamGameServer, steamIDUser: CSteamID, pchPlayerName: cstring, uScore: uint32) -> bool ---
+	NetworkingSockets_CreateListenSocketIP :: proc(self: ^INetworkingSockets, localAddress: ^SteamNetworkingIPAddr, nOptions: c.int, pOptions: ^SteamNetworkingConfigValue_t) -> HSteamListenSocket ---
+	NetworkingSockets_ConnectByIPAddress :: proc(self: ^INetworkingSockets, address: ^SteamNetworkingIPAddr, nOptions: c.int, pOptions: ^SteamNetworkingConfigValue_t) -> HSteamNetConnection ---
+	NetworkingSockets_CreateListenSocketP2P :: proc(self: ^INetworkingSockets, nLocalVirtualPort: c.int, nOptions: c.int, pOptions: ^SteamNetworkingConfigValue_t) -> HSteamListenSocket ---
+	NetworkingSockets_ConnectP2P :: proc(self: ^INetworkingSockets, identityRemote: ^SteamNetworkingIdentity, nRemoteVirtualPort: c.int, nOptions: c.int, pOptions: ^SteamNetworkingConfigValue_t) -> HSteamNetConnection ---
+	NetworkingSockets_AcceptConnection :: proc(self: ^INetworkingSockets, hConn: HSteamNetConnection) -> EResult ---
+	NetworkingSockets_CloseConnection :: proc(self: ^INetworkingSockets, hPeer: HSteamNetConnection, nReason: c.int, pszDebug: cstring, bEnableLinger: bool) -> bool ---
+	NetworkingSockets_CloseListenSocket :: proc(self: ^INetworkingSockets, hSocket: HSteamListenSocket) -> bool ---
+	NetworkingSockets_SetConnectionUserData :: proc(self: ^INetworkingSockets, hPeer: HSteamNetConnection, nUserData: int64) -> bool ---
+	NetworkingSockets_GetConnectionUserData :: proc(self: ^INetworkingSockets, hPeer: HSteamNetConnection) -> int64 ---
+	NetworkingSockets_SetConnectionName :: proc(self: ^INetworkingSockets, hPeer: HSteamNetConnection, pszName: cstring) ---
+	NetworkingSockets_GetConnectionName :: proc(self: ^INetworkingSockets, hPeer: HSteamNetConnection, pszName: ^u8, nMaxLen: c.int) -> bool ---
+	NetworkingSockets_SendMessageToConnection :: proc(self: ^INetworkingSockets, hConn: HSteamNetConnection, pData: rawptr, cbData: uint32, nSendFlags: c.int, pOutMessageNumber: ^int64) -> EResult ---
+	NetworkingSockets_FlushMessagesOnConnection :: proc(self: ^INetworkingSockets, hConn: HSteamNetConnection) -> EResult ---
+	NetworkingSockets_ReceiveMessagesOnConnection :: proc(self: ^INetworkingSockets, hConn: HSteamNetConnection, ppOutMessages: ^^SteamNetworkingMessage_t, nMaxMessages: c.int) -> c.int ---
+	NetworkingSockets_GetConnectionInfo :: proc(self: ^INetworkingSockets, hConn: HSteamNetConnection, pInfo: ^SteamNetConnectionInfo_t) -> bool ---
+	NetworkingSockets_GetConnectionRealTimeStatus :: proc(self: ^INetworkingSockets, hConn: HSteamNetConnection, pStatus: ^SteamNetConnectionRealTimeStatus_t, nLanes: c.int, pLanes: ^SteamNetConnectionRealTimeLaneStatus_t) -> EResult ---
+	NetworkingSockets_GetDetailedConnectionStatus :: proc(self: ^INetworkingSockets, hConn: HSteamNetConnection, pszBuf: ^u8, cbBuf: c.int) -> c.int ---
+	NetworkingSockets_GetListenSocketAddress :: proc(self: ^INetworkingSockets, hSocket: HSteamListenSocket, address: ^SteamNetworkingIPAddr) -> bool ---
+	NetworkingSockets_CreateSocketPair :: proc(self: ^INetworkingSockets, pOutConnection1: ^HSteamNetConnection, pOutConnection2: ^HSteamNetConnection, bUseNetworkLoopback: bool, pIdentity1: ^SteamNetworkingIdentity, pIdentity2: ^SteamNetworkingIdentity) -> bool ---
+	NetworkingSockets_ConfigureConnectionLanes :: proc(self: ^INetworkingSockets, hConn: HSteamNetConnection, nNumLanes: c.int, pLanePriorities: ^int, pLaneWeights: ^uint16) -> EResult ---
+	NetworkingSockets_GetIdentity :: proc(self: ^INetworkingSockets, pIdentity: ^SteamNetworkingIdentity) -> bool ---
+	NetworkingSockets_InitAuthentication :: proc(self: ^INetworkingSockets) -> ESteamNetworkingAvailability ---
+	NetworkingSockets_GetAuthenticationStatus :: proc(self: ^INetworkingSockets, pDetails: ^SteamNetAuthenticationStatus_t) -> ESteamNetworkingAvailability ---
+	NetworkingSockets_CreatePollGroup :: proc(self: ^INetworkingSockets) -> HSteamNetPollGroup ---
+	NetworkingSockets_DestroyPollGroup :: proc(self: ^INetworkingSockets, hPollGroup: HSteamNetPollGroup) -> bool ---
+	NetworkingSockets_SetConnectionPollGroup :: proc(self: ^INetworkingSockets, hConn: HSteamNetConnection, hPollGroup: HSteamNetPollGroup) -> bool ---
+	NetworkingSockets_ReceiveMessagesOnPollGroup :: proc(self: ^INetworkingSockets, hPollGroup: HSteamNetPollGroup, ppOutMessages: ^^SteamNetworkingMessage_t, nMaxMessages: c.int) -> c.int ---
+	NetworkingSockets_ReceivedRelayAuthTicket :: proc(self: ^INetworkingSockets, pvTicket: rawptr, cbTicket: c.int, pOutParsedTicket: SteamDatagramRelayAuthTicketPtr) -> bool ---
+	NetworkingSockets_FindRelayAuthTicketForServer :: proc(self: ^INetworkingSockets, identityGameServer: ^SteamNetworkingIdentity, nRemoteVirtualPort: c.int, pOutParsedTicket: SteamDatagramRelayAuthTicketPtr) -> c.int ---
+	NetworkingSockets_ConnectToHostedDedicatedServer :: proc(self: ^INetworkingSockets, identityTarget: ^SteamNetworkingIdentity, nRemoteVirtualPort: c.int, nOptions: c.int, pOptions: ^SteamNetworkingConfigValue_t) -> HSteamNetConnection ---
+	NetworkingSockets_GetHostedDedicatedServerPort :: proc(self: ^INetworkingSockets) -> uint16 ---
+	NetworkingSockets_GetHostedDedicatedServerPOPID :: proc(self: ^INetworkingSockets) -> SteamNetworkingPOPID ---
+	NetworkingSockets_GetHostedDedicatedServerAddress :: proc(self: ^INetworkingSockets, pRouting: ^SteamDatagramHostedAddress) -> EResult ---
+	NetworkingSockets_CreateHostedDedicatedServerListenSocket :: proc(self: ^INetworkingSockets, nLocalVirtualPort: c.int, nOptions: c.int, pOptions: ^SteamNetworkingConfigValue_t) -> HSteamListenSocket ---
+	NetworkingSockets_GetGameCoordinatorServerLogin :: proc(self: ^INetworkingSockets, pLoginInfo: ^SteamDatagramGameCoordinatorServerLogin, pcbSignedBlob: ^int, pBlob: rawptr) -> EResult ---
+	NetworkingSockets_ConnectP2PCustomSignaling :: proc(self: ^INetworkingSockets, pSignaling: SteamDatagramRelayAuthTicketPtr, pPeerIdentity: ^SteamNetworkingIdentity, nRemoteVirtualPort: c.int, nOptions: c.int, pOptions: ^SteamNetworkingConfigValue_t) -> HSteamNetConnection ---
+	NetworkingSockets_ReceivedP2PCustomSignal :: proc(self: ^INetworkingSockets, pMsg: rawptr, cbMsg: c.int, pContext: INetworkingSignalingRecvContextPtr) -> bool ---
+	NetworkingSockets_GetCertificateRequest :: proc(self: ^INetworkingSockets, pcbBlob: ^int, pBlob: rawptr, errMsg: ^SteamNetworkingErrMsg) -> bool ---
+	NetworkingSockets_SetCertificate :: proc(self: ^INetworkingSockets, pCertificate: rawptr, cbCertificate: c.int, errMsg: ^SteamNetworkingErrMsg) -> bool ---
+	NetworkingSockets_ResetIdentity :: proc(self: ^INetworkingSockets, pIdentity: ^SteamNetworkingIdentity) ---
+	NetworkingSockets_RunCallbacks :: proc(self: ^INetworkingSockets) ---
+	NetworkingSockets_BeginAsyncRequestFakeIP :: proc(self: ^INetworkingSockets, nNumPorts: c.int) -> bool ---
+	NetworkingSockets_GetFakeIP :: proc(self: ^INetworkingSockets, idxFirstPort: c.int, pInfo: ^SteamNetworkingFakeIPResult_t) ---
+	NetworkingSockets_CreateListenSocketP2PFakeIP :: proc(self: ^INetworkingSockets, idxFakePort: c.int, nOptions: c.int, pOptions: ^SteamNetworkingConfigValue_t) -> HSteamListenSocket ---
+	NetworkingSockets_GetRemoteFakeIPForConnection :: proc(self: ^INetworkingSockets, hConn: HSteamNetConnection, pOutAddr: ^SteamNetworkingIPAddr) -> EResult ---
+	NetworkingSockets_CreateFakeUDPPort :: proc(self: ^INetworkingSockets, idxFakeServerPort: c.int) -> ^INetworkingFakeUDPPort ---
 
-	ISteamGameServerStats_RequestUserStats :: proc(self: ^ISteamGameServerStats, steamIDUser: CSteamID) -> SteamAPICall_t ---
-	ISteamGameServerStats_GetUserStatInt32 :: proc(self: ^ISteamGameServerStats, steamIDUser: CSteamID, pchName: cstring, pData: ^int32) -> bool ---
-	ISteamGameServerStats_GetUserStatFloat :: proc(self: ^ISteamGameServerStats, steamIDUser: CSteamID, pchName: cstring, pData: ^f32) -> bool ---
-	ISteamGameServerStats_GetUserAchievement :: proc(self: ^ISteamGameServerStats, steamIDUser: CSteamID, pchName: cstring, pbAchieved: ^bool) -> bool ---
-	ISteamGameServerStats_SetUserStatInt32 :: proc(self: ^ISteamGameServerStats, steamIDUser: CSteamID, pchName: cstring, nData: int32) -> bool ---
-	ISteamGameServerStats_SetUserStatFloat :: proc(self: ^ISteamGameServerStats, steamIDUser: CSteamID, pchName: cstring, fData: f32) -> bool ---
-	ISteamGameServerStats_UpdateUserAvgRateStat :: proc(self: ^ISteamGameServerStats, steamIDUser: CSteamID, pchName: cstring, flCountThisSession: f32, dSessionLength: f64) -> bool ---
-	ISteamGameServerStats_SetUserAchievement :: proc(self: ^ISteamGameServerStats, steamIDUser: CSteamID, pchName: cstring) -> bool ---
-	ISteamGameServerStats_ClearUserAchievement :: proc(self: ^ISteamGameServerStats, steamIDUser: CSteamID, pchName: cstring) -> bool ---
-	ISteamGameServerStats_StoreUserStats :: proc(self: ^ISteamGameServerStats, steamIDUser: CSteamID) -> SteamAPICall_t ---
+	NetworkingUtils_AllocateMessage :: proc(self: ^INetworkingUtils, cbAllocateBuffer: c.int) -> ^SteamNetworkingMessage_t ---
+	NetworkingUtils_InitRelayNetworkAccess :: proc(self: ^INetworkingUtils) ---
+	NetworkingUtils_GetRelayNetworkStatus :: proc(self: ^INetworkingUtils, pDetails: ^SteamRelayNetworkStatus_t) -> ESteamNetworkingAvailability ---
+	NetworkingUtils_GetLocalPingLocation :: proc(self: ^INetworkingUtils, result: ^SteamNetworkPingLocation_t) -> f32 ---
+	NetworkingUtils_EstimatePingTimeBetweenTwoLocations :: proc(self: ^INetworkingUtils, location1: ^SteamNetworkPingLocation_t, location2: ^SteamNetworkPingLocation_t) -> c.int ---
+	NetworkingUtils_EstimatePingTimeFromLocalHost :: proc(self: ^INetworkingUtils, remoteLocation: ^SteamNetworkPingLocation_t) -> c.int ---
+	NetworkingUtils_ConvertPingLocationToString :: proc(self: ^INetworkingUtils, location: ^SteamNetworkPingLocation_t, pszBuf: ^u8, cchBufSize: c.int) ---
+	NetworkingUtils_ParsePingLocationString :: proc(self: ^INetworkingUtils, pszString: cstring, result: ^SteamNetworkPingLocation_t) -> bool ---
+	NetworkingUtils_CheckPingDataUpToDate :: proc(self: ^INetworkingUtils, flMaxAgeSeconds: f32) -> bool ---
+	NetworkingUtils_GetPingToDataCenter :: proc(self: ^INetworkingUtils, popID: SteamNetworkingPOPID, pViaRelayPoP: ^SteamNetworkingPOPID) -> c.int ---
+	NetworkingUtils_GetDirectPingToPOP :: proc(self: ^INetworkingUtils, popID: SteamNetworkingPOPID) -> c.int ---
+	NetworkingUtils_GetPOPCount :: proc(self: ^INetworkingUtils) -> c.int ---
+	NetworkingUtils_GetPOPList :: proc(self: ^INetworkingUtils, list: ^SteamNetworkingPOPID, nListSz: c.int) -> c.int ---
+	NetworkingUtils_GetLocalTimestamp :: proc(self: ^INetworkingUtils) -> SteamNetworkingMicroseconds ---
+	NetworkingUtils_SetDebugOutputFunction :: proc(self: ^INetworkingUtils, eDetailLevel: ESteamNetworkingSocketsDebugOutputType, pfnFunc: FSteamNetworkingSocketsDebugOutput) ---
+	NetworkingUtils_IsFakeIPv4 :: proc(self: ^INetworkingUtils, nIPv4: uint32) -> bool ---
+	NetworkingUtils_GetIPv4FakeIPType :: proc(self: ^INetworkingUtils, nIPv4: uint32) -> ESteamNetworkingFakeIPType ---
+	NetworkingUtils_GetRealIdentityForFakeIP :: proc(self: ^INetworkingUtils, fakeIP: ^SteamNetworkingIPAddr, pOutRealIdentity: ^SteamNetworkingIdentity) -> EResult ---
+	NetworkingUtils_SetGlobalConfigValueInt32 :: proc(self: ^INetworkingUtils, eValue: ESteamNetworkingConfigValue, val: int32) -> bool ---
+	NetworkingUtils_SetGlobalConfigValueFloat :: proc(self: ^INetworkingUtils, eValue: ESteamNetworkingConfigValue, val: f32) -> bool ---
+	NetworkingUtils_SetGlobalConfigValueString :: proc(self: ^INetworkingUtils, eValue: ESteamNetworkingConfigValue, val: cstring) -> bool ---
+	NetworkingUtils_SetGlobalConfigValuePtr :: proc(self: ^INetworkingUtils, eValue: ESteamNetworkingConfigValue, val: rawptr) -> bool ---
+	NetworkingUtils_SetConnectionConfigValueInt32 :: proc(self: ^INetworkingUtils, hConn: HSteamNetConnection, eValue: ESteamNetworkingConfigValue, val: int32) -> bool ---
+	NetworkingUtils_SetConnectionConfigValueFloat :: proc(self: ^INetworkingUtils, hConn: HSteamNetConnection, eValue: ESteamNetworkingConfigValue, val: f32) -> bool ---
+	NetworkingUtils_SetConnectionConfigValueString :: proc(self: ^INetworkingUtils, hConn: HSteamNetConnection, eValue: ESteamNetworkingConfigValue, val: cstring) -> bool ---
+	NetworkingUtils_SetGlobalCallback_SteamNetConnectionStatusChanged :: proc(self: ^INetworkingUtils, fnCallback: FnSteamNetConnectionStatusChanged) -> bool ---
+	NetworkingUtils_SetGlobalCallback_SteamNetAuthenticationStatusChanged :: proc(self: ^INetworkingUtils, fnCallback: FnSteamNetAuthenticationStatusChanged) -> bool ---
+	NetworkingUtils_SetGlobalCallback_SteamRelayNetworkStatusChanged :: proc(self: ^INetworkingUtils, fnCallback: FnSteamRelayNetworkStatusChanged) -> bool ---
+	NetworkingUtils_SetGlobalCallback_FakeIPResult :: proc(self: ^INetworkingUtils, fnCallback: FnSteamNetworkingFakeIPResult) -> bool ---
+	NetworkingUtils_SetGlobalCallback_MessagesSessionRequest :: proc(self: ^INetworkingUtils, fnCallback: FnSteamNetworkingMessagesSessionRequest) -> bool ---
+	NetworkingUtils_SetGlobalCallback_MessagesSessionFailed :: proc(self: ^INetworkingUtils, fnCallback: FnSteamNetworkingMessagesSessionFailed) -> bool ---
+	NetworkingUtils_SetConfigValue :: proc(self: ^INetworkingUtils, eValue: ESteamNetworkingConfigValue, eScopeType: ESteamNetworkingConfigScope, scopeObj: intptr, eDataType: ESteamNetworkingConfigDataType, pArg: rawptr) -> bool ---
+	NetworkingUtils_SetConfigValueStruct :: proc(self: ^INetworkingUtils, opt: ^SteamNetworkingConfigValue_t, eScopeType: ESteamNetworkingConfigScope, scopeObj: intptr) -> bool ---
+	NetworkingUtils_GetConfigValue :: proc(self: ^INetworkingUtils, eValue: ESteamNetworkingConfigValue, eScopeType: ESteamNetworkingConfigScope, scopeObj: intptr, pOutDataType: ^ESteamNetworkingConfigDataType, pResult: rawptr, cbResult: ^int) -> ESteamNetworkingGetConfigValueResult ---
+	NetworkingUtils_GetConfigValueInfo :: proc(self: ^INetworkingUtils, eValue: ESteamNetworkingConfigValue, pOutDataType: ^ESteamNetworkingConfigDataType, pOutScope: ^ESteamNetworkingConfigScope) -> cstring ---
+	NetworkingUtils_IterateGenericEditableConfigValues :: proc(self: ^INetworkingUtils, eCurrent: ESteamNetworkingConfigValue, bEnumerateDevVars: bool) -> ESteamNetworkingConfigValue ---
+	NetworkingUtils_SteamNetworkingIPAddr_ToString :: proc(self: ^INetworkingUtils, addr: ^SteamNetworkingIPAddr, buf: ^u8, cbBuf: uint32, bWithPort: bool) ---
+	NetworkingUtils_SteamNetworkingIPAddr_ParseString :: proc(self: ^INetworkingUtils, pAddr: ^SteamNetworkingIPAddr, pszStr: cstring) -> bool ---
+	NetworkingUtils_SteamNetworkingIPAddr_GetFakeIPType :: proc(self: ^INetworkingUtils, addr: ^SteamNetworkingIPAddr) -> ESteamNetworkingFakeIPType ---
+	NetworkingUtils_SteamNetworkingIdentity_ToString :: proc(self: ^INetworkingUtils, identity: ^SteamNetworkingIdentity, buf: ^u8, cbBuf: uint32) ---
+	NetworkingUtils_SteamNetworkingIdentity_ParseString :: proc(self: ^INetworkingUtils, pIdentity: ^SteamNetworkingIdentity, pszStr: cstring) -> bool ---
 
-	ISteamNetworkingFakeUDPPort_DestroyFakeUDPPort :: proc(self: ^ISteamNetworkingFakeUDPPort) ---
-	ISteamNetworkingFakeUDPPort_SendMessageToFakeIP :: proc(self: ^ISteamNetworkingFakeUDPPort, remoteAddress: ^SteamNetworkingIPAddr, pData: rawptr, cbData: uint32, nSendFlags: c.int) -> EResult ---
-	ISteamNetworkingFakeUDPPort_ReceiveMessages :: proc(self: ^ISteamNetworkingFakeUDPPort, ppOutMessages: ^^SteamNetworkingMessage_t, nMaxMessages: c.int) -> c.int ---
-	ISteamNetworkingFakeUDPPort_ScheduleCleanup :: proc(self: ^ISteamNetworkingFakeUDPPort, remoteAddress: ^SteamNetworkingIPAddr) ---
+	GameServer_SetProduct :: proc(self: ^IGameServer, pszProduct: cstring) ---
+	GameServer_SetGameDescription :: proc(self: ^IGameServer, pszGameDescription: cstring) ---
+	GameServer_SetModDir :: proc(self: ^IGameServer, pszModDir: cstring) ---
+	GameServer_SetDedicatedServer :: proc(self: ^IGameServer, bDedicated: bool) ---
+	GameServer_LogOn :: proc(self: ^IGameServer, pszToken: cstring) ---
+	GameServer_LogOnAnonymous :: proc(self: ^IGameServer) ---
+	GameServer_LogOff :: proc(self: ^IGameServer) ---
+	GameServer_BLoggedOn :: proc(self: ^IGameServer) -> bool ---
+	GameServer_BSecure :: proc(self: ^IGameServer) -> bool ---
+	GameServer_GetSteamID :: proc(self: ^IGameServer) -> CSteamID ---
+	GameServer_WasRestartRequested :: proc(self: ^IGameServer) -> bool ---
+	GameServer_SetMaxPlayerCount :: proc(self: ^IGameServer, cPlayersMax: c.int) ---
+	GameServer_SetBotPlayerCount :: proc(self: ^IGameServer, cBotplayers: c.int) ---
+	GameServer_SetServerName :: proc(self: ^IGameServer, pszServerName: cstring) ---
+	GameServer_SetMapName :: proc(self: ^IGameServer, pszMapName: cstring) ---
+	GameServer_SetPasswordProtected :: proc(self: ^IGameServer, bPasswordProtected: bool) ---
+	GameServer_SetSpectatorPort :: proc(self: ^IGameServer, unSpectatorPort: uint16) ---
+	GameServer_SetSpectatorServerName :: proc(self: ^IGameServer, pszSpectatorServerName: cstring) ---
+	GameServer_ClearAllKeyValues :: proc(self: ^IGameServer) ---
+	GameServer_SetKeyValue :: proc(self: ^IGameServer, pKey: cstring, pValue: cstring) ---
+	GameServer_SetGameTags :: proc(self: ^IGameServer, pchGameTags: cstring) ---
+	GameServer_SetGameData :: proc(self: ^IGameServer, pchGameData: cstring) ---
+	GameServer_SetRegion :: proc(self: ^IGameServer, pszRegion: cstring) ---
+	GameServer_SetAdvertiseServerActive :: proc(self: ^IGameServer, bActive: bool) ---
+	GameServer_GetAuthSessionTicket :: proc(self: ^IGameServer, pTicket: rawptr, cbMaxTicket: c.int, pcbTicket: ^uint32) -> HAuthTicket ---
+	GameServer_BeginAuthSession :: proc(self: ^IGameServer, pAuthTicket: rawptr, cbAuthTicket: c.int, steamID: CSteamID) -> EBeginAuthSessionResult ---
+	GameServer_EndAuthSession :: proc(self: ^IGameServer, steamID: CSteamID) ---
+	GameServer_CancelAuthTicket :: proc(self: ^IGameServer, hAuthTicket: HAuthTicket) ---
+	GameServer_UserHasLicenseForApp :: proc(self: ^IGameServer, steamID: CSteamID, appID: AppId_t) -> EUserHasLicenseForAppResult ---
+	GameServer_RequestUserGroupStatus :: proc(self: ^IGameServer, steamIDUser: CSteamID, steamIDGroup: CSteamID) -> bool ---
+	GameServer_GetGameplayStats :: proc(self: ^IGameServer) ---
+	GameServer_GetServerReputation :: proc(self: ^IGameServer) -> SteamAPICall_t ---
+	GameServer_GetPublicIP :: proc(self: ^IGameServer) -> SteamIPAddress_t ---
+	GameServer_HandleIncomingPacket :: proc(self: ^IGameServer, pData: rawptr, cbData: c.int, srcIP: uint32, srcPort: uint16) -> bool ---
+	GameServer_GetNextOutgoingPacket :: proc(self: ^IGameServer, pOut: rawptr, cbMaxOut: c.int, pNetAdr: ^uint32, pPort: ^uint16) -> c.int ---
+	GameServer_AssociateWithClan :: proc(self: ^IGameServer, steamIDClan: CSteamID) -> SteamAPICall_t ---
+	GameServer_ComputeNewPlayerCompatibility :: proc(self: ^IGameServer, steamIDNewPlayer: CSteamID) -> SteamAPICall_t ---
+	GameServer_SendUserConnectAndAuthenticate_DEPRECATED :: proc(self: ^IGameServer, unIPClient: uint32, pvAuthBlob: rawptr, cubAuthBlobSize: uint32, pSteamIDUser: ^CSteamID) -> bool ---
+	GameServer_CreateUnauthenticatedUserConnection :: proc(self: ^IGameServer) -> CSteamID ---
+	GameServer_SendUserDisconnect_DEPRECATED :: proc(self: ^IGameServer, steamIDUser: CSteamID) ---
+	GameServer_BUpdateUserData :: proc(self: ^IGameServer, steamIDUser: CSteamID, pchPlayerName: cstring, uScore: uint32) -> bool ---
+
+	GameServerStats_RequestUserStats :: proc(self: ^IGameServerStats, steamIDUser: CSteamID) -> SteamAPICall_t ---
+	GameServerStats_GetUserStatInt32 :: proc(self: ^IGameServerStats, steamIDUser: CSteamID, pchName: cstring, pData: ^int32) -> bool ---
+	GameServerStats_GetUserStatFloat :: proc(self: ^IGameServerStats, steamIDUser: CSteamID, pchName: cstring, pData: ^f32) -> bool ---
+	GameServerStats_GetUserAchievement :: proc(self: ^IGameServerStats, steamIDUser: CSteamID, pchName: cstring, pbAchieved: ^bool) -> bool ---
+	GameServerStats_SetUserStatInt32 :: proc(self: ^IGameServerStats, steamIDUser: CSteamID, pchName: cstring, nData: int32) -> bool ---
+	GameServerStats_SetUserStatFloat :: proc(self: ^IGameServerStats, steamIDUser: CSteamID, pchName: cstring, fData: f32) -> bool ---
+	GameServerStats_UpdateUserAvgRateStat :: proc(self: ^IGameServerStats, steamIDUser: CSteamID, pchName: cstring, flCountThisSession: f32, dSessionLength: f64) -> bool ---
+	GameServerStats_SetUserAchievement :: proc(self: ^IGameServerStats, steamIDUser: CSteamID, pchName: cstring) -> bool ---
+	GameServerStats_ClearUserAchievement :: proc(self: ^IGameServerStats, steamIDUser: CSteamID, pchName: cstring) -> bool ---
+	GameServerStats_StoreUserStats :: proc(self: ^IGameServerStats, steamIDUser: CSteamID) -> SteamAPICall_t ---
+
+	NetworkingFakeUDPPort_DestroyFakeUDPPort :: proc(self: ^INetworkingFakeUDPPort) ---
+	NetworkingFakeUDPPort_SendMessageToFakeIP :: proc(self: ^INetworkingFakeUDPPort, remoteAddress: ^SteamNetworkingIPAddr, pData: rawptr, cbData: uint32, nSendFlags: c.int) -> EResult ---
+	NetworkingFakeUDPPort_ReceiveMessages :: proc(self: ^INetworkingFakeUDPPort, ppOutMessages: ^^SteamNetworkingMessage_t, nMaxMessages: c.int) -> c.int ---
+	NetworkingFakeUDPPort_ScheduleCleanup :: proc(self: ^INetworkingFakeUDPPort, remoteAddress: ^SteamNetworkingIPAddr) ---
 
 	SteamIPAddress_t_IsSet :: proc(self: ^SteamIPAddress_t) -> bool ---
 	MatchMakingKeyValuePair_t_Construct :: proc(self: ^MatchMakingKeyValuePair_t) ---
@@ -4945,958 +4961,4 @@ foreign lib {
 	SteamDatagramHostedAddress_Clear :: proc(self: ^SteamDatagramHostedAddress) ---
 	SteamDatagramHostedAddress_GetPopID :: proc(self: ^SteamDatagramHostedAddress) -> SteamNetworkingPOPID ---
 	SteamDatagramHostedAddress_SetDevAddress :: proc(self: ^SteamDatagramHostedAddress, nIP: uint32, nPort: uint16, popid: SteamNetworkingPOPID) ---
-
 } // foreign lib
-
-
-// ---------------
-// HELPFUL ALIASES
-// ---------------
-
-Client :: SteamClient
-
-User :: SteamUser
-Friends :: SteamFriends
-Utils :: SteamUtils
-Matchmaking :: SteamMatchmaking
-MatchmakingServers :: SteamMatchmakingServers
-GameSearch :: SteamGameSearch
-Parties :: SteamParties
-RemoteStorage :: SteamRemoteStorage
-UserStats :: SteamUserStats
-Apps :: SteamApps
-Networking :: SteamNetworking
-Screenshots :: SteamScreenshots
-Music :: SteamMusic
-MusicRemote :: SteamMusicRemote
-HTTP :: SteamHTTP
-Input :: SteamInput
-Controller :: SteamController
-UGC :: SteamUGC
-AppList :: SteamAppList
-HTMLSurface :: SteamHTMLSurface
-Inventory :: SteamInventory
-Video :: SteamVideo
-ParentalSettings :: SteamParentalSettings
-RemotePlay :: SteamRemotePlay
-NetworkingMessages_SteamAPI :: SteamNetworkingMessages_SteamAPI
-NetworkingSockets_SteamAPI :: SteamNetworkingSockets_SteamAPI
-
-Client_CreateSteamPipe :: ISteamClient_CreateSteamPipe
-Client_BReleaseSteamPipe :: ISteamClient_BReleaseSteamPipe
-Client_ConnectToGlobalUser :: ISteamClient_ConnectToGlobalUser
-Client_CreateLocalUser :: ISteamClient_CreateLocalUser
-Client_ReleaseUser :: ISteamClient_ReleaseUser
-Client_GetISteamUser :: ISteamClient_GetISteamUser
-Client_GetISteamGameServer :: ISteamClient_GetISteamGameServer
-Client_SetLocalIPBinding :: ISteamClient_SetLocalIPBinding
-Client_GetISteamFriends :: ISteamClient_GetISteamFriends
-Client_GetISteamUtils :: ISteamClient_GetISteamUtils
-Client_GetISteamMatchmaking :: ISteamClient_GetISteamMatchmaking
-Client_GetISteamMatchmakingServers :: ISteamClient_GetISteamMatchmakingServers
-Client_GetISteamGenericInterface :: ISteamClient_GetISteamGenericInterface
-Client_GetISteamUserStats :: ISteamClient_GetISteamUserStats
-Client_GetISteamGameServerStats :: ISteamClient_GetISteamGameServerStats
-Client_GetISteamApps :: ISteamClient_GetISteamApps
-Client_GetISteamNetworking :: ISteamClient_GetISteamNetworking
-Client_GetISteamRemoteStorage :: ISteamClient_GetISteamRemoteStorage
-Client_GetISteamScreenshots :: ISteamClient_GetISteamScreenshots
-Client_GetISteamGameSearch :: ISteamClient_GetISteamGameSearch
-Client_GetIPCCallCount :: ISteamClient_GetIPCCallCount
-Client_SetWarningMessageHook :: ISteamClient_SetWarningMessageHook
-Client_BShutdownIfAllPipesClosed :: ISteamClient_BShutdownIfAllPipesClosed
-Client_GetISteamHTTP :: ISteamClient_GetISteamHTTP
-Client_GetISteamController :: ISteamClient_GetISteamController
-Client_GetISteamUGC :: ISteamClient_GetISteamUGC
-Client_GetISteamAppList :: ISteamClient_GetISteamAppList
-Client_GetISteamMusic :: ISteamClient_GetISteamMusic
-Client_GetISteamMusicRemote :: ISteamClient_GetISteamMusicRemote
-Client_GetISteamHTMLSurface :: ISteamClient_GetISteamHTMLSurface
-Client_GetISteamInventory :: ISteamClient_GetISteamInventory
-Client_GetISteamVideo :: ISteamClient_GetISteamVideo
-Client_GetISteamParentalSettings :: ISteamClient_GetISteamParentalSettings
-Client_GetISteamInput :: ISteamClient_GetISteamInput
-Client_GetISteamParties :: ISteamClient_GetISteamParties
-Client_GetISteamRemotePlay :: ISteamClient_GetISteamRemotePlay
-User_GetHSteamUser :: ISteamUser_GetHSteamUser
-User_BLoggedOn :: ISteamUser_BLoggedOn
-User_GetSteamID :: ISteamUser_GetSteamID
-User_InitiateGameConnection_DEPRECATED :: ISteamUser_InitiateGameConnection_DEPRECATED
-User_TerminateGameConnection_DEPRECATED :: ISteamUser_TerminateGameConnection_DEPRECATED
-User_TrackAppUsageEvent :: ISteamUser_TrackAppUsageEvent
-User_GetUserDataFolder :: ISteamUser_GetUserDataFolder
-User_StartVoiceRecording :: ISteamUser_StartVoiceRecording
-User_StopVoiceRecording :: ISteamUser_StopVoiceRecording
-User_GetAvailableVoice :: ISteamUser_GetAvailableVoice
-User_GetVoice :: ISteamUser_GetVoice
-User_DecompressVoice :: ISteamUser_DecompressVoice
-User_GetVoiceOptimalSampleRate :: ISteamUser_GetVoiceOptimalSampleRate
-User_GetAuthSessionTicket :: ISteamUser_GetAuthSessionTicket
-User_BeginAuthSession :: ISteamUser_BeginAuthSession
-User_EndAuthSession :: ISteamUser_EndAuthSession
-User_CancelAuthTicket :: ISteamUser_CancelAuthTicket
-User_UserHasLicenseForApp :: ISteamUser_UserHasLicenseForApp
-User_BIsBehindNAT :: ISteamUser_BIsBehindNAT
-User_AdvertiseGame :: ISteamUser_AdvertiseGame
-User_RequestEncryptedAppTicket :: ISteamUser_RequestEncryptedAppTicket
-User_GetEncryptedAppTicket :: ISteamUser_GetEncryptedAppTicket
-User_GetGameBadgeLevel :: ISteamUser_GetGameBadgeLevel
-User_GetPlayerSteamLevel :: ISteamUser_GetPlayerSteamLevel
-User_RequestStoreAuthURL :: ISteamUser_RequestStoreAuthURL
-User_BIsPhoneVerified :: ISteamUser_BIsPhoneVerified
-User_BIsTwoFactorEnabled :: ISteamUser_BIsTwoFactorEnabled
-User_BIsPhoneIdentifying :: ISteamUser_BIsPhoneIdentifying
-User_BIsPhoneRequiringVerification :: ISteamUser_BIsPhoneRequiringVerification
-User_GetMarketEligibility :: ISteamUser_GetMarketEligibility
-User_GetDurationControl :: ISteamUser_GetDurationControl
-User_BSetDurationControlOnlineState :: ISteamUser_BSetDurationControlOnlineState
-Friends_GetPersonaName :: ISteamFriends_GetPersonaName
-Friends_SetPersonaName :: ISteamFriends_SetPersonaName
-Friends_GetPersonaState :: ISteamFriends_GetPersonaState
-Friends_GetFriendCount :: ISteamFriends_GetFriendCount
-Friends_GetFriendByIndex :: ISteamFriends_GetFriendByIndex
-Friends_GetFriendRelationship :: ISteamFriends_GetFriendRelationship
-Friends_GetFriendPersonaState :: ISteamFriends_GetFriendPersonaState
-Friends_GetFriendPersonaName :: ISteamFriends_GetFriendPersonaName
-Friends_GetFriendGamePlayed :: ISteamFriends_GetFriendGamePlayed
-Friends_GetFriendPersonaNameHistory :: ISteamFriends_GetFriendPersonaNameHistory
-Friends_GetFriendSteamLevel :: ISteamFriends_GetFriendSteamLevel
-Friends_GetPlayerNickname :: ISteamFriends_GetPlayerNickname
-Friends_GetFriendsGroupCount :: ISteamFriends_GetFriendsGroupCount
-Friends_GetFriendsGroupIDByIndex :: ISteamFriends_GetFriendsGroupIDByIndex
-Friends_GetFriendsGroupName :: ISteamFriends_GetFriendsGroupName
-Friends_GetFriendsGroupMembersCount :: ISteamFriends_GetFriendsGroupMembersCount
-Friends_GetFriendsGroupMembersList :: ISteamFriends_GetFriendsGroupMembersList
-Friends_HasFriend :: ISteamFriends_HasFriend
-Friends_GetClanCount :: ISteamFriends_GetClanCount
-Friends_GetClanByIndex :: ISteamFriends_GetClanByIndex
-Friends_GetClanName :: ISteamFriends_GetClanName
-Friends_GetClanTag :: ISteamFriends_GetClanTag
-Friends_GetClanActivityCounts :: ISteamFriends_GetClanActivityCounts
-Friends_DownloadClanActivityCounts :: ISteamFriends_DownloadClanActivityCounts
-Friends_GetFriendCountFromSource :: ISteamFriends_GetFriendCountFromSource
-Friends_GetFriendFromSourceByIndex :: ISteamFriends_GetFriendFromSourceByIndex
-Friends_IsUserInSource :: ISteamFriends_IsUserInSource
-Friends_SetInGameVoiceSpeaking :: ISteamFriends_SetInGameVoiceSpeaking
-Friends_ActivateGameOverlay :: ISteamFriends_ActivateGameOverlay
-Friends_ActivateGameOverlayToUser :: ISteamFriends_ActivateGameOverlayToUser
-Friends_ActivateGameOverlayToWebPage :: ISteamFriends_ActivateGameOverlayToWebPage
-Friends_ActivateGameOverlayToStore :: ISteamFriends_ActivateGameOverlayToStore
-Friends_SetPlayedWith :: ISteamFriends_SetPlayedWith
-Friends_ActivateGameOverlayInviteDialog :: ISteamFriends_ActivateGameOverlayInviteDialog
-Friends_GetSmallFriendAvatar :: ISteamFriends_GetSmallFriendAvatar
-Friends_GetMediumFriendAvatar :: ISteamFriends_GetMediumFriendAvatar
-Friends_GetLargeFriendAvatar :: ISteamFriends_GetLargeFriendAvatar
-Friends_RequestUserInformation :: ISteamFriends_RequestUserInformation
-Friends_RequestClanOfficerList :: ISteamFriends_RequestClanOfficerList
-Friends_GetClanOwner :: ISteamFriends_GetClanOwner
-Friends_GetClanOfficerCount :: ISteamFriends_GetClanOfficerCount
-Friends_GetClanOfficerByIndex :: ISteamFriends_GetClanOfficerByIndex
-Friends_GetUserRestrictions :: ISteamFriends_GetUserRestrictions
-Friends_SetRichPresence :: ISteamFriends_SetRichPresence
-Friends_ClearRichPresence :: ISteamFriends_ClearRichPresence
-Friends_GetFriendRichPresence :: ISteamFriends_GetFriendRichPresence
-Friends_GetFriendRichPresenceKeyCount :: ISteamFriends_GetFriendRichPresenceKeyCount
-Friends_GetFriendRichPresenceKeyByIndex :: ISteamFriends_GetFriendRichPresenceKeyByIndex
-Friends_RequestFriendRichPresence :: ISteamFriends_RequestFriendRichPresence
-Friends_InviteUserToGame :: ISteamFriends_InviteUserToGame
-Friends_GetCoplayFriendCount :: ISteamFriends_GetCoplayFriendCount
-Friends_GetCoplayFriend :: ISteamFriends_GetCoplayFriend
-Friends_GetFriendCoplayTime :: ISteamFriends_GetFriendCoplayTime
-Friends_GetFriendCoplayGame :: ISteamFriends_GetFriendCoplayGame
-Friends_JoinClanChatRoom :: ISteamFriends_JoinClanChatRoom
-Friends_LeaveClanChatRoom :: ISteamFriends_LeaveClanChatRoom
-Friends_GetClanChatMemberCount :: ISteamFriends_GetClanChatMemberCount
-Friends_GetChatMemberByIndex :: ISteamFriends_GetChatMemberByIndex
-Friends_SendClanChatMessage :: ISteamFriends_SendClanChatMessage
-Friends_GetClanChatMessage :: ISteamFriends_GetClanChatMessage
-Friends_IsClanChatAdmin :: ISteamFriends_IsClanChatAdmin
-Friends_IsClanChatWindowOpenInSteam :: ISteamFriends_IsClanChatWindowOpenInSteam
-Friends_OpenClanChatWindowInSteam :: ISteamFriends_OpenClanChatWindowInSteam
-Friends_CloseClanChatWindowInSteam :: ISteamFriends_CloseClanChatWindowInSteam
-Friends_SetListenForFriendsMessages :: ISteamFriends_SetListenForFriendsMessages
-Friends_ReplyToFriendMessage :: ISteamFriends_ReplyToFriendMessage
-Friends_GetFriendMessage :: ISteamFriends_GetFriendMessage
-Friends_GetFollowerCount :: ISteamFriends_GetFollowerCount
-Friends_IsFollowing :: ISteamFriends_IsFollowing
-Friends_EnumerateFollowingList :: ISteamFriends_EnumerateFollowingList
-Friends_IsClanPublic :: ISteamFriends_IsClanPublic
-Friends_IsClanOfficialGameGroup :: ISteamFriends_IsClanOfficialGameGroup
-Friends_GetNumChatsWithUnreadPriorityMessages :: ISteamFriends_GetNumChatsWithUnreadPriorityMessages
-Friends_ActivateGameOverlayRemotePlayTogetherInviteDialog :: ISteamFriends_ActivateGameOverlayRemotePlayTogetherInviteDialog
-Friends_RegisterProtocolInOverlayBrowser :: ISteamFriends_RegisterProtocolInOverlayBrowser
-Friends_ActivateGameOverlayInviteDialogConnectString :: ISteamFriends_ActivateGameOverlayInviteDialogConnectString
-Friends_RequestEquippedProfileItems :: ISteamFriends_RequestEquippedProfileItems
-Friends_BHasEquippedProfileItem :: ISteamFriends_BHasEquippedProfileItem
-Friends_GetProfileItemPropertyString :: ISteamFriends_GetProfileItemPropertyString
-Friends_GetProfileItemPropertyUint :: ISteamFriends_GetProfileItemPropertyUint
-Utils_GetSecondsSinceAppActive :: ISteamUtils_GetSecondsSinceAppActive
-Utils_GetSecondsSinceComputerActive :: ISteamUtils_GetSecondsSinceComputerActive
-Utils_GetConnectedUniverse :: ISteamUtils_GetConnectedUniverse
-Utils_GetServerRealTime :: ISteamUtils_GetServerRealTime
-Utils_GetIPCountry :: ISteamUtils_GetIPCountry
-Utils_GetImageSize :: ISteamUtils_GetImageSize
-Utils_GetImageRGBA :: ISteamUtils_GetImageRGBA
-Utils_GetCurrentBatteryPower :: ISteamUtils_GetCurrentBatteryPower
-Utils_GetAppID :: ISteamUtils_GetAppID
-Utils_SetOverlayNotificationPosition :: ISteamUtils_SetOverlayNotificationPosition
-Utils_IsAPICallCompleted :: ISteamUtils_IsAPICallCompleted
-Utils_GetAPICallFailureReason :: ISteamUtils_GetAPICallFailureReason
-Utils_GetAPICallResult :: ISteamUtils_GetAPICallResult
-Utils_GetIPCCallCount :: ISteamUtils_GetIPCCallCount
-Utils_SetWarningMessageHook :: ISteamUtils_SetWarningMessageHook
-Utils_IsOverlayEnabled :: ISteamUtils_IsOverlayEnabled
-Utils_BOverlayNeedsPresent :: ISteamUtils_BOverlayNeedsPresent
-Utils_CheckFileSignature :: ISteamUtils_CheckFileSignature
-Utils_ShowGamepadTextInput :: ISteamUtils_ShowGamepadTextInput
-Utils_GetEnteredGamepadTextLength :: ISteamUtils_GetEnteredGamepadTextLength
-Utils_GetEnteredGamepadTextInput :: ISteamUtils_GetEnteredGamepadTextInput
-Utils_GetSteamUILanguage :: ISteamUtils_GetSteamUILanguage
-Utils_IsSteamRunningInVR :: ISteamUtils_IsSteamRunningInVR
-Utils_SetOverlayNotificationInset :: ISteamUtils_SetOverlayNotificationInset
-Utils_IsSteamInBigPictureMode :: ISteamUtils_IsSteamInBigPictureMode
-Utils_StartVRDashboard :: ISteamUtils_StartVRDashboard
-Utils_IsVRHeadsetStreamingEnabled :: ISteamUtils_IsVRHeadsetStreamingEnabled
-Utils_SetVRHeadsetStreamingEnabled :: ISteamUtils_SetVRHeadsetStreamingEnabled
-Utils_IsSteamChinaLauncher :: ISteamUtils_IsSteamChinaLauncher
-Utils_InitFilterText :: ISteamUtils_InitFilterText
-Utils_FilterText :: ISteamUtils_FilterText
-Utils_GetIPv6ConnectivityState :: ISteamUtils_GetIPv6ConnectivityState
-Utils_IsSteamRunningOnSteamDeck :: ISteamUtils_IsSteamRunningOnSteamDeck
-Utils_Showf32ingGamepadTextInput :: ISteamUtils_Showf32ingGamepadTextInput
-Utils_SetGameLauncherMode :: ISteamUtils_SetGameLauncherMode
-Utils_Dismissf32ingGamepadTextInput :: ISteamUtils_Dismissf32ingGamepadTextInput
-Matchmaking_GetFavoriteGameCount :: ISteamMatchmaking_GetFavoriteGameCount
-Matchmaking_GetFavoriteGame :: ISteamMatchmaking_GetFavoriteGame
-Matchmaking_AddFavoriteGame :: ISteamMatchmaking_AddFavoriteGame
-Matchmaking_RemoveFavoriteGame :: ISteamMatchmaking_RemoveFavoriteGame
-Matchmaking_RequestLobbyList :: ISteamMatchmaking_RequestLobbyList
-Matchmaking_AddRequestLobbyListStringFilter :: ISteamMatchmaking_AddRequestLobbyListStringFilter
-Matchmaking_AddRequestLobbyListNumericalFilter :: ISteamMatchmaking_AddRequestLobbyListNumericalFilter
-Matchmaking_AddRequestLobbyListNearValueFilter :: ISteamMatchmaking_AddRequestLobbyListNearValueFilter
-Matchmaking_AddRequestLobbyListFilterSlotsAvailable :: ISteamMatchmaking_AddRequestLobbyListFilterSlotsAvailable
-Matchmaking_AddRequestLobbyListDistanceFilter :: ISteamMatchmaking_AddRequestLobbyListDistanceFilter
-Matchmaking_AddRequestLobbyListResultCountFilter :: ISteamMatchmaking_AddRequestLobbyListResultCountFilter
-Matchmaking_AddRequestLobbyListCompatibleMembersFilter :: ISteamMatchmaking_AddRequestLobbyListCompatibleMembersFilter
-Matchmaking_GetLobbyByIndex :: ISteamMatchmaking_GetLobbyByIndex
-Matchmaking_CreateLobby :: ISteamMatchmaking_CreateLobby
-Matchmaking_JoinLobby :: ISteamMatchmaking_JoinLobby
-Matchmaking_LeaveLobby :: ISteamMatchmaking_LeaveLobby
-Matchmaking_InviteUserToLobby :: ISteamMatchmaking_InviteUserToLobby
-Matchmaking_GetNumLobbyMembers :: ISteamMatchmaking_GetNumLobbyMembers
-Matchmaking_GetLobbyMemberByIndex :: ISteamMatchmaking_GetLobbyMemberByIndex
-Matchmaking_GetLobbyData :: ISteamMatchmaking_GetLobbyData
-Matchmaking_SetLobbyData :: ISteamMatchmaking_SetLobbyData
-Matchmaking_GetLobbyDataCount :: ISteamMatchmaking_GetLobbyDataCount
-Matchmaking_GetLobbyDataByIndex :: ISteamMatchmaking_GetLobbyDataByIndex
-Matchmaking_DeleteLobbyData :: ISteamMatchmaking_DeleteLobbyData
-Matchmaking_GetLobbyMemberData :: ISteamMatchmaking_GetLobbyMemberData
-Matchmaking_SetLobbyMemberData :: ISteamMatchmaking_SetLobbyMemberData
-Matchmaking_SendLobbyChatMsg :: ISteamMatchmaking_SendLobbyChatMsg
-Matchmaking_GetLobbyChatEntry :: ISteamMatchmaking_GetLobbyChatEntry
-Matchmaking_RequestLobbyData :: ISteamMatchmaking_RequestLobbyData
-Matchmaking_SetLobbyGameServer :: ISteamMatchmaking_SetLobbyGameServer
-Matchmaking_GetLobbyGameServer :: ISteamMatchmaking_GetLobbyGameServer
-Matchmaking_SetLobbyMemberLimit :: ISteamMatchmaking_SetLobbyMemberLimit
-Matchmaking_GetLobbyMemberLimit :: ISteamMatchmaking_GetLobbyMemberLimit
-Matchmaking_SetLobbyType :: ISteamMatchmaking_SetLobbyType
-Matchmaking_SetLobbyJoinable :: ISteamMatchmaking_SetLobbyJoinable
-Matchmaking_GetLobbyOwner :: ISteamMatchmaking_GetLobbyOwner
-Matchmaking_SetLobbyOwner :: ISteamMatchmaking_SetLobbyOwner
-Matchmaking_SetLinkedLobby :: ISteamMatchmaking_SetLinkedLobby
-MatchmakingServerListResponse_ServerResponded :: ISteamMatchmakingServerListResponse_ServerResponded
-MatchmakingServerListResponse_ServerFailedToRespond :: ISteamMatchmakingServerListResponse_ServerFailedToRespond
-MatchmakingServerListResponse_RefreshComplete :: ISteamMatchmakingServerListResponse_RefreshComplete
-MatchmakingPingResponse_ServerResponded :: ISteamMatchmakingPingResponse_ServerResponded
-MatchmakingPingResponse_ServerFailedToRespond :: ISteamMatchmakingPingResponse_ServerFailedToRespond
-MatchmakingPlayersResponse_AddPlayerToList :: ISteamMatchmakingPlayersResponse_AddPlayerToList
-MatchmakingPlayersResponse_PlayersFailedToRespond :: ISteamMatchmakingPlayersResponse_PlayersFailedToRespond
-MatchmakingPlayersResponse_PlayersRefreshComplete :: ISteamMatchmakingPlayersResponse_PlayersRefreshComplete
-MatchmakingRulesResponse_RulesResponded :: ISteamMatchmakingRulesResponse_RulesResponded
-MatchmakingRulesResponse_RulesFailedToRespond :: ISteamMatchmakingRulesResponse_RulesFailedToRespond
-MatchmakingRulesResponse_RulesRefreshComplete :: ISteamMatchmakingRulesResponse_RulesRefreshComplete
-MatchmakingServers_RequestInternetServerList :: ISteamMatchmakingServers_RequestInternetServerList
-MatchmakingServers_RequestLANServerList :: ISteamMatchmakingServers_RequestLANServerList
-MatchmakingServers_RequestFriendsServerList :: ISteamMatchmakingServers_RequestFriendsServerList
-MatchmakingServers_RequestFavoritesServerList :: ISteamMatchmakingServers_RequestFavoritesServerList
-MatchmakingServers_RequestHistoryServerList :: ISteamMatchmakingServers_RequestHistoryServerList
-MatchmakingServers_RequestSpectatorServerList :: ISteamMatchmakingServers_RequestSpectatorServerList
-MatchmakingServers_ReleaseRequest :: ISteamMatchmakingServers_ReleaseRequest
-MatchmakingServers_GetServerDetails :: ISteamMatchmakingServers_GetServerDetails
-MatchmakingServers_CancelQuery :: ISteamMatchmakingServers_CancelQuery
-MatchmakingServers_RefreshQuery :: ISteamMatchmakingServers_RefreshQuery
-MatchmakingServers_IsRefreshing :: ISteamMatchmakingServers_IsRefreshing
-MatchmakingServers_GetServerCount :: ISteamMatchmakingServers_GetServerCount
-MatchmakingServers_RefreshServer :: ISteamMatchmakingServers_RefreshServer
-MatchmakingServers_PingServer :: ISteamMatchmakingServers_PingServer
-MatchmakingServers_PlayerDetails :: ISteamMatchmakingServers_PlayerDetails
-MatchmakingServers_ServerRules :: ISteamMatchmakingServers_ServerRules
-MatchmakingServers_CancelServerQuery :: ISteamMatchmakingServers_CancelServerQuery
-GameSearch_AddGameSearchParams :: ISteamGameSearch_AddGameSearchParams
-GameSearch_SearchForGameWithLobby :: ISteamGameSearch_SearchForGameWithLobby
-GameSearch_SearchForGameSolo :: ISteamGameSearch_SearchForGameSolo
-GameSearch_AcceptGame :: ISteamGameSearch_AcceptGame
-GameSearch_DeclineGame :: ISteamGameSearch_DeclineGame
-GameSearch_RetrieveConnectionDetails :: ISteamGameSearch_RetrieveConnectionDetails
-GameSearch_EndGameSearch :: ISteamGameSearch_EndGameSearch
-GameSearch_SetGameHostParams :: ISteamGameSearch_SetGameHostParams
-GameSearch_SetConnectionDetails :: ISteamGameSearch_SetConnectionDetails
-GameSearch_RequestPlayersForGame :: ISteamGameSearch_RequestPlayersForGame
-GameSearch_HostConfirmGameStart :: ISteamGameSearch_HostConfirmGameStart
-GameSearch_CancelRequestPlayersForGame :: ISteamGameSearch_CancelRequestPlayersForGame
-GameSearch_SubmitPlayerResult :: ISteamGameSearch_SubmitPlayerResult
-GameSearch_EndGame :: ISteamGameSearch_EndGame
-Parties_GetNumActiveBeacons :: ISteamParties_GetNumActiveBeacons
-Parties_GetBeaconByIndex :: ISteamParties_GetBeaconByIndex
-Parties_GetBeaconDetails :: ISteamParties_GetBeaconDetails
-Parties_JoinParty :: ISteamParties_JoinParty
-Parties_GetNumAvailableBeaconLocations :: ISteamParties_GetNumAvailableBeaconLocations
-Parties_GetAvailableBeaconLocations :: ISteamParties_GetAvailableBeaconLocations
-Parties_CreateBeacon :: ISteamParties_CreateBeacon
-Parties_OnReservationCompleted :: ISteamParties_OnReservationCompleted
-Parties_CancelReservation :: ISteamParties_CancelReservation
-Parties_ChangeNumOpenSlots :: ISteamParties_ChangeNumOpenSlots
-Parties_DestroyBeacon :: ISteamParties_DestroyBeacon
-Parties_GetBeaconLocationData :: ISteamParties_GetBeaconLocationData
-RemoteStorage_FileWrite :: ISteamRemoteStorage_FileWrite
-RemoteStorage_FileRead :: ISteamRemoteStorage_FileRead
-RemoteStorage_FileWriteAsync :: ISteamRemoteStorage_FileWriteAsync
-RemoteStorage_FileReadAsync :: ISteamRemoteStorage_FileReadAsync
-RemoteStorage_FileReadAsyncComplete :: ISteamRemoteStorage_FileReadAsyncComplete
-RemoteStorage_FileForget :: ISteamRemoteStorage_FileForget
-RemoteStorage_FileDelete :: ISteamRemoteStorage_FileDelete
-RemoteStorage_FileShare :: ISteamRemoteStorage_FileShare
-RemoteStorage_SetSyncPlatforms :: ISteamRemoteStorage_SetSyncPlatforms
-RemoteStorage_FileWriteStreamOpen :: ISteamRemoteStorage_FileWriteStreamOpen
-RemoteStorage_FileWriteStreamWriteChunk :: ISteamRemoteStorage_FileWriteStreamWriteChunk
-RemoteStorage_FileWriteStreamClose :: ISteamRemoteStorage_FileWriteStreamClose
-RemoteStorage_FileWriteStreamCancel :: ISteamRemoteStorage_FileWriteStreamCancel
-RemoteStorage_FileExists :: ISteamRemoteStorage_FileExists
-RemoteStorage_FilePersisted :: ISteamRemoteStorage_FilePersisted
-RemoteStorage_GetFileSize :: ISteamRemoteStorage_GetFileSize
-RemoteStorage_GetFileTimestamp :: ISteamRemoteStorage_GetFileTimestamp
-RemoteStorage_GetSyncPlatforms :: ISteamRemoteStorage_GetSyncPlatforms
-RemoteStorage_GetFileCount :: ISteamRemoteStorage_GetFileCount
-RemoteStorage_GetFileNameAndSize :: ISteamRemoteStorage_GetFileNameAndSize
-RemoteStorage_GetQuota :: ISteamRemoteStorage_GetQuota
-RemoteStorage_IsCloudEnabledForAccount :: ISteamRemoteStorage_IsCloudEnabledForAccount
-RemoteStorage_IsCloudEnabledForApp :: ISteamRemoteStorage_IsCloudEnabledForApp
-RemoteStorage_SetCloudEnabledForApp :: ISteamRemoteStorage_SetCloudEnabledForApp
-RemoteStorage_UGCDownload :: ISteamRemoteStorage_UGCDownload
-RemoteStorage_GetUGCDownloadProgress :: ISteamRemoteStorage_GetUGCDownloadProgress
-RemoteStorage_GetUGCDetails :: ISteamRemoteStorage_GetUGCDetails
-RemoteStorage_UGCRead :: ISteamRemoteStorage_UGCRead
-RemoteStorage_GetCachedUGCCount :: ISteamRemoteStorage_GetCachedUGCCount
-RemoteStorage_GetCachedUGCHandle :: ISteamRemoteStorage_GetCachedUGCHandle
-RemoteStorage_PublishWorkshopFile :: ISteamRemoteStorage_PublishWorkshopFile
-RemoteStorage_CreatePublishedFileUpdateRequest :: ISteamRemoteStorage_CreatePublishedFileUpdateRequest
-RemoteStorage_UpdatePublishedFileFile :: ISteamRemoteStorage_UpdatePublishedFileFile
-RemoteStorage_UpdatePublishedFilePreviewFile :: ISteamRemoteStorage_UpdatePublishedFilePreviewFile
-RemoteStorage_UpdatePublishedFileTitle :: ISteamRemoteStorage_UpdatePublishedFileTitle
-RemoteStorage_UpdatePublishedFileDescription :: ISteamRemoteStorage_UpdatePublishedFileDescription
-RemoteStorage_UpdatePublishedFileVisibility :: ISteamRemoteStorage_UpdatePublishedFileVisibility
-RemoteStorage_UpdatePublishedFileTags :: ISteamRemoteStorage_UpdatePublishedFileTags
-RemoteStorage_CommitPublishedFileUpdate :: ISteamRemoteStorage_CommitPublishedFileUpdate
-RemoteStorage_GetPublishedFileDetails :: ISteamRemoteStorage_GetPublishedFileDetails
-RemoteStorage_DeletePublishedFile :: ISteamRemoteStorage_DeletePublishedFile
-RemoteStorage_EnumerateUserPublishedFiles :: ISteamRemoteStorage_EnumerateUserPublishedFiles
-RemoteStorage_SubscribePublishedFile :: ISteamRemoteStorage_SubscribePublishedFile
-RemoteStorage_EnumerateUserSubscribedFiles :: ISteamRemoteStorage_EnumerateUserSubscribedFiles
-RemoteStorage_UnsubscribePublishedFile :: ISteamRemoteStorage_UnsubscribePublishedFile
-RemoteStorage_UpdatePublishedFileSetChangeDescription :: ISteamRemoteStorage_UpdatePublishedFileSetChangeDescription
-RemoteStorage_GetPublishedItemVoteDetails :: ISteamRemoteStorage_GetPublishedItemVoteDetails
-RemoteStorage_UpdateUserPublishedItemVote :: ISteamRemoteStorage_UpdateUserPublishedItemVote
-RemoteStorage_GetUserPublishedItemVoteDetails :: ISteamRemoteStorage_GetUserPublishedItemVoteDetails
-RemoteStorage_EnumerateUserSharedWorkshopFiles :: ISteamRemoteStorage_EnumerateUserSharedWorkshopFiles
-RemoteStorage_PublishVideo :: ISteamRemoteStorage_PublishVideo
-RemoteStorage_SetUserPublishedFileAction :: ISteamRemoteStorage_SetUserPublishedFileAction
-RemoteStorage_EnumeratePublishedFilesByUserAction :: ISteamRemoteStorage_EnumeratePublishedFilesByUserAction
-RemoteStorage_EnumeratePublishedWorkshopFiles :: ISteamRemoteStorage_EnumeratePublishedWorkshopFiles
-RemoteStorage_UGCDownloadToLocation :: ISteamRemoteStorage_UGCDownloadToLocation
-RemoteStorage_GetLocalFileChangeCount :: ISteamRemoteStorage_GetLocalFileChangeCount
-RemoteStorage_GetLocalFileChange :: ISteamRemoteStorage_GetLocalFileChange
-RemoteStorage_BeginFileWriteBatch :: ISteamRemoteStorage_BeginFileWriteBatch
-RemoteStorage_EndFileWriteBatch :: ISteamRemoteStorage_EndFileWriteBatch
-UserStats_RequestCurrentStats :: ISteamUserStats_RequestCurrentStats
-UserStats_GetStatInt32 :: ISteamUserStats_GetStatInt32
-UserStats_GetStatFloat :: ISteamUserStats_GetStatFloat
-UserStats_SetStatInt32 :: ISteamUserStats_SetStatInt32
-UserStats_SetStatFloat :: ISteamUserStats_SetStatFloat
-UserStats_UpdateAvgRateStat :: ISteamUserStats_UpdateAvgRateStat
-UserStats_GetAchievement :: ISteamUserStats_GetAchievement
-UserStats_SetAchievement :: ISteamUserStats_SetAchievement
-UserStats_ClearAchievement :: ISteamUserStats_ClearAchievement
-UserStats_GetAchievementAndUnlockTime :: ISteamUserStats_GetAchievementAndUnlockTime
-UserStats_StoreStats :: ISteamUserStats_StoreStats
-UserStats_GetAchievementIcon :: ISteamUserStats_GetAchievementIcon
-UserStats_GetAchievementDisplayAttribute :: ISteamUserStats_GetAchievementDisplayAttribute
-UserStats_IndicateAchievementProgress :: ISteamUserStats_IndicateAchievementProgress
-UserStats_GetNumAchievements :: ISteamUserStats_GetNumAchievements
-UserStats_GetAchievementName :: ISteamUserStats_GetAchievementName
-UserStats_RequestUserStats :: ISteamUserStats_RequestUserStats
-UserStats_GetUserStatInt32 :: ISteamUserStats_GetUserStatInt32
-UserStats_GetUserStatFloat :: ISteamUserStats_GetUserStatFloat
-UserStats_GetUserAchievement :: ISteamUserStats_GetUserAchievement
-UserStats_GetUserAchievementAndUnlockTime :: ISteamUserStats_GetUserAchievementAndUnlockTime
-UserStats_ResetAllStats :: ISteamUserStats_ResetAllStats
-UserStats_FindOrCreateLeaderboard :: ISteamUserStats_FindOrCreateLeaderboard
-UserStats_FindLeaderboard :: ISteamUserStats_FindLeaderboard
-UserStats_GetLeaderboardName :: ISteamUserStats_GetLeaderboardName
-UserStats_GetLeaderboardEntryCount :: ISteamUserStats_GetLeaderboardEntryCount
-UserStats_GetLeaderboardSortMethod :: ISteamUserStats_GetLeaderboardSortMethod
-UserStats_GetLeaderboardDisplayType :: ISteamUserStats_GetLeaderboardDisplayType
-UserStats_DownloadLeaderboardEntries :: ISteamUserStats_DownloadLeaderboardEntries
-UserStats_DownloadLeaderboardEntriesForUsers :: ISteamUserStats_DownloadLeaderboardEntriesForUsers
-UserStats_GetDownloadedLeaderboardEntry :: ISteamUserStats_GetDownloadedLeaderboardEntry
-UserStats_UploadLeaderboardScore :: ISteamUserStats_UploadLeaderboardScore
-UserStats_AttachLeaderboardUGC :: ISteamUserStats_AttachLeaderboardUGC
-UserStats_GetNumberOfCurrentPlayers :: ISteamUserStats_GetNumberOfCurrentPlayers
-UserStats_RequestGlobalAchievementPercentages :: ISteamUserStats_RequestGlobalAchievementPercentages
-UserStats_GetMostAchievedAchievementInfo :: ISteamUserStats_GetMostAchievedAchievementInfo
-UserStats_GetNextMostAchievedAchievementInfo :: ISteamUserStats_GetNextMostAchievedAchievementInfo
-UserStats_GetAchievementAchievedPercent :: ISteamUserStats_GetAchievementAchievedPercent
-UserStats_RequestGlobalStats :: ISteamUserStats_RequestGlobalStats
-UserStats_GetGlobalStatInt64 :: ISteamUserStats_GetGlobalStatInt64
-UserStats_GetGlobalStatFloat64 :: ISteamUserStats_GetGlobalStatFloat64
-UserStats_GetGlobalStatHistoryInt64 :: ISteamUserStats_GetGlobalStatHistoryInt64
-UserStats_GetGlobalStatHistoryFloat64 :: ISteamUserStats_GetGlobalStatHistoryFloat64
-UserStats_GetAchievementProgressLimitsInt32 :: ISteamUserStats_GetAchievementProgressLimitsInt32
-UserStats_GetAchievementProgressLimitsFloat :: ISteamUserStats_GetAchievementProgressLimitsFloat
-Apps_BIsSubscribed :: ISteamApps_BIsSubscribed
-Apps_BIsLowViolence :: ISteamApps_BIsLowViolence
-Apps_BIsCybercafe :: ISteamApps_BIsCybercafe
-Apps_BIsVACBanned :: ISteamApps_BIsVACBanned
-Apps_GetCurrentGameLanguage :: ISteamApps_GetCurrentGameLanguage
-Apps_GetAvailableGameLanguages :: ISteamApps_GetAvailableGameLanguages
-Apps_BIsSubscribedApp :: ISteamApps_BIsSubscribedApp
-Apps_BIsDlcInstalled :: ISteamApps_BIsDlcInstalled
-Apps_GetEarliestPurchaseUnixTime :: ISteamApps_GetEarliestPurchaseUnixTime
-Apps_BIsSubscribedFromFreeWeekend :: ISteamApps_BIsSubscribedFromFreeWeekend
-Apps_GetDLCCount :: ISteamApps_GetDLCCount
-Apps_BGetDLCDataByIndex :: ISteamApps_BGetDLCDataByIndex
-Apps_InstallDLC :: ISteamApps_InstallDLC
-Apps_UninstallDLC :: ISteamApps_UninstallDLC
-Apps_RequestAppProofOfPurchaseKey :: ISteamApps_RequestAppProofOfPurchaseKey
-Apps_GetCurrentBetaName :: ISteamApps_GetCurrentBetaName
-Apps_MarkContentCorrupt :: ISteamApps_MarkContentCorrupt
-Apps_GetInstalledDepots :: ISteamApps_GetInstalledDepots
-Apps_GetAppInstallDir :: ISteamApps_GetAppInstallDir
-Apps_BIsAppInstalled :: ISteamApps_BIsAppInstalled
-Apps_GetAppOwner :: ISteamApps_GetAppOwner
-Apps_GetLaunchQueryParam :: ISteamApps_GetLaunchQueryParam
-Apps_GetDlcDownloadProgress :: ISteamApps_GetDlcDownloadProgress
-Apps_GetAppBuildId :: ISteamApps_GetAppBuildId
-Apps_RequestAllProofOfPurchaseKeys :: ISteamApps_RequestAllProofOfPurchaseKeys
-Apps_GetFileDetails :: ISteamApps_GetFileDetails
-Apps_GetLaunchCommandLine :: ISteamApps_GetLaunchCommandLine
-Apps_BIsSubscribedFromFamilySharing :: ISteamApps_BIsSubscribedFromFamilySharing
-Apps_BIsTimedTrial :: ISteamApps_BIsTimedTrial
-Apps_SetDlcContext :: ISteamApps_SetDlcContext
-Networking_SendP2PPacket :: ISteamNetworking_SendP2PPacket
-Networking_IsP2PPacketAvailable :: ISteamNetworking_IsP2PPacketAvailable
-Networking_ReadP2PPacket :: ISteamNetworking_ReadP2PPacket
-Networking_AcceptP2PSessionWithUser :: ISteamNetworking_AcceptP2PSessionWithUser
-Networking_CloseP2PSessionWithUser :: ISteamNetworking_CloseP2PSessionWithUser
-Networking_CloseP2PChannelWithUser :: ISteamNetworking_CloseP2PChannelWithUser
-Networking_GetP2PSessionState :: ISteamNetworking_GetP2PSessionState
-Networking_AllowP2PPacketRelay :: ISteamNetworking_AllowP2PPacketRelay
-Networking_CreateListenSocket :: ISteamNetworking_CreateListenSocket
-Networking_CreateP2PConnectionSocket :: ISteamNetworking_CreateP2PConnectionSocket
-Networking_CreateConnectionSocket :: ISteamNetworking_CreateConnectionSocket
-Networking_DestroySocket :: ISteamNetworking_DestroySocket
-Networking_DestroyListenSocket :: ISteamNetworking_DestroyListenSocket
-Networking_SendDataOnSocket :: ISteamNetworking_SendDataOnSocket
-Networking_IsDataAvailableOnSocket :: ISteamNetworking_IsDataAvailableOnSocket
-Networking_RetrieveDataFromSocket :: ISteamNetworking_RetrieveDataFromSocket
-Networking_IsDataAvailable :: ISteamNetworking_IsDataAvailable
-Networking_RetrieveData :: ISteamNetworking_RetrieveData
-Networking_GetSocketInfo :: ISteamNetworking_GetSocketInfo
-Networking_GetListenSocketInfo :: ISteamNetworking_GetListenSocketInfo
-Networking_GetSocketConnectionType :: ISteamNetworking_GetSocketConnectionType
-Networking_GetMaxPacketSize :: ISteamNetworking_GetMaxPacketSize
-Screenshots_WriteScreenshot :: ISteamScreenshots_WriteScreenshot
-Screenshots_AddScreenshotToLibrary :: ISteamScreenshots_AddScreenshotToLibrary
-Screenshots_TriggerScreenshot :: ISteamScreenshots_TriggerScreenshot
-Screenshots_HookScreenshots :: ISteamScreenshots_HookScreenshots
-Screenshots_SetLocation :: ISteamScreenshots_SetLocation
-Screenshots_TagUser :: ISteamScreenshots_TagUser
-Screenshots_TagPublishedFile :: ISteamScreenshots_TagPublishedFile
-Screenshots_IsScreenshotsHooked :: ISteamScreenshots_IsScreenshotsHooked
-Screenshots_AddVRScreenshotToLibrary :: ISteamScreenshots_AddVRScreenshotToLibrary
-Music_BIsEnabled :: ISteamMusic_BIsEnabled
-Music_BIsPlaying :: ISteamMusic_BIsPlaying
-Music_GetPlaybackStatus :: ISteamMusic_GetPlaybackStatus
-Music_Play :: ISteamMusic_Play
-Music_Pause :: ISteamMusic_Pause
-Music_PlayPrevious :: ISteamMusic_PlayPrevious
-Music_PlayNext :: ISteamMusic_PlayNext
-Music_SetVolume :: ISteamMusic_SetVolume
-Music_GetVolume :: ISteamMusic_GetVolume
-MusicRemote_RegisterSteamMusicRemote :: ISteamMusicRemote_RegisterSteamMusicRemote
-MusicRemote_DeregisterSteamMusicRemote :: ISteamMusicRemote_DeregisterSteamMusicRemote
-MusicRemote_BIsCurrentMusicRemote :: ISteamMusicRemote_BIsCurrentMusicRemote
-MusicRemote_BActivationSuccess :: ISteamMusicRemote_BActivationSuccess
-MusicRemote_SetDisplayName :: ISteamMusicRemote_SetDisplayName
-MusicRemote_SetPNGIcon_64x64 :: ISteamMusicRemote_SetPNGIcon_64x64
-MusicRemote_EnablePlayPrevious :: ISteamMusicRemote_EnablePlayPrevious
-MusicRemote_EnablePlayNext :: ISteamMusicRemote_EnablePlayNext
-MusicRemote_EnableShuffled :: ISteamMusicRemote_EnableShuffled
-MusicRemote_EnableLooped :: ISteamMusicRemote_EnableLooped
-MusicRemote_EnableQueue :: ISteamMusicRemote_EnableQueue
-MusicRemote_EnablePlaylists :: ISteamMusicRemote_EnablePlaylists
-MusicRemote_UpdatePlaybackStatus :: ISteamMusicRemote_UpdatePlaybackStatus
-MusicRemote_UpdateShuffled :: ISteamMusicRemote_UpdateShuffled
-MusicRemote_UpdateLooped :: ISteamMusicRemote_UpdateLooped
-MusicRemote_UpdateVolume :: ISteamMusicRemote_UpdateVolume
-MusicRemote_CurrentEntryWillChange :: ISteamMusicRemote_CurrentEntryWillChange
-MusicRemote_CurrentEntryIsAvailable :: ISteamMusicRemote_CurrentEntryIsAvailable
-MusicRemote_UpdateCurrentEntryText :: ISteamMusicRemote_UpdateCurrentEntryText
-MusicRemote_UpdateCurrentEntryElapsedSeconds :: ISteamMusicRemote_UpdateCurrentEntryElapsedSeconds
-MusicRemote_UpdateCurrentEntryCoverArt :: ISteamMusicRemote_UpdateCurrentEntryCoverArt
-MusicRemote_CurrentEntryDidChange :: ISteamMusicRemote_CurrentEntryDidChange
-MusicRemote_QueueWillChange :: ISteamMusicRemote_QueueWillChange
-MusicRemote_ResetQueueEntries :: ISteamMusicRemote_ResetQueueEntries
-MusicRemote_SetQueueEntry :: ISteamMusicRemote_SetQueueEntry
-MusicRemote_SetCurrentQueueEntry :: ISteamMusicRemote_SetCurrentQueueEntry
-MusicRemote_QueueDidChange :: ISteamMusicRemote_QueueDidChange
-MusicRemote_PlaylistWillChange :: ISteamMusicRemote_PlaylistWillChange
-MusicRemote_ResetPlaylistEntries :: ISteamMusicRemote_ResetPlaylistEntries
-MusicRemote_SetPlaylistEntry :: ISteamMusicRemote_SetPlaylistEntry
-MusicRemote_SetCurrentPlaylistEntry :: ISteamMusicRemote_SetCurrentPlaylistEntry
-MusicRemote_PlaylistDidChange :: ISteamMusicRemote_PlaylistDidChange
-HTTP_CreateHTTPRequest :: ISteamHTTP_CreateHTTPRequest
-HTTP_SetHTTPRequestContextValue :: ISteamHTTP_SetHTTPRequestContextValue
-HTTP_SetHTTPRequestNetworkActivityTimeout :: ISteamHTTP_SetHTTPRequestNetworkActivityTimeout
-HTTP_SetHTTPRequestHeaderValue :: ISteamHTTP_SetHTTPRequestHeaderValue
-HTTP_SetHTTPRequestGetOrPostParameter :: ISteamHTTP_SetHTTPRequestGetOrPostParameter
-HTTP_SendHTTPRequest :: ISteamHTTP_SendHTTPRequest
-HTTP_SendHTTPRequestAndStreamResponse :: ISteamHTTP_SendHTTPRequestAndStreamResponse
-HTTP_DeferHTTPRequest :: ISteamHTTP_DeferHTTPRequest
-HTTP_PrioritizeHTTPRequest :: ISteamHTTP_PrioritizeHTTPRequest
-HTTP_GetHTTPResponseHeaderSize :: ISteamHTTP_GetHTTPResponseHeaderSize
-HTTP_GetHTTPResponseHeaderValue :: ISteamHTTP_GetHTTPResponseHeaderValue
-HTTP_GetHTTPResponseBodySize :: ISteamHTTP_GetHTTPResponseBodySize
-HTTP_GetHTTPResponseBodyData :: ISteamHTTP_GetHTTPResponseBodyData
-HTTP_GetHTTPStreamingResponseBodyData :: ISteamHTTP_GetHTTPStreamingResponseBodyData
-HTTP_ReleaseHTTPRequest :: ISteamHTTP_ReleaseHTTPRequest
-HTTP_GetHTTPDownloadProgressPct :: ISteamHTTP_GetHTTPDownloadProgressPct
-HTTP_SetHTTPRequestRawPostBody :: ISteamHTTP_SetHTTPRequestRawPostBody
-HTTP_CreateCookieContainer :: ISteamHTTP_CreateCookieContainer
-HTTP_ReleaseCookieContainer :: ISteamHTTP_ReleaseCookieContainer
-HTTP_SetCookie :: ISteamHTTP_SetCookie
-HTTP_SetHTTPRequestCookieContainer :: ISteamHTTP_SetHTTPRequestCookieContainer
-HTTP_SetHTTPRequestUserAgentInfo :: ISteamHTTP_SetHTTPRequestUserAgentInfo
-HTTP_SetHTTPRequestRequiresVerifiedCertificate :: ISteamHTTP_SetHTTPRequestRequiresVerifiedCertificate
-HTTP_SetHTTPRequestAbsoluteTimeoutMS :: ISteamHTTP_SetHTTPRequestAbsoluteTimeoutMS
-HTTP_GetHTTPRequestWasTimedOut :: ISteamHTTP_GetHTTPRequestWasTimedOut
-Input_Init :: ISteamInput_Init
-Input_Shutdown :: ISteamInput_Shutdown
-Input_SetInputActionManifestFilePath :: ISteamInput_SetInputActionManifestFilePath
-Input_RunFrame :: ISteamInput_RunFrame
-Input_BWaitForData :: ISteamInput_BWaitForData
-Input_BNewDataAvailable :: ISteamInput_BNewDataAvailable
-Input_GetConnectedControllers :: ISteamInput_GetConnectedControllers
-Input_EnableDeviceCallbacks :: ISteamInput_EnableDeviceCallbacks
-Input_EnableActionEventCallbacks :: ISteamInput_EnableActionEventCallbacks
-Input_GetActionSetHandle :: ISteamInput_GetActionSetHandle
-Input_ActivateActionSet :: ISteamInput_ActivateActionSet
-Input_GetCurrentActionSet :: ISteamInput_GetCurrentActionSet
-Input_ActivateActionSetLayer :: ISteamInput_ActivateActionSetLayer
-Input_DeactivateActionSetLayer :: ISteamInput_DeactivateActionSetLayer
-Input_DeactivateAllActionSetLayers :: ISteamInput_DeactivateAllActionSetLayers
-Input_GetActiveActionSetLayers :: ISteamInput_GetActiveActionSetLayers
-Input_GetDigitalActionHandle :: ISteamInput_GetDigitalActionHandle
-Input_GetDigitalActionData :: ISteamInput_GetDigitalActionData
-Input_GetDigitalActionOrigins :: ISteamInput_GetDigitalActionOrigins
-Input_GetStringForDigitalActionName :: ISteamInput_GetStringForDigitalActionName
-Input_GetAnalogActionHandle :: ISteamInput_GetAnalogActionHandle
-Input_GetAnalogActionData :: ISteamInput_GetAnalogActionData
-Input_GetAnalogActionOrigins :: ISteamInput_GetAnalogActionOrigins
-Input_GetGlyphPNGForActionOrigin :: ISteamInput_GetGlyphPNGForActionOrigin
-Input_GetGlyphSVGForActionOrigin :: ISteamInput_GetGlyphSVGForActionOrigin
-Input_GetGlyphForActionOrigin_Legacy :: ISteamInput_GetGlyphForActionOrigin_Legacy
-Input_GetStringForActionOrigin :: ISteamInput_GetStringForActionOrigin
-Input_GetStringForAnalogActionName :: ISteamInput_GetStringForAnalogActionName
-Input_StopAnalogActionMomentum :: ISteamInput_StopAnalogActionMomentum
-Input_GetMotionData :: ISteamInput_GetMotionData
-Input_TriggerVibration :: ISteamInput_TriggerVibration
-Input_TriggerVibrationExtended :: ISteamInput_TriggerVibrationExtended
-Input_TriggerSimpleHapticEvent :: ISteamInput_TriggerSimpleHapticEvent
-Input_SetLEDColor :: ISteamInput_SetLEDColor
-Input_Legacy_TriggerHapticPulse :: ISteamInput_Legacy_TriggerHapticPulse
-Input_Legacy_TriggerRepeatedHapticPulse :: ISteamInput_Legacy_TriggerRepeatedHapticPulse
-Input_ShowBindingPanel :: ISteamInput_ShowBindingPanel
-Input_GetInputTypeForHandle :: ISteamInput_GetInputTypeForHandle
-Input_GetControllerForGamepadIndex :: ISteamInput_GetControllerForGamepadIndex
-Input_GetGamepadIndexForController :: ISteamInput_GetGamepadIndexForController
-Input_GetStringForXboxOrigin :: ISteamInput_GetStringForXboxOrigin
-Input_GetGlyphForXboxOrigin :: ISteamInput_GetGlyphForXboxOrigin
-Input_GetActionOriginFromXboxOrigin :: ISteamInput_GetActionOriginFromXboxOrigin
-Input_TranslateActionOrigin :: ISteamInput_TranslateActionOrigin
-Input_GetDeviceBindingRevision :: ISteamInput_GetDeviceBindingRevision
-Input_GetRemotePlaySessionID :: ISteamInput_GetRemotePlaySessionID
-Input_GetSessionInputConfigurationSettings :: ISteamInput_GetSessionInputConfigurationSettings
-Controller_Init :: ISteamController_Init
-Controller_Shutdown :: ISteamController_Shutdown
-Controller_RunFrame :: ISteamController_RunFrame
-Controller_GetConnectedControllers :: ISteamController_GetConnectedControllers
-Controller_GetActionSetHandle :: ISteamController_GetActionSetHandle
-Controller_ActivateActionSet :: ISteamController_ActivateActionSet
-Controller_GetCurrentActionSet :: ISteamController_GetCurrentActionSet
-Controller_ActivateActionSetLayer :: ISteamController_ActivateActionSetLayer
-Controller_DeactivateActionSetLayer :: ISteamController_DeactivateActionSetLayer
-Controller_DeactivateAllActionSetLayers :: ISteamController_DeactivateAllActionSetLayers
-Controller_GetActiveActionSetLayers :: ISteamController_GetActiveActionSetLayers
-Controller_GetDigitalActionHandle :: ISteamController_GetDigitalActionHandle
-Controller_GetDigitalActionData :: ISteamController_GetDigitalActionData
-Controller_GetDigitalActionOrigins :: ISteamController_GetDigitalActionOrigins
-Controller_GetAnalogActionHandle :: ISteamController_GetAnalogActionHandle
-Controller_GetAnalogActionData :: ISteamController_GetAnalogActionData
-Controller_GetAnalogActionOrigins :: ISteamController_GetAnalogActionOrigins
-Controller_GetGlyphForActionOrigin :: ISteamController_GetGlyphForActionOrigin
-Controller_GetStringForActionOrigin :: ISteamController_GetStringForActionOrigin
-Controller_StopAnalogActionMomentum :: ISteamController_StopAnalogActionMomentum
-Controller_GetMotionData :: ISteamController_GetMotionData
-Controller_TriggerHapticPulse :: ISteamController_TriggerHapticPulse
-Controller_TriggerRepeatedHapticPulse :: ISteamController_TriggerRepeatedHapticPulse
-Controller_TriggerVibration :: ISteamController_TriggerVibration
-Controller_SetLEDColor :: ISteamController_SetLEDColor
-Controller_ShowBindingPanel :: ISteamController_ShowBindingPanel
-Controller_GetInputTypeForHandle :: ISteamController_GetInputTypeForHandle
-Controller_GetControllerForGamepadIndex :: ISteamController_GetControllerForGamepadIndex
-Controller_GetGamepadIndexForController :: ISteamController_GetGamepadIndexForController
-Controller_GetStringForXboxOrigin :: ISteamController_GetStringForXboxOrigin
-Controller_GetGlyphForXboxOrigin :: ISteamController_GetGlyphForXboxOrigin
-Controller_GetActionOriginFromXboxOrigin :: ISteamController_GetActionOriginFromXboxOrigin
-Controller_TranslateActionOrigin :: ISteamController_TranslateActionOrigin
-Controller_GetControllerBindingRevision :: ISteamController_GetControllerBindingRevision
-UGC_CreateQueryUserUGCRequest :: ISteamUGC_CreateQueryUserUGCRequest
-UGC_CreateQueryAllUGCRequestByPage :: ISteamUGC_CreateQueryAllUGCRequestByPage
-UGC_CreateQueryAllUGCRequestByCursor :: ISteamUGC_CreateQueryAllUGCRequestByCursor
-UGC_CreateQueryUGCDetailsRequest :: ISteamUGC_CreateQueryUGCDetailsRequest
-UGC_SendQueryUGCRequest :: ISteamUGC_SendQueryUGCRequest
-UGC_GetQueryUGCResult :: ISteamUGC_GetQueryUGCResult
-UGC_GetQueryUGCNumTags :: ISteamUGC_GetQueryUGCNumTags
-UGC_GetQueryUGCTag :: ISteamUGC_GetQueryUGCTag
-UGC_GetQueryUGCTagDisplayName :: ISteamUGC_GetQueryUGCTagDisplayName
-UGC_GetQueryUGCPreviewURL :: ISteamUGC_GetQueryUGCPreviewURL
-UGC_GetQueryUGCMetadata :: ISteamUGC_GetQueryUGCMetadata
-UGC_GetQueryUGCChildren :: ISteamUGC_GetQueryUGCChildren
-UGC_GetQueryUGCStatistic :: ISteamUGC_GetQueryUGCStatistic
-UGC_GetQueryUGCNumAdditionalPreviews :: ISteamUGC_GetQueryUGCNumAdditionalPreviews
-UGC_GetQueryUGCAdditionalPreview :: ISteamUGC_GetQueryUGCAdditionalPreview
-UGC_GetQueryUGCNumKeyValueTags :: ISteamUGC_GetQueryUGCNumKeyValueTags
-UGC_GetQueryUGCKeyValueTag :: ISteamUGC_GetQueryUGCKeyValueTag
-UGC_ReleaseQueryUGCRequest :: ISteamUGC_ReleaseQueryUGCRequest
-UGC_AddRequiredTag :: ISteamUGC_AddRequiredTag
-UGC_AddRequiredTagGroup :: ISteamUGC_AddRequiredTagGroup
-UGC_AddExcludedTag :: ISteamUGC_AddExcludedTag
-UGC_SetReturnOnlyIDs :: ISteamUGC_SetReturnOnlyIDs
-UGC_SetReturnKeyValueTags :: ISteamUGC_SetReturnKeyValueTags
-UGC_SetReturnLongDescription :: ISteamUGC_SetReturnLongDescription
-UGC_SetReturnMetadata :: ISteamUGC_SetReturnMetadata
-UGC_SetReturnChildren :: ISteamUGC_SetReturnChildren
-UGC_SetReturnAdditionalPreviews :: ISteamUGC_SetReturnAdditionalPreviews
-UGC_SetReturnTotalOnly :: ISteamUGC_SetReturnTotalOnly
-UGC_SetReturnPlaytimeStats :: ISteamUGC_SetReturnPlaytimeStats
-UGC_SetLanguage :: ISteamUGC_SetLanguage
-UGC_SetAllowCachedResponse :: ISteamUGC_SetAllowCachedResponse
-UGC_SetCloudFileNameFilter :: ISteamUGC_SetCloudFileNameFilter
-UGC_SetMatchAnyTag :: ISteamUGC_SetMatchAnyTag
-UGC_SetSearchText :: ISteamUGC_SetSearchText
-UGC_SetRankedByTrendDays :: ISteamUGC_SetRankedByTrendDays
-UGC_SetTimeCreatedDateRange :: ISteamUGC_SetTimeCreatedDateRange
-UGC_SetTimeUpdatedDateRange :: ISteamUGC_SetTimeUpdatedDateRange
-UGC_AddRequiredKeyValueTag :: ISteamUGC_AddRequiredKeyValueTag
-UGC_RequestUGCDetails :: ISteamUGC_RequestUGCDetails
-UGC_CreateItem :: ISteamUGC_CreateItem
-UGC_StartItemUpdate :: ISteamUGC_StartItemUpdate
-UGC_SetItemTitle :: ISteamUGC_SetItemTitle
-UGC_SetItemDescription :: ISteamUGC_SetItemDescription
-UGC_SetItemUpdateLanguage :: ISteamUGC_SetItemUpdateLanguage
-UGC_SetItemMetadata :: ISteamUGC_SetItemMetadata
-UGC_SetItemVisibility :: ISteamUGC_SetItemVisibility
-UGC_SetItemTags :: ISteamUGC_SetItemTags
-UGC_SetItemContent :: ISteamUGC_SetItemContent
-UGC_SetItemPreview :: ISteamUGC_SetItemPreview
-UGC_SetAllowLegacyUpload :: ISteamUGC_SetAllowLegacyUpload
-UGC_RemoveAllItemKeyValueTags :: ISteamUGC_RemoveAllItemKeyValueTags
-UGC_RemoveItemKeyValueTags :: ISteamUGC_RemoveItemKeyValueTags
-UGC_AddItemKeyValueTag :: ISteamUGC_AddItemKeyValueTag
-UGC_AddItemPreviewFile :: ISteamUGC_AddItemPreviewFile
-UGC_AddItemPreviewVideo :: ISteamUGC_AddItemPreviewVideo
-UGC_UpdateItemPreviewFile :: ISteamUGC_UpdateItemPreviewFile
-UGC_UpdateItemPreviewVideo :: ISteamUGC_UpdateItemPreviewVideo
-UGC_RemoveItemPreview :: ISteamUGC_RemoveItemPreview
-UGC_SubmitItemUpdate :: ISteamUGC_SubmitItemUpdate
-UGC_GetItemUpdateProgress :: ISteamUGC_GetItemUpdateProgress
-UGC_SetUserItemVote :: ISteamUGC_SetUserItemVote
-UGC_GetUserItemVote :: ISteamUGC_GetUserItemVote
-UGC_AddItemToFavorites :: ISteamUGC_AddItemToFavorites
-UGC_RemoveItemFromFavorites :: ISteamUGC_RemoveItemFromFavorites
-UGC_SubscribeItem :: ISteamUGC_SubscribeItem
-UGC_UnsubscribeItem :: ISteamUGC_UnsubscribeItem
-UGC_GetNumSubscribedItems :: ISteamUGC_GetNumSubscribedItems
-UGC_GetSubscribedItems :: ISteamUGC_GetSubscribedItems
-UGC_GetItemState :: ISteamUGC_GetItemState
-UGC_GetItemInstallInfo :: ISteamUGC_GetItemInstallInfo
-UGC_GetItemDownloadInfo :: ISteamUGC_GetItemDownloadInfo
-UGC_DownloadItem :: ISteamUGC_DownloadItem
-UGC_BInitWorkshopForGameServer :: ISteamUGC_BInitWorkshopForGameServer
-UGC_SuspendDownloads :: ISteamUGC_SuspendDownloads
-UGC_StartPlaytimeTracking :: ISteamUGC_StartPlaytimeTracking
-UGC_StopPlaytimeTracking :: ISteamUGC_StopPlaytimeTracking
-UGC_StopPlaytimeTrackingForAllItems :: ISteamUGC_StopPlaytimeTrackingForAllItems
-UGC_AddDependency :: ISteamUGC_AddDependency
-UGC_RemoveDependency :: ISteamUGC_RemoveDependency
-UGC_AddAppDependency :: ISteamUGC_AddAppDependency
-UGC_RemoveAppDependency :: ISteamUGC_RemoveAppDependency
-UGC_GetAppDependencies :: ISteamUGC_GetAppDependencies
-UGC_DeleteItem :: ISteamUGC_DeleteItem
-UGC_ShowWorkshopEULA :: ISteamUGC_ShowWorkshopEULA
-UGC_GetWorkshopEULAStatus :: ISteamUGC_GetWorkshopEULAStatus
-AppList_GetNumInstalledApps :: ISteamAppList_GetNumInstalledApps
-AppList_GetInstalledApps :: ISteamAppList_GetInstalledApps
-AppList_GetAppName :: ISteamAppList_GetAppName
-AppList_GetAppInstallDir :: ISteamAppList_GetAppInstallDir
-AppList_GetAppBuildId :: ISteamAppList_GetAppBuildId
-HTMLSurface_Init :: ISteamHTMLSurface_Init
-HTMLSurface_Shutdown :: ISteamHTMLSurface_Shutdown
-HTMLSurface_CreateBrowser :: ISteamHTMLSurface_CreateBrowser
-HTMLSurface_RemoveBrowser :: ISteamHTMLSurface_RemoveBrowser
-HTMLSurface_LoadURL :: ISteamHTMLSurface_LoadURL
-HTMLSurface_SetSize :: ISteamHTMLSurface_SetSize
-HTMLSurface_StopLoad :: ISteamHTMLSurface_StopLoad
-HTMLSurface_Reload :: ISteamHTMLSurface_Reload
-HTMLSurface_GoBack :: ISteamHTMLSurface_GoBack
-HTMLSurface_GoForward :: ISteamHTMLSurface_GoForward
-HTMLSurface_AddHeader :: ISteamHTMLSurface_AddHeader
-HTMLSurface_ExecuteJavascript :: ISteamHTMLSurface_ExecuteJavascript
-HTMLSurface_MouseUp :: ISteamHTMLSurface_MouseUp
-HTMLSurface_MouseDown :: ISteamHTMLSurface_MouseDown
-HTMLSurface_MouseDoubleClick :: ISteamHTMLSurface_MouseDoubleClick
-HTMLSurface_MouseMove :: ISteamHTMLSurface_MouseMove
-HTMLSurface_MouseWheel :: ISteamHTMLSurface_MouseWheel
-HTMLSurface_KeyDown :: ISteamHTMLSurface_KeyDown
-HTMLSurface_KeyUp :: ISteamHTMLSurface_KeyUp
-HTMLSurface_KeyChar :: ISteamHTMLSurface_KeyChar
-HTMLSurface_SetHorizontalScroll :: ISteamHTMLSurface_SetHorizontalScroll
-HTMLSurface_SetVerticalScroll :: ISteamHTMLSurface_SetVerticalScroll
-HTMLSurface_SetKeyFocus :: ISteamHTMLSurface_SetKeyFocus
-HTMLSurface_ViewSource :: ISteamHTMLSurface_ViewSource
-HTMLSurface_CopyToClipboard :: ISteamHTMLSurface_CopyToClipboard
-HTMLSurface_PasteFromClipboard :: ISteamHTMLSurface_PasteFromClipboard
-HTMLSurface_Find :: ISteamHTMLSurface_Find
-HTMLSurface_StopFind :: ISteamHTMLSurface_StopFind
-HTMLSurface_GetLinkAtPosition :: ISteamHTMLSurface_GetLinkAtPosition
-HTMLSurface_SetCookie :: ISteamHTMLSurface_SetCookie
-HTMLSurface_SetPageScaleFactor :: ISteamHTMLSurface_SetPageScaleFactor
-HTMLSurface_SetBackgroundMode :: ISteamHTMLSurface_SetBackgroundMode
-HTMLSurface_SetDPIScalingFactor :: ISteamHTMLSurface_SetDPIScalingFactor
-HTMLSurface_OpenDeveloperTools :: ISteamHTMLSurface_OpenDeveloperTools
-HTMLSurface_AllowStartRequest :: ISteamHTMLSurface_AllowStartRequest
-HTMLSurface_JSDialogResponse :: ISteamHTMLSurface_JSDialogResponse
-HTMLSurface_FileLoadDialogResponse :: ISteamHTMLSurface_FileLoadDialogResponse
-Inventory_GetResultStatus :: ISteamInventory_GetResultStatus
-Inventory_GetResultItems :: ISteamInventory_GetResultItems
-Inventory_GetResultItemProperty :: ISteamInventory_GetResultItemProperty
-Inventory_GetResultTimestamp :: ISteamInventory_GetResultTimestamp
-Inventory_CheckResultSteamID :: ISteamInventory_CheckResultSteamID
-Inventory_DestroyResult :: ISteamInventory_DestroyResult
-Inventory_GetAllItems :: ISteamInventory_GetAllItems
-Inventory_GetItemsByID :: ISteamInventory_GetItemsByID
-Inventory_SerializeResult :: ISteamInventory_SerializeResult
-Inventory_DeserializeResult :: ISteamInventory_DeserializeResult
-Inventory_GenerateItems :: ISteamInventory_GenerateItems
-Inventory_GrantPromoItems :: ISteamInventory_GrantPromoItems
-Inventory_AddPromoItem :: ISteamInventory_AddPromoItem
-Inventory_AddPromoItems :: ISteamInventory_AddPromoItems
-Inventory_ConsumeItem :: ISteamInventory_ConsumeItem
-Inventory_ExchangeItems :: ISteamInventory_ExchangeItems
-Inventory_TransferItemQuantity :: ISteamInventory_TransferItemQuantity
-Inventory_SendItemDropHeartbeat :: ISteamInventory_SendItemDropHeartbeat
-Inventory_TriggerItemDrop :: ISteamInventory_TriggerItemDrop
-Inventory_TradeItems :: ISteamInventory_TradeItems
-Inventory_LoadItemDefinitions :: ISteamInventory_LoadItemDefinitions
-Inventory_GetItemDefinitionIDs :: ISteamInventory_GetItemDefinitionIDs
-Inventory_GetItemDefinitionProperty :: ISteamInventory_GetItemDefinitionProperty
-Inventory_RequestEligiblePromoItemDefinitionsIDs :: ISteamInventory_RequestEligiblePromoItemDefinitionsIDs
-Inventory_GetEligiblePromoItemDefinitionIDs :: ISteamInventory_GetEligiblePromoItemDefinitionIDs
-Inventory_StartPurchase :: ISteamInventory_StartPurchase
-Inventory_RequestPrices :: ISteamInventory_RequestPrices
-Inventory_GetNumItemsWithPrices :: ISteamInventory_GetNumItemsWithPrices
-Inventory_GetItemsWithPrices :: ISteamInventory_GetItemsWithPrices
-Inventory_GetItemPrice :: ISteamInventory_GetItemPrice
-Inventory_StartUpdateProperties :: ISteamInventory_StartUpdateProperties
-Inventory_RemoveProperty :: ISteamInventory_RemoveProperty
-Inventory_SetProperty :: ISteamInventory_SetProperty
-Inventory_SetPropertyBool :: ISteamInventory_SetPropertyBool
-Inventory_SetPropertyInt64 :: ISteamInventory_SetPropertyInt64
-Inventory_SetPropertyFloat :: ISteamInventory_SetPropertyFloat
-Inventory_SubmitUpdateProperties :: ISteamInventory_SubmitUpdateProperties
-Inventory_InspectItem :: ISteamInventory_InspectItem
-Video_GetVideoURL :: ISteamVideo_GetVideoURL
-Video_IsBroadcasting :: ISteamVideo_IsBroadcasting
-Video_GetOPFSettings :: ISteamVideo_GetOPFSettings
-Video_GetOPFStringForApp :: ISteamVideo_GetOPFStringForApp
-ParentalSettings_BIsParentalLockEnabled :: ISteamParentalSettings_BIsParentalLockEnabled
-ParentalSettings_BIsParentalLockLocked :: ISteamParentalSettings_BIsParentalLockLocked
-ParentalSettings_BIsAppBlocked :: ISteamParentalSettings_BIsAppBlocked
-ParentalSettings_BIsAppInBlockList :: ISteamParentalSettings_BIsAppInBlockList
-ParentalSettings_BIsFeatureBlocked :: ISteamParentalSettings_BIsFeatureBlocked
-ParentalSettings_BIsFeatureInBlockList :: ISteamParentalSettings_BIsFeatureInBlockList
-RemotePlay_GetSessionCount :: ISteamRemotePlay_GetSessionCount
-RemotePlay_GetSessionID :: ISteamRemotePlay_GetSessionID
-RemotePlay_GetSessionSteamID :: ISteamRemotePlay_GetSessionSteamID
-RemotePlay_GetSessionClientName :: ISteamRemotePlay_GetSessionClientName
-RemotePlay_GetSessionClientFormFactor :: ISteamRemotePlay_GetSessionClientFormFactor
-RemotePlay_BGetSessionClientResolution :: ISteamRemotePlay_BGetSessionClientResolution
-RemotePlay_BSendRemotePlayTogetherInvite :: ISteamRemotePlay_BSendRemotePlayTogetherInvite
-NetworkingMessages_SendMessageToUser :: ISteamNetworkingMessages_SendMessageToUser
-NetworkingMessages_ReceiveMessagesOnChannel :: ISteamNetworkingMessages_ReceiveMessagesOnChannel
-NetworkingMessages_AcceptSessionWithUser :: ISteamNetworkingMessages_AcceptSessionWithUser
-NetworkingMessages_CloseSessionWithUser :: ISteamNetworkingMessages_CloseSessionWithUser
-NetworkingMessages_CloseChannelWithUser :: ISteamNetworkingMessages_CloseChannelWithUser
-NetworkingMessages_GetSessionConnectionInfo :: ISteamNetworkingMessages_GetSessionConnectionInfo
-NetworkingSockets_CreateListenSocketIP :: ISteamNetworkingSockets_CreateListenSocketIP
-NetworkingSockets_ConnectByIPAddress :: ISteamNetworkingSockets_ConnectByIPAddress
-NetworkingSockets_CreateListenSocketP2P :: ISteamNetworkingSockets_CreateListenSocketP2P
-NetworkingSockets_ConnectP2P :: ISteamNetworkingSockets_ConnectP2P
-NetworkingSockets_AcceptConnection :: ISteamNetworkingSockets_AcceptConnection
-NetworkingSockets_CloseConnection :: ISteamNetworkingSockets_CloseConnection
-NetworkingSockets_CloseListenSocket :: ISteamNetworkingSockets_CloseListenSocket
-NetworkingSockets_SetConnectionUserData :: ISteamNetworkingSockets_SetConnectionUserData
-NetworkingSockets_GetConnectionUserData :: ISteamNetworkingSockets_GetConnectionUserData
-NetworkingSockets_SetConnectionName :: ISteamNetworkingSockets_SetConnectionName
-NetworkingSockets_GetConnectionName :: ISteamNetworkingSockets_GetConnectionName
-NetworkingSockets_SendMessageToConnection :: ISteamNetworkingSockets_SendMessageToConnection
-NetworkingSockets_FlushMessagesOnConnection :: ISteamNetworkingSockets_FlushMessagesOnConnection
-NetworkingSockets_ReceiveMessagesOnConnection :: ISteamNetworkingSockets_ReceiveMessagesOnConnection
-NetworkingSockets_GetConnectionInfo :: ISteamNetworkingSockets_GetConnectionInfo
-NetworkingSockets_GetConnectionRealTimeStatus :: ISteamNetworkingSockets_GetConnectionRealTimeStatus
-NetworkingSockets_GetDetailedConnectionStatus :: ISteamNetworkingSockets_GetDetailedConnectionStatus
-NetworkingSockets_GetListenSocketAddress :: ISteamNetworkingSockets_GetListenSocketAddress
-NetworkingSockets_CreateSocketPair :: ISteamNetworkingSockets_CreateSocketPair
-NetworkingSockets_ConfigureConnectionLanes :: ISteamNetworkingSockets_ConfigureConnectionLanes
-NetworkingSockets_GetIdentity :: ISteamNetworkingSockets_GetIdentity
-NetworkingSockets_InitAuthentication :: ISteamNetworkingSockets_InitAuthentication
-NetworkingSockets_GetAuthenticationStatus :: ISteamNetworkingSockets_GetAuthenticationStatus
-NetworkingSockets_CreatePollGroup :: ISteamNetworkingSockets_CreatePollGroup
-NetworkingSockets_DestroyPollGroup :: ISteamNetworkingSockets_DestroyPollGroup
-NetworkingSockets_SetConnectionPollGroup :: ISteamNetworkingSockets_SetConnectionPollGroup
-NetworkingSockets_ReceiveMessagesOnPollGroup :: ISteamNetworkingSockets_ReceiveMessagesOnPollGroup
-NetworkingSockets_ReceivedRelayAuthTicket :: ISteamNetworkingSockets_ReceivedRelayAuthTicket
-NetworkingSockets_FindRelayAuthTicketForServer :: ISteamNetworkingSockets_FindRelayAuthTicketForServer
-NetworkingSockets_ConnectToHostedDedicatedServer :: ISteamNetworkingSockets_ConnectToHostedDedicatedServer
-NetworkingSockets_GetHostedDedicatedServerPort :: ISteamNetworkingSockets_GetHostedDedicatedServerPort
-NetworkingSockets_GetHostedDedicatedServerPOPID :: ISteamNetworkingSockets_GetHostedDedicatedServerPOPID
-NetworkingSockets_GetHostedDedicatedServerAddress :: ISteamNetworkingSockets_GetHostedDedicatedServerAddress
-NetworkingSockets_CreateHostedDedicatedServerListenSocket :: ISteamNetworkingSockets_CreateHostedDedicatedServerListenSocket
-NetworkingSockets_GetGameCoordinatorServerLogin :: ISteamNetworkingSockets_GetGameCoordinatorServerLogin
-NetworkingSockets_ConnectP2PCustomSignaling :: ISteamNetworkingSockets_ConnectP2PCustomSignaling
-NetworkingSockets_ReceivedP2PCustomSignal :: ISteamNetworkingSockets_ReceivedP2PCustomSignal
-NetworkingSockets_GetCertificateRequest :: ISteamNetworkingSockets_GetCertificateRequest
-NetworkingSockets_SetCertificate :: ISteamNetworkingSockets_SetCertificate
-NetworkingSockets_ResetIdentity :: ISteamNetworkingSockets_ResetIdentity
-NetworkingSockets_RunCallbacks :: ISteamNetworkingSockets_RunCallbacks
-NetworkingSockets_BeginAsyncRequestFakeIP :: ISteamNetworkingSockets_BeginAsyncRequestFakeIP
-NetworkingSockets_GetFakeIP :: ISteamNetworkingSockets_GetFakeIP
-NetworkingSockets_CreateListenSocketP2PFakeIP :: ISteamNetworkingSockets_CreateListenSocketP2PFakeIP
-NetworkingSockets_GetRemoteFakeIPForConnection :: ISteamNetworkingSockets_GetRemoteFakeIPForConnection
-NetworkingSockets_CreateFakeUDPPort :: ISteamNetworkingSockets_CreateFakeUDPPort
-NetworkingUtils_AllocateMessage :: ISteamNetworkingUtils_AllocateMessage
-NetworkingUtils_InitRelayNetworkAccess :: ISteamNetworkingUtils_InitRelayNetworkAccess
-NetworkingUtils_GetRelayNetworkStatus :: ISteamNetworkingUtils_GetRelayNetworkStatus
-NetworkingUtils_GetLocalPingLocation :: ISteamNetworkingUtils_GetLocalPingLocation
-NetworkingUtils_EstimatePingTimeBetweenTwoLocations :: ISteamNetworkingUtils_EstimatePingTimeBetweenTwoLocations
-NetworkingUtils_EstimatePingTimeFromLocalHost :: ISteamNetworkingUtils_EstimatePingTimeFromLocalHost
-NetworkingUtils_ConvertPingLocationToString :: ISteamNetworkingUtils_ConvertPingLocationToString
-NetworkingUtils_ParsePingLocationString :: ISteamNetworkingUtils_ParsePingLocationString
-NetworkingUtils_CheckPingDataUpToDate :: ISteamNetworkingUtils_CheckPingDataUpToDate
-NetworkingUtils_GetPingToDataCenter :: ISteamNetworkingUtils_GetPingToDataCenter
-NetworkingUtils_GetDirectPingToPOP :: ISteamNetworkingUtils_GetDirectPingToPOP
-NetworkingUtils_GetPOPCount :: ISteamNetworkingUtils_GetPOPCount
-NetworkingUtils_GetPOPList :: ISteamNetworkingUtils_GetPOPList
-NetworkingUtils_GetLocalTimestamp :: ISteamNetworkingUtils_GetLocalTimestamp
-NetworkingUtils_SetDebugOutputFunction :: ISteamNetworkingUtils_SetDebugOutputFunction
-NetworkingUtils_IsFakeIPv4 :: ISteamNetworkingUtils_IsFakeIPv4
-NetworkingUtils_GetIPv4FakeIPType :: ISteamNetworkingUtils_GetIPv4FakeIPType
-NetworkingUtils_GetRealIdentityForFakeIP :: ISteamNetworkingUtils_GetRealIdentityForFakeIP
-NetworkingUtils_SetGlobalConfigValueInt32 :: ISteamNetworkingUtils_SetGlobalConfigValueInt32
-NetworkingUtils_SetGlobalConfigValueFloat :: ISteamNetworkingUtils_SetGlobalConfigValueFloat
-NetworkingUtils_SetGlobalConfigValueString :: ISteamNetworkingUtils_SetGlobalConfigValueString
-NetworkingUtils_SetGlobalConfigValuePtr :: ISteamNetworkingUtils_SetGlobalConfigValuePtr
-NetworkingUtils_SetConnectionConfigValueInt32 :: ISteamNetworkingUtils_SetConnectionConfigValueInt32
-NetworkingUtils_SetConnectionConfigValueFloat :: ISteamNetworkingUtils_SetConnectionConfigValueFloat
-NetworkingUtils_SetConnectionConfigValueString :: ISteamNetworkingUtils_SetConnectionConfigValueString
-NetworkingUtils_SetGlobalCallback_SteamNetConnectionStatusChanged :: ISteamNetworkingUtils_SetGlobalCallback_SteamNetConnectionStatusChanged
-NetworkingUtils_SetGlobalCallback_SteamNetAuthenticationStatusChanged :: ISteamNetworkingUtils_SetGlobalCallback_SteamNetAuthenticationStatusChanged
-NetworkingUtils_SetGlobalCallback_SteamRelayNetworkStatusChanged :: ISteamNetworkingUtils_SetGlobalCallback_SteamRelayNetworkStatusChanged
-NetworkingUtils_SetGlobalCallback_FakeIPResult :: ISteamNetworkingUtils_SetGlobalCallback_FakeIPResult
-NetworkingUtils_SetGlobalCallback_MessagesSessionRequest :: ISteamNetworkingUtils_SetGlobalCallback_MessagesSessionRequest
-NetworkingUtils_SetGlobalCallback_MessagesSessionFailed :: ISteamNetworkingUtils_SetGlobalCallback_MessagesSessionFailed
-NetworkingUtils_SetConfigValue :: ISteamNetworkingUtils_SetConfigValue
-NetworkingUtils_SetConfigValueStruct :: ISteamNetworkingUtils_SetConfigValueStruct
-NetworkingUtils_GetConfigValue :: ISteamNetworkingUtils_GetConfigValue
-NetworkingUtils_GetConfigValueInfo :: ISteamNetworkingUtils_GetConfigValueInfo
-NetworkingUtils_IterateGenericEditableConfigValues :: ISteamNetworkingUtils_IterateGenericEditableConfigValues
-NetworkingUtils_SteamNetworkingIPAddr_ToString :: ISteamNetworkingUtils_SteamNetworkingIPAddr_ToString
-NetworkingUtils_SteamNetworkingIPAddr_ParseString :: ISteamNetworkingUtils_SteamNetworkingIPAddr_ParseString
-NetworkingUtils_SteamNetworkingIPAddr_GetFakeIPType :: ISteamNetworkingUtils_SteamNetworkingIPAddr_GetFakeIPType
-NetworkingUtils_SteamNetworkingIdentity_ToString :: ISteamNetworkingUtils_SteamNetworkingIdentity_ToString
-NetworkingUtils_SteamNetworkingIdentity_ParseString :: ISteamNetworkingUtils_SteamNetworkingIdentity_ParseString
-GameServer_SetProduct :: ISteamGameServer_SetProduct
-GameServer_SetGameDescription :: ISteamGameServer_SetGameDescription
-GameServer_SetModDir :: ISteamGameServer_SetModDir
-GameServer_SetDedicatedServer :: ISteamGameServer_SetDedicatedServer
-GameServer_LogOn :: ISteamGameServer_LogOn
-GameServer_LogOnAnonymous :: ISteamGameServer_LogOnAnonymous
-GameServer_LogOff :: ISteamGameServer_LogOff
-GameServer_BLoggedOn :: ISteamGameServer_BLoggedOn
-GameServer_BSecure :: ISteamGameServer_BSecure
-GameServer_GetSteamID :: ISteamGameServer_GetSteamID
-GameServer_WasRestartRequested :: ISteamGameServer_WasRestartRequested
-GameServer_SetMaxPlayerCount :: ISteamGameServer_SetMaxPlayerCount
-GameServer_SetBotPlayerCount :: ISteamGameServer_SetBotPlayerCount
-GameServer_SetServerName :: ISteamGameServer_SetServerName
-GameServer_SetMapName :: ISteamGameServer_SetMapName
-GameServer_SetPasswordProtected :: ISteamGameServer_SetPasswordProtected
-GameServer_SetSpectatorPort :: ISteamGameServer_SetSpectatorPort
-GameServer_SetSpectatorServerName :: ISteamGameServer_SetSpectatorServerName
-GameServer_ClearAllKeyValues :: ISteamGameServer_ClearAllKeyValues
-GameServer_SetKeyValue :: ISteamGameServer_SetKeyValue
-GameServer_SetGameTags :: ISteamGameServer_SetGameTags
-GameServer_SetGameData :: ISteamGameServer_SetGameData
-GameServer_SetRegion :: ISteamGameServer_SetRegion
-GameServer_SetAdvertiseServerActive :: ISteamGameServer_SetAdvertiseServerActive
-GameServer_GetAuthSessionTicket :: ISteamGameServer_GetAuthSessionTicket
-GameServer_BeginAuthSession :: ISteamGameServer_BeginAuthSession
-GameServer_EndAuthSession :: ISteamGameServer_EndAuthSession
-GameServer_CancelAuthTicket :: ISteamGameServer_CancelAuthTicket
-GameServer_UserHasLicenseForApp :: ISteamGameServer_UserHasLicenseForApp
-GameServer_RequestUserGroupStatus :: ISteamGameServer_RequestUserGroupStatus
-GameServer_GetGameplayStats :: ISteamGameServer_GetGameplayStats
-GameServer_GetServerReputation :: ISteamGameServer_GetServerReputation
-GameServer_GetPublicIP :: ISteamGameServer_GetPublicIP
-GameServer_HandleIncomingPacket :: ISteamGameServer_HandleIncomingPacket
-GameServer_GetNextOutgoingPacket :: ISteamGameServer_GetNextOutgoingPacket
-GameServer_AssociateWithClan :: ISteamGameServer_AssociateWithClan
-GameServer_ComputeNewPlayerCompatibility :: ISteamGameServer_ComputeNewPlayerCompatibility
-GameServer_SendUserConnectAndAuthenticate_DEPRECATED :: ISteamGameServer_SendUserConnectAndAuthenticate_DEPRECATED
-GameServer_CreateUnauthenticatedUserConnection :: ISteamGameServer_CreateUnauthenticatedUserConnection
-GameServer_SendUserDisconnect_DEPRECATED :: ISteamGameServer_SendUserDisconnect_DEPRECATED
-GameServer_BUpdateUserData :: ISteamGameServer_BUpdateUserData
-GameServerStats_RequestUserStats :: ISteamGameServerStats_RequestUserStats
-GameServerStats_GetUserStatInt32 :: ISteamGameServerStats_GetUserStatInt32
-GameServerStats_GetUserStatFloat :: ISteamGameServerStats_GetUserStatFloat
-GameServerStats_GetUserAchievement :: ISteamGameServerStats_GetUserAchievement
-GameServerStats_SetUserStatInt32 :: ISteamGameServerStats_SetUserStatInt32
-GameServerStats_SetUserStatFloat :: ISteamGameServerStats_SetUserStatFloat
-GameServerStats_UpdateUserAvgRateStat :: ISteamGameServerStats_UpdateUserAvgRateStat
-GameServerStats_SetUserAchievement :: ISteamGameServerStats_SetUserAchievement
-GameServerStats_ClearUserAchievement :: ISteamGameServerStats_ClearUserAchievement
-GameServerStats_StoreUserStats :: ISteamGameServerStats_StoreUserStats
-NetworkingFakeUDPPort_DestroyFakeUDPPort :: ISteamNetworkingFakeUDPPort_DestroyFakeUDPPort
-NetworkingFakeUDPPort_SendMessageToFakeIP :: ISteamNetworkingFakeUDPPort_SendMessageToFakeIP
-NetworkingFakeUDPPort_ReceiveMessages :: ISteamNetworkingFakeUDPPort_ReceiveMessages
-NetworkingFakeUDPPort_ScheduleCleanup :: ISteamNetworkingFakeUDPPort_ScheduleCleanup

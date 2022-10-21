@@ -15,9 +15,9 @@ main :: proc() {
 
 	if !steam.Init() do panic("steam.Init failed.")
 
-	steam.Client_SetWarningMessageHook(steam.SteamClient(), steamApiDebugTextHook)
+	steam.Client_SetWarningMessageHook(steam.Client(), steamApiDebugTextHook)
 
-	if !steam.ISteamUser_BLoggedOn(steam.SteamUser()) {
+	if !steam.User_BLoggedOn(steam.User()) {
 		panic("User isn't logged in.")
 	} else do fmt.println("USER IS LOGGED IN")
 
