@@ -1,6 +1,7 @@
 # Odin Steamworks Bindings
 Odin bindings for Valve's [Steamworks SDK](https://partner.steamgames.com/doc/sdk). Includes a binding generator.
 
+Current Steamworks SDK version: `1.55`
 
 > Steamworks is a set of tools and services that help game developers and publishers build
 > their games and get the most out of distributing on Steam.
