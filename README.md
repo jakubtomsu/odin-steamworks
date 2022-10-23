@@ -1,10 +1,9 @@
 # Odin bindings for Steamworks
-Odin bindings for Valve's [Steamworks SDK](https://partner.steamgames.com/doc/sdk). Includes a binding generator.
+Odin bindings for Valve's [Steamworks API](https://partner.steamgames.com/doc/sdk). Includes a binding generator.
 
 Current Steamworks SDK version: `1.55`
 
-> Steamworks is a set of tools and services that help game developers and publishers build
-> their games and get the most out of distributing on Steam.
+> The Steamworks API allows your game to take full advantage of Steam by accessing all of the underlying systems provided through the API. This includes things such as pausing your game when the user opens the Steam Overlay, inviting friends to play, allowing players to unlock Steam Achievements, letting players compete on the Steam Leaderboards and much more.
 
 ## How to Use
 Just copy the `steamworks/steamworks.odin` file somewhere to your project.
