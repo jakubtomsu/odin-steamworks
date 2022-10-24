@@ -16,7 +16,7 @@ main :: proc() {
 
     if !steamworks.Init() do panic("steamworks.Init failed. Make sure Steam is running.")
 
-    steamworks.Client_SetWarningMessageHook(steamworks.Client(), steamworksApiDebugTextHook)
+    steamworks.Client_SetWarningMessageHook(steamworks.Client(), steamDebugTextHook)
 
     if !steamworks.User_BLoggedOn(steamworks.User()) {
         panic("User isn't logged in.")
@@ -24,6 +24,8 @@ main :: proc() {
 
     fmt.println(string(steamworks.Friends_GetPersonaName(steamworks.Friends())))
     fmt.println(steamworks.Friends_GetPersonaState(steamworks.Friends()))
+
+    lobbyCall := steamworks.Matchmaking_RequestLobbyList(steamworks.Matchmaking())
 
 
     raylib.InitWindow(800, 480, "Odin Steamworks Example")
@@ -43,7 +45,7 @@ main :: proc() {
     steamworks.Shutdown()
 }
 
-steamworksApiDebugTextHook :: proc "c" (severity: c.int, debugText: cstring) {
+steamDebugTextHook :: proc "c" (severity: c.int, debugText: cstring) {
     // if you're running in the debugger, only warnings (nSeverity >= 1) will be sent
     // if you add -debug_steamworksapi to the command-line, a lot of extra informational messages will also be sent
     runtime.print_string(string(debugText))
