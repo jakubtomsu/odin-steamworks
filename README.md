@@ -5,7 +5,7 @@ Current Steamworks SDK version: `1.55`
 
 > The Steamworks API allows your game to take full advantage of Steam by accessing all of the underlying systems provided through the API. This includes things such as pausing your game when the user opens the Steam Overlay, inviting friends to play, allowing players to unlock Steam Achievements, letting players compete on the Steam Leaderboards and much more.
 
-Note: the Steamworks API includes the [Steam GameNetworkingSockets](https://github.com/ValveSoftware/GameNetworkingSockets)
+the Steamworks API also includes the [Steam GameNetworkingSockets](https://github.com/ValveSoftware/GameNetworkingSockets)
 
 ## How to Use
 Just copy the `steamworks/steamworks.odin` file somewhere to your project.
