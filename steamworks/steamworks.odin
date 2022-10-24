@@ -1,6 +1,6 @@
 package steamworks
 import "core:c"
-foreign import lib "steaapi64.lib"
+foreign import lib "steam_api64.lib"
 
 intptr :: distinct int
 
@@ -435,7 +435,7 @@ GamepadTextInputDismissed :: struct #packed {
 
 AppResumingFromSuspend :: struct #packed {}
 
-f32ingGamepadTextInputDismissed :: struct #packed {}
+FloatingGamepadTextInputDismissed :: struct #packed {}
 
 FavoritesListChanged :: struct #packed {
     nIP:         uint32,
@@ -3850,7 +3850,7 @@ foreign lib {
     // Returns true if the current process should terminate. Steam is now re-launching your application.
     //
     // Returns false if no action needs to be taken. This means that your executable was started through
-    // the Steam client, or a steaappid.txt file is present in your game's directory (for development).
+    // the Steam client, or a steam_appid.txt file is present in your game's directory (for development).
     // Your current process should continue if false is returned.
     //
     // NOTE: If you use the Steam DRM wrapper on your primary executable file, this check is unnecessary
@@ -4136,9 +4136,9 @@ foreign lib {
     Utils_FilterText :: proc(self: ^IUtils, eContext: ETextFilteringContext, sourceSteamID: CSteamID, pchInputMessage: cstring, pchOutFilteredText: ^u8, nByteSizeOutFilteredText: uint32) -> c.int ---
     Utils_GetIPv6ConnectivityState :: proc(self: ^IUtils, eProtocol: ESteamIPv6ConnectivityProtocol) -> ESteamIPv6ConnectivityState ---
     Utils_IsSteamRunningOnSteamDeck :: proc(self: ^IUtils) -> bool ---
-    Utils_Showf32ingGamepadTextInput :: proc(self: ^IUtils, eKeyboardMode: Ef32ingGamepadTextInputMode, nTextFieldXPosition: c.int, nTextFieldYPosition: c.int, nTextFieldWidth: c.int, nTextFieldHeight: c.int) -> bool ---
+    Utils_ShowFloatingGamepadTextInput :: proc(self: ^IUtils, eKeyboardMode: EFloatingGamepadTextInputMode, nTextFieldXPosition: c.int, nTextFieldYPosition: c.int, nTextFieldWidth: c.int, nTextFieldHeight: c.int) -> bool ---
     Utils_SetGameLauncherMode :: proc(self: ^IUtils, bLauncherMode: bool) ---
-    Utils_Dismissf32ingGamepadTextInput :: proc(self: ^IUtils) -> bool ---
+    Utils_DismissFloatingGamepadTextInput :: proc(self: ^IUtils) -> bool ---
 
     Matchmaking_GetFavoriteGameCount :: proc(self: ^IMatchmaking) -> c.int ---
     Matchmaking_GetFavoriteGame :: proc(self: ^IMatchmaking, iGame: c.int, pnAppID: ^AppId, pnIP: ^uint32, pnConnPort: ^uint16, pnQueryPort: ^uint16, punFlags: ^uint32, pRTime32LastPlayedOnServer: ^uint32) -> bool ---
