@@ -1,5 +1,7 @@
 {
-	"character_width": 1000,
-	"tabs": false,
-	"tabs_width": 4
+    "character_width": 1000,
+    "tabs": false,
+    "spaces": 4,
+    "newline_limit": 3,
+    "tabs_width": 4
 }

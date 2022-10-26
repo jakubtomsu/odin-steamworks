@@ -2,6 +2,10 @@ package steamworks
 import "core:c"
 foreign import lib "steam_api64.lib"
 
+// VALVE_CALLBACK_PACK_SMALL / VALVE_CALLBACK_PACK_LARGE
+CALLBACK_PACK_LARGE :: #config(STEAMWORKS_CALLBACK_PACK_LARGE, true)
+CALLBACK_ALIGN :: 8 when CALLBACK_PACK_LARGE else 4
+
 intptr :: distinct int
 
 // HACK
@@ -30,6 +34,7 @@ lint64 :: i64
 ulint64 :: u64
 intp :: int
 uintp :: uintptr
+
 AppId :: c.uint
 DepotId :: c.uint
 RTime32 :: c.uint
@@ -38,11 +43,11 @@ AccountID :: c.uint
 PartyBeaconID :: u64
 HAuthTicket :: c.uint
 PFNPreMinidumpCallback :: proc "c" (_: rawptr)
-HSteamPipe :: int
-HSteamUser :: int
+HSteamPipe :: int32
+HSteamUser :: int32
 FriendsGroupID :: i64
 HServerListRequest :: rawptr
-HServerQuery :: int
+HServerQuery :: c.int
 UGCHandle :: u64
 PublishedFileUpdateHandle :: u64
 PublishedFileId :: u64
@@ -181,7 +186,7 @@ SteamDatagramPOPID_dev: SteamNetworkingPOPID : (uint32('d') << 16) | (uint32('e'
 // Structs
 // -------
 
-SteamNetworkingMessage :: struct #packed {
+SteamNetworkingMessage :: struct #align CALLBACK_ALIGN {
     pData:            rawptr,
     cbSize:           c.int,
     conn:             HSteamNetConnection,
@@ -198,38 +203,38 @@ SteamNetworkingMessage :: struct #packed {
     _pad1__:          uint16,
 }
 
-SteamInputActionEvent_t_AnalogAction :: struct {
+SteamInputActionEvent_AnalogAction :: struct #align CALLBACK_ALIGN {
     actionHandle:     InputAnalogActionHandle,
     analogActionData: InputAnalogActionData,
 }
 
-SteamInputActionEvent_t_DigitalAction :: struct {
+SteamInputActionEvent_DigitalAction :: struct #align CALLBACK_ALIGN {
     actionHandle:      InputDigitalActionHandle,
     digitalActionData: InputDigitalActionData,
 }
 
-SteamInputActionEvent :: struct {
+SteamInputActionEvent :: struct #align CALLBACK_ALIGN {
     controllerHandle: InputHandle,
     eEventType:       ESteamInputActionEventType,
     using actions:    struct #raw_union {
-        analogAction:  SteamInputActionEvent_t_AnalogAction,
-        digitalAction: SteamInputActionEvent_t_DigitalAction,
+        analogAction:  SteamInputActionEvent_AnalogAction,
+        digitalAction: SteamInputActionEvent_DigitalAction,
     },
 }
 
 
-SteamServersConnected :: struct #packed {}
+SteamServersConnected :: struct #align CALLBACK_ALIGN {}
 
-SteamServerConnectFailure :: struct #packed {
+SteamServerConnectFailure :: struct #align CALLBACK_ALIGN {
     eResult:        EResult,
     bStillRetrying: bool,
 }
 
-SteamServersDisconnected :: struct #packed {
+SteamServersDisconnected :: struct #align CALLBACK_ALIGN {
     eResult: EResult,
 }
 
-ClientGameServerDeny :: struct #packed {
+ClientGameServerDeny :: struct #align CALLBACK_ALIGN {
     uAppID:           uint32,
     unGameServerIP:   uint32,
     usGameServerPort: uint16,
@@ -237,42 +242,42 @@ ClientGameServerDeny :: struct #packed {
     uReason:          uint32,
 }
 
-IPCFailure :: struct #packed {
+IPCFailure :: struct #align CALLBACK_ALIGN {
     eFailureType: uint8,
 }
 
-LicensesUpdated :: struct #packed {}
+LicensesUpdated :: struct #align CALLBACK_ALIGN {}
 
-ValidateAuthTicketResponse :: struct #packed {
+ValidateAuthTicketResponse :: struct #align CALLBACK_ALIGN {
     SteamID:              CSteamID,
     eAuthSessionResponse: EAuthSessionResponse,
     OwnerSteamID:         CSteamID,
 }
 
-MicroTxnAuthorizationResponse :: struct #packed {
+MicroTxnAuthorizationResponse :: struct #align CALLBACK_ALIGN {
     unAppID:     uint32,
     ulOrderID:   uint64,
     bAuthorized: uint8,
 }
 
-EncryptedAppTicketResponse :: struct #packed {
+EncryptedAppTicketResponse :: struct #align CALLBACK_ALIGN {
     eResult: EResult,
 }
 
-GetAuthSessionTicketResponse :: struct #packed {
+GetAuthSessionTicketResponse :: struct #align CALLBACK_ALIGN {
     hAuthTicket: HAuthTicket,
     eResult:     EResult,
 }
 
-GameWebCallback :: struct #packed {
+GameWebCallback :: struct #align CALLBACK_ALIGN {
     szURL: [256]u8,
 }
 
-StoreAuthURLResponse :: struct #packed {
+StoreAuthURLResponse :: struct #align CALLBACK_ALIGN {
     szURL: [512]u8,
 }
 
-MarketEligibilityResponse :: struct #packed {
+MarketEligibilityResponse :: struct #align CALLBACK_ALIGN {
     bAllowed:                   bool,
     eNotAllowedReason:          EMarketNotAllowedReasonFlags,
     rtAllowedAtTime:            RTime32,
@@ -280,7 +285,7 @@ MarketEligibilityResponse :: struct #packed {
     cdayNewDeviceCooldown:      c.int,
 }
 
-DurationControl :: struct #packed {
+DurationControl :: struct #align CALLBACK_ALIGN {
     eResult:        EResult,
     appid:          AppId,
     bApplicable:    bool,
@@ -291,116 +296,116 @@ DurationControl :: struct #packed {
     csecsRemaining: int32,
 }
 
-PersonaStateChange :: struct #packed {
+PersonaStateChange :: struct #align CALLBACK_ALIGN {
     ulSteamID:    uint64,
     nChangeFlags: c.int,
 }
 
-GameOverlayActivated :: struct #packed {
+GameOverlayActivated :: struct #align CALLBACK_ALIGN {
     bActive: uint8,
 }
 
-GameServerChangeRequested :: struct #packed {
+GameServerChangeRequested :: struct #align CALLBACK_ALIGN {
     rgchServer:   [64]u8,
     rgchPassword: [64]u8,
 }
 
-GameLobbyJoinRequested :: struct #packed {
+GameLobbyJoinRequested :: struct #align CALLBACK_ALIGN {
     steamIDLobby:  CSteamID,
     steamIDFriend: CSteamID,
 }
 
-AvatarImageLoaded :: struct #packed {
+AvatarImageLoaded :: struct #align CALLBACK_ALIGN {
     steamID: CSteamID,
     iImage:  c.int,
     iWide:   c.int,
     iTall:   c.int,
 }
 
-ClanOfficerListResponse :: struct #packed {
+ClanOfficerListResponse :: struct #align CALLBACK_ALIGN {
     steamIDClan: CSteamID,
     cOfficers:   c.int,
     bSuccess:    uint8,
 }
 
-FriendRichPresenceUpdate :: struct #packed {
+FriendRichPresenceUpdate :: struct #align CALLBACK_ALIGN {
     steamIDFriend: CSteamID,
     nAppID:        AppId,
 }
 
-GameRichPresenceJoinRequested :: struct #packed {
+GameRichPresenceJoinRequested :: struct #align CALLBACK_ALIGN {
     steamIDFriend: CSteamID,
     rgchConnect:   [256]u8,
 }
 
-GameConnectedClanChatMsg :: struct #packed {
+GameConnectedClanChatMsg :: struct #align CALLBACK_ALIGN {
     steamIDClanChat: CSteamID,
     steamIDUser:     CSteamID,
     iMessageID:      c.int,
 }
 
-GameConnectedChatJoin :: struct #packed {
+GameConnectedChatJoin :: struct #align CALLBACK_ALIGN {
     steamIDClanChat: CSteamID,
     steamIDUser:     CSteamID,
 }
 
-GameConnectedChatLeave :: struct #packed {
+GameConnectedChatLeave :: struct #align CALLBACK_ALIGN {
     steamIDClanChat: CSteamID,
     steamIDUser:     CSteamID,
     bKicked:         bool,
     bDropped:        bool,
 }
 
-DownloadClanActivityCountsResult :: struct #packed {
+DownloadClanActivityCountsResult :: struct #align CALLBACK_ALIGN {
     bSuccess: bool,
 }
 
-JoinClanChatRoomCompletionResult :: struct #packed {
+JoinClanChatRoomCompletionResult :: struct #align CALLBACK_ALIGN {
     steamIDClanChat:        CSteamID,
     eChatRoomEnterResponse: EChatRoomEnterResponse,
 }
 
-GameConnectedFriendChatMsg :: struct #packed {
+GameConnectedFriendChatMsg :: struct #align CALLBACK_ALIGN {
     steamIDUser: CSteamID,
     iMessageID:  c.int,
 }
 
-FriendsGetFollowerCount :: struct #packed {
+FriendsGetFollowerCount :: struct #align CALLBACK_ALIGN {
     eResult: EResult,
     steamID: CSteamID,
     nCount:  c.int,
 }
 
-FriendsIsFollowing :: struct #packed {
+FriendsIsFollowing :: struct #align CALLBACK_ALIGN {
     eResult:      EResult,
     steamID:      CSteamID,
     bIsFollowing: bool,
 }
 
-FriendsEnumerateFollowingList :: struct #packed {
+FriendsEnumerateFollowingList :: struct #align CALLBACK_ALIGN {
     eResult:           EResult,
     rgSteamID:         [50]CSteamID,
     nResultsReturned:  int32,
     nTotalResultCount: int32,
 }
 
-SetPersonaNameResponse :: struct #packed {
+SetPersonaNameResponse :: struct #align CALLBACK_ALIGN {
     bSuccess:      bool,
     bLocalSuccess: bool,
     result:        EResult,
 }
 
-UnreadChatMessagesChanged :: struct #packed {}
+UnreadChatMessagesChanged :: struct #align CALLBACK_ALIGN {}
 
-OverlayBrowserProtocolNavigation :: struct #packed {
+OverlayBrowserProtocolNavigation :: struct #align CALLBACK_ALIGN {
     rgchURI: [1024]u8,
 }
 
-EquippedProfileItemsChanged :: struct #packed {
+EquippedProfileItemsChanged :: struct #align CALLBACK_ALIGN {
     steamID: CSteamID,
 }
 
-EquippedProfileItems :: struct #packed {
+EquippedProfileItems :: struct #align CALLBACK_ALIGN {
     eResult:                   EResult,
     steamID:                   CSteamID,
     bHasAnimatedAvatar:        bool,
@@ -410,34 +415,34 @@ EquippedProfileItems :: struct #packed {
     bHasMiniProfileBackground: bool,
 }
 
-IPCountry :: struct #packed {}
+IPCountry :: struct #align CALLBACK_ALIGN {}
 
-LowBatteryPower :: struct #packed {
+LowBatteryPower :: struct #align CALLBACK_ALIGN {
     nMinutesBatteryLeft: uint8,
 }
 
-SteamAPICallCompleted :: struct #packed {
+SteamAPICallCompleted :: struct #align CALLBACK_ALIGN {
     hAsyncCall: SteamAPICall,
     iCallback:  c.int,
     cubParam:   uint32,
 }
 
-SteamShutdown :: struct #packed {}
+SteamShutdown :: struct #align CALLBACK_ALIGN {}
 
-CheckFileSignature :: struct #packed {
+CheckFileSignature :: struct #align CALLBACK_ALIGN {
     eCheckFileSignature: ECheckFileSignature,
 }
 
-GamepadTextInputDismissed :: struct #packed {
+GamepadTextInputDismissed :: struct #align CALLBACK_ALIGN {
     bSubmitted:      bool,
     unSubmittedText: uint32,
 }
 
-AppResumingFromSuspend :: struct #packed {}
+AppResumingFromSuspend :: struct #align CALLBACK_ALIGN {}
 
-FloatingGamepadTextInputDismissed :: struct #packed {}
+FloatingGamepadTextInputDismissed :: struct #align CALLBACK_ALIGN {}
 
-FavoritesListChanged :: struct #packed {
+FavoritesListChanged :: struct #align CALLBACK_ALIGN {
     nIP:         uint32,
     nQueryPort:  uint32,
     nConnPort:   uint32,
@@ -447,71 +452,71 @@ FavoritesListChanged :: struct #packed {
     unAccountId: AccountID,
 }
 
-LobbyInvite :: struct #packed {
+LobbyInvite :: struct #align CALLBACK_ALIGN {
     ulSteamIDUser:  uint64,
     ulSteamIDLobby: uint64,
     ulGameID:       uint64,
 }
 
-LobbyEnter :: struct #packed {
+LobbyEnter :: struct #align CALLBACK_ALIGN {
     ulSteamIDLobby:         uint64,
     rgfChatPermissions:     uint32,
     bLocked:                bool,
     EChatRoomEnterResponse: uint32,
 }
 
-LobbyDataUpdate :: struct #packed {
+LobbyDataUpdate :: struct #align CALLBACK_ALIGN {
     ulSteamIDLobby:  uint64,
     ulSteamIDMember: uint64,
     bSuccess:        uint8,
 }
 
-LobbyChatUpdate :: struct #packed {
+LobbyChatUpdate :: struct #align CALLBACK_ALIGN {
     ulSteamIDLobby:           uint64,
     ulSteamIDUserChanged:     uint64,
     ulSteamIDMakingChange:    uint64,
     rgfChatMemberStateChange: uint32,
 }
 
-LobbyChatMsg :: struct #packed {
+LobbyChatMsg :: struct #align CALLBACK_ALIGN {
     ulSteamIDLobby: uint64,
     ulSteamIDUser:  uint64,
     eChatEntryType: uint8,
     iChatID:        uint32,
 }
 
-LobbyGameCreated :: struct #packed {
+LobbyGameCreated :: struct #align CALLBACK_ALIGN {
     ulSteamIDLobby:      uint64,
     ulSteamIDGameServer: uint64,
     unIP:                uint32,
     usPort:              uint16,
 }
 
-LobbyMatchList :: struct #packed {
+LobbyMatchList :: struct #align CALLBACK_ALIGN {
     nLobbiesMatching: uint32,
 }
 
-LobbyKicked :: struct #packed {
+LobbyKicked :: struct #align CALLBACK_ALIGN {
     ulSteamIDLobby:         uint64,
     ulSteamIDAdmin:         uint64,
     bKickedDueToDisconnect: uint8,
 }
 
-LobbyCreated :: struct #packed {
+LobbyCreated :: struct #align CALLBACK_ALIGN {
     eResult:        EResult,
     ulSteamIDLobby: uint64,
 }
 
-PSNGameBootInviteResult :: struct #packed {
+PSNGameBootInviteResult :: struct #align CALLBACK_ALIGN {
     bGameBootInviteExists: bool,
     steamIDLobby:          CSteamID,
 }
 
-FavoritesListAccountsUpdated :: struct #packed {
+FavoritesListAccountsUpdated :: struct #align CALLBACK_ALIGN {
     eResult: EResult,
 }
 
-SearchForGameProgressCallback :: struct #packed {
+SearchForGameProgressCallback :: struct #align CALLBACK_ALIGN {
     ullSearchID:               uint64,
     eResult:                   EResult,
     lobbyID:                   CSteamID,
@@ -520,7 +525,7 @@ SearchForGameProgressCallback :: struct #packed {
     cPlayersSearching:         int32,
 }
 
-SearchForGameResultCallback :: struct #packed {
+SearchForGameResultCallback :: struct #align CALLBACK_ALIGN {
     ullSearchID:         uint64,
     eResult:             EResult,
     nCountPlayersInGame: int32,
@@ -529,12 +534,12 @@ SearchForGameResultCallback :: struct #packed {
     bFinalCallback:      bool,
 }
 
-RequestPlayersForGameProgressCallback :: struct #packed {
+RequestPlayersForGameProgressCallback :: struct #align CALLBACK_ALIGN {
     eResult:     EResult,
     ullSearchID: uint64,
 }
 
-RequestPlayersForGameResultCallback :: struct #packed {
+RequestPlayersForGameResultCallback :: struct #align CALLBACK_ALIGN {
     eResult:                   EResult,
     ullSearchID:               uint64,
     SteamIDPlayerFound:        CSteamID,
@@ -553,78 +558,78 @@ RequestPlayersForGameResultCallbact_PlayerAcceptState :: enum {
     EStatePlayerDeclined = 2,
 }
 
-RequestPlayersForGameFinalResultCallback :: struct #packed {
+RequestPlayersForGameFinalResultCallback :: struct #align CALLBACK_ALIGN {
     eResult:         EResult,
     ullSearchID:     uint64,
     ullUniqueGameID: uint64,
 }
 
-SubmitPlayerResultResultCallback :: struct #packed {
+SubmitPlayerResultResultCallback :: struct #align CALLBACK_ALIGN {
     eResult:         EResult,
     ullUniqueGameID: uint64,
     steamIDPlayer:   CSteamID,
 }
 
-EndGameResultCallback :: struct #packed {
+EndGameResultCallback :: struct #align CALLBACK_ALIGN {
     eResult:         EResult,
     ullUniqueGameID: uint64,
 }
 
-JoinPartyCallback :: struct #packed {
+JoinPartyCallback :: struct #align CALLBACK_ALIGN {
     eResult:            EResult,
     ulBeaconID:         PartyBeaconID,
     SteamIDBeaconOwner: CSteamID,
     rgchConnectString:  [256]u8,
 }
 
-CreateBeaconCallback :: struct #packed {
+CreateBeaconCallback :: struct #align CALLBACK_ALIGN {
     eResult:    EResult,
     ulBeaconID: PartyBeaconID,
 }
 
-ReservationNotificationCallback :: struct #packed {
+ReservationNotificationCallback :: struct #align CALLBACK_ALIGN {
     ulBeaconID:    PartyBeaconID,
     steamIDJoiner: CSteamID,
 }
 
-ChangeNumOpenSlotsCallback :: struct #packed {
+ChangeNumOpenSlotsCallback :: struct #align CALLBACK_ALIGN {
     eResult: EResult,
 }
 
-AvailableBeaconLocationsUpdated :: struct #packed {}
+AvailableBeaconLocationsUpdated :: struct #align CALLBACK_ALIGN {}
 
-ActiveBeaconsUpdated :: struct #packed {}
+ActiveBeaconsUpdated :: struct #align CALLBACK_ALIGN {}
 
-RemoteStorageFileShareResult :: struct #packed {
+RemoteStorageFileShareResult :: struct #align CALLBACK_ALIGN {
     eResult:      EResult,
     hFile:        UGCHandle,
     rgchFilename: [260]u8,
 }
 
-RemoteStoragePublishFileResult :: struct #packed {
+RemoteStoragePublishFileResult :: struct #align CALLBACK_ALIGN {
     eResult:                                  EResult,
     nPublishedFileId:                         PublishedFileId,
     bUserNeedsToAcceptWorkshopLegalAgreement: bool,
 }
 
-RemoteStorageDeletePublishedFileResult :: struct #packed {
+RemoteStorageDeletePublishedFileResult :: struct #align CALLBACK_ALIGN {
     eResult:          EResult,
     nPublishedFileId: PublishedFileId,
 }
 
-RemoteStorageEnumerateUserPublishedFilesResult :: struct #packed {
+RemoteStorageEnumerateUserPublishedFilesResult :: struct #align CALLBACK_ALIGN {
     eResult:           EResult,
     nResultsReturned:  int32,
     nTotalResultCount: int32,
     rgPublishedFileId: [50]PublishedFileId,
 }
 
-RemoteStorageSubscribePublishedFileResult :: struct #packed {
+RemoteStorageSubscribePublishedFileResult :: struct #align CALLBACK_ALIGN {
     eResult:          EResult,
     nPublishedFileId: PublishedFileId,
 }
 
-RemoteStorageEnumerateUserSubscribedFilesResult :: struct #packed {
+RemoteStorageEnumerateUserSubscribedFilesResult :: struct #align CALLBACK_ALIGN {
     eResult:           EResult,
     nResultsReturned:  int32,
     nTotalResultCount: int32,
@@ -632,18 +637,18 @@ RemoteStorageEnumerateUserSubscribedFilesResult :: struct #packed {
     rgRTimeSubscribed: [50]uint32,
 }
 
-RemoteStorageUnsubscribePublishedFileResult :: struct #packed {
+RemoteStorageUnsubscribePublishedFileResult :: struct #align CALLBACK_ALIGN {
     eResult:          EResult,
     nPublishedFileId: PublishedFileId,
 }
 
-RemoteStorageUpdatePublishedFileResult :: struct #packed {
+RemoteStorageUpdatePublishedFileResult :: struct #align CALLBACK_ALIGN {
     eResult:                                  EResult,
     nPublishedFileId:                         PublishedFileId,
     bUserNeedsToAcceptWorkshopLegalAgreement: bool,
 }
 
-RemoteStorageDownloadUGCResult :: struct #packed {
+RemoteStorageDownloadUGCResult :: struct #align CALLBACK_ALIGN {
     eResult:        EResult,
     hFile:          UGCHandle,
     nAppID:         AppId,
@@ -652,7 +657,7 @@ RemoteStorageDownloadUGCResult :: struct #packed {
     ulSteamIDOwner: uint64,
 }
 
-RemoteStorageGetPublishedFileDetailsResult :: struct #packed {
+RemoteStorageGetPublishedFileDetailsResult :: struct #align CALLBACK_ALIGN {
     eResult:          EResult,
     nPublishedFileId: PublishedFileId,
     nCreatorAppID:    AppId,
@@ -676,7 +681,7 @@ RemoteStorageGetPublishedFileDetailsResult :: struct #packed {
     bAcceptedForUse:  bool,
 }
 
-RemoteStorageEnumerateWorkshopFilesResult :: struct #packed {
+RemoteStorageEnumerateWorkshopFilesResult :: struct #align CALLBACK_ALIGN {
     eResult:           EResult,
     nResultsReturned:  int32,
     nTotalResultCount: int32,
@@ -686,7 +691,7 @@ RemoteStorageEnumerateWorkshopFilesResult :: struct #packed {
     unStartIndex:      uint32,
 }
 
-RemoteStorageGetPublishedItemVoteDetailsResult :: struct #packed {
+RemoteStorageGetPublishedItemVoteDetailsResult :: struct #align CALLBACK_ALIGN {
     eResult:           EResult,
     unPublishedFileId: PublishedFileId,
     nVotesFor:         int32,
@@ -695,46 +700,46 @@ RemoteStorageGetPublishedItemVoteDetailsResult :: struct #packed {
     fScore:            f32,
 }
 
-RemoteStoragePublishedFileSubscribed :: struct #packed {
+RemoteStoragePublishedFileSubscribed :: struct #align CALLBACK_ALIGN {
     nPublishedFileId: PublishedFileId,
     nAppID:           AppId,
 }
 
-RemoteStoragePublishedFileUnsubscribed :: struct #packed {
+RemoteStoragePublishedFileUnsubscribed :: struct #align CALLBACK_ALIGN {
     nPublishedFileId: PublishedFileId,
     nAppID:           AppId,
 }
 
-RemoteStoragePublishedFileDeleted :: struct #packed {
+RemoteStoragePublishedFileDeleted :: struct #align CALLBACK_ALIGN {
     nPublishedFileId: PublishedFileId,
     nAppID:           AppId,
 }
 
-RemoteStorageUpdateUserPublishedItemVoteResult :: struct #packed {
+RemoteStorageUpdateUserPublishedItemVoteResult :: struct #align CALLBACK_ALIGN {
     eResult:          EResult,
     nPublishedFileId: PublishedFileId,
 }
 
-RemoteStorageUserVoteDetails :: struct #packed {
+RemoteStorageUserVoteDetails :: struct #align CALLBACK_ALIGN {
     eResult:          EResult,
     nPublishedFileId: PublishedFileId,
     eVote:            EWorkshopVote,
 }
 
-RemoteStorageEnumerateUserSharedWorkshopFilesResult :: struct #packed {
+RemoteStorageEnumerateUserSharedWorkshopFilesResult :: struct #align CALLBACK_ALIGN {
     eResult:           EResult,
     nResultsReturned:  int32,
     nTotalResultCount: int32,
     rgPublishedFileId: [50]PublishedFileId,
 }
 
-RemoteStorageSetUserPublishedFileActionResult :: struct #packed {
+RemoteStorageSetUserPublishedFileActionResult :: struct #align CALLBACK_ALIGN {
     eResult:          EResult,
     nPublishedFileId: PublishedFileId,
     eAction:          EWorkshopFileAction,
 }
 
-RemoteStorageEnumeratePublishedFilesByUserActionResult :: struct #packed {
+RemoteStorageEnumeratePublishedFilesByUserActionResult :: struct #align CALLBACK_ALIGN {
     eResult:           EResult,
     eAction:           EWorkshopFileAction,
     nResultsReturned:  int32,
@@ -743,42 +748,42 @@ RemoteStorageEnumeratePublishedFilesByUserActionResult :: struct #packed {
     rgRTimeUpdated:    [50]uint32,
 }
 
-RemoteStoragePublishFileProgress :: struct #packed {
+RemoteStoragePublishFileProgress :: struct #align CALLBACK_ALIGN {
     dPercentFile: f64,
     bPreview:     bool,
 }
 
-RemoteStoragePublishedFileUpdated :: struct #packed {
+RemoteStoragePublishedFileUpdated :: struct #align CALLBACK_ALIGN {
     nPublishedFileId: PublishedFileId,
     nAppID:           AppId,
     ulUnused:         uint64,
 }
 
-RemoteStorageFileWriteAsyncComplete :: struct #packed {
+RemoteStorageFileWriteAsyncComplete :: struct #align CALLBACK_ALIGN {
     eResult: EResult,
 }
 
-RemoteStorageFileReadAsyncComplete :: struct #packed {
+RemoteStorageFileReadAsyncComplete :: struct #align CALLBACK_ALIGN {
     hFileReadAsync: SteamAPICall,
     eResult:        EResult,
     nOffset:        uint32,
     cubRead:        uint32,
 }
 
-RemoteStorageLocalFileChange :: struct #packed {}
+RemoteStorageLocalFileChange :: struct #align CALLBACK_ALIGN {}
 
-UserStatsReceived :: struct #packed {
+UserStatsReceived :: struct #align CALLBACK_ALIGN {
     nGameID:     uint64,
     eResult:     EResult,
     steamIDUser: CSteamID,
 }
 
-UserStatsStored :: struct #packed {
+UserStatsStored :: struct #align CALLBACK_ALIGN {
     nGameID: uint64,
     eResult: EResult,
 }
 
-UserAchievementStored :: struct #packed {
+UserAchievementStored :: struct #align CALLBACK_ALIGN {
     nGameID:             uint64,
     bGroupAchievement:   bool,
     rgchAchievementName: [128]u8,
@@ -786,18 +791,18 @@ UserAchievementStored :: struct #packed {
     nMaxProgress:        uint32,
 }
 
-LeaderboardFindResult :: struct #packed {
+LeaderboardFindResult :: struct #align CALLBACK_ALIGN {
     hSteamLeaderboard: SteamLeaderboard,
     bLeaderboardFound: uint8,
 }
 
-LeaderboardScoresDownloaded :: struct #packed {
+LeaderboardScoresDownloaded :: struct #align CALLBACK_ALIGN {
     hSteamLeaderboard:        SteamLeaderboard,
     hSteamLeaderboardEntries: SteamLeaderboardEntries,
     cEntryCount:              c.int,
 }
 
-LeaderboardScoreUploaded :: struct #packed {
+LeaderboardScoreUploaded :: struct #align CALLBACK_ALIGN {
     bSuccess:            uint8,
     hSteamLeaderboard:   SteamLeaderboard,
     nScore:              int32,
@@ -806,145 +811,145 @@ LeaderboardScoreUploaded :: struct #packed {
     nGlobalRankPrevious: c.int,
 }
 
-NumberOfCurrentPlayers :: struct #packed {
+NumberOfCurrentPlayers :: struct #align CALLBACK_ALIGN {
     bSuccess: uint8,
     cPlayers: int32,
 }
 
-UserStatsUnloaded :: struct #packed {
+UserStatsUnloaded :: struct #align CALLBACK_ALIGN {
     steamIDUser: CSteamID,
 }
 
-UserAchievementIconFetched :: struct #packed {
+UserAchievementIconFetched :: struct #align CALLBACK_ALIGN {
     nGameID:             CGameID,
     rgchAchievementName: [128]u8,
     bAchieved:           bool,
     nIconHandle:         c.int,
 }
 
-GlobalAchievementPercentagesReady :: struct #packed {
+GlobalAchievementPercentagesReady :: struct #align CALLBACK_ALIGN {
     nGameID: uint64,
     eResult: EResult,
 }
 
-LeaderboardUGCSet :: struct #packed {
+LeaderboardUGCSet :: struct #align CALLBACK_ALIGN {
     eResult:           EResult,
     hSteamLeaderboard: SteamLeaderboard,
 }
 
-PS3TrophiesInstalled :: struct #packed {
+PS3TrophiesInstalled :: struct #align CALLBACK_ALIGN {
     nGameID:             uint64,
     eResult:             EResult,
     ulRequiredDiskSpace: uint64,
 }
 
-GlobalStatsReceived :: struct #packed {
+GlobalStatsReceived :: struct #align CALLBACK_ALIGN {
     nGameID: uint64,
     eResult: EResult,
 }
 
-DlcInstalled :: struct #packed {
+DlcInstalled :: struct #align CALLBACK_ALIGN {
     nAppID: AppId,
 }
 
-RegisterActivationCodeResponse :: struct #packed {
+RegisterActivationCodeResponse :: struct #align CALLBACK_ALIGN {
     eResult:             ERegisterActivationCodeResult,
     unPackageRegistered: uint32,
 }
 
-NewUrlLaunchParameters :: struct #packed {}
+NewUrlLaunchParameters :: struct #align CALLBACK_ALIGN {}
 
-AppProofOfPurchaseKeyResponse :: struct #packed {
+AppProofOfPurchaseKeyResponse :: struct #align CALLBACK_ALIGN {
     eResult:      EResult,
     nAppID:       uint32,
     cchKeyLength: uint32,
     rgchKey:      [240]u8,
 }
 
-FileDetailsResult :: struct #packed {
+FileDetailsResult :: struct #align CALLBACK_ALIGN {
     eResult:    EResult,
     ulFileSize: uint64,
     FileSHA:    [20]uint8,
     unFlags:    uint32,
 }
 
-TimedTrialStatus :: struct #packed {
+TimedTrialStatus :: struct #align CALLBACK_ALIGN {
     unAppID:          AppId,
     bIsOffline:       bool,
     unSecondsAllowed: uint32,
     unSecondsPlayed:  uint32,
 }
 
-P2PSessionRequest :: struct #packed {
+P2PSessionRequest :: struct #align CALLBACK_ALIGN {
     steamIDRemote: CSteamID,
 }
 
-P2PSessionConnectFail :: struct #packed {
+P2PSessionConnectFail :: struct #align CALLBACK_ALIGN {
     steamIDRemote:    CSteamID,
     eP2PSessionError: uint8,
 }
 
-SocketStatusCallback :: struct #packed {
+SocketStatusCallback :: struct #align CALLBACK_ALIGN {
     hSocket:          SNetSocket,
     hListenSocket:    SNetListenSocket,
     steamIDRemote:    CSteamID,
     eSNetSocketState: c.int,
 }
 
-ScreenshotReady :: struct #packed {
+ScreenshotReady :: struct #align CALLBACK_ALIGN {
     hLocal:  ScreenshotHandle,
     eResult: EResult,
 }
 
-ScreenshotRequested :: struct #packed {}
+ScreenshotRequested :: struct #align CALLBACK_ALIGN {}
 
-PlaybackStatusHasChanged :: struct #packed {}
+PlaybackStatusHasChanged :: struct #align CALLBACK_ALIGN {}
 
-VolumeHasChanged :: struct #packed {
+VolumeHasChanged :: struct #align CALLBACK_ALIGN {
     flNewVolume: f32,
 }
 
-MusicPlayerRemoteWillActivate :: struct #packed {}
+MusicPlayerRemoteWillActivate :: struct #align CALLBACK_ALIGN {}
 
-MusicPlayerRemoteWillDeactivate :: struct #packed {}
+MusicPlayerRemoteWillDeactivate :: struct #align CALLBACK_ALIGN {}
 
-MusicPlayerRemoteToFront :: struct #packed {}
+MusicPlayerRemoteToFront :: struct #align CALLBACK_ALIGN {}
 
-MusicPlayerWillQuit :: struct #packed {}
+MusicPlayerWillQuit :: struct #align CALLBACK_ALIGN {}
 
-MusicPlayerWantsPlay :: struct #packed {}
+MusicPlayerWantsPlay :: struct #align CALLBACK_ALIGN {}
 
-MusicPlayerWantsPause :: struct #packed {}
+MusicPlayerWantsPause :: struct #align CALLBACK_ALIGN {}
 
-MusicPlayerWantsPlayPrevious :: struct #packed {}
+MusicPlayerWantsPlayPrevious :: struct #align CALLBACK_ALIGN {}
 
-MusicPlayerWantsPlayNext :: struct #packed {}
+MusicPlayerWantsPlayNext :: struct #align CALLBACK_ALIGN {}
 
-MusicPlayerWantsShuffled :: struct #packed {
+MusicPlayerWantsShuffled :: struct #align CALLBACK_ALIGN {
     bShuffled: bool,
 }
 
-MusicPlayerWantsLooped :: struct #packed {
+MusicPlayerWantsLooped :: struct #align CALLBACK_ALIGN {
     bLooped: bool,
 }
 
-MusicPlayerWantsVolume :: struct #packed {
+MusicPlayerWantsVolume :: struct #align CALLBACK_ALIGN {
     flNewVolume: f32,
 }
 
-MusicPlayerSelectsQueueEntry :: struct #packed {
+MusicPlayerSelectsQueueEntry :: struct #align CALLBACK_ALIGN {
     nID: c.int,
 }
 
-MusicPlayerSelectsPlaylistEntry :: struct #packed {
+MusicPlayerSelectsPlaylistEntry :: struct #align CALLBACK_ALIGN {
     nID: c.int,
 }
 
-MusicPlayerWantsPlayingRepeatStatus :: struct #packed {
+MusicPlayerWantsPlayingRepeatStatus :: struct #align CALLBACK_ALIGN {
     nPlayingRepeatStatus: c.int,
 }
 
-HTTPRequestCompleted :: struct #packed {
+HTTPRequestCompleted :: struct #align CALLBACK_ALIGN {
     hRequest:           HTTPRequestHandle,
     ulContextValue:     uint64,
     bRequestSuccessful: bool,
@@ -952,27 +957,27 @@ HTTPRequestCompleted :: struct #packed {
     unBodySize:         uint32,
 }
 
-HTTPRequestHeadersReceived :: struct #packed {
+HTTPRequestHeadersReceived :: struct #align CALLBACK_ALIGN {
     hRequest:       HTTPRequestHandle,
     ulContextValue: uint64,
 }
 
-HTTPRequestDataReceived :: struct #packed {
+HTTPRequestDataReceived :: struct #align CALLBACK_ALIGN {
     hRequest:       HTTPRequestHandle,
     ulContextValue: uint64,
     cOffset:        uint32,
     cBytesReceived: uint32,
 }
 
-SteamInputDeviceConnected :: struct #packed {
+SteamInputDeviceConnected :: struct #align CALLBACK_ALIGN {
     ulConnectedDeviceHandle: InputHandle,
 }
 
-SteamInputDeviceDisconnected :: struct #packed {
+SteamInputDeviceDisconnected :: struct #align CALLBACK_ALIGN {
     ulDisconnectedDeviceHandle: InputHandle,
 }
 
-SteamInputConfigurationLoaded :: struct #packed {
+SteamInputConfigurationLoaded :: struct #align CALLBACK_ALIGN {
     unAppID:            AppId,
     ulDeviceHandle:     InputHandle,
     ulMappingCreator:   CSteamID,
@@ -982,7 +987,7 @@ SteamInputConfigurationLoaded :: struct #packed {
     bUsesGamepadAPI:    bool,
 }
 
-SteamUGCQueryCompleted :: struct #packed {
+SteamUGCQueryCompleted :: struct #align CALLBACK_ALIGN {
     handle:                 UGCQueryHandle,
     eResult:                EResult,
     unNumResultsReturned:   uint32,
@@ -991,47 +996,47 @@ SteamUGCQueryCompleted :: struct #packed {
     rgchNextCursor:         [256]u8,
 }
 
-SteamUGCRequestUGCDetailsResult :: struct #packed {
+SteamUGCRequestUGCDetailsResult :: struct #align CALLBACK_ALIGN {
     details:     SteamUGCDetails,
     bCachedData: bool,
 }
 
-CreateItemResult :: struct #packed {
+CreateItemResult :: struct #align CALLBACK_ALIGN {
     eResult:                                  EResult,
     nPublishedFileId:                         PublishedFileId,
     bUserNeedsToAcceptWorkshopLegalAgreement: bool,
 }
 
-SubmitItemUpdateResult :: struct #packed {
+SubmitItemUpdateResult :: struct #align CALLBACK_ALIGN {
     eResult:                                  EResult,
     bUserNeedsToAcceptWorkshopLegalAgreement: bool,
     nPublishedFileId:                         PublishedFileId,
 }
 
-ItemInstalled :: struct #packed {
+ItemInstalled :: struct #align CALLBACK_ALIGN {
     unAppID:          AppId,
     nPublishedFileId: PublishedFileId,
 }
 
-DownloadItemResult :: struct #packed {
+DownloadItemResult :: struct #align CALLBACK_ALIGN {
     unAppID:          AppId,
     nPublishedFileId: PublishedFileId,
     eResult:          EResult,
 }
 
-UserFavoriteItemsListChanged :: struct #packed {
+UserFavoriteItemsListChanged :: struct #align CALLBACK_ALIGN {
     nPublishedFileId: PublishedFileId,
     eResult:          EResult,
     bWasAddRequest:   bool,
 }
 
-SetUserItemVoteResult :: struct #packed {
+SetUserItemVoteResult :: struct #align CALLBACK_ALIGN {
     nPublishedFileId: PublishedFileId,
     eResult:          EResult,
     bVoteUp:          bool,
 }
 
-GetUserItemVoteResult :: struct #packed {
+GetUserItemVoteResult :: struct #align CALLBACK_ALIGN {
     nPublishedFileId: PublishedFileId,
     eResult:          EResult,
     bVotedUp:         bool,
@@ -1039,39 +1044,39 @@ GetUserItemVoteResult :: struct #packed {
     bVoteSkipped:     bool,
 }
 
-StartPlaytimeTrackingResult :: struct #packed {
+StartPlaytimeTrackingResult :: struct #align CALLBACK_ALIGN {
     eResult: EResult,
 }
 
-StopPlaytimeTrackingResult :: struct #packed {
+StopPlaytimeTrackingResult :: struct #align CALLBACK_ALIGN {
     eResult: EResult,
 }
 
-AddUGCDependencyResult :: struct #packed {
+AddUGCDependencyResult :: struct #align CALLBACK_ALIGN {
     eResult:               EResult,
     nPublishedFileId:      PublishedFileId,
     nChildPublishedFileId: PublishedFileId,
 }
 
-RemoveUGCDependencyResult :: struct #packed {
+RemoveUGCDependencyResult :: struct #align CALLBACK_ALIGN {
     eResult:               EResult,
     nPublishedFileId:      PublishedFileId,
     nChildPublishedFileId: PublishedFileId,
 }
 
-AddAppDependencyResult :: struct #packed {
+AddAppDependencyResult :: struct #align CALLBACK_ALIGN {
     eResult:          EResult,
     nPublishedFileId: PublishedFileId,
     nAppID:           AppId,
 }
 
-RemoveAppDependencyResult :: struct #packed {
+RemoveAppDependencyResult :: struct #align CALLBACK_ALIGN {
     eResult:          EResult,
     nPublishedFileId: PublishedFileId,
     nAppID:           AppId,
 }
 
-GetAppDependenciesResult :: struct #packed {
+GetAppDependenciesResult :: struct #align CALLBACK_ALIGN {
     eResult:                  EResult,
     nPublishedFileId:         PublishedFileId,
     rgAppIDs:                 [32]AppId,
@@ -1079,16 +1084,16 @@ GetAppDependenciesResult :: struct #packed {
     nTotalNumAppDependencies: uint32,
 }
 
-DeleteItemResult :: struct #packed {
+DeleteItemResult :: struct #align CALLBACK_ALIGN {
     eResult:          EResult,
     nPublishedFileId: PublishedFileId,
 }
 
-UserSubscribedItemsListChanged :: struct #packed {
+UserSubscribedItemsListChanged :: struct #align CALLBACK_ALIGN {
     nAppID: AppId,
 }
 
-WorkshopEULAStatus :: struct #packed {
+WorkshopEULAStatus :: struct #align CALLBACK_ALIGN {
     eResult:      EResult,
     nAppID:       AppId,
     unVersion:    uint32,
@@ -1097,21 +1102,21 @@ WorkshopEULAStatus :: struct #packed {
     bNeedsAction: bool,
 }
 
-SteamAppInstalled :: struct #packed {
+SteamAppInstalled :: struct #align CALLBACK_ALIGN {
     nAppID:              AppId,
     iInstallFolderIndex: c.int,
 }
 
-SteamAppUninstalled :: struct #packed {
+SteamAppUninstalled :: struct #align CALLBACK_ALIGN {
     nAppID:              AppId,
     iInstallFolderIndex: c.int,
 }
 
-HTML_BrowserReady :: struct #packed {
+HTML_BrowserReady :: struct #align CALLBACK_ALIGN {
     unBrowserHandle: HHTMLBrowser,
 }
 
-HTML_NeedsPaint :: struct #packed {
+HTML_NeedsPaint :: struct #align CALLBACK_ALIGN {
     unBrowserHandle: HHTMLBrowser,
     pBGRA:           cstring,
     unWide:          uint32,
@@ -1126,7 +1131,7 @@ HTML_NeedsPaint :: struct #packed {
     unPageSerial:    uint32,
 }
 
-HTML_StartRequest :: struct #packed {
+HTML_StartRequest :: struct #align CALLBACK_ALIGN {
     unBrowserHandle: HHTMLBrowser,
     pchURL:          cstring,
     pchTarget:       cstring,
@@ -1134,11 +1139,11 @@ HTML_StartRequest :: struct #packed {
     bIsRedirect:     bool,
 }
 
-HTML_CloseBrowser :: struct #packed {
+HTML_CloseBrowser :: struct #align CALLBACK_ALIGN {
     unBrowserHandle: HHTMLBrowser,
 }
 
-HTML_URLChanged :: struct #packed {
+HTML_URLChanged :: struct #align CALLBACK_ALIGN {
     unBrowserHandle: HHTMLBrowser,
     pchURL:          cstring,
     pchPostData:     cstring,
@@ -1147,35 +1152,35 @@ HTML_URLChanged :: struct #packed {
     bNewNavigation:  bool,
 }
 
-HTML_FinishedRequest :: struct #packed {
+HTML_FinishedRequest :: struct #align CALLBACK_ALIGN {
     unBrowserHandle: HHTMLBrowser,
     pchURL:          cstring,
     pchPageTitle:    cstring,
 }
 
-HTML_OpenLinkInNewTab :: struct #packed {
+HTML_OpenLinkInNewTab :: struct #align CALLBACK_ALIGN {
     unBrowserHandle: HHTMLBrowser,
     pchURL:          cstring,
 }
 
-HTML_ChangedTitle :: struct #packed {
+HTML_ChangedTitle :: struct #align CALLBACK_ALIGN {
     unBrowserHandle: HHTMLBrowser,
     pchTitle:        cstring,
 }
 
-HTML_SearchResults :: struct #packed {
+HTML_SearchResults :: struct #align CALLBACK_ALIGN {
     unBrowserHandle: HHTMLBrowser,
     unResults:       uint32,
     unCurrentMatch:  uint32,
 }
 
-HTML_CanGoBackAndForward :: struct #packed {
+HTML_CanGoBackAndForward :: struct #align CALLBACK_ALIGN {
     unBrowserHandle: HHTMLBrowser,
     bCanGoBack:      bool,
     bCanGoForward:   bool,
 }
 
-HTML_HorizontalScroll :: struct #packed {
+HTML_HorizontalScroll :: struct #align CALLBACK_ALIGN {
     unBrowserHandle: HHTMLBrowser,
     unScrollMax:     uint32,
     unScrollCurrent: uint32,
@@ -1184,7 +1189,7 @@ HTML_HorizontalScroll :: struct #packed {
     unPageSize:      uint32,
 }
 
-HTML_VerticalScroll :: struct #packed {
+HTML_VerticalScroll :: struct #align CALLBACK_ALIGN {
     unBrowserHandle: HHTMLBrowser,
     unScrollMax:     uint32,
     unScrollCurrent: uint32,
@@ -1193,7 +1198,7 @@ HTML_VerticalScroll :: struct #packed {
     unPageSize:      uint32,
 }
 
-HTML_LinkAtPosition :: struct #packed {
+HTML_LinkAtPosition :: struct #align CALLBACK_ALIGN {
     unBrowserHandle: HHTMLBrowser,
     x:               uint32,
     y:               uint32,
@@ -1202,23 +1207,23 @@ HTML_LinkAtPosition :: struct #packed {
     bLiveLink:       bool,
 }
 
-HTML_JSAlert :: struct #packed {
+HTML_JSAlert :: struct #align CALLBACK_ALIGN {
     unBrowserHandle: HHTMLBrowser,
     pchMessage:      cstring,
 }
 
-HTML_JSConfirt :: struct #packed {
+HTML_JSConfirt :: struct #align CALLBACK_ALIGN {
     unBrowserHandle: HHTMLBrowser,
     pchMessage:      cstring,
 }
 
-HTML_FileOpenDialog :: struct #packed {
+HTML_FileOpenDialog :: struct #align CALLBACK_ALIGN {
     unBrowserHandle: HHTMLBrowser,
     pchTitle:        cstring,
     pchInitialFile:  cstring,
 }
 
-HTML_NewWindow :: struct #packed {
+HTML_NewWindow :: struct #align CALLBACK_ALIGN {
     unBrowserHandle:                  HHTMLBrowser,
     pchURL:                           cstring,
     unX:                              uint32,
@@ -1228,105 +1233,105 @@ HTML_NewWindow :: struct #packed {
     unNewWindow_BrowserHandle_IGNORE: HHTMLBrowser,
 }
 
-HTML_SetCursor :: struct #packed {
+HTML_SetCursor :: struct #align CALLBACK_ALIGN {
     unBrowserHandle: HHTMLBrowser,
     eMouseCursor:    uint32,
 }
 
-HTML_StatusText :: struct #packed {
+HTML_StatusText :: struct #align CALLBACK_ALIGN {
     unBrowserHandle: HHTMLBrowser,
     pchMsg:          cstring,
 }
 
-HTML_ShowToolTip :: struct #packed {
+HTML_ShowToolTip :: struct #align CALLBACK_ALIGN {
     unBrowserHandle: HHTMLBrowser,
     pchMsg:          cstring,
 }
 
-HTML_UpdateToolTip :: struct #packed {
+HTML_UpdateToolTip :: struct #align CALLBACK_ALIGN {
     unBrowserHandle: HHTMLBrowser,
     pchMsg:          cstring,
 }
 
-HTML_HideToolTip :: struct #packed {
+HTML_HideToolTip :: struct #align CALLBACK_ALIGN {
     unBrowserHandle: HHTMLBrowser,
 }
 
-HTML_BrowserRestarted :: struct #packed {
+HTML_BrowserRestarted :: struct #align CALLBACK_ALIGN {
     unBrowserHandle:    HHTMLBrowser,
     unOldBrowserHandle: HHTMLBrowser,
 }
 
-SteamInventoryResultReady :: struct #packed {
+SteamInventoryResultReady :: struct #align CALLBACK_ALIGN {
     handle: SteamInventoryResult,
     result: EResult,
 }
 
-SteamInventoryFullUpdate :: struct #packed {
+SteamInventoryFullUpdate :: struct #align CALLBACK_ALIGN {
     handle: SteamInventoryResult,
 }
 
-SteamInventoryDefinitionUpdate :: struct #packed {}
+SteamInventoryDefinitionUpdate :: struct #align CALLBACK_ALIGN {}
 
-SteamInventoryEligiblePromoItemDefIDs :: struct #packed {
+SteamInventoryEligiblePromoItemDefIDs :: struct #align CALLBACK_ALIGN {
     result:                   EResult,
     steamID:                  CSteamID,
     numEligiblePromoItemDefs: c.int,
     bCachedData:              bool,
 }
 
-SteamInventoryStartPurchaseResult :: struct #packed {
+SteamInventoryStartPurchaseResult :: struct #align CALLBACK_ALIGN {
     result:    EResult,
     ulOrderID: uint64,
     ulTransID: uint64,
 }
 
-SteamInventoryRequestPricesResult :: struct #packed {
+SteamInventoryRequestPricesResult :: struct #align CALLBACK_ALIGN {
     result:       EResult,
     rgchCurrency: [4]u8,
 }
 
-GetVideoURLResult :: struct #packed {
+GetVideoURLResult :: struct #align CALLBACK_ALIGN {
     eResult:      EResult,
     unVideoAppID: AppId,
     rgchURL:      [256]u8,
 }
 
-GetOPFSettingsResult :: struct #packed {
+GetOPFSettingsResult :: struct #align CALLBACK_ALIGN {
     eResult:      EResult,
     unVideoAppID: AppId,
 }
 
-SteamParentalSettingsChanged :: struct #packed {}
+SteamParentalSettingsChanged :: struct #align CALLBACK_ALIGN {}
 
-SteamRemotePlaySessionConnected :: struct #packed {
+SteamRemotePlaySessionConnected :: struct #align CALLBACK_ALIGN {
     unSessionID: RemotePlaySessionID,
 }
 
-SteamRemotePlaySessionDisconnected :: struct #packed {
+SteamRemotePlaySessionDisconnected :: struct #align CALLBACK_ALIGN {
     unSessionID: RemotePlaySessionID,
 }
 
-SteamNetworkingMessagesSessionRequest :: struct #packed {
+SteamNetworkingMessagesSessionRequest :: struct #align CALLBACK_ALIGN {
     identityRemote: SteamNetworkingIdentity,
 }
 
-SteamNetworkingMessagesSessionFailed :: struct #packed {
+SteamNetworkingMessagesSessionFailed :: struct #align CALLBACK_ALIGN {
     info: SteamNetConnectionInfo,
 }
 
-SteamNetConnectionStatusChangedCallback :: struct #packed {
+SteamNetConnectionStatusChangedCallback :: struct #align CALLBACK_ALIGN {
     hConn:     HSteamNetConnection,
     info:      SteamNetConnectionInfo,
     eOldState: ESteamNetworkingConnectionState,
 }
 
-SteamNetAuthenticationStatus :: struct #packed {
+SteamNetAuthenticationStatus :: struct #align CALLBACK_ALIGN {
     eAvail:   ESteamNetworkingAvailability,
     debugMsg: [256]u8,
 }
 
-SteamRelayNetworkStatus :: struct #packed {
+SteamRelayNetworkStatus :: struct #align CALLBACK_ALIGN {
     eAvail:                     ESteamNetworkingAvailability,
     bPingMeasurementInProgress: c.int,
     eAvailNetworkConfig:        ESteamNetworkingAvailability,
@@ -1334,47 +1339,47 @@ SteamRelayNetworkStatus :: struct #packed {
     debugMsg:                   [256]u8,
 }
 
-GSClientApprove :: struct #packed {
+GSClientApprove :: struct #align CALLBACK_ALIGN {
     SteamID:      CSteamID,
     OwnerSteamID: CSteamID,
 }
 
-GSClientDeny :: struct #packed {
+GSClientDeny :: struct #align CALLBACK_ALIGN {
     SteamID:          CSteamID,
     eDenyReason:      EDenyReason,
     rgchOptionalText: [128]u8,
 }
 
-GSClientKick :: struct #packed {
+GSClientKick :: struct #align CALLBACK_ALIGN {
     SteamID:     CSteamID,
     eDenyReason: EDenyReason,
 }
 
-GSClientAchievementStatus :: struct #packed {
+GSClientAchievementStatus :: struct #align CALLBACK_ALIGN {
     SteamID:        uint64,
     pchAchievement: [128]u8,
     bUnlocked:      bool,
 }
 
-GSPolicyResponse :: struct #packed {
+GSPolicyResponse :: struct #align CALLBACK_ALIGN {
     bSecure: uint8,
 }
 
-GSGameplayStats :: struct #packed {
+GSGameplayStats :: struct #align CALLBACK_ALIGN {
     eResult:              EResult,
     nRank:                int32,
     unTotalConnects:      uint32,
     unTotalMinutesPlayed: uint32,
 }
 
-GSClientGroupStatus :: struct #packed {
+GSClientGroupStatus :: struct #align CALLBACK_ALIGN {
     SteamIDUser:  CSteamID,
     SteamIDGroup: CSteamID,
     bMember:      bool,
     bOfficer:     bool,
 }
 
-GSReputation :: struct #packed {
+GSReputation :: struct #align CALLBACK_ALIGN {
     eResult:           EResult,
     unReputationScore: uint32,
     bBanned:           bool,
@@ -1384,11 +1389,11 @@ GSReputation :: struct #packed {
     unBanExpires:      uint32,
 }
 
-AssociateWithClanResult :: struct #packed {
+AssociateWithClanResult :: struct #align CALLBACK_ALIGN {
     eResult: EResult,
 }
 
-ComputeNewPlayerCompatibilityResult :: struct #packed {
+ComputeNewPlayerCompatibilityResult :: struct #align CALLBACK_ALIGN {
     eResult:                           EResult,
     cPlayersThatDontLikeCandidate:     c.int,
     cPlayersThatCandidateDoesntLike:   c.int,
@@ -1396,21 +1401,21 @@ ComputeNewPlayerCompatibilityResult :: struct #packed {
     SteamIDCandidate:                  CSteamID,
 }
 
-GSStatsReceived :: struct #packed {
+GSStatsReceived :: struct #align CALLBACK_ALIGN {
     eResult:     EResult,
     steamIDUser: CSteamID,
 }
 
-GSStatsStored :: struct #packed {
+GSStatsStored :: struct #align CALLBACK_ALIGN {
     eResult:     EResult,
     steamIDUser: CSteamID,
 }
 
-GSStatsUnloaded :: struct #packed {
+GSStatsUnloaded :: struct #align CALLBACK_ALIGN {
     steamIDUser: CSteamID,
 }
 
-SteamNetworkingFakeIPResult :: struct #packed {
+SteamNetworkingFakeIPResult :: struct #align CALLBACK_ALIGN {
     eResult:  EResult,
     identity: SteamNetworkingIdentity,
     unIP:     uint32,
@@ -1881,6 +1886,8 @@ ECommunityProfileItemProperty :: enum {
     MovieMP4Small  = 11,
 }
 
+// used in PersonaStateChange_t::m_nChangeFlags to describe what's changed about a user
+// these flags describe what the client has learned has changed recently, so on startup you'll see a name, avatar & relationship change for every friend
 EPersonaChange :: enum {
     Name                = 1,
     Status              = 2,
@@ -3532,12 +3539,12 @@ IHTMLSurface_EHTMLKeyModifiers :: enum {
     ShiftDown = 4,
 }
 
-SteamIPAddress :: struct #packed {
+SteamIPAddress :: struct #align CALLBACK_ALIGN {
     rgubIPv6: [16]uint8,
     eType:    ESteamIPType,
 }
 
-FriendGameInfo :: struct #packed {
+FriendGameInfo :: struct #align CALLBACK_ALIGN {
     gameID:       CGameID,
     unGameIP:     uint32,
     usGamePort:   uint16,
@@ -3545,18 +3552,18 @@ FriendGameInfo :: struct #packed {
     steamIDLobby: CSteamID,
 }
 
-MatchMakingKeyValuePair :: struct #packed {
+MatchMakingKeyValuePair :: struct #align CALLBACK_ALIGN {
     szKey:   [256]u8,
     szValue: [256]u8,
 }
 
-servernetadr :: struct #packed {
+servernetadr :: struct #align CALLBACK_ALIGN {
     usConnectionPort: uint16,
     usQueryPort:      uint16,
     unIP:             uint32,
 }
 
-gameserveritet :: struct #packed {
+gameserveritet :: struct #align CALLBACK_ALIGN {
     NetAdr:                 servernetadr,
     nPing:                  c.int,
     bHadSuccessfulResponse: bool,
@@ -3577,17 +3584,17 @@ gameserveritet :: struct #packed {
     steamID:                CSteamID,
 }
 
-SteamPartyBeaconLocation :: struct #packed {
+SteamPartyBeaconLocation :: struct #align CALLBACK_ALIGN {
     eType:        ESteamPartyBeaconLocationType,
     ulLocationID: uint64,
 }
 
-SteamParamStringArray :: struct #packed {
+SteamParamStringArray :: struct #align CALLBACK_ALIGN {
     ppStrings:   ^cstring,
     nNumStrings: int32,
 }
 
-LeaderboardEntry :: struct #packed {
+LeaderboardEntry :: struct #align CALLBACK_ALIGN {
     steamIDUser: CSteamID,
     nGlobalRank: int32,
     nScore:      int32,
@@ -3595,7 +3602,7 @@ LeaderboardEntry :: struct #packed {
     hUGC:        UGCHandle,
 }
 
-P2PSessionState :: struct #packed {
+P2PSessionState :: struct #align CALLBACK_ALIGN {
     bConnectionActive:     uint8,
     bConnecting:           uint8,
     eP2PSessionError:      uint8,
@@ -3606,19 +3613,19 @@ P2PSessionState :: struct #packed {
     nRemotePort:           uint16,
 }
 
-InputAnalogActionData :: struct #packed {
+InputAnalogActionData :: struct #align CALLBACK_ALIGN {
     eMode:   EInputSourceMode,
     x:       f32,
     y:       f32,
     bActive: bool,
 }
 
-InputDigitalActionData :: struct #packed {
+InputDigitalActionData :: struct #align CALLBACK_ALIGN {
     bState:  bool,
     bActive: bool,
 }
 
-InputMotionData :: struct #packed {
+InputMotionData :: struct #align CALLBACK_ALIGN {
     rotQuatX:  f32,
     rotQuatY:  f32,
     rotQuatZ:  f32,
@@ -3631,7 +3638,7 @@ InputMotionData :: struct #packed {
     rotVelZ:   f32,
 }
 
-SteamUGCDetails :: struct #packed {
+SteamUGCDetails :: struct #align CALLBACK_ALIGN {
     nPublishedFileId:     PublishedFileId,
     eResult:              EResult,
     eFileType:            EWorkshopFileType,
@@ -3660,25 +3667,25 @@ SteamUGCDetails :: struct #packed {
     unNumChildren:        uint32,
 }
 
-SteamItemDetails :: struct #packed {
+SteamItemDetails :: struct #align CALLBACK_ALIGN {
     itemId:      SteamItemInstanceID,
     iDefinition: SteamItemDef,
     unQuantity:  uint16,
     unFlags:     uint16,
 }
 
-SteamNetworkingIPAddr :: struct #packed {
+SteamNetworkingIPAddr :: struct #align CALLBACK_ALIGN {
     ipv6: [16]uint8,
     port: uint16,
 }
 
-SteamNetworkingIdentity :: struct #packed {
+SteamNetworkingIdentity :: struct #align CALLBACK_ALIGN {
     eType:              ESteamNetworkingIdentityType,
     cbSize:             c.int,
     szUnknownRawString: [128]u8,
 }
 
-SteamNetConnectionInfo :: struct #packed {
+SteamNetConnectionInfo :: struct #align CALLBACK_ALIGN {
     identityRemote:          SteamNetworkingIdentity,
     nUserData:               int64,
     hListenSocket:           HSteamListenSocket,
@@ -3694,7 +3701,7 @@ SteamNetConnectionInfo :: struct #packed {
     reserved:                [63]uint32,
 }
 
-SteamNetConnectionRealTimeStatus :: struct #packed {
+SteamNetConnectionRealTimeStatus :: struct #align CALLBACK_ALIGN {
     eState:                    ESteamNetworkingConnectionState,
     nPing:                     c.int,
     flConnectionQualityLocal:  f32,
@@ -3711,7 +3718,7 @@ SteamNetConnectionRealTimeStatus :: struct #packed {
     reserved:                  [16]uint32,
 }
 
-SteamNetConnectionRealTimeLaneStatus :: struct #packed {
+SteamNetConnectionRealTimeLaneStatus :: struct #align CALLBACK_ALIGN {
     cbPendingUnreliable:   c.int,
     cbPendingReliable:     c.int,
     cbSentUnackedReliable: c.int,
@@ -3720,22 +3727,22 @@ SteamNetConnectionRealTimeLaneStatus :: struct #packed {
     reserved:              [10]uint32,
 }
 
-SteamNetworkPingLocation :: struct #packed {
+SteamNetworkPingLocation :: struct #align CALLBACK_ALIGN {
     data: [512]uint8,
 }
 
-SteamNetworkingConfigValue :: struct #packed {
+SteamNetworkingConfigValue :: struct #align CALLBACK_ALIGN {
     eValue:    ESteamNetworkingConfigValue,
     eDataType: ESteamNetworkingConfigDataType,
     int64:     int64,
 }
 
-SteamDatagramHostedAddress :: struct #packed {
+SteamDatagramHostedAddress :: struct #align CALLBACK_ALIGN {
     cbSize: c.int,
     data:   [128]u8,
 }
 
-SteamDatagramGameCoordinatorServerLogin :: struct #packed {
+SteamDatagramGameCoordinatorServerLogin :: struct #align CALLBACK_ALIGN {
     identity:  SteamNetworkingIdentity,
     routing:   SteamDatagramHostedAddress,
     nAppID:    AppId,
@@ -3897,6 +3904,7 @@ foreign lib {
     UseBreakpadCrashHandler :: proc "c" (pchVersion: cstring, pchDate: cstring, pchTime: cstring, bFullMemoryDumps: bool, pvContext: rawptr, pfnPreMinidumpCallback: PFNPreMinidumpCallback) ---
     SetBreakpadAppID :: proc "c" (unAppID: uint32) ---
 
+
     /// Inform the API that you wish to use manual event dispatch.  This must be called after SteamAPI_Init, but before
     /// you use any of the other manual dispatch functions below.
     ManualDispatch_Init :: proc "c" () ---
@@ -3904,17 +3912,25 @@ foreign lib {
     /// Perform certain periodic actions that need to be performed.
     ManualDispatch_RunFrame :: proc "c" (hSteamPipe: HSteamPipe) ---
 
+    /// Fetch the next pending callback on the given pipe, if any.  If a callback is available, true is returned
+    /// and the structure is populated.  In this case, you MUST call SteamAPI_ManualDispatch_FreeLastCallback
+    /// (after dispatching the callback) before calling SteamAPI_ManualDispatch_GetNextCallback again.
+    ManualDispatch_GetNextCallback :: proc "c" (hSteamPipe: HSteamPipe, pCallbackMsg: ^CallbackMsg) -> bool ---
+
     /// You must call this after dispatching the callback, if SteamAPI_ManualDispatch_GetNextCallback returns true.
     ManualDispatch_FreeLastCallback :: proc "c" (hSteamPipe: HSteamPipe) ---
 
     /// Return the call result for the specified call on the specified pipe.  You really should
     /// only call this in a handler for SteamAPICallCompletedcallback.
     ManualDispatch_GetAPICallResult :: proc "c" (hSteamPipe: HSteamPipe, hSteamAPICall: SteamAPICall, pCallback: rawptr, cubCallback: c.int, iCallbackExpected: c.int, pbFailed: ^bool) -> bool ---
+
+
+    GetHSteamPipe :: proc "c" () -> HSteamPipe ---
 }
 
-// ---------
-// Accessors
-// ---------
+// -------------------------------------------
+// Versioned accessors
+// -------------------------------------------
 
 @(link_prefix = "SteamAPI_", default_calling_convention = "c")
 foreign lib {
@@ -3946,9 +3962,9 @@ foreign lib {
     SteamNetworkingSockets_SteamAPI_v012 :: proc() -> ^INetworkingSockets ---
 }
 
-// ----------
+// -------------------------------------------
 // Interfaces
-// ----------
+// -------------------------------------------
 
 @(link_prefix = "SteamAPI_ISteam", default_calling_convention = "c")
 foreign lib {
@@ -4906,18 +4922,18 @@ foreign lib {
     NetworkingFakeUDPPort_ReceiveMessages :: proc(self: ^INetworkingFakeUDPPort, ppOutMessages: ^^SteamNetworkingMessage, nMaxMessages: c.int) -> c.int ---
     NetworkingFakeUDPPort_ScheduleCleanup :: proc(self: ^INetworkingFakeUDPPort, remoteAddress: ^SteamNetworkingIPAddr) ---
 
-    SteamIPAddress_t_IsSet :: proc(self: ^SteamIPAddress) -> bool ---
-    MatchMakingKeyValuePair_t_Construct :: proc(self: ^MatchMakingKeyValuePair) ---
-    servernetadr_t_Construct :: proc(self: ^servernetadr) ---
-    servernetadr_t_Init :: proc(self: ^servernetadr, ip: c.uint, usQueryPort: uint16, usConnectionPort: uint16) ---
-    servernetadr_t_GetQueryPort :: proc(self: ^servernetadr) -> uint16 ---
-    servernetadr_t_SetQueryPort :: proc(self: ^servernetadr, usPort: uint16) ---
-    servernetadr_t_GetConnectionPort :: proc(self: ^servernetadr) -> uint16 ---
-    servernetadr_t_SetConnectionPort :: proc(self: ^servernetadr, usPort: uint16) ---
-    servernetadr_t_GetIP :: proc(self: ^servernetadr) -> uint32 ---
-    servernetadr_t_SetIP :: proc(self: ^servernetadr, unIP: uint32) ---
-    servernetadr_t_GetConnectionAddressString :: proc(self: ^servernetadr) -> cstring ---
-    servernetadr_t_GetQueryAddressString :: proc(self: ^servernetadr) -> cstring ---
+    SteamIPAddress_IsSet :: proc(self: ^SteamIPAddress) -> bool ---
+    MatchMakingKeyValuePair_Construct :: proc(self: ^MatchMakingKeyValuePair) ---
+    servernetadr_Construct :: proc(self: ^servernetadr) ---
+    servernetadr_Init :: proc(self: ^servernetadr, ip: c.uint, usQueryPort: uint16, usConnectionPort: uint16) ---
+    servernetadr_GetQueryPort :: proc(self: ^servernetadr) -> uint16 ---
+    servernetadr_SetQueryPort :: proc(self: ^servernetadr, usPort: uint16) ---
+    servernetadr_GetConnectionPort :: proc(self: ^servernetadr) -> uint16 ---
+    servernetadr_SetConnectionPort :: proc(self: ^servernetadr, usPort: uint16) ---
+    servernetadr_GetIP :: proc(self: ^servernetadr) -> uint32 ---
+    servernetadr_SetIP :: proc(self: ^servernetadr, unIP: uint32) ---
+    servernetadr_GetConnectionAddressString :: proc(self: ^servernetadr) -> cstring ---
+    servernetadr_GetQueryAddressString :: proc(self: ^servernetadr) -> cstring ---
     gameserveritet_Construct :: proc(self: ^gameserveritet) ---
     gameserveritet_GetName :: proc(self: ^gameserveritet) -> cstring ---
     gameserveritet_SetName :: proc(self: ^gameserveritet, pName: cstring) ---
@@ -4959,13 +4975,779 @@ foreign lib {
     SteamNetworkingIdentity_GetGenericBytes :: proc(self: ^SteamNetworkingIdentity, cbLen: ^int) -> ^uint8 ---
     SteamNetworkingIdentity_ToString :: proc(self: ^SteamNetworkingIdentity, buf: ^u8, cbBuf: uint32) ---
     SteamNetworkingIdentity_ParseString :: proc(self: ^SteamNetworkingIdentity, pszStr: cstring) -> bool ---
-    SteamNetworkingMessage_t_Release :: proc(self: ^SteamNetworkingMessage) ---
-    SteamNetworkingConfigValue_t_SetInt32 :: proc(self: ^SteamNetworkingConfigValue, eVal: ESteamNetworkingConfigValue, data: int32) ---
-    SteamNetworkingConfigValue_t_SetInt64 :: proc(self: ^SteamNetworkingConfigValue, eVal: ESteamNetworkingConfigValue, data: int64) ---
-    SteamNetworkingConfigValue_t_SetFloat :: proc(self: ^SteamNetworkingConfigValue, eVal: ESteamNetworkingConfigValue, data: f32) ---
-    SteamNetworkingConfigValue_t_SetPtr :: proc(self: ^SteamNetworkingConfigValue, eVal: ESteamNetworkingConfigValue, data: rawptr) ---
-    SteamNetworkingConfigValue_t_SetString :: proc(self: ^SteamNetworkingConfigValue, eVal: ESteamNetworkingConfigValue, data: cstring) ---
+    SteamNetworkingMessage_Release :: proc(self: ^SteamNetworkingMessage) ---
+    SteamNetworkingConfigValue_SetInt32 :: proc(self: ^SteamNetworkingConfigValue, eVal: ESteamNetworkingConfigValue, data: int32) ---
+    SteamNetworkingConfigValue_SetInt64 :: proc(self: ^SteamNetworkingConfigValue, eVal: ESteamNetworkingConfigValue, data: int64) ---
+    SteamNetworkingConfigValue_SetFloat :: proc(self: ^SteamNetworkingConfigValue, eVal: ESteamNetworkingConfigValue, data: f32) ---
+    SteamNetworkingConfigValue_SetPtr :: proc(self: ^SteamNetworkingConfigValue, eVal: ESteamNetworkingConfigValue, data: rawptr) ---
+    SteamNetworkingConfigValue_SetString :: proc(self: ^SteamNetworkingConfigValue, eVal: ESteamNetworkingConfigValue, data: cstring) ---
     SteamDatagramHostedAddress_Clear :: proc(self: ^SteamDatagramHostedAddress) ---
     SteamDatagramHostedAddress_GetPopID :: proc(self: ^SteamDatagramHostedAddress) -> SteamNetworkingPOPID ---
     SteamDatagramHostedAddress_SetDevAddress :: proc(self: ^SteamDatagramHostedAddress, nIP: uint32, nPort: uint16, popid: SteamNetworkingPOPID) ---
 } // foreign lib
+
+
+// From: steam_api_internal.h
+// Purpose: Base values for callback identifiers, each callback must
+//			have a unique ID.
+iSteamUserCallbacks :: 100
+iSteamGameServerCallbacks :: 200
+iSteamFriendsCallbacks :: 300
+iSteamBillingCallbacks :: 400
+iSteamMatchmakingCallbacks :: 500
+iSteamContentServerCallbacks :: 600
+iSteamUtilsCallbacks :: 700
+iSteamAppsCallbacks :: 1000
+iSteamUserStatsCallbacks :: 1100
+iSteamNetworkingCallbacks :: 1200
+iSteamNetworkingSocketsCallbacks :: 1220
+iSteamNetworkingMessagesCallbacks :: 1250
+iSteamNetworkingUtilsCallbacks :: 1280
+iSteamRemoteStorageCallbacks :: 1300
+iSteamGameServerItemsCallbacks :: 1500
+iSteamGameCoordinatorCallbacks :: 1700
+iSteamGameServerStatsCallbacks :: 1800
+iSteam2AsyncCallbacks :: 1900
+iSteamGameStatsCallbacks :: 2000
+iSteamHTTPCallbacks :: 2100
+iSteamScreenshotsCallbacks :: 2300
+// NOTE: 2500-2599 are reserved
+iSteamStreamLauncherCallbacks :: 2600
+iSteamControllerCallbacks :: 2800
+iSteamUGCCallbacks :: 3400
+iSteamStreamClientCallbacks :: 3500
+iSteamAppListCallbacks :: 3900
+iSteamMusicCallbacks :: 4000
+iSteamMusicRemoteCallbacks :: 4100
+iSteamGameNotificationCallbacks :: 4400
+iSteamHTMLSurfaceCallbacks :: 4500
+iSteamVideoCallbacks :: 4600
+iSteamInventoryCallbacks :: 4700
+ISteamParentalSettingsCallbacks :: 5000
+iSteamGameSearchCallbacks :: 5200
+iSteamPartiesCallbacks :: 5300
+iSteamSTARCallbacks :: 5500
+iSteamRemotePlayCallbacks :: 5700
+iSteamChatCallbacks :: 5900
+
+
+// From: isteamapps.h
+
+DlcInstalled_iCallback :: iSteamAppsCallbacks + 5
+
+// Purpose: response to RegisterActivationCode()
+RegisterActivationCodeResponse_iCallback :: iSteamAppsCallbacks + 8
+
+// Purpose: posted after the user gains executes a Steam URL with command line or query parameters
+// such as steam://run/<appid>//-commandline/?param1=value1&param2=value2&param3=value3 etc
+// while the game is already running.  The new params can be queried
+// with GetLaunchQueryParam and GetLaunchCommandLine
+NewUrlLaunchParameters_iCallback :: iSteamAppsCallbacks + 14
+
+// Purpose: response to RequestAppProofOfPurchaseKey/RequestAllProofOfPurchaseKeys
+// for supporting third-party CD keys, or other proof-of-purchase systems.
+AppProofOfPurchaseKeyResponse_iCallback :: iSteamAppsCallbacks + 21
+
+// Purpose: response to GetFileDetails
+FileDetailsResult_iCallback :: iSteamAppsCallbacks + 23
+
+// Purpose: called for games in Timed Trial mode
+TimedTrialStatus_iCallback :: iSteamAppsCallbacks + 30
+
+
+// From: isteamfriends.h
+
+// Purpose: called when a friends' status changes
+PersonaStateChange_iCallback :: iSteamFriendsCallbacks + 4
+
+// Purpose: posted when game overlay activates or deactivates
+//			the game can use this to be pause or resume single player games
+GameOverlayActivated_iCallback :: iSteamFriendsCallbacks + 31
+
+// Purpose: called when the user tries to join a different game server from their friends list
+//			game client should attempt to connect to specified server when this is received
+GameServerChangeRequested_iCallback :: iSteamFriendsCallbacks + 32
+
+// Purpose: called when the user tries to join a lobby from their friends list
+//			game client should attempt to connect to specified lobby when this is received
+GameLobbyJoinRequested_iCallback :: iSteamFriendsCallbacks + 33
+
+// Purpose: called when an avatar is loaded in from a previous GetLargeFriendAvatar() call
+//			if the image wasn't already available
+AvatarImageLoaded_iCallback :: iSteamFriendsCallbacks + 34
+
+// Purpose: marks the return of a request officer list call
+ClanOfficerListResponse_iCallback :: iSteamFriendsCallbacks + 35
+
+// Purpose: callback indicating updated data about friends rich presence information
+FriendRichPresenceUpdate_iCallback :: iSteamFriendsCallbacks + 36
+
+// Purpose: called when the user tries to join a game from their friends list
+//			rich presence will have been set with the "connect" key which is set here
+GameRichPresenceJoinRequested_iCallback :: iSteamFriendsCallbacks + 37
+
+// Purpose: a chat message has been received for a clan chat the game has joined
+GameConnectedClanChatMsg_iCallback :: iSteamFriendsCallbacks + 38
+
+// Purpose: a user has joined a clan chat
+GameConnectedChatJoin_iCallback :: iSteamFriendsCallbacks + 39
+
+// Purpose: a user has left the chat we're in
+GameConnectedChatLeave_iCallback :: iSteamFriendsCallbacks + 40
+
+// Purpose: a DownloadClanActivityCounts() call has finished
+DownloadClanActivityCountsResult_iCallback :: iSteamFriendsCallbacks + 41
+
+// Purpose: a JoinClanChatRoom() call has finished
+JoinClanChatRoomCompletionResult_iCallback :: iSteamFriendsCallbacks + 42
+
+// Purpose: a chat message has been received from a user
+GameConnectedFriendChatMsg_iCallback :: iSteamFriendsCallbacks + 43
+
+FriendsGetFollowerCount_iCallback :: iSteamFriendsCallbacks + 44
+FriendsIsFollowing_iCallback :: iSteamFriendsCallbacks + 45
+FriendsEnumerateFollowingList_iCallback :: iSteamFriendsCallbacks + 46
+
+// Purpose: reports the result of an attempt to change the user's persona name
+SetPersonaNameResponse_iCallback :: iSteamFriendsCallbacks + 47
+
+// Purpose: Invoked when the status of unread messages changes
+UnreadChatMessagesChanged_iCallback :: iSteamFriendsCallbacks + 48
+
+// Purpose: Dispatched when an overlay browser instance is navigated to a protocol/scheme registered by RegisterProtocolInOverlayBrowser()
+OverlayBrowserProtocolNavigation_iCallback :: iSteamFriendsCallbacks + 49
+
+// Purpose: A user's equipped profile items have changed
+EquippedProfileItemsChanged_iCallback :: iSteamFriendsCallbacks + 50
+
+EquippedProfileItems_iCallback :: iSteamFriendsCallbacks + 51
+
+
+// From: isteamgamecoordinator.h
+
+GCMessageAvailable_iCallback :: iSteamGameCoordinatorCallbacks + 1
+
+// callback notification - A message failed to make it to the GC. It may be down temporarily
+GCMessageFailed_iCallback :: iSteamGameCoordinatorCallbacks + 2
+
+
+// From: isteamgameserver.h
+
+// client has been approved to connect to this game server
+GSClientApprove_iCallback :: iSteamGameServerCallbacks + 1
+
+// client has been denied to connection to this game server
+GSClientDeny_iCallback :: iSteamGameServerCallbacks + 2
+
+// request the game server should kick the user
+GSClientKick_iCallback :: iSteamGameServerCallbacks + 3
+
+// NOTE: callback values 4 and 5 are skipped because they are used for old deprecated callbacks, 
+// do not reuse them here.
+
+// client achievement info
+GSClientAchievementStatus_iCallback :: iSteamGameServerCallbacks + 6
+
+// received when the game server requests to be displayed as secure (VAC protected)
+// m_bSecure is true if the game server should display itself as secure to users, false otherwise
+GSPolicyResponse_iCallback :: iSteamUserCallbacks + 15
+
+// GS gameplay stats info
+GSGameplayStats_iCallback :: iSteamGameServerCallbacks + 7
+
+// send as a reply to RequestUserGroupStatus()
+GSClientGroupStatus_iCallback :: iSteamGameServerCallbacks + 8
+
+// Sent as a reply to GetServerReputation()
+GSReputation_iCallback :: iSteamGameServerCallbacks + 9
+
+// Sent as a reply to AssociateWithClan()
+AssociateWithClanResult_iCallback :: iSteamGameServerCallbacks + 10
+
+// Sent as a reply to ComputeNewPlayerCompatibility()
+ComputeNewPlayerCompatibilityResult_iCallback :: iSteamGameServerCallbacks + 11
+
+
+// From: isteamgameserverstats.h
+
+// Purpose: called when the latests stats and achievements have been received
+//			from the server
+GSStatsReceived_iCallback :: iSteamGameServerStatsCallbacks
+
+// Purpose: result of a request to store the user stats for a game
+GSStatsStored_iCallback :: iSteamGameServerStatsCallbacks + 1
+
+// Purpose: Callback indicating that a user's stats have been unloaded.
+//  Call RequestUserStats again to access stats for this user
+GSStatsUnloaded_iCallback :: iSteamUserStatsCallbacks + 8
+
+
+// From: isteamhttp.h
+
+HTTPRequestCompleted_iCallback :: iSteamHTTPCallbacks + 1
+HTTPRequestHeadersReceived_iCallback :: iSteamHTTPCallbacks + 2
+HTTPRequestDataReceived_iCallback :: iSteamHTTPCallbacks + 3
+
+
+// From: isteaminput.h
+
+// Purpose: called when a new controller has been connected, will fire once
+// per controller if multiple new controllers connect in the same frame
+SteamInputDeviceConnected_iCallback :: iSteamControllerCallbacks + 1
+
+// Purpose: called when a new controller has been connected, will fire once
+// per controller if multiple new controllers connect in the same frame
+SteamInputDeviceDisconnected_iCallback :: iSteamControllerCallbacks + 2
+
+// Purpose: called when a controller configuration has been loaded, will fire once
+// per controller per focus change for Steam Input enabled controllers
+SteamInputConfigurationLoaded_iCallback :: iSteamControllerCallbacks + 3
+
+
+// From: isteaminventory.h
+
+// SteamInventoryResultReady_t callbacks are fired whenever asynchronous
+// results transition from "Pending" to "OK" or an error state. There will
+// always be exactly one callback per handle.
+SteamInventoryResultReady_iCallback :: iSteamInventoryCallbacks + 0
+
+// SteamInventoryFullUpdate_t callbacks are triggered when GetAllItems
+// successfully returns a result which is newer / fresher than the last
+// known result. (It will not trigger if the inventory hasn't changed,
+// or if results from two overlapping calls are reversed in flight and
+// the earlier result is already known to be stale/out-of-date.)
+// The normal ResultReady callback will still be triggered immediately
+// afterwards; this is an additional notification for your convenience.
+SteamInventoryFullUpdate_iCallback :: iSteamInventoryCallbacks + 1
+
+// A SteamInventoryDefinitionUpdate_t callback is triggered whenever
+// item definitions have been updated, which could be in response to 
+// LoadItemDefinitions() or any other async request which required
+// a definition update in order to process results from the server.
+SteamInventoryDefinitionUpdate_iCallback :: iSteamInventoryCallbacks + 2
+
+// Returned 
+SteamInventoryEligiblePromoItemDefIDs_iCallback :: iSteamInventoryCallbacks + 3
+
+// Triggered from StartPurchase call
+SteamInventoryStartPurchaseResult_iCallback :: iSteamInventoryCallbacks + 4
+
+// Triggered from RequestPrices
+SteamInventoryRequestPricesResult_iCallback :: iSteamInventoryCallbacks + 5
+
+
+// From: isteammatchmaking.h
+
+// Callbacks for ISteamMatchmaking (which go through the regular Steam callback registration system)
+
+// Purpose: a server was added/removed from the favorites list, you should refresh now
+FavoritesListChanged_iCallback :: iSteamMatchmakingCallbacks + 2
+
+// Purpose: Someone has invited you to join a Lobby
+//			normally you don't need to do anything with this, since
+//			the Steam UI will also display a '<user> has invited you to the lobby, join?' dialog
+//
+//			if the user outside a game chooses to join, your game will be launched with the parameter "+connect_lobby <64-bit lobby id>",
+//			or with the callback GameLobbyJoinRequested_t if they're already in-game
+LobbyInvite_iCallback :: iSteamMatchmakingCallbacks + 3
+
+// Purpose: Sent on entering a lobby, or on failing to enter
+//			m_EChatRoomEnterResponse will be set to k_EChatRoomEnterResponseSuccess on success,
+//			or a higher value on failure (see enum EChatRoomEnterResponse)
+LobbyEnter_iCallback :: iSteamMatchmakingCallbacks + 4
+
+// Purpose: The lobby metadata has changed
+//			if m_ulSteamIDMember is the steamID of a lobby member, use GetLobbyMemberData() to access per-user details
+//			if m_ulSteamIDMember == m_ulSteamIDLobby, use GetLobbyData() to access lobby metadata
+LobbyDataUpdate_iCallback :: iSteamMatchmakingCallbacks + 5
+
+// Purpose: The lobby chat room state has changed
+//			this is usually sent when a user has joined or left the lobby
+LobbyChatUpdate_iCallback :: iSteamMatchmakingCallbacks + 6
+
+// Purpose: A chat message for this lobby has been sent
+//			use GetLobbyChatEntry( m_iChatID ) to retrieve the contents of this message
+LobbyChatMsg_iCallback :: iSteamMatchmakingCallbacks + 7
+
+// Purpose: A game created a game for all the members of the lobby to join,
+//			as triggered by a SetLobbyGameServer()
+//			it's up to the individual clients to take action on this; the usual
+//			game behavior is to leave the lobby and connect to the specified game server
+LobbyGameCreated_iCallback :: iSteamMatchmakingCallbacks + 9
+
+// Purpose: Number of matching lobbies found
+//			iterate the returned lobbies with GetLobbyByIndex(), from values 0 to m_nLobbiesMatching-1
+LobbyMatchList_iCallback :: iSteamMatchmakingCallbacks + 10
+
+// Purpose: posted if a user is forcefully removed from a lobby
+//			can occur if a user loses connection to Steam
+LobbyKicked_iCallback :: iSteamMatchmakingCallbacks + 12
+
+// Purpose: Result of our request to create a Lobby
+//			m_eResult == k_EResultOK on success
+//			at this point, the lobby has been joined and is ready for use
+//			a LobbyEnter_t callback will also be received (since the local user is joining their own lobby)
+LobbyCreated_iCallback :: iSteamMatchmakingCallbacks + 13
+
+// used by now obsolete RequestFriendsLobbiesResponse_t
+// enum { k_iCallback = iSteamMatchmakingCallbacks + 14 };
+
+// Purpose: Result of CheckForPSNGameBootInvite
+//			m_eResult == k_EResultOK on success
+//			at this point, the local user may not have finishing joining this lobby;
+//			game code should wait until the subsequent LobbyEnter_t callback is received
+PSNGameBootInviteResult_iCallback :: iSteamMatchmakingCallbacks + 15
+
+// Purpose: Result of our request to create a Lobby
+//			m_eResult == k_EResultOK on success
+//			at this point, the lobby has been joined and is ready for use
+//			a LobbyEnter_t callback will also be received (since the local user is joining their own lobby)
+FavoritesListAccountsUpdated_iCallback :: iSteamMatchmakingCallbacks + 16
+
+// Callbacks for ISteamGameSearch (which go through the regular Steam callback registration system)
+
+SearchForGameProgressCallback_iCallback :: iSteamGameSearchCallbacks + 1
+
+// notification to all players searching that a game has been found
+SearchForGameResultCallback_iCallback :: iSteamGameSearchCallbacks + 2
+
+// ISteamGameSearch : Game Host API callbacks
+
+// callback from RequestPlayersForGame when the matchmaking service has started or ended search
+// callback will also follow a call from CancelRequestPlayersForGame - m_bSearchInProgress will be false
+RequestPlayersForGameProgressCallback_iCallback :: iSteamGameSearchCallbacks + 11
+
+// callback from RequestPlayersForGame
+// one of these will be sent per player 
+// followed by additional callbacks when players accept or decline the game
+RequestPlayersForGameResultCallback_iCallback :: iSteamGameSearchCallbacks + 12
+
+RequestPlayersForGameFinalResultCallback_iCallback :: iSteamGameSearchCallbacks + 13
+
+// this callback confirms that results were received by the matchmaking service for this player
+SubmitPlayerResultResultCallback_iCallback :: iSteamGameSearchCallbacks + 14
+
+// this callback confirms that the game is recorded as complete on the matchmaking service
+// the next call to RequestPlayersForGame will generate a new unique game ID
+EndGameResultCallback_iCallback :: iSteamGameSearchCallbacks + 15
+
+// Steam has responded to the user request to join a party via the given Beacon ID.
+// If successful, the connect string contains game-specific instructions to connect
+// to the game with that party.
+JoinPartyCallback_iCallback :: iSteamPartiesCallbacks + 1
+
+// Response to CreateBeacon request. If successful, the beacon ID is provided.
+CreateBeaconCallback_iCallback :: iSteamPartiesCallbacks + 2
+
+// Someone has used the beacon to join your party - they are in-flight now
+// and we've reserved one of the open slots for them.
+// You should confirm when they join your party by calling OnReservationCompleted().
+// Otherwise, Steam may timeout their reservation eventually.
+ReservationNotificationCallback_iCallback :: iSteamPartiesCallbacks + 3
+
+// Response to ChangeNumOpenSlots call
+ChangeNumOpenSlotsCallback_iCallback :: iSteamPartiesCallbacks + 4
+
+// The list of possible Party beacon locations has changed
+AvailableBeaconLocationsUpdated_iCallback :: iSteamPartiesCallbacks + 5
+
+// The list of active beacons may have changed
+ActiveBeaconsUpdated_iCallback :: iSteamPartiesCallbacks + 6
+
+
+// From: isteamnetworking.h
+
+// callback notification - a user wants to talk to us over the P2P channel via the SendP2PPacket() API
+// in response, a call to AcceptP2PPacketsFromUser() needs to be made, if you want to talk with them
+P2PSessionRequest_iCallback :: iSteamNetworkingCallbacks + 2
+
+// callback notification - packets can't get through to the specified user via the SendP2PPacket() API
+// all packets queued packets unsent at this point will be dropped
+// further attempts to send will retry making the connection (but will be dropped if we fail again)
+P2PSessionConnectFail_iCallback :: iSteamNetworkingCallbacks + 3
+
+// callback notification - status of a socket has changed
+// used as part of the CreateListenSocket() / CreateP2PConnectionSocket() 
+SocketStatusCallback_iCallback :: iSteamNetworkingCallbacks + 1
+
+
+// From: isteamnetworkingmessages.h
+
+/// Posted when a remote host is sending us a message, and we do not already have a session with them
+SteamNetworkingMessagesSessionRequest_iCallback :: iSteamNetworkingMessagesCallbacks + 1
+
+/// Posted when we fail to establish a connection, or we detect that communications
+/// have been disrupted it an unusual way.  There is no notification when a peer proactively
+/// closes the session.  ("Closed by peer" is not a concept of UDP-style communications, and
+/// SteamNetworkingMessages is primarily intended to make porting UDP code easy.)
+///
+/// Remember: callbacks are asynchronous.   See notes on SendMessageToUser,
+/// and k_nSteamNetworkingSend_AutoRestartBrokenSession in particular.
+///
+/// Also, if a session times out due to inactivity, no callbacks will be posted.  The only
+/// way to detect that this is happening is that querying the session state may return
+/// none, connecting, and findingroute again.
+SteamNetworkingMessagesSessionFailed_iCallback :: iSteamNetworkingMessagesCallbacks + 2
+
+
+// From: isteamnetworkingsockets.h
+
+/// This callback is posted whenever a connection is created, destroyed, or changes state.
+/// The m_info field will contain a complete description of the connection at the time the
+/// change occurred and the callback was posted.  In particular, m_eState will have the
+/// new connection state.
+///
+/// You will usually need to listen for this callback to know when:
+/// - A new connection arrives on a listen socket.
+///   m_info.m_hListenSocket will be set, m_eOldState = k_ESteamNetworkingConnectionState_None,
+///   and m_info.m_eState = k_ESteamNetworkingConnectionState_Connecting.
+///   See ISteamNetworkigSockets::AcceptConnection.
+/// - A connection you initiated has been accepted by the remote host.
+///   m_eOldState = k_ESteamNetworkingConnectionState_Connecting, and
+///   m_info.m_eState = k_ESteamNetworkingConnectionState_Connected.
+///   Some connections might transition to k_ESteamNetworkingConnectionState_FindingRoute first.
+/// - A connection has been actively rejected or closed by the remote host.
+///   m_eOldState = k_ESteamNetworkingConnectionState_Connecting or k_ESteamNetworkingConnectionState_Connected,
+///   and m_info.m_eState = k_ESteamNetworkingConnectionState_ClosedByPeer.  m_info.m_eEndReason
+///   and m_info.m_szEndDebug will have for more details.
+///   NOTE: upon receiving this callback, you must still destroy the connection using
+///   ISteamNetworkingSockets::CloseConnection to free up local resources.  (The details
+///   passed to the function are not used in this case, since the connection is already closed.)
+/// - A problem was detected with the connection, and it has been closed by the local host.
+///   The most common failure is timeout, but other configuration or authentication failures
+///   can cause this.  m_eOldState = k_ESteamNetworkingConnectionState_Connecting or
+///   k_ESteamNetworkingConnectionState_Connected, and m_info.m_eState = k_ESteamNetworkingConnectionState_ProblemDetectedLocally.
+///   m_info.m_eEndReason and m_info.m_szEndDebug will have for more details.
+///   NOTE: upon receiving this callback, you must still destroy the connection using
+///   ISteamNetworkingSockets::CloseConnection to free up local resources.  (The details
+///   passed to the function are not used in this case, since the connection is already closed.)
+///
+/// Remember that callbacks are posted to a queue, and networking connections can
+/// change at any time.  It is possible that the connection has already changed
+/// state by the time you process this callback.
+///
+/// Also note that callbacks will be posted when connections are created and destroyed by your own API calls.
+SteamNetConnectionStatusChangedCallback_iCallback :: iSteamNetworkingSocketsCallbacks + 1
+
+/// A struct used to describe our readiness to participate in authenticated,
+/// encrypted communication.  In order to do this we need:
+///
+/// - The list of trusted CA certificates that might be relevant for this
+///   app.
+/// - A valid certificate issued by a CA.
+///
+/// This callback is posted whenever the state of our readiness changes.
+SteamNetAuthenticationStatus_iCallback :: iSteamNetworkingSocketsCallbacks + 2
+
+
+// From: isteamnetworkingutils.h
+
+/// A struct used to describe our readiness to use the relay network.
+/// To do this we first need to fetch the network configuration,
+/// which describes what POPs are available.
+SteamRelayNetworkStatus_iCallback :: iSteamNetworkingUtilsCallbacks + 1
+
+
+// From: isteamparentalsettings.h
+
+// Purpose: Callback for querying UGC
+SteamParentalSettingsChanged_iCallback :: ISteamParentalSettingsCallbacks + 1
+
+
+// From: isteamremotestorage.h
+
+// Purpose: The result of a call to FileShare()
+RemoteStorageFileShareResult_iCallback :: iSteamRemoteStorageCallbacks + 7
+
+// iSteamRemoteStorageCallbacks + 8 is deprecated! Do not reuse
+
+// Purpose: The result of a call to PublishFile()
+RemoteStoragePublishFileResult_iCallback :: iSteamRemoteStorageCallbacks + 9
+
+// iSteamRemoteStorageCallbacks + 10 is deprecated! Do not reuse
+
+// Purpose: The result of a call to DeletePublishedFile()
+RemoteStorageDeletePublishedFileResult_iCallback :: iSteamRemoteStorageCallbacks + 11
+
+// Purpose: The result of a call to EnumerateUserPublishedFiles()
+RemoteStorageEnumerateUserPublishedFilesResult_iCallback :: iSteamRemoteStorageCallbacks + 12
+
+// Purpose: The result of a call to SubscribePublishedFile()
+RemoteStorageSubscribePublishedFileResult_iCallback :: iSteamRemoteStorageCallbacks + 13
+
+// Purpose: The result of a call to EnumerateSubscribePublishedFiles()
+RemoteStorageEnumerateUserSubscribedFilesResult_iCallback :: iSteamRemoteStorageCallbacks + 14
+
+// Purpose: The result of a call to UnsubscribePublishedFile()
+RemoteStorageUnsubscribePublishedFileResult_iCallback :: iSteamRemoteStorageCallbacks + 15
+
+// Purpose: The result of a call to CommitPublishedFileUpdate()
+RemoteStorageUpdatePublishedFileResult_iCallback :: iSteamRemoteStorageCallbacks + 16
+
+// Purpose: The result of a call to UGCDownload()
+RemoteStorageDownloadUGCResult_iCallback :: iSteamRemoteStorageCallbacks + 17
+
+// Purpose: The result of a call to GetPublishedFileDetails()
+RemoteStorageGetPublishedFileDetailsResult_iCallback :: iSteamRemoteStorageCallbacks + 18
+
+RemoteStorageEnumerateWorkshopFilesResult_iCallback :: iSteamRemoteStorageCallbacks + 19
+
+// Purpose: The result of GetPublishedItemVoteDetails
+RemoteStorageGetPublishedItemVoteDetailsResult_iCallback :: iSteamRemoteStorageCallbacks + 20
+
+// Purpose: User subscribed to a file for the app (from within the app or on the web)
+RemoteStoragePublishedFileSubscribed_iCallback :: iSteamRemoteStorageCallbacks + 21
+
+// Purpose: User unsubscribed from a file for the app (from within the app or on the web)
+RemoteStoragePublishedFileUnsubscribed_iCallback :: iSteamRemoteStorageCallbacks + 22
+
+// Purpose: Published file that a user owns was deleted (from within the app or the web)
+RemoteStoragePublishedFileDeleted_iCallback :: iSteamRemoteStorageCallbacks + 23
+
+// Purpose: The result of a call to UpdateUserPublishedItemVote()
+RemoteStorageUpdateUserPublishedItemVoteResult_iCallback :: iSteamRemoteStorageCallbacks + 24
+
+// Purpose: The result of a call to GetUserPublishedItemVoteDetails()
+RemoteStorageUserVoteDetails_iCallback :: iSteamRemoteStorageCallbacks + 25
+
+RemoteStorageEnumerateUserSharedWorkshopFilesResult_iCallback :: iSteamRemoteStorageCallbacks + 26
+
+RemoteStorageSetUserPublishedFileActionResult_iCallback :: iSteamRemoteStorageCallbacks + 27
+
+RemoteStorageEnumeratePublishedFilesByUserActionResult_iCallback :: iSteamRemoteStorageCallbacks + 28
+
+// Purpose: Called periodically while a PublishWorkshopFile is in progress
+RemoteStoragePublishFileProgress_iCallback :: iSteamRemoteStorageCallbacks + 29
+
+// Purpose: Called when the content for a published file is updated
+RemoteStoragePublishedFileUpdated_iCallback :: iSteamRemoteStorageCallbacks + 30
+
+// Purpose: Called when a FileWriteAsync completes
+RemoteStorageFileWriteAsyncComplete_iCallback :: iSteamRemoteStorageCallbacks + 31
+
+// Purpose: Called when a FileReadAsync completes
+RemoteStorageFileReadAsyncComplete_iCallback :: iSteamRemoteStorageCallbacks + 32
+
+
+// From: isteamscreenshots.h
+
+// Purpose: Screenshot successfully written or otherwise added to the library
+// and can now be tagged
+ScreenshotReady_iCallback :: iSteamScreenshotsCallbacks + 1
+
+// Purpose: Screenshot has been requested by the user.  Only sent if
+// HookScreenshots() has been called, in which case Steam will not take
+// the screenshot itself.
+ScreenshotRequested_iCallback :: iSteamScreenshotsCallbacks + 2
+
+
+// From: isteamugc.h
+
+// Purpose: Callback for querying UGC
+SteamUGCQueryCompleted_iCallback :: iSteamUGCCallbacks + 1
+
+// Purpose: Callback for requesting details on one piece of UGC
+SteamUGCRequestUGCDetailsResult_iCallback :: iSteamUGCCallbacks + 2
+
+// Purpose: result for ISteamUGC::CreateItem() 
+CreateItemResult_iCallback :: iSteamUGCCallbacks + 3
+
+// Purpose: result for ISteamUGC::SubmitItemUpdate() 
+SubmitItemUpdateResult_iCallback :: iSteamUGCCallbacks + 4
+
+// Purpose: a Workshop item has been installed or updated
+ItemInstalled_iCallback :: iSteamUGCCallbacks + 5
+
+// Purpose: result of DownloadItem(), existing item files can be accessed again
+DownloadItemResult_iCallback :: iSteamUGCCallbacks + 6
+
+// Purpose: result of AddItemToFavorites() or RemoveItemFromFavorites()
+UserFavoriteItemsListChanged_iCallback :: iSteamUGCCallbacks + 7
+
+// Purpose: The result of a call to SetUserItemVote()
+SetUserItemVoteResult_iCallback :: iSteamUGCCallbacks + 8
+
+// Purpose: The result of a call to GetUserItemVote()
+GetUserItemVoteResult_iCallback :: iSteamUGCCallbacks + 9
+
+// Purpose: The result of a call to StartPlaytimeTracking()
+StartPlaytimeTrackingResult_iCallback :: iSteamUGCCallbacks + 10
+
+// Purpose: The result of a call to StopPlaytimeTracking()
+StopPlaytimeTrackingResult_iCallback :: iSteamUGCCallbacks + 11
+
+// Purpose: The result of a call to AddDependency
+AddUGCDependencyResult_iCallback :: iSteamUGCCallbacks + 12
+
+// Purpose: The result of a call to RemoveDependency
+RemoveUGCDependencyResult_iCallback :: iSteamUGCCallbacks + 13
+
+// Purpose: The result of a call to AddAppDependency
+AddAppDependencyResult_iCallback :: iSteamUGCCallbacks + 14
+
+// Purpose: The result of a call to RemoveAppDependency
+RemoveAppDependencyResult_iCallback :: iSteamUGCCallbacks + 15
+
+// Purpose: The result of a call to GetAppDependencies.  Callback may be called
+//			multiple times until all app dependencies have been returned.
+GetAppDependenciesResult_iCallback :: iSteamUGCCallbacks + 16
+
+// Purpose: The result of a call to DeleteItem
+DeleteItemResult_iCallback :: iSteamUGCCallbacks + 17
+
+// Purpose: signal that the list of subscribed items changed
+UserSubscribedItemsListChanged_iCallback :: iSteamUGCCallbacks + 18
+
+// Purpose: Status of the user's acceptable/rejection of the app's specific Workshop EULA
+WorkshopEULAStatus_iCallback :: iSteamUGCCallbacks + 20
+
+
+// From: isteamuser.h
+
+// Purpose: called when a connections to the Steam back-end has been established
+//			this means the Steam client now has a working connection to the Steam servers
+//			usually this will have occurred before the game has launched, and should
+//			only be seen if the user has dropped connection due to a networking issue
+//			or a Steam server update
+SteamServersConnected_iCallback :: iSteamUserCallbacks + 1
+
+// Purpose: called when a connection attempt has failed
+//			this will occur periodically if the Steam client is not connected, 
+//			and has failed in it's retry to establish a connection
+SteamServerConnectFailure_iCallback :: iSteamUserCallbacks + 2
+
+
+// Purpose: called if the client has lost connection to the Steam servers
+//			real-time services will be disabled until a matching SteamServersConnected_t has been posted
+SteamServersDisconnected_iCallback :: iSteamUserCallbacks + 3
+
+
+// Purpose: Sent by the Steam server to the client telling it to disconnect from the specified game server,
+//			which it may be in the process of or already connected to.
+//			The game client should immediately disconnect upon receiving this message.
+//			This can usually occur if the user doesn't have rights to play on the game server.
+ClientGameServerDeny_iCallback :: iSteamUserCallbacks + 13
+
+
+// Purpose: called when the callback system for this client is in an error state (and has flushed pending callbacks)
+//			When getting this message the client should disconnect from Steam, reset any stored Steam state and reconnect.
+//			This usually occurs in the rare event the Steam client has some kind of fatal error.
+IPCFailure_iCallback :: iSteamUserCallbacks + 17
+
+// Purpose: Signaled whenever licenses change
+LicensesUpdated_iCallback :: iSteamUserCallbacks + 25
+
+// callback for BeginAuthSession
+ValidateAuthTicketResponse_iCallback :: iSteamUserCallbacks + 43
+
+// Purpose: called when a user has responded to a microtransaction authorization request
+MicroTxnAuthorizationResponse_iCallback :: iSteamUserCallbacks + 52
+
+// Purpose: Result from RequestEncryptedAppTicket
+EncryptedAppTicketResponse_iCallback :: iSteamUserCallbacks + 54
+
+// callback for GetAuthSessionTicket
+GetAuthSessionTicketResponse_iCallback :: iSteamUserCallbacks + 63
+
+// Purpose: sent to your game in response to a steam://gamewebcallback/ command
+GameWebCallback_iCallback :: iSteamUserCallbacks + 64
+
+// Purpose: sent to your game in response to ISteamUser::RequestStoreAuthURL
+StoreAuthURLResponse_iCallback :: iSteamUserCallbacks + 65
+
+// Purpose: sent in response to ISteamUser::GetMarketEligibility
+MarketEligibilityResponse_iCallback :: iSteamUserCallbacks + 66
+
+// Purpose: sent for games with enabled anti indulgence / duration control, for
+// enabled users. Lets the game know whether the user can keep playing or
+// whether the game should exit, and returns info about remaining gameplay time.
+//
+// This callback is fired asynchronously in response to timers triggering.
+// It is also fired in response to calls to GetDurationControl().
+DurationControl_iCallback :: iSteamUserCallbacks + 67
+
+
+// From: isteamuserstats.h
+
+// Purpose: called when the latests stats and achievements have been received
+//			from the server
+UserStatsReceived_iCallback :: iSteamUserStatsCallbacks + 1
+
+// Purpose: result of a request to store the user stats for a game
+UserStatsStored_iCallback :: iSteamUserStatsCallbacks + 2
+
+// Purpose: result of a request to store the achievements for a game, or an 
+//			"indicate progress" call. If both m_nCurProgress and m_nMaxProgress
+//			are zero, that means the achievement has been fully unlocked.
+UserAchievementStored_iCallback :: iSteamUserStatsCallbacks + 3
+
+// Purpose: call result for finding a leaderboard, returned as a result of FindOrCreateLeaderboard() or FindLeaderboard()
+//			use CCallResult<> to map this async result to a member function
+LeaderboardFindResult_iCallback :: iSteamUserStatsCallbacks + 4
+
+// Purpose: call result indicating scores for a leaderboard have been downloaded and are ready to be retrieved, returned as a result of DownloadLeaderboardEntries()
+//			use CCallResult<> to map this async result to a member function
+LeaderboardScoresDownloaded_iCallback :: iSteamUserStatsCallbacks + 5
+
+// Purpose: call result indicating scores has been uploaded, returned as a result of UploadLeaderboardScore()
+//			use CCallResult<> to map this async result to a member function
+LeaderboardScoreUploaded_iCallback :: iSteamUserStatsCallbacks + 6
+
+NumberOfCurrentPlayers_iCallback :: iSteamUserStatsCallbacks + 7
+
+// Purpose: Callback indicating that a user's stats have been unloaded.
+//  Call RequestUserStats again to access stats for this user
+UserStatsUnloaded_iCallback :: iSteamUserStatsCallbacks + 8
+
+// Purpose: Callback indicating that an achievement icon has been fetched
+UserAchievementIconFetched_iCallback :: iSteamUserStatsCallbacks + 9
+
+// Purpose: Callback indicating that global achievement percentages are fetched
+GlobalAchievementPercentagesReady_iCallback :: iSteamUserStatsCallbacks + 10
+
+// Purpose: call result indicating UGC has been uploaded, returned as a result of SetLeaderboardUGC()
+LeaderboardUGCSet_iCallback :: iSteamUserStatsCallbacks + 11
+
+// Purpose: callback indicating that PS3 trophies have been installed
+PS3TrophiesInstalled_iCallback :: iSteamUserStatsCallbacks + 12
+// Purpose: callback indicating global stats have been received.
+//	Returned as a result of RequestGlobalStats()
+GlobalStatsReceived_iCallback :: iSteamUserStatsCallbacks + 12
+
+
+// From: isteamutils.h
+
+// Purpose: The country of the user changed
+IPCountry_iCallback :: iSteamUtilsCallbacks + 1
+
+// Purpose: Fired when running on a laptop and less than 10 minutes of battery is left, fires then every minute
+LowBatteryPower_iCallback :: iSteamUtilsCallbacks + 2
+
+// Purpose: called when a SteamAsyncCall_t has completed (or failed)
+SteamAPICallCompleted_iCallback :: iSteamUtilsCallbacks + 3
+
+// called when Steam wants to shutdown
+SteamShutdown_iCallback :: iSteamUtilsCallbacks + 4
+
+CheckFileSignature_iCallback :: iSteamUtilsCallbacks + 5
+
+// iSteamUtilsCallbacks + 13 is taken
+
+// Full Screen gamepad text input has been closed
+GamepadTextInputDismissed_iCallback :: iSteamUtilsCallbacks + 14
+
+// iSteamUtilsCallbacks + 15 through 35 are taken
+
+// iSteamUtilsCallbacks + 37 is taken
+
+// The floating on-screen keyboard has been closed
+FloatingGamepadTextInputDismissed_iCallback :: iSteamUtilsCallbacks + 38
+
+
+/// Internal structure used in manual callback dispatch
+CallbackMsg :: struct #align CALLBACK_ALIGN {
+    hSteamUser: HSteamUser, // Specific user to whom this callback applies.
+    iCallback:  c.int, // Callback identifier.  (Corresponds to the k_iCallback enum in the callback structure.)
+    pubParam:   ^uint8, // Points to the callback structure
+    cubParam:   c.int, // Size of the data pointed to by m_pubParam
+}

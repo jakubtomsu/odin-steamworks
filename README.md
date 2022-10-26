@@ -10,6 +10,8 @@ the Steamworks API also includes the [Steam GameNetworkingSockets](https://githu
 ## How to Use
 Just copy the `steamworks/steamworks.odin` file somewhere to your project.
 
+Note: The naming is slightly different than in the C/C++ API. For instance, things aren't prefixed with `Steam`, `m_`, `k_`, etc. Also `_t` suffixes for structs aren't used.
+
 ## About the generator
 The generator uses the `steamworks_api.json` to generate a single source file. The file has to be manually edited, because
 the generator just doesn't handle everything. (`steamworks/steamworks.odin` is already edited and ready to go)
