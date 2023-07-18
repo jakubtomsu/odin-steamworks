@@ -8,7 +8,11 @@ Current Steamworks SDK version: `1.57`
 the Steamworks API also includes the [Steam GameNetworkingSockets](https://github.com/ValveSoftware/GameNetworkingSockets)
 
 ## How to Use
-Just copy the `steamworks/steamworks.odin` file somewhere to your project, put `steam_api64.lib` to the `steamworks` folder, and put `steam_api64.dll` next to your exe.
+1. Create a folder called `steamworks` somewhere in your project.
+2. Copy the `steamworks/steamworks.odin` to your `steamworks` folder
+3. Copy the `redistributable_bin` from your Steamworks SDK install to your `steamworks` folder.
+4. Put `steam_api64.dll` next to your exe.
+5. (debug-only) Create a `steam_appid.txt` with the text `480`. Do not ship this with your game.
 
 ## About the generator
 The generator uses the `steamworks_api.json` to generate a single source file. The file has to be manually edited, because

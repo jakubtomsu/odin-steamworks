@@ -3,5 +3,8 @@
 *.lib
 *.dll
 *.exp
+*.so
+*.dylib
+*.obj
 
 ols.json

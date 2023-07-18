@@ -8,6 +8,7 @@ import "vendor:raylib"
 import "../steamworks"
 
 // https://partner.steamgames.com/doc/sdk/api
+// https://partner.steamgames.com/doc/sdk/api#manual_dispatch
 
 numberOfCurrentPlayers: int
 
@@ -83,17 +84,18 @@ runSteamCallbacks :: proc() {
 
             pCallCompleted := transmute(^steamworks.SteamAPICallCompleted)callback.pubParam
             resize(&tempMem, int(callback.cubParam))
-            pTmpCallResult: rawptr = mem.alloc(int(callback.cubParam)) // &tempMem[0] //malloc(pCallback.cubParam)
-            bFailed: bool
-            if steamworks.ManualDispatch_GetAPICallResult(hSteamPipe, pCallCompleted.hAsyncCall, pTmpCallResult, callback.cubParam, callback.iCallback, &bFailed) {
-                // Dispatch the call result to the registered handler(s) for the
-                // call identified by pCallCompleted->m_hAsyncCall
-                fmt.println("   pCallCompleted", pCallCompleted)
-                if pCallCompleted.iCallback == steamworks.NumberOfCurrentPlayers_iCallback {
-                    onGetNumberOfCurrentPlayers(transmute(^steamworks.NumberOfCurrentPlayers)pTmpCallResult, bFailed)
+            if pTmpCallResult, ok := mem.alloc(int(callback.cubParam)); ok == nil {
+                bFailed: bool
+                if steamworks.ManualDispatch_GetAPICallResult(hSteamPipe, pCallCompleted.hAsyncCall, pTmpCallResult, callback.cubParam, callback.iCallback, &bFailed) {
+                    // Dispatch the call result to the registered handler(s) for the
+                    // call identified by pCallCompleted->m_hAsyncCall
+                    fmt.println("   pCallCompleted", pCallCompleted)
+                    if pCallCompleted.iCallback == steamworks.NumberOfCurrentPlayers_iCallback {
+                        onGetNumberOfCurrentPlayers(transmute(^steamworks.NumberOfCurrentPlayers)pTmpCallResult, bFailed)
+                    }
                 }
+                mem.free(pTmpCallResult)
             }
-            mem.free(pTmpCallResult)
 
         } else {
             // Look at callback.m_iCallback to see what kind of callback it is,
