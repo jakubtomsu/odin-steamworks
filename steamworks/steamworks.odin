@@ -3758,7 +3758,7 @@ SteamAPIWarningMessageHook :: proc "c" (_: c.int, _: cstring)
 // ----------------
 
 Client :: SteamClient
-User: proc "c" () -> ^IUser : SteamUser_v021
+User: proc "c" () -> ^IUser : SteamUser_v023
 Friends: proc "c" () -> ^IFriends : SteamFriends_v017
 Utils: proc "c" () -> ^IUtils : SteamUtils_v010
 Matchmaking: proc "c" () -> ^IMatchmaking : SteamMatchmaking_v009
@@ -3775,7 +3775,7 @@ MusicRemote: proc "c" () -> ^IMusicRemote : SteamMusicRemote_v001
 HTTP: proc "c" () -> ^IHTTP : SteamHTTP_v003
 Input: proc "c" () -> ^IInput : SteamInput_v006
 Controller: proc "c" () -> ^IController : SteamController_v008
-UGC: proc "c" () -> ^IUGC : SteamUGC_v016
+UGC: proc "c" () -> ^IUGC : SteamUGC_v017
 AppList: proc "c" () -> ^IAppList : SteamAppList_v001
 HTMLSurface: proc "c" () -> ^IHTMLSurface : SteamHTMLSurface_v005
 Inventory: proc "c" () -> ^IInventory : SteamInventory_v003
@@ -3934,7 +3934,7 @@ foreign lib {
 
 @(link_prefix = "SteamAPI_", default_calling_convention = "c")
 foreign lib {
-    SteamUser_v021 :: proc() -> ^IUser ---
+    SteamUser_v023 :: proc() -> ^IUser ---
     SteamFriends_v017 :: proc() -> ^IFriends ---
     SteamUtils_v010 :: proc() -> ^IUtils ---
     SteamMatchmaking_v009 :: proc() -> ^IMatchmaking ---
@@ -3951,7 +3951,7 @@ foreign lib {
     SteamHTTP_v003 :: proc() -> ^IHTTP ---
     SteamInput_v006 :: proc() -> ^IInput ---
     SteamController_v008 :: proc() -> ^IController ---
-    SteamUGC_v016 :: proc() -> ^IUGC ---
+    SteamUGC_v017 :: proc() -> ^IUGC ---
     SteamAppList_v001 :: proc() -> ^IAppList ---
     SteamHTMLSurface_v005 :: proc() -> ^IHTMLSurface ---
     SteamInventory_v003 :: proc() -> ^IInventory ---
@@ -4018,7 +4018,7 @@ foreign lib {
     User_GetVoice :: proc(self: ^IUser, bWantCompressed: bool, pDestBuffer: rawptr, cbDestBufferSize: uint32, nBytesWritten: ^uint32, bWantUncompressed_Deprecated: bool, pUncompressedDestBuffer_Deprecated: rawptr, cbUncompressedDestBufferSize_Deprecated: uint32, nUncompressBytesWritten_Deprecated: ^uint32, nUncompressedVoiceDesiredSampleRate_Deprecated: uint32) -> EVoiceResult ---
     User_DecompressVoice :: proc(self: ^IUser, pCompressed: rawptr, cbCompressed: uint32, pDestBuffer: rawptr, cbDestBufferSize: uint32, nBytesWritten: ^uint32, nDesiredSampleRate: uint32) -> EVoiceResult ---
     User_GetVoiceOptimalSampleRate :: proc(self: ^IUser) -> uint32 ---
-    User_GetAuthSessionTicket :: proc(self: ^IUser, pTicket: rawptr, cbMaxTicket: c.int, pcbTicket: ^uint32) -> HAuthTicket ---
+    User_GetAuthSessionTicket :: proc(self: ^IUser, pTicket: rawptr, cbMaxTicket: c.int, pcbTicket: ^uint32, #by_ptr pSteamNetworkingIdentity: SteamNetworkingIdentity) -> HAuthTicket ---
     User_BeginAuthSession :: proc(self: ^IUser, pAuthTicket: rawptr, cbAuthTicket: c.int, steamID: CSteamID) -> EBeginAuthSessionResult ---
     User_EndAuthSession :: proc(self: ^IUser, steamID: CSteamID) ---
     User_CancelAuthTicket :: proc(self: ^IUser, hAuthTicket: HAuthTicket) ---
