@@ -14,6 +14,8 @@ the Steamworks API also includes the [Steam GameNetworkingSockets](https://githu
 4. Put `steam_api64.dll` next to your exe.
 5. (debug-only) Create a `steam_appid.txt` with the text `480`. Do not ship this with your game.
 
+Take a look at the [example](example/example.odin) to see the API usage.
+
 ## About the generator
 The generator uses the `steamworks_api.json` to generate a single source file. The file has to be manually edited, because
 the generator just doesn't handle everything. (`steamworks/steamworks.odin` is already edited and ready to go)
