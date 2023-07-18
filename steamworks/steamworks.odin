@@ -3753,32 +3753,33 @@ SteamAPIWarningMessageHook :: #type proc "c" (_: i32, _: cstring)
 // ----------------
 
 Client :: SteamClient
-User: #type proc "c" () -> ^IUser : SteamUser_v023
-Friends: #type proc "c" () -> ^IFriends : SteamFriends_v017
-Utils: #type proc "c" () -> ^IUtils : SteamUtils_v010
-Matchmaking: #type proc "c" () -> ^IMatchmaking : SteamMatchmaking_v009
-MatchmakingServers: #type proc "c" () -> ^IMatchmakingServers : SteamMatchmakingServers_v002
-GameSearch: #type proc "c" () -> ^IGameSearch : SteamGameSearch_v001
-Parties: #type proc "c" () -> ^IParties : SteamParties_v002
-RemoteStorage: #type proc "c" () -> ^IRemoteStorage : SteamRemoteStorage_v016
-UserStats: #type proc "c" () -> ^IUserStats : SteamUserStats_v012
-Apps: #type proc "c" () -> ^IApps : SteamApps_v008
-Networking: #type proc "c" () -> ^INetworking : SteamNetworking_v006
-Screenshots: #type proc "c" () -> ^IScreenshots : SteamScreenshots_v003
-Music: #type proc "c" () -> ^IMusic : SteamMusic_v001
-MusicRemote: #type proc "c" () -> ^IMusicRemote : SteamMusicRemote_v001
-HTTP: #type proc "c" () -> ^IHTTP : SteamHTTP_v003
-Input: #type proc "c" () -> ^IInput : SteamInput_v006
-Controller: #type proc "c" () -> ^IController : SteamController_v008
-UGC: #type proc "c" () -> ^IUGC : SteamUGC_v017
-AppList: #type proc "c" () -> ^IAppList : SteamAppList_v001
-HTMLSurface: #type proc "c" () -> ^IHTMLSurface : SteamHTMLSurface_v005
-Inventory: #type proc "c" () -> ^IInventory : SteamInventory_v003
-Video: #type proc "c" () -> ^IVideo : SteamVideo_v002
-ParentalSettings: #type proc "c" () -> ^IParentalSettings : SteamParentalSettings_v001
-RemotePlay: #type proc "c" () -> ^IRemotePlay : SteamRemotePlay_v001
-NetworkingMessages_SteamAPI: #type proc "c" () -> ^INetworkingMessages : SteamNetworkingMessages_SteamAPI_v002
-NetworkingSockets_SteamAPI: #type proc "c" () -> ^INetworkingSockets : SteamNetworkingSockets_SteamAPI_v012
+User :: SteamUser_v023
+Friends :: SteamFriends_v017
+Utils :: SteamUtils_v010
+Matchmaking :: SteamMatchmaking_v009
+MatchmakingServers :: SteamMatchmakingServers_v002
+GameSearch :: SteamGameSearch_v001
+Parties :: SteamParties_v002
+RemoteStorage :: SteamRemoteStorage_v016
+UserStats :: SteamUserStats_v012
+Apps :: SteamApps_v008
+Networking :: SteamNetworking_v006
+Screenshots :: SteamScreenshots_v003
+Music :: SteamMusic_v001
+MusicRemote :: SteamMusicRemote_v001
+HTTP :: SteamHTTP_v003
+Input :: SteamInput_v006
+Controller :: SteamController_v008
+UGC :: SteamUGC_v017
+AppList :: SteamAppList_v001
+HTMLSurface :: SteamHTMLSurface_v005
+Inventory :: SteamInventory_v003
+Video :: SteamVideo_v002
+ParentalSettings :: SteamParentalSettings_v001
+RemotePlay :: SteamRemotePlay_v001
+NetworkingMessages_SteamAPI :: SteamNetworkingMessages_SteamAPI_v002
+NetworkingSockets_SteamAPI :: SteamNetworkingSockets_SteamAPI_v012
+NetworkingUtils_SteamAPI :: SteamNetworkingUtils_SteamAPI_v004
 
 // ---------------
 // Interface types
@@ -3954,6 +3955,7 @@ foreign lib {
     SteamRemotePlay_v001 :: proc() -> ^IRemotePlay ---
     SteamNetworkingMessages_SteamAPI_v002 :: proc() -> ^INetworkingMessages ---
     SteamNetworkingSockets_SteamAPI_v012 :: proc() -> ^INetworkingSockets ---
+    SteamNetworkingUtils_SteamAPI_v004 :: proc() -> ^INetworkingUtils ---
 }
 
 // -------------------------------------------
