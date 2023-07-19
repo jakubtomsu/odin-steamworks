@@ -23,3 +23,6 @@ the generator just doesn't handle everything. (`steamworks/steamworks.odin` is a
 Build the generator with `odin build` commands.
 
 Note: The naming is slightly different than in the C/C++ API. For instance, things aren't prefixed with `Steam`, `m_`, `k_`, etc. Also `_t` suffixes for structs aren't used.
+
+## Contributing
+Contributions are welcome! Preferrably submit a pull request here on Github.
