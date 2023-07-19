@@ -5031,175 +5031,171 @@ iSteamChatCallbacks :: 5900
 
 // From: isteamapps.h
 ICallback :: enum i32 {
-    DlcInstalled = iSteamAppsCallbacks + 5,
+    DlcInstalled                                           = iSteamAppsCallbacks + 5,
 
     // Purpose: response to RegisterActivationCode()
-    RegisterActivationCodeResponse = iSteamAppsCallbacks + 8,
+    RegisterActivationCodeResponse                         = iSteamAppsCallbacks + 8,
 
     // Purpose: posted after the user gains executes a Steam URL with command line or query parameters
     // such as steam://run/<appid>//-commandline/?param1=value1&param2=value2&param3=value3 etc
     // while the game is already running.  The new params can be queried
     // with GetLaunchQueryParam and GetLaunchCommandLine
-    NewUrlLaunchParameters = iSteamAppsCallbacks + 14,
+    NewUrlLaunchParameters                                 = iSteamAppsCallbacks + 14,
 
     // Purpose: response to RequestAppProofOfPurchaseKey/RequestAllProofOfPurchaseKeys
     // for supporting third-party CD keys, or other proof-of-purchase systems.
-    AppProofOfPurchaseKeyResponse = iSteamAppsCallbacks + 21,
+    AppProofOfPurchaseKeyResponse                          = iSteamAppsCallbacks + 21,
 
     // Purpose: response to GetFileDetails
-    FileDetailsResult = iSteamAppsCallbacks + 23,
+    FileDetailsResult                                      = iSteamAppsCallbacks + 23,
 
     // Purpose: called for games in Timed Trial mode
-    TimedTrialStatus = iSteamAppsCallbacks + 30,
+    TimedTrialStatus                                       = iSteamAppsCallbacks + 30,
 
 
     // From: isteamfriends.h
 
     // Purpose: called when a friends' status changes
-    PersonaStateChange = iSteamFriendsCallbacks + 4,
+    PersonaStateChange                                     = iSteamFriendsCallbacks + 4,
 
     // Purpose: posted when game overlay activates or deactivates
     //			the game can use this to be pause or resume single player games
-    GameOverlayActivated = iSteamFriendsCallbacks + 31,
+    GameOverlayActivated                                   = iSteamFriendsCallbacks + 31,
 
     // Purpose: called when the user tries to join a different game server from their friends list
     //			game client should attempt to connect to specified server when this is received
-    GameServerChangeRequested = iSteamFriendsCallbacks + 32,
+    GameServerChangeRequested                              = iSteamFriendsCallbacks + 32,
 
     // Purpose: called when the user tries to join a lobby from their friends list
     //			game client should attempt to connect to specified lobby when this is received
-    GameLobbyJoinRequested = iSteamFriendsCallbacks + 33,
+    GameLobbyJoinRequested                                 = iSteamFriendsCallbacks + 33,
 
     // Purpose: called when an avatar is loaded in from a previous GetLargeFriendAvatar() call
     //			if the image wasn't already available
-    AvatarImageLoaded = iSteamFriendsCallbacks + 34,
+    AvatarImageLoaded                                      = iSteamFriendsCallbacks + 34,
 
     // Purpose: marks the return of a request officer list call
-    ClanOfficerListResponse = iSteamFriendsCallbacks + 35,
+    ClanOfficerListResponse                                = iSteamFriendsCallbacks + 35,
 
     // Purpose: callback indicating updated data about friends rich presence information
-    FriendRichPresenceUpdate = iSteamFriendsCallbacks + 36,
+    FriendRichPresenceUpdate                               = iSteamFriendsCallbacks + 36,
 
     // Purpose: called when the user tries to join a game from their friends list
     //			rich presence will have been set with the "connect" key which is set here
-    GameRichPresenceJoinRequested = iSteamFriendsCallbacks + 37,
+    GameRichPresenceJoinRequested                          = iSteamFriendsCallbacks + 37,
 
     // Purpose: a chat message has been received for a clan chat the game has joined
-    GameConnectedClanChatMsg = iSteamFriendsCallbacks + 38,
+    GameConnectedClanChatMsg                               = iSteamFriendsCallbacks + 38,
 
     // Purpose: a user has joined a clan chat
-    GameConnectedChatJoin = iSteamFriendsCallbacks + 39,
+    GameConnectedChatJoin                                  = iSteamFriendsCallbacks + 39,
 
     // Purpose: a user has left the chat we're in
-    GameConnectedChatLeave = iSteamFriendsCallbacks + 40,
+    GameConnectedChatLeave                                 = iSteamFriendsCallbacks + 40,
 
     // Purpose: a DownloadClanActivityCounts() call has finished
-    DownloadClanActivityCountsResult = iSteamFriendsCallbacks + 41,
+    DownloadClanActivityCountsResult                       = iSteamFriendsCallbacks + 41,
 
     // Purpose: a JoinClanChatRoom() call has finished
-    JoinClanChatRoomCompletionResult = iSteamFriendsCallbacks + 42,
+    JoinClanChatRoomCompletionResult                       = iSteamFriendsCallbacks + 42,
 
     // Purpose: a chat message has been received from a user
-    GameConnectedFriendChatMsg = iSteamFriendsCallbacks + 43,
-
-    FriendsGetFollowerCount = iSteamFriendsCallbacks + 44,
-    FriendsIsFollowing = iSteamFriendsCallbacks + 45,
-    FriendsEnumerateFollowingList = iSteamFriendsCallbacks + 46,
+    GameConnectedFriendChatMsg                             = iSteamFriendsCallbacks + 43,
+    FriendsGetFollowerCount                                = iSteamFriendsCallbacks + 44,
+    FriendsIsFollowing                                     = iSteamFriendsCallbacks + 45,
+    FriendsEnumerateFollowingList                          = iSteamFriendsCallbacks + 46,
 
     // Purpose: reports the result of an attempt to change the user's persona name
-    SetPersonaNameResponse = iSteamFriendsCallbacks + 47,
+    SetPersonaNameResponse                                 = iSteamFriendsCallbacks + 47,
 
     // Purpose: Invoked when the status of unread messages changes
-    UnreadChatMessagesChanged = iSteamFriendsCallbacks + 48,
+    UnreadChatMessagesChanged                              = iSteamFriendsCallbacks + 48,
 
     // Purpose: Dispatched when an overlay browser instance is navigated to a protocol/scheme registered by RegisterProtocolInOverlayBrowser()
-    OverlayBrowserProtocolNavigation = iSteamFriendsCallbacks + 49,
+    OverlayBrowserProtocolNavigation                       = iSteamFriendsCallbacks + 49,
 
     // Purpose: A user's equipped profile items have changed
-    EquippedProfileItemsChanged = iSteamFriendsCallbacks + 50,
-
-    EquippedProfileItems = iSteamFriendsCallbacks + 51,
+    EquippedProfileItemsChanged                            = iSteamFriendsCallbacks + 50,
+    EquippedProfileItems                                   = iSteamFriendsCallbacks + 51,
 
 
     // From: isteamgamecoordinator.h
-
-    GCMessageAvailable = iSteamGameCoordinatorCallbacks + 1,
+    GCMessageAvailable                                     = iSteamGameCoordinatorCallbacks + 1,
 
     // callback notification - A message failed to make it to the GC. It may be down temporarily
-    GCMessageFailed = iSteamGameCoordinatorCallbacks + 2,
+    GCMessageFailed                                        = iSteamGameCoordinatorCallbacks + 2,
 
 
     // From: isteamgameserver.h
 
     // client has been approved to connect to this game server
-    GSClientApprove = iSteamGameServerCallbacks + 1,
+    GSClientApprove                                        = iSteamGameServerCallbacks + 1,
 
     // client has been denied to connection to this game server
-    GSClientDeny = iSteamGameServerCallbacks + 2,
+    GSClientDeny                                           = iSteamGameServerCallbacks + 2,
 
     // request the game server should kick the user
-    GSClientKick = iSteamGameServerCallbacks + 3,
+    GSClientKick                                           = iSteamGameServerCallbacks + 3,
 
     // NOTE: callback values 4, and 5, are skipped because they are used for old deprecated callbacks, 
     // do not reuse them here.
 
     // client achievement info
-    GSClientAchievementStatus = iSteamGameServerCallbacks + 6,
+    GSClientAchievementStatus                              = iSteamGameServerCallbacks + 6,
 
     // received when the game server requests to be displayed as secure (VAC protected)
     // m_bSecure is true if the game server should display itself as secure to users, false otherwise
-    GSPolicyResponse = iSteamUserCallbacks + 15,
+    GSPolicyResponse                                       = iSteamUserCallbacks + 15,
 
     // GS gameplay stats info
-    GSGameplayStats = iSteamGameServerCallbacks + 7,
+    GSGameplayStats                                        = iSteamGameServerCallbacks + 7,
 
     // send as a reply to RequestUserGroupStatus()
-    GSClientGroupStatus = iSteamGameServerCallbacks + 8,
+    GSClientGroupStatus                                    = iSteamGameServerCallbacks + 8,
 
     // Sent as a reply to GetServerReputation()
-    GSReputation = iSteamGameServerCallbacks + 9,
+    GSReputation                                           = iSteamGameServerCallbacks + 9,
 
     // Sent as a reply to AssociateWithClan()
-    AssociateWithClanResult = iSteamGameServerCallbacks + 10,
+    AssociateWithClanResult                                = iSteamGameServerCallbacks + 10,
 
     // Sent as a reply to ComputeNewPlayerCompatibility()
-    ComputeNewPlayerCompatibilityResult = iSteamGameServerCallbacks + 11,
+    ComputeNewPlayerCompatibilityResult                    = iSteamGameServerCallbacks + 11,
 
 
     // From: isteamgameserverstats.h
 
     // Purpose: called when the latests stats and achievements have been received
     //			from the server
-    GSStatsReceived = iSteamGameServerStatsCallbacks,
+    GSStatsReceived                                        = iSteamGameServerStatsCallbacks,
 
     // Purpose: result of a request to store the user stats for a game
-    GSStatsStored = iSteamGameServerStatsCallbacks + 1,
+    GSStatsStored                                          = iSteamGameServerStatsCallbacks + 1,
 
     // Purpose: Callback indicating that a user's stats have been unloaded.
     //  Call RequestUserStats again to access stats for this user
-    GSStatsUnloaded = iSteamUserStatsCallbacks + 8,
+    GSStatsUnloaded                                        = iSteamUserStatsCallbacks + 8,
 
 
     // From: isteamhttp.h
-
-    HTTPRequestCompleted = iSteamHTTPCallbacks + 1,
-    HTTPRequestHeadersReceived = iSteamHTTPCallbacks + 2,
-    HTTPRequestDataReceived = iSteamHTTPCallbacks + 3,
+    HTTPRequestCompleted                                   = iSteamHTTPCallbacks + 1,
+    HTTPRequestHeadersReceived                             = iSteamHTTPCallbacks + 2,
+    HTTPRequestDataReceived                                = iSteamHTTPCallbacks + 3,
 
 
     // From: isteaminput.h
 
     // Purpose: called when a new controller has been connected, will fire once
     // per controller if multiple new controllers connect in the same frame
-    SteamInputDeviceConnected = iSteamControllerCallbacks + 1,
+    SteamInputDeviceConnected                              = iSteamControllerCallbacks + 1,
 
     // Purpose: called when a new controller has been connected, will fire once
     // per controller if multiple new controllers connect in the same frame
-    SteamInputDeviceDisconnected = iSteamControllerCallbacks + 2,
+    SteamInputDeviceDisconnected                           = iSteamControllerCallbacks + 2,
 
     // Purpose: called when a controller configuration has been loaded, will fire once
     // per controller per focus change for Steam Input enabled controllers
-    SteamInputConfigurationLoaded = iSteamControllerCallbacks + 3,
+    SteamInputConfigurationLoaded                          = iSteamControllerCallbacks + 3,
 
 
     // From: isteaminventory.h
@@ -5207,7 +5203,7 @@ ICallback :: enum i32 {
     // SteamInventoryResultReady_t callbacks are fired whenever asynchronous
     // results transition from "Pending" to "OK" or an error state. There will
     // always be exactly one callback per handle.
-    SteamInventoryResultReady = iSteamInventoryCallbacks + 0,
+    SteamInventoryResultReady                              = iSteamInventoryCallbacks + 0,
 
     // SteamInventoryFullUpdate_t callbacks are triggered when GetAllItems
     // successfully returns a result which is newer / fresher than the last
@@ -5216,22 +5212,22 @@ ICallback :: enum i32 {
     // the earlier result is already known to be stale/out-of-date.)
     // The normal ResultReady callback will still be triggered immediately
     // afterwards; this is an additional notification for your convenience.
-    SteamInventoryFullUpdate = iSteamInventoryCallbacks + 1,
+    SteamInventoryFullUpdate                               = iSteamInventoryCallbacks + 1,
 
     // A SteamInventoryDefinitionUpdate_t callback is triggered whenever
     // item definitions have been updated, which could be in response to 
     // LoadItemDefinitions() or any other async request which required
     // a definition update in order to process results from the server.
-    SteamInventoryDefinitionUpdate = iSteamInventoryCallbacks + 2,
+    SteamInventoryDefinitionUpdate                         = iSteamInventoryCallbacks + 2,
 
     // Returned 
-    SteamInventoryEligiblePromoItemDefIDs = iSteamInventoryCallbacks + 3,
+    SteamInventoryEligiblePromoItemDefIDs                  = iSteamInventoryCallbacks + 3,
 
     // Triggered from StartPurchase call
-    SteamInventoryStartPurchaseResult = iSteamInventoryCallbacks + 4,
+    SteamInventoryStartPurchaseResult                      = iSteamInventoryCallbacks + 4,
 
     // Triggered from RequestPrices
-    SteamInventoryRequestPricesResult = iSteamInventoryCallbacks + 5,
+    SteamInventoryRequestPricesResult                      = iSteamInventoryCallbacks + 5,
 
 
     // From: isteammatchmaking.h
@@ -5239,7 +5235,7 @@ ICallback :: enum i32 {
     // Callbacks for ISteamMatchmaking (which go through the regular Steam callback registration system)
 
     // Purpose: a server was added/removed from the favorites list, you should refresh now
-    FavoritesListChanged = iSteamMatchmakingCallbacks + 2,
+    FavoritesListChanged                                   = iSteamMatchmakingCallbacks + 2,
 
     // Purpose: Someone has invited you to join a Lobby
     //			normally you don't need to do anything with this, since
@@ -5247,45 +5243,45 @@ ICallback :: enum i32 {
     //
     //			if the user outside a game chooses to join, your game will be launched with the parameter "+connect_lobby <64-bit lobby id>",
     //			or with the callback GameLobbyJoinRequested_t if they're already in-game
-    LobbyInvite = iSteamMatchmakingCallbacks + 3,
+    LobbyInvite                                            = iSteamMatchmakingCallbacks + 3,
 
     // Purpose: Sent on entering a lobby, or on failing to enter
     //			m_EChatRoomEnterResponse will be set to k_EChatRoomEnterResponseSuccess on success,
     //			or a higher value on failure (see enum EChatRoomEnterResponse)
-    LobbyEnter = iSteamMatchmakingCallbacks + 4,
+    LobbyEnter                                             = iSteamMatchmakingCallbacks + 4,
 
     // Purpose: The lobby metadata has changed
     //			if m_ulSteamIDMember is the steamID of a lobby member, use GetLobbyMemberData() to access per-user details
     //			if m_ulSteamIDMember == m_ulSteamIDLobby, use GetLobbyData() to access lobby metadata
-    LobbyDataUpdate = iSteamMatchmakingCallbacks + 5,
+    LobbyDataUpdate                                        = iSteamMatchmakingCallbacks + 5,
 
     // Purpose: The lobby chat room state has changed
     //			this is usually sent when a user has joined or left the lobby
-    LobbyChatUpdate = iSteamMatchmakingCallbacks + 6,
+    LobbyChatUpdate                                        = iSteamMatchmakingCallbacks + 6,
 
     // Purpose: A chat message for this lobby has been sent
     //			use GetLobbyChatEntry( m_iChatID ) to retrieve the contents of this message
-    LobbyChatMsg = iSteamMatchmakingCallbacks + 7,
+    LobbyChatMsg                                           = iSteamMatchmakingCallbacks + 7,
 
     // Purpose: A game created a game for all the members of the lobby to join,
     //			as triggered by a SetLobbyGameServer()
     //			it's up to the individual clients to take action on this; the usual
     //			game behavior is to leave the lobby and connect to the specified game server
-    LobbyGameCreated = iSteamMatchmakingCallbacks + 9,
+    LobbyGameCreated                                       = iSteamMatchmakingCallbacks + 9,
 
     // Purpose: Number of matching lobbies found
     //			iterate the returned lobbies with GetLobbyByIndex(), from values 0, to m_nLobbiesMatching-1
-    LobbyMatchList = iSteamMatchmakingCallbacks + 10,
+    LobbyMatchList                                         = iSteamMatchmakingCallbacks + 10,
 
     // Purpose: posted if a user is forcefully removed from a lobby
     //			can occur if a user loses connection to Steam
-    LobbyKicked = iSteamMatchmakingCallbacks + 12,
+    LobbyKicked                                            = iSteamMatchmakingCallbacks + 12,
 
     // Purpose: Result of our request to create a Lobby
     //			m_eResult == k_EResultOK on success
     //			at this point, the lobby has been joined and is ready for use
     //			a LobbyEnter_t callback will also be received (since the local user is joining their own lobby)
-    LobbyCreated = iSteamMatchmakingCallbacks + 13,
+    LobbyCreated                                           = iSteamMatchmakingCallbacks + 13,
 
     // used by now obsolete RequestFriendsLobbiesResponse_t
     // enum { k = iSteamMatchmakingCallbacks + 14 };
@@ -5294,85 +5290,83 @@ ICallback :: enum i32 {
     //			m_eResult == k_EResultOK on success
     //			at this point, the local user may not have finishing joining this lobby;
     //			game code should wait until the subsequent LobbyEnter_t callback is received
-    PSNGameBootInviteResult = iSteamMatchmakingCallbacks + 15,
+    PSNGameBootInviteResult                                = iSteamMatchmakingCallbacks + 15,
 
     // Purpose: Result of our request to create a Lobby
     //			m_eResult == k_EResultOK on success
     //			at this point, the lobby has been joined and is ready for use
     //			a LobbyEnter_t callback will also be received (since the local user is joining their own lobby)
-    FavoritesListAccountsUpdated = iSteamMatchmakingCallbacks + 16,
+    FavoritesListAccountsUpdated                           = iSteamMatchmakingCallbacks + 16,
 
     // Callbacks for ISteamGameSearch (which go through the regular Steam callback registration system)
-
-    SearchForGameProgressCallback = iSteamGameSearchCallbacks + 1,
+    SearchForGameProgressCallback                          = iSteamGameSearchCallbacks + 1,
 
     // notification to all players searching that a game has been found
-    SearchForGameResultCallback = iSteamGameSearchCallbacks + 2,
+    SearchForGameResultCallback                            = iSteamGameSearchCallbacks + 2,
 
     // ISteamGameSearch : Game Host API callbacks
 
     // callback from RequestPlayersForGame when the matchmaking service has started or ended search
     // callback will also follow a call from CancelRequestPlayersForGame - m_bSearchInProgress will be false
-    RequestPlayersForGameProgressCallback = iSteamGameSearchCallbacks + 11,
+    RequestPlayersForGameProgressCallback                  = iSteamGameSearchCallbacks + 11,
 
     // callback from RequestPlayersForGame
     // one of these will be sent per player 
     // followed by additional callbacks when players accept or decline the game
-    RequestPlayersForGameResultCallback = iSteamGameSearchCallbacks + 12,
-
-    RequestPlayersForGameFinalResultCallback = iSteamGameSearchCallbacks + 13,
+    RequestPlayersForGameResultCallback                    = iSteamGameSearchCallbacks + 12,
+    RequestPlayersForGameFinalResultCallback               = iSteamGameSearchCallbacks + 13,
 
     // this callback confirms that results were received by the matchmaking service for this player
-    SubmitPlayerResultResultCallback = iSteamGameSearchCallbacks + 14,
+    SubmitPlayerResultResultCallback                       = iSteamGameSearchCallbacks + 14,
 
     // this callback confirms that the game is recorded as complete on the matchmaking service
     // the next call to RequestPlayersForGame will generate a new unique game ID
-    EndGameResultCallback = iSteamGameSearchCallbacks + 15,
+    EndGameResultCallback                                  = iSteamGameSearchCallbacks + 15,
 
     // Steam has responded to the user request to join a party via the given Beacon ID.
     // If successful, the connect string contains game-specific instructions to connect
     // to the game with that party.
-    JoinPartyCallback = iSteamPartiesCallbacks + 1,
+    JoinPartyCallback                                      = iSteamPartiesCallbacks + 1,
 
     // Response to CreateBeacon request. If successful, the beacon ID is provided.
-    CreateBeaconCallback = iSteamPartiesCallbacks + 2,
+    CreateBeaconCallback                                   = iSteamPartiesCallbacks + 2,
 
     // Someone has used the beacon to join your party - they are in-flight now
     // and we've reserved one of the open slots for them.
     // You should confirm when they join your party by calling OnReservationCompleted().
     // Otherwise, Steam may timeout their reservation eventually.
-    ReservationNotificationCallback = iSteamPartiesCallbacks + 3,
+    ReservationNotificationCallback                        = iSteamPartiesCallbacks + 3,
 
     // Response to ChangeNumOpenSlots call
-    ChangeNumOpenSlotsCallback = iSteamPartiesCallbacks + 4,
+    ChangeNumOpenSlotsCallback                             = iSteamPartiesCallbacks + 4,
 
     // The list of possible Party beacon locations has changed
-    AvailableBeaconLocationsUpdated = iSteamPartiesCallbacks + 5,
+    AvailableBeaconLocationsUpdated                        = iSteamPartiesCallbacks + 5,
 
     // The list of active beacons may have changed
-    ActiveBeaconsUpdated = iSteamPartiesCallbacks + 6,
+    ActiveBeaconsUpdated                                   = iSteamPartiesCallbacks + 6,
 
 
     // From: isteamnetworking.h
 
     // callback notification - a user wants to talk to us over the P2P channel via the SendP2PPacket() API
     // in response, a call to AcceptP2PPacketsFromUser() needs to be made, if you want to talk with them
-    P2PSessionRequest = iSteamNetworkingCallbacks + 2,
+    P2PSessionRequest                                      = iSteamNetworkingCallbacks + 2,
 
     // callback notification - packets can't get through to the specified user via the SendP2PPacket() API
     // all packets queued packets unsent at this point will be dropped
     // further attempts to send will retry making the connection (but will be dropped if we fail again)
-    P2PSessionConnectFail = iSteamNetworkingCallbacks + 3,
+    P2PSessionConnectFail                                  = iSteamNetworkingCallbacks + 3,
 
     // callback notification - status of a socket has changed
     // used as part of the CreateListenSocket() / CreateP2PConnectionSocket() 
-    SocketStatusCallback = iSteamNetworkingCallbacks + 1,
+    SocketStatusCallback                                   = iSteamNetworkingCallbacks + 1,
 
 
     // From: isteamnetworkingmessages.h
 
     /// Posted when a remote host is sending us a message, and we do not already have a session with them
-    SteamNetworkingMessagesSessionRequest = iSteamNetworkingMessagesCallbacks + 1,
+    SteamNetworkingMessagesSessionRequest                  = iSteamNetworkingMessagesCallbacks + 1,
 
     /// Posted when we fail to establish a connection, or we detect that communications
     /// have been disrupted it an unusual way.  There is no notification when a peer proactively
@@ -5385,7 +5379,7 @@ ICallback :: enum i32 {
     /// Also, if a session times out due to inactivity, no callbacks will be posted.  The only
     /// way to detect that this is happening is that querying the session state may return
     /// none, connecting, and findingroute again.
-    SteamNetworkingMessagesSessionFailed = iSteamNetworkingMessagesCallbacks + 2,
+    SteamNetworkingMessagesSessionFailed                   = iSteamNetworkingMessagesCallbacks + 2,
 
 
     // From: isteamnetworkingsockets.h
@@ -5425,7 +5419,7 @@ ICallback :: enum i32 {
     /// state by the time you process this callback.
     ///
     /// Also note that callbacks will be posted when connections are created and destroyed by your own API calls.
-    SteamNetConnectionStatusChangedCallback = iSteamNetworkingSocketsCallbacks + 1,
+    SteamNetConnectionStatusChangedCallback                = iSteamNetworkingSocketsCallbacks + 1,
 
     /// A struct used to describe our readiness to participate in authenticated,
     /// encrypted communication.  In order to do this we need:
@@ -5435,7 +5429,7 @@ ICallback :: enum i32 {
     /// - A valid certificate issued by a CA.
     ///
     /// This callback is posted whenever the state of our readiness changes.
-    SteamNetAuthenticationStatus = iSteamNetworkingSocketsCallbacks + 2,
+    SteamNetAuthenticationStatus                           = iSteamNetworkingSocketsCallbacks + 2,
 
 
     // From: isteamnetworkingutils.h
@@ -5443,161 +5437,157 @@ ICallback :: enum i32 {
     /// A struct used to describe our readiness to use the relay network.
     /// To do this we first need to fetch the network configuration,
     /// which describes what POPs are available.
-    SteamRelayNetworkStatus = iSteamNetworkingUtilsCallbacks + 1,
+    SteamRelayNetworkStatus                                = iSteamNetworkingUtilsCallbacks + 1,
 
 
     // From: isteamparentalsettings.h
 
     // Purpose: Callback for querying UGC
-    SteamParentalSettingsChanged = ISteamParentalSettingsCallbacks + 1,
+    SteamParentalSettingsChanged                           = ISteamParentalSettingsCallbacks + 1,
 
 
     // From: isteamremotestorage.h
 
     // Purpose: The result of a call to FileShare()
-    RemoteStorageFileShareResult = iSteamRemoteStorageCallbacks + 7,
+    RemoteStorageFileShareResult                           = iSteamRemoteStorageCallbacks + 7,
 
     // iSteamRemoteStorageCallbacks + 8, is deprecated! Do not reuse
 
     // Purpose: The result of a call to PublishFile()
-    RemoteStoragePublishFileResult = iSteamRemoteStorageCallbacks + 9,
+    RemoteStoragePublishFileResult                         = iSteamRemoteStorageCallbacks + 9,
 
     // iSteamRemoteStorageCallbacks + 10 is deprecated! Do not reuse
 
     // Purpose: The result of a call to DeletePublishedFile()
-    RemoteStorageDeletePublishedFileResult = iSteamRemoteStorageCallbacks + 11,
+    RemoteStorageDeletePublishedFileResult                 = iSteamRemoteStorageCallbacks + 11,
 
     // Purpose: The result of a call to EnumerateUserPublishedFiles()
-    RemoteStorageEnumerateUserPublishedFilesResult = iSteamRemoteStorageCallbacks + 12,
+    RemoteStorageEnumerateUserPublishedFilesResult         = iSteamRemoteStorageCallbacks + 12,
 
     // Purpose: The result of a call to SubscribePublishedFile()
-    RemoteStorageSubscribePublishedFileResult = iSteamRemoteStorageCallbacks + 13,
+    RemoteStorageSubscribePublishedFileResult              = iSteamRemoteStorageCallbacks + 13,
 
     // Purpose: The result of a call to EnumerateSubscribePublishedFiles()
-    RemoteStorageEnumerateUserSubscribedFilesResult = iSteamRemoteStorageCallbacks + 14,
+    RemoteStorageEnumerateUserSubscribedFilesResult        = iSteamRemoteStorageCallbacks + 14,
 
     // Purpose: The result of a call to UnsubscribePublishedFile()
-    RemoteStorageUnsubscribePublishedFileResult = iSteamRemoteStorageCallbacks + 15,
+    RemoteStorageUnsubscribePublishedFileResult            = iSteamRemoteStorageCallbacks + 15,
 
     // Purpose: The result of a call to CommitPublishedFileUpdate()
-    RemoteStorageUpdatePublishedFileResult = iSteamRemoteStorageCallbacks + 16,
+    RemoteStorageUpdatePublishedFileResult                 = iSteamRemoteStorageCallbacks + 16,
 
     // Purpose: The result of a call to UGCDownload()
-    RemoteStorageDownloadUGCResult = iSteamRemoteStorageCallbacks + 17,
+    RemoteStorageDownloadUGCResult                         = iSteamRemoteStorageCallbacks + 17,
 
     // Purpose: The result of a call to GetPublishedFileDetails()
-    RemoteStorageGetPublishedFileDetailsResult = iSteamRemoteStorageCallbacks + 18,
-
-    RemoteStorageEnumerateWorkshopFilesResult = iSteamRemoteStorageCallbacks + 19,
+    RemoteStorageGetPublishedFileDetailsResult             = iSteamRemoteStorageCallbacks + 18,
+    RemoteStorageEnumerateWorkshopFilesResult              = iSteamRemoteStorageCallbacks + 19,
 
     // Purpose: The result of GetPublishedItemVoteDetails
-    RemoteStorageGetPublishedItemVoteDetailsResult = iSteamRemoteStorageCallbacks + 20,
+    RemoteStorageGetPublishedItemVoteDetailsResult         = iSteamRemoteStorageCallbacks + 20,
 
     // Purpose: User subscribed to a file for the app (from within the app or on the web)
-    RemoteStoragePublishedFileSubscribed = iSteamRemoteStorageCallbacks + 21,
+    RemoteStoragePublishedFileSubscribed                   = iSteamRemoteStorageCallbacks + 21,
 
     // Purpose: User unsubscribed from a file for the app (from within the app or on the web)
-    RemoteStoragePublishedFileUnsubscribed = iSteamRemoteStorageCallbacks + 22,
+    RemoteStoragePublishedFileUnsubscribed                 = iSteamRemoteStorageCallbacks + 22,
 
     // Purpose: Published file that a user owns was deleted (from within the app or the web)
-    RemoteStoragePublishedFileDeleted = iSteamRemoteStorageCallbacks + 23,
+    RemoteStoragePublishedFileDeleted                      = iSteamRemoteStorageCallbacks + 23,
 
     // Purpose: The result of a call to UpdateUserPublishedItemVote()
-    RemoteStorageUpdateUserPublishedItemVoteResult = iSteamRemoteStorageCallbacks + 24,
+    RemoteStorageUpdateUserPublishedItemVoteResult         = iSteamRemoteStorageCallbacks + 24,
 
     // Purpose: The result of a call to GetUserPublishedItemVoteDetails()
-    RemoteStorageUserVoteDetails = iSteamRemoteStorageCallbacks + 25,
-
-    RemoteStorageEnumerateUserSharedWorkshopFilesResult = iSteamRemoteStorageCallbacks + 26,
-
-    RemoteStorageSetUserPublishedFileActionResult = iSteamRemoteStorageCallbacks + 27,
-
+    RemoteStorageUserVoteDetails                           = iSteamRemoteStorageCallbacks + 25,
+    RemoteStorageEnumerateUserSharedWorkshopFilesResult    = iSteamRemoteStorageCallbacks + 26,
+    RemoteStorageSetUserPublishedFileActionResult          = iSteamRemoteStorageCallbacks + 27,
     RemoteStorageEnumeratePublishedFilesByUserActionResult = iSteamRemoteStorageCallbacks + 28,
 
     // Purpose: Called periodically while a PublishWorkshopFile is in progress
-    RemoteStoragePublishFileProgress = iSteamRemoteStorageCallbacks + 29,
+    RemoteStoragePublishFileProgress                       = iSteamRemoteStorageCallbacks + 29,
 
     // Purpose: Called when the content for a published file is updated
-    RemoteStoragePublishedFileUpdated = iSteamRemoteStorageCallbacks + 30,
+    RemoteStoragePublishedFileUpdated                      = iSteamRemoteStorageCallbacks + 30,
 
     // Purpose: Called when a FileWriteAsync completes
-    RemoteStorageFileWriteAsyncComplete = iSteamRemoteStorageCallbacks + 31,
+    RemoteStorageFileWriteAsyncComplete                    = iSteamRemoteStorageCallbacks + 31,
 
     // Purpose: Called when a FileReadAsync completes
-    RemoteStorageFileReadAsyncComplete = iSteamRemoteStorageCallbacks + 32,
+    RemoteStorageFileReadAsyncComplete                     = iSteamRemoteStorageCallbacks + 32,
 
 
     // From: isteamscreenshots.h
 
     // Purpose: Screenshot successfully written or otherwise added to the library
     // and can now be tagged
-    ScreenshotReady = iSteamScreenshotsCallbacks + 1,
+    ScreenshotReady                                        = iSteamScreenshotsCallbacks + 1,
 
     // Purpose: Screenshot has been requested by the user.  Only sent if
     // HookScreenshots() has been called, in which case Steam will not take
     // the screenshot itself.
-    ScreenshotRequested = iSteamScreenshotsCallbacks + 2,
+    ScreenshotRequested                                    = iSteamScreenshotsCallbacks + 2,
 
 
     // From: isteamugc.h
 
     // Purpose: Callback for querying UGC
-    SteamUGCQueryCompleted = iSteamUGCCallbacks + 1,
+    SteamUGCQueryCompleted                                 = iSteamUGCCallbacks + 1,
 
     // Purpose: Callback for requesting details on one piece of UGC
-    SteamUGCRequestUGCDetailsResult = iSteamUGCCallbacks + 2,
+    SteamUGCRequestUGCDetailsResult                        = iSteamUGCCallbacks + 2,
 
     // Purpose: result for ISteamUGC=CreateItem() 
-    CreateItemResult = iSteamUGCCallbacks + 3,
+    CreateItemResult                                       = iSteamUGCCallbacks + 3,
 
     // Purpose: result for ISteamUGC=SubmitItemUpdate() 
-    SubmitItemUpdateResult = iSteamUGCCallbacks + 4,
+    SubmitItemUpdateResult                                 = iSteamUGCCallbacks + 4,
 
     // Purpose: a Workshop item has been installed or updated
-    ItemInstalled = iSteamUGCCallbacks + 5,
+    ItemInstalled                                          = iSteamUGCCallbacks + 5,
 
     // Purpose: result of DownloadItem(), existing item files can be accessed again
-    DownloadItemResult = iSteamUGCCallbacks + 6,
+    DownloadItemResult                                     = iSteamUGCCallbacks + 6,
 
     // Purpose: result of AddItemToFavorites() or RemoveItemFromFavorites()
-    UserFavoriteItemsListChanged = iSteamUGCCallbacks + 7,
+    UserFavoriteItemsListChanged                           = iSteamUGCCallbacks + 7,
 
     // Purpose: The result of a call to SetUserItemVote()
-    SetUserItemVoteResult = iSteamUGCCallbacks + 8,
+    SetUserItemVoteResult                                  = iSteamUGCCallbacks + 8,
 
     // Purpose: The result of a call to GetUserItemVote()
-    GetUserItemVoteResult = iSteamUGCCallbacks + 9,
+    GetUserItemVoteResult                                  = iSteamUGCCallbacks + 9,
 
     // Purpose: The result of a call to StartPlaytimeTracking()
-    StartPlaytimeTrackingResult = iSteamUGCCallbacks + 10,
+    StartPlaytimeTrackingResult                            = iSteamUGCCallbacks + 10,
 
     // Purpose: The result of a call to StopPlaytimeTracking()
-    StopPlaytimeTrackingResult = iSteamUGCCallbacks + 11,
+    StopPlaytimeTrackingResult                             = iSteamUGCCallbacks + 11,
 
     // Purpose: The result of a call to AddDependency
-    AddUGCDependencyResult = iSteamUGCCallbacks + 12,
+    AddUGCDependencyResult                                 = iSteamUGCCallbacks + 12,
 
     // Purpose: The result of a call to RemoveDependency
-    RemoveUGCDependencyResult = iSteamUGCCallbacks + 13,
+    RemoveUGCDependencyResult                              = iSteamUGCCallbacks + 13,
 
     // Purpose: The result of a call to AddAppDependency
-    AddAppDependencyResult = iSteamUGCCallbacks + 14,
+    AddAppDependencyResult                                 = iSteamUGCCallbacks + 14,
 
     // Purpose: The result of a call to RemoveAppDependency
-    RemoveAppDependencyResult = iSteamUGCCallbacks + 15,
+    RemoveAppDependencyResult                              = iSteamUGCCallbacks + 15,
 
     // Purpose: The result of a call to GetAppDependencies.  Callback may be called
     //			multiple times until all app dependencies have been returned.
-    GetAppDependenciesResult = iSteamUGCCallbacks + 16,
+    GetAppDependenciesResult                               = iSteamUGCCallbacks + 16,
 
     // Purpose: The result of a call to DeleteItem
-    DeleteItemResult = iSteamUGCCallbacks + 17,
+    DeleteItemResult                                       = iSteamUGCCallbacks + 17,
 
     // Purpose: signal that the list of subscribed items changed
-    UserSubscribedItemsListChanged = iSteamUGCCallbacks + 18,
+    UserSubscribedItemsListChanged                         = iSteamUGCCallbacks + 18,
 
     // Purpose: Status of the user's acceptable/rejection of the app's specific Workshop EULA
-    WorkshopEULAStatus = iSteamUGCCallbacks + 20,
+    WorkshopEULAStatus                                     = iSteamUGCCallbacks + 20,
 
 
     // From: isteamuser.h
@@ -5607,54 +5597,54 @@ ICallback :: enum i32 {
     //			usually this will have occurred before the game has launched, and should
     //			only be seen if the user has dropped connection due to a networking issue
     //			or a Steam server update
-    SteamServersConnected = iSteamUserCallbacks + 1,
+    SteamServersConnected                                  = iSteamUserCallbacks + 1,
 
     // Purpose: called when a connection attempt has failed
     //			this will occur periodically if the Steam client is not connected, 
     //			and has failed in it's retry to establish a connection
-    SteamServerConnectFailure = iSteamUserCallbacks + 2,
+    SteamServerConnectFailure                              = iSteamUserCallbacks + 2,
 
 
     // Purpose: called if the client has lost connection to the Steam servers
     //			real-time services will be disabled until a matching SteamServersConnected_t has been posted
-    SteamServersDisconnected = iSteamUserCallbacks + 3,
+    SteamServersDisconnected                               = iSteamUserCallbacks + 3,
 
 
     // Purpose: Sent by the Steam server to the client telling it to disconnect from the specified game server,
     //			which it may be in the process of or already connected to.
     //			The game client should immediately disconnect upon receiving this message.
     //			This can usually occur if the user doesn't have rights to play on the game server.
-    ClientGameServerDeny = iSteamUserCallbacks + 13,
+    ClientGameServerDeny                                   = iSteamUserCallbacks + 13,
 
 
     // Purpose: called when the callback system for this client is in an error state (and has flushed pending callbacks)
     //			When getting this message the client should disconnect from Steam, reset any stored Steam state and reconnect.
     //			This usually occurs in the rare event the Steam client has some kind of fatal error.
-    IPCFailure = iSteamUserCallbacks + 17,
+    IPCFailure                                             = iSteamUserCallbacks + 17,
 
     // Purpose: Signaled whenever licenses change
-    LicensesUpdated = iSteamUserCallbacks + 25,
+    LicensesUpdated                                        = iSteamUserCallbacks + 25,
 
     // callback for BeginAuthSession
-    ValidateAuthTicketResponse = iSteamUserCallbacks + 43,
+    ValidateAuthTicketResponse                             = iSteamUserCallbacks + 43,
 
     // Purpose: called when a user has responded to a microtransaction authorization request
-    MicroTxnAuthorizationResponse = iSteamUserCallbacks + 52,
+    MicroTxnAuthorizationResponse                          = iSteamUserCallbacks + 52,
 
     // Purpose: Result from RequestEncryptedAppTicket
-    EncryptedAppTicketResponse = iSteamUserCallbacks + 54,
+    EncryptedAppTicketResponse                             = iSteamUserCallbacks + 54,
 
     // callback for GetAuthSessionTicket
-    GetAuthSessionTicketResponse = iSteamUserCallbacks + 63,
+    GetAuthSessionTicketResponse                           = iSteamUserCallbacks + 63,
 
     // Purpose: sent to your game in response to a steam://gamewebcallback/ command
-    GameWebCallback = iSteamUserCallbacks + 64,
+    GameWebCallback                                        = iSteamUserCallbacks + 64,
 
     // Purpose: sent to your game in response to ISteamUser=RequestStoreAuthURL
-    StoreAuthURLResponse = iSteamUserCallbacks + 65,
+    StoreAuthURLResponse                                   = iSteamUserCallbacks + 65,
 
     // Purpose: sent in response to ISteamUser=GetMarketEligibility
-    MarketEligibilityResponse = iSteamUserCallbacks + 66,
+    MarketEligibilityResponse                              = iSteamUserCallbacks + 66,
 
     // Purpose: sent for games with enabled anti indulgence / duration control, for
     // enabled users. Lets the game know whether the user can keep playing or
@@ -5662,90 +5652,88 @@ ICallback :: enum i32 {
     //
     // This callback is fired asynchronously in response to timers triggering.
     // It is also fired in response to calls to GetDurationControl().
-    DurationControl = iSteamUserCallbacks + 67,
+    DurationControl                                        = iSteamUserCallbacks + 67,
 
 
     // From: isteamuserstats.h
 
     // Purpose: called when the latests stats and achievements have been received
     //			from the server
-    UserStatsReceived = iSteamUserStatsCallbacks + 1,
+    UserStatsReceived                                      = iSteamUserStatsCallbacks + 1,
 
     // Purpose: result of a request to store the user stats for a game
-    UserStatsStored = iSteamUserStatsCallbacks + 2,
+    UserStatsStored                                        = iSteamUserStatsCallbacks + 2,
 
     // Purpose: result of a request to store the achievements for a game, or an 
     //			"indicate progress" call. If both m_nCurProgress and m_nMaxProgress
     //			are zero, that means the achievement has been fully unlocked.
-    UserAchievementStored = iSteamUserStatsCallbacks + 3,
+    UserAchievementStored                                  = iSteamUserStatsCallbacks + 3,
 
     // Purpose: call result for finding a leaderboard, returned as a result of FindOrCreateLeaderboard() or FindLeaderboard()
     //			use CCallResult<> to map this async result to a member function
-    LeaderboardFindResult = iSteamUserStatsCallbacks + 4,
+    LeaderboardFindResult                                  = iSteamUserStatsCallbacks + 4,
 
     // Purpose: call result indicating scores for a leaderboard have been downloaded and are ready to be retrieved, returned as a result of DownloadLeaderboardEntries()
     //			use CCallResult<> to map this async result to a member function
-    LeaderboardScoresDownloaded = iSteamUserStatsCallbacks + 5,
+    LeaderboardScoresDownloaded                            = iSteamUserStatsCallbacks + 5,
 
     // Purpose: call result indicating scores has been uploaded, returned as a result of UploadLeaderboardScore()
     //			use CCallResult<> to map this async result to a member function
-    LeaderboardScoreUploaded = iSteamUserStatsCallbacks + 6,
-
-    NumberOfCurrentPlayers = iSteamUserStatsCallbacks + 7,
+    LeaderboardScoreUploaded                               = iSteamUserStatsCallbacks + 6,
+    NumberOfCurrentPlayers                                 = iSteamUserStatsCallbacks + 7,
 
     // Purpose: Callback indicating that a user's stats have been unloaded.
     //  Call RequestUserStats again to access stats for this user
-    UserStatsUnloaded = iSteamUserStatsCallbacks + 8,
+    UserStatsUnloaded                                      = iSteamUserStatsCallbacks + 8,
 
     // Purpose: Callback indicating that an achievement icon has been fetched
-    UserAchievementIconFetched = iSteamUserStatsCallbacks + 9,
+    UserAchievementIconFetched                             = iSteamUserStatsCallbacks + 9,
 
     // Purpose: Callback indicating that global achievement percentages are fetched
-    GlobalAchievementPercentagesReady = iSteamUserStatsCallbacks + 10,
+    GlobalAchievementPercentagesReady                      = iSteamUserStatsCallbacks + 10,
 
     // Purpose: call result indicating UGC has been uploaded, returned as a result of SetLeaderboardUGC()
-    LeaderboardUGCSet = iSteamUserStatsCallbacks + 11,
+    LeaderboardUGCSet                                      = iSteamUserStatsCallbacks + 11,
 
     // Purpose: callback indicating that PS3 trophies have been installed
-    PS3TrophiesInstalled = iSteamUserStatsCallbacks + 12,
+    PS3TrophiesInstalled                                   = iSteamUserStatsCallbacks + 12,
     // Purpose: callback indicating global stats have been received.
     //	Returned as a result of RequestGlobalStats()
-    GlobalStatsReceived = iSteamUserStatsCallbacks + 12,
+    GlobalStatsReceived                                    = iSteamUserStatsCallbacks + 12,
 
 
     // From: isteamutils.h
 
     // Purpose: The country of the user changed
-    IPCountry = iSteamUtilsCallbacks + 1,
+    IPCountry                                              = iSteamUtilsCallbacks + 1,
 
     // Purpose: Fired when running on a laptop and less than 10 minutes of battery is left, fires then every minute
-    LowBatteryPower = iSteamUtilsCallbacks + 2,
+    LowBatteryPower                                        = iSteamUtilsCallbacks + 2,
 
     // Purpose: called when a SteamAsyncCall_t has completed (or failed)
-    SteamAPICallCompleted = iSteamUtilsCallbacks + 3,
+    SteamAPICallCompleted                                  = iSteamUtilsCallbacks + 3,
 
     // called when Steam wants to shutdown
-    SteamShutdown = iSteamUtilsCallbacks + 4,
-
-    CheckFileSignature = iSteamUtilsCallbacks + 5,
+    SteamShutdown                                          = iSteamUtilsCallbacks + 4,
+    CheckFileSignature                                     = iSteamUtilsCallbacks + 5,
 
     // iSteamUtilsCallbacks + 13 is taken
 
     // Full Screen gamepad text input has been closed
-    GamepadTextInputDismissed = iSteamUtilsCallbacks + 14,
+    GamepadTextInputDismissed                              = iSteamUtilsCallbacks + 14,
 
     // iSteamUtilsCallbacks + 15 through 35 are taken
 
     // iSteamUtilsCallbacks + 37 is taken
 
     // The floating on-screen keyboard has been closed
-    FloatingGamepadTextInputDismissed = iSteamUtilsCallbacks + 38,
+    FloatingGamepadTextInputDismissed                      = iSteamUtilsCallbacks + 38,
 }
 
 /// Internal structure used in manual callback dispatch
 CallbackMsg :: struct #align CALLBACK_ALIGN {
-    hSteamUser  :   HSteamUser, // Specific user to whom this callback applies.
-    iCallback   :   ICallback, // Callback identifier.  (Corresponds to the k_iCallback enum in the callback structure.)
-    pubParam    :   ^u8, // Points to the callback structure
-    cubParam    :   i32, // Size of the data pointed to by m_pubParam
+    hSteamUser: HSteamUser, // Specific user to whom this callback applies.
+    iCallback:  ICallback, // Callback identifier.  (Corresponds to the k_iCallback enum in the callback structure.)
+    pubParam:   ^u8, // Points to the callback structure
+    cubParam:   i32, // Size of the data pointed to by m_pubParam
 }
