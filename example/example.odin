@@ -79,7 +79,7 @@ runSteamCallbacks :: proc() {
 
     for steamworks.ManualDispatch_GetNextCallback(hSteamPipe, &callback) {
         // Check for dispatching API call results
-        if callback.iCallback == steamworks.SteamAPICallCompleted_iCallback {
+        if callback.iCallback == .SteamAPICallCompleted {
             fmt.println("CallResult: ", callback)
 
             pCallCompleted := transmute(^steamworks.SteamAPICallCompleted)callback.pubParam
@@ -90,7 +90,7 @@ runSteamCallbacks :: proc() {
                     // Dispatch the call result to the registered handler(s) for the
                     // call identified by pCallCompleted->m_hAsyncCall
                     fmt.println("   pCallCompleted", pCallCompleted)
-                    if pCallCompleted.iCallback == steamworks.NumberOfCurrentPlayers_iCallback {
+                    if pCallCompleted.iCallback == .NumberOfCurrentPlayers {
                         onGetNumberOfCurrentPlayers(transmute(^steamworks.NumberOfCurrentPlayers)pTmpCallResult, bFailed)
                     }
                 }
@@ -102,7 +102,7 @@ runSteamCallbacks :: proc() {
             // and dispatch to appropriate handler(s)
             fmt.println("Callback: ", callback)
 
-            if callback.iCallback == steamworks.GameOverlayActivated_iCallback {
+            if callback.iCallback == .GameOverlayActivated {
                 fmt.println("GameOverlayActivated")
                 onGameOverlayActivated(transmute(^steamworks.GameOverlayActivated)callback.pubParam)
             }
