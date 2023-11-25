@@ -1,8 +1,8 @@
-Microsoft (R) COFF/PE Dumper Version 14.29.30133.0
+Microsoft (R) COFF/PE Dumper Version 14.33.31631.0
 Copyright (C) Microsoft Corporation.  All rights reserved.
 
 
-Dump of file steamworks\steam_api64.lib
+Dump of file redistributable_bin\win64\steam_api64.lib
 
 File Type: LIBRARY
 
@@ -660,6 +660,7 @@ File Type: LIBRARY
                   SteamAPI_ISteamParties_OnReservationCompleted
                   SteamAPI_ISteamRemotePlay_BGetSessionClientResolution
                   SteamAPI_ISteamRemotePlay_BSendRemotePlayTogetherInvite
+                  SteamAPI_ISteamRemotePlay_BStartRemotePlayTogether
                   SteamAPI_ISteamRemotePlay_GetSessionClientFormFactor
                   SteamAPI_ISteamRemotePlay_GetSessionClientName
                   SteamAPI_ISteamRemotePlay_GetSessionCount
@@ -734,6 +735,7 @@ File Type: LIBRARY
                   SteamAPI_ISteamScreenshots_TriggerScreenshot
                   SteamAPI_ISteamScreenshots_WriteScreenshot
                   SteamAPI_ISteamUGC_AddAppDependency
+                  SteamAPI_ISteamUGC_AddContentDescriptor
                   SteamAPI_ISteamUGC_AddDependency
                   SteamAPI_ISteamUGC_AddExcludedTag
                   SteamAPI_ISteamUGC_AddItemKeyValueTag
@@ -760,6 +762,7 @@ File Type: LIBRARY
                   SteamAPI_ISteamUGC_GetQueryFirstUGCKeyValueTag
                   SteamAPI_ISteamUGC_GetQueryUGCAdditionalPreview
                   SteamAPI_ISteamUGC_GetQueryUGCChildren
+                  SteamAPI_ISteamUGC_GetQueryUGCContentDescriptors
                   SteamAPI_ISteamUGC_GetQueryUGCKeyValueTag
                   SteamAPI_ISteamUGC_GetQueryUGCMetadata
                   SteamAPI_ISteamUGC_GetQueryUGCNumAdditionalPreviews
@@ -771,11 +774,13 @@ File Type: LIBRARY
                   SteamAPI_ISteamUGC_GetQueryUGCTag
                   SteamAPI_ISteamUGC_GetQueryUGCTagDisplayName
                   SteamAPI_ISteamUGC_GetSubscribedItems
+                  SteamAPI_ISteamUGC_GetUserContentDescriptorPreferences
                   SteamAPI_ISteamUGC_GetUserItemVote
                   SteamAPI_ISteamUGC_GetWorkshopEULAStatus
                   SteamAPI_ISteamUGC_ReleaseQueryUGCRequest
                   SteamAPI_ISteamUGC_RemoveAllItemKeyValueTags
                   SteamAPI_ISteamUGC_RemoveAppDependency
+                  SteamAPI_ISteamUGC_RemoveContentDescriptor
                   SteamAPI_ISteamUGC_RemoveDependency
                   SteamAPI_ISteamUGC_RemoveItemFromFavorites
                   SteamAPI_ISteamUGC_RemoveItemKeyValueTags
@@ -877,6 +882,7 @@ File Type: LIBRARY
                   SteamAPI_ISteamUser_DecompressVoice
                   SteamAPI_ISteamUser_EndAuthSession
                   SteamAPI_ISteamUser_GetAuthSessionTicket
+                  SteamAPI_ISteamUser_GetAuthTicketForWebApi
                   SteamAPI_ISteamUser_GetAvailableVoice
                   SteamAPI_ISteamUser_GetDurationControl
                   SteamAPI_ISteamUser_GetEncryptedAppTicket
@@ -932,11 +938,15 @@ File Type: LIBRARY
                   SteamAPI_ISteamUtils_ShowFloatingGamepadTextInput
                   SteamAPI_ISteamUtils_ShowGamepadTextInput
                   SteamAPI_ISteamUtils_StartVRDashboard
+                  SteamAPI_ISteamVideo_AddTimelineHighlightMarker
+                  SteamAPI_ISteamVideo_AddTimelineRangeEnd
+                  SteamAPI_ISteamVideo_AddTimelineRangeStart
+                  SteamAPI_ISteamVideo_AddTimelineTimestamp
                   SteamAPI_ISteamVideo_GetOPFSettings
                   SteamAPI_ISteamVideo_GetOPFStringForApp
                   SteamAPI_ISteamVideo_GetVideoURL
                   SteamAPI_ISteamVideo_IsBroadcasting
-                  SteamAPI_Init
+                  SteamAPI_ISteamVideo_SetTimelineGameMode
                   SteamAPI_InitAnonymousUser
                   SteamAPI_InitSafe
                   SteamAPI_IsSteamRunning
@@ -969,9 +979,9 @@ File Type: LIBRARY
                   SteamAPI_SteamGameServerNetworkingSockets_SteamAPI_v012
                   SteamAPI_SteamGameServerNetworking_v006
                   SteamAPI_SteamGameServerStats_v001
-                  SteamAPI_SteamGameServerUGC_v016
+                  SteamAPI_SteamGameServerUGC_v018
                   SteamAPI_SteamGameServerUtils_v010
-                  SteamAPI_SteamGameServer_v014
+                  SteamAPI_SteamGameServer_v015
                   SteamAPI_SteamHTMLSurface_v005
                   SteamAPI_SteamHTTP_v003
                   SteamAPI_SteamIPAddress_t_IsSet
@@ -1033,14 +1043,14 @@ File Type: LIBRARY
                   SteamAPI_SteamNetworking_v006
                   SteamAPI_SteamParentalSettings_v001
                   SteamAPI_SteamParties_v002
-                  SteamAPI_SteamRemotePlay_v001
+                  SteamAPI_SteamRemotePlay_v002
                   SteamAPI_SteamRemoteStorage_v016
                   SteamAPI_SteamScreenshots_v003
-                  SteamAPI_SteamUGC_v016
+                  SteamAPI_SteamUGC_v018
                   SteamAPI_SteamUserStats_v012
-                  SteamAPI_SteamUser_v021
+                  SteamAPI_SteamUser_v023
                   SteamAPI_SteamUtils_v010
-                  SteamAPI_SteamVideo_v002
+                  SteamAPI_SteamVideo_v003
                   SteamAPI_UnregisterCallResult
                   SteamAPI_UnregisterCallback
                   SteamAPI_UseBreakpadCrashHandler
@@ -1073,7 +1083,8 @@ File Type: LIBRARY
                   SteamInternal_CreateInterface
                   SteamInternal_FindOrCreateGameServerInterface
                   SteamInternal_FindOrCreateUserInterface
-                  SteamInternal_GameServer_Init
+                  SteamInternal_GameServer_Init_V2
+                  SteamInternal_SteamAPI_Init
                   g_pSteamClientGameServer
 
   Summary

@@ -177,11 +177,17 @@ UGCUpdateHandleInvalid: UGCUpdateHandle : 0xffffffffffffffff
 SteamInventoryUpdateHandleInvalid: SteamInventoryUpdateHandle : 0xffffffffffffffff
 SteamDatagramPOPID_dev: SteamNetworkingPOPID : (u32('d') << 16) | (u32('e') << 8) | u32('v')
 
+// A fixed size buffer to receive an error message that is returned by some API
+// calls.
+cchMaxSteamErrMsg :: 1024
+SteamErrMsg :: distinct [cchMaxSteamErrMsg]u8
+
+
 // -------
 // Structs
 // -------
 
-SteamNetworkingMessage :: struct #align CALLBACK_ALIGN {
+SteamNetworkingMessage :: struct #align (CALLBACK_ALIGN) {
     pData:            rawptr,
     cbSize:           i32,
     conn:             HSteamNetConnection,
@@ -198,17 +204,17 @@ SteamNetworkingMessage :: struct #align CALLBACK_ALIGN {
     _pad1__:          u16,
 }
 
-SteamInputActionEvent_AnalogAction :: struct #align CALLBACK_ALIGN {
+SteamInputActionEvent_AnalogAction :: struct #align (CALLBACK_ALIGN) {
     actionHandle:     InputAnalogActionHandle,
     analogActionData: InputAnalogActionData,
 }
 
-SteamInputActionEvent_DigitalAction :: struct #align CALLBACK_ALIGN {
+SteamInputActionEvent_DigitalAction :: struct #align (CALLBACK_ALIGN) {
     actionHandle:      InputDigitalActionHandle,
     digitalActionData: InputDigitalActionData,
 }
 
-SteamInputActionEvent :: struct #align CALLBACK_ALIGN {
+SteamInputActionEvent :: struct #align (CALLBACK_ALIGN) {
     controllerHandle: InputHandle,
     eEventType:       ESteamInputActionEventType,
     using actions:    struct #raw_union {
@@ -218,18 +224,18 @@ SteamInputActionEvent :: struct #align CALLBACK_ALIGN {
 }
 
 
-SteamServersConnected :: struct #align CALLBACK_ALIGN {}
+SteamServersConnected :: struct #align (CALLBACK_ALIGN) {}
 
-SteamServerConnectFailure :: struct #align CALLBACK_ALIGN {
+SteamServerConnectFailure :: struct #align (CALLBACK_ALIGN) {
     eResult:        EResult,
     bStillRetrying: bool,
 }
 
-SteamServersDisconnected :: struct #align CALLBACK_ALIGN {
+SteamServersDisconnected :: struct #align (CALLBACK_ALIGN) {
     eResult: EResult,
 }
 
-ClientGameServerDeny :: struct #align CALLBACK_ALIGN {
+ClientGameServerDeny :: struct #align (CALLBACK_ALIGN) {
     uAppID:           u32,
     unGameServerIP:   u32,
     usGameServerPort: u16,
@@ -237,42 +243,42 @@ ClientGameServerDeny :: struct #align CALLBACK_ALIGN {
     uReason:          u32,
 }
 
-IPCFailure :: struct #align CALLBACK_ALIGN {
+IPCFailure :: struct #align (CALLBACK_ALIGN) {
     eFailureType: u8,
 }
 
-LicensesUpdated :: struct #align CALLBACK_ALIGN {}
+LicensesUpdated :: struct #align (CALLBACK_ALIGN) {}
 
-ValidateAuthTicketResponse :: struct #align CALLBACK_ALIGN {
+ValidateAuthTicketResponse :: struct #align (CALLBACK_ALIGN) {
     SteamID:              CSteamID,
     eAuthSessionResponse: EAuthSessionResponse,
     OwnerSteamID:         CSteamID,
 }
 
-MicroTxnAuthorizationResponse :: struct #align CALLBACK_ALIGN {
+MicroTxnAuthorizationResponse :: struct #align (CALLBACK_ALIGN) {
     unAppID:     u32,
     ulOrderID:   u64,
     bAuthorized: u8,
 }
 
-EncryptedAppTicketResponse :: struct #align CALLBACK_ALIGN {
+EncryptedAppTicketResponse :: struct #align (CALLBACK_ALIGN) {
     eResult: EResult,
 }
 
-GetAuthSessionTicketResponse :: struct #align CALLBACK_ALIGN {
+GetAuthSessionTicketResponse :: struct #align (CALLBACK_ALIGN) {
     hAuthTicket: HAuthTicket,
     eResult:     EResult,
 }
 
-GameWebCallback :: struct #align CALLBACK_ALIGN {
+GameWebCallback :: struct #align (CALLBACK_ALIGN) {
     szURL: [256]u8,
 }
 
-StoreAuthURLResponse :: struct #align CALLBACK_ALIGN {
+StoreAuthURLResponse :: struct #align (CALLBACK_ALIGN) {
     szURL: [512]u8,
 }
 
-MarketEligibilityResponse :: struct #align CALLBACK_ALIGN {
+MarketEligibilityResponse :: struct #align (CALLBACK_ALIGN) {
     bAllowed:                   bool,
     eNotAllowedReason:          EMarketNotAllowedReasonFlags,
     rtAllowedAtTime:            RTime32,
@@ -280,7 +286,7 @@ MarketEligibilityResponse :: struct #align CALLBACK_ALIGN {
     cdayNewDeviceCooldown:      i32,
 }
 
-DurationControl :: struct #align CALLBACK_ALIGN {
+DurationControl :: struct #align (CALLBACK_ALIGN) {
     eResult:        EResult,
     appid:          AppId,
     bApplicable:    bool,
@@ -291,116 +297,116 @@ DurationControl :: struct #align CALLBACK_ALIGN {
     csecsRemaining: i32,
 }
 
-PersonaStateChange :: struct #align CALLBACK_ALIGN {
+PersonaStateChange :: struct #align (CALLBACK_ALIGN) {
     ulSteamID:    u64,
     nChangeFlags: i32,
 }
 
-GameOverlayActivated :: struct #align CALLBACK_ALIGN {
+GameOverlayActivated :: struct #align (CALLBACK_ALIGN) {
     bActive: u8,
 }
 
-GameServerChangeRequested :: struct #align CALLBACK_ALIGN {
+GameServerChangeRequested :: struct #align (CALLBACK_ALIGN) {
     rgchServer:   [64]u8,
     rgchPassword: [64]u8,
 }
 
-GameLobbyJoinRequested :: struct #align CALLBACK_ALIGN {
+GameLobbyJoinRequested :: struct #align (CALLBACK_ALIGN) {
     steamIDLobby:  CSteamID,
     steamIDFriend: CSteamID,
 }
 
-AvatarImageLoaded :: struct #align CALLBACK_ALIGN {
+AvatarImageLoaded :: struct #align (CALLBACK_ALIGN) {
     steamID: CSteamID,
     iImage:  i32,
     iWide:   i32,
     iTall:   i32,
 }
 
-ClanOfficerListResponse :: struct #align CALLBACK_ALIGN {
+ClanOfficerListResponse :: struct #align (CALLBACK_ALIGN) {
     steamIDClan: CSteamID,
     cOfficers:   i32,
     bSuccess:    u8,
 }
 
-FriendRichPresenceUpdate :: struct #align CALLBACK_ALIGN {
+FriendRichPresenceUpdate :: struct #align (CALLBACK_ALIGN) {
     steamIDFriend: CSteamID,
     nAppID:        AppId,
 }
 
-GameRichPresenceJoinRequested :: struct #align CALLBACK_ALIGN {
+GameRichPresenceJoinRequested :: struct #align (CALLBACK_ALIGN) {
     steamIDFriend: CSteamID,
     rgchConnect:   [256]u8,
 }
 
-GameConnectedClanChatMsg :: struct #align CALLBACK_ALIGN {
+GameConnectedClanChatMsg :: struct #align (CALLBACK_ALIGN) {
     steamIDClanChat: CSteamID,
     steamIDUser:     CSteamID,
     iMessageID:      i32,
 }
 
-GameConnectedChatJoin :: struct #align CALLBACK_ALIGN {
+GameConnectedChatJoin :: struct #align (CALLBACK_ALIGN) {
     steamIDClanChat: CSteamID,
     steamIDUser:     CSteamID,
 }
 
-GameConnectedChatLeave :: struct #align CALLBACK_ALIGN {
+GameConnectedChatLeave :: struct #align (CALLBACK_ALIGN) {
     steamIDClanChat: CSteamID,
     steamIDUser:     CSteamID,
     bKicked:         bool,
     bDropped:        bool,
 }
 
-DownloadClanActivityCountsResult :: struct #align CALLBACK_ALIGN {
+DownloadClanActivityCountsResult :: struct #align (CALLBACK_ALIGN) {
     bSuccess: bool,
 }
 
-JoinClanChatRoomCompletionResult :: struct #align CALLBACK_ALIGN {
+JoinClanChatRoomCompletionResult :: struct #align (CALLBACK_ALIGN) {
     steamIDClanChat:        CSteamID,
     eChatRoomEnterResponse: EChatRoomEnterResponse,
 }
 
-GameConnectedFriendChatMsg :: struct #align CALLBACK_ALIGN {
+GameConnectedFriendChatMsg :: struct #align (CALLBACK_ALIGN) {
     steamIDUser: CSteamID,
     iMessageID:  i32,
 }
 
-FriendsGetFollowerCount :: struct #align CALLBACK_ALIGN {
+FriendsGetFollowerCount :: struct #align (CALLBACK_ALIGN) {
     eResult: EResult,
     steamID: CSteamID,
     nCount:  i32,
 }
 
-FriendsIsFollowing :: struct #align CALLBACK_ALIGN {
+FriendsIsFollowing :: struct #align (CALLBACK_ALIGN) {
     eResult:      EResult,
     steamID:      CSteamID,
     bIsFollowing: bool,
 }
 
-FriendsEnumerateFollowingList :: struct #align CALLBACK_ALIGN {
+FriendsEnumerateFollowingList :: struct #align (CALLBACK_ALIGN) {
     eResult:           EResult,
     rgSteamID:         [50]CSteamID,
     nResultsReturned:  i32,
     nTotalResultCount: i32,
 }
 
-SetPersonaNameResponse :: struct #align CALLBACK_ALIGN {
+SetPersonaNameResponse :: struct #align (CALLBACK_ALIGN) {
     bSuccess:      bool,
     bLocalSuccess: bool,
     result:        EResult,
 }
 
-UnreadChatMessagesChanged :: struct #align CALLBACK_ALIGN {}
+UnreadChatMessagesChanged :: struct #align (CALLBACK_ALIGN) {}
 
-OverlayBrowserProtocolNavigation :: struct #align CALLBACK_ALIGN {
+OverlayBrowserProtocolNavigation :: struct #align (CALLBACK_ALIGN) {
     rgchURI: [1024]u8,
 }
 
-EquippedProfileItemsChanged :: struct #align CALLBACK_ALIGN {
+EquippedProfileItemsChanged :: struct #align (CALLBACK_ALIGN) {
     steamID: CSteamID,
 }
 
-EquippedProfileItems :: struct #align CALLBACK_ALIGN {
+EquippedProfileItems :: struct #align (CALLBACK_ALIGN) {
     eResult:                   EResult,
     steamID:                   CSteamID,
     bHasAnimatedAvatar:        bool,
@@ -410,34 +416,34 @@ EquippedProfileItems :: struct #align CALLBACK_ALIGN {
     bHasMiniProfileBackground: bool,
 }
 
-IPCountry :: struct #align CALLBACK_ALIGN {}
+IPCountry :: struct #align (CALLBACK_ALIGN) {}
 
-LowBatteryPower :: struct #align CALLBACK_ALIGN {
+LowBatteryPower :: struct #align (CALLBACK_ALIGN) {
     nMinutesBatteryLeft: u8,
 }
 
-SteamAPICallCompleted :: struct #align CALLBACK_ALIGN {
+SteamAPICallCompleted :: struct #align (CALLBACK_ALIGN) {
     hAsyncCall: SteamAPICall,
     iCallback:  ICallback,
     cubParam:   u32,
 }
 
-SteamShutdown :: struct #align CALLBACK_ALIGN {}
+SteamShutdown :: struct #align (CALLBACK_ALIGN) {}
 
-CheckFileSignature :: struct #align CALLBACK_ALIGN {
+CheckFileSignature :: struct #align (CALLBACK_ALIGN) {
     eCheckFileSignature: ECheckFileSignature,
 }
 
-GamepadTextInputDismissed :: struct #align CALLBACK_ALIGN {
+GamepadTextInputDismissed :: struct #align (CALLBACK_ALIGN) {
     bSubmitted:      bool,
     unSubmittedText: u32,
 }
 
-AppResumingFromSuspend :: struct #align CALLBACK_ALIGN {}
+AppResumingFromSuspend :: struct #align (CALLBACK_ALIGN) {}
 
-FloatingGamepadTextInputDismissed :: struct #align CALLBACK_ALIGN {}
+FloatingGamepadTextInputDismissed :: struct #align (CALLBACK_ALIGN) {}
 
-FavoritesListChanged :: struct #align CALLBACK_ALIGN {
+FavoritesListChanged :: struct #align (CALLBACK_ALIGN) {
     nIP:         u32,
     nQueryPort:  u32,
     nConnPort:   u32,
@@ -447,71 +453,71 @@ FavoritesListChanged :: struct #align CALLBACK_ALIGN {
     unAccountId: AccountID,
 }
 
-LobbyInvite :: struct #align CALLBACK_ALIGN {
+LobbyInvite :: struct #align (CALLBACK_ALIGN) {
     ulSteamIDUser:  u64,
     ulSteamIDLobby: u64,
     ulGameID:       u64,
 }
 
-LobbyEnter :: struct #align CALLBACK_ALIGN {
+LobbyEnter :: struct #align (CALLBACK_ALIGN) {
     ulSteamIDLobby:         u64,
     rgfChatPermissions:     u32,
     bLocked:                bool,
     EChatRoomEnterResponse: u32,
 }
 
-LobbyDataUpdate :: struct #align CALLBACK_ALIGN {
+LobbyDataUpdate :: struct #align (CALLBACK_ALIGN) {
     ulSteamIDLobby:  u64,
     ulSteamIDMember: u64,
     bSuccess:        u8,
 }
 
-LobbyChatUpdate :: struct #align CALLBACK_ALIGN {
+LobbyChatUpdate :: struct #align (CALLBACK_ALIGN) {
     ulSteamIDLobby:           u64,
     ulSteamIDUserChanged:     u64,
     ulSteamIDMakingChange:    u64,
     rgfChatMemberStateChange: u32,
 }
 
-LobbyChatMsg :: struct #align CALLBACK_ALIGN {
+LobbyChatMsg :: struct #align (CALLBACK_ALIGN) {
     ulSteamIDLobby: u64,
     ulSteamIDUser:  u64,
     eChatEntryType: u8,
     iChatID:        u32,
 }
 
-LobbyGameCreated :: struct #align CALLBACK_ALIGN {
+LobbyGameCreated :: struct #align (CALLBACK_ALIGN) {
     ulSteamIDLobby:      u64,
     ulSteamIDGameServer: u64,
     unIP:                u32,
     usPort:              u16,
 }
 
-LobbyMatchList :: struct #align CALLBACK_ALIGN {
+LobbyMatchList :: struct #align (CALLBACK_ALIGN) {
     nLobbiesMatching: u32,
 }
 
-LobbyKicked :: struct #align CALLBACK_ALIGN {
+LobbyKicked :: struct #align (CALLBACK_ALIGN) {
     ulSteamIDLobby:         u64,
     ulSteamIDAdmin:         u64,
     bKickedDueToDisconnect: u8,
 }
 
-LobbyCreated :: struct #align CALLBACK_ALIGN {
+LobbyCreated :: struct #align (CALLBACK_ALIGN) {
     eResult:        EResult,
     ulSteamIDLobby: u64,
 }
 
-PSNGameBootInviteResult :: struct #align CALLBACK_ALIGN {
+PSNGameBootInviteResult :: struct #align (CALLBACK_ALIGN) {
     bGameBootInviteExists: bool,
     steamIDLobby:          CSteamID,
 }
 
-FavoritesListAccountsUpdated :: struct #align CALLBACK_ALIGN {
+FavoritesListAccountsUpdated :: struct #align (CALLBACK_ALIGN) {
     eResult: EResult,
 }
 
-SearchForGameProgressCallback :: struct #align CALLBACK_ALIGN {
+SearchForGameProgressCallback :: struct #align (CALLBACK_ALIGN) {
     ullSearchID:               u64,
     eResult:                   EResult,
     lobbyID:                   CSteamID,
@@ -520,7 +526,7 @@ SearchForGameProgressCallback :: struct #align CALLBACK_ALIGN {
     cPlayersSearching:         i32,
 }
 
-SearchForGameResultCallback :: struct #align CALLBACK_ALIGN {
+SearchForGameResultCallback :: struct #align (CALLBACK_ALIGN) {
     ullSearchID:         u64,
     eResult:             EResult,
     nCountPlayersInGame: i32,
@@ -529,12 +535,12 @@ SearchForGameResultCallback :: struct #align CALLBACK_ALIGN {
     bFinalCallback:      bool,
 }
 
-RequestPlayersForGameProgressCallback :: struct #align CALLBACK_ALIGN {
+RequestPlayersForGameProgressCallback :: struct #align (CALLBACK_ALIGN) {
     eResult:     EResult,
     ullSearchID: u64,
 }
 
-RequestPlayersForGameResultCallback :: struct #align CALLBACK_ALIGN {
+RequestPlayersForGameResultCallback :: struct #align (CALLBACK_ALIGN) {
     eResult:                   EResult,
     ullSearchID:               u64,
     SteamIDPlayerFound:        CSteamID,
@@ -547,84 +553,84 @@ RequestPlayersForGameResultCallback :: struct #align CALLBACK_ALIGN {
     ullUniqueGameID:           u64,
 }
 
-RequestPlayersForGameResultCallbact_PlayerAcceptState :: enum {
+RequestPlayersForGameResultCallbact_PlayerAcceptState :: enum i32 {
     EStateUnknown        = 0,
     EStatePlayerAccepted = 1,
     EStatePlayerDeclined = 2,
 }
 
-RequestPlayersForGameFinalResultCallback :: struct #align CALLBACK_ALIGN {
+RequestPlayersForGameFinalResultCallback :: struct #align (CALLBACK_ALIGN) {
     eResult:         EResult,
     ullSearchID:     u64,
     ullUniqueGameID: u64,
 }
 
-SubmitPlayerResultResultCallback :: struct #align CALLBACK_ALIGN {
+SubmitPlayerResultResultCallback :: struct #align (CALLBACK_ALIGN) {
     eResult:         EResult,
     ullUniqueGameID: u64,
     steamIDPlayer:   CSteamID,
 }
 
-EndGameResultCallback :: struct #align CALLBACK_ALIGN {
+EndGameResultCallback :: struct #align (CALLBACK_ALIGN) {
     eResult:         EResult,
     ullUniqueGameID: u64,
 }
 
-JoinPartyCallback :: struct #align CALLBACK_ALIGN {
+JoinPartyCallback :: struct #align (CALLBACK_ALIGN) {
     eResult:            EResult,
     ulBeaconID:         PartyBeaconID,
     SteamIDBeaconOwner: CSteamID,
     rgchConnectString:  [256]u8,
 }
 
-CreateBeaconCallback :: struct #align CALLBACK_ALIGN {
+CreateBeaconCallback :: struct #align (CALLBACK_ALIGN) {
     eResult:    EResult,
     ulBeaconID: PartyBeaconID,
 }
 
-ReservationNotificationCallback :: struct #align CALLBACK_ALIGN {
+ReservationNotificationCallback :: struct #align (CALLBACK_ALIGN) {
     ulBeaconID:    PartyBeaconID,
     steamIDJoiner: CSteamID,
 }
 
-ChangeNumOpenSlotsCallback :: struct #align CALLBACK_ALIGN {
+ChangeNumOpenSlotsCallback :: struct #align (CALLBACK_ALIGN) {
     eResult: EResult,
 }
 
-AvailableBeaconLocationsUpdated :: struct #align CALLBACK_ALIGN {}
+AvailableBeaconLocationsUpdated :: struct #align (CALLBACK_ALIGN) {}
 
-ActiveBeaconsUpdated :: struct #align CALLBACK_ALIGN {}
+ActiveBeaconsUpdated :: struct #align (CALLBACK_ALIGN) {}
 
-RemoteStorageFileShareResult :: struct #align CALLBACK_ALIGN {
+RemoteStorageFileShareResult :: struct #align (CALLBACK_ALIGN) {
     eResult:      EResult,
     hFile:        UGCHandle,
     rgchFilename: [260]u8,
 }
 
-RemoteStoragePublishFileResult :: struct #align CALLBACK_ALIGN {
+RemoteStoragePublishFileResult :: struct #align (CALLBACK_ALIGN) {
     eResult:                                  EResult,
     nPublishedFileId:                         PublishedFileId,
     bUserNeedsToAcceptWorkshopLegalAgreement: bool,
 }
 
-RemoteStorageDeletePublishedFileResult :: struct #align CALLBACK_ALIGN {
+RemoteStorageDeletePublishedFileResult :: struct #align (CALLBACK_ALIGN) {
     eResult:          EResult,
     nPublishedFileId: PublishedFileId,
 }
 
-RemoteStorageEnumerateUserPublishedFilesResult :: struct #align CALLBACK_ALIGN {
+RemoteStorageEnumerateUserPublishedFilesResult :: struct #align (CALLBACK_ALIGN) {
     eResult:           EResult,
     nResultsReturned:  i32,
     nTotalResultCount: i32,
     rgPublishedFileId: [50]PublishedFileId,
 }
 
-RemoteStorageSubscribePublishedFileResult :: struct #align CALLBACK_ALIGN {
+RemoteStorageSubscribePublishedFileResult :: struct #align (CALLBACK_ALIGN) {
     eResult:          EResult,
     nPublishedFileId: PublishedFileId,
 }
 
-RemoteStorageEnumerateUserSubscribedFilesResult :: struct #align CALLBACK_ALIGN {
+RemoteStorageEnumerateUserSubscribedFilesResult :: struct #align (CALLBACK_ALIGN) {
     eResult:           EResult,
     nResultsReturned:  i32,
     nTotalResultCount: i32,
@@ -632,18 +638,18 @@ RemoteStorageEnumerateUserSubscribedFilesResult :: struct #align CALLBACK_ALIGN 
     rgRTimeSubscribed: [50]u32,
 }
 
-RemoteStorageUnsubscribePublishedFileResult :: struct #align CALLBACK_ALIGN {
+RemoteStorageUnsubscribePublishedFileResult :: struct #align (CALLBACK_ALIGN) {
     eResult:          EResult,
     nPublishedFileId: PublishedFileId,
 }
 
-RemoteStorageUpdatePublishedFileResult :: struct #align CALLBACK_ALIGN {
+RemoteStorageUpdatePublishedFileResult :: struct #align (CALLBACK_ALIGN) {
     eResult:                                  EResult,
     nPublishedFileId:                         PublishedFileId,
     bUserNeedsToAcceptWorkshopLegalAgreement: bool,
 }
 
-RemoteStorageDownloadUGCResult :: struct #align CALLBACK_ALIGN {
+RemoteStorageDownloadUGCResult :: struct #align (CALLBACK_ALIGN) {
     eResult:        EResult,
     hFile:          UGCHandle,
     nAppID:         AppId,
@@ -652,7 +658,7 @@ RemoteStorageDownloadUGCResult :: struct #align CALLBACK_ALIGN {
     ulSteamIDOwner: u64,
 }
 
-RemoteStorageGetPublishedFileDetailsResult :: struct #align CALLBACK_ALIGN {
+RemoteStorageGetPublishedFileDetailsResult :: struct #align (CALLBACK_ALIGN) {
     eResult:          EResult,
     nPublishedFileId: PublishedFileId,
     nCreatorAppID:    AppId,
@@ -676,7 +682,7 @@ RemoteStorageGetPublishedFileDetailsResult :: struct #align CALLBACK_ALIGN {
     bAcceptedForUse:  bool,
 }
 
-RemoteStorageEnumerateWorkshopFilesResult :: struct #align CALLBACK_ALIGN {
+RemoteStorageEnumerateWorkshopFilesResult :: struct #align (CALLBACK_ALIGN) {
     eResult:           EResult,
     nResultsReturned:  i32,
     nTotalResultCount: i32,
@@ -686,7 +692,7 @@ RemoteStorageEnumerateWorkshopFilesResult :: struct #align CALLBACK_ALIGN {
     unStartIndex:      u32,
 }
 
-RemoteStorageGetPublishedItemVoteDetailsResult :: struct #align CALLBACK_ALIGN {
+RemoteStorageGetPublishedItemVoteDetailsResult :: struct #align (CALLBACK_ALIGN) {
     eResult:           EResult,
     unPublishedFileId: PublishedFileId,
     nVotesFor:         i32,
@@ -695,46 +701,46 @@ RemoteStorageGetPublishedItemVoteDetailsResult :: struct #align CALLBACK_ALIGN {
     fScore:            f32,
 }
 
-RemoteStoragePublishedFileSubscribed :: struct #align CALLBACK_ALIGN {
+RemoteStoragePublishedFileSubscribed :: struct #align (CALLBACK_ALIGN) {
     nPublishedFileId: PublishedFileId,
     nAppID:           AppId,
 }
 
-RemoteStoragePublishedFileUnsubscribed :: struct #align CALLBACK_ALIGN {
+RemoteStoragePublishedFileUnsubscribed :: struct #align (CALLBACK_ALIGN) {
     nPublishedFileId: PublishedFileId,
     nAppID:           AppId,
 }
 
-RemoteStoragePublishedFileDeleted :: struct #align CALLBACK_ALIGN {
+RemoteStoragePublishedFileDeleted :: struct #align (CALLBACK_ALIGN) {
     nPublishedFileId: PublishedFileId,
     nAppID:           AppId,
 }
 
-RemoteStorageUpdateUserPublishedItemVoteResult :: struct #align CALLBACK_ALIGN {
+RemoteStorageUpdateUserPublishedItemVoteResult :: struct #align (CALLBACK_ALIGN) {
     eResult:          EResult,
     nPublishedFileId: PublishedFileId,
 }
 
-RemoteStorageUserVoteDetails :: struct #align CALLBACK_ALIGN {
+RemoteStorageUserVoteDetails :: struct #align (CALLBACK_ALIGN) {
     eResult:          EResult,
     nPublishedFileId: PublishedFileId,
     eVote:            EWorkshopVote,
 }
 
-RemoteStorageEnumerateUserSharedWorkshopFilesResult :: struct #align CALLBACK_ALIGN {
+RemoteStorageEnumerateUserSharedWorkshopFilesResult :: struct #align (CALLBACK_ALIGN) {
     eResult:           EResult,
     nResultsReturned:  i32,
     nTotalResultCount: i32,
     rgPublishedFileId: [50]PublishedFileId,
 }
 
-RemoteStorageSetUserPublishedFileActionResult :: struct #align CALLBACK_ALIGN {
+RemoteStorageSetUserPublishedFileActionResult :: struct #align (CALLBACK_ALIGN) {
     eResult:          EResult,
     nPublishedFileId: PublishedFileId,
     eAction:          EWorkshopFileAction,
 }
 
-RemoteStorageEnumeratePublishedFilesByUserActionResult :: struct #align CALLBACK_ALIGN {
+RemoteStorageEnumeratePublishedFilesByUserActionResult :: struct #align (CALLBACK_ALIGN) {
     eResult:           EResult,
     eAction:           EWorkshopFileAction,
     nResultsReturned:  i32,
@@ -743,42 +749,42 @@ RemoteStorageEnumeratePublishedFilesByUserActionResult :: struct #align CALLBACK
     rgRTimeUpdated:    [50]u32,
 }
 
-RemoteStoragePublishFileProgress :: struct #align CALLBACK_ALIGN {
+RemoteStoragePublishFileProgress :: struct #align (CALLBACK_ALIGN) {
     dPercentFile: f64,
     bPreview:     bool,
 }
 
-RemoteStoragePublishedFileUpdated :: struct #align CALLBACK_ALIGN {
+RemoteStoragePublishedFileUpdated :: struct #align (CALLBACK_ALIGN) {
     nPublishedFileId: PublishedFileId,
     nAppID:           AppId,
     ulUnused:         u64,
 }
 
-RemoteStorageFileWriteAsyncComplete :: struct #align CALLBACK_ALIGN {
+RemoteStorageFileWriteAsyncComplete :: struct #align (CALLBACK_ALIGN) {
     eResult: EResult,
 }
 
-RemoteStorageFileReadAsyncComplete :: struct #align CALLBACK_ALIGN {
+RemoteStorageFileReadAsyncComplete :: struct #align (CALLBACK_ALIGN) {
     hFileReadAsync: SteamAPICall,
     eResult:        EResult,
     nOffset:        u32,
     cubRead:        u32,
 }
 
-RemoteStorageLocalFileChange :: struct #align CALLBACK_ALIGN {}
+RemoteStorageLocalFileChange :: struct #align (CALLBACK_ALIGN) {}
 
-UserStatsReceived :: struct #align CALLBACK_ALIGN {
+UserStatsReceived :: struct #align (CALLBACK_ALIGN) {
     nGameID:     u64,
     eResult:     EResult,
     steamIDUser: CSteamID,
 }
 
-UserStatsStored :: struct #align CALLBACK_ALIGN {
+UserStatsStored :: struct #align (CALLBACK_ALIGN) {
     nGameID: u64,
     eResult: EResult,
 }
 
-UserAchievementStored :: struct #align CALLBACK_ALIGN {
+UserAchievementStored :: struct #align (CALLBACK_ALIGN) {
     nGameID:             u64,
     bGroupAchievement:   bool,
     rgchAchievementName: [128]u8,
@@ -786,18 +792,18 @@ UserAchievementStored :: struct #align CALLBACK_ALIGN {
     nMaxProgress:        u32,
 }
 
-LeaderboardFindResult :: struct #align CALLBACK_ALIGN {
+LeaderboardFindResult :: struct #align (CALLBACK_ALIGN) {
     hSteamLeaderboard: SteamLeaderboard,
     bLeaderboardFound: u8,
 }
 
-LeaderboardScoresDownloaded :: struct #align CALLBACK_ALIGN {
+LeaderboardScoresDownloaded :: struct #align (CALLBACK_ALIGN) {
     hSteamLeaderboard:        SteamLeaderboard,
     hSteamLeaderboardEntries: SteamLeaderboardEntries,
     cEntryCount:              i32,
 }
 
-LeaderboardScoreUploaded :: struct #align CALLBACK_ALIGN {
+LeaderboardScoreUploaded :: struct #align (CALLBACK_ALIGN) {
     bSuccess:            u8,
     hSteamLeaderboard:   SteamLeaderboard,
     nScore:              i32,
@@ -806,145 +812,145 @@ LeaderboardScoreUploaded :: struct #align CALLBACK_ALIGN {
     nGlobalRankPrevious: i32,
 }
 
-NumberOfCurrentPlayers :: struct #align CALLBACK_ALIGN {
+NumberOfCurrentPlayers :: struct #align (CALLBACK_ALIGN) {
     bSuccess: u8,
     cPlayers: i32,
 }
 
-UserStatsUnloaded :: struct #align CALLBACK_ALIGN {
+UserStatsUnloaded :: struct #align (CALLBACK_ALIGN) {
     steamIDUser: CSteamID,
 }
 
-UserAchievementIconFetched :: struct #align CALLBACK_ALIGN {
+UserAchievementIconFetched :: struct #align (CALLBACK_ALIGN) {
     nGameID:             CGameID,
     rgchAchievementName: [128]u8,
     bAchieved:           bool,
     nIconHandle:         i32,
 }
 
-GlobalAchievementPercentagesReady :: struct #align CALLBACK_ALIGN {
+GlobalAchievementPercentagesReady :: struct #align (CALLBACK_ALIGN) {
     nGameID: u64,
     eResult: EResult,
 }
 
-LeaderboardUGCSet :: struct #align CALLBACK_ALIGN {
+LeaderboardUGCSet :: struct #align (CALLBACK_ALIGN) {
     eResult:           EResult,
     hSteamLeaderboard: SteamLeaderboard,
 }
 
-PS3TrophiesInstalled :: struct #align CALLBACK_ALIGN {
+PS3TrophiesInstalled :: struct #align (CALLBACK_ALIGN) {
     nGameID:             u64,
     eResult:             EResult,
     ulRequiredDiskSpace: u64,
 }
 
-GlobalStatsReceived :: struct #align CALLBACK_ALIGN {
+GlobalStatsReceived :: struct #align (CALLBACK_ALIGN) {
     nGameID: u64,
     eResult: EResult,
 }
 
-DlcInstalled :: struct #align CALLBACK_ALIGN {
+DlcInstalled :: struct #align (CALLBACK_ALIGN) {
     nAppID: AppId,
 }
 
-RegisterActivationCodeResponse :: struct #align CALLBACK_ALIGN {
+RegisterActivationCodeResponse :: struct #align (CALLBACK_ALIGN) {
     eResult:             ERegisterActivationCodeResult,
     unPackageRegistered: u32,
 }
 
-NewUrlLaunchParameters :: struct #align CALLBACK_ALIGN {}
+NewUrlLaunchParameters :: struct #align (CALLBACK_ALIGN) {}
 
-AppProofOfPurchaseKeyResponse :: struct #align CALLBACK_ALIGN {
+AppProofOfPurchaseKeyResponse :: struct #align (CALLBACK_ALIGN) {
     eResult:      EResult,
     nAppID:       u32,
     cchKeyLength: u32,
     rgchKey:      [240]u8,
 }
 
-FileDetailsResult :: struct #align CALLBACK_ALIGN {
+FileDetailsResult :: struct #align (CALLBACK_ALIGN) {
     eResult:    EResult,
     ulFileSize: u64,
     FileSHA:    [20]u8,
     unFlags:    u32,
 }
 
-TimedTrialStatus :: struct #align CALLBACK_ALIGN {
+TimedTrialStatus :: struct #align (CALLBACK_ALIGN) {
     unAppID:          AppId,
     bIsOffline:       bool,
     unSecondsAllowed: u32,
     unSecondsPlayed:  u32,
 }
 
-P2PSessionRequest :: struct #align CALLBACK_ALIGN {
+P2PSessionRequest :: struct #align (CALLBACK_ALIGN) {
     steamIDRemote: CSteamID,
 }
 
-P2PSessionConnectFail :: struct #align CALLBACK_ALIGN {
+P2PSessionConnectFail :: struct #align (CALLBACK_ALIGN) {
     steamIDRemote:    CSteamID,
     eP2PSessionError: u8,
 }
 
-SocketStatusCallback :: struct #align CALLBACK_ALIGN {
+SocketStatusCallback :: struct #align (CALLBACK_ALIGN) {
     hSocket:          SNetSocket,
     hListenSocket:    SNetListenSocket,
     steamIDRemote:    CSteamID,
     eSNetSocketState: i32,
 }
 
-ScreenshotReady :: struct #align CALLBACK_ALIGN {
+ScreenshotReady :: struct #align (CALLBACK_ALIGN) {
     hLocal:  ScreenshotHandle,
     eResult: EResult,
 }
 
-ScreenshotRequested :: struct #align CALLBACK_ALIGN {}
+ScreenshotRequested :: struct #align (CALLBACK_ALIGN) {}
 
-PlaybackStatusHasChanged :: struct #align CALLBACK_ALIGN {}
+PlaybackStatusHasChanged :: struct #align (CALLBACK_ALIGN) {}
 
-VolumeHasChanged :: struct #align CALLBACK_ALIGN {
+VolumeHasChanged :: struct #align (CALLBACK_ALIGN) {
     flNewVolume: f32,
 }
 
-MusicPlayerRemoteWillActivate :: struct #align CALLBACK_ALIGN {}
+MusicPlayerRemoteWillActivate :: struct #align (CALLBACK_ALIGN) {}
 
-MusicPlayerRemoteWillDeactivate :: struct #align CALLBACK_ALIGN {}
+MusicPlayerRemoteWillDeactivate :: struct #align (CALLBACK_ALIGN) {}
 
-MusicPlayerRemoteToFront :: struct #align CALLBACK_ALIGN {}
+MusicPlayerRemoteToFront :: struct #align (CALLBACK_ALIGN) {}
 
-MusicPlayerWillQuit :: struct #align CALLBACK_ALIGN {}
+MusicPlayerWillQuit :: struct #align (CALLBACK_ALIGN) {}
 
-MusicPlayerWantsPlay :: struct #align CALLBACK_ALIGN {}
+MusicPlayerWantsPlay :: struct #align (CALLBACK_ALIGN) {}
 
-MusicPlayerWantsPause :: struct #align CALLBACK_ALIGN {}
+MusicPlayerWantsPause :: struct #align (CALLBACK_ALIGN) {}
 
-MusicPlayerWantsPlayPrevious :: struct #align CALLBACK_ALIGN {}
+MusicPlayerWantsPlayPrevious :: struct #align (CALLBACK_ALIGN) {}
 
-MusicPlayerWantsPlayNext :: struct #align CALLBACK_ALIGN {}
+MusicPlayerWantsPlayNext :: struct #align (CALLBACK_ALIGN) {}
 
-MusicPlayerWantsShuffled :: struct #align CALLBACK_ALIGN {
+MusicPlayerWantsShuffled :: struct #align (CALLBACK_ALIGN) {
     bShuffled: bool,
 }
 
-MusicPlayerWantsLooped :: struct #align CALLBACK_ALIGN {
+MusicPlayerWantsLooped :: struct #align (CALLBACK_ALIGN) {
     bLooped: bool,
 }
 
-MusicPlayerWantsVolume :: struct #align CALLBACK_ALIGN {
+MusicPlayerWantsVolume :: struct #align (CALLBACK_ALIGN) {
     flNewVolume: f32,
 }
 
-MusicPlayerSelectsQueueEntry :: struct #align CALLBACK_ALIGN {
+MusicPlayerSelectsQueueEntry :: struct #align (CALLBACK_ALIGN) {
     nID: i32,
 }
 
-MusicPlayerSelectsPlaylistEntry :: struct #align CALLBACK_ALIGN {
+MusicPlayerSelectsPlaylistEntry :: struct #align (CALLBACK_ALIGN) {
     nID: i32,
 }
 
-MusicPlayerWantsPlayingRepeatStatus :: struct #align CALLBACK_ALIGN {
+MusicPlayerWantsPlayingRepeatStatus :: struct #align (CALLBACK_ALIGN) {
     nPlayingRepeatStatus: i32,
 }
 
-HTTPRequestCompleted :: struct #align CALLBACK_ALIGN {
+HTTPRequestCompleted :: struct #align (CALLBACK_ALIGN) {
     hRequest:           HTTPRequestHandle,
     ulContextValue:     u64,
     bRequestSuccessful: bool,
@@ -952,27 +958,27 @@ HTTPRequestCompleted :: struct #align CALLBACK_ALIGN {
     unBodySize:         u32,
 }
 
-HTTPRequestHeadersReceived :: struct #align CALLBACK_ALIGN {
+HTTPRequestHeadersReceived :: struct #align (CALLBACK_ALIGN) {
     hRequest:       HTTPRequestHandle,
     ulContextValue: u64,
 }
 
-HTTPRequestDataReceived :: struct #align CALLBACK_ALIGN {
+HTTPRequestDataReceived :: struct #align (CALLBACK_ALIGN) {
     hRequest:       HTTPRequestHandle,
     ulContextValue: u64,
     cOffset:        u32,
     cBytesReceived: u32,
 }
 
-SteamInputDeviceConnected :: struct #align CALLBACK_ALIGN {
+SteamInputDeviceConnected :: struct #align (CALLBACK_ALIGN) {
     ulConnectedDeviceHandle: InputHandle,
 }
 
-SteamInputDeviceDisconnected :: struct #align CALLBACK_ALIGN {
+SteamInputDeviceDisconnected :: struct #align (CALLBACK_ALIGN) {
     ulDisconnectedDeviceHandle: InputHandle,
 }
 
-SteamInputConfigurationLoaded :: struct #align CALLBACK_ALIGN {
+SteamInputConfigurationLoaded :: struct #align (CALLBACK_ALIGN) {
     unAppID:            AppId,
     ulDeviceHandle:     InputHandle,
     ulMappingCreator:   CSteamID,
@@ -982,7 +988,7 @@ SteamInputConfigurationLoaded :: struct #align CALLBACK_ALIGN {
     bUsesGamepadAPI:    bool,
 }
 
-SteamUGCQueryCompleted :: struct #align CALLBACK_ALIGN {
+SteamUGCQueryCompleted :: struct #align (CALLBACK_ALIGN) {
     handle:                 UGCQueryHandle,
     eResult:                EResult,
     unNumResultsReturned:   u32,
@@ -991,47 +997,47 @@ SteamUGCQueryCompleted :: struct #align CALLBACK_ALIGN {
     rgchNextCursor:         [256]u8,
 }
 
-SteamUGCRequestUGCDetailsResult :: struct #align CALLBACK_ALIGN {
+SteamUGCRequestUGCDetailsResult :: struct #align (CALLBACK_ALIGN) {
     details:     SteamUGCDetails,
     bCachedData: bool,
 }
 
-CreateItemResult :: struct #align CALLBACK_ALIGN {
+CreateItemResult :: struct #align (CALLBACK_ALIGN) {
     eResult:                                  EResult,
     nPublishedFileId:                         PublishedFileId,
     bUserNeedsToAcceptWorkshopLegalAgreement: bool,
 }
 
-SubmitItemUpdateResult :: struct #align CALLBACK_ALIGN {
+SubmitItemUpdateResult :: struct #align (CALLBACK_ALIGN) {
     eResult:                                  EResult,
     bUserNeedsToAcceptWorkshopLegalAgreement: bool,
     nPublishedFileId:                         PublishedFileId,
 }
 
-ItemInstalled :: struct #align CALLBACK_ALIGN {
+ItemInstalled :: struct #align (CALLBACK_ALIGN) {
     unAppID:          AppId,
     nPublishedFileId: PublishedFileId,
 }
 
-DownloadItemResult :: struct #align CALLBACK_ALIGN {
+DownloadItemResult :: struct #align (CALLBACK_ALIGN) {
     unAppID:          AppId,
     nPublishedFileId: PublishedFileId,
     eResult:          EResult,
 }
 
-UserFavoriteItemsListChanged :: struct #align CALLBACK_ALIGN {
+UserFavoriteItemsListChanged :: struct #align (CALLBACK_ALIGN) {
     nPublishedFileId: PublishedFileId,
     eResult:          EResult,
     bWasAddRequest:   bool,
 }
 
-SetUserItemVoteResult :: struct #align CALLBACK_ALIGN {
+SetUserItemVoteResult :: struct #align (CALLBACK_ALIGN) {
     nPublishedFileId: PublishedFileId,
     eResult:          EResult,
     bVoteUp:          bool,
 }
 
-GetUserItemVoteResult :: struct #align CALLBACK_ALIGN {
+GetUserItemVoteResult :: struct #align (CALLBACK_ALIGN) {
     nPublishedFileId: PublishedFileId,
     eResult:          EResult,
     bVotedUp:         bool,
@@ -1039,39 +1045,39 @@ GetUserItemVoteResult :: struct #align CALLBACK_ALIGN {
     bVoteSkipped:     bool,
 }
 
-StartPlaytimeTrackingResult :: struct #align CALLBACK_ALIGN {
+StartPlaytimeTrackingResult :: struct #align (CALLBACK_ALIGN) {
     eResult: EResult,
 }
 
-StopPlaytimeTrackingResult :: struct #align CALLBACK_ALIGN {
+StopPlaytimeTrackingResult :: struct #align (CALLBACK_ALIGN) {
     eResult: EResult,
 }
 
-AddUGCDependencyResult :: struct #align CALLBACK_ALIGN {
+AddUGCDependencyResult :: struct #align (CALLBACK_ALIGN) {
     eResult:               EResult,
     nPublishedFileId:      PublishedFileId,
     nChildPublishedFileId: PublishedFileId,
 }
 
-RemoveUGCDependencyResult :: struct #align CALLBACK_ALIGN {
+RemoveUGCDependencyResult :: struct #align (CALLBACK_ALIGN) {
     eResult:               EResult,
     nPublishedFileId:      PublishedFileId,
     nChildPublishedFileId: PublishedFileId,
 }
 
-AddAppDependencyResult :: struct #align CALLBACK_ALIGN {
+AddAppDependencyResult :: struct #align (CALLBACK_ALIGN) {
     eResult:          EResult,
     nPublishedFileId: PublishedFileId,
     nAppID:           AppId,
 }
 
-RemoveAppDependencyResult :: struct #align CALLBACK_ALIGN {
+RemoveAppDependencyResult :: struct #align (CALLBACK_ALIGN) {
     eResult:          EResult,
     nPublishedFileId: PublishedFileId,
     nAppID:           AppId,
 }
 
-GetAppDependenciesResult :: struct #align CALLBACK_ALIGN {
+GetAppDependenciesResult :: struct #align (CALLBACK_ALIGN) {
     eResult:                  EResult,
     nPublishedFileId:         PublishedFileId,
     rgAppIDs:                 [32]AppId,
@@ -1079,16 +1085,16 @@ GetAppDependenciesResult :: struct #align CALLBACK_ALIGN {
     nTotalNumAppDependencies: u32,
 }
 
-DeleteItemResult :: struct #align CALLBACK_ALIGN {
+DeleteItemResult :: struct #align (CALLBACK_ALIGN) {
     eResult:          EResult,
     nPublishedFileId: PublishedFileId,
 }
 
-UserSubscribedItemsListChanged :: struct #align CALLBACK_ALIGN {
+UserSubscribedItemsListChanged :: struct #align (CALLBACK_ALIGN) {
     nAppID: AppId,
 }
 
-WorkshopEULAStatus :: struct #align CALLBACK_ALIGN {
+WorkshopEULAStatus :: struct #align (CALLBACK_ALIGN) {
     eResult:      EResult,
     nAppID:       AppId,
     unVersion:    u32,
@@ -1097,21 +1103,21 @@ WorkshopEULAStatus :: struct #align CALLBACK_ALIGN {
     bNeedsAction: bool,
 }
 
-SteamAppInstalled :: struct #align CALLBACK_ALIGN {
+SteamAppInstalled :: struct #align (CALLBACK_ALIGN) {
     nAppID:              AppId,
     iInstallFolderIndex: i32,
 }
 
-SteamAppUninstalled :: struct #align CALLBACK_ALIGN {
+SteamAppUninstalled :: struct #align (CALLBACK_ALIGN) {
     nAppID:              AppId,
     iInstallFolderIndex: i32,
 }
 
-HTML_BrowserReady :: struct #align CALLBACK_ALIGN {
+HTML_BrowserReady :: struct #align (CALLBACK_ALIGN) {
     unBrowserHandle: HHTMLBrowser,
 }
 
-HTML_NeedsPaint :: struct #align CALLBACK_ALIGN {
+HTML_NeedsPaint :: struct #align (CALLBACK_ALIGN) {
     unBrowserHandle: HHTMLBrowser,
     pBGRA:           cstring,
     unWide:          u32,
@@ -1126,7 +1132,7 @@ HTML_NeedsPaint :: struct #align CALLBACK_ALIGN {
     unPageSerial:    u32,
 }
 
-HTML_StartRequest :: struct #align CALLBACK_ALIGN {
+HTML_StartRequest :: struct #align (CALLBACK_ALIGN) {
     unBrowserHandle: HHTMLBrowser,
     pchURL:          cstring,
     pchTarget:       cstring,
@@ -1134,11 +1140,11 @@ HTML_StartRequest :: struct #align CALLBACK_ALIGN {
     bIsRedirect:     bool,
 }
 
-HTML_CloseBrowser :: struct #align CALLBACK_ALIGN {
+HTML_CloseBrowser :: struct #align (CALLBACK_ALIGN) {
     unBrowserHandle: HHTMLBrowser,
 }
 
-HTML_URLChanged :: struct #align CALLBACK_ALIGN {
+HTML_URLChanged :: struct #align (CALLBACK_ALIGN) {
     unBrowserHandle: HHTMLBrowser,
     pchURL:          cstring,
     pchPostData:     cstring,
@@ -1147,35 +1153,35 @@ HTML_URLChanged :: struct #align CALLBACK_ALIGN {
     bNewNavigation:  bool,
 }
 
-HTML_FinishedRequest :: struct #align CALLBACK_ALIGN {
+HTML_FinishedRequest :: struct #align (CALLBACK_ALIGN) {
     unBrowserHandle: HHTMLBrowser,
     pchURL:          cstring,
     pchPageTitle:    cstring,
 }
 
-HTML_OpenLinkInNewTab :: struct #align CALLBACK_ALIGN {
+HTML_OpenLinkInNewTab :: struct #align (CALLBACK_ALIGN) {
     unBrowserHandle: HHTMLBrowser,
     pchURL:          cstring,
 }
 
-HTML_ChangedTitle :: struct #align CALLBACK_ALIGN {
+HTML_ChangedTitle :: struct #align (CALLBACK_ALIGN) {
     unBrowserHandle: HHTMLBrowser,
     pchTitle:        cstring,
 }
 
-HTML_SearchResults :: struct #align CALLBACK_ALIGN {
+HTML_SearchResults :: struct #align (CALLBACK_ALIGN) {
     unBrowserHandle: HHTMLBrowser,
     unResults:       u32,
     unCurrentMatch:  u32,
 }
 
-HTML_CanGoBackAndForward :: struct #align CALLBACK_ALIGN {
+HTML_CanGoBackAndForward :: struct #align (CALLBACK_ALIGN) {
     unBrowserHandle: HHTMLBrowser,
     bCanGoBack:      bool,
     bCanGoForward:   bool,
 }
 
-HTML_HorizontalScroll :: struct #align CALLBACK_ALIGN {
+HTML_HorizontalScroll :: struct #align (CALLBACK_ALIGN) {
     unBrowserHandle: HHTMLBrowser,
     unScrollMax:     u32,
     unScrollCurrent: u32,
@@ -1184,7 +1190,7 @@ HTML_HorizontalScroll :: struct #align CALLBACK_ALIGN {
     unPageSize:      u32,
 }
 
-HTML_VerticalScroll :: struct #align CALLBACK_ALIGN {
+HTML_VerticalScroll :: struct #align (CALLBACK_ALIGN) {
     unBrowserHandle: HHTMLBrowser,
     unScrollMax:     u32,
     unScrollCurrent: u32,
@@ -1193,7 +1199,7 @@ HTML_VerticalScroll :: struct #align CALLBACK_ALIGN {
     unPageSize:      u32,
 }
 
-HTML_LinkAtPosition :: struct #align CALLBACK_ALIGN {
+HTML_LinkAtPosition :: struct #align (CALLBACK_ALIGN) {
     unBrowserHandle: HHTMLBrowser,
     x:               u32,
     y:               u32,
@@ -1202,23 +1208,23 @@ HTML_LinkAtPosition :: struct #align CALLBACK_ALIGN {
     bLiveLink:       bool,
 }
 
-HTML_JSAlert :: struct #align CALLBACK_ALIGN {
+HTML_JSAlert :: struct #align (CALLBACK_ALIGN) {
     unBrowserHandle: HHTMLBrowser,
     pchMessage:      cstring,
 }
 
-HTML_JSConfirt :: struct #align CALLBACK_ALIGN {
+HTML_JSConfirt :: struct #align (CALLBACK_ALIGN) {
     unBrowserHandle: HHTMLBrowser,
     pchMessage:      cstring,
 }
 
-HTML_FileOpenDialog :: struct #align CALLBACK_ALIGN {
+HTML_FileOpenDialog :: struct #align (CALLBACK_ALIGN) {
     unBrowserHandle: HHTMLBrowser,
     pchTitle:        cstring,
     pchInitialFile:  cstring,
 }
 
-HTML_NewWindow :: struct #align CALLBACK_ALIGN {
+HTML_NewWindow :: struct #align (CALLBACK_ALIGN) {
     unBrowserHandle:                  HHTMLBrowser,
     pchURL:                           cstring,
     unX:                              u32,
@@ -1228,105 +1234,105 @@ HTML_NewWindow :: struct #align CALLBACK_ALIGN {
     unNewWindow_BrowserHandle_IGNORE: HHTMLBrowser,
 }
 
-HTML_SetCursor :: struct #align CALLBACK_ALIGN {
+HTML_SetCursor :: struct #align (CALLBACK_ALIGN) {
     unBrowserHandle: HHTMLBrowser,
     eMouseCursor:    u32,
 }
 
-HTML_StatusText :: struct #align CALLBACK_ALIGN {
+HTML_StatusText :: struct #align (CALLBACK_ALIGN) {
     unBrowserHandle: HHTMLBrowser,
     pchMsg:          cstring,
 }
 
-HTML_ShowToolTip :: struct #align CALLBACK_ALIGN {
+HTML_ShowToolTip :: struct #align (CALLBACK_ALIGN) {
     unBrowserHandle: HHTMLBrowser,
     pchMsg:          cstring,
 }
 
-HTML_UpdateToolTip :: struct #align CALLBACK_ALIGN {
+HTML_UpdateToolTip :: struct #align (CALLBACK_ALIGN) {
     unBrowserHandle: HHTMLBrowser,
     pchMsg:          cstring,
 }
 
-HTML_HideToolTip :: struct #align CALLBACK_ALIGN {
+HTML_HideToolTip :: struct #align (CALLBACK_ALIGN) {
     unBrowserHandle: HHTMLBrowser,
 }
 
-HTML_BrowserRestarted :: struct #align CALLBACK_ALIGN {
+HTML_BrowserRestarted :: struct #align (CALLBACK_ALIGN) {
     unBrowserHandle:    HHTMLBrowser,
     unOldBrowserHandle: HHTMLBrowser,
 }
 
-SteamInventoryResultReady :: struct #align CALLBACK_ALIGN {
+SteamInventoryResultReady :: struct #align (CALLBACK_ALIGN) {
     handle: SteamInventoryResult,
     result: EResult,
 }
 
-SteamInventoryFullUpdate :: struct #align CALLBACK_ALIGN {
+SteamInventoryFullUpdate :: struct #align (CALLBACK_ALIGN) {
     handle: SteamInventoryResult,
 }
 
-SteamInventoryDefinitionUpdate :: struct #align CALLBACK_ALIGN {}
+SteamInventoryDefinitionUpdate :: struct #align (CALLBACK_ALIGN) {}
 
-SteamInventoryEligiblePromoItemDefIDs :: struct #align CALLBACK_ALIGN {
+SteamInventoryEligiblePromoItemDefIDs :: struct #align (CALLBACK_ALIGN) {
     result:                   EResult,
     steamID:                  CSteamID,
     numEligiblePromoItemDefs: i32,
     bCachedData:              bool,
 }
 
-SteamInventoryStartPurchaseResult :: struct #align CALLBACK_ALIGN {
+SteamInventoryStartPurchaseResult :: struct #align (CALLBACK_ALIGN) {
     result:    EResult,
     ulOrderID: u64,
     ulTransID: u64,
 }
 
-SteamInventoryRequestPricesResult :: struct #align CALLBACK_ALIGN {
+SteamInventoryRequestPricesResult :: struct #align (CALLBACK_ALIGN) {
     result:       EResult,
     rgchCurrency: [4]u8,
 }
 
-GetVideoURLResult :: struct #align CALLBACK_ALIGN {
+GetVideoURLResult :: struct #align (CALLBACK_ALIGN) {
     eResult:      EResult,
     unVideoAppID: AppId,
     rgchURL:      [256]u8,
 }
 
-GetOPFSettingsResult :: struct #align CALLBACK_ALIGN {
+GetOPFSettingsResult :: struct #align (CALLBACK_ALIGN) {
     eResult:      EResult,
     unVideoAppID: AppId,
 }
 
-SteamParentalSettingsChanged :: struct #align CALLBACK_ALIGN {}
+SteamParentalSettingsChanged :: struct #align (CALLBACK_ALIGN) {}
 
-SteamRemotePlaySessionConnected :: struct #align CALLBACK_ALIGN {
+SteamRemotePlaySessionConnected :: struct #align (CALLBACK_ALIGN) {
     unSessionID: RemotePlaySessionID,
 }
 
-SteamRemotePlaySessionDisconnected :: struct #align CALLBACK_ALIGN {
+SteamRemotePlaySessionDisconnected :: struct #align (CALLBACK_ALIGN) {
     unSessionID: RemotePlaySessionID,
 }
 
-SteamNetworkingMessagesSessionRequest :: struct #align CALLBACK_ALIGN {
+SteamNetworkingMessagesSessionRequest :: struct #align (CALLBACK_ALIGN) {
     identityRemote: SteamNetworkingIdentity,
 }
 
-SteamNetworkingMessagesSessionFailed :: struct #align CALLBACK_ALIGN {
+SteamNetworkingMessagesSessionFailed :: struct #align (CALLBACK_ALIGN) {
     info: SteamNetConnectionInfo,
 }
 
-SteamNetConnectionStatusChangedCallback :: struct #align CALLBACK_ALIGN {
+SteamNetConnectionStatusChangedCallback :: struct #align (CALLBACK_ALIGN) {
     hConn:     HSteamNetConnection,
     info:      SteamNetConnectionInfo,
     eOldState: ESteamNetworkingConnectionState,
 }
 
-SteamNetAuthenticationStatus :: struct #align CALLBACK_ALIGN {
+SteamNetAuthenticationStatus :: struct #align (CALLBACK_ALIGN) {
     eAvail:   ESteamNetworkingAvailability,
     debugMsg: [256]u8,
 }
 
-SteamRelayNetworkStatus :: struct #align CALLBACK_ALIGN {
+SteamRelayNetworkStatus :: struct #align (CALLBACK_ALIGN) {
     eAvail:                     ESteamNetworkingAvailability,
     bPingMeasurementInProgress: i32,
     eAvailNetworkConfig:        ESteamNetworkingAvailability,
@@ -1334,47 +1340,47 @@ SteamRelayNetworkStatus :: struct #align CALLBACK_ALIGN {
     debugMsg:                   [256]u8,
 }
 
-GSClientApprove :: struct #align CALLBACK_ALIGN {
+GSClientApprove :: struct #align (CALLBACK_ALIGN) {
     SteamID:      CSteamID,
     OwnerSteamID: CSteamID,
 }
 
-GSClientDeny :: struct #align CALLBACK_ALIGN {
+GSClientDeny :: struct #align (CALLBACK_ALIGN) {
     SteamID:          CSteamID,
     eDenyReason:      EDenyReason,
     rgchOptionalText: [128]u8,
 }
 
-GSClientKick :: struct #align CALLBACK_ALIGN {
+GSClientKick :: struct #align (CALLBACK_ALIGN) {
     SteamID:     CSteamID,
     eDenyReason: EDenyReason,
 }
 
-GSClientAchievementStatus :: struct #align CALLBACK_ALIGN {
+GSClientAchievementStatus :: struct #align (CALLBACK_ALIGN) {
     SteamID:        u64,
     pchAchievement: [128]u8,
     bUnlocked:      bool,
 }
 
-GSPolicyResponse :: struct #align CALLBACK_ALIGN {
+GSPolicyResponse :: struct #align (CALLBACK_ALIGN) {
     bSecure: u8,
 }
 
-GSGameplayStats :: struct #align CALLBACK_ALIGN {
+GSGameplayStats :: struct #align (CALLBACK_ALIGN) {
     eResult:              EResult,
     nRank:                i32,
     unTotalConnects:      u32,
     unTotalMinutesPlayed: u32,
 }
 
-GSClientGroupStatus :: struct #align CALLBACK_ALIGN {
+GSClientGroupStatus :: struct #align (CALLBACK_ALIGN) {
     SteamIDUser:  CSteamID,
     SteamIDGroup: CSteamID,
     bMember:      bool,
     bOfficer:     bool,
 }
 
-GSReputation :: struct #align CALLBACK_ALIGN {
+GSReputation :: struct #align (CALLBACK_ALIGN) {
     eResult:           EResult,
     unReputationScore: u32,
     bBanned:           bool,
@@ -1384,11 +1390,11 @@ GSReputation :: struct #align CALLBACK_ALIGN {
     unBanExpires:      u32,
 }
 
-AssociateWithClanResult :: struct #align CALLBACK_ALIGN {
+AssociateWithClanResult :: struct #align (CALLBACK_ALIGN) {
     eResult: EResult,
 }
 
-ComputeNewPlayerCompatibilityResult :: struct #align CALLBACK_ALIGN {
+ComputeNewPlayerCompatibilityResult :: struct #align (CALLBACK_ALIGN) {
     eResult:                           EResult,
     cPlayersThatDontLikeCandidate:     i32,
     cPlayersThatCandidateDoesntLike:   i32,
@@ -1396,21 +1402,21 @@ ComputeNewPlayerCompatibilityResult :: struct #align CALLBACK_ALIGN {
     SteamIDCandidate:                  CSteamID,
 }
 
-GSStatsReceived :: struct #align CALLBACK_ALIGN {
+GSStatsReceived :: struct #align (CALLBACK_ALIGN) {
     eResult:     EResult,
     steamIDUser: CSteamID,
 }
 
-GSStatsStored :: struct #align CALLBACK_ALIGN {
+GSStatsStored :: struct #align (CALLBACK_ALIGN) {
     eResult:     EResult,
     steamIDUser: CSteamID,
 }
 
-GSStatsUnloaded :: struct #align CALLBACK_ALIGN {
+GSStatsUnloaded :: struct #align (CALLBACK_ALIGN) {
     steamIDUser: CSteamID,
 }
 
-SteamNetworkingFakeIPResult :: struct #align CALLBACK_ALIGN {
+SteamNetworkingFakeIPResult :: struct #align (CALLBACK_ALIGN) {
     eResult:  EResult,
     identity: SteamNetworkingIdentity,
     unIP:     u32,
@@ -1421,19 +1427,19 @@ SteamNetworkingFakeIPResult :: struct #align CALLBACK_ALIGN {
 // Enums
 // -----
 
-CGameID_EGameIDType :: enum {
+CGameID_EGameIDType :: enum i32 {
     App      = 0,
     GameMod  = 1,
     Shortcut = 2,
     P2P      = 3,
 }
 
-ESteamIPType :: enum {
+ESteamIPType :: enum i32 {
     IPv4 = 0,
     IPv6 = 1,
 }
 
-EUniverse :: enum {
+EUniverse :: enum i32 {
     Invalid  = 0,
     Public   = 1,
     Beta     = 2,
@@ -1442,7 +1448,7 @@ EUniverse :: enum {
     Max      = 5,
 }
 
-EResult :: enum {
+EResult :: enum i32 {
     None                                    = 0,
     OK                                      = 1,
     Fail                                    = 2,
@@ -1572,7 +1578,7 @@ EResult :: enum {
     PhoneNumberIsVOIP                       = 127,
 }
 
-EVoiceResult :: enum {
+EVoiceResult :: enum i32 {
     OK                   = 0,
     NotInitialized       = 1,
     NotRecording         = 2,
@@ -1585,7 +1591,7 @@ EVoiceResult :: enum {
     ReceiverDidNotAnswer = 9,
 }
 
-EDenyReason :: enum {
+EDenyReason :: enum i32 {
     Invalid                 = 0,
     InvalidVersion          = 1,
     Generic                 = 2,
@@ -1604,7 +1610,7 @@ EDenyReason :: enum {
     SteamOwnerLeftGuestUser = 15,
 }
 
-EBeginAuthSessionResult :: enum {
+EBeginAuthSessionResult :: enum i32 {
     OK               = 0,
     InvalidTicket    = 1,
     DuplicateRequest = 2,
@@ -1613,7 +1619,7 @@ EBeginAuthSessionResult :: enum {
     ExpiredTicket    = 5,
 }
 
-EAuthSessionResponse :: enum {
+EAuthSessionResponse :: enum i32 {
     OK                           = 0,
     UserNotConnectedToSteam      = 1,
     NoLicenseOrExpired           = 2,
@@ -1626,13 +1632,13 @@ EAuthSessionResponse :: enum {
     PublisherIssuedBan           = 9,
 }
 
-EUserHasLicenseForAppResult :: enum {
+EUserHasLicenseForAppResult :: enum i32 {
     HasLicense         = 0,
     DoesNotHaveLicense = 1,
     NoAuth             = 2,
 }
 
-EAccountType :: enum {
+EAccountType :: enum i32 {
     Invalid        = 0,
     Individual     = 1,
     Multiseat      = 2,
@@ -1647,7 +1653,7 @@ EAccountType :: enum {
     Max            = 11,
 }
 
-EChatEntryType :: enum {
+EChatEntryType :: enum i32 {
     Invalid          = 0,
     ChatMsg          = 1,
     Typing           = 2,
@@ -1662,7 +1668,7 @@ EChatEntryType :: enum {
     LinkBlocked      = 14,
 }
 
-EChatRoomEnterResponse :: enum {
+EChatRoomEnterResponse :: enum i32 {
     Success           = 1,
     DoesntExist       = 2,
     NotAllowed        = 3,
@@ -1677,21 +1683,21 @@ EChatRoomEnterResponse :: enum {
     RatelimitExceeded = 15,
 }
 
-EChatSteamIDInstanceFlags :: enum {
+EChatSteamIDInstanceFlags :: enum i32 {
     AccountInstanceMask  = 4095,
     InstanceFlagClan     = 524288,
     InstanceFlagLobby    = 262144,
     InstanceFlagMMSLobby = 131072,
 }
 
-ENotificationPosition :: enum {
+ENotificationPosition :: enum i32 {
     TopLeft     = 0,
     TopRight    = 1,
     BottomLeft  = 2,
     BottomRight = 3,
 }
 
-EBroadcastUploadResult :: enum {
+EBroadcastUploadResult :: enum i32 {
     None              = 0,
     OK                = 1,
     InitFailed        = 2,
@@ -1718,7 +1724,7 @@ EBroadcastUploadResult :: enum {
     AudioInitFailed   = 23,
 }
 
-EMarketNotAllowedReasonFlags :: enum {
+EMarketNotAllowedReasonFlags :: enum i32 {
     None                             = 0,
     TemporaryFailure                 = 1,
     AccountDisabled                  = 2,
@@ -1738,7 +1744,7 @@ EMarketNotAllowedReasonFlags :: enum {
     AcceptedWalletGift               = 32768,
 }
 
-EDurationControlProgress :: enum {
+EDurationControlProgress :: enum i32 {
     Progress_Full  = 0,
     Progress_Half  = 1,
     Progress_None  = 2,
@@ -1747,7 +1753,7 @@ EDurationControlProgress :: enum {
     ExitSoon_Night = 5,
 }
 
-EDurationControlNotification :: enum {
+EDurationControlNotification :: enum i32 {
     None           = 0,
     OneHour        = 1,
     ThreeHours     = 2,
@@ -1758,14 +1764,14 @@ EDurationControlNotification :: enum {
     ExitSoon_Night = 7,
 }
 
-EDurationControlOnlineState :: enum {
+EDurationControlOnlineState :: enum i32 {
     Invalid       = 0,
     Offline       = 1,
     Online        = 2,
     OnlineHighPri = 3,
 }
 
-EGameSearchErrorCode :: enum {
+EGameSearchErrorCode :: enum i32 {
     OK                                = 1,
     Failed_Search_Already_In_Progress = 2,
     Failed_No_Search_In_Progress      = 3,
@@ -1777,7 +1783,7 @@ EGameSearchErrorCode :: enum {
     Failed_Unknown_Error              = 9,
 }
 
-EPlayerResult :: enum {
+EPlayerResult :: enum i32 {
     FailedToConnect = 1,
     Abandoned       = 2,
     Kicked          = 3,
@@ -1785,19 +1791,19 @@ EPlayerResult :: enum {
     Completed       = 5,
 }
 
-ESteamIPv6ConnectivityProtocol :: enum {
+ESteamIPv6ConnectivityProtocol :: enum i32 {
     Invalid = 0,
     HTTP    = 1,
     UDP     = 2,
 }
 
-ESteamIPv6ConnectivityState :: enum {
+ESteamIPv6ConnectivityState :: enum i32 {
     Unknown = 0,
     Good    = 1,
     Bad     = 2,
 }
 
-EFriendRelationship :: enum {
+EFriendRelationship :: enum i32 {
     None                 = 0,
     Blocked              = 1,
     RequestRecipient     = 2,
@@ -1809,7 +1815,7 @@ EFriendRelationship :: enum {
     Max                  = 8,
 }
 
-EPersonaState :: enum {
+EPersonaState :: enum i32 {
     Offline        = 0,
     Online         = 1,
     Busy           = 2,
@@ -1821,7 +1827,7 @@ EPersonaState :: enum {
     Max            = 8,
 }
 
-EFriendFlags :: enum {
+EFriendFlags :: enum i32 {
     None                 = 0,
     Blocked              = 1,
     FriendshipRequested  = 2,
@@ -1836,7 +1842,7 @@ EFriendFlags :: enum {
     All                  = 65535,
 }
 
-EUserRestriction :: enum {
+EUserRestriction :: enum i32 {
     None        = 0,
     Unknown     = 1,
     AnyChat     = 2,
@@ -1847,18 +1853,18 @@ EUserRestriction :: enum {
     Trading     = 64,
 }
 
-EOverlayToStoreFlag :: enum {
+EOverlayToStoreFlag :: enum i32 {
     None             = 0,
     AddToCart        = 1,
     AddToCartAndShow = 2,
 }
 
-EActivateGameOverlayToWebPageMode :: enum {
+EActivateGameOverlayToWebPageMode :: enum i32 {
     Default = 0,
     Modal   = 1,
 }
 
-ECommunityProfileItemType :: enum {
+ECommunityProfileItemType :: enum i32 {
     AnimatedAvatar        = 0,
     AvatarFrame           = 1,
     ProfileModifier       = 2,
@@ -1866,7 +1872,7 @@ ECommunityProfileItemType :: enum {
     MiniProfileBackground = 4,
 }
 
-ECommunityProfileItemProperty :: enum {
+ECommunityProfileItemProperty :: enum i32 {
     ImageSmall     = 0,
     ImageLarge     = 1,
     InternalName   = 2,
@@ -1883,7 +1889,7 @@ ECommunityProfileItemProperty :: enum {
 
 // used in PersonaStateChange_t::m_nChangeFlags to describe what's changed about a user
 // these flags describe what the client has learned has changed recently, so on startup you'll see a name, avatar & relationship change for every friend
-EPersonaChange :: enum {
+EPersonaChange :: enum i32 {
     Name                = 1,
     Status              = 2,
     ComeOnline          = 4,
@@ -1901,7 +1907,7 @@ EPersonaChange :: enum {
     RichPresence        = 16384,
 }
 
-ESteamAPICallFailure :: enum {
+ESteamAPICallFailure :: enum i32 {
     None               = -1,
     SteamGone          = 0,
     NetworkFailure     = 1,
@@ -1909,31 +1915,31 @@ ESteamAPICallFailure :: enum {
     MismatchedCallback = 3,
 }
 
-EGamepadTextInputMode :: enum {
+EGamepadTextInputMode :: enum i32 {
     Normal   = 0,
     Password = 1,
 }
 
-EGamepadTextInputLineMode :: enum {
+EGamepadTextInputLineMode :: enum i32 {
     SingleLine    = 0,
     MultipleLines = 1,
 }
 
-EFloatingGamepadTextInputMode :: enum {
+EFloatingGamepadTextInputMode :: enum i32 {
     SingleLine    = 0,
     MultipleLines = 1,
     Email         = 2,
     Numeric       = 3,
 }
 
-ETextFilteringContext :: enum {
+ETextFilteringContext :: enum i32 {
     Unknown     = 0,
     GameContent = 1,
     Chat        = 2,
     Name        = 3,
 }
 
-ECheckFileSignature :: enum {
+ECheckFileSignature :: enum i32 {
     InvalidSignature             = 0,
     ValidSignature               = 1,
     FileNotFound                 = 2,
@@ -1941,13 +1947,13 @@ ECheckFileSignature :: enum {
     NoSignaturesFoundForThisFile = 4,
 }
 
-EMatchMakingServerResponse :: enum {
+EMatchMakingServerResponse :: enum i32 {
     ServerResponded               = 0,
     ServerFailedToRespond         = 1,
     NoServersListedOnMasterServer = 2,
 }
 
-ELobbyType :: enum {
+ELobbyType :: enum i32 {
     Private       = 0,
     FriendsOnly   = 1,
     Public        = 2,
@@ -1955,7 +1961,7 @@ ELobbyType :: enum {
     PrivateUnique = 4,
 }
 
-ELobbyComparison :: enum {
+ELobbyComparison :: enum i32 {
     EqualToOrLessThan    = -2,
     LessThan             = -1,
     Equal                = 0,
@@ -1964,14 +1970,14 @@ ELobbyComparison :: enum {
     NotEqual             = 3,
 }
 
-ELobbyDistanceFilter :: enum {
+ELobbyDistanceFilter :: enum i32 {
     Close     = 0,
     Default   = 1,
     Far       = 2,
     Worldwide = 3,
 }
 
-EChatMemberStateChange :: enum {
+EChatMemberStateChange :: enum i32 {
     Entered      = 1,
     Left         = 2,
     Disconnected = 4,
@@ -1979,13 +1985,13 @@ EChatMemberStateChange :: enum {
     Banned       = 16,
 }
 
-ESteamPartyBeaconLocationType :: enum {
+ESteamPartyBeaconLocationType :: enum i32 {
     Invalid   = 0,
     ChatGroup = 1,
     Max       = 2,
 }
 
-ESteamPartyBeaconLocationData :: enum {
+ESteamPartyBeaconLocationData :: enum i32 {
     Invalid       = 0,
     Name          = 1,
     IconURLSmall  = 2,
@@ -1993,7 +1999,7 @@ ESteamPartyBeaconLocationData :: enum {
     IconURLLarge  = 4,
 }
 
-ERemoteStoragePlatform :: enum {
+ERemoteStoragePlatform :: enum i32 {
     None    = 0,
     Windows = 1,
     OSX     = 2,
@@ -2005,14 +2011,14 @@ ERemoteStoragePlatform :: enum {
     All     = -1,
 }
 
-ERemoteStoragePublishedFileVisibility :: enum {
+ERemoteStoragePublishedFileVisibility :: enum i32 {
     Public      = 0,
     FriendsOnly = 1,
     Private     = 2,
     Unlisted    = 3,
 }
 
-EWorkshopFileType :: enum {
+EWorkshopFileType :: enum i32 {
     First                  = 0,
     Community              = 0,
     Microtransaction       = 1,
@@ -2033,19 +2039,19 @@ EWorkshopFileType :: enum {
     Max                    = 16,
 }
 
-EWorkshopVote :: enum {
+EWorkshopVote :: enum i32 {
     Unvoted = 0,
     For     = 1,
     Against = 2,
     Later   = 3,
 }
 
-EWorkshopFileAction :: enum {
+EWorkshopFileAction :: enum i32 {
     Played    = 0,
     Completed = 1,
 }
 
-EWorkshopEnumerationType :: enum {
+EWorkshopEnumerationType :: enum i32 {
     RankedByVote            = 0,
     Recent                  = 1,
     Trending                = 2,
@@ -2055,56 +2061,56 @@ EWorkshopEnumerationType :: enum {
     RecentFromFollowedUsers = 6,
 }
 
-EWorkshopVideoProvider :: enum {
+EWorkshopVideoProvider :: enum i32 {
     None    = 0,
     Youtube = 1,
 }
 
-EUGCReadAction :: enum {
+EUGCReadAction :: enum i32 {
     ContinueReadingUntilFinished = 0,
     ContinueReading              = 1,
     Close                        = 2,
 }
 
-ERemoteStorageLocalFileChange :: enum {
+ERemoteStorageLocalFileChange :: enum i32 {
     Invalid     = 0,
     FileUpdated = 1,
     FileDeleted = 2,
 }
 
-ERemoteStorageFilePathType :: enum {
+ERemoteStorageFilePathType :: enum i32 {
     Invalid     = 0,
     Absolute    = 1,
     APIFilename = 2,
 }
 
-ELeaderboardDataRequest :: enum {
+ELeaderboardDataRequest :: enum i32 {
     Global           = 0,
     GlobalAroundUser = 1,
     Friends          = 2,
     Users            = 3,
 }
 
-ELeaderboardSortMethod :: enum {
+ELeaderboardSortMethod :: enum i32 {
     MethodNone       = 0,
     MethodAscending  = 1,
     MethodDescending = 2,
 }
 
-ELeaderboardDisplayType :: enum {
+ELeaderboardDisplayType :: enum i32 {
     None             = 0,
     Numeric          = 1,
     TimeSeconds      = 2,
     TimeMilliSeconds = 3,
 }
 
-ELeaderboardUploadScoreMethod :: enum {
+ELeaderboardUploadScoreMethod :: enum i32 {
     None        = 0,
     KeepBest    = 1,
     ForceUpdate = 2,
 }
 
-ERegisterActivationCodeResult :: enum {
+ERegisterActivationCodeResult :: enum i32 {
     OK                = 0,
     Fail              = 1,
     AlreadyRegistered = 2,
@@ -2112,7 +2118,7 @@ ERegisterActivationCodeResult :: enum {
     AlreadyOwned      = 4,
 }
 
-EP2PSessionError :: enum {
+EP2PSessionError :: enum i32 {
     None                           = 0,
     NoRightsToApp                  = 2,
     Timeout                        = 4,
@@ -2121,14 +2127,14 @@ EP2PSessionError :: enum {
     Max                            = 5,
 }
 
-EP2PSend :: enum {
+EP2PSend :: enum i32 {
     Unreliable            = 0,
     UnreliableNoDelay     = 1,
     Reliable              = 2,
     ReliableWithBuffering = 3,
 }
 
-ESNetSocketState :: enum {
+ESNetSocketState :: enum i32 {
     Invalid                  = 0,
     Connected                = 1,
     Initiated                = 10,
@@ -2142,13 +2148,13 @@ ESNetSocketState :: enum {
     ConnectionBroken         = 25,
 }
 
-ESNetSocketConnectionType :: enum {
+ESNetSocketConnectionType :: enum i32 {
     NotConnected = 0,
     UDP          = 1,
     UDPRelay     = 2,
 }
 
-EVRScreenshotType :: enum {
+EVRScreenshotType :: enum i32 {
     None           = 0,
     Mono           = 1,
     Stereo         = 2,
@@ -2157,14 +2163,14 @@ EVRScreenshotType :: enum {
     StereoPanorama = 5,
 }
 
-AudioPlaybacStatus :: enum {
+AudioPlaybacStatus :: enum i32 {
     Undefined = 0,
     Playing   = 1,
     Paused    = 2,
     Idle      = 3,
 }
 
-EHTTPMethod :: enum {
+EHTTPMethod :: enum i32 {
     Invalid = 0,
     GET     = 1,
     HEAD    = 2,
@@ -2175,7 +2181,7 @@ EHTTPMethod :: enum {
     PATCH   = 7,
 }
 
-EHTTPStatusCode :: enum {
+EHTTPStatusCode :: enum i32 {
     CodeInvalid                         = 0,
     Code100Continue                     = 100,
     Code101SwitchingProtocols           = 101,
@@ -2223,7 +2229,7 @@ EHTTPStatusCode :: enum {
     Code5xxUnknown                      = 599,
 }
 
-EInputSourceMode :: enum {
+EInputSourceMode :: enum i32 {
     None           = 0,
     Dpad           = 1,
     Buttons        = 2,
@@ -2243,7 +2249,7 @@ EInputSourceMode :: enum {
     Switches       = 16,
 }
 
-EInputActionOrigin :: enum {
+EInputActionOrigin :: enum i32 {
     None                               = 0,
     SteamController_A                  = 1,
     SteamController_B                  = 2,
@@ -2654,7 +2660,7 @@ EInputActionOrigin :: enum {
     MaximumPossibleValue               = 32767,
 }
 
-EXboxOrigin :: enum {
+EXboxOrigin :: enum i32 {
     A                  = 0,
     B                  = 1,
     X                  = 2,
@@ -2686,24 +2692,24 @@ EXboxOrigin :: enum {
     Count              = 28,
 }
 
-ESteamControllerPad :: enum {
+ESteamControllerPad :: enum i32 {
     Left  = 0,
     Right = 1,
 }
 
-EControllerHapticLocation :: enum {
+EControllerHapticLocation :: enum i32 {
     Left  = 1,
     Right = 2,
     Both  = 3,
 }
 
-EControllerHapticType :: enum {
+EControllerHapticType :: enum i32 {
     Off   = 0,
     Tick  = 1,
     Click = 2,
 }
 
-ESteamInputType :: enum {
+ESteamInputType :: enum i32 {
     Unknown              = 0,
     SteamController      = 1,
     XBox360Controller    = 2,
@@ -2723,7 +2729,7 @@ ESteamInputType :: enum {
     MaximumPossibleValue = 255,
 }
 
-ESteamInputConfigurationEnableType :: enum {
+ESteamInputConfigurationEnableType :: enum i32 {
     None        = 0,
     Playstation = 1,
     Xbox        = 2,
@@ -2731,19 +2737,19 @@ ESteamInputConfigurationEnableType :: enum {
     Switch      = 8,
 }
 
-ESteamInputLEDFlag :: enum {
+ESteamInputLEDFlag :: enum i32 {
     SetColor           = 0,
     RestoreUserDefault = 1,
 }
 
-ESteamInputGlyphSize :: enum {
+ESteamInputGlyphSize :: enum i32 {
     Small  = 0,
     Medium = 1,
     Large  = 2,
     Count  = 3,
 }
 
-ESteamInputGlyphStyle :: enum {
+ESteamInputGlyphStyle :: enum i32 {
     Knockout         = 0,
     Light            = 1,
     Dark             = 2,
@@ -2751,12 +2757,12 @@ ESteamInputGlyphStyle :: enum {
     SolidABXY        = 32,
 }
 
-ESteamInputActionEventType :: enum {
+ESteamInputActionEventType :: enum i32 {
     DigitalAction = 0,
     AnalogAction  = 1,
 }
 
-EControllerActionOrigin :: enum {
+EControllerActionOrigin :: enum i32 {
     None                             = 0,
     A                                = 1,
     B                                = 2,
@@ -3139,12 +3145,12 @@ EControllerActionOrigin :: enum {
     MaximumPossibleValue             = 32767,
 }
 
-ESteamControllerLEDFlag :: enum {
+ESteamControllerLEDFlag :: enum i32 {
     SetColor           = 0,
     RestoreUserDefault = 1,
 }
 
-EUGCMatchingUGCType :: enum {
+EUGCMatchingUGCType :: enum i32 {
     Items              = 0,
     Items_Mtx          = 1,
     Items_ReadyToUse   = 2,
@@ -3161,7 +3167,7 @@ EUGCMatchingUGCType :: enum {
     All                = -1,
 }
 
-EUserUGCList :: enum {
+EUserUGCList :: enum i32 {
     Published     = 0,
     VotedOn       = 1,
     VotedUp       = 2,
@@ -3173,7 +3179,7 @@ EUserUGCList :: enum {
     Followed      = 8,
 }
 
-EUserUGCListSortOrder :: enum {
+EUserUGCListSortOrder :: enum i32 {
     CreationOrderDesc    = 0,
     CreationOrderAsc     = 1,
     TitleAsc             = 2,
@@ -3183,7 +3189,7 @@ EUserUGCListSortOrder :: enum {
     ForModeration        = 6,
 }
 
-EUGCQuery :: enum {
+EUGCQuery :: enum i32 {
     RankedByVote                                  = 0,
     RankedByPublicationDate                       = 1,
     AcceptedForGameRankedByAcceptanceDate         = 2,
@@ -3206,7 +3212,7 @@ EUGCQuery :: enum {
     RankedByLastUpdatedDate                       = 19,
 }
 
-EItemUpdateStatus :: enum {
+EItemUpdateStatus :: enum i32 {
     Invalid              = 0,
     PreparingConfig      = 1,
     PreparingContent     = 2,
@@ -3215,7 +3221,7 @@ EItemUpdateStatus :: enum {
     CommittingChanges    = 5,
 }
 
-EItemState :: enum {
+EItemState :: enum i32 {
     None            = 0,
     Subscribed      = 1,
     LegacyItem      = 2,
@@ -3225,7 +3231,7 @@ EItemState :: enum {
     DownloadPending = 32,
 }
 
-EItemStatistic :: enum {
+EItemStatistic :: enum i32 {
     NumSubscriptions                    = 0,
     NumFavorites                        = 1,
     NumFollowers                        = 2,
@@ -3241,7 +3247,7 @@ EItemStatistic :: enum {
     NumPlaytimeSessionsDuringTimePeriod = 12,
 }
 
-EItemPreviewType :: enum {
+EItemPreviewType :: enum i32 {
     Image                          = 0,
     YouTubeVideo                   = 1,
     Sketchfab                      = 2,
@@ -3250,13 +3256,21 @@ EItemPreviewType :: enum {
     ReservedMax                    = 255,
 }
 
-ESteamItemFlags :: enum {
+EUGCContentDescriptorID :: enum i32 {
+    NudityOrSexualContent   = 1,
+    FrequentViolenceOrGore  = 2,
+    AdultOnlySexualContent  = 3,
+    GratuitousSexualContent = 4,
+    AnyMatureContent        = 5,
+}
+
+ESteamItemFlags :: enum i32 {
     NoTrade  = 1,
     Removed  = 256,
     Consumed = 512,
 }
 
-EParentalFeature :: enum {
+EParentalFeature :: enum i32 {
     Invalid       = 0,
     Store         = 1,
     Community     = 2,
@@ -3274,7 +3288,7 @@ EParentalFeature :: enum {
     Max           = 14,
 }
 
-ESteamDeviceFormFactor :: enum {
+ESteamDeviceFormFactor :: enum i32 {
     Unknown  = 0,
     Phone    = 1,
     Tablet   = 2,
@@ -3282,7 +3296,7 @@ ESteamDeviceFormFactor :: enum {
     TV       = 4,
 }
 
-ESteamNetworkingAvailability :: enum {
+ESteamNetworkingAvailability :: enum i32 {
     CannotTry   = -102,
     Failed      = -101,
     Previously  = -100,
@@ -3295,7 +3309,7 @@ ESteamNetworkingAvailability :: enum {
     _Force32bit = 2147483647,
 }
 
-ESteamNetworkingIdentityType :: enum {
+ESteamNetworkingIdentityType :: enum i32 {
     Invalid        = 0,
     SteamID        = 16,
     XboxPairwiseID = 17,
@@ -3308,7 +3322,7 @@ ESteamNetworkingIdentityType :: enum {
     _Force32bit    = 2147483647,
 }
 
-ESteamNetworkingFakeIPType :: enum {
+ESteamNetworkingFakeIPType :: enum i32 {
     Invalid     = 0,
     NotFake     = 1,
     GlobalIPv4  = 2,
@@ -3316,7 +3330,7 @@ ESteamNetworkingFakeIPType :: enum {
     _Force32Bit = 2147483647,
 }
 
-ESteamNetworkingConnectionState :: enum {
+ESteamNetworkingConnectionState :: enum i32 {
     None                   = 0,
     Connecting             = 1,
     FindingRoute           = 2,
@@ -3329,7 +3343,7 @@ ESteamNetworkingConnectionState :: enum {
     _Force32Bit            = 2147483647,
 }
 
-ESteamNetConnectionEnd :: enum {
+ESteamNetConnectionEnd :: enum i32 {
     Invalid                          = 0,
     App_Min                          = 1000,
     App_Generic                      = 1000,
@@ -3365,7 +3379,7 @@ ESteamNetConnectionEnd :: enum {
     _Force32Bit                      = 2147483647,
 }
 
-ESteamNetworkingConfigScope :: enum {
+ESteamNetworkingConfigScope :: enum i32 {
     Global           = 1,
     SocketsInterface = 2,
     ListenSocket     = 3,
@@ -3373,7 +3387,7 @@ ESteamNetworkingConfigScope :: enum {
     _Force32Bit      = 2147483647,
 }
 
-ESteamNetworkingConfigDataType :: enum {
+ESteamNetworkingConfigDataType :: enum i32 {
     Int32       = 1,
     Int64       = 2,
     Float       = 3,
@@ -3382,7 +3396,7 @@ ESteamNetworkingConfigDataType :: enum {
     _Force32Bit = 2147483647,
 }
 
-ESteamNetworkingConfigValue :: enum {
+ESteamNetworkingConfigValue :: enum i32 {
     Invalid                                        = 0,
     TimeoutInitial                                 = 24,
     TimeoutConnected                               = 25,
@@ -3447,7 +3461,7 @@ ESteamNetworkingConfigValue :: enum {
     _Force32Bit                                    = 2147483647,
 }
 
-ESteamNetworkingGetConfigValueResult :: enum {
+ESteamNetworkingGetConfigValueResult :: enum i32 {
     BadValue           = -1,
     BadScopeObj        = -2,
     BufferTooSmall     = -3,
@@ -3456,7 +3470,7 @@ ESteamNetworkingGetConfigValueResult :: enum {
     Result__Force32Bit = 2147483647,
 }
 
-ESteamNetworkingSocketsDebugOutputType :: enum {
+ESteamNetworkingSocketsDebugOutputType :: enum i32 {
     None        = 0,
     Bug         = 1,
     Error       = 2,
@@ -3469,20 +3483,20 @@ ESteamNetworkingSocketsDebugOutputType :: enum {
     _Force32Bit = 2147483647,
 }
 
-EServerMode :: enum {
+EServerMode :: enum i32 {
     Invalid                 = 0,
     NoAuthentication        = 1,
     Authentication          = 2,
     AuthenticationAndSecure = 3,
 }
 
-IHTMLSurface_EHTMLMouseButton :: enum {
+IHTMLSurface_EHTMLMouseButton :: enum i32 {
     Left   = 0,
     Right  = 1,
     Middle = 2,
 }
 
-IHTMLSurface_EMouseCursor :: enum {
+IHTMLSurface_EMouseCursor :: enum i32 {
     user           = 0,
     none           = 1,
     arrow          = 2,
@@ -3527,19 +3541,27 @@ IHTMLSurface_EMouseCursor :: enum {
     last           = 41,
 }
 
-IHTMLSurface_EHTMLKeyModifiers :: enum {
+IHTMLSurface_EHTMLKeyModifiers :: enum i32 {
     None      = 0,
     AltDown   = 1,
     CtrlDown  = 2,
     ShiftDown = 4,
 }
 
-SteamIPAddress :: struct #align CALLBACK_ALIGN {
+ESteamAPIInitResult :: enum i32 {
+    OK              = 0,
+    FailedGeneric   = 1, // Some other failure
+    NoSteamClient   = 2, // We cannot connect to Steam, steam probably isn't running
+    VersionMismatch = 3, // Steam client appears to be out of date
+}
+
+
+SteamIPAddress :: struct #align (CALLBACK_ALIGN) {
     rgubIPv6: [16]u8,
     eType:    ESteamIPType,
 }
 
-FriendGameInfo :: struct #align CALLBACK_ALIGN {
+FriendGameInfo :: struct #align (CALLBACK_ALIGN) {
     gameID:       CGameID,
     unGameIP:     u32,
     usGamePort:   u16,
@@ -3547,18 +3569,18 @@ FriendGameInfo :: struct #align CALLBACK_ALIGN {
     steamIDLobby: CSteamID,
 }
 
-MatchMakingKeyValuePair :: struct #align CALLBACK_ALIGN {
+MatchMakingKeyValuePair :: struct #align (CALLBACK_ALIGN) {
     szKey:   [256]u8,
     szValue: [256]u8,
 }
 
-servernetadr :: struct #align CALLBACK_ALIGN {
+servernetadr :: struct #align (CALLBACK_ALIGN) {
     usConnectionPort: u16,
     usQueryPort:      u16,
     unIP:             u32,
 }
 
-gameserveritet :: struct #align CALLBACK_ALIGN {
+gameserveritet :: struct #align (CALLBACK_ALIGN) {
     NetAdr:                 servernetadr,
     nPing:                  i32,
     bHadSuccessfulResponse: bool,
@@ -3579,17 +3601,17 @@ gameserveritet :: struct #align CALLBACK_ALIGN {
     steamID:                CSteamID,
 }
 
-SteamPartyBeaconLocation :: struct #align CALLBACK_ALIGN {
+SteamPartyBeaconLocation :: struct #align (CALLBACK_ALIGN) {
     eType:        ESteamPartyBeaconLocationType,
     ulLocationID: u64,
 }
 
-SteamParamStringArray :: struct #align CALLBACK_ALIGN {
+SteamParamStringArray :: struct #align (CALLBACK_ALIGN) {
     ppStrings:   ^cstring,
     nNumStrings: i32,
 }
 
-LeaderboardEntry :: struct #align CALLBACK_ALIGN {
+LeaderboardEntry :: struct #align (CALLBACK_ALIGN) {
     steamIDUser: CSteamID,
     nGlobalRank: i32,
     nScore:      i32,
@@ -3597,7 +3619,7 @@ LeaderboardEntry :: struct #align CALLBACK_ALIGN {
     hUGC:        UGCHandle,
 }
 
-P2PSessionState :: struct #align CALLBACK_ALIGN {
+P2PSessionState :: struct #align (CALLBACK_ALIGN) {
     bConnectionActive:     u8,
     bConnecting:           u8,
     eP2PSessionError:      u8,
@@ -3608,19 +3630,19 @@ P2PSessionState :: struct #align CALLBACK_ALIGN {
     nRemotePort:           u16,
 }
 
-InputAnalogActionData :: struct #align CALLBACK_ALIGN {
+InputAnalogActionData :: struct #align (CALLBACK_ALIGN) {
     eMode:   EInputSourceMode,
     x:       f32,
     y:       f32,
     bActive: bool,
 }
 
-InputDigitalActionData :: struct #align CALLBACK_ALIGN {
+InputDigitalActionData :: struct #align (CALLBACK_ALIGN) {
     bState:  bool,
     bActive: bool,
 }
 
-InputMotionData :: struct #align CALLBACK_ALIGN {
+InputMotionData :: struct #align (CALLBACK_ALIGN) {
     rotQuatX:  f32,
     rotQuatY:  f32,
     rotQuatZ:  f32,
@@ -3633,7 +3655,7 @@ InputMotionData :: struct #align CALLBACK_ALIGN {
     rotVelZ:   f32,
 }
 
-SteamUGCDetails :: struct #align CALLBACK_ALIGN {
+SteamUGCDetails :: struct #align (CALLBACK_ALIGN) {
     nPublishedFileId:     PublishedFileId,
     eResult:              EResult,
     eFileType:            EWorkshopFileType,
@@ -3662,25 +3684,25 @@ SteamUGCDetails :: struct #align CALLBACK_ALIGN {
     unNumChildren:        u32,
 }
 
-SteamItemDetails :: struct #align CALLBACK_ALIGN {
+SteamItemDetails :: struct #align (CALLBACK_ALIGN) {
     itemId:      SteamItemInstanceID,
     iDefinition: SteamItemDef,
     unQuantity:  u16,
     unFlags:     u16,
 }
 
-SteamNetworkingIPAddr :: struct #align CALLBACK_ALIGN {
+SteamNetworkingIPAddr :: struct #align (CALLBACK_ALIGN) {
     ipv6: [16]u8,
     port: u16,
 }
 
-SteamNetworkingIdentity :: struct #align CALLBACK_ALIGN {
+SteamNetworkingIdentity :: struct #align (CALLBACK_ALIGN) {
     eType:              ESteamNetworkingIdentityType,
     cbSize:             i32,
     szUnknownRawString: [128]u8,
 }
 
-SteamNetConnectionInfo :: struct #align CALLBACK_ALIGN {
+SteamNetConnectionInfo :: struct #align (CALLBACK_ALIGN) {
     identityRemote:          SteamNetworkingIdentity,
     nUserData:               i64,
     hListenSocket:           HSteamListenSocket,
@@ -3696,7 +3718,7 @@ SteamNetConnectionInfo :: struct #align CALLBACK_ALIGN {
     reserved:                [63]u32,
 }
 
-SteamNetConnectionRealTimeStatus :: struct #align CALLBACK_ALIGN {
+SteamNetConnectionRealTimeStatus :: struct #align (CALLBACK_ALIGN) {
     eState:                    ESteamNetworkingConnectionState,
     nPing:                     i32,
     flConnectionQualityLocal:  f32,
@@ -3713,7 +3735,7 @@ SteamNetConnectionRealTimeStatus :: struct #align CALLBACK_ALIGN {
     reserved:                  [16]u32,
 }
 
-SteamNetConnectionRealTimeLaneStatus :: struct #align CALLBACK_ALIGN {
+SteamNetConnectionRealTimeLaneStatus :: struct #align (CALLBACK_ALIGN) {
     cbPendingUnreliable:   i32,
     cbPendingReliable:     i32,
     cbSentUnackedReliable: i32,
@@ -3722,22 +3744,22 @@ SteamNetConnectionRealTimeLaneStatus :: struct #align CALLBACK_ALIGN {
     reserved:              [10]u32,
 }
 
-SteamNetworkPingLocation :: struct #align CALLBACK_ALIGN {
+SteamNetworkPingLocation :: struct #align (CALLBACK_ALIGN) {
     data: [512]u8,
 }
 
-SteamNetworkingConfigValue :: struct #align CALLBACK_ALIGN {
+SteamNetworkingConfigValue :: struct #align (CALLBACK_ALIGN) {
     eValue:    ESteamNetworkingConfigValue,
     eDataType: ESteamNetworkingConfigDataType,
     i64:       i64,
 }
 
-SteamDatagramHostedAddress :: struct #align CALLBACK_ALIGN {
+SteamDatagramHostedAddress :: struct #align (CALLBACK_ALIGN) {
     cbSize: i32,
     data:   [128]u8,
 }
 
-SteamDatagramGameCoordinatorServerLogin :: struct #align CALLBACK_ALIGN {
+SteamDatagramGameCoordinatorServerLogin :: struct #align (CALLBACK_ALIGN) {
     identity:  SteamNetworkingIdentity,
     routing:   SteamDatagramHostedAddress,
     nAppID:    AppId,
@@ -3770,13 +3792,13 @@ MusicRemote :: SteamMusicRemote_v001
 HTTP :: SteamHTTP_v003
 Input :: SteamInput_v006
 Controller :: SteamController_v008
-UGC :: SteamUGC_v017
+UGC :: SteamUGC_v018
 AppList :: SteamAppList_v001
 HTMLSurface :: SteamHTMLSurface_v005
 Inventory :: SteamInventory_v003
 Video :: SteamVideo_v002
 ParentalSettings :: SteamParentalSettings_v001
-RemotePlay :: SteamRemotePlay_v001
+RemotePlay :: SteamRemotePlay_v002
 NetworkingMessages_SteamAPI :: SteamNetworkingMessages_SteamAPI_v002
 NetworkingSockets_SteamAPI :: SteamNetworkingSockets_SteamAPI_v012
 NetworkingUtils_SteamAPI :: SteamNetworkingUtils_SteamAPI_v004
@@ -3825,11 +3847,113 @@ INetworkingFakeUDPPort :: distinct rawptr
 // No 'SteamAPI_' prefix
 foreign lib {
     SteamClient :: proc() -> ^IClient ---
+
+    // Internal implementation of SteamAPI_InitEx.  This is done in a way that checks
+    // all of the versions of interfaces from headers being compiled into this code.
+    // If you are not using any of the C++ interfaces and do not need this version checking
+    // (for example if you are only using the "flat" interfaces, which have a different type
+    // of version checking), you can pass a NULL interface version string.
+    SteamInternal_SteamAPI_Init :: proc(pszInternalCheckInterfaceVersions: cstring, pOutErrMsg: ^SteamErrMsg) -> ESteamAPIInitResult ---
+
+
+    // Shutdown SteamGameSeverXxx interfaces, log out, and free resources.
+    SteamGameServer_Shutdown :: proc() ---
+
+    SteamGameServer_BSecure :: proc() -> bool ---
+    SteamGameServer_GetSteamID :: proc() -> u64 ---
+
+    // Older SDKs exported this global pointer, but it is no longer supported.
+    // You should use SteamGameServerClient() or CSteamGameServerAPIContext to
+    // safely access the ISteamClient APIs from your game server application.
+    //S_API ISteamClient *g_pSteamClientGameServer;
+
+    // SteamGameServer_InitSafe has been replaced with SteamGameServer_Init and
+    // is no longer supported. Use SteamGameServer_Init instead.
+    //S_API void S_CALLTYPE SteamGameServer_InitSafe();
+
+    SteamInternal_GameServer_Init_V2 :: proc(unIP: u32, usGamePort: u16, usQueryPort: u16, eServerMode: EServerMode, pchVersionString: cstring, pszInternalCheckInterfaceVersions: cstring, pOutErrMsg: ^SteamErrMsg) -> ESteamAPIInitResult ---
+
 }
+
 
 // --------------------------
 // Global SteamAPI functionns
 // --------------------------
+
+// Initialize the SDK, without worrying about the cause of failure.
+// This function is included for compatibility with older SDK.
+// You can use it if you don't care about decent error handling
+Init :: proc() -> bool {
+    return InitEx(nil) == .OK
+}
+
+
+// Initialize the Steamworks SDK.
+// On success k_ESteamAPIInitResult_OK is returned.  Otherwise, if pOutErrMsg is non-NULL,
+// it will receive a non-localized message that explains the reason for the failure
+//
+// Example usage:
+// 
+//   SteamErrMsg errMsg;
+//   if ( SteamAPI_Init(&errMsg) != k_ESteamAPIInitResult_OK )
+//       FatalError( "Failed to init Steam.  %s", errMsg );
+InitEx :: proc(pOutErrMsg: ^SteamErrMsg) -> ESteamAPIInitResult {
+    return SteamInternal_SteamAPI_Init(nil, pOutErrMsg)
+}
+
+// This function is included for compatibility with older SDK.
+// You can use it if you don't care about decent error handling
+SteamGameServer_Init :: proc(unIP: u32, usGamePort: u16, usQueryPort: u16, eServerMode: EServerMode, pchVersionString: cstring) -> bool {
+    return SteamGameServer_InitEx(unIP, usGamePort, usQueryPort, eServerMode, pchVersionString, nil) == .OK
+}
+
+// Initialize SteamGameServer client and interface objects, and set server properties which may not be changed.
+//
+// After calling this function, you should set any additional server parameters, and then
+// call ISteamGameServer::LogOnAnonymous() or ISteamGameServer::LogOn()
+//
+// - unIP will usually be zero.  If you are on a machine with multiple IP addresses, you can pass a non-zero
+//   value here and the relevant sockets will be bound to that IP.  This can be used to ensure that
+//   the IP you desire is the one used in the server browser.
+// - usGamePort is the port that clients will connect to for gameplay.  You will usually open up your
+//   own socket bound to this port.
+// - usQueryPort is the port that will manage server browser related duties and info
+//		pings from clients.  If you pass STEAMGAMESERVER_QUERY_PORT_SHARED for usQueryPort, then it
+//		will use "GameSocketShare" mode, which means that the game is responsible for sending and receiving
+//		UDP packets for the master  server updater.  (See ISteamGameServer::HandleIncomingPacket and
+//		ISteamGameServer::GetNextOutgoingPacket.)
+// - The version string should be in the form x.x.x.x, and is used by the master server to detect when the
+//		server is out of date.  (Only servers with the latest version will be listed.)
+//
+// On success k_ESteamAPIInitResult_OK is returned.  Otherwise, if pOutErrMsg is non-NULL,
+// it will receive a non-localized message that explains the reason for the failure
+SteamGameServer_InitEx :: proc(unIP: u32, usGamePort: u16, usQueryPort: u16, eServerMode: EServerMode, pchVersionString: cstring, pOutErrMsg: ^SteamErrMsg) -> ESteamAPIInitResult {
+    // NOTE: can we pass null to pszInternalCheckInterfaceVersions??
+    pszInternalCheckInterfaceVersions: cstring = nil
+    // 	STEAMUTILS_INTERFACE_VERSION "\0"
+    // 	STEAMNETWORKINGUTILS_INTERFACE_VERSION "\0"
+
+    // 	STEAMGAMESERVER_INTERFACE_VERSION "\0"
+    // 	STEAMGAMESERVERSTATS_INTERFACE_VERSION "\0"
+    // 	STEAMHTTP_INTERFACE_VERSION "\0"
+    // 	STEAMINVENTORY_INTERFACE_VERSION "\0"
+    // 	STEAMNETWORKING_INTERFACE_VERSION "\0"
+    // 	STEAMNETWORKINGMESSAGES_INTERFACE_VERSION "\0"
+    // 	STEAMNETWORKINGSOCKETS_INTERFACE_VERSION "\0"
+    // 	STEAMUGC_INTERFACE_VERSION "\0"
+    // 	"\0";
+    return SteamInternal_GameServer_Init_V2(unIP, usGamePort, usQueryPort, eServerMode, pchVersionString, pszInternalCheckInterfaceVersions, pOutErrMsg)
+}
+
+// Most Steam API functions allocate some amount of thread-local memory for
+// parameter storage. Calling SteamGameServer_ReleaseCurrentThreadMemory()
+// will free all API-related memory associated with the calling thread.
+// This memory is released automatically by SteamGameServer_RunCallbacks(),
+// so single-threaded servers do not need to explicitly call this function.
+SteamGameServer_ReleaseCurrentThreadMemory :: proc() {
+    ReleaseCurrentThreadMemory()
+}
+
 
 @(link_prefix = "SteamAPI_")
 foreign lib {
@@ -3839,10 +3963,6 @@ foreign lib {
     //	These functions manage loading, initializing and shutdown of the steamclient.dll
     //
     //----------------------------------------------------------------------------------------------------------------------------------------------------------//
-
-    // SteamAPI_Init must be called before using any other API functions. If it fails, an
-    // error message will be output to the debugger (or stderr) with further information.
-    Init :: proc() -> bool ---
 
     // SteamAPI_Shutdown should be called during process shutdown if possible.
     Shutdown :: proc() ---
@@ -3946,13 +4066,13 @@ foreign lib {
     SteamHTTP_v003 :: proc() -> ^IHTTP ---
     SteamInput_v006 :: proc() -> ^IInput ---
     SteamController_v008 :: proc() -> ^IController ---
-    SteamUGC_v017 :: proc() -> ^IUGC ---
+    SteamUGC_v018 :: proc() -> ^IUGC ---
     SteamAppList_v001 :: proc() -> ^IAppList ---
     SteamHTMLSurface_v005 :: proc() -> ^IHTMLSurface ---
     SteamInventory_v003 :: proc() -> ^IInventory ---
     SteamVideo_v002 :: proc() -> ^IVideo ---
     SteamParentalSettings_v001 :: proc() -> ^IParentalSettings ---
-    SteamRemotePlay_v001 :: proc() -> ^IRemotePlay ---
+    SteamRemotePlay_v002 :: proc() -> ^IRemotePlay ---
     SteamNetworkingMessages_SteamAPI_v002 :: proc() -> ^INetworkingMessages ---
     SteamNetworkingSockets_SteamAPI_v012 :: proc() -> ^INetworkingSockets ---
     SteamNetworkingUtils_SteamAPI_v004 :: proc() -> ^INetworkingUtils ---
@@ -4015,6 +4135,7 @@ foreign lib {
     User_DecompressVoice :: proc(self: ^IUser, pCompressed: rawptr, cbCompressed: u32, pDestBuffer: rawptr, cbDestBufferSize: u32, nBytesWritten: ^u32, nDesiredSampleRate: u32) -> EVoiceResult ---
     User_GetVoiceOptimalSampleRate :: proc(self: ^IUser) -> u32 ---
     User_GetAuthSessionTicket :: proc(self: ^IUser, pTicket: rawptr, cbMaxTicket: i32, pcbTicket: ^u32, #by_ptr pSteamNetworkingIdentity: SteamNetworkingIdentity) -> HAuthTicket ---
+    User_GetAuthTicketForWebApi :: proc(self: ^IUser, pchIdentity: cstring) -> HAuthTicket ---
     User_BeginAuthSession :: proc(self: ^IUser, pAuthTicket: rawptr, cbAuthTicket: i32, steamID: CSteamID) -> EBeginAuthSessionResult ---
     User_EndAuthSession :: proc(self: ^IUser, steamID: CSteamID) ---
     User_CancelAuthTicket :: proc(self: ^IUser, hAuthTicket: HAuthTicket) ---
@@ -4592,6 +4713,8 @@ foreign lib {
     UGC_GetQueryUGCAdditionalPreview :: proc(self: ^IUGC, handle: UGCQueryHandle, index: u32, previewIndex: u32, pchURLOrVideoID: ^u8, cchURLSize: u32, pchOriginalFileName: ^u8, cchOriginalFileNameSize: u32, pPreviewType: ^EItemPreviewType) -> bool ---
     UGC_GetQueryUGCNumKeyValueTags :: proc(self: ^IUGC, handle: UGCQueryHandle, index: u32) -> u32 ---
     UGC_GetQueryUGCKeyValueTag :: proc(self: ^IUGC, handle: UGCQueryHandle, index: u32, pchKey: cstring, pchValue: ^u8, cchValueSize: u32) -> bool ---
+    UGC_GetQueryFirstUGCKeyValueTag :: proc(self: ^IUGC, handle: UGCQueryHandle, index: u32, pchKey: cstring, pchValue: [^]u8, cchValueSize: u32) -> bool ---
+    UGC_GetQueryUGCContentDescriptors :: proc(self: ^IUGC, handle: UGCQueryHandle, index: u32, pvecDescriptors: [^]EUGCContentDescriptorID, cMaxEntries: u32) -> u32 ---
     UGC_ReleaseQueryUGCRequest :: proc(self: ^IUGC, handle: UGCQueryHandle) -> bool ---
     UGC_AddRequiredTag :: proc(self: ^IUGC, handle: UGCQueryHandle, pTagName: cstring) -> bool ---
     UGC_AddRequiredTagGroup :: proc(self: ^IUGC, handle: UGCQueryHandle, pTagGroups: ^SteamParamStringArray) -> bool ---
@@ -4621,7 +4744,7 @@ foreign lib {
     UGC_SetItemUpdateLanguage :: proc(self: ^IUGC, handle: UGCUpdateHandle, pchLanguage: cstring) -> bool ---
     UGC_SetItemMetadata :: proc(self: ^IUGC, handle: UGCUpdateHandle, pchMetaData: cstring) -> bool ---
     UGC_SetItemVisibility :: proc(self: ^IUGC, handle: UGCUpdateHandle, eVisibility: ERemoteStoragePublishedFileVisibility) -> bool ---
-    UGC_SetItemTags :: proc(self: ^IUGC, updateHandle: UGCUpdateHandle, pTags: ^SteamParamStringArray) -> bool ---
+    UGC_SetItemTags :: proc(self: ^IUGC, updateHandle: UGCUpdateHandle, pTags: ^SteamParamStringArray, bAllowAdminTags: bool = false) -> bool ---
     UGC_SetItemContent :: proc(self: ^IUGC, handle: UGCUpdateHandle, pszContentFolder: cstring) -> bool ---
     UGC_SetItemPreview :: proc(self: ^IUGC, handle: UGCUpdateHandle, pszPreviewFile: cstring) -> bool ---
     UGC_SetAllowLegacyUpload :: proc(self: ^IUGC, handle: UGCUpdateHandle, bAllowLegacyUpload: bool) -> bool ---
@@ -4633,6 +4756,8 @@ foreign lib {
     UGC_UpdateItemPreviewFile :: proc(self: ^IUGC, handle: UGCUpdateHandle, index: u32, pszPreviewFile: cstring) -> bool ---
     UGC_UpdateItemPreviewVideo :: proc(self: ^IUGC, handle: UGCUpdateHandle, index: u32, pszVideoID: cstring) -> bool ---
     UGC_RemoveItemPreview :: proc(self: ^IUGC, handle: UGCUpdateHandle, index: u32) -> bool ---
+    UGC_AddContentDescriptor :: proc(self: ^IUGC, handle: UGCUpdateHandle, descid: EUGCContentDescriptorID) -> bool ---
+    UGC_RemoveContentDescriptor :: proc(self: ^IUGC, handle: UGCUpdateHandle, descid: EUGCContentDescriptorID) -> bool ---
     UGC_SubmitItemUpdate :: proc(self: ^IUGC, handle: UGCUpdateHandle, pchChangeNote: cstring) -> SteamAPICall ---
     UGC_GetItemUpdateProgress :: proc(self: ^IUGC, handle: UGCUpdateHandle, punBytesProcessed: ^u64, punBytesTotal: ^u64) -> EItemUpdateStatus ---
     UGC_SetUserItemVote :: proc(self: ^IUGC, nPublishedFileID: PublishedFileId, bVoteUp: bool) -> SteamAPICall ---
@@ -4660,6 +4785,8 @@ foreign lib {
     UGC_DeleteItem :: proc(self: ^IUGC, nPublishedFileID: PublishedFileId) -> SteamAPICall ---
     UGC_ShowWorkshopEULA :: proc(self: ^IUGC) -> bool ---
     UGC_GetWorkshopEULAStatus :: proc(self: ^IUGC) -> SteamAPICall ---
+    UGC_GetUserContentDescriptorPreferences :: proc(self: ^IUGC, pvecDescriptors: [^]EUGCContentDescriptorID, cMaxEntries: u32) -> u32 ---
+
 
     AppList_GetNumInstalledApps :: proc(self: ^IAppList) -> u32 ---
     AppList_GetInstalledApps :: proc(self: ^IAppList, pvecAppID: ^AppId, unMaxAppIDs: u32) -> u32 ---
@@ -4762,6 +4889,7 @@ foreign lib {
     RemotePlay_GetSessionClientName :: proc(self: ^IRemotePlay, unSessionID: RemotePlaySessionID) -> cstring ---
     RemotePlay_GetSessionClientFormFactor :: proc(self: ^IRemotePlay, unSessionID: RemotePlaySessionID) -> ESteamDeviceFormFactor ---
     RemotePlay_BGetSessionClientResolution :: proc(self: ^IRemotePlay, unSessionID: RemotePlaySessionID, pnResolutionX: ^int, pnResolutionY: ^int) -> bool ---
+    RemotePlay_BStartRemotePlayTogether :: proc(self: ^IRemotePlay, bShowOverlay: bool) -> bool ---
     RemotePlay_BSendRemotePlayTogetherInvite :: proc(self: ^IRemotePlay, steamIDFriend: CSteamID) -> bool ---
 
     NetworkingMessages_SendMessageToUser :: proc(self: ^INetworkingMessages, identityRemote: ^SteamNetworkingIdentity, pubData: rawptr, cubData: u32, nSendFlags: i32, nRemoteChannel: i32) -> EResult ---
@@ -5284,7 +5412,7 @@ ICallback :: enum i32 {
     LobbyCreated                                           = iSteamMatchmakingCallbacks + 13,
 
     // used by now obsolete RequestFriendsLobbiesResponse_t
-    // enum { k = iSteamMatchmakingCallbacks + 14 };
+    // enum i32 { k = iSteamMatchmakingCallbacks + 14 };
 
     // Purpose: Result of CheckForPSNGameBootInvite
     //			m_eResult == k_EResultOK on success
@@ -5731,7 +5859,7 @@ ICallback :: enum i32 {
 }
 
 /// Internal structure used in manual callback dispatch
-CallbackMsg :: struct #align CALLBACK_ALIGN {
+CallbackMsg :: struct #align (CALLBACK_ALIGN) {
     hSteamUser: HSteamUser, // Specific user to whom this callback applies.
     iCallback:  ICallback, // Callback identifier.  (Corresponds to the k_iCallback enum in the callback structure.)
     pubParam:   ^u8, // Points to the callback structure
