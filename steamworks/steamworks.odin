@@ -14,10 +14,38 @@ when ODIN_OS == .Windows {
 CALLBACK_PACK_LARGE :: #config(STEAMWORKS_CALLBACK_PACK_LARGE, true)
 CALLBACK_ALIGN :: 8 when CALLBACK_PACK_LARGE else 4
 
-intptr :: distinct int
+CGameID :: struct #raw_union {
+    ulGameID: u64,
+    gameID:   GameID,
+}
 
-// HACK
-CGameID :: u64
+when ODIN_ENDIAN == .Big {
+    GameID :: struct #raw_union {
+        nModID: u32,
+        nType:  u8,
+        nAppID: [3]u8,
+    }
+} else {
+    GameID :: struct #raw_union {
+        nAppID: [3]u8,
+        nType:  u8,
+        nModID: u32,
+    }
+}
+
+cgameid_is_valid :: proc(id: CGameID) -> bool {
+    switch id.gameID.nType {
+    case u8(CGameID_EGameIDType.App):
+        return id.gameID.nAppID != 0
+    case u8(CGameID_EGameIDType.GameMod):
+        return id.gameID.nAppID != 0 && bool(id.gameID.nModID & 0x80000000)
+    case u8(CGameID_EGameIDType.Shortcut):
+        return id.gameID.nAppID == 0 && bool(id.gameID.nModID & 0x80000000) && id.gameID.nModID >= (5000 | 0x80000000)
+    case u8(CGameID_EGameIDType.P2P):
+        return id.gameID.nAppID == 0 && bool(id.gameID.nModID & 0x80000000)
+    }
+    return false
+}
 
 // HACK
 CSteamID :: u64
@@ -77,9 +105,9 @@ FnSteamRelayNetworkStatusChanged :: #type proc "c" (_: ^SteamRelayNetworkStatus)
 FnSteamNetworkingMessagesSessionRequest :: #type proc "c" (_: ^SteamNetworkingMessagesSessionRequest)
 FnSteamNetworkingMessagesSessionFailed :: #type proc "c" (_: ^SteamNetworkingMessagesSessionFailed)
 FnSteamNetworkingFakeIPResult :: #type proc "c" (_: ^SteamNetworkingFakeIPResult)
-HSteamNetConnection :: u32
-HSteamListenSocket :: u32
-HSteamNetPollGroup :: u32
+HSteamNetConnection :: distinct u32
+HSteamListenSocket :: distinct u32
+HSteamNetPollGroup :: distinct u32
 SteamNetworkingErrMsg :: [1024]u8
 SteamNetworkingPOPID :: u32
 SteamNetworkingMicroseconds :: i64 // c.longlong
@@ -4977,9 +5005,9 @@ foreign lib {
     NetworkingUtils_SetGlobalCallbacFakeIPResult :: proc(self: ^INetworkingUtils, fnCallback: FnSteamNetworkingFakeIPResult) -> bool ---
     NetworkingUtils_SetGlobalCallbacMessagesSessionRequest :: proc(self: ^INetworkingUtils, fnCallback: FnSteamNetworkingMessagesSessionRequest) -> bool ---
     NetworkingUtils_SetGlobalCallbacMessagesSessionFailed :: proc(self: ^INetworkingUtils, fnCallback: FnSteamNetworkingMessagesSessionFailed) -> bool ---
-    NetworkingUtils_SetConfigValue :: proc(self: ^INetworkingUtils, eValue: ESteamNetworkingConfigValue, eScopeType: ESteamNetworkingConfigScope, scopeObj: intptr, eDataType: ESteamNetworkingConfigDataType, pArg: rawptr) -> bool ---
-    NetworkingUtils_SetConfigValueStruct :: proc(self: ^INetworkingUtils, opt: ^SteamNetworkingConfigValue, eScopeType: ESteamNetworkingConfigScope, scopeObj: intptr) -> bool ---
-    NetworkingUtils_GetConfigValue :: proc(self: ^INetworkingUtils, eValue: ESteamNetworkingConfigValue, eScopeType: ESteamNetworkingConfigScope, scopeObj: intptr, pOutDataType: ^ESteamNetworkingConfigDataType, pResult: rawptr, cbResult: ^int) -> ESteamNetworkingGetConfigValueResult ---
+    NetworkingUtils_SetConfigValue :: proc(self: ^INetworkingUtils, eValue: ESteamNetworkingConfigValue, eScopeType: ESteamNetworkingConfigScope, scopeObj: int, eDataType: ESteamNetworkingConfigDataType, pArg: rawptr) -> bool ---
+    NetworkingUtils_SetConfigValueStruct :: proc(self: ^INetworkingUtils, opt: ^SteamNetworkingConfigValue, eScopeType: ESteamNetworkingConfigScope, scopeObj: int) -> bool ---
+    NetworkingUtils_GetConfigValue :: proc(self: ^INetworkingUtils, eValue: ESteamNetworkingConfigValue, eScopeType: ESteamNetworkingConfigScope, scopeObj: int, pOutDataType: ^ESteamNetworkingConfigDataType, pResult: rawptr, cbResult: ^int) -> ESteamNetworkingGetConfigValueResult ---
     NetworkingUtils_GetConfigValueInfo :: proc(self: ^INetworkingUtils, eValue: ESteamNetworkingConfigValue, pOutDataType: ^ESteamNetworkingConfigDataType, pOutScope: ^ESteamNetworkingConfigScope) -> cstring ---
     NetworkingUtils_IterateGenericEditableConfigValues :: proc(self: ^INetworkingUtils, eCurrent: ESteamNetworkingConfigValue, bEnumerateDevVars: bool) -> ESteamNetworkingConfigValue ---
     NetworkingUtils_SteamNetworkingIPAddr_ToString :: proc(self: ^INetworkingUtils, addr: ^SteamNetworkingIPAddr, buf: ^u8, cbBuf: u32, bWithPort: bool) ---
