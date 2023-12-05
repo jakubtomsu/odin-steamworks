@@ -10,9 +10,9 @@ Current Steamworks SDK version: `1.58a`
 Latest tested Odin version: `dev-2023-12-nightly:31b1aef4`
 
 ## How to Use
-1. Copy the [steamworks](steamworks/) folder into your project.
-2. Put `steam_api64.dll` next to your exe.
-3. (debug-only) Create a `steam_appid.txt` with the text `480`. Do not ship this with your game.
+1. Copy the [steamworks](steamworks/) folder into your project
+2. Put `steam_api64.dll` next to your exe
+3. Create a `steam_appid.txt` with your steam app ID. Use `480` for testing purposes
 
 Take a look at the [example](example/example.odin) to see the API usage.
 
