@@ -1,39 +1,42 @@
-package main
-import "core:fmt"
+package steamworks_example
+
+import steam "../steamworks"
 import "core:c"
+import "core:fmt"
+import "core:mem"
 import "core:runtime"
 import "core:strings"
-import "core:mem"
 import "vendor:raylib"
-import "../steamworks"
 
 // https://partner.steamgames.com/doc/sdk/api
 // https://partner.steamgames.com/doc/sdk/api#manual_dispatch
 
-numberOfCurrentPlayers: int
+number_of_current_players: int
 
 main :: proc() {
     fmt.println("Hello world!")
 
-    if steamworks.RestartAppIfNecessary(steamworks.uAppIdInvalid) {
-        fmt.println("Launching app through steamworks...")
+    if steam.RestartAppIfNecessary(steam.uAppIdInvalid) {
+        fmt.println("Launching app through steam...")
         return
     }
 
-    if !steamworks.Init() do panic("steamworks.Init failed. Make sure Steam is running.")
+    if !steam.Init() do panic("steam.Init failed. Make sure Steam is running.")
 
-    steamworks.Client_SetWarningMessageHook(steamworks.Client(), steamDebugTextHook)
+    steam.Client_SetWarningMessageHook(steam.Client(), steam_debug_text_hook)
 
-    steamworks.ManualDispatch_Init()
+    steam.ManualDispatch_Init()
 
-    if !steamworks.User_BLoggedOn(steamworks.User()) {
+    if !steam.User_BLoggedOn(steam.User()) {
         panic("User isn't logged in.")
-    } else do fmt.println("USER IS LOGGED IN")
+    } else {
+        fmt.println("USER IS LOGGED IN")
+    }
 
-    fmt.println(string(steamworks.Friends_GetPersonaName(steamworks.Friends())))
-    fmt.println(steamworks.Friends_GetPersonaState(steamworks.Friends()))
+    fmt.println(string(steam.Friends_GetPersonaName(steam.Friends())))
+    fmt.println(steam.Friends_GetPersonaState(steam.Friends()))
 
-    // lobbyCall := steamworks.Matchmaking_RequestLobbyList(steamworks.Matchmaking())
+    // lobbyCall := steam.Matchmaking_RequestLobbyList(steam.Matchmaking())
 
     raylib.InitWindow(800, 480, "Odin Steamworks Example")
     raylib.SetTargetFPS(60)
@@ -43,13 +46,13 @@ main :: proc() {
         raylib.ClearBackground(raylib.DARKBLUE)
         raylib.DrawFPS(2, 2)
         raylib.DrawText("Press Shift+Tab to open Steam Overlay", 2, 22 * 2, 20, raylib.WHITE)
-        raylib.DrawText(raylib.TextFormat("Friends_GetPersonaName: %s", steamworks.Friends_GetPersonaName(steamworks.Friends())), 2, 22 * 4, 20, raylib.WHITE)
-        raylib.DrawText(raylib.TextFormat("Friends_GetPersonaState: %s", steamworks.Friends_GetPersonaState(steamworks.Friends())), 2, 22 * 5, 20, raylib.WHITE)
-        raylib.DrawText(raylib.TextFormat("Number of current players (refresh with N key): %i", numberOfCurrentPlayers), 2, 22 * 6, 20, raylib.WHITE)
-        runSteamCallbacks()
+        raylib.DrawText(raylib.TextFormat("Friends_GetPersonaName: %s", steam.Friends_GetPersonaName(steam.Friends())), 2, 22 * 4, 20, raylib.WHITE)
+        raylib.DrawText(raylib.TextFormat("Friends_GetPersonaState: %s", steam.Friends_GetPersonaState(steam.Friends())), 2, 22 * 5, 20, raylib.WHITE)
+        raylib.DrawText(raylib.TextFormat("Number of current players (refresh with N key): %i", number_of_current_players), 2, 22 * 6, 20, raylib.WHITE)
+        run_steam_callbacks()
 
         if raylib.IsKeyPressed(.N) {
-            getNumberOfCurrentPlayers()
+            get_number_of_current_players()
         }
 
         raylib.EndDrawing()
@@ -57,44 +60,43 @@ main :: proc() {
 
     raylib.CloseWindow()
 
-    steamworks.Shutdown()
+    steam.Shutdown()
 }
 
-steamDebugTextHook :: proc "c" (severity: c.int, debugText: cstring) {
+steam_debug_text_hook :: proc "c" (severity: c.int, debugText: cstring) {
     // if you're running in the debugger, only warnings (nSeverity >= 1) will be sent
     // if you add -debug_steamworksapi to the command-line, a lot of extra informational messages will also be sent
     runtime.print_string(string(debugText))
 
     if severity >= 1 {
-        // TODO: breakpoint
+        runtime.debug_trap()
     }
 }
 
-runSteamCallbacks :: proc() {
-    tempMem := make([dynamic]byte, context.temp_allocator)
+run_steam_callbacks :: proc() {
+    temp_mem := make([dynamic]byte, context.temp_allocator)
 
-    hSteamPipe := steamworks.GetHSteamPipe()
-    steamworks.ManualDispatch_RunFrame(hSteamPipe)
-    callback: steamworks.CallbackMsg
+    steam_pipe := steam.GetHSteamPipe()
+    steam.ManualDispatch_RunFrame(steam_pipe)
+    callback: steam.CallbackMsg
 
-    for steamworks.ManualDispatch_GetNextCallback(hSteamPipe, &callback) {
+    for steam.ManualDispatch_GetNextCallback(steam_pipe, &callback) {
         // Check for dispatching API call results
         if callback.iCallback == .SteamAPICallCompleted {
             fmt.println("CallResult: ", callback)
 
-            pCallCompleted := transmute(^steamworks.SteamAPICallCompleted)callback.pubParam
-            resize(&tempMem, int(callback.cubParam))
-            if pTmpCallResult, ok := mem.alloc(int(callback.cubParam)); ok == nil {
+            call_completed := transmute(^steam.SteamAPICallCompleted)callback.pubParam
+            resize(&temp_mem, int(callback.cubParam))
+            if temp_call_res, ok := mem.alloc(int(callback.cubParam), allocator = context.temp_allocator); ok == nil {
                 bFailed: bool
-                if steamworks.ManualDispatch_GetAPICallResult(hSteamPipe, pCallCompleted.hAsyncCall, pTmpCallResult, callback.cubParam, callback.iCallback, &bFailed) {
+                if steam.ManualDispatch_GetAPICallResult(steam_pipe, call_completed.hAsyncCall, temp_call_res, callback.cubParam, callback.iCallback, &bFailed) {
                     // Dispatch the call result to the registered handler(s) for the
-                    // call identified by pCallCompleted->m_hAsyncCall
-                    fmt.println("   pCallCompleted", pCallCompleted)
-                    if pCallCompleted.iCallback == .NumberOfCurrentPlayers {
-                        onGetNumberOfCurrentPlayers(transmute(^steamworks.NumberOfCurrentPlayers)pTmpCallResult, bFailed)
+                    // call identified by call_completed->m_hAsyncCall
+                    fmt.println("   call_completed", call_completed)
+                    if call_completed.iCallback == .NumberOfCurrentPlayers {
+                        onGetNumberOfCurrentPlayers(transmute(^steam.NumberOfCurrentPlayers)temp_call_res, bFailed)
                     }
                 }
-                mem.free(pTmpCallResult)
             }
 
         } else {
@@ -104,29 +106,30 @@ runSteamCallbacks :: proc() {
 
             if callback.iCallback == .GameOverlayActivated {
                 fmt.println("GameOverlayActivated")
-                onGameOverlayActivated(transmute(^steamworks.GameOverlayActivated)callback.pubParam)
+                onGameOverlayActivated(transmute(^steam.GameOverlayActivated)callback.pubParam)
             }
         }
-        steamworks.ManualDispatch_FreeLastCallback(hSteamPipe)
+
+        steam.ManualDispatch_FreeLastCallback(steam_pipe)
     }
 }
 
-onGameOverlayActivated :: proc(using data: ^steamworks.GameOverlayActivated) {
+onGameOverlayActivated :: proc(using data: ^steam.GameOverlayActivated) {
     fmt.println("Is overlay active =", bActive)
 }
 
-onGetNumberOfCurrentPlayers :: proc(using data: ^steamworks.NumberOfCurrentPlayers, ioFailure: bool) {
-    fmt.println("[getNumberOfCurrentPlayers] success:", bSuccess)
+onGetNumberOfCurrentPlayers :: proc(using data: ^steam.NumberOfCurrentPlayers, ioFailure: bool) {
+    fmt.println("[get_number_of_current_players] success:", bSuccess)
     if ioFailure || !bool(bSuccess) {
-        fmt.println("getNumberOfCurrentPlayers failed.")
+        fmt.println("get_number_of_current_players failed.")
         return
     }
 
-    fmt.println("[getNumberOfCurrentPlayers] Number of players currently playing:", cPlayers)
-    numberOfCurrentPlayers = int(cPlayers)
+    fmt.println("[get_number_of_current_players] Number of players currently playing:", cPlayers)
+    number_of_current_players = int(cPlayers)
 }
 
-getNumberOfCurrentPlayers :: proc() {
-    fmt.println("[getNumberOfCurrentPlayers] Getting number of current players.")
-    hSteamApiCall := steamworks.UserStats_GetNumberOfCurrentPlayers(steamworks.UserStats())
+get_number_of_current_players :: proc() {
+    fmt.println("[get_number_of_current_players] Getting number of current players.")
+    hSteamApiCall := steam.UserStats_GetNumberOfCurrentPlayers(steam.UserStats())
 }
