@@ -5,9 +5,9 @@ Odin bindings for Valve's [Steamworks API](https://partner.steamgames.com/doc/sd
 
 the Steamworks API also includes the [Steam GameNetworkingSockets](https://github.com/ValveSoftware/GameNetworkingSockets)
 
-Current Steamworks SDK version: `1.58a`
+Current Steamworks SDK version: `1.59`
 
-Latest tested Odin version: `dev-2023-12-nightly:31b1aef4`
+Latest tested Odin version: `dev-2024-02-nightly:539cec74`
 
 ## How to Use
 1. Copy the [steamworks](steamworks/) folder into your project
@@ -17,10 +17,9 @@ Latest tested Odin version: `dev-2023-12-nightly:31b1aef4`
 Take a look at the [example](example/example.odin) to see the API usage.
 
 ## About the generator
-The generator uses the `steamworks_api.json` to generate a single source file. The file has to be manually edited, because
-the generator just doesn't handle everything. (`steamworks/steamworks.odin` is already edited and ready to go)
+The generator was used initially to make the bindings, and those are manually updated.
 
-Build the generator with `odin build` commands.
+It uses the `steamworks_api.json` to generate a single source file. Build the generator with `odin build` commands.
 
 Note: The naming is slightly different than in the C/C++ API. For instance, things aren't prefixed with `Steam`, `m_`, `k_`, etc. Also `_t` suffixes for structs aren't used.
 

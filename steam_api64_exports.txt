@@ -2,7 +2,7 @@ Microsoft (R) COFF/PE Dumper Version 14.33.31631.0
 Copyright (C) Microsoft Corporation.  All rights reserved.
 
 
-Dump of file redistributable_bin\win64\steam_api64.lib
+Dump of file steamworks\redistributable_bin\win64\steam_api64.lib
 
 File Type: LIBRARY
 
@@ -15,11 +15,6 @@ File Type: LIBRARY
                   SteamAPI_GetHSteamPipe
                   SteamAPI_GetHSteamUser
                   SteamAPI_GetSteamInstallPath
-                  SteamAPI_ISteamAppList_GetAppBuildId
-                  SteamAPI_ISteamAppList_GetAppInstallDir
-                  SteamAPI_ISteamAppList_GetAppName
-                  SteamAPI_ISteamAppList_GetInstalledApps
-                  SteamAPI_ISteamAppList_GetNumInstalledApps
                   SteamAPI_ISteamApps_BGetDLCDataByIndex
                   SteamAPI_ISteamApps_BIsAppInstalled
                   SteamAPI_ISteamApps_BIsCybercafe
@@ -56,7 +51,6 @@ File Type: LIBRARY
                   SteamAPI_ISteamClient_CreateLocalUser
                   SteamAPI_ISteamClient_CreateSteamPipe
                   SteamAPI_ISteamClient_GetIPCCallCount
-                  SteamAPI_ISteamClient_GetISteamAppList
                   SteamAPI_ISteamClient_GetISteamApps
                   SteamAPI_ISteamClient_GetISteamController
                   SteamAPI_ISteamClient_GetISteamFriends
@@ -905,6 +899,7 @@ File Type: LIBRARY
                   SteamAPI_ISteamUtils_BOverlayNeedsPresent
                   SteamAPI_ISteamUtils_CheckFileSignature
                   SteamAPI_ISteamUtils_DismissFloatingGamepadTextInput
+                  SteamAPI_ISteamUtils_DismissGamepadTextInput
                   SteamAPI_ISteamUtils_FilterText
                   SteamAPI_ISteamUtils_GetAPICallFailureReason
                   SteamAPI_ISteamUtils_GetAPICallResult
@@ -939,8 +934,7 @@ File Type: LIBRARY
                   SteamAPI_ISteamUtils_ShowGamepadTextInput
                   SteamAPI_ISteamUtils_StartVRDashboard
                   SteamAPI_ISteamVideo_AddTimelineHighlightMarker
-                  SteamAPI_ISteamVideo_AddTimelineRangeEnd
-                  SteamAPI_ISteamVideo_AddTimelineRangeStart
+                  SteamAPI_ISteamVideo_AddTimelineRange
                   SteamAPI_ISteamVideo_AddTimelineTimestamp
                   SteamAPI_ISteamVideo_GetOPFSettings
                   SteamAPI_ISteamVideo_GetOPFStringForApp
@@ -948,6 +942,7 @@ File Type: LIBRARY
                   SteamAPI_ISteamVideo_IsBroadcasting
                   SteamAPI_ISteamVideo_SetTimelineGameMode
                   SteamAPI_InitAnonymousUser
+                  SteamAPI_InitFlat
                   SteamAPI_InitSafe
                   SteamAPI_IsSteamRunning
                   SteamAPI_ManualDispatch_FreeLastCallback
@@ -965,7 +960,6 @@ File Type: LIBRARY
                   SteamAPI_SetMiniDumpComment
                   SteamAPI_SetTryCatchCallbacks
                   SteamAPI_Shutdown
-                  SteamAPI_SteamAppList_v001
                   SteamAPI_SteamApps_v008
                   SteamAPI_SteamController_v008
                   SteamAPI_SteamDatagramHostedAddress_Clear
@@ -1050,7 +1044,7 @@ File Type: LIBRARY
                   SteamAPI_SteamUserStats_v012
                   SteamAPI_SteamUser_v023
                   SteamAPI_SteamUtils_v010
-                  SteamAPI_SteamVideo_v003
+                  SteamAPI_SteamVideo_v004
                   SteamAPI_UnregisterCallResult
                   SteamAPI_UnregisterCallback
                   SteamAPI_UseBreakpadCrashHandler

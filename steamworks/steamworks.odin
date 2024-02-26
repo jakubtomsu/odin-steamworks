@@ -3821,7 +3821,6 @@ HTTP :: SteamHTTP_v003
 Input :: SteamInput_v006
 Controller :: SteamController_v008
 UGC :: SteamUGC_v018
-AppList :: SteamAppList_v001
 HTMLSurface :: SteamHTMLSurface_v005
 Inventory :: SteamInventory_v003
 Video :: SteamVideo_v002
@@ -3858,7 +3857,6 @@ IHTTP :: distinct rawptr
 IInput :: distinct rawptr
 IController :: distinct rawptr
 IUGC :: distinct rawptr
-IAppList :: distinct rawptr
 IHTMLSurface :: distinct rawptr
 IInventory :: distinct rawptr
 IVideo :: distinct rawptr
@@ -3908,6 +3906,22 @@ foreign lib {
 // Global SteamAPI functionns
 // --------------------------
 
+// Initializing the Steamworks SDK
+// -----------------------------
+// 
+// There are three different methods you can use to initialize the Steamworks SDK, depending on
+// your project's environment. You should only use one method in your project.
+// 
+// If you are able to include this C++ header in your project, we recommend using the following
+// initialization methods. They will ensure that all ISteam* interfaces defined in other
+// C++ header files have versions that are supported by the user's Steam Client:
+// - SteamAPI_InitEx() for new projects so you can show a detailed error message to the user
+// - SteamAPI_Init() for existing projects that only display a generic error message
+// 
+// If you are unable to include this C++ header in your project and are dynamically loading
+// Steamworks SDK methods from dll/so, you can use the following method:
+// - SteamAPI_InitFlat()
+
 // Initialize the SDK, without worrying about the cause of failure.
 // This function is included for compatibility with older SDK.
 // You can use it if you don't care about decent error handling
@@ -3928,6 +3942,11 @@ Init :: proc() -> bool {
 InitEx :: proc(pOutErrMsg: ^SteamErrMsg) -> ESteamAPIInitResult {
     return SteamInternal_SteamAPI_Init(nil, pOutErrMsg)
 }
+
+// See "Initializing the Steamworks SDK" above for how to choose an init method.
+// Same usage as SteamAPI_InitEx(), however does not verify ISteam* interfaces are
+// supported by the user's client and is exported from the dll
+InitFlat :: proc(pOutErrMsg: ^SteamErrMsg) -> ESteamAPIInitResult ---
 
 // This function is included for compatibility with older SDK.
 // You can use it if you don't care about decent error handling
@@ -4095,7 +4114,6 @@ foreign lib {
     SteamInput_v006 :: proc() -> ^IInput ---
     SteamController_v008 :: proc() -> ^IController ---
     SteamUGC_v018 :: proc() -> ^IUGC ---
-    SteamAppList_v001 :: proc() -> ^IAppList ---
     SteamHTMLSurface_v005 :: proc() -> ^IHTMLSurface ---
     SteamInventory_v003 :: proc() -> ^IInventory ---
     SteamVideo_v002 :: proc() -> ^IVideo ---
@@ -4138,7 +4156,6 @@ foreign lib {
     Client_GetIHTTP :: proc(self: ^IClient, hSteamuser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^IHTTP ---
     Client_GetIController :: proc(self: ^IClient, hSteamUser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^IController ---
     Client_GetIUGC :: proc(self: ^IClient, hSteamUser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^IUGC ---
-    Client_GetIAppList :: proc(self: ^IClient, hSteamUser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^IAppList ---
     Client_GetIMusic :: proc(self: ^IClient, hSteamuser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^IMusic ---
     Client_GetIMusicRemote :: proc(self: ^IClient, hSteamuser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^IMusicRemote ---
     Client_GetIHTMLSurface :: proc(self: ^IClient, hSteamuser: HSteamUser, hSteamPipe: HSteamPipe, pchVersion: cstring) -> ^IHTMLSurface ---
@@ -4300,6 +4317,8 @@ foreign lib {
     Utils_ShowFloatingGamepadTextInput :: proc(self: ^IUtils, eKeyboardMode: EFloatingGamepadTextInputMode, nTextFieldXPosition: i32, nTextFieldYPosition: i32, nTextFieldWidth: i32, nTextFieldHeight: i32) -> bool ---
     Utils_SetGameLauncherMode :: proc(self: ^IUtils, bLauncherMode: bool) ---
     Utils_DismissFloatingGamepadTextInput :: proc(self: ^IUtils) -> bool ---
+    Utils_DismissGamepadTextInput :: proc(self: ^ISteamUtils) -> bool ---
+
 
     Matchmaking_GetFavoriteGameCount :: proc(self: ^IMatchmaking) -> i32 ---
     Matchmaking_GetFavoriteGame :: proc(self: ^IMatchmaking, iGame: i32, pnAppID: ^AppId, pnIP: ^u32, pnConnPort: ^u16, pnQueryPort: ^u16, punFlags: ^u32, pRTime32LastPlayedOnServer: ^u32) -> bool ---
@@ -4815,13 +4834,6 @@ foreign lib {
     UGC_GetWorkshopEULAStatus :: proc(self: ^IUGC) -> SteamAPICall ---
     UGC_GetUserContentDescriptorPreferences :: proc(self: ^IUGC, pvecDescriptors: [^]EUGCContentDescriptorID, cMaxEntries: u32) -> u32 ---
 
-
-    AppList_GetNumInstalledApps :: proc(self: ^IAppList) -> u32 ---
-    AppList_GetInstalledApps :: proc(self: ^IAppList, pvecAppID: ^AppId, unMaxAppIDs: u32) -> u32 ---
-    AppList_GetAppName :: proc(self: ^IAppList, nAppID: AppId, pchName: ^u8, cchNameMax: i32) -> i32 ---
-    AppList_GetAppInstallDir :: proc(self: ^IAppList, nAppID: AppId, pchDirectory: ^u8, cchNameMax: i32) -> i32 ---
-    AppList_GetAppBuildId :: proc(self: ^IAppList, nAppID: AppId) -> i32 ---
-
     HTMLSurface_Init :: proc(self: ^IHTMLSurface) -> bool ---
     HTMLSurface_Shutdown :: proc(self: ^IHTMLSurface) -> bool ---
     HTMLSurface_CreateBrowser :: proc(self: ^IHTMLSurface, pchUserAgent: cstring, pchUserCSS: cstring) -> SteamAPICall ---
@@ -5168,7 +5180,6 @@ iSteamStreamLauncherCallbacks :: 2600
 iSteamControllerCallbacks :: 2800
 iSteamUGCCallbacks :: 3400
 iSteamStreamClientCallbacks :: 3500
-iSteamAppListCallbacks :: 3900
 iSteamMusicCallbacks :: 4000
 iSteamMusicRemoteCallbacks :: 4100
 iSteamGameNotificationCallbacks :: 4400

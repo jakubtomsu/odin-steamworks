@@ -9,6 +9,18 @@ Welcome to the Steamworks SDK.  For documentation please see our partner
 website at: http://partner.steamgames.com
 
 ----------------------------------------------------------------
+v1.59 9th February 2024
+----------------------------------------------------------------
+General
+* Added new initialization method, SteamAPI_InitFlat
+
+ISteamUtils
+* Added DismissGamepadTextInput
+
+ISteamAppList
+* This interface has been removed from the SDK
+
+----------------------------------------------------------------
 v1.58a 26th October 2023
 ----------------------------------------------------------------
 Fixes to steam_api_flat.h
