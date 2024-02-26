@@ -82,10 +82,17 @@ SNetListenSocket :: u32
 ScreenshotHandle :: u32
 HTTPRequestHandle :: u32
 HTTPCookieContainerHandle :: u32
+
+// InputHandle_t is used to refer to a specific controller.
+// This handle will consistently identify a controller, even if it is disconnected and re-connected
 InputHandle :: u64
+
+// These handles are used to refer to a specific in-game action or action set
+// All action handles should be queried during initialization for performance reasons
 InputActionSetHandle :: u64
 InputDigitalActionHandle :: u64
 InputAnalogActionHandle :: u64
+
 SteamInputActionEventCallbackPointer :: #type proc "c" (_: ^SteamInputActionEvent)
 ControllerHandle :: u64
 ControllerActionSetHandle :: u64
@@ -209,6 +216,16 @@ SteamDatagramPOPID_dev: SteamNetworkingPOPID : (u32('d') << 16) | (u32('e') << 8
 // calls.
 cchMaxSteamErrMsg :: 1024
 SteamErrMsg :: distinct [cchMaxSteamErrMsg]u8
+
+INPUT_MAX_COUNT :: 16
+INPUT_MAX_ANALOG_ACTIONS :: 24
+INPUT_MAX_DIGITAL_ACTIONS :: 256
+INPUT_MAX_ORIGINS :: 8
+INPUT_MAX_ACTIVE_LAYERS :: 16
+// When sending an option to a specific controller handle, you can send to all devices via this command
+INPUT_HANDLE_ALL_CONTROLLERS :: max(u64)
+INPUT_MIN_ANALOG_ACTION_DATA :: -1.0
+INPUT_MAX_ANALOG_ACTION_DATA :: 1.0
 
 
 // -------
