@@ -182,7 +182,7 @@ nSteamNetworkingSend_Unreliable: i32 : 0
 nSteamNetworkingSend_NoNagle: i32 : 1
 nSteamNetworkingSend_UnreliableNoNagle: i32 : nSteamNetworkingSend_Unreliable | nSteamNetworkingSend_NoNagle
 nSteamNetworkingSend_NoDelay: i32 : 4
-nSteamNetworkingSend_UnreliableNoDelay: i32 : nSteamNetworkingSend_Unreliable | nSteamNetworkingSend_NoDelay | nSteamNetworkingSend_NoNagle
+nSteamNetworkingSend_UnreliableNoDelay :: i32(nSteamNetworkingSend_Unreliable | nSteamNetworkingSend_NoDelay | nSteamNetworkingSend_NoNagle)
 nSteamNetworkingSend_Reliable: i32 : 8
 nSteamNetworkingSend_ReliableNoNagle: i32 : nSteamNetworkingSend_Reliable | nSteamNetworkingSend_NoNagle
 nSteamNetworkingSend_UseCurrentThread: i32 : 16
@@ -3960,11 +3960,6 @@ InitEx :: proc(pOutErrMsg: ^SteamErrMsg) -> ESteamAPIInitResult {
     return SteamInternal_SteamAPI_Init(nil, pOutErrMsg)
 }
 
-// See "Initializing the Steamworks SDK" above for how to choose an init method.
-// Same usage as SteamAPI_InitEx(), however does not verify ISteam* interfaces are
-// supported by the user's client and is exported from the dll
-InitFlat :: proc(pOutErrMsg: ^SteamErrMsg) -> ESteamAPIInitResult ---
-
 // This function is included for compatibility with older SDK.
 // You can use it if you don't care about decent error handling
 SteamGameServer_Init :: proc(unIP: u32, usGamePort: u16, usQueryPort: u16, eServerMode: EServerMode, pchVersionString: cstring) -> bool {
@@ -4027,6 +4022,12 @@ foreign lib {
     //	These functions manage loading, initializing and shutdown of the steamclient.dll
     //
     //----------------------------------------------------------------------------------------------------------------------------------------------------------//
+
+    // See "Initializing the Steamworks SDK" above for how to choose an init method.
+    // Same usage as SteamAPI_InitEx(), however does not verify ISteam* interfaces are
+    // supported by the user's client and is exported from the dll
+    InitFlat :: proc(pOutErrMsg: ^SteamErrMsg) -> ESteamAPIInitResult ---
+
 
     // SteamAPI_Shutdown should be called during process shutdown if possible.
     Shutdown :: proc() ---
@@ -4334,7 +4335,7 @@ foreign lib {
     Utils_ShowFloatingGamepadTextInput :: proc(self: ^IUtils, eKeyboardMode: EFloatingGamepadTextInputMode, nTextFieldXPosition: i32, nTextFieldYPosition: i32, nTextFieldWidth: i32, nTextFieldHeight: i32) -> bool ---
     Utils_SetGameLauncherMode :: proc(self: ^IUtils, bLauncherMode: bool) ---
     Utils_DismissFloatingGamepadTextInput :: proc(self: ^IUtils) -> bool ---
-    Utils_DismissGamepadTextInput :: proc(self: ^ISteamUtils) -> bool ---
+    Utils_DismissGamepadTextInput :: proc(self: ^IUtils) -> bool ---
 
 
     Matchmaking_GetFavoriteGameCount :: proc(self: ^IMatchmaking) -> i32 ---
