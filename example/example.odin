@@ -21,7 +21,11 @@ main :: proc() {
         return
     }
 
-    if !steam.Init() do panic("steam.Init failed. Make sure Steam is running.")
+    err_msg: steam.SteamErrMsg
+    if err := steam.InitFlat(&err_msg); err != .OK {
+        fmt.printfln("steam.InitFlat failed with code '{}' and message \"{}\"", err, transmute(cstring)&err_msg[0])
+        panic("Steam Init failed. Make sure Steam is running.")
+    }
 
     steam.Client_SetWarningMessageHook(steam.Client(), steam_debug_text_hook)
 
