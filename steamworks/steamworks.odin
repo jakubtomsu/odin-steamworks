@@ -228,6 +228,11 @@ INPUT_MIN_ANALOG_ACTION_DATA :: -1.0
 INPUT_MAX_ANALOG_ACTION_DATA :: 1.0
 
 
+MAX_TIMELINE_PRIORITY :: 1000
+MAX_TIMELINE_EVENT_DURATION :: 600
+
+
+
 // -------
 // Structs
 // -------
@@ -3601,6 +3606,32 @@ ESteamAPIInitResult :: enum i32 {
 }
 
 
+
+// Controls the color of the timeline bar segments. The value names listed here map to a multiplayer game, where
+// the user starts a game (in menus), then joins a multiplayer session that first has a character selection lobby
+// then finally the multiplayer session starts. However, you can also map these values to any type of game. In a single
+// player game where you visit towns & dungeons, you could set k_ETimelineGameMode_Menus when the player is in a town
+// buying items, k_ETimelineGameMode_Staging for when a dungeon is loading and k_ETimelineGameMode_Playing for when
+// inside the dungeon fighting monsters.
+ETimelineGameMode :: enum i32 {
+    Invalid = 0,
+    Playing = 1,
+    Staging = 2,
+    Menus = 3,
+    LoadingScreen = 4,
+    Max, // one past the last valid value
+}
+
+// Used in AddTimelineEvent, where Featured events will be offered before Standard events
+ETimelineEventClipPriority :: enum i32 {
+    Invalid  = 0,
+    None     = 1,
+    Standard = 2,
+    Featured = 3,
+}
+
+
+
 SteamIPAddress :: struct #align (CALLBACK_ALIGN) {
     rgubIPv6: [16]u8,
     eType:    ESteamIPType,
@@ -3727,6 +3758,7 @@ SteamUGCDetails :: struct #align (CALLBACK_ALIGN) {
     unVotesDown:          u32,
     flScore:              f32,
     unNumChildren:        u32,
+    ulTotalFilesSize:     u64,
 }
 
 SteamItemDetails :: struct #align (CALLBACK_ALIGN) {
@@ -3837,15 +3869,16 @@ MusicRemote :: SteamMusicRemote_v001
 HTTP :: SteamHTTP_v003
 Input :: SteamInput_v006
 Controller :: SteamController_v008
-UGC :: SteamUGC_v018
+UGC :: SteamUGC_v020
 HTMLSurface :: SteamHTMLSurface_v005
 Inventory :: SteamInventory_v003
-Video :: SteamVideo_v002
+Video :: SteamVideo_v007
 ParentalSettings :: SteamParentalSettings_v001
 RemotePlay :: SteamRemotePlay_v002
 NetworkingMessages_SteamAPI :: SteamNetworkingMessages_SteamAPI_v002
 NetworkingSockets_SteamAPI :: SteamNetworkingSockets_SteamAPI_v012
 NetworkingUtils_SteamAPI :: SteamNetworkingUtils_SteamAPI_v004
+Timeline :: SteamTimeline_v001
 
 // ---------------
 // Interface types
@@ -3885,6 +3918,7 @@ INetworkingUtils :: distinct rawptr
 IGameServer :: distinct rawptr
 IGameServerStats :: distinct rawptr
 INetworkingFakeUDPPort :: distinct rawptr
+ITimeline :: distinct rawptr
 
 
 // No 'SteamAPI_' prefix
@@ -4131,15 +4165,16 @@ foreign lib {
     SteamHTTP_v003 :: proc() -> ^IHTTP ---
     SteamInput_v006 :: proc() -> ^IInput ---
     SteamController_v008 :: proc() -> ^IController ---
-    SteamUGC_v018 :: proc() -> ^IUGC ---
+    SteamUGC_v020 :: proc() -> ^IUGC ---
     SteamHTMLSurface_v005 :: proc() -> ^IHTMLSurface ---
     SteamInventory_v003 :: proc() -> ^IInventory ---
-    SteamVideo_v002 :: proc() -> ^IVideo ---
+    SteamVideo_v007 :: proc() -> ^IVideo ---
     SteamParentalSettings_v001 :: proc() -> ^IParentalSettings ---
     SteamRemotePlay_v002 :: proc() -> ^IRemotePlay ---
     SteamNetworkingMessages_SteamAPI_v002 :: proc() -> ^INetworkingMessages ---
     SteamNetworkingSockets_SteamAPI_v012 :: proc() -> ^INetworkingSockets ---
     SteamNetworkingUtils_SteamAPI_v004 :: proc() -> ^INetworkingUtils ---
+    SteamTimeline_v001 :: proc() -> ^ITimeline ---
 }
 
 // -------------------------------------------
@@ -4574,6 +4609,9 @@ foreign lib {
     Apps_BIsSubscribedFromFamilySharing :: proc(self: ^IApps) -> bool ---
     Apps_BIsTimedTrial :: proc(self: ^IApps, punSecondsAllowed: ^u32, punSecondsPlayed: ^u32) -> bool ---
     Apps_SetDlcContext :: proc(self: ^IApps, nAppID: AppId) -> bool ---
+    Apps_GetNumBetas :: proc(self: ^IApps, unAppID: AppId, pnAvailable: ^i32, pnPrivate: ^i32) -> i32 ---
+    Apps_GetBetaInfo :: proc(self: ^IApps, unAppID: AppId, iBetaIndex: i32, punFlags: ^u32, punBuildID: ^u32, pchBetaName: [^]byte, cchBetaName: i32, pchDescription: [^]byte, cchDescription: i32) -> bool ---
+    Apps_SetActiveBeta :: proc(self: ^IApps, unAppID: AppId, pchBetaName: cstring) -> bool ---
 
     Networking_SendP2PPacket :: proc(self: ^INetworking, steamIDRemote: CSteamID, pubData: rawptr, cubData: u32, eP2PSendType: EP2PSend, nChannel: i32) -> bool ---
     Networking_IsP2PPacketAvailable :: proc(self: ^INetworking, pcubMsgSize: ^u32, nChannel: i32) -> bool ---
@@ -4851,6 +4889,10 @@ foreign lib {
     UGC_ShowWorkshopEULA :: proc(self: ^IUGC) -> bool ---
     UGC_GetWorkshopEULAStatus :: proc(self: ^IUGC) -> SteamAPICall ---
     UGC_GetUserContentDescriptorPreferences :: proc(self: ^IUGC, pvecDescriptors: [^]EUGCContentDescriptorID, cMaxEntries: u32) -> u32 ---
+    UGC_GetNumSupportedGameVersions :: proc(self: IUGC, handle: UGCQueryHandle, index: u32) -> u32 ---
+    UGC_SetAdminQuery :: proc(self: IUGC, handle: UGCUpdateHandle, bAdminQuery: bool) -> bool ---
+    UGC_SetRequiredGameVersions :: proc(self: IUGC, handle: UGCUpdateHandle, pszGameBranchMin: cstring, pszGameBranchMax: cstring) -> bool ---
+
 
     HTMLSurface_Init :: proc(self: ^IHTMLSurface) -> bool ---
     HTMLSurface_Shutdown :: proc(self: ^IHTMLSurface) -> bool ---
@@ -4928,6 +4970,11 @@ foreign lib {
     Inventory_SetPropertyFloat :: proc(self: ^IInventory, handle: SteamInventoryUpdateHandle, nItemID: SteamItemInstanceID, pchPropertyName: cstring, flValue: f32) -> bool ---
     Inventory_SubmitUpdateProperties :: proc(self: ^IInventory, handle: SteamInventoryUpdateHandle, pResultHandle: ^SteamInventoryResult) -> bool ---
     Inventory_InspectItem :: proc(self: ^IInventory, pResultHandle: ^SteamInventoryResult, pchItemToken: cstring) -> bool ---
+
+    Timeline_SetTimelineStateDescription :: proc(self: ^ITimeline, pchDescription: cstring, flTimeDelta: f32) ---
+    Timeline_ClearTimelineStateDescription :: proc(self: ^ITimeline, flTimeDelta: f32) ---
+    Timeline_AddTimelineEvent :: proc(self: ^ITimeline, pchIcon: cstring, pchTitle: cstring, pchDescription: cstring, unPriority: u32, flStartOffsetSeconds: f32, flDurationSeconds: f32, ePossibleClip: ETimelineEventClipPriority) ---
+    Timeline_SetTimelineGameMode :: proc(self: ^ITimeline, eMode: ETimelineGameMode) ---
 
     Video_GetVideoURL :: proc(self: ^IVideo, unVideoAppID: AppId) ---
     Video_IsBroadcasting :: proc(self: ^IVideo, pnNumViewers: ^int) -> bool ---

@@ -30,6 +30,7 @@ File Type: LIBRARY
                   SteamAPI_ISteamApps_GetAppInstallDir
                   SteamAPI_ISteamApps_GetAppOwner
                   SteamAPI_ISteamApps_GetAvailableGameLanguages
+                  SteamAPI_ISteamApps_GetBetaInfo
                   SteamAPI_ISteamApps_GetCurrentBetaName
                   SteamAPI_ISteamApps_GetCurrentGameLanguage
                   SteamAPI_ISteamApps_GetDLCCount
@@ -39,10 +40,12 @@ File Type: LIBRARY
                   SteamAPI_ISteamApps_GetInstalledDepots
                   SteamAPI_ISteamApps_GetLaunchCommandLine
                   SteamAPI_ISteamApps_GetLaunchQueryParam
+                  SteamAPI_ISteamApps_GetNumBetas
                   SteamAPI_ISteamApps_InstallDLC
                   SteamAPI_ISteamApps_MarkContentCorrupt
                   SteamAPI_ISteamApps_RequestAllProofOfPurchaseKeys
                   SteamAPI_ISteamApps_RequestAppProofOfPurchaseKey
+                  SteamAPI_ISteamApps_SetActiveBeta
                   SteamAPI_ISteamApps_SetDlcContext
                   SteamAPI_ISteamApps_UninstallDLC
                   SteamAPI_ISteamClient_BReleaseSteamPipe
@@ -728,6 +731,10 @@ File Type: LIBRARY
                   SteamAPI_ISteamScreenshots_TagUser
                   SteamAPI_ISteamScreenshots_TriggerScreenshot
                   SteamAPI_ISteamScreenshots_WriteScreenshot
+                  SteamAPI_ISteamTimeline_AddTimelineEvent
+                  SteamAPI_ISteamTimeline_ClearTimelineStateDescription
+                  SteamAPI_ISteamTimeline_SetTimelineGameMode
+                  SteamAPI_ISteamTimeline_SetTimelineStateDescription
                   SteamAPI_ISteamUGC_AddAppDependency
                   SteamAPI_ISteamUGC_AddContentDescriptor
                   SteamAPI_ISteamUGC_AddDependency
@@ -753,6 +760,7 @@ File Type: LIBRARY
                   SteamAPI_ISteamUGC_GetItemState
                   SteamAPI_ISteamUGC_GetItemUpdateProgress
                   SteamAPI_ISteamUGC_GetNumSubscribedItems
+                  SteamAPI_ISteamUGC_GetNumSupportedGameVersions
                   SteamAPI_ISteamUGC_GetQueryFirstUGCKeyValueTag
                   SteamAPI_ISteamUGC_GetQueryUGCAdditionalPreview
                   SteamAPI_ISteamUGC_GetQueryUGCChildren
@@ -768,6 +776,7 @@ File Type: LIBRARY
                   SteamAPI_ISteamUGC_GetQueryUGCTag
                   SteamAPI_ISteamUGC_GetQueryUGCTagDisplayName
                   SteamAPI_ISteamUGC_GetSubscribedItems
+                  SteamAPI_ISteamUGC_GetSupportedGameVersionData
                   SteamAPI_ISteamUGC_GetUserContentDescriptorPreferences
                   SteamAPI_ISteamUGC_GetUserItemVote
                   SteamAPI_ISteamUGC_GetWorkshopEULAStatus
@@ -781,6 +790,7 @@ File Type: LIBRARY
                   SteamAPI_ISteamUGC_RemoveItemPreview
                   SteamAPI_ISteamUGC_RequestUGCDetails
                   SteamAPI_ISteamUGC_SendQueryUGCRequest
+                  SteamAPI_ISteamUGC_SetAdminQuery
                   SteamAPI_ISteamUGC_SetAllowCachedResponse
                   SteamAPI_ISteamUGC_SetAllowLegacyUpload
                   SteamAPI_ISteamUGC_SetCloudFileNameFilter
@@ -795,6 +805,7 @@ File Type: LIBRARY
                   SteamAPI_ISteamUGC_SetLanguage
                   SteamAPI_ISteamUGC_SetMatchAnyTag
                   SteamAPI_ISteamUGC_SetRankedByTrendDays
+                  SteamAPI_ISteamUGC_SetRequiredGameVersions
                   SteamAPI_ISteamUGC_SetReturnAdditionalPreviews
                   SteamAPI_ISteamUGC_SetReturnChildren
                   SteamAPI_ISteamUGC_SetReturnKeyValueTags
@@ -933,14 +944,10 @@ File Type: LIBRARY
                   SteamAPI_ISteamUtils_ShowFloatingGamepadTextInput
                   SteamAPI_ISteamUtils_ShowGamepadTextInput
                   SteamAPI_ISteamUtils_StartVRDashboard
-                  SteamAPI_ISteamVideo_AddTimelineHighlightMarker
-                  SteamAPI_ISteamVideo_AddTimelineRange
-                  SteamAPI_ISteamVideo_AddTimelineTimestamp
                   SteamAPI_ISteamVideo_GetOPFSettings
                   SteamAPI_ISteamVideo_GetOPFStringForApp
                   SteamAPI_ISteamVideo_GetVideoURL
                   SteamAPI_ISteamVideo_IsBroadcasting
-                  SteamAPI_ISteamVideo_SetTimelineGameMode
                   SteamAPI_InitAnonymousUser
                   SteamAPI_InitFlat
                   SteamAPI_InitSafe
@@ -973,7 +980,7 @@ File Type: LIBRARY
                   SteamAPI_SteamGameServerNetworkingSockets_SteamAPI_v012
                   SteamAPI_SteamGameServerNetworking_v006
                   SteamAPI_SteamGameServerStats_v001
-                  SteamAPI_SteamGameServerUGC_v018
+                  SteamAPI_SteamGameServerUGC_v020
                   SteamAPI_SteamGameServerUtils_v010
                   SteamAPI_SteamGameServer_v015
                   SteamAPI_SteamHTMLSurface_v005
@@ -1040,11 +1047,12 @@ File Type: LIBRARY
                   SteamAPI_SteamRemotePlay_v002
                   SteamAPI_SteamRemoteStorage_v016
                   SteamAPI_SteamScreenshots_v003
-                  SteamAPI_SteamUGC_v018
+                  SteamAPI_SteamTimeline_v001
+                  SteamAPI_SteamUGC_v020
                   SteamAPI_SteamUserStats_v012
                   SteamAPI_SteamUser_v023
                   SteamAPI_SteamUtils_v010
-                  SteamAPI_SteamVideo_v004
+                  SteamAPI_SteamVideo_v007
                   SteamAPI_UnregisterCallResult
                   SteamAPI_UnregisterCallback
                   SteamAPI_UseBreakpadCrashHandler
