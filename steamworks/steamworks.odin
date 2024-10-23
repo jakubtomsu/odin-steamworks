@@ -4195,9 +4195,12 @@ foreign lib {
     servernetadr_t_GetConnectionAddressString :: proc(self: ^servernetadr) -> cstring ---
     servernetadr_t_GetQueryAddressString :: proc(self: ^servernetadr) -> cstring ---
     servernetadr_t_IsLessThan :: proc(self: ^servernetadr, that: ^servernetadr) ---
+    
     gameserveritem_t_Construct :: proc(self: ^gameserveritet) ---
     gameserveritem_t_GetName :: proc(self: ^gameserveritet) -> cstring ---
     gameserveritem_t_SetName :: proc(self: ^gameserveritet, pName: cstring) ---
+
+    MatchMakingKeyValuePair_t_Construct :: proc(self: ^MatchMakingKeyValuePair) ---
 }
 
 @(link_prefix = "SteamAPI_Steam") 
@@ -5226,8 +5229,6 @@ foreign lib {
     NetworkingFakeUDPPort_SendMessageToFakeIP :: proc(self: ^INetworkingFakeUDPPort, remoteAddress: ^SteamNetworkingIPAddr, pData: rawptr, cbData: u32, nSendFlags: i32) -> EResult ---
     NetworkingFakeUDPPort_ReceiveMessages :: proc(self: ^INetworkingFakeUDPPort, ppOutMessages: ^^SteamNetworkingMessage, nMaxMessages: i32) -> i32 ---
     NetworkingFakeUDPPort_ScheduleCleanup :: proc(self: ^INetworkingFakeUDPPort, remoteAddress: ^SteamNetworkingIPAddr) ---
-
-    MatchMakingKeyValuePair_t_Construct :: proc(self: ^MatchMakingKeyValuePair) ---
 } // foreign lib
 
 
