@@ -4181,6 +4181,24 @@ foreign lib {
 // Interfaces
 // -------------------------------------------
 
+@(link_prefix = "SteamAPI_") 
+foreign lib {
+    servernetadr_t_Assign :: proc(self: ^servernetadr, that: ^servernetadr) ---
+    servernetadr_t_Construct :: proc(self: ^servernetadr) ---
+    servernetadr_t_Init :: proc(self: ^servernetadr, ip: u32, usQueryPort: u16, usConnectionPort: u16) ---
+    servernetadr_t_GetQueryPort :: proc(self: ^servernetadr) -> u16 ---
+    servernetadr_t_SetQueryPort :: proc(self: ^servernetadr, usPort: u16) ---
+    servernetadr_t_GetConnectionPort :: proc(self: ^servernetadr) -> u16 ---
+    servernetadr_t_SetConnectionPort :: proc(self: ^servernetadr, usPort: u16) ---
+    servernetadr_t_GetIP :: proc(self: ^servernetadr) -> u32 ---
+    servernetadr_t_SetIP :: proc(self: ^servernetadr, unIP: u32) ---
+    servernetadr_t_GetConnectionAddressString :: proc(self: ^servernetadr) -> cstring ---
+    servernetadr_t_GetQueryAddressString :: proc(self: ^servernetadr) -> cstring ---
+    servernetadr_t_IsLessThan :: proc(self: ^servernetadr, that: ^servernetadr) ---
+    gameserveritem_t_Construct :: proc(self: ^gameserveritet) ---
+    gameserveritem_t_GetName :: proc(self: ^gameserveritet) -> cstring ---
+    gameserveritem_t_SetName :: proc(self: ^gameserveritet, pName: cstring) ---
+}
 
 @(link_prefix = "SteamAPI_Steam") 
 foreign lib {
@@ -4225,11 +4243,13 @@ foreign lib {
     NetworkingIPAddr_IsFakeIP :: proc(self: ^SteamNetworkingIPAddr) -> bool ---
     
     NetworkingMessage_t_Release :: proc(self: ^SteamNetworkingMessage) ---
+    
     NetworkingConfigValue_t_SetInt32 :: proc(self: ^SteamNetworkingConfigValue, eVal: ESteamNetworkingConfigValue, data: i32) ---
     NetworkingConfigValue_t_SetInt64 :: proc(self: ^SteamNetworkingConfigValue, eVal: ESteamNetworkingConfigValue, data: i64) ---
     NetworkingConfigValue_t_SetFloat :: proc(self: ^SteamNetworkingConfigValue, eVal: ESteamNetworkingConfigValue, data: f32) ---
     NetworkingConfigValue_t_SetPtr :: proc(self: ^SteamNetworkingConfigValue, eVal: ESteamNetworkingConfigValue, data: rawptr) ---
     NetworkingConfigValue_t_SetString :: proc(self: ^SteamNetworkingConfigValue, eVal: ESteamNetworkingConfigValue, data: cstring) ---
+    
     DatagramHostedAddress_Clear :: proc(self: ^SteamDatagramHostedAddress) ---
     DatagramHostedAddress_GetPopID :: proc(self: ^SteamDatagramHostedAddress) -> SteamNetworkingPOPID ---
     DatagramHostedAddress_SetDevAddress :: proc(self: ^SteamDatagramHostedAddress, nIP: u32, nPort: u16, popid: SteamNetworkingPOPID) ---
@@ -5207,20 +5227,7 @@ foreign lib {
     NetworkingFakeUDPPort_ReceiveMessages :: proc(self: ^INetworkingFakeUDPPort, ppOutMessages: ^^SteamNetworkingMessage, nMaxMessages: i32) -> i32 ---
     NetworkingFakeUDPPort_ScheduleCleanup :: proc(self: ^INetworkingFakeUDPPort, remoteAddress: ^SteamNetworkingIPAddr) ---
 
-    MatchMakingKeyValuePair_Construct :: proc(self: ^MatchMakingKeyValuePair) ---
-    servernetadr_t_Construct :: proc(self: ^servernetadr) ---
-    servernetadr_t_Init :: proc(self: ^servernetadr, ip: u32, usQueryPort: u16, usConnectionPort: u16) ---
-    servernetadr_t_GetQueryPort :: proc(self: ^servernetadr) -> u16 ---
-    servernetadr_t_SetQueryPort :: proc(self: ^servernetadr, usPort: u16) ---
-    servernetadr_t_GetConnectionPort :: proc(self: ^servernetadr) -> u16 ---
-    servernetadr_t_SetConnectionPort :: proc(self: ^servernetadr, usPort: u16) ---
-    servernetadr_t_GetIP :: proc(self: ^servernetadr) -> u32 ---
-    servernetadr_t_SetIP :: proc(self: ^servernetadr, unIP: u32) ---
-    servernetadr_t_GetConnectionAddressString :: proc(self: ^servernetadr) -> cstring ---
-    servernetadr_t_GetQueryAddressString :: proc(self: ^servernetadr) -> cstring ---
-    gameserveritet_t_Construct :: proc(self: ^gameserveritet) ---
-    gameserveritet_t_GetName :: proc(self: ^gameserveritet) -> cstring ---
-    gameserveritet_t_SetName :: proc(self: ^gameserveritet, pName: cstring) ---
+    MatchMakingKeyValuePair_t_Construct :: proc(self: ^MatchMakingKeyValuePair) ---
 } // foreign lib
 
 
