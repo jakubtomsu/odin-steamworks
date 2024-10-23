@@ -4181,6 +4181,62 @@ foreign lib {
 // Interfaces
 // -------------------------------------------
 
+
+@(link_prefix = "SteamAPI_Steam") 
+foreign lib {
+    NetworkingIdentity_Clear :: proc(self: ^SteamNetworkingIdentity) ---
+    NetworkingIdentity_IsInvalid :: proc(self: ^SteamNetworkingIdentity) -> bool ---
+    NetworkingIdentity_SetSteamID :: proc(self: ^SteamNetworkingIdentity, steamID: CSteamID) ---
+    NetworkingIdentity_GetSteamID :: proc(self: ^SteamNetworkingIdentity) -> CSteamID ---
+    NetworkingIdentity_SetSteamID64 :: proc(self: ^SteamNetworkingIdentity, steamID: u64) ---
+    NetworkingIdentity_GetSteamID64 :: proc(self: ^SteamNetworkingIdentity) -> u64 ---
+    NetworkingIdentity_SetXboxPairwiseID :: proc(self: ^SteamNetworkingIdentity, pszString: cstring) -> bool ---
+    NetworkingIdentity_GetXboxPairwiseID :: proc(self: ^SteamNetworkingIdentity) -> cstring ---
+    NetworkingIdentity_SetPSNID :: proc(self: ^SteamNetworkingIdentity, id: u64) ---
+    NetworkingIdentity_GetPSNID :: proc(self: ^SteamNetworkingIdentity) -> u64 ---
+    NetworkingIdentity_SetStadiaID :: proc(self: ^SteamNetworkingIdentity, id: u64) ---
+    NetworkingIdentity_GetStadiaID :: proc(self: ^SteamNetworkingIdentity) -> u64 ---
+    NetworkingIdentity_SetIPAddr :: proc(self: ^SteamNetworkingIdentity, addr: ^SteamNetworkingIPAddr) ---
+    NetworkingIdentity_GetIPAddr :: proc(self: ^SteamNetworkingIdentity) -> ^SteamNetworkingIPAddr ---
+    NetworkingIdentity_SetIPv4Addr :: proc(self: ^SteamNetworkingIdentity, nIPv4: u32, nPort: u16) ---
+    NetworkingIdentity_GetIPv4 :: proc(self: ^SteamNetworkingIdentity) -> u32 ---
+    NetworkingIdentity_GetFakeIPType :: proc(self: ^SteamNetworkingIdentity) -> ESteamNetworkingFakeIPType ---
+    NetworkingIdentity_IsFakeIP :: proc(self: ^SteamNetworkingIdentity) -> bool ---
+    NetworkingIdentity_SetLocalHost :: proc(self: ^SteamNetworkingIdentity) ---
+    NetworkingIdentity_IsLocalHost :: proc(self: ^SteamNetworkingIdentity) -> bool ---
+    NetworkingIdentity_SetGenericString :: proc(self: ^SteamNetworkingIdentity, pszString: cstring) -> bool ---
+    NetworkingIdentity_GetGenericString :: proc(self: ^SteamNetworkingIdentity) -> cstring ---
+    NetworkingIdentity_SetGenericBytes :: proc(self: ^SteamNetworkingIdentity, data: rawptr, cbLen: u32) -> bool ---
+    NetworkingIdentity_GetGenericBytes :: proc(self: ^SteamNetworkingIdentity, cbLen: ^int) -> ^u8 ---
+    NetworkingIdentity_ToString :: proc(self: ^SteamNetworkingIdentity, buf: ^u8, cbBuf: u32) ---
+    NetworkingIdentity_ParseString :: proc(self: ^SteamNetworkingIdentity, pszStr: cstring) -> bool ---
+
+    NetworkingIPAddr_Clear :: proc(self: ^SteamNetworkingIPAddr) ---
+    NetworkingIPAddr_IsIPv6AllZeros :: proc(self: ^SteamNetworkingIPAddr) -> bool ---
+    NetworkingIPAddr_SetIPv6 :: proc(self: ^SteamNetworkingIPAddr, ipv6: ^u8, nPort: u16) ---
+    NetworkingIPAddr_SetIPv4 :: proc(self: ^SteamNetworkingIPAddr, nIP: u32, nPort: u16) ---
+    NetworkingIPAddr_IsIPv4 :: proc(self: ^SteamNetworkingIPAddr) -> bool ---
+    NetworkingIPAddr_GetIPv4 :: proc(self: ^SteamNetworkingIPAddr) -> u32 ---
+    NetworkingIPAddr_SetIPv6LocalHost :: proc(self: ^SteamNetworkingIPAddr, nPort: u16) ---
+    NetworkingIPAddr_IsLocalHost :: proc(self: ^SteamNetworkingIPAddr) -> bool ---
+    NetworkingIPAddr_ToString :: proc(self: ^SteamNetworkingIPAddr, buf: ^u8, cbBuf: u32, bWithPort: bool) ---
+    NetworkingIPAddr_ParseString :: proc(self: ^SteamNetworkingIPAddr, pszStr: cstring) -> bool ---
+    NetworkingIPAddr_GetFakeIPType :: proc(self: ^SteamNetworkingIPAddr) -> ESteamNetworkingFakeIPType ---
+    NetworkingIPAddr_IsFakeIP :: proc(self: ^SteamNetworkingIPAddr) -> bool ---
+    
+    NetworkingMessage_t_Release :: proc(self: ^SteamNetworkingMessage) ---
+    NetworkingConfigValue_t_SetInt32 :: proc(self: ^SteamNetworkingConfigValue, eVal: ESteamNetworkingConfigValue, data: i32) ---
+    NetworkingConfigValue_t_SetInt64 :: proc(self: ^SteamNetworkingConfigValue, eVal: ESteamNetworkingConfigValue, data: i64) ---
+    NetworkingConfigValue_t_SetFloat :: proc(self: ^SteamNetworkingConfigValue, eVal: ESteamNetworkingConfigValue, data: f32) ---
+    NetworkingConfigValue_t_SetPtr :: proc(self: ^SteamNetworkingConfigValue, eVal: ESteamNetworkingConfigValue, data: rawptr) ---
+    NetworkingConfigValue_t_SetString :: proc(self: ^SteamNetworkingConfigValue, eVal: ESteamNetworkingConfigValue, data: cstring) ---
+    DatagramHostedAddress_Clear :: proc(self: ^SteamDatagramHostedAddress) ---
+    DatagramHostedAddress_GetPopID :: proc(self: ^SteamDatagramHostedAddress) -> SteamNetworkingPOPID ---
+    DatagramHostedAddress_SetDevAddress :: proc(self: ^SteamDatagramHostedAddress, nIP: u32, nPort: u16, popid: SteamNetworkingPOPID) ---
+
+    IPAddress_t_IsSet :: proc(self: ^SteamIPAddress) -> bool ---
+}
+
 @(link_prefix = "SteamAPI_ISteam")
 foreign lib {
     Client_CreateSteamPipe :: proc(self: ^IClient) -> HSteamPipe ---
@@ -5151,68 +5207,20 @@ foreign lib {
     NetworkingFakeUDPPort_ReceiveMessages :: proc(self: ^INetworkingFakeUDPPort, ppOutMessages: ^^SteamNetworkingMessage, nMaxMessages: i32) -> i32 ---
     NetworkingFakeUDPPort_ScheduleCleanup :: proc(self: ^INetworkingFakeUDPPort, remoteAddress: ^SteamNetworkingIPAddr) ---
 
-    SteamIPAddress_IsSet :: proc(self: ^SteamIPAddress) -> bool ---
     MatchMakingKeyValuePair_Construct :: proc(self: ^MatchMakingKeyValuePair) ---
-    servernetadr_Construct :: proc(self: ^servernetadr) ---
-    servernetadr_Init :: proc(self: ^servernetadr, ip: u32, usQueryPort: u16, usConnectionPort: u16) ---
-    servernetadr_GetQueryPort :: proc(self: ^servernetadr) -> u16 ---
-    servernetadr_SetQueryPort :: proc(self: ^servernetadr, usPort: u16) ---
-    servernetadr_GetConnectionPort :: proc(self: ^servernetadr) -> u16 ---
-    servernetadr_SetConnectionPort :: proc(self: ^servernetadr, usPort: u16) ---
-    servernetadr_GetIP :: proc(self: ^servernetadr) -> u32 ---
-    servernetadr_SetIP :: proc(self: ^servernetadr, unIP: u32) ---
-    servernetadr_GetConnectionAddressString :: proc(self: ^servernetadr) -> cstring ---
-    servernetadr_GetQueryAddressString :: proc(self: ^servernetadr) -> cstring ---
-    gameserveritet_Construct :: proc(self: ^gameserveritet) ---
-    gameserveritet_GetName :: proc(self: ^gameserveritet) -> cstring ---
-    gameserveritet_SetName :: proc(self: ^gameserveritet, pName: cstring) ---
-    SteamNetworkingIPAddr_Clear :: proc(self: ^SteamNetworkingIPAddr) ---
-    SteamNetworkingIPAddr_IsIPv6AllZeros :: proc(self: ^SteamNetworkingIPAddr) -> bool ---
-    SteamNetworkingIPAddr_SetIPv6 :: proc(self: ^SteamNetworkingIPAddr, ipv6: ^u8, nPort: u16) ---
-    SteamNetworkingIPAddr_SetIPv4 :: proc(self: ^SteamNetworkingIPAddr, nIP: u32, nPort: u16) ---
-    SteamNetworkingIPAddr_IsIPv4 :: proc(self: ^SteamNetworkingIPAddr) -> bool ---
-    SteamNetworkingIPAddr_GetIPv4 :: proc(self: ^SteamNetworkingIPAddr) -> u32 ---
-    SteamNetworkingIPAddr_SetIPv6LocalHost :: proc(self: ^SteamNetworkingIPAddr, nPort: u16) ---
-    SteamNetworkingIPAddr_IsLocalHost :: proc(self: ^SteamNetworkingIPAddr) -> bool ---
-    SteamNetworkingIPAddr_ToString :: proc(self: ^SteamNetworkingIPAddr, buf: ^u8, cbBuf: u32, bWithPort: bool) ---
-    SteamNetworkingIPAddr_ParseString :: proc(self: ^SteamNetworkingIPAddr, pszStr: cstring) -> bool ---
-    SteamNetworkingIPAddr_GetFakeIPType :: proc(self: ^SteamNetworkingIPAddr) -> ESteamNetworkingFakeIPType ---
-    SteamNetworkingIPAddr_IsFakeIP :: proc(self: ^SteamNetworkingIPAddr) -> bool ---
-    SteamNetworkingIdentity_Clear :: proc(self: ^SteamNetworkingIdentity) ---
-    SteamNetworkingIdentity_IsInvalid :: proc(self: ^SteamNetworkingIdentity) -> bool ---
-    SteamNetworkingIdentity_SetSteamID :: proc(self: ^SteamNetworkingIdentity, steamID: CSteamID) ---
-    SteamNetworkingIdentity_GetSteamID :: proc(self: ^SteamNetworkingIdentity) -> CSteamID ---
-    SteamNetworkingIdentity_SetSteamID64 :: proc(self: ^SteamNetworkingIdentity, steamID: u64) ---
-    SteamNetworkingIdentity_GetSteamID64 :: proc(self: ^SteamNetworkingIdentity) -> u64 ---
-    SteamNetworkingIdentity_SetXboxPairwiseID :: proc(self: ^SteamNetworkingIdentity, pszString: cstring) -> bool ---
-    SteamNetworkingIdentity_GetXboxPairwiseID :: proc(self: ^SteamNetworkingIdentity) -> cstring ---
-    SteamNetworkingIdentity_SetPSNID :: proc(self: ^SteamNetworkingIdentity, id: u64) ---
-    SteamNetworkingIdentity_GetPSNID :: proc(self: ^SteamNetworkingIdentity) -> u64 ---
-    SteamNetworkingIdentity_SetStadiaID :: proc(self: ^SteamNetworkingIdentity, id: u64) ---
-    SteamNetworkingIdentity_GetStadiaID :: proc(self: ^SteamNetworkingIdentity) -> u64 ---
-    SteamNetworkingIdentity_SetIPAddr :: proc(self: ^SteamNetworkingIdentity, addr: ^SteamNetworkingIPAddr) ---
-    SteamNetworkingIdentity_GetIPAddr :: proc(self: ^SteamNetworkingIdentity) -> ^SteamNetworkingIPAddr ---
-    SteamNetworkingIdentity_SetIPv4Addr :: proc(self: ^SteamNetworkingIdentity, nIPv4: u32, nPort: u16) ---
-    SteamNetworkingIdentity_GetIPv4 :: proc(self: ^SteamNetworkingIdentity) -> u32 ---
-    SteamNetworkingIdentity_GetFakeIPType :: proc(self: ^SteamNetworkingIdentity) -> ESteamNetworkingFakeIPType ---
-    SteamNetworkingIdentity_IsFakeIP :: proc(self: ^SteamNetworkingIdentity) -> bool ---
-    SteamNetworkingIdentity_SetLocalHost :: proc(self: ^SteamNetworkingIdentity) ---
-    SteamNetworkingIdentity_IsLocalHost :: proc(self: ^SteamNetworkingIdentity) -> bool ---
-    SteamNetworkingIdentity_SetGenericString :: proc(self: ^SteamNetworkingIdentity, pszString: cstring) -> bool ---
-    SteamNetworkingIdentity_GetGenericString :: proc(self: ^SteamNetworkingIdentity) -> cstring ---
-    SteamNetworkingIdentity_SetGenericBytes :: proc(self: ^SteamNetworkingIdentity, data: rawptr, cbLen: u32) -> bool ---
-    SteamNetworkingIdentity_GetGenericBytes :: proc(self: ^SteamNetworkingIdentity, cbLen: ^int) -> ^u8 ---
-    SteamNetworkingIdentity_ToString :: proc(self: ^SteamNetworkingIdentity, buf: ^u8, cbBuf: u32) ---
-    SteamNetworkingIdentity_ParseString :: proc(self: ^SteamNetworkingIdentity, pszStr: cstring) -> bool ---
-    SteamNetworkingMessage_Release :: proc(self: ^SteamNetworkingMessage) ---
-    SteamNetworkingConfigValue_SetInt32 :: proc(self: ^SteamNetworkingConfigValue, eVal: ESteamNetworkingConfigValue, data: i32) ---
-    SteamNetworkingConfigValue_SetInt64 :: proc(self: ^SteamNetworkingConfigValue, eVal: ESteamNetworkingConfigValue, data: i64) ---
-    SteamNetworkingConfigValue_SetFloat :: proc(self: ^SteamNetworkingConfigValue, eVal: ESteamNetworkingConfigValue, data: f32) ---
-    SteamNetworkingConfigValue_SetPtr :: proc(self: ^SteamNetworkingConfigValue, eVal: ESteamNetworkingConfigValue, data: rawptr) ---
-    SteamNetworkingConfigValue_SetString :: proc(self: ^SteamNetworkingConfigValue, eVal: ESteamNetworkingConfigValue, data: cstring) ---
-    SteamDatagramHostedAddress_Clear :: proc(self: ^SteamDatagramHostedAddress) ---
-    SteamDatagramHostedAddress_GetPopID :: proc(self: ^SteamDatagramHostedAddress) -> SteamNetworkingPOPID ---
-    SteamDatagramHostedAddress_SetDevAddress :: proc(self: ^SteamDatagramHostedAddress, nIP: u32, nPort: u16, popid: SteamNetworkingPOPID) ---
+    servernetadr_t_Construct :: proc(self: ^servernetadr) ---
+    servernetadr_t_Init :: proc(self: ^servernetadr, ip: u32, usQueryPort: u16, usConnectionPort: u16) ---
+    servernetadr_t_GetQueryPort :: proc(self: ^servernetadr) -> u16 ---
+    servernetadr_t_SetQueryPort :: proc(self: ^servernetadr, usPort: u16) ---
+    servernetadr_t_GetConnectionPort :: proc(self: ^servernetadr) -> u16 ---
+    servernetadr_t_SetConnectionPort :: proc(self: ^servernetadr, usPort: u16) ---
+    servernetadr_t_GetIP :: proc(self: ^servernetadr) -> u32 ---
+    servernetadr_t_SetIP :: proc(self: ^servernetadr, unIP: u32) ---
+    servernetadr_t_GetConnectionAddressString :: proc(self: ^servernetadr) -> cstring ---
+    servernetadr_t_GetQueryAddressString :: proc(self: ^servernetadr) -> cstring ---
+    gameserveritet_t_Construct :: proc(self: ^gameserveritet) ---
+    gameserveritet_t_GetName :: proc(self: ^gameserveritet) -> cstring ---
+    gameserveritet_t_SetName :: proc(self: ^gameserveritet, pName: cstring) ---
 } // foreign lib
 
 
