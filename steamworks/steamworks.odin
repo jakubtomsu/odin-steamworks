@@ -237,7 +237,7 @@ MAX_TIMELINE_EVENT_DURATION :: 600
 // Structs
 // -------
 
-SteamNetworkingMessage :: struct #align (CALLBACK_ALIGN) {
+SteamNetworkingMessage :: struct #max_field_align(CALLBACK_ALIGN) {
     pData:            rawptr,
     cbSize:           i32,
     conn:             HSteamNetConnection,
@@ -254,17 +254,17 @@ SteamNetworkingMessage :: struct #align (CALLBACK_ALIGN) {
     _pad1__:          u16,
 }
 
-SteamInputActionEvent_AnalogAction :: struct #align (CALLBACK_ALIGN) {
+SteamInputActionEvent_AnalogAction :: struct #max_field_align(CALLBACK_ALIGN) {
     actionHandle:     InputAnalogActionHandle,
     analogActionData: InputAnalogActionData,
 }
 
-SteamInputActionEvent_DigitalAction :: struct #align (CALLBACK_ALIGN) {
+SteamInputActionEvent_DigitalAction :: struct #max_field_align(CALLBACK_ALIGN) {
     actionHandle:      InputDigitalActionHandle,
     digitalActionData: InputDigitalActionData,
 }
 
-SteamInputActionEvent :: struct #align (CALLBACK_ALIGN) {
+SteamInputActionEvent :: struct #max_field_align(CALLBACK_ALIGN) {
     controllerHandle: InputHandle,
     eEventType:       ESteamInputActionEventType,
     using actions:    struct #raw_union {
@@ -274,18 +274,18 @@ SteamInputActionEvent :: struct #align (CALLBACK_ALIGN) {
 }
 
 
-SteamServersConnected :: struct #align (CALLBACK_ALIGN) {}
+SteamServersConnected :: struct #max_field_align(CALLBACK_ALIGN) {}
 
-SteamServerConnectFailure :: struct #align (CALLBACK_ALIGN) {
+SteamServerConnectFailure :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult:        EResult,
     bStillRetrying: bool,
 }
 
-SteamServersDisconnected :: struct #align (CALLBACK_ALIGN) {
+SteamServersDisconnected :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult: EResult,
 }
 
-ClientGameServerDeny :: struct #align (CALLBACK_ALIGN) {
+ClientGameServerDeny :: struct #max_field_align(CALLBACK_ALIGN) {
     uAppID:           u32,
     unGameServerIP:   u32,
     usGameServerPort: u16,
@@ -293,42 +293,42 @@ ClientGameServerDeny :: struct #align (CALLBACK_ALIGN) {
     uReason:          u32,
 }
 
-IPCFailure :: struct #align (CALLBACK_ALIGN) {
+IPCFailure :: struct #max_field_align(CALLBACK_ALIGN) {
     eFailureType: u8,
 }
 
-LicensesUpdated :: struct #align (CALLBACK_ALIGN) {}
+LicensesUpdated :: struct #max_field_align(CALLBACK_ALIGN) {}
 
-ValidateAuthTicketResponse :: struct #align (CALLBACK_ALIGN) {
+ValidateAuthTicketResponse :: struct #max_field_align(CALLBACK_ALIGN) {
     SteamID:              CSteamID,
     eAuthSessionResponse: EAuthSessionResponse,
     OwnerSteamID:         CSteamID,
 }
 
-MicroTxnAuthorizationResponse :: struct #align (CALLBACK_ALIGN) {
+MicroTxnAuthorizationResponse :: struct #max_field_align(CALLBACK_ALIGN) {
     unAppID:     u32,
     ulOrderID:   u64,
     bAuthorized: u8,
 }
 
-EncryptedAppTicketResponse :: struct #align (CALLBACK_ALIGN) {
+EncryptedAppTicketResponse :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult: EResult,
 }
 
-GetAuthSessionTicketResponse :: struct #align (CALLBACK_ALIGN) {
+GetAuthSessionTicketResponse :: struct #max_field_align(CALLBACK_ALIGN) {
     hAuthTicket: HAuthTicket,
     eResult:     EResult,
 }
 
-GameWebCallback :: struct #align (CALLBACK_ALIGN) {
+GameWebCallback :: struct #max_field_align(CALLBACK_ALIGN) {
     szURL: [256]u8,
 }
 
-StoreAuthURLResponse :: struct #align (CALLBACK_ALIGN) {
+StoreAuthURLResponse :: struct #max_field_align(CALLBACK_ALIGN) {
     szURL: [512]u8,
 }
 
-MarketEligibilityResponse :: struct #align (CALLBACK_ALIGN) {
+MarketEligibilityResponse :: struct #max_field_align(CALLBACK_ALIGN) {
     bAllowed:                   bool,
     eNotAllowedReason:          EMarketNotAllowedReasonFlags,
     rtAllowedAtTime:            RTime32,
@@ -336,7 +336,7 @@ MarketEligibilityResponse :: struct #align (CALLBACK_ALIGN) {
     cdayNewDeviceCooldown:      i32,
 }
 
-DurationControl :: struct #align (CALLBACK_ALIGN) {
+DurationControl :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult:        EResult,
     appid:          AppId,
     bApplicable:    bool,
@@ -347,116 +347,116 @@ DurationControl :: struct #align (CALLBACK_ALIGN) {
     csecsRemaining: i32,
 }
 
-PersonaStateChange :: struct #align (CALLBACK_ALIGN) {
+PersonaStateChange :: struct #max_field_align(CALLBACK_ALIGN) {
     ulSteamID:    u64,
     nChangeFlags: i32,
 }
 
-GameOverlayActivated :: struct #align (CALLBACK_ALIGN) {
+GameOverlayActivated :: struct #max_field_align(CALLBACK_ALIGN) {
     bActive: u8,
 }
 
-GameServerChangeRequested :: struct #align (CALLBACK_ALIGN) {
+GameServerChangeRequested :: struct #max_field_align(CALLBACK_ALIGN) {
     rgchServer:   [64]u8,
     rgchPassword: [64]u8,
 }
 
-GameLobbyJoinRequested :: struct #align (CALLBACK_ALIGN) {
+GameLobbyJoinRequested :: struct #max_field_align(CALLBACK_ALIGN) {
     steamIDLobby:  CSteamID,
     steamIDFriend: CSteamID,
 }
 
-AvatarImageLoaded :: struct #align (CALLBACK_ALIGN) {
+AvatarImageLoaded :: struct #max_field_align(CALLBACK_ALIGN) {
     steamID: CSteamID,
     iImage:  i32,
     iWide:   i32,
     iTall:   i32,
 }
 
-ClanOfficerListResponse :: struct #align (CALLBACK_ALIGN) {
+ClanOfficerListResponse :: struct #max_field_align(CALLBACK_ALIGN) {
     steamIDClan: CSteamID,
     cOfficers:   i32,
     bSuccess:    u8,
 }
 
-FriendRichPresenceUpdate :: struct #align (CALLBACK_ALIGN) {
+FriendRichPresenceUpdate :: struct #max_field_align(CALLBACK_ALIGN) {
     steamIDFriend: CSteamID,
     nAppID:        AppId,
 }
 
-GameRichPresenceJoinRequested :: struct #align (CALLBACK_ALIGN) {
+GameRichPresenceJoinRequested :: struct #max_field_align(CALLBACK_ALIGN) {
     steamIDFriend: CSteamID,
     rgchConnect:   [256]u8,
 }
 
-GameConnectedClanChatMsg :: struct #align (CALLBACK_ALIGN) {
+GameConnectedClanChatMsg :: struct #max_field_align(CALLBACK_ALIGN) {
     steamIDClanChat: CSteamID,
     steamIDUser:     CSteamID,
     iMessageID:      i32,
 }
 
-GameConnectedChatJoin :: struct #align (CALLBACK_ALIGN) {
+GameConnectedChatJoin :: struct #max_field_align(CALLBACK_ALIGN) {
     steamIDClanChat: CSteamID,
     steamIDUser:     CSteamID,
 }
 
-GameConnectedChatLeave :: struct #align (CALLBACK_ALIGN) {
+GameConnectedChatLeave :: struct #max_field_align(CALLBACK_ALIGN) {
     steamIDClanChat: CSteamID,
     steamIDUser:     CSteamID,
     bKicked:         bool,
     bDropped:        bool,
 }
 
-DownloadClanActivityCountsResult :: struct #align (CALLBACK_ALIGN) {
+DownloadClanActivityCountsResult :: struct #max_field_align(CALLBACK_ALIGN) {
     bSuccess: bool,
 }
 
-JoinClanChatRoomCompletionResult :: struct #align (CALLBACK_ALIGN) {
+JoinClanChatRoomCompletionResult :: struct #max_field_align(CALLBACK_ALIGN) {
     steamIDClanChat:        CSteamID,
     eChatRoomEnterResponse: EChatRoomEnterResponse,
 }
 
-GameConnectedFriendChatMsg :: struct #align (CALLBACK_ALIGN) {
+GameConnectedFriendChatMsg :: struct #max_field_align(CALLBACK_ALIGN) {
     steamIDUser: CSteamID,
     iMessageID:  i32,
 }
 
-FriendsGetFollowerCount :: struct #align (CALLBACK_ALIGN) {
+FriendsGetFollowerCount :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult: EResult,
     steamID: CSteamID,
     nCount:  i32,
 }
 
-FriendsIsFollowing :: struct #align (CALLBACK_ALIGN) {
+FriendsIsFollowing :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult:      EResult,
     steamID:      CSteamID,
     bIsFollowing: bool,
 }
 
-FriendsEnumerateFollowingList :: struct #align (CALLBACK_ALIGN) {
+FriendsEnumerateFollowingList :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult:           EResult,
     rgSteamID:         [50]CSteamID,
     nResultsReturned:  i32,
     nTotalResultCount: i32,
 }
 
-SetPersonaNameResponse :: struct #align (CALLBACK_ALIGN) {
+SetPersonaNameResponse :: struct #max_field_align(CALLBACK_ALIGN) {
     bSuccess:      bool,
     bLocalSuccess: bool,
     result:        EResult,
 }
 
-UnreadChatMessagesChanged :: struct #align (CALLBACK_ALIGN) {}
+UnreadChatMessagesChanged :: struct #max_field_align(CALLBACK_ALIGN) {}
 
-OverlayBrowserProtocolNavigation :: struct #align (CALLBACK_ALIGN) {
+OverlayBrowserProtocolNavigation :: struct #max_field_align(CALLBACK_ALIGN) {
     rgchURI: [1024]u8,
 }
 
-EquippedProfileItemsChanged :: struct #align (CALLBACK_ALIGN) {
+EquippedProfileItemsChanged :: struct #max_field_align(CALLBACK_ALIGN) {
     steamID: CSteamID,
 }
 
-EquippedProfileItems :: struct #align (CALLBACK_ALIGN) {
+EquippedProfileItems :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult:                   EResult,
     steamID:                   CSteamID,
     bHasAnimatedAvatar:        bool,
@@ -466,34 +466,34 @@ EquippedProfileItems :: struct #align (CALLBACK_ALIGN) {
     bHasMiniProfileBackground: bool,
 }
 
-IPCountry :: struct #align (CALLBACK_ALIGN) {}
+IPCountry :: struct #max_field_align(CALLBACK_ALIGN) {}
 
-LowBatteryPower :: struct #align (CALLBACK_ALIGN) {
+LowBatteryPower :: struct #max_field_align(CALLBACK_ALIGN) {
     nMinutesBatteryLeft: u8,
 }
 
-SteamAPICallCompleted :: struct #align (CALLBACK_ALIGN) {
+SteamAPICallCompleted :: struct #max_field_align(CALLBACK_ALIGN) {
     hAsyncCall: SteamAPICall,
     iCallback:  ICallback,
     cubParam:   u32,
 }
 
-SteamShutdown :: struct #align (CALLBACK_ALIGN) {}
+SteamShutdown :: struct #max_field_align(CALLBACK_ALIGN) {}
 
-CheckFileSignature :: struct #align (CALLBACK_ALIGN) {
+CheckFileSignature :: struct #max_field_align(CALLBACK_ALIGN) {
     eCheckFileSignature: ECheckFileSignature,
 }
 
-GamepadTextInputDismissed :: struct #align (CALLBACK_ALIGN) {
+GamepadTextInputDismissed :: struct #max_field_align(CALLBACK_ALIGN) {
     bSubmitted:      bool,
     unSubmittedText: u32,
 }
 
-AppResumingFromSuspend :: struct #align (CALLBACK_ALIGN) {}
+AppResumingFromSuspend :: struct #max_field_align(CALLBACK_ALIGN) {}
 
-FloatingGamepadTextInputDismissed :: struct #align (CALLBACK_ALIGN) {}
+FloatingGamepadTextInputDismissed :: struct #max_field_align(CALLBACK_ALIGN) {}
 
-FavoritesListChanged :: struct #align (CALLBACK_ALIGN) {
+FavoritesListChanged :: struct #max_field_align(CALLBACK_ALIGN) {
     nIP:         u32,
     nQueryPort:  u32,
     nConnPort:   u32,
@@ -503,71 +503,71 @@ FavoritesListChanged :: struct #align (CALLBACK_ALIGN) {
     unAccountId: AccountID,
 }
 
-LobbyInvite :: struct #align (CALLBACK_ALIGN) {
+LobbyInvite :: struct #max_field_align(CALLBACK_ALIGN) {
     ulSteamIDUser:  u64,
     ulSteamIDLobby: u64,
     ulGameID:       u64,
 }
 
-LobbyEnter :: struct #align (CALLBACK_ALIGN) {
+LobbyEnter :: struct #max_field_align(CALLBACK_ALIGN) {
     ulSteamIDLobby:         u64,
     rgfChatPermissions:     u32,
     bLocked:                bool,
     EChatRoomEnterResponse: u32,
 }
 
-LobbyDataUpdate :: struct #align (CALLBACK_ALIGN) {
+LobbyDataUpdate :: struct #max_field_align(CALLBACK_ALIGN) {
     ulSteamIDLobby:  u64,
     ulSteamIDMember: u64,
     bSuccess:        u8,
 }
 
-LobbyChatUpdate :: struct #align (CALLBACK_ALIGN) {
+LobbyChatUpdate :: struct #max_field_align(CALLBACK_ALIGN) {
     ulSteamIDLobby:           u64,
     ulSteamIDUserChanged:     u64,
     ulSteamIDMakingChange:    u64,
     rgfChatMemberStateChange: u32,
 }
 
-LobbyChatMsg :: struct #align (CALLBACK_ALIGN) {
+LobbyChatMsg :: struct #max_field_align(CALLBACK_ALIGN) {
     ulSteamIDLobby: u64,
     ulSteamIDUser:  u64,
     eChatEntryType: u8,
     iChatID:        u32,
 }
 
-LobbyGameCreated :: struct #align (CALLBACK_ALIGN) {
+LobbyGameCreated :: struct #max_field_align(CALLBACK_ALIGN) {
     ulSteamIDLobby:      u64,
     ulSteamIDGameServer: u64,
     unIP:                u32,
     usPort:              u16,
 }
 
-LobbyMatchList :: struct #align (CALLBACK_ALIGN) {
+LobbyMatchList :: struct #max_field_align(CALLBACK_ALIGN) {
     nLobbiesMatching: u32,
 }
 
-LobbyKicked :: struct #align (CALLBACK_ALIGN) {
+LobbyKicked :: struct #max_field_align(CALLBACK_ALIGN) {
     ulSteamIDLobby:         u64,
     ulSteamIDAdmin:         u64,
     bKickedDueToDisconnect: u8,
 }
 
-LobbyCreated :: struct #align (CALLBACK_ALIGN) {
+LobbyCreated :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult:        EResult,
     ulSteamIDLobby: u64,
 }
 
-PSNGameBootInviteResult :: struct #align (CALLBACK_ALIGN) {
+PSNGameBootInviteResult :: struct #max_field_align(CALLBACK_ALIGN) {
     bGameBootInviteExists: bool,
     steamIDLobby:          CSteamID,
 }
 
-FavoritesListAccountsUpdated :: struct #align (CALLBACK_ALIGN) {
+FavoritesListAccountsUpdated :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult: EResult,
 }
 
-SearchForGameProgressCallback :: struct #align (CALLBACK_ALIGN) {
+SearchForGameProgressCallback :: struct #max_field_align(CALLBACK_ALIGN) {
     ullSearchID:               u64,
     eResult:                   EResult,
     lobbyID:                   CSteamID,
@@ -576,7 +576,7 @@ SearchForGameProgressCallback :: struct #align (CALLBACK_ALIGN) {
     cPlayersSearching:         i32,
 }
 
-SearchForGameResultCallback :: struct #align (CALLBACK_ALIGN) {
+SearchForGameResultCallback :: struct #max_field_align(CALLBACK_ALIGN) {
     ullSearchID:         u64,
     eResult:             EResult,
     nCountPlayersInGame: i32,
@@ -585,12 +585,12 @@ SearchForGameResultCallback :: struct #align (CALLBACK_ALIGN) {
     bFinalCallback:      bool,
 }
 
-RequestPlayersForGameProgressCallback :: struct #align (CALLBACK_ALIGN) {
+RequestPlayersForGameProgressCallback :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult:     EResult,
     ullSearchID: u64,
 }
 
-RequestPlayersForGameResultCallback :: struct #align (CALLBACK_ALIGN) {
+RequestPlayersForGameResultCallback :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult:                   EResult,
     ullSearchID:               u64,
     SteamIDPlayerFound:        CSteamID,
@@ -609,78 +609,78 @@ RequestPlayersForGameResultCallbact_PlayerAcceptState :: enum i32 {
     EStatePlayerDeclined = 2,
 }
 
-RequestPlayersForGameFinalResultCallback :: struct #align (CALLBACK_ALIGN) {
+RequestPlayersForGameFinalResultCallback :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult:         EResult,
     ullSearchID:     u64,
     ullUniqueGameID: u64,
 }
 
-SubmitPlayerResultResultCallback :: struct #align (CALLBACK_ALIGN) {
+SubmitPlayerResultResultCallback :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult:         EResult,
     ullUniqueGameID: u64,
     steamIDPlayer:   CSteamID,
 }
 
-EndGameResultCallback :: struct #align (CALLBACK_ALIGN) {
+EndGameResultCallback :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult:         EResult,
     ullUniqueGameID: u64,
 }
 
-JoinPartyCallback :: struct #align (CALLBACK_ALIGN) {
+JoinPartyCallback :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult:            EResult,
     ulBeaconID:         PartyBeaconID,
     SteamIDBeaconOwner: CSteamID,
     rgchConnectString:  [256]u8,
 }
 
-CreateBeaconCallback :: struct #align (CALLBACK_ALIGN) {
+CreateBeaconCallback :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult:    EResult,
     ulBeaconID: PartyBeaconID,
 }
 
-ReservationNotificationCallback :: struct #align (CALLBACK_ALIGN) {
+ReservationNotificationCallback :: struct #max_field_align(CALLBACK_ALIGN) {
     ulBeaconID:    PartyBeaconID,
     steamIDJoiner: CSteamID,
 }
 
-ChangeNumOpenSlotsCallback :: struct #align (CALLBACK_ALIGN) {
+ChangeNumOpenSlotsCallback :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult: EResult,
 }
 
-AvailableBeaconLocationsUpdated :: struct #align (CALLBACK_ALIGN) {}
+AvailableBeaconLocationsUpdated :: struct #max_field_align(CALLBACK_ALIGN) {}
 
-ActiveBeaconsUpdated :: struct #align (CALLBACK_ALIGN) {}
+ActiveBeaconsUpdated :: struct #max_field_align(CALLBACK_ALIGN) {}
 
-RemoteStorageFileShareResult :: struct #align (CALLBACK_ALIGN) {
+RemoteStorageFileShareResult :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult:      EResult,
     hFile:        UGCHandle,
     rgchFilename: [260]u8,
 }
 
-RemoteStoragePublishFileResult :: struct #align (CALLBACK_ALIGN) {
+RemoteStoragePublishFileResult :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult:                                  EResult,
     nPublishedFileId:                         PublishedFileId,
     bUserNeedsToAcceptWorkshopLegalAgreement: bool,
 }
 
-RemoteStorageDeletePublishedFileResult :: struct #align (CALLBACK_ALIGN) {
+RemoteStorageDeletePublishedFileResult :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult:          EResult,
     nPublishedFileId: PublishedFileId,
 }
 
-RemoteStorageEnumerateUserPublishedFilesResult :: struct #align (CALLBACK_ALIGN) {
+RemoteStorageEnumerateUserPublishedFilesResult :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult:           EResult,
     nResultsReturned:  i32,
     nTotalResultCount: i32,
     rgPublishedFileId: [50]PublishedFileId,
 }
 
-RemoteStorageSubscribePublishedFileResult :: struct #align (CALLBACK_ALIGN) {
+RemoteStorageSubscribePublishedFileResult :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult:          EResult,
     nPublishedFileId: PublishedFileId,
 }
 
-RemoteStorageEnumerateUserSubscribedFilesResult :: struct #align (CALLBACK_ALIGN) {
+RemoteStorageEnumerateUserSubscribedFilesResult :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult:           EResult,
     nResultsReturned:  i32,
     nTotalResultCount: i32,
@@ -688,18 +688,18 @@ RemoteStorageEnumerateUserSubscribedFilesResult :: struct #align (CALLBACK_ALIGN
     rgRTimeSubscribed: [50]u32,
 }
 
-RemoteStorageUnsubscribePublishedFileResult :: struct #align (CALLBACK_ALIGN) {
+RemoteStorageUnsubscribePublishedFileResult :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult:          EResult,
     nPublishedFileId: PublishedFileId,
 }
 
-RemoteStorageUpdatePublishedFileResult :: struct #align (CALLBACK_ALIGN) {
+RemoteStorageUpdatePublishedFileResult :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult:                                  EResult,
     nPublishedFileId:                         PublishedFileId,
     bUserNeedsToAcceptWorkshopLegalAgreement: bool,
 }
 
-RemoteStorageDownloadUGCResult :: struct #align (CALLBACK_ALIGN) {
+RemoteStorageDownloadUGCResult :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult:        EResult,
     hFile:          UGCHandle,
     nAppID:         AppId,
@@ -708,7 +708,7 @@ RemoteStorageDownloadUGCResult :: struct #align (CALLBACK_ALIGN) {
     ulSteamIDOwner: u64,
 }
 
-RemoteStorageGetPublishedFileDetailsResult :: struct #align (CALLBACK_ALIGN) {
+RemoteStorageGetPublishedFileDetailsResult :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult:          EResult,
     nPublishedFileId: PublishedFileId,
     nCreatorAppID:    AppId,
@@ -732,7 +732,7 @@ RemoteStorageGetPublishedFileDetailsResult :: struct #align (CALLBACK_ALIGN) {
     bAcceptedForUse:  bool,
 }
 
-RemoteStorageEnumerateWorkshopFilesResult :: struct #align (CALLBACK_ALIGN) {
+RemoteStorageEnumerateWorkshopFilesResult :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult:           EResult,
     nResultsReturned:  i32,
     nTotalResultCount: i32,
@@ -742,7 +742,7 @@ RemoteStorageEnumerateWorkshopFilesResult :: struct #align (CALLBACK_ALIGN) {
     unStartIndex:      u32,
 }
 
-RemoteStorageGetPublishedItemVoteDetailsResult :: struct #align (CALLBACK_ALIGN) {
+RemoteStorageGetPublishedItemVoteDetailsResult :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult:           EResult,
     unPublishedFileId: PublishedFileId,
     nVotesFor:         i32,
@@ -751,46 +751,46 @@ RemoteStorageGetPublishedItemVoteDetailsResult :: struct #align (CALLBACK_ALIGN)
     fScore:            f32,
 }
 
-RemoteStoragePublishedFileSubscribed :: struct #align (CALLBACK_ALIGN) {
+RemoteStoragePublishedFileSubscribed :: struct #max_field_align(CALLBACK_ALIGN) {
     nPublishedFileId: PublishedFileId,
     nAppID:           AppId,
 }
 
-RemoteStoragePublishedFileUnsubscribed :: struct #align (CALLBACK_ALIGN) {
+RemoteStoragePublishedFileUnsubscribed :: struct #max_field_align(CALLBACK_ALIGN) {
     nPublishedFileId: PublishedFileId,
     nAppID:           AppId,
 }
 
-RemoteStoragePublishedFileDeleted :: struct #align (CALLBACK_ALIGN) {
+RemoteStoragePublishedFileDeleted :: struct #max_field_align(CALLBACK_ALIGN) {
     nPublishedFileId: PublishedFileId,
     nAppID:           AppId,
 }
 
-RemoteStorageUpdateUserPublishedItemVoteResult :: struct #align (CALLBACK_ALIGN) {
+RemoteStorageUpdateUserPublishedItemVoteResult :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult:          EResult,
     nPublishedFileId: PublishedFileId,
 }
 
-RemoteStorageUserVoteDetails :: struct #align (CALLBACK_ALIGN) {
+RemoteStorageUserVoteDetails :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult:          EResult,
     nPublishedFileId: PublishedFileId,
     eVote:            EWorkshopVote,
 }
 
-RemoteStorageEnumerateUserSharedWorkshopFilesResult :: struct #align (CALLBACK_ALIGN) {
+RemoteStorageEnumerateUserSharedWorkshopFilesResult :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult:           EResult,
     nResultsReturned:  i32,
     nTotalResultCount: i32,
     rgPublishedFileId: [50]PublishedFileId,
 }
 
-RemoteStorageSetUserPublishedFileActionResult :: struct #align (CALLBACK_ALIGN) {
+RemoteStorageSetUserPublishedFileActionResult :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult:          EResult,
     nPublishedFileId: PublishedFileId,
     eAction:          EWorkshopFileAction,
 }
 
-RemoteStorageEnumeratePublishedFilesByUserActionResult :: struct #align (CALLBACK_ALIGN) {
+RemoteStorageEnumeratePublishedFilesByUserActionResult :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult:           EResult,
     eAction:           EWorkshopFileAction,
     nResultsReturned:  i32,
@@ -799,42 +799,42 @@ RemoteStorageEnumeratePublishedFilesByUserActionResult :: struct #align (CALLBAC
     rgRTimeUpdated:    [50]u32,
 }
 
-RemoteStoragePublishFileProgress :: struct #align (CALLBACK_ALIGN) {
+RemoteStoragePublishFileProgress :: struct #max_field_align(CALLBACK_ALIGN) {
     dPercentFile: f64,
     bPreview:     bool,
 }
 
-RemoteStoragePublishedFileUpdated :: struct #align (CALLBACK_ALIGN) {
+RemoteStoragePublishedFileUpdated :: struct #max_field_align(CALLBACK_ALIGN) {
     nPublishedFileId: PublishedFileId,
     nAppID:           AppId,
     ulUnused:         u64,
 }
 
-RemoteStorageFileWriteAsyncComplete :: struct #align (CALLBACK_ALIGN) {
+RemoteStorageFileWriteAsyncComplete :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult: EResult,
 }
 
-RemoteStorageFileReadAsyncComplete :: struct #align (CALLBACK_ALIGN) {
+RemoteStorageFileReadAsyncComplete :: struct #max_field_align(CALLBACK_ALIGN) {
     hFileReadAsync: SteamAPICall,
     eResult:        EResult,
     nOffset:        u32,
     cubRead:        u32,
 }
 
-RemoteStorageLocalFileChange :: struct #align (CALLBACK_ALIGN) {}
+RemoteStorageLocalFileChange :: struct #max_field_align(CALLBACK_ALIGN) {}
 
-UserStatsReceived :: struct #align (CALLBACK_ALIGN) {
+UserStatsReceived :: struct #max_field_align(CALLBACK_ALIGN) {
     nGameID:     u64,
     eResult:     EResult,
     steamIDUser: CSteamID,
 }
 
-UserStatsStored :: struct #align (CALLBACK_ALIGN) {
+UserStatsStored :: struct #max_field_align(CALLBACK_ALIGN) {
     nGameID: u64,
     eResult: EResult,
 }
 
-UserAchievementStored :: struct #align (CALLBACK_ALIGN) {
+UserAchievementStored :: struct #max_field_align(CALLBACK_ALIGN) {
     nGameID:             u64,
     bGroupAchievement:   bool,
     rgchAchievementName: [128]u8,
@@ -842,18 +842,18 @@ UserAchievementStored :: struct #align (CALLBACK_ALIGN) {
     nMaxProgress:        u32,
 }
 
-LeaderboardFindResult :: struct #align (CALLBACK_ALIGN) {
+LeaderboardFindResult :: struct #max_field_align(CALLBACK_ALIGN) {
     hSteamLeaderboard: SteamLeaderboard,
     bLeaderboardFound: u8,
 }
 
-LeaderboardScoresDownloaded :: struct #align (CALLBACK_ALIGN) {
+LeaderboardScoresDownloaded :: struct #max_field_align(CALLBACK_ALIGN) {
     hSteamLeaderboard:        SteamLeaderboard,
     hSteamLeaderboardEntries: SteamLeaderboardEntries,
     cEntryCount:              i32,
 }
 
-LeaderboardScoreUploaded :: struct #align (CALLBACK_ALIGN) {
+LeaderboardScoreUploaded :: struct #max_field_align(CALLBACK_ALIGN) {
     bSuccess:            u8,
     hSteamLeaderboard:   SteamLeaderboard,
     nScore:              i32,
@@ -862,145 +862,145 @@ LeaderboardScoreUploaded :: struct #align (CALLBACK_ALIGN) {
     nGlobalRankPrevious: i32,
 }
 
-NumberOfCurrentPlayers :: struct #align (CALLBACK_ALIGN) {
+NumberOfCurrentPlayers :: struct #max_field_align(CALLBACK_ALIGN) {
     bSuccess: u8,
     cPlayers: i32,
 }
 
-UserStatsUnloaded :: struct #align (CALLBACK_ALIGN) {
+UserStatsUnloaded :: struct #max_field_align(CALLBACK_ALIGN) {
     steamIDUser: CSteamID,
 }
 
-UserAchievementIconFetched :: struct #align (CALLBACK_ALIGN) {
+UserAchievementIconFetched :: struct #max_field_align(CALLBACK_ALIGN) {
     nGameID:             CGameID,
     rgchAchievementName: [128]u8,
     bAchieved:           bool,
     nIconHandle:         i32,
 }
 
-GlobalAchievementPercentagesReady :: struct #align (CALLBACK_ALIGN) {
+GlobalAchievementPercentagesReady :: struct #max_field_align(CALLBACK_ALIGN) {
     nGameID: u64,
     eResult: EResult,
 }
 
-LeaderboardUGCSet :: struct #align (CALLBACK_ALIGN) {
+LeaderboardUGCSet :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult:           EResult,
     hSteamLeaderboard: SteamLeaderboard,
 }
 
-PS3TrophiesInstalled :: struct #align (CALLBACK_ALIGN) {
+PS3TrophiesInstalled :: struct #max_field_align(CALLBACK_ALIGN) {
     nGameID:             u64,
     eResult:             EResult,
     ulRequiredDiskSpace: u64,
 }
 
-GlobalStatsReceived :: struct #align (CALLBACK_ALIGN) {
+GlobalStatsReceived :: struct #max_field_align(CALLBACK_ALIGN) {
     nGameID: u64,
     eResult: EResult,
 }
 
-DlcInstalled :: struct #align (CALLBACK_ALIGN) {
+DlcInstalled :: struct #max_field_align(CALLBACK_ALIGN) {
     nAppID: AppId,
 }
 
-RegisterActivationCodeResponse :: struct #align (CALLBACK_ALIGN) {
+RegisterActivationCodeResponse :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult:             ERegisterActivationCodeResult,
     unPackageRegistered: u32,
 }
 
-NewUrlLaunchParameters :: struct #align (CALLBACK_ALIGN) {}
+NewUrlLaunchParameters :: struct #max_field_align(CALLBACK_ALIGN) {}
 
-AppProofOfPurchaseKeyResponse :: struct #align (CALLBACK_ALIGN) {
+AppProofOfPurchaseKeyResponse :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult:      EResult,
     nAppID:       u32,
     cchKeyLength: u32,
     rgchKey:      [240]u8,
 }
 
-FileDetailsResult :: struct #align (CALLBACK_ALIGN) {
+FileDetailsResult :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult:    EResult,
     ulFileSize: u64,
     FileSHA:    [20]u8,
     unFlags:    u32,
 }
 
-TimedTrialStatus :: struct #align (CALLBACK_ALIGN) {
+TimedTrialStatus :: struct #max_field_align(CALLBACK_ALIGN) {
     unAppID:          AppId,
     bIsOffline:       bool,
     unSecondsAllowed: u32,
     unSecondsPlayed:  u32,
 }
 
-P2PSessionRequest :: struct #align (CALLBACK_ALIGN) {
+P2PSessionRequest :: struct #max_field_align(CALLBACK_ALIGN) {
     steamIDRemote: CSteamID,
 }
 
-P2PSessionConnectFail :: struct #align (CALLBACK_ALIGN) {
+P2PSessionConnectFail :: struct #max_field_align(CALLBACK_ALIGN) {
     steamIDRemote:    CSteamID,
     eP2PSessionError: u8,
 }
 
-SocketStatusCallback :: struct #align (CALLBACK_ALIGN) {
+SocketStatusCallback :: struct #max_field_align(CALLBACK_ALIGN) {
     hSocket:          SNetSocket,
     hListenSocket:    SNetListenSocket,
     steamIDRemote:    CSteamID,
     eSNetSocketState: i32,
 }
 
-ScreenshotReady :: struct #align (CALLBACK_ALIGN) {
+ScreenshotReady :: struct #max_field_align(CALLBACK_ALIGN) {
     hLocal:  ScreenshotHandle,
     eResult: EResult,
 }
 
-ScreenshotRequested :: struct #align (CALLBACK_ALIGN) {}
+ScreenshotRequested :: struct #max_field_align(CALLBACK_ALIGN) {}
 
-PlaybackStatusHasChanged :: struct #align (CALLBACK_ALIGN) {}
+PlaybackStatusHasChanged :: struct #max_field_align(CALLBACK_ALIGN) {}
 
-VolumeHasChanged :: struct #align (CALLBACK_ALIGN) {
+VolumeHasChanged :: struct #max_field_align(CALLBACK_ALIGN) {
     flNewVolume: f32,
 }
 
-MusicPlayerRemoteWillActivate :: struct #align (CALLBACK_ALIGN) {}
+MusicPlayerRemoteWillActivate :: struct #max_field_align(CALLBACK_ALIGN) {}
 
-MusicPlayerRemoteWillDeactivate :: struct #align (CALLBACK_ALIGN) {}
+MusicPlayerRemoteWillDeactivate :: struct #max_field_align(CALLBACK_ALIGN) {}
 
-MusicPlayerRemoteToFront :: struct #align (CALLBACK_ALIGN) {}
+MusicPlayerRemoteToFront :: struct #max_field_align(CALLBACK_ALIGN) {}
 
-MusicPlayerWillQuit :: struct #align (CALLBACK_ALIGN) {}
+MusicPlayerWillQuit :: struct #max_field_align(CALLBACK_ALIGN) {}
 
-MusicPlayerWantsPlay :: struct #align (CALLBACK_ALIGN) {}
+MusicPlayerWantsPlay :: struct #max_field_align(CALLBACK_ALIGN) {}
 
-MusicPlayerWantsPause :: struct #align (CALLBACK_ALIGN) {}
+MusicPlayerWantsPause :: struct #max_field_align(CALLBACK_ALIGN) {}
 
-MusicPlayerWantsPlayPrevious :: struct #align (CALLBACK_ALIGN) {}
+MusicPlayerWantsPlayPrevious :: struct #max_field_align(CALLBACK_ALIGN) {}
 
-MusicPlayerWantsPlayNext :: struct #align (CALLBACK_ALIGN) {}
+MusicPlayerWantsPlayNext :: struct #max_field_align(CALLBACK_ALIGN) {}
 
-MusicPlayerWantsShuffled :: struct #align (CALLBACK_ALIGN) {
+MusicPlayerWantsShuffled :: struct #max_field_align(CALLBACK_ALIGN) {
     bShuffled: bool,
 }
 
-MusicPlayerWantsLooped :: struct #align (CALLBACK_ALIGN) {
+MusicPlayerWantsLooped :: struct #max_field_align(CALLBACK_ALIGN) {
     bLooped: bool,
 }
 
-MusicPlayerWantsVolume :: struct #align (CALLBACK_ALIGN) {
+MusicPlayerWantsVolume :: struct #max_field_align(CALLBACK_ALIGN) {
     flNewVolume: f32,
 }
 
-MusicPlayerSelectsQueueEntry :: struct #align (CALLBACK_ALIGN) {
+MusicPlayerSelectsQueueEntry :: struct #max_field_align(CALLBACK_ALIGN) {
     nID: i32,
 }
 
-MusicPlayerSelectsPlaylistEntry :: struct #align (CALLBACK_ALIGN) {
+MusicPlayerSelectsPlaylistEntry :: struct #max_field_align(CALLBACK_ALIGN) {
     nID: i32,
 }
 
-MusicPlayerWantsPlayingRepeatStatus :: struct #align (CALLBACK_ALIGN) {
+MusicPlayerWantsPlayingRepeatStatus :: struct #max_field_align(CALLBACK_ALIGN) {
     nPlayingRepeatStatus: i32,
 }
 
-HTTPRequestCompleted :: struct #align (CALLBACK_ALIGN) {
+HTTPRequestCompleted :: struct #max_field_align(CALLBACK_ALIGN) {
     hRequest:           HTTPRequestHandle,
     ulContextValue:     u64,
     bRequestSuccessful: bool,
@@ -1008,27 +1008,27 @@ HTTPRequestCompleted :: struct #align (CALLBACK_ALIGN) {
     unBodySize:         u32,
 }
 
-HTTPRequestHeadersReceived :: struct #align (CALLBACK_ALIGN) {
+HTTPRequestHeadersReceived :: struct #max_field_align(CALLBACK_ALIGN) {
     hRequest:       HTTPRequestHandle,
     ulContextValue: u64,
 }
 
-HTTPRequestDataReceived :: struct #align (CALLBACK_ALIGN) {
+HTTPRequestDataReceived :: struct #max_field_align(CALLBACK_ALIGN) {
     hRequest:       HTTPRequestHandle,
     ulContextValue: u64,
     cOffset:        u32,
     cBytesReceived: u32,
 }
 
-SteamInputDeviceConnected :: struct #align (CALLBACK_ALIGN) {
+SteamInputDeviceConnected :: struct #max_field_align(CALLBACK_ALIGN) {
     ulConnectedDeviceHandle: InputHandle,
 }
 
-SteamInputDeviceDisconnected :: struct #align (CALLBACK_ALIGN) {
+SteamInputDeviceDisconnected :: struct #max_field_align(CALLBACK_ALIGN) {
     ulDisconnectedDeviceHandle: InputHandle,
 }
 
-SteamInputConfigurationLoaded :: struct #align (CALLBACK_ALIGN) {
+SteamInputConfigurationLoaded :: struct #max_field_align(CALLBACK_ALIGN) {
     unAppID:            AppId,
     ulDeviceHandle:     InputHandle,
     ulMappingCreator:   CSteamID,
@@ -1038,7 +1038,7 @@ SteamInputConfigurationLoaded :: struct #align (CALLBACK_ALIGN) {
     bUsesGamepadAPI:    bool,
 }
 
-SteamUGCQueryCompleted :: struct #align (CALLBACK_ALIGN) {
+SteamUGCQueryCompleted :: struct #max_field_align(CALLBACK_ALIGN) {
     handle:                 UGCQueryHandle,
     eResult:                EResult,
     unNumResultsReturned:   u32,
@@ -1047,47 +1047,47 @@ SteamUGCQueryCompleted :: struct #align (CALLBACK_ALIGN) {
     rgchNextCursor:         [256]u8,
 }
 
-SteamUGCRequestUGCDetailsResult :: struct #align (CALLBACK_ALIGN) {
+SteamUGCRequestUGCDetailsResult :: struct #max_field_align(CALLBACK_ALIGN) {
     details:     SteamUGCDetails,
     bCachedData: bool,
 }
 
-CreateItemResult :: struct #align (CALLBACK_ALIGN) {
+CreateItemResult :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult:                                  EResult,
     nPublishedFileId:                         PublishedFileId,
     bUserNeedsToAcceptWorkshopLegalAgreement: bool,
 }
 
-SubmitItemUpdateResult :: struct #align (CALLBACK_ALIGN) {
+SubmitItemUpdateResult :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult:                                  EResult,
     bUserNeedsToAcceptWorkshopLegalAgreement: bool,
     nPublishedFileId:                         PublishedFileId,
 }
 
-ItemInstalled :: struct #align (CALLBACK_ALIGN) {
+ItemInstalled :: struct #max_field_align(CALLBACK_ALIGN) {
     unAppID:          AppId,
     nPublishedFileId: PublishedFileId,
 }
 
-DownloadItemResult :: struct #align (CALLBACK_ALIGN) {
+DownloadItemResult :: struct #max_field_align(CALLBACK_ALIGN) {
     unAppID:          AppId,
     nPublishedFileId: PublishedFileId,
     eResult:          EResult,
 }
 
-UserFavoriteItemsListChanged :: struct #align (CALLBACK_ALIGN) {
+UserFavoriteItemsListChanged :: struct #max_field_align(CALLBACK_ALIGN) {
     nPublishedFileId: PublishedFileId,
     eResult:          EResult,
     bWasAddRequest:   bool,
 }
 
-SetUserItemVoteResult :: struct #align (CALLBACK_ALIGN) {
+SetUserItemVoteResult :: struct #max_field_align(CALLBACK_ALIGN) {
     nPublishedFileId: PublishedFileId,
     eResult:          EResult,
     bVoteUp:          bool,
 }
 
-GetUserItemVoteResult :: struct #align (CALLBACK_ALIGN) {
+GetUserItemVoteResult :: struct #max_field_align(CALLBACK_ALIGN) {
     nPublishedFileId: PublishedFileId,
     eResult:          EResult,
     bVotedUp:         bool,
@@ -1095,39 +1095,39 @@ GetUserItemVoteResult :: struct #align (CALLBACK_ALIGN) {
     bVoteSkipped:     bool,
 }
 
-StartPlaytimeTrackingResult :: struct #align (CALLBACK_ALIGN) {
+StartPlaytimeTrackingResult :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult: EResult,
 }
 
-StopPlaytimeTrackingResult :: struct #align (CALLBACK_ALIGN) {
+StopPlaytimeTrackingResult :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult: EResult,
 }
 
-AddUGCDependencyResult :: struct #align (CALLBACK_ALIGN) {
+AddUGCDependencyResult :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult:               EResult,
     nPublishedFileId:      PublishedFileId,
     nChildPublishedFileId: PublishedFileId,
 }
 
-RemoveUGCDependencyResult :: struct #align (CALLBACK_ALIGN) {
+RemoveUGCDependencyResult :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult:               EResult,
     nPublishedFileId:      PublishedFileId,
     nChildPublishedFileId: PublishedFileId,
 }
 
-AddAppDependencyResult :: struct #align (CALLBACK_ALIGN) {
+AddAppDependencyResult :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult:          EResult,
     nPublishedFileId: PublishedFileId,
     nAppID:           AppId,
 }
 
-RemoveAppDependencyResult :: struct #align (CALLBACK_ALIGN) {
+RemoveAppDependencyResult :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult:          EResult,
     nPublishedFileId: PublishedFileId,
     nAppID:           AppId,
 }
 
-GetAppDependenciesResult :: struct #align (CALLBACK_ALIGN) {
+GetAppDependenciesResult :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult:                  EResult,
     nPublishedFileId:         PublishedFileId,
     rgAppIDs:                 [32]AppId,
@@ -1135,16 +1135,16 @@ GetAppDependenciesResult :: struct #align (CALLBACK_ALIGN) {
     nTotalNumAppDependencies: u32,
 }
 
-DeleteItemResult :: struct #align (CALLBACK_ALIGN) {
+DeleteItemResult :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult:          EResult,
     nPublishedFileId: PublishedFileId,
 }
 
-UserSubscribedItemsListChanged :: struct #align (CALLBACK_ALIGN) {
+UserSubscribedItemsListChanged :: struct #max_field_align(CALLBACK_ALIGN) {
     nAppID: AppId,
 }
 
-WorkshopEULAStatus :: struct #align (CALLBACK_ALIGN) {
+WorkshopEULAStatus :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult:      EResult,
     nAppID:       AppId,
     unVersion:    u32,
@@ -1153,21 +1153,21 @@ WorkshopEULAStatus :: struct #align (CALLBACK_ALIGN) {
     bNeedsAction: bool,
 }
 
-SteamAppInstalled :: struct #align (CALLBACK_ALIGN) {
+SteamAppInstalled :: struct #max_field_align(CALLBACK_ALIGN) {
     nAppID:              AppId,
     iInstallFolderIndex: i32,
 }
 
-SteamAppUninstalled :: struct #align (CALLBACK_ALIGN) {
+SteamAppUninstalled :: struct #max_field_align(CALLBACK_ALIGN) {
     nAppID:              AppId,
     iInstallFolderIndex: i32,
 }
 
-HTML_BrowserReady :: struct #align (CALLBACK_ALIGN) {
+HTML_BrowserReady :: struct #max_field_align(CALLBACK_ALIGN) {
     unBrowserHandle: HHTMLBrowser,
 }
 
-HTML_NeedsPaint :: struct #align (CALLBACK_ALIGN) {
+HTML_NeedsPaint :: struct #max_field_align(CALLBACK_ALIGN) {
     unBrowserHandle: HHTMLBrowser,
     pBGRA:           cstring,
     unWide:          u32,
@@ -1182,7 +1182,7 @@ HTML_NeedsPaint :: struct #align (CALLBACK_ALIGN) {
     unPageSerial:    u32,
 }
 
-HTML_StartRequest :: struct #align (CALLBACK_ALIGN) {
+HTML_StartRequest :: struct #max_field_align(CALLBACK_ALIGN) {
     unBrowserHandle: HHTMLBrowser,
     pchURL:          cstring,
     pchTarget:       cstring,
@@ -1190,11 +1190,11 @@ HTML_StartRequest :: struct #align (CALLBACK_ALIGN) {
     bIsRedirect:     bool,
 }
 
-HTML_CloseBrowser :: struct #align (CALLBACK_ALIGN) {
+HTML_CloseBrowser :: struct #max_field_align(CALLBACK_ALIGN) {
     unBrowserHandle: HHTMLBrowser,
 }
 
-HTML_URLChanged :: struct #align (CALLBACK_ALIGN) {
+HTML_URLChanged :: struct #max_field_align(CALLBACK_ALIGN) {
     unBrowserHandle: HHTMLBrowser,
     pchURL:          cstring,
     pchPostData:     cstring,
@@ -1203,35 +1203,35 @@ HTML_URLChanged :: struct #align (CALLBACK_ALIGN) {
     bNewNavigation:  bool,
 }
 
-HTML_FinishedRequest :: struct #align (CALLBACK_ALIGN) {
+HTML_FinishedRequest :: struct #max_field_align(CALLBACK_ALIGN) {
     unBrowserHandle: HHTMLBrowser,
     pchURL:          cstring,
     pchPageTitle:    cstring,
 }
 
-HTML_OpenLinkInNewTab :: struct #align (CALLBACK_ALIGN) {
+HTML_OpenLinkInNewTab :: struct #max_field_align(CALLBACK_ALIGN) {
     unBrowserHandle: HHTMLBrowser,
     pchURL:          cstring,
 }
 
-HTML_ChangedTitle :: struct #align (CALLBACK_ALIGN) {
+HTML_ChangedTitle :: struct #max_field_align(CALLBACK_ALIGN) {
     unBrowserHandle: HHTMLBrowser,
     pchTitle:        cstring,
 }
 
-HTML_SearchResults :: struct #align (CALLBACK_ALIGN) {
+HTML_SearchResults :: struct #max_field_align(CALLBACK_ALIGN) {
     unBrowserHandle: HHTMLBrowser,
     unResults:       u32,
     unCurrentMatch:  u32,
 }
 
-HTML_CanGoBackAndForward :: struct #align (CALLBACK_ALIGN) {
+HTML_CanGoBackAndForward :: struct #max_field_align(CALLBACK_ALIGN) {
     unBrowserHandle: HHTMLBrowser,
     bCanGoBack:      bool,
     bCanGoForward:   bool,
 }
 
-HTML_HorizontalScroll :: struct #align (CALLBACK_ALIGN) {
+HTML_HorizontalScroll :: struct #max_field_align(CALLBACK_ALIGN) {
     unBrowserHandle: HHTMLBrowser,
     unScrollMax:     u32,
     unScrollCurrent: u32,
@@ -1240,7 +1240,7 @@ HTML_HorizontalScroll :: struct #align (CALLBACK_ALIGN) {
     unPageSize:      u32,
 }
 
-HTML_VerticalScroll :: struct #align (CALLBACK_ALIGN) {
+HTML_VerticalScroll :: struct #max_field_align(CALLBACK_ALIGN) {
     unBrowserHandle: HHTMLBrowser,
     unScrollMax:     u32,
     unScrollCurrent: u32,
@@ -1249,7 +1249,7 @@ HTML_VerticalScroll :: struct #align (CALLBACK_ALIGN) {
     unPageSize:      u32,
 }
 
-HTML_LinkAtPosition :: struct #align (CALLBACK_ALIGN) {
+HTML_LinkAtPosition :: struct #max_field_align(CALLBACK_ALIGN) {
     unBrowserHandle: HHTMLBrowser,
     x:               u32,
     y:               u32,
@@ -1258,23 +1258,23 @@ HTML_LinkAtPosition :: struct #align (CALLBACK_ALIGN) {
     bLiveLink:       bool,
 }
 
-HTML_JSAlert :: struct #align (CALLBACK_ALIGN) {
+HTML_JSAlert :: struct #max_field_align(CALLBACK_ALIGN) {
     unBrowserHandle: HHTMLBrowser,
     pchMessage:      cstring,
 }
 
-HTML_JSConfirt :: struct #align (CALLBACK_ALIGN) {
+HTML_JSConfirt :: struct #max_field_align(CALLBACK_ALIGN) {
     unBrowserHandle: HHTMLBrowser,
     pchMessage:      cstring,
 }
 
-HTML_FileOpenDialog :: struct #align (CALLBACK_ALIGN) {
+HTML_FileOpenDialog :: struct #max_field_align(CALLBACK_ALIGN) {
     unBrowserHandle: HHTMLBrowser,
     pchTitle:        cstring,
     pchInitialFile:  cstring,
 }
 
-HTML_NewWindow :: struct #align (CALLBACK_ALIGN) {
+HTML_NewWindow :: struct #max_field_align(CALLBACK_ALIGN) {
     unBrowserHandle:                  HHTMLBrowser,
     pchURL:                           cstring,
     unX:                              u32,
@@ -1284,105 +1284,105 @@ HTML_NewWindow :: struct #align (CALLBACK_ALIGN) {
     unNewWindow_BrowserHandle_IGNORE: HHTMLBrowser,
 }
 
-HTML_SetCursor :: struct #align (CALLBACK_ALIGN) {
+HTML_SetCursor :: struct #max_field_align(CALLBACK_ALIGN) {
     unBrowserHandle: HHTMLBrowser,
     eMouseCursor:    u32,
 }
 
-HTML_StatusText :: struct #align (CALLBACK_ALIGN) {
+HTML_StatusText :: struct #max_field_align(CALLBACK_ALIGN) {
     unBrowserHandle: HHTMLBrowser,
     pchMsg:          cstring,
 }
 
-HTML_ShowToolTip :: struct #align (CALLBACK_ALIGN) {
+HTML_ShowToolTip :: struct #max_field_align(CALLBACK_ALIGN) {
     unBrowserHandle: HHTMLBrowser,
     pchMsg:          cstring,
 }
 
-HTML_UpdateToolTip :: struct #align (CALLBACK_ALIGN) {
+HTML_UpdateToolTip :: struct #max_field_align(CALLBACK_ALIGN) {
     unBrowserHandle: HHTMLBrowser,
     pchMsg:          cstring,
 }
 
-HTML_HideToolTip :: struct #align (CALLBACK_ALIGN) {
+HTML_HideToolTip :: struct #max_field_align(CALLBACK_ALIGN) {
     unBrowserHandle: HHTMLBrowser,
 }
 
-HTML_BrowserRestarted :: struct #align (CALLBACK_ALIGN) {
+HTML_BrowserRestarted :: struct #max_field_align(CALLBACK_ALIGN) {
     unBrowserHandle:    HHTMLBrowser,
     unOldBrowserHandle: HHTMLBrowser,
 }
 
-SteamInventoryResultReady :: struct #align (CALLBACK_ALIGN) {
+SteamInventoryResultReady :: struct #max_field_align(CALLBACK_ALIGN) {
     handle: SteamInventoryResult,
     result: EResult,
 }
 
-SteamInventoryFullUpdate :: struct #align (CALLBACK_ALIGN) {
+SteamInventoryFullUpdate :: struct #max_field_align(CALLBACK_ALIGN) {
     handle: SteamInventoryResult,
 }
 
-SteamInventoryDefinitionUpdate :: struct #align (CALLBACK_ALIGN) {}
+SteamInventoryDefinitionUpdate :: struct #max_field_align(CALLBACK_ALIGN) {}
 
-SteamInventoryEligiblePromoItemDefIDs :: struct #align (CALLBACK_ALIGN) {
+SteamInventoryEligiblePromoItemDefIDs :: struct #max_field_align(CALLBACK_ALIGN) {
     result:                   EResult,
     steamID:                  CSteamID,
     numEligiblePromoItemDefs: i32,
     bCachedData:              bool,
 }
 
-SteamInventoryStartPurchaseResult :: struct #align (CALLBACK_ALIGN) {
+SteamInventoryStartPurchaseResult :: struct #max_field_align(CALLBACK_ALIGN) {
     result:    EResult,
     ulOrderID: u64,
     ulTransID: u64,
 }
 
-SteamInventoryRequestPricesResult :: struct #align (CALLBACK_ALIGN) {
+SteamInventoryRequestPricesResult :: struct #max_field_align(CALLBACK_ALIGN) {
     result:       EResult,
     rgchCurrency: [4]u8,
 }
 
-GetVideoURLResult :: struct #align (CALLBACK_ALIGN) {
+GetVideoURLResult :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult:      EResult,
     unVideoAppID: AppId,
     rgchURL:      [256]u8,
 }
 
-GetOPFSettingsResult :: struct #align (CALLBACK_ALIGN) {
+GetOPFSettingsResult :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult:      EResult,
     unVideoAppID: AppId,
 }
 
-SteamParentalSettingsChanged :: struct #align (CALLBACK_ALIGN) {}
+SteamParentalSettingsChanged :: struct #max_field_align(CALLBACK_ALIGN) {}
 
-SteamRemotePlaySessionConnected :: struct #align (CALLBACK_ALIGN) {
+SteamRemotePlaySessionConnected :: struct #max_field_align(CALLBACK_ALIGN) {
     unSessionID: RemotePlaySessionID,
 }
 
-SteamRemotePlaySessionDisconnected :: struct #align (CALLBACK_ALIGN) {
+SteamRemotePlaySessionDisconnected :: struct #max_field_align(CALLBACK_ALIGN) {
     unSessionID: RemotePlaySessionID,
 }
 
-SteamNetworkingMessagesSessionRequest :: struct #align (CALLBACK_ALIGN) {
+SteamNetworkingMessagesSessionRequest :: struct #max_field_align(CALLBACK_ALIGN) {
     identityRemote: SteamNetworkingIdentity,
 }
 
-SteamNetworkingMessagesSessionFailed :: struct #align (CALLBACK_ALIGN) {
+SteamNetworkingMessagesSessionFailed :: struct #max_field_align(CALLBACK_ALIGN) {
     info: SteamNetConnectionInfo,
 }
 
-SteamNetConnectionStatusChangedCallback :: struct #align (CALLBACK_ALIGN) {
+SteamNetConnectionStatusChangedCallback :: struct #max_field_align(CALLBACK_ALIGN) {
     hConn:     HSteamNetConnection,
     info:      SteamNetConnectionInfo,
     eOldState: ESteamNetworkingConnectionState,
 }
 
-SteamNetAuthenticationStatus :: struct #align (CALLBACK_ALIGN) {
+SteamNetAuthenticationStatus :: struct #max_field_align(CALLBACK_ALIGN) {
     eAvail:   ESteamNetworkingAvailability,
     debugMsg: [256]u8,
 }
 
-SteamRelayNetworkStatus :: struct #align (CALLBACK_ALIGN) {
+SteamRelayNetworkStatus :: struct #max_field_align(CALLBACK_ALIGN) {
     eAvail:                     ESteamNetworkingAvailability,
     bPingMeasurementInProgress: i32,
     eAvailNetworkConfig:        ESteamNetworkingAvailability,
@@ -1390,47 +1390,47 @@ SteamRelayNetworkStatus :: struct #align (CALLBACK_ALIGN) {
     debugMsg:                   [256]u8,
 }
 
-GSClientApprove :: struct #align (CALLBACK_ALIGN) {
+GSClientApprove :: struct #max_field_align(CALLBACK_ALIGN) {
     SteamID:      CSteamID,
     OwnerSteamID: CSteamID,
 }
 
-GSClientDeny :: struct #align (CALLBACK_ALIGN) {
+GSClientDeny :: struct #max_field_align(CALLBACK_ALIGN) {
     SteamID:          CSteamID,
     eDenyReason:      EDenyReason,
     rgchOptionalText: [128]u8,
 }
 
-GSClientKick :: struct #align (CALLBACK_ALIGN) {
+GSClientKick :: struct #max_field_align(CALLBACK_ALIGN) {
     SteamID:     CSteamID,
     eDenyReason: EDenyReason,
 }
 
-GSClientAchievementStatus :: struct #align (CALLBACK_ALIGN) {
+GSClientAchievementStatus :: struct #max_field_align(CALLBACK_ALIGN) {
     SteamID:        u64,
     pchAchievement: [128]u8,
     bUnlocked:      bool,
 }
 
-GSPolicyResponse :: struct #align (CALLBACK_ALIGN) {
+GSPolicyResponse :: struct #max_field_align(CALLBACK_ALIGN) {
     bSecure: u8,
 }
 
-GSGameplayStats :: struct #align (CALLBACK_ALIGN) {
+GSGameplayStats :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult:              EResult,
     nRank:                i32,
     unTotalConnects:      u32,
     unTotalMinutesPlayed: u32,
 }
 
-GSClientGroupStatus :: struct #align (CALLBACK_ALIGN) {
+GSClientGroupStatus :: struct #max_field_align(CALLBACK_ALIGN) {
     SteamIDUser:  CSteamID,
     SteamIDGroup: CSteamID,
     bMember:      bool,
     bOfficer:     bool,
 }
 
-GSReputation :: struct #align (CALLBACK_ALIGN) {
+GSReputation :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult:           EResult,
     unReputationScore: u32,
     bBanned:           bool,
@@ -1440,11 +1440,11 @@ GSReputation :: struct #align (CALLBACK_ALIGN) {
     unBanExpires:      u32,
 }
 
-AssociateWithClanResult :: struct #align (CALLBACK_ALIGN) {
+AssociateWithClanResult :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult: EResult,
 }
 
-ComputeNewPlayerCompatibilityResult :: struct #align (CALLBACK_ALIGN) {
+ComputeNewPlayerCompatibilityResult :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult:                           EResult,
     cPlayersThatDontLikeCandidate:     i32,
     cPlayersThatCandidateDoesntLike:   i32,
@@ -1452,21 +1452,21 @@ ComputeNewPlayerCompatibilityResult :: struct #align (CALLBACK_ALIGN) {
     SteamIDCandidate:                  CSteamID,
 }
 
-GSStatsReceived :: struct #align (CALLBACK_ALIGN) {
+GSStatsReceived :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult:     EResult,
     steamIDUser: CSteamID,
 }
 
-GSStatsStored :: struct #align (CALLBACK_ALIGN) {
+GSStatsStored :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult:     EResult,
     steamIDUser: CSteamID,
 }
 
-GSStatsUnloaded :: struct #align (CALLBACK_ALIGN) {
+GSStatsUnloaded :: struct #max_field_align(CALLBACK_ALIGN) {
     steamIDUser: CSteamID,
 }
 
-SteamNetworkingFakeIPResult :: struct #align (CALLBACK_ALIGN) {
+SteamNetworkingFakeIPResult :: struct #max_field_align(CALLBACK_ALIGN) {
     eResult:  EResult,
     identity: SteamNetworkingIdentity,
     unIP:     u32,
@@ -3632,12 +3632,12 @@ ETimelineEventClipPriority :: enum i32 {
 
 
 
-SteamIPAddress :: struct #align (CALLBACK_ALIGN) {
+SteamIPAddress :: struct #max_field_align(CALLBACK_ALIGN) {
     rgubIPv6: [16]u8,
     eType:    ESteamIPType,
 }
 
-FriendGameInfo :: struct #align (CALLBACK_ALIGN) {
+FriendGameInfo :: struct #max_field_align(CALLBACK_ALIGN) {
     gameID:       CGameID,
     unGameIP:     u32,
     usGamePort:   u16,
@@ -3645,18 +3645,18 @@ FriendGameInfo :: struct #align (CALLBACK_ALIGN) {
     steamIDLobby: CSteamID,
 }
 
-MatchMakingKeyValuePair :: struct #align (CALLBACK_ALIGN) {
+MatchMakingKeyValuePair :: struct #max_field_align(CALLBACK_ALIGN) {
     szKey:   [256]u8,
     szValue: [256]u8,
 }
 
-servernetadr :: struct #align (CALLBACK_ALIGN) {
+servernetadr :: struct #max_field_align(CALLBACK_ALIGN) {
     usConnectionPort: u16,
     usQueryPort:      u16,
     unIP:             u32,
 }
 
-gameserveritet :: struct #align (CALLBACK_ALIGN) {
+gameserveritet :: struct #max_field_align(CALLBACK_ALIGN) {
     NetAdr:                 servernetadr,
     nPing:                  i32,
     bHadSuccessfulResponse: bool,
@@ -3677,17 +3677,17 @@ gameserveritet :: struct #align (CALLBACK_ALIGN) {
     steamID:                CSteamID,
 }
 
-SteamPartyBeaconLocation :: struct #align (CALLBACK_ALIGN) {
+SteamPartyBeaconLocation :: struct #max_field_align(CALLBACK_ALIGN) {
     eType:        ESteamPartyBeaconLocationType,
     ulLocationID: u64,
 }
 
-SteamParamStringArray :: struct #align (CALLBACK_ALIGN) {
+SteamParamStringArray :: struct #max_field_align(CALLBACK_ALIGN) {
     ppStrings:   ^cstring,
     nNumStrings: i32,
 }
 
-LeaderboardEntry :: struct #align (CALLBACK_ALIGN) {
+LeaderboardEntry :: struct #max_field_align(CALLBACK_ALIGN) {
     steamIDUser: CSteamID,
     nGlobalRank: i32,
     nScore:      i32,
@@ -3695,7 +3695,7 @@ LeaderboardEntry :: struct #align (CALLBACK_ALIGN) {
     hUGC:        UGCHandle,
 }
 
-P2PSessionState :: struct #align (CALLBACK_ALIGN) {
+P2PSessionState :: struct #max_field_align(CALLBACK_ALIGN) {
     bConnectionActive:     u8,
     bConnecting:           u8,
     eP2PSessionError:      u8,
@@ -3706,19 +3706,19 @@ P2PSessionState :: struct #align (CALLBACK_ALIGN) {
     nRemotePort:           u16,
 }
 
-InputAnalogActionData :: struct #align (CALLBACK_ALIGN) {
+InputAnalogActionData :: struct #max_field_align(CALLBACK_ALIGN) {
     eMode:   EInputSourceMode,
     x:       f32,
     y:       f32,
     bActive: bool,
 }
 
-InputDigitalActionData :: struct #align (CALLBACK_ALIGN) {
+InputDigitalActionData :: struct #max_field_align(CALLBACK_ALIGN) {
     bState:  bool,
     bActive: bool,
 }
 
-InputMotionData :: struct #align (CALLBACK_ALIGN) {
+InputMotionData :: struct #max_field_align(CALLBACK_ALIGN) {
     rotQuatX:  f32,
     rotQuatY:  f32,
     rotQuatZ:  f32,
@@ -3731,7 +3731,7 @@ InputMotionData :: struct #align (CALLBACK_ALIGN) {
     rotVelZ:   f32,
 }
 
-SteamUGCDetails :: struct #align (CALLBACK_ALIGN) {
+SteamUGCDetails :: struct #max_field_align(CALLBACK_ALIGN) {
     nPublishedFileId:     PublishedFileId,
     eResult:              EResult,
     eFileType:            EWorkshopFileType,
@@ -3761,25 +3761,25 @@ SteamUGCDetails :: struct #align (CALLBACK_ALIGN) {
     ulTotalFilesSize:     u64,
 }
 
-SteamItemDetails :: struct #align (CALLBACK_ALIGN) {
+SteamItemDetails :: struct #max_field_align(CALLBACK_ALIGN) {
     itemId:      SteamItemInstanceID,
     iDefinition: SteamItemDef,
     unQuantity:  u16,
     unFlags:     u16,
 }
 
-SteamNetworkingIPAddr :: struct #align (CALLBACK_ALIGN) {
+SteamNetworkingIPAddr :: struct #max_field_align(CALLBACK_ALIGN) {
     ipv6: [16]u8,
     port: u16,
 }
 
-SteamNetworkingIdentity :: struct #align (CALLBACK_ALIGN) {
+SteamNetworkingIdentity :: struct #max_field_align(CALLBACK_ALIGN) {
     eType:              ESteamNetworkingIdentityType,
     cbSize:             i32,
     szUnknownRawString: [128]u8,
 }
 
-SteamNetConnectionInfo :: struct #align (CALLBACK_ALIGN) {
+SteamNetConnectionInfo :: struct #max_field_align(CALLBACK_ALIGN) {
     identityRemote:          SteamNetworkingIdentity,
     nUserData:               i64,
     hListenSocket:           HSteamListenSocket,
@@ -3795,7 +3795,7 @@ SteamNetConnectionInfo :: struct #align (CALLBACK_ALIGN) {
     reserved:                [63]u32,
 }
 
-SteamNetConnectionRealTimeStatus :: struct #align (CALLBACK_ALIGN) {
+SteamNetConnectionRealTimeStatus :: struct #max_field_align(CALLBACK_ALIGN) {
     eState:                    ESteamNetworkingConnectionState,
     nPing:                     i32,
     flConnectionQualityLocal:  f32,
@@ -3812,7 +3812,7 @@ SteamNetConnectionRealTimeStatus :: struct #align (CALLBACK_ALIGN) {
     reserved:                  [16]u32,
 }
 
-SteamNetConnectionRealTimeLaneStatus :: struct #align (CALLBACK_ALIGN) {
+SteamNetConnectionRealTimeLaneStatus :: struct #max_field_align(CALLBACK_ALIGN) {
     cbPendingUnreliable:   i32,
     cbPendingReliable:     i32,
     cbSentUnackedReliable: i32,
@@ -3821,22 +3821,22 @@ SteamNetConnectionRealTimeLaneStatus :: struct #align (CALLBACK_ALIGN) {
     reserved:              [10]u32,
 }
 
-SteamNetworkPingLocation :: struct #align (CALLBACK_ALIGN) {
+SteamNetworkPingLocation :: struct #max_field_align(CALLBACK_ALIGN) {
     data: [512]u8,
 }
 
-SteamNetworkingConfigValue :: struct #align (CALLBACK_ALIGN) {
+SteamNetworkingConfigValue :: struct #max_field_align(CALLBACK_ALIGN) {
     eValue:    ESteamNetworkingConfigValue,
     eDataType: ESteamNetworkingConfigDataType,
     i64:       i64,
 }
 
-SteamDatagramHostedAddress :: struct #align (CALLBACK_ALIGN) {
+SteamDatagramHostedAddress :: struct #max_field_align(CALLBACK_ALIGN) {
     cbSize: i32,
     data:   [128]u8,
 }
 
-SteamDatagramGameCoordinatorServerLogin :: struct #align (CALLBACK_ALIGN) {
+SteamDatagramGameCoordinatorServerLogin :: struct #max_field_align(CALLBACK_ALIGN) {
     identity:  SteamNetworkingIdentity,
     routing:   SteamDatagramHostedAddress,
     nAppID:    AppId,
@@ -5979,7 +5979,7 @@ ICallback :: enum i32 {
 }
 
 /// Internal structure used in manual callback dispatch
-CallbackMsg :: struct #align (CALLBACK_ALIGN) {
+CallbackMsg :: struct #max_field_align(CALLBACK_ALIGN) {
     hSteamUser: HSteamUser, // Specific user to whom this callback applies.
     iCallback:  ICallback, // Callback identifier.  (Corresponds to the k_iCallback enum in the callback structure.)
     pubParam:   ^u8, // Points to the callback structure
