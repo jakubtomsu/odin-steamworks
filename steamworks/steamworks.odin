@@ -3768,12 +3768,12 @@ SteamItemDetails :: struct #max_field_align(CALLBACK_ALIGN) {
     unFlags:     u16,
 }
 
-SteamNetworkingIPAddr :: struct #max_field_align(CALLBACK_ALIGN) {
+SteamNetworkingIPAddr :: struct #packed {
     ipv6: [16]u8,
     port: u16,
 }
 
-SteamNetworkingIdentity :: struct #max_field_align(CALLBACK_ALIGN) {
+SteamNetworkingIdentity :: struct #packed {
     eType:              ESteamNetworkingIdentityType,
     cbSize:             i32,
     szUnknownRawString: [128]u8,
