@@ -1363,11 +1363,11 @@ SteamRemotePlaySessionDisconnected :: struct #max_field_align(CALLBACK_ALIGN) {
     unSessionID: RemotePlaySessionID,
 }
 
-SteamNetworkingMessagesSessionRequest :: struct #max_field_align(CALLBACK_ALIGN) {
+SteamNetworkingMessagesSessionRequest :: struct #packed {
     identityRemote: SteamNetworkingIdentity,
 }
 
-SteamNetworkingMessagesSessionFailed :: struct #max_field_align(CALLBACK_ALIGN) {
+SteamNetworkingMessagesSessionFailed :: struct #packed {
     info: SteamNetConnectionInfo,
 }
 
@@ -3632,7 +3632,7 @@ ETimelineEventClipPriority :: enum i32 {
 
 
 
-SteamIPAddress :: struct #max_field_align(CALLBACK_ALIGN) {
+SteamIPAddress :: struct #packed {
     rgubIPv6: [16]u8,
     eType:    ESteamIPType,
 }
@@ -3706,19 +3706,19 @@ P2PSessionState :: struct #max_field_align(CALLBACK_ALIGN) {
     nRemotePort:           u16,
 }
 
-InputAnalogActionData :: struct #max_field_align(CALLBACK_ALIGN) {
+InputAnalogActionData :: struct #packed {
     eMode:   EInputSourceMode,
     x:       f32,
     y:       f32,
     bActive: bool,
 }
 
-InputDigitalActionData :: struct #max_field_align(CALLBACK_ALIGN) {
+InputDigitalActionData :: struct #packed {
     bState:  bool,
     bActive: bool,
 }
 
-InputMotionData :: struct #max_field_align(CALLBACK_ALIGN) {
+InputMotionData :: struct #packed {
     rotQuatX:  f32,
     rotQuatY:  f32,
     rotQuatZ:  f32,
@@ -3959,16 +3959,16 @@ foreign lib {
 
 // Initializing the Steamworks SDK
 // -----------------------------
-// 
+//
 // There are three different methods you can use to initialize the Steamworks SDK, depending on
 // your project's environment. You should only use one method in your project.
-// 
+//
 // If you are able to include this C++ header in your project, we recommend using the following
 // initialization methods. They will ensure that all ISteam* interfaces defined in other
 // C++ header files have versions that are supported by the user's Steam Client:
 // - SteamAPI_InitEx() for new projects so you can show a detailed error message to the user
 // - SteamAPI_Init() for existing projects that only display a generic error message
-// 
+//
 // If you are unable to include this C++ header in your project and are dynamically loading
 // Steamworks SDK methods from dll/so, you can use the following method:
 // - SteamAPI_InitFlat()
@@ -3986,7 +3986,7 @@ Init :: proc() -> bool {
 // it will receive a non-localized message that explains the reason for the failure
 //
 // Example usage:
-// 
+//
 //   SteamErrMsg errMsg;
 //   if ( SteamAPI_Init(&errMsg) != k_ESteamAPIInitResult_OK )
 //       FatalError( "Failed to init Steam.  %s", errMsg );
@@ -4181,7 +4181,7 @@ foreign lib {
 // Interfaces
 // -------------------------------------------
 
-@(link_prefix = "SteamAPI_") 
+@(link_prefix = "SteamAPI_")
 foreign lib {
     servernetadr_t_Assign :: proc(self: ^servernetadr, that: ^servernetadr) ---
     servernetadr_t_Construct :: proc(self: ^servernetadr) ---
@@ -4195,7 +4195,7 @@ foreign lib {
     servernetadr_t_GetConnectionAddressString :: proc(self: ^servernetadr) -> cstring ---
     servernetadr_t_GetQueryAddressString :: proc(self: ^servernetadr) -> cstring ---
     servernetadr_t_IsLessThan :: proc(self: ^servernetadr, that: ^servernetadr) ---
-    
+
     gameserveritem_t_Construct :: proc(self: ^gameserveritet) ---
     gameserveritem_t_GetName :: proc(self: ^gameserveritet) -> cstring ---
     gameserveritem_t_SetName :: proc(self: ^gameserveritet, pName: cstring) ---
@@ -4203,7 +4203,7 @@ foreign lib {
     MatchMakingKeyValuePair_t_Construct :: proc(self: ^MatchMakingKeyValuePair) ---
 }
 
-@(link_prefix = "SteamAPI_Steam") 
+@(link_prefix = "SteamAPI_Steam")
 foreign lib {
     NetworkingIdentity_Clear :: proc(self: ^SteamNetworkingIdentity) ---
     NetworkingIdentity_IsInvalid :: proc(self: ^SteamNetworkingIdentity) -> bool ---
@@ -4244,15 +4244,15 @@ foreign lib {
     NetworkingIPAddr_ParseString :: proc(self: ^SteamNetworkingIPAddr, pszStr: cstring) -> bool ---
     NetworkingIPAddr_GetFakeIPType :: proc(self: ^SteamNetworkingIPAddr) -> ESteamNetworkingFakeIPType ---
     NetworkingIPAddr_IsFakeIP :: proc(self: ^SteamNetworkingIPAddr) -> bool ---
-    
+
     NetworkingMessage_t_Release :: proc(self: ^SteamNetworkingMessage) ---
-    
+
     NetworkingConfigValue_t_SetInt32 :: proc(self: ^SteamNetworkingConfigValue, eVal: ESteamNetworkingConfigValue, data: i32) ---
     NetworkingConfigValue_t_SetInt64 :: proc(self: ^SteamNetworkingConfigValue, eVal: ESteamNetworkingConfigValue, data: i64) ---
     NetworkingConfigValue_t_SetFloat :: proc(self: ^SteamNetworkingConfigValue, eVal: ESteamNetworkingConfigValue, data: f32) ---
     NetworkingConfigValue_t_SetPtr :: proc(self: ^SteamNetworkingConfigValue, eVal: ESteamNetworkingConfigValue, data: rawptr) ---
     NetworkingConfigValue_t_SetString :: proc(self: ^SteamNetworkingConfigValue, eVal: ESteamNetworkingConfigValue, data: cstring) ---
-    
+
     DatagramHostedAddress_Clear :: proc(self: ^SteamDatagramHostedAddress) ---
     DatagramHostedAddress_GetPopID :: proc(self: ^SteamDatagramHostedAddress) -> SteamNetworkingPOPID ---
     DatagramHostedAddress_SetDevAddress :: proc(self: ^SteamDatagramHostedAddress, nIP: u32, nPort: u16, popid: SteamNetworkingPOPID) ---
@@ -5385,7 +5385,7 @@ ICallback :: enum i32 {
     // request the game server should kick the user
     GSClientKick                                           = iSteamGameServerCallbacks + 3,
 
-    // NOTE: callback values 4, and 5, are skipped because they are used for old deprecated callbacks, 
+    // NOTE: callback values 4, and 5, are skipped because they are used for old deprecated callbacks,
     // do not reuse them here.
 
     // client achievement info
@@ -5463,12 +5463,12 @@ ICallback :: enum i32 {
     SteamInventoryFullUpdate                               = iSteamInventoryCallbacks + 1,
 
     // A SteamInventoryDefinitionUpdate_t callback is triggered whenever
-    // item definitions have been updated, which could be in response to 
+    // item definitions have been updated, which could be in response to
     // LoadItemDefinitions() or any other async request which required
     // a definition update in order to process results from the server.
     SteamInventoryDefinitionUpdate                         = iSteamInventoryCallbacks + 2,
 
-    // Returned 
+    // Returned
     SteamInventoryEligiblePromoItemDefIDs                  = iSteamInventoryCallbacks + 3,
 
     // Triggered from StartPurchase call
@@ -5559,7 +5559,7 @@ ICallback :: enum i32 {
     RequestPlayersForGameProgressCallback                  = iSteamGameSearchCallbacks + 11,
 
     // callback from RequestPlayersForGame
-    // one of these will be sent per player 
+    // one of these will be sent per player
     // followed by additional callbacks when players accept or decline the game
     RequestPlayersForGameResultCallback                    = iSteamGameSearchCallbacks + 12,
     RequestPlayersForGameFinalResultCallback               = iSteamGameSearchCallbacks + 13,
@@ -5607,7 +5607,7 @@ ICallback :: enum i32 {
     P2PSessionConnectFail                                  = iSteamNetworkingCallbacks + 3,
 
     // callback notification - status of a socket has changed
-    // used as part of the CreateListenSocket() / CreateP2PConnectionSocket() 
+    // used as part of the CreateListenSocket() / CreateP2PConnectionSocket()
     SocketStatusCallback                                   = iSteamNetworkingCallbacks + 1,
 
 
@@ -5785,10 +5785,10 @@ ICallback :: enum i32 {
     // Purpose: Callback for requesting details on one piece of UGC
     SteamUGCRequestUGCDetailsResult                        = iSteamUGCCallbacks + 2,
 
-    // Purpose: result for ISteamUGC=CreateItem() 
+    // Purpose: result for ISteamUGC=CreateItem()
     CreateItemResult                                       = iSteamUGCCallbacks + 3,
 
-    // Purpose: result for ISteamUGC=SubmitItemUpdate() 
+    // Purpose: result for ISteamUGC=SubmitItemUpdate()
     SubmitItemUpdateResult                                 = iSteamUGCCallbacks + 4,
 
     // Purpose: a Workshop item has been installed or updated
@@ -5848,7 +5848,7 @@ ICallback :: enum i32 {
     SteamServersConnected                                  = iSteamUserCallbacks + 1,
 
     // Purpose: called when a connection attempt has failed
-    //			this will occur periodically if the Steam client is not connected, 
+    //			this will occur periodically if the Steam client is not connected,
     //			and has failed in it's retry to establish a connection
     SteamServerConnectFailure                              = iSteamUserCallbacks + 2,
 
@@ -5912,7 +5912,7 @@ ICallback :: enum i32 {
     // Purpose: result of a request to store the user stats for a game
     UserStatsStored                                        = iSteamUserStatsCallbacks + 2,
 
-    // Purpose: result of a request to store the achievements for a game, or an 
+    // Purpose: result of a request to store the achievements for a game, or an
     //			"indicate progress" call. If both m_nCurProgress and m_nMaxProgress
     //			are zero, that means the achievement has been fully unlocked.
     UserAchievementStored                                  = iSteamUserStatsCallbacks + 3,
