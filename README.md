@@ -22,11 +22,10 @@ Take a look at the [example](example/example.odin) to see the API usage.
 - `odin run .`
 
 ## About the generator
-The generator was used initially to make the bindings, and those are manually updated based on the changelog. So the generator is no longer needed, but it's here just for reference.
-
-It uses the `steamworks_api.json` to generate a single source file. Build the generator with `odin build` commands.
+Initially a custom generator was used to create the bindings, which was removed in commit [ddd0f5a](https://github.com/jakubtomsu/odin-steamworks/commit/ddd0f5ad2f7e14aaf7b02cefd4ed529be770fa8c).
+It used the `steamworks_api.json` to generate a single source file.
 
 Note: The naming is slightly different than in the C/C++ API. For instance, things aren't prefixed with `Steam`, `m_`, `k_`, etc. Also `_t` suffixes for structs aren't used.
 
 ## Contributing
-Contributions are welcome! Preferrably submit a pull request here on Github.
+Contributions are welcome, especially bugfixes! Please submit a pull request here on Github.
