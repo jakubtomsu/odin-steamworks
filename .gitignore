@@ -8,5 +8,6 @@
 *.obj
 
 ols.json
+odinfmt.json
 
 !steamworks/redistributable_bin/**/*.*
