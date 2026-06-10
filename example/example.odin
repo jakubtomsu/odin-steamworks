@@ -5,7 +5,6 @@ import "base:runtime"
 import "core:c"
 import "core:fmt"
 import "core:mem"
-import "core:strings"
 import "vendor:raylib"
 
 // https://partner.steamgames.com/doc/sdk/api
@@ -118,19 +117,19 @@ run_steam_callbacks :: proc() {
     }
 }
 
-onGameOverlayActivated :: proc(using data: ^steam.GameOverlayActivated) {
-    fmt.println("Is overlay active =", bActive)
+onGameOverlayActivated :: proc(data: ^steam.GameOverlayActivated) {
+    fmt.println("Is overlay active =", data.bActive)
 }
 
-onGetNumberOfCurrentPlayers :: proc(using data: ^steam.NumberOfCurrentPlayers, ioFailure: bool) {
-    fmt.println("[get_number_of_current_players] success:", bSuccess)
-    if ioFailure || !bool(bSuccess) {
+onGetNumberOfCurrentPlayers :: proc(data: ^steam.NumberOfCurrentPlayers, ioFailure: bool) {
+    fmt.println("[get_number_of_current_players] success:", data.bSuccess)
+    if ioFailure || !bool(data.bSuccess) {
         fmt.println("get_number_of_current_players failed.")
         return
     }
 
-    fmt.println("[get_number_of_current_players] Number of players currently playing:", cPlayers)
-    number_of_current_players = int(cPlayers)
+    fmt.println("[get_number_of_current_players] Number of players currently playing:", data.cPlayers)
+    number_of_current_players = int(data.cPlayers)
 }
 
 get_number_of_current_players :: proc() {
